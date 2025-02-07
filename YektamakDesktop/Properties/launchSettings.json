@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FinansalTakipDesktop": {
+      "commandName": "Project",
+      "nativeDebugging": true,
+      "sqlDebugging": false,
+      "hotReloadEnabled": true
+    }
+  }
+}

@@ -1,0 +1,76 @@
+﻿@using BlazorApp1.Features.Commands.Account.Login
+@using Utilities.Interfaces
+@using YektamakWeb.Components.Dialogs
+@using YektamakWeb.Pages
+@using Models.DTO
+@using YektamakWeb.Commands.Accounts
+@using System.Security.Claims
+@inject ICache cache
+@inject CustomAuthStateProvider authStateProvider
+
+<div class="bb-page">
+
+    <Sidebar @ref="sidebar"
+             Href="/"
+             Title="Yektamak"
+             DataProvider="SidebarDataProvider"
+             ImageSrc="/LOGO.png"/>
+
+    <main>
+        <div class="bb-top-row px-4 d-flex justify-content-between">
+            <Icon Name="IconName.List" role="button" @onclick="ToggleSidebar" />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+    </main>
+</div>
+@code {
+    Sidebar sidebar = default!;
+    IEnumerable<NavItem>? navItems;
+    [Inject]
+    private NavigationManager? navigation { get; set; }
+    private ClaimsPrincipal user;
+    private bool isAuth;
+    protected override async void OnInitialized()
+    {
+        authStateProvider.OnChange += StateHasChanged;
+
+    }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        user = authState.User; // Kullanıcı bilgilerini alıyoruz.
+        isAuth = user.Identity.IsAuthenticated;
+    }
+    public void Dispose()
+    {
+        authStateProvider.OnChange -= StateHasChanged;
+    }
+
+    private async void ToggleSidebar()
+    {
+        sidebar.ToggleSidebar();
+        SidebarDataProviderRequest sidebarDataProviderRequest = new SidebarDataProviderRequest();
+        sidebarDataProviderRequest.ApplyTo(GetNavItems());
+        await sidebar.DataProvider(sidebarDataProviderRequest);
+        StateHasChanged();
+    }
+    private void OpenPage(string page)
+    {
+        navigation?.NavigateTo(char.ToUpper(page[0])+page.Substring(1).ToLower());
+    }
+    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
+    {
+        if (navItems is null)
+            navItems = GetNavItems();
+
+        return await Task.FromResult(request.ApplyTo(navItems));
+    }
+
+    private IEnumerable<NavItem> GetNavItems()
+    {
+        foreach(AnaMenu menu in cache.ananaMenuList)
+        {
+            yield return new NavItem { Id = menu.Id.ToString(), Href = $"/{char.ToUpper(menu.ad[0]) + menu.ad.Substring(1).ToLower()}", IconName = IconName.HouseDoorFill, Text = menu.ad };
+        }
+    }
+}

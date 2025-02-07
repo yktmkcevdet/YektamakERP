@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\FinansalTakipDesktop\FinansalTakipDesktop\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="CustomControls\CustomCheckedComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\CustomComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\CustomComboListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\CustomRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="CustomControls\CustomTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\CustomTextBoxTarih.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="CustomControls\RoundedIconButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="CustomControls\ToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\CariKartKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\CariOdemeKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\CariOdemelerGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\CekKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\CekKayitlariGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\ResimGoruntule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\TahakkukFisiKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\TahakkukFisleriGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\TaksitliIslemlerGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\TaksitliIslemOtomatikTaksitlendirme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\TaksitliOdemeKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\DovizKurlari.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\PersonelGridFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\PersonelKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Ortak\DxfViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Proje\ExceldenVeriAlmaFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Proje\ProjeDosyalari.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Proje\SatinalmaTalepOlusturma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaSiparisKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaSiparisGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaTalepGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaTalepleri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaTalepTeklifListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisSiparisGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Stok\MalzemeGrubu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Stok\StokKartTanimlamaFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\UserLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Ortak\ExceldenVeriAlmaFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Ortak\PdfGoruntuleme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaFaturaGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaFaturaKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaTalepFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\AltMenuEkle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\EkranEkle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\KullaniciKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\KullaniciYeniSifreBelirlemeFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\Menuler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Yetkilendirme\YetkiTanimlari.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Temp\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Formlar\Satinalma\SatinalmaTalepGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Formlar\Satis\SatisProjeGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Formlar\Yetkilendirme\KullaniciKayitFormu.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

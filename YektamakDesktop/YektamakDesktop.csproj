@@ -1,0 +1,223 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows7.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <PackageIcon>logo.ico</PackageIcon>
+    <IncludeSymbols>False</IncludeSymbols>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+ 
+
+  <ItemGroup>
+    <None Remove="Reports\CariEkstre.frx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>9</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>00020813-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>6</VersionMinor>
+      <VersionMajor>9</VersionMajor>
+      <Guid>00062fff-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="HHCTRLLib">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>4</VersionMajor>
+      <Guid>adb880a2-d8ff-11cf-9377-00aa003b7a11</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="MSHTML">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>4</VersionMajor>
+      <Guid>3050f1c5-98b5-11cf-bb82-00aa00bdce0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
+    <Content Include="Reports\CariEkstre.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+ 
+
+  <ItemGroup>
+    <PackageReference Include="FastReport.OpenSource" Version="2024.1.10" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2024.1.10" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="netDxf" Version="2023.11.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NPOI" Version="2.7.2" />
+    <PackageReference Include="Pdfium.Net.SDK" Version="4.96.2704" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\ApiService\ApiService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CustomControls\CustomTextBoxTarih.cs" />
+    <Compile Update="CustomControls\CustomTextBoxSayisal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Formlar\MainWindow.cs" />
+    <Compile Update="Formlar\Finans\CariKartlarGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\KasaKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\KrediKartiKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\KrediKartlariGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Finans\KasaTanimlariGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\BankaHesabiKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\FirmaKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\FirmaGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaTalepFormuDetay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\TedarikciIadeFaturaKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\TedarikciIadeFaturaGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\SatinalmaSiparisGridForm.cs" />
+    <Compile Update="Formlar\Satinalma\SatinalmaSiparisKayitFormuOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisFaturaGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisSiparisTeklifTalepKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisSiparisTeklifTalepGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\TahsilatPlanKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisSiparisGridForm.cs" />
+    <Compile Update="Formlar\Satis\SatisSiparisKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisProjeKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisProjeGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\ProjeSafhaGridFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\SatisFaturaKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Stok\StokKartGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Temp\TemplateGridFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Temp\TemplateKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="CustomControls\CustomComboListBox.cs" />
+    <Compile Update="Formlar\Genel\BankaHesabiGridFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\ProjeKodKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Formlar\Satinalma\SatinalmaSiparisGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Formlar\Satis\SatisFaturaGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Formlar\Satis\SatisSiparisTeklifTalepGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Formlar\Satis\SatisSiparisGridForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  
+
+  
+
+</Project>

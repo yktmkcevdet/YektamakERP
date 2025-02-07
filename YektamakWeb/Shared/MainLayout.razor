@@ -1,0 +1,40 @@
+﻿@using YektamakWeb.Commands.Accounts
+@inherits LayoutComponentBase
+<div class="page">
+    <div class="sidebar">
+    <NavMenu />
+    </div>
+    <main>
+        <AuthorizeView>
+            <Authorized>
+                <div class="d-flex justify-content-end">
+                    <p>Hoş geldin, @context.User.Identity.Name!<br>
+                        <a href="/" @onclick="LogOut">Çıkış Yap</a>
+                    </p>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <a href="/signin-google">Google ile Giriş Yap</a>
+            </NotAuthorized>
+        </AuthorizeView>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+@code {
+    @inject LoginService loginService
+    private bool isSidebarOpen = true;
+    protected async override void OnInitialized()
+    {
+        StateHasChanged();
+    }
+    private void ToggleSidebar()
+    {
+        isSidebarOpen = !isSidebarOpen;
+    }
+    private void LogOut()
+    {
+        loginService.LogoutAsync();
+    }
+}

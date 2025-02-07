@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/17/2024 14:48:01" ReportInfo.Modified="01/30/2024 15:55:18" ReportInfo.CreatorVersion="2024.1.3.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="CariHaareketEkstresi" ReferenceName="CariEkstre" DataType="System.Int32" Enabled="true">
+      <Column Name="FaturaTarihi" DataType="System.DateTime"/>
+      <Column Name="VadeTarihi" DataType="System.DateTime"/>
+      <Column Name="FisDurumu" DataType="System.String"/>
+      <Column Name="Aciklama" DataType="System.String"/>
+      <Column Name="BorcTutari" DataType="System.Decimal"/>
+      <Column Name="AlacakTutari" DataType="System.Decimal"/>
+    </BusinessObjectDataSource>
+    <Parameter Name="Parameter" DataType="System.String" AsString=""/>
+    <Parameter Name="Parameter1" DataType="System.String" AsString=""/>
+    <Total Name="AlacakTutar" Expression="[CariHaareketEkstresi.AlacakTutari]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="103.95">
+      <TextObject Name="Text4" Left="75.6" Top="47.25" Width="94.5" Height="18.9" Text="[Parameter]" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="75.6" Top="75.6" Width="94.5" Height="18.9" Text="[Parameter1]" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="189" Top="9.45" Width="311.85" Height="18.9" Text="CARİ HESAP EKSTRESİ" HorzAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="107.95" Width="718.2" Height="28.35">
+      <TextObject Name="Text1" Left="9.45" Width="113.4" Height="18.9" Text="FATURA TARİH" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text2" Left="132.3" Width="94.5" Height="18.9" Text="VADE TARİHİ" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text3" Left="245.7" Width="113.4" Height="18.9" Text="FİŞ DURUMU" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="368.55" Width="94.5" Height="18.9" Text="AÇIKLAMA" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="481.95" Width="103.95" Height="18.9" Text="BORÇ TUTARI" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="595.35" Width="113.4" Height="18.9" Text="ALACAK TUTARI" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="140.3" Width="718.2" Height="37.8" DataSource="CariHaareketEkstresi">
+      <TextObject Name="Text6" Left="9.45" Top="9.45" Width="94.5" Height="18.9" Text="[CariHaareketEkstresi.FaturaTarihi]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="132.3" Top="9.45" Width="94.5" Height="18.9" Text="[CariHaareketEkstresi.VadeTarihi]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="245.7" Top="9.45" Width="94.5" Height="18.9" Text="[CariHaareketEkstresi.FisDurumu]" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="368.55" Top="9.45" Width="94.5" Height="18.9" Text="[CariHaareketEkstresi.Aciklama]" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="481.95" Top="9.45" Width="94.5" Height="18.9" Text="[CariHaareketEkstresi.BorcTutari]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text13" Left="595.35" Top="9.45" Width="103.95" Height="18.9" Text="[CariHaareketEkstresi.AlacakTutari]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="182.1" Width="718.2" Height="37.8">
+      <TextObject Name="Text17" Left="604.8" Top="9.45" Width="94.5" Height="18.9" Text="[AlacakTutar]" HorzAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="223.9" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

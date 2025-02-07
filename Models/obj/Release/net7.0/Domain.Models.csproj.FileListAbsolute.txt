@@ -1,0 +1,11 @@
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\bin\Release\net7.0\Domain.Models.deps.json
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\bin\Release\net7.0\Domain.Models.dll
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\bin\Release\net7.0\Domain.Models.pdb
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.AssemblyInfoInputs.cache
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.AssemblyInfo.cs
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.csproj.CoreCompileInputs.cache
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.dll
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\refint\Domain.Models.dll
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\Domain.Models.pdb
+C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net7.0\ref\Domain.Models.dll

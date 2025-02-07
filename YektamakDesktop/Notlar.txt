@@ -1,0 +1,305 @@
+﻿20221127
++ Firma tanımlama panelinde kaldık
+- Tek tek panel tasarımlarını yapıp buralardan rest api metodlarını çağıracağız
+
+20221205
++ CustomCheckedComboBox kontrolünü tasarlarken
+	* CustomTextBox kullanacağız
+	* CustomTextBox'ın PlaceHolderText'inde listedeki seçilenler seçim1 & seçim2 & seçim3... şeklinde yazacak
+	* CustomTextBox'a tıklandığında checkedListBox açılacak ve listbox nesneleri textBox'ta yazılanlara göre filtrelenecek
+	* CustomTextBox FocusLeave event'i ile birlikte listbox kapanacak
+
+
+
++ Boyutlandırma için Resize metodunu yaz
+
++ CustomCheckedComboBox'ta listBoxData'ya ihtiyaç kalmadı onun yerine listBoxRows list'ini kullanacağız
++ Filtreleme özelliğini yaptıktan sonra panel tasarımlarına devam edebiliriz
+
++ KeyUp event'i textchanged'den sonra oluyor olabilir
+
+20221218
++ CustomCheckedCombobox problemleri
+	+ textBox focus olmadığı zamanlarda placeholder text görünecek
+	+ placeholdertext'te checked statüdeki elemanlar görünecek en güncel halleri bulunmuyor
+	+ filtreleme öncesi sonrasında checked statüleri korunsun
+
+20221221
++ Firma tanımlamapaneli tamam proje tanımlama panellerine devam
+
+20221228
+- Grid kullanımına bak
+- MDI form yerine UserControl kullanımı düşünülebilir (https://www.codeproject.com/Questions/5321139/Csharp-how-do-I-load-a-form-inside-another-form)
+- SatınalmaSipariş ekran tasarımından devam edelim
+
+Dolar borcum olan adama tl göndererek mahsuplaşabiliyor muyum nasıl oluyor?
+
+20221231
+- Güncelleme ve silme işlemleri yapabilmek için gridview içeren pencereler ekleyeceğiz
+
+20230103
+- Pencere boyutlarını yükleme anında belirlemek için kontrolleri bir panel içine alıp o panelin boyutlarına göre pencereyi boyutlandıracağız
+- Ekran boyutunu aşarsa scroll yapılacak
+
+20230114
+
++ byte dizisi json'a çevrilirken hata veriyor. byte[] alanı olan bir nesne modeli yapıp onu json'a çevirmek lazım
++ Hatta gdf'de olduğu gibi şifreleme operasyonu da yapabiliriz
+
+20230115
+
++ Grid kullanımına geçebiliriz. PersonelGrid ile başlayacağız
+
+20230120
+
+- Personel sınıfına FirmaUnvan alanı ekleyeceğiz ama kayıt penceresinde elle yazılan bir şey olmayacak gridview'de kullanacağız (firma işlemleri tamamlandıktan sonra güncelleyelim)
+- Personel grid filtreli sorgulama işlemlerini yapalım
+
+20230122
+
+- Personel sınıfına FirmaUnvan'ı hemen ekleyelim. Daha sonra firma kayıtlarını yaparken bu kayıtlar otomatik düzelecek.
+
+20230125
+
+- Veri tabanına yeni bir personel kaydedildiğinde eğer firmaId>0 ise firmanın personelIdList ve personelNameList bilgilerinin güncelleneceği bir stored procedure olmalı
+- Firma Tablosunda adres alanı da parçalı olsun (Ülke,Şehir,Posta kodu, Açık adres) bu bilgilerle sorgulama yapılabilir.
+- PersonelIdList ve PersonelNameList FirmaData'ya taşınsın
+- 5 ayrı sütundaki sektör bilgileri bu şekilde kalsın
+
+20230126
+
++ Personel ve Firma kayıt işlemlerinde (eğer hata yoksa) geriye id numaraları dönsün
++ Bunun nedeni firma kayıttan sonra personel kayıt yapılacak olduğunda firma id'nin bilinmesi gerekliliğidir
+- PersonelKayit için bir stored procedure oluştur. Dönüş değeri personelId olsun. 
+
+20230128
+
+- FirmaGrid'i yapıp FirmaDelete ve FirmaUpdate metodlarını da tamamlayalım.
++ Bütün WebMethod'ları sql tarafında StoredProcedure'e çevirelim
+- FirmaGrid filtreleme özelliklerini açalım
+- Filtre textBox'larının textChanged olayında griddeki datasetteki (dataset boş değilse) mevcut kayıtları filtreleyelim
+- Filtre butonuna basıldığında ise bu filtrelere göre veritabanından çekiip dataseti ve gridi dolduralım
+
+
+20230201
+
+- BankaHesabı ekle sayfasına Firma güncelleme'den gelineceğin için firmaId ve firmaName verileri hazır gelecek
+- BankaId ve BankaName seçenekleri için sektör listesinde bankacılık&finans alanı bulunan firmalar liste olarak gelecek ve combobox'ta listelenecek (bankaListesi için bir storedprocedure yazacağız)
+
+20230203
+
+- CustomComboListBox Firma güncellemedeki yetkili ve banka listesi gibi listeleri göstermek için kullanılacak kontrol
+- Buraya yazacağımız string'leri formatlayarak sütun sütun göstereceğiz 
+- Arka planda ListBoxDataRow türü ile id bilgisi tutacağız bu şekilde seçilen nesnenin id numarasını alıyor olacağız
+
+20230204
+
++ CustomComboListBox'ta seçilen nesnenin değeri textbox'ta yazsın
+
+20230205
+
++ Bir firmaya ait bütün personel ve bankahesabi bilgilerini veren stored procedure yazacağız
++ Bunun için önce bir firmaya ait bütün banka hesaplarını veren stored procedure yazacağız
++ Sonra bir firmaya ait bütün personel bilgilerini veren stored procedure yazacağız
++ Sonra geri dönüşte firma bilgileri bir dataset'in bir tablosunda personel ve bankahesabi bilgileri ayrı birer tabloda dönecek
++ FirmaUpdate penceresinin açılışında detaylı firma datasetini alacağız
+
++ FirmaUpdate metodunu yazalım
++ Veri tabanında spFirmaUpdate stored proceduru yazılacak
++ Personel kayıt ve güncellemeleri banka hesaplarında olduğu gibi firma güncelleme penceresinden yapılsın
+- Firma güncellemede + butonunun yanında bir de mercek butonu olsun bu mercek butonu o firmaya ait personelgrid ve bankahesabigrid pencerelerini açsın
+- Personel kayıt penceresi olmasın ama bütün personellere erişim filtreleme ve detay aramalar için personelgrid'e doğrudan erişim olsun
++ ComboListBox kontrolünde listbox'tan seçim yapmak mümkün olmuyor CheckFocusOnControl() metodunu gözden geçirmek lazım
+
+20230206
+
+- FirmaGrid penceresinin başlığında Firma İşlemleri yazsın
+- Ana sayfadaki butonda da Firma İşlemleri yazsın
+- FirmaGrid penceresinde firma ekle butonu olsun ve firma ekle penceresine buradan ulaşalım
+- Tüm firmaları getirerek veya filtreli arama yaparak kayıt satırlarındaki butonlarla silme-güncelleme işlemleri yapmaya devam edelim
+- BankaHesabiGrid formu sadece firma güncelleme formundaki banka hesapları combobox'ının yanındaki mercek butonu ile çağırılabilecek
+- Yarın bankahesabigrid penceresiyle devam edelim
+
+
+20230209
+
+- Desktop projesi için FirmaController PersonelController gibi sınıflar yazalım 
+- Web metodları bu sınıflar içerisindeki metodlardan çağıralım.
+- Özellikle geri dönüş türü dataset olan web methodları id veya başka bir tür dönecek şekilde buradaki Controller'lardan alalım
+- Hata alınan durumlarda referans tiplerde null dönsün int tiplerde -1 dönsün
+- Veya WebMethods'u bu şekilde veri dönecek biçimde düzenleyelim
+- İçerideki kodları gelen verinin işlenmesi bakımından basitleştirelim
+
+20230212
+
+- PersonelGridFormu.FirmaPersonelleriGetir metodunda personel tablosunda sadece firmaId olacak şekilde dataset dönüyor
+- Join kullanarak bu datasete firmaUnvan bilgisini de ekleyerek döndürelim
+
+20230213
+
++ FirmaKayıtFormu banka hesabı silme butonu çalışmıyor (combolist'ten kayıt çıkarıyor ama veritabanından silinmiyor)
+- BankaHesaplariGrid.cs dosyasında Personel için yapılmış her şeyi BankaHesabi'na göre düzenleyelim
+
+20230215
+
++ BankaHesabiKayitFormu.UpdateMode() metodunda comboListBoxBankalar listesinden banka seçimini yapalım
++ DovizCinsi enum yerine GlobalData içerisinde veri tabanından alınan bir liste olsun
+
+20230216
+
++ BankaHesabiKayitFormu.UpdateMode() comboListBoxDovizTuru index seçiminde hata var
+
+20230217
+
++ BankaHesabiGridFormu.UpdateBankaHesabiOnGrid() metodunu çağıran metodu yazmak gerekiyor
++ Daha sonra BankaHesabiGridFormu'ndaki diğer metodları BankaHesabi'na uyarlayacağız
+
+20230218
+
+- GlobalData'ya IBAN formatlama (gösterim için) ile ilgili bir static metod ekleyelim
++ Başlığa göre grid sıralaması yapıldığı zaman dataset sıralamasının da değişmesi lazım bu yüzden grid sıralama olayını yakalamak lazım
++ Hazır yapmışken gridfiltrelemeyi de kapsayacak bir değişiklik yapmamız gerekiyor
++ Visible özelliği false olan bir id kolonuyla bu iş çözülebilir
++ Bunu bütün gridlere uygulamamız lazım
+- Bunları yapınca filtrelemeleri yapalım
+
+20230219
+
++ FirmaGrid ve FirmaKayıtFormu arasında yeni kayıt veya güncelleme olduğunda grid'i güncelleyecek bir ilişki kurulmamış.
++ PersonelGrid'e bakarak yapabiliriz
+
++ ComboListBoxSektorler'de sektor listesi iki kere tekrar ediyor.
++ FirmaKayıt işlemi bununla ilgili bir hata veriyor
+
+20230221
+
++ PersonelKayıt formuna bir de fotoğraf seçim alanı ekleyelim
++ Veritabanında PersonelFotograf diye bir tablo olsun fotografId personelId ve fotografData diye üç alan içersin
++ Personel fotoğraflarını image nesnesinin byte dizisi olarak saklayalım
+
++ Yarın FiltrelenmisFirmalar Web Metodunu yazalım
++ Veri tabanında TestSektorGetAlike'daki gibi bir storedprocedure yapalım
+- Griddeki verilerin filtrelenmesi textChanged olayıyla anlık olacak
++ Filtrelenmiş kayıtların veritabanından getirilmesi Filtreleme butonu ile olacak
+
+20230223
+
++ ReplaceTurkishChars fonksiyonunu nasıl kullanacağız?
+
+20230224
++ PersonelResim konusundan devam et.
++ PersonelResim tablosuna resimFormatId diye bir alan ekle.
++ ResimFormat diye bir tabloda resim formatları olsun
+
+20230225
+
++ SavePersonelWithImage diye bir webmethod ekleyelim
++ Benzer şekilde UpdatePersonelWithImage olsun
++ PersonelKayitFormunda yeniResim=false ise normal kayıt ve güncelleme, true ise withImage olacak şekilde kayıt ve güncelleme çağırılır.
++ Veritabanındaki sp'lere de aynı şekilde eklenir
+
+20230226
+
++ Web serviste resimli personel veritabanı metodları tamam PersonelController'daki api metodları yazılacak
++ Desktop uygulamada WebMethodsPersonel'de bu metodları çağıran metodlar tamamlanacak
++ Sonra arayüzde önceki günün notlarına göre bir mantıkta bu metodlar ilişkilendirilecek
+
++ Personel güncelleme sayfası açılırken veri tabanından spGetPersonelPictureWithPersonelId metoduyla resim çağıracak wepapi metodlarını yazalım
++ Buradan gelen resim dosyasını da eğer null değilse pictureBox'ta görüntüleyelim
+
+20230227
+
+- SatışProjeGrid tasarımına geçelim
+- RadioButtonList'te Yürüyen Projeler,Bitmiş Projeler, Geciken Projeler, Ödeme bekleyen projeler, faturası kesilmiş, faturası kesilmemiş, Tüm Projeler gibi seçenekler olsun
+- Müşteriye göre, termine göre, satış fiyatına göre listeleme gibi seçenekler olsun
+- Yeni proje ekle butonu ile proje kayıt sayfası açılsın
+
+20230306
+
++ ProjeKod kayıt sayfasını tamamla
+- SatisProjeKayit formundan devam et
+
++ DatabaseJobs -> ProjeKod.ProjeKodKaydet'te kaldın
+
+20230319
+
++ Hataları eksi kodlarla dönelim. Error1 dönerse -1 Error2 dönerse -2 değeri dönsün. Daha sonra bunu anlamlandıralım.
++ Onun haricinde kayıt metodlarındaki sıfırdan büyük sayısal değerler id değerleri ifade etsin
++ ProjeKodKaydet'te aynı proje numarasıyla ikinci kayıt girilecek olursa bir hata dönmesi lazım. StoredProcedure'e bununla ilgili bir revizyon yapalım.
+- Yarın proje safha (aşama) tanımlama penceresinden devam edelim 
+- Sipariş, ProjeOnay, Sevkiyat, Kurulum, Son Ödeme gibi default değerler datagrid'e gelsin. Tarih bölümlerini kullanıcı doldursun.
+- Datagridde ekleme çıkarma gibi seçenekler olsun
+
+20230326
+
++ ProjeKayıtFormu savemodeda açıldığında Proje Aşamaları ve Sipariş Kaydı ile ilgili veri girişleri disable olsun
++ Proje Kodu, Proje Adı, Proje Açıklaması, Müşteri bilgileri girilmeden kayıt yapılamasın
++ Kayıt yapıldıktan sonra PorjeKayıtFormu güncelleme moduna geçsin
++ Proje kaydı yapan sp ProjeKodu tablosuna da bu projenin id'sini yazarak güncellesin
+
+20230506
+
+- Kapat butonu yerine Alt+F4 ile pencere kapatılmak istenirse GlobalData'daki RemoveLastForm metodu çağırılmıyor. Buna bir çözüm bulalım.
+
+20230507
+
++ SatisProjeKayitFormu'nda Müşteri ekleme butonu aktif hale getirilecek
++ Kaydet butonu ile kayıt işlemi yapılacak
++ Proje Aşamaları ve Sipariş Kaydı ile ilgili işlemler yapılacak.
+
+20230509
+
++ SatisProjeKayitFormu'nda rButtonKaydet_Click eventinde kaldık
+
+20230513
+
+- SatisProjeKayitFormu'nda Proje aşamalarının seçildiği combolistbox kontrolü yerine bir şey seçilmeyen ama liste gösteren bir kontrol olsun
+ SatisProjeGridForm'da Proje aşağıdaki aşamalar tamamlanacak;
+	+ Güncelleme
+	+ Silme
+	+ Yeni Proje Ekleme
+	+ Filtreleme
++ SatisProjeSafhaForm'u tasarlanacak
+
+20230516
++ SatisProjeGridForm'da Filtreleme FirmaGridForm'daki gibi olacak. (Gerekli storedprocedure yapısı vs ayarlanacak)
++ ProjeSafhaGridForm'da yapılacaklar;
+	+ Yeni satır ekleme
+	+ Eklenen her yeni satırda satisProjeSafhaList'e yeni bir SatisProjeSafha nesnesi eklenecek
+	+ Eğer iki satır varsa eklenen üçüncü satırda bu nesnenin safhaAd özelliği Aşama3 olacak gibi isimlendirilecek.
+	+ MonthCalendar.Visible özelliği her true olduğunda seçili tarih default olarak bugünün tarihi olacak
+	+ Safha silme özelliği olacak
+	+ ProjeSafhaGridForm'da projeId diye bir özellik olacak. Bu özellik SatisProjeKayitForm'dan gelen projeId'yi tutacak
+	+ Değişiklikleri kaydet butonuna tıklandığında veritabanına kayıt atılana kadar gerekli tüm işlemler yapılacak
+	+ Veritabanına liste halinde gönderilen SatisProjeSafha nesneleri eğer satisprojesafhaıd değerleri sıfırdan büyükse güncelleme, sıfır ise yeni kayıt olarak işlem yapılacak.
+
+20230525
++ SatisSiparis tablosuna SatisTutariDovizCinsiId ve OngoruMaliyetiDovizCinsiId alanları eklenecek (int)
++ Veritabanına KDV tablosu eklencek
++ TahsilatPlanı tablosundan TahsilatPlanı alanı kaldırılacak
+
+20230527
++ SatisProjeKayitForm UpdateMode'da açıldığında ProjeKodu değiştirilemez olacak.
+- Bir proje silindiğinde o proje kodu da silinecek. ** Proje silindiğinde proje kodu boşa düşüyor silmeye gerek var mı?
++ SatisSiparisKayit formu update mode'larda açılırken setup metoduna SatisSiparis nesnesi verilerek açılacak.
++ UpdateMode'larda açıldığında veya SatisProjeKayitFormu'ndan açıldığında ProjeKodu değiştirilemez olacak.
++ 4 farklı açılış modu için kontrollerin enable disable özellikleri ayarlanacak
++ TahsilatPlanı butonu yalnızca update mode'larda açıldığında aktif olacak
+
+20230717
++ SatinalmaFatura modeline KDV alanı eklendi , faturaResim yapısı eklendi
++ Veritabanında SatinalmaFatura tablosuna KdvId alanı eklendi
++ Veritabanına SatinalmaFaturaResim tablosu eklendi
+
+20230726
++ Tahsilat planı tablosu güncellemesi yapılırken tahsilat plan aşaması eklendikten sonra proje safha tablosunda değişiklik yapılırsa daha önceden eklenmiş tahsilata aşamasının listbox'ı güncellenecek.
+
+20230816
+- SatınalmaFatura - SatınalmaSipariş ilişki kuralları aşağıdaki gibi düzenlenecek
+	* Bir siparişe ait yalnızca bir fatura olabilir
+	* Bir fatura birden çok siparişle ilişkili olabilir
+	* Bir fatura kaydı yapılırken bir veya birden fazla siparişle ilişkilendirilerek kayıt edilirse bu sipariş veya siparişlerin kayıtlarındaki fatura bilgileri güncellenir.
+	* Eğer bir sipariş kaydı güncellenirken ilişkili olduğu fatura bilgisi değiştirilirse eski fatura kaydındaki sipariş bilgisi silinir ve yeni fatura kaydına bu siparişin kaydı eklenir.
+	Fatura girişi yapılırken tutar eşitliği zorunluluğu olduğu için her halükarda sipariş faturadan önce açılmalı ve fatura kaydı oluşturulurken ilgili siparişler fatura ile ilişkilendirilmelidir.
+	Sipariş kaydından fatura değişikliği yapılması durumunda eski fatura kaydının tutar bilgisi ile sipariş(ler) toplam tutarı arasında tutar eşitliği sağlanamayacağı için sipariş kayıt formundan fatura ilişkilendirilmesi yapılamıyor. 
+Bu sebeple sipariş kayıt fomunda fatura no alanı pasif olarak açılacak. Fatura ilişkelindirmesi yapılmışsa formda gösterilecek, yapılmamışsa boş gelecek. 
