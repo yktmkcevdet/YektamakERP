@@ -175,7 +175,7 @@ namespace YektamakDesktop.Formlar.Finans
                 }
                 else
                 {
-                    IDataTableConverter dataTableConverter = new DataTableConverter();
+                    IDataTableHelper dataTableConverter = new DataTableHelper();
                     IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                     DataSet dataSet = jsonConverter.JsonStringToDataSet(result);
                     cariKartToSave = dataTableConverter.DataRowToModel<CariKart>(dataSet.Tables[0].Rows[0]);

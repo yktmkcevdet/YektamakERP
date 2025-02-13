@@ -21,3 +21,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Debug\net6.0\Models.dl
 C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Debug\net6.0\refint\Models.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Debug\net6.0\Models.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Debug\net6.0\ref\Models.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Debug\net6.0\Models.sourcelink.json

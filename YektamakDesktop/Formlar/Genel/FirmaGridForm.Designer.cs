@@ -38,8 +38,10 @@
             buttonTumKayitlariGetir = new CustomControls.RoundedIconButton();
             buttonFiltre = new CustomControls.RoundedIconButton();
             dataGridView = new System.Windows.Forms.DataGridView();
-            id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            unvan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            panelFooter = new System.Windows.Forms.Panel();
+            rButtonCikis = new CustomControls.RoundedButton();
+            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             adres_acikAdres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             adres_ulke = new System.Windows.Forms.DataGridViewTextBoxColumn();
             adres_postaKodu = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,8 +56,6 @@
             yetkiliList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Guncelle = new System.Windows.Forms.DataGridViewImageColumn();
             Sil = new System.Windows.Forms.DataGridViewImageColumn();
-            panelFooter = new System.Windows.Forms.Panel();
-            rButtonCikis = new CustomControls.RoundedButton();
             panelHeader.SuspendLayout();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
@@ -87,7 +87,7 @@
             buttonClose.BorderSize = 2;
             buttonClose.FlatAppearance.BorderSize = 0;
             buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonClose.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            buttonClose.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonClose.ForeColor = System.Drawing.Color.White;
             buttonClose.Location = new System.Drawing.Point(1168, 9);
             buttonClose.Margin = new System.Windows.Forms.Padding(0);
@@ -109,7 +109,7 @@
             buttonHelp.BorderSize = 2;
             buttonHelp.FlatAppearance.BorderSize = 0;
             buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonHelp.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            buttonHelp.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonHelp.ForeColor = System.Drawing.Color.White;
             buttonHelp.Location = new System.Drawing.Point(1088, 9);
             buttonHelp.Margin = new System.Windows.Forms.Padding(0);
@@ -130,7 +130,7 @@
             buttomMinimize.BorderSize = 2;
             buttomMinimize.FlatAppearance.BorderSize = 0;
             buttomMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttomMinimize.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            buttomMinimize.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttomMinimize.ForeColor = System.Drawing.Color.White;
             buttomMinimize.Location = new System.Drawing.Point(1128, 9);
             buttomMinimize.Margin = new System.Windows.Forms.Padding(0);
@@ -148,7 +148,7 @@
             labelHeader.Anchor = System.Windows.Forms.AnchorStyles.Left;
             labelHeader.AutoSize = true;
             labelHeader.BackColor = System.Drawing.Color.Red;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            labelHeader.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             labelHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             labelHeader.Location = new System.Drawing.Point(37, 9);
             labelHeader.Name = "labelHeader";
@@ -177,7 +177,7 @@
             buttonFirmaEkle.BackColor = System.Drawing.Color.FromArgb(0, 64, 64);
             buttonFirmaEkle.CornerRadius = 15;
             buttonFirmaEkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonFirmaEkle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            buttonFirmaEkle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonFirmaEkle.ForeColor = System.Drawing.Color.Gainsboro;
             buttonFirmaEkle.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
             buttonFirmaEkle.IconColor = System.Drawing.Color.Gainsboro;
@@ -197,7 +197,7 @@
             buttonTumKayitlariGetir.BackColor = System.Drawing.Color.FromArgb(0, 64, 64);
             buttonTumKayitlariGetir.CornerRadius = 15;
             buttonTumKayitlariGetir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonTumKayitlariGetir.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            buttonTumKayitlariGetir.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonTumKayitlariGetir.ForeColor = System.Drawing.Color.Gainsboro;
             buttonTumKayitlariGetir.IconChar = FontAwesome.Sharp.IconChar.FilterCircleXmark;
             buttonTumKayitlariGetir.IconColor = System.Drawing.Color.Gainsboro;
@@ -217,7 +217,7 @@
             buttonFiltre.BackColor = System.Drawing.Color.FromArgb(0, 64, 64);
             buttonFiltre.CornerRadius = 15;
             buttonFiltre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonFiltre.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            buttonFiltre.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonFiltre.ForeColor = System.Drawing.Color.Gainsboro;
             buttonFiltre.IconChar = FontAwesome.Sharp.IconChar.Filter;
             buttonFiltre.IconColor = System.Drawing.Color.Gainsboro;
@@ -236,7 +236,7 @@
             // 
             dataGridView.AllowUserToAddRows = false;
             dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { id, unvan, adres_acikAdres, adres_ulke, adres_postaKodu, vergiDairesi, vergiNumarasi, telefon, faks, mail, adres_sehir, sektorIdList, bankaHesabiList, yetkiliList, Guncelle, Sil });
+            dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, ad, adres_acikAdres, adres_ulke, adres_postaKodu, vergiDairesi, vergiNumarasi, telefon, faks, mail, adres_sehir, sektorIdList, bankaHesabiList, yetkiliList, Guncelle, Sil });
             dataGridView.Location = new System.Drawing.Point(0, 105);
             dataGridView.Name = "dataGridView";
             dataGridView.RowTemplate.Height = 25;
@@ -246,20 +246,50 @@
             dataGridView.ColumnWidthChanged += dataGridView_ColumnWidthChanged;
             dataGridView.Scroll += dataGridView_Scroll;
             // 
-            // id
+            // panelFooter
             // 
-            id.HeaderText = "firmaId";
-            id.Name = "id";
-            id.ReadOnly = true;
-            id.Visible = false;
+            panelFooter.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panelFooter.BackColor = System.Drawing.SystemColors.ControlLight;
+            panelFooter.Controls.Add(rButtonCikis);
+            panelFooter.Location = new System.Drawing.Point(0, 692);
+            panelFooter.Name = "panelFooter";
+            panelFooter.Size = new System.Drawing.Size(1216, 65);
+            panelFooter.TabIndex = 1;
             // 
-            // unvan
+            // rButtonCikis
             // 
-            unvan.DataPropertyName = "filtre";
-            unvan.HeaderText = "Ünvan";
-            unvan.Name = "unvan";
-            unvan.ReadOnly = true;
-            unvan.Width = 400;
+            rButtonCikis.BackColor = System.Drawing.Color.Brown;
+            rButtonCikis.BackgroundColor = System.Drawing.Color.Brown;
+            rButtonCikis.BorderColor = System.Drawing.Color.Crimson;
+            rButtonCikis.BorderRadius = 40;
+            rButtonCikis.BorderSize = 5;
+            rButtonCikis.FlatAppearance.BorderSize = 0;
+            rButtonCikis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            rButtonCikis.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            rButtonCikis.ForeColor = System.Drawing.Color.White;
+            rButtonCikis.Location = new System.Drawing.Point(3, 3);
+            rButtonCikis.Name = "rButtonCikis";
+            rButtonCikis.Size = new System.Drawing.Size(152, 59);
+            rButtonCikis.TabIndex = 0;
+            rButtonCikis.Text = "KAPAT";
+            rButtonCikis.TextColor = System.Drawing.Color.White;
+            rButtonCikis.UseVisualStyleBackColor = false;
+            rButtonCikis.Click += buttonClose_Click;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "firmaId";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // ad
+            // 
+            ad.DataPropertyName = "filtre";
+            ad.HeaderText = "Ünvan";
+            ad.Name = "ad";
+            ad.ReadOnly = true;
+            ad.Width = 400;
             // 
             // adres_acikAdres
             // 
@@ -353,36 +383,6 @@
             Sil.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             Sil.Width = 30;
             // 
-            // panelFooter
-            // 
-            panelFooter.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            panelFooter.BackColor = System.Drawing.SystemColors.ControlLight;
-            panelFooter.Controls.Add(rButtonCikis);
-            panelFooter.Location = new System.Drawing.Point(0, 692);
-            panelFooter.Name = "panelFooter";
-            panelFooter.Size = new System.Drawing.Size(1216, 65);
-            panelFooter.TabIndex = 1;
-            // 
-            // rButtonCikis
-            // 
-            rButtonCikis.BackColor = System.Drawing.Color.Brown;
-            rButtonCikis.BackgroundColor = System.Drawing.Color.Brown;
-            rButtonCikis.BorderColor = System.Drawing.Color.Crimson;
-            rButtonCikis.BorderRadius = 40;
-            rButtonCikis.BorderSize = 5;
-            rButtonCikis.FlatAppearance.BorderSize = 0;
-            rButtonCikis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            rButtonCikis.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
-            rButtonCikis.ForeColor = System.Drawing.Color.White;
-            rButtonCikis.Location = new System.Drawing.Point(3, 3);
-            rButtonCikis.Name = "rButtonCikis";
-            rButtonCikis.Size = new System.Drawing.Size(152, 59);
-            rButtonCikis.TabIndex = 0;
-            rButtonCikis.Text = "KAPAT";
-            rButtonCikis.TextColor = System.Drawing.Color.White;
-            rButtonCikis.UseVisualStyleBackColor = false;
-            rButtonCikis.Click += buttonClose_Click;
-            // 
             // FirmaGridForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -416,8 +416,9 @@
         private CustomControls.RoundedButton buttonClose;
         private CustomControls.RoundedButton buttonHelp;
         private CustomControls.RoundedButton buttomMinimize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unvan;
+        private CustomControls.RoundedIconButton buttonFiltre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ad;
         private System.Windows.Forms.DataGridViewTextBoxColumn adres_acikAdres;
         private System.Windows.Forms.DataGridViewTextBoxColumn adres_ulke;
         private System.Windows.Forms.DataGridViewTextBoxColumn adres_postaKodu;
@@ -432,6 +433,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn yetkiliList;
         private System.Windows.Forms.DataGridViewImageColumn Guncelle;
         private System.Windows.Forms.DataGridViewImageColumn Sil;
-        private CustomControls.RoundedIconButton buttonFiltre;
     }
 }

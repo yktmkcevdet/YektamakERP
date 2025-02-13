@@ -47,7 +47,7 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
             //GlobalData.ComboDovizCinsi(_dovizCinsiId);
             dovizCinsiId.SelectDataRowId(dovizid);
             SatinalmaSiparis satinalmaSiparis = new();
-            satinalmaSiparis.firma.id = firmaId;
+            satinalmaSiparis.firma.Id = firmaId;
             satinalmaSiparis.tutar.dovizCinsi.id=dovizid;
             string result = WebMethods.GetFilteredSatinalmaSiparis(satinalmaSiparis);
             

@@ -136,7 +136,7 @@ namespace YektamakDesktop.Formlar.Satis
         {
             if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(SatisSiparisGridForm))
             {
-                if (satisSiparisToUpdate != null && satisSiparisToUpdate.siparisId != 0)
+                if (satisSiparisToUpdate != null && satisSiparisToUpdate.Id != 0)
                 {
                     SatisSiparisGridForm.satisSiparisGridForm.UpdateRow(satisSiparisToUpdate);
                 }
@@ -210,7 +210,7 @@ namespace YektamakDesktop.Formlar.Satis
                     comboListBoxProjeKodu.ClearListBox();
                     comboListBoxProjeKodu.AddDataRow(satisSiparisToUpdate.satisProje.projeKod.Id, satisSiparisToUpdate.satisProje.projeKod.kod);
                     comboListBoxMarka.AddDataRow(satisSiparisToUpdate.satisProje.projeKod.marka.markaId, satisSiparisToUpdate.satisProje.projeKod.marka.markaAd);
-                    comboListBoxMusteri.AddDataRow(satisSiparisToUpdate.satisProje.musteri.id, satisSiparisToUpdate.satisProje.musteri.unvan);
+                    comboListBoxMusteri.AddDataRow(satisSiparisToUpdate.satisProje.musteri.Id, satisSiparisToUpdate.satisProje.musteri.ad);
                     comboListBoxProjeKodu.SelectDataRowId(satisSiparisToUpdate.satisProje.projeKod.Id);
                     FillSatisSiparisKayitForm(satisSiparisToUpdate);
                     comboListBoxProjeKodu.Enabled = false;
@@ -223,7 +223,7 @@ namespace YektamakDesktop.Formlar.Satis
                     comboListBoxProjeKodu.ClearListBox();
                     comboListBoxProjeKodu.AddDataRow(satisSiparis.satisProje.projeKod.Id, satisSiparis.satisProje.projeKod.kod);
                     comboListBoxMarka.AddDataRow(satisSiparis.satisProje.projeKod.marka.markaId, satisSiparis.satisProje.projeKod.marka.markaAd);
-                    comboListBoxMusteri.AddDataRow(satisSiparis.satisProje.musteri.id, satisSiparis.satisProje.musteri.unvan);
+                    comboListBoxMusteri.AddDataRow(satisSiparis.satisProje.musteri.Id, satisSiparis.satisProje.musteri.ad);
                     comboListBoxProjeKodu.SelectDataRowId(satisSiparis.satisProje.projeKod.Id);
                     comboListBoxKdv.SelectDataRowValue("%"+satisSiparisToUpdate.kdv.kdvOrani.ToString());
                     FillSatisSiparisKayitForm(satisSiparis);
@@ -264,13 +264,13 @@ namespace YektamakDesktop.Formlar.Satis
         private SatisSiparis GetCurrentSatisSiparis()
         {
             SatisSiparis satisSiparis = new SatisSiparis();
-            satisSiparis.siparisId = _siparisId;
+            satisSiparis.Id = _siparisId;
             satisSiparis.satisProje.projeKod.Id = comboListBoxProjeKodu.selectedDataRowId;
             satisSiparis.satisProje.projeKod.kod = comboListBoxProjeKodu.selectedDataRowValue;
             satisSiparis.satisProje.projeKod.marka.markaId = comboListBoxMarka.selectedDataRowId;
             satisSiparis.satisProje.projeKod.marka.markaAd = comboListBoxMarka.selectedDataRowValue;
-            satisSiparis.satisProje.musteri.id = comboListBoxMusteri.selectedDataRowId;
-            satisSiparis.satisProje.musteri.unvan=comboListBoxMusteri.selectedDataRowValue;
+            satisSiparis.satisProje.musteri.Id = comboListBoxMusteri.selectedDataRowId;
+            satisSiparis.satisProje.musteri.ad=comboListBoxMusteri.selectedDataRowValue;
             satisSiparis.kdv.kdvId = comboListBoxKdv.selectedDataRowId;
             satisSiparis.kdv.kdvOrani = int.Parse(comboListBoxKdv.selectedDataRowValue.Substring(1, comboListBoxKdv.selectedDataRowValue.Length - 1));
             satisSiparis.siparisTarihi = DateTime.Parse(textBoxSiparisTarihi.TextCustom);
@@ -435,7 +435,7 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxKdv.SelectDataRowId(satisSiparis.kdv.kdvId);
             textBoxProjeOngoruMaliyeti.TextCustom = satisSiparis.ongoruMaliyeti.tutar.ToString("#,##0.00");
             comboListBoxProjeOngoruMaliyetiDovizCinsi.SelectDataRowId(satisSiparis.ongoruMaliyeti.dovizCinsi.id);
-            _siparisId = satisSiparis.siparisId;
+            _siparisId = satisSiparis.Id;
         }
         /// <summary>
         /// Proje kodu değiştiğinde firma adı ve marka adı alanlarını doldurur.
@@ -446,7 +446,7 @@ namespace YektamakDesktop.Formlar.Satis
         private async void comboListBoxProjeKodu_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboListBoxMarka.SelectDataRowId(satisSiparisToUpdate.satisProje.projeKod.marka.markaId);
-            comboListBoxMusteri.SelectDataRowId(satisSiparisToUpdate.satisProje.musteri.id);
+            comboListBoxMusteri.SelectDataRowId(satisSiparisToUpdate.satisProje.musteri.Id);
         }
         /// <summary>
         /// Sadece sayısal veriler girilmesine izin veriri, alfasayısal değerleri engeller.

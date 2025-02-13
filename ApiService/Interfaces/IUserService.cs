@@ -1,6 +1,6 @@
 ﻿using Models;
 
-namespace ApiService.Implementetions
+namespace ApiService.Interfaces
 {
     public interface IUserService
     {

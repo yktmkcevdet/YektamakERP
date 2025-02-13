@@ -271,8 +271,8 @@ namespace YektamakDesktop.Formlar.Satis
                 satisFatura.tutar.dovizCinsi.sembol,
                 satisFatura.satisSiparis.satisProje.projeId,
                 0, //Faturalandırılmamış tutar alanı dataTable'da 0 olarak tutulacak.
-                satisFatura.satisSiparis.siparisId,
-                satisFatura.satisSiparis.satisProje.musteri.id,
+                satisFatura.satisSiparis.Id,
+                satisFatura.satisSiparis.satisProje.musteri.Id,
                 satisFatura.cariKart.cari.Id);
         }
         public void UpdateRow(SatisFatura satisFatura)

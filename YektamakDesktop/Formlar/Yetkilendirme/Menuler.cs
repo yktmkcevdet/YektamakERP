@@ -81,7 +81,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
             for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
             {
-                IDataTableConverter dataTableConverter = new DataTableConverter();
+                IDataTableHelper dataTableConverter = new DataTableHelper();
                 DataRow dataRow = dataSet.Tables[0].Rows[i];
                 menuList.Add(dataTableConverter.DataRowToModel<DataControlMenu>(dataRow));
                 menuList[i].newRec = false;

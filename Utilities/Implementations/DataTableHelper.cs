@@ -6,7 +6,7 @@ using Utilities.Interfaces;
 
 namespace Utilities.Implementations
 {
-    public class DataTableConverter: IDataTableConverter
+    public class DataTableHelper: IDataTableHelper
     {
         /// <summary>
         /// Datatable satırlarını model listesine çevirir.
@@ -16,7 +16,7 @@ namespace Utilities.Implementations
         /// <typeparam name="T"></typeparam>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public List<T> ToList<T>(List<DataRow> dt) where T : IEntity, new()
+        public List<T> DataTableRowsToModelList<T>(List<DataRow> dt) where T : IEntity, new()
         {
             List<T> list = new List<T>();
 
@@ -103,9 +103,9 @@ namespace Utilities.Implementations
 
                 else if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
                 {
-                    MethodInfo method = typeof(DataTableConverter).GetMethod(nameof(DataRowToModel)).MakeGenericMethod(type);
+                    MethodInfo method = typeof(DataTableHelper).GetMethod(nameof(DataRowToModel)).MakeGenericMethod(type);
                     
-                    var converterInstance = new DataTableConverter();
+                    var converterInstance = new DataTableHelper();
                     object value = method.Invoke(converterInstance, new object[] { dataRow, upClassName + propertyInfo.Name + "_" });
                     propertyInfo.SetValue(entity, value);
                 }

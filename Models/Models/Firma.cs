@@ -3,10 +3,10 @@
     [Serializable]
     public class Firma:Cari,IEntity
     {
-        private int _id;
-        public int id { get { return _id; } set { base.Id = value;_id = value; } }
+        private int _Id;
+        public int Id { get { return _Id; } set { base.Id = value;_Id = value; } }
         
-        public string unvan;
+        public string ad;
         private Adres _adres;
         public Adres adres { get { if (_adres == null) { _adres = new(); } return _adres; } set { _adres = value; } }
         public string vergiDairesi;
@@ -25,7 +25,7 @@
         public Firma()  
         {
             base.cariTuru = CariTuru.FIRMA;
-            base.Id = id;
+            base.Id = Id;
         }
     }
 

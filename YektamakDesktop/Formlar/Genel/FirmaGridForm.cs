@@ -6,11 +6,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Genel
 {
     public partial class FirmaGridForm : Form, IForm,IGridForm<Firma>
     {
+        private static IDataGridHelper _dataGridHelper; 
+        public FirmaGridForm(IDataGridHelper dataGridHelper)
+        {
+            _dataGridHelper = dataGridHelper;
+        }
         public FirmaGridForm()
         {
             InitializeComponent();
@@ -52,7 +59,7 @@ namespace YektamakDesktop.Formlar.Genel
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = GlobalData.FillDataTable(WebMethods.GetFilteredFirma, firmaFilter);
+                    _dataTable = _dataGridHelper.FillDataTable(WebMethods.GetFilteredFirma, firmaFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }
@@ -134,7 +141,7 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="firma"></param>
         public void UpdateRow(Firma firma)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, firma.id);
+            int i = GlobalData.IndexOfDataSet(dataTable, firma.Id);
             if (i == -1)
             {
                 AddNewRow(firma);
@@ -152,8 +159,8 @@ namespace YektamakDesktop.Formlar.Genel
         public void AddNewRow(Firma firma)
         {
             dataTable.Rows.Add(
-                firma.id,
-                firma.unvan,
+                firma.Id,
+                firma.ad,
                 firma.adres.acikAdres,
                 firma.adres.ulke,
                 firma.adres.postaKodu,

@@ -1,9 +1,9 @@
 ﻿using ApiService.Common;
-using ApiService.Implementetions;
+using ApiService.Interfaces;
 using Models;
 using System.Data;
 
-namespace ApiService.Interfaces
+namespace ApiService.Implementetions
 {
     public class UserService : IUserService
     {

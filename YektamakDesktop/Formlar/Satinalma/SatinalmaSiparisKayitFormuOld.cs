@@ -145,7 +145,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             comboListBoxAvansDovizCinsi.SelectDataRowId(satinalmaSiparis.avans.dovizCinsi.id);
             comboListBoxkdv.SelectDataRowId(satinalmaSiparis.kdv.kdvId);
             textBoxVade.TextCustom = satinalmaSiparis.vade.ToString();
-            comboListBoxFirmaId.SelectDataRowId(satinalmaSiparis.firma.id);
+            comboListBoxFirmaId.SelectDataRowId(satinalmaSiparis.firma.Id);
             textBoxSiparisTarihi.TextCustom = satinalmaSiparis.siparisTarihi.ToShortDateString();
             textBoxAciklama.TextCustom = satinalmaSiparis.siparisAciklamasi.ToString();
             this.Enabled = true;
@@ -275,7 +275,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 vade = int.Parse(textBoxVade.TextCustom.ToString()),
                 firma = new Firma()
                 {
-                    id = comboListBoxFirmaId.selectedDataRowId
+                    Id = comboListBoxFirmaId.selectedDataRowId
                 },
 
                 tutar = new Tutar()

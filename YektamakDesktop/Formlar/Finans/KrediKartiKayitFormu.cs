@@ -169,7 +169,7 @@ namespace YektamakDesktop.Formlar.Finans
             krediKartiToSave.kartNumarasi = customTextBoxKartNumarasi.TextCustom;
             krediKartiToSave.kartSahibi = customTextBoxKartSahibi.TextCustom;
             krediKartiToSave.bagliHesap = new BankaHesabi();
-            krediKartiToSave.bagliHesap.banka.id = comboListBoxBanka.selectedDataRowId;
+            krediKartiToSave.bagliHesap.banka.Id = comboListBoxBanka.selectedDataRowId;
             krediKartiToSave.bagliHesap.hesapId = customComboListBoxBagliHesap.selectedDataRowId;
             krediKartiToSave.dovizCinsi.id = customComboListBoxDovizTuru.selectedDataRowId;
             krediKartiToSave.hesapKesimTarihi = DateTime.Parse(customTextBoxHesapKesimTarihi.TextCustom);
@@ -281,7 +281,7 @@ namespace YektamakDesktop.Formlar.Finans
         {
             customComboListBoxBagliHesap.ClearListBox();
             BankaHesabi bankaHesabi= new();
-            bankaHesabi.firma.id = GlobalData.kendiFirmaId; // Yektamak'a ait banka hesapları
+            bankaHesabi.firma.Id = GlobalData.kendiFirmaId; // Yektamak'a ait banka hesapları
             string jsonString = WebMethods.GetFilteredBankaHesabi(bankaHesabi);
             
             IJsonConvertHelper jsonConverter = new JsonConvertHelper();

@@ -11,14 +11,15 @@ namespace ApiService
             services.AddHttpClient<IApiService, ApiServiceClient>(client =>
             {
                 client.BaseAddress = new Uri(ApiBaseUrl.server); // API'nin temel adresi
-            });
+            })
             // SSL sertifikası olmayan sunucular için
-            //        .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-            //{
-            //  ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            //});
-            
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                });
+
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISatinalmaTalep, SatinalmaTalep>();
             return services;
         }
     }

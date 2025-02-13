@@ -339,6 +339,7 @@
             rButtonGuncelle.Text = "GÜNCELLE";
             rButtonGuncelle.TextColor = System.Drawing.Color.White;
             rButtonGuncelle.UseVisualStyleBackColor = false;
+            rButtonGuncelle.Click += rButtonGuncelle_Click_1;
             // 
             // rButtonKaydet
             // 

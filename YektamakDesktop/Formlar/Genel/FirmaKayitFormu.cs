@@ -100,8 +100,8 @@ namespace YektamakDesktop.Formlar.Genel
         private void GetCurrentFirma()
         {
             firmaToSave = new();
-            firmaToSave.id = firmaToUpdate.id;
-            firmaToSave.unvan = textBoxFirmaUnvan.TextCustom;
+            firmaToSave.Id = firmaToUpdate.Id;
+            firmaToSave.ad = textBoxFirmaUnvan.TextCustom;
             firmaToSave.vergiDairesi = textBoxVergiDairesi.TextCustom;
             firmaToSave.vergiNumarasi = textBoxVergiNumarasi.TextCustom;
             int sektorCount = 0;
@@ -140,8 +140,8 @@ namespace YektamakDesktop.Formlar.Genel
             firmaToUpdate = JsonConvert.DeserializeObject<Firma>(JsonConvert.SerializeObject(firma));
             firmaToSave = JsonConvert.DeserializeObject<Firma>(JsonConvert.SerializeObject(firma));
             rButtonFirmaGuncelle.Visible = true;
-            firmaToSave.id = firmaToUpdate.id;
-            textBoxFirmaUnvan.TextCustom = firmaToUpdate.unvan;
+            firmaToSave.Id = firmaToUpdate.Id;
+            textBoxFirmaUnvan.TextCustom = firmaToUpdate.ad;
             textBoxVergiDairesi.TextCustom = firmaToUpdate.vergiDairesi;
             textBoxVergiNumarasi.TextCustom = firmaToUpdate.vergiNumarasi;
             textBoxUlke.Text = firmaToUpdate.adres.ulke;
@@ -176,12 +176,12 @@ namespace YektamakDesktop.Formlar.Genel
                     }
                     else
                     {
-                        IDataTableConverter dataTableConverter = new DataTableConverter();
+                        IDataTableHelper dataTableConverter = new DataTableHelper();
                         IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                         firmaToSave = dataTableConverter.DataRowToModel<Firma>(jsonConverter.JsonStringToDataSet(result).Tables[0].Rows[0]);
                         if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(FirmaGridForm))
                         {
-                            if (firmaToSave != null && firmaToSave.id != 0)
+                            if (firmaToSave != null && firmaToSave.Id != 0)
                             {
                                 FirmaGridForm.firmaGridForm.UpdateRow(firmaToSave);
                             }
@@ -217,7 +217,7 @@ namespace YektamakDesktop.Formlar.Genel
             if(personelKayitFormu != null)
             {
                 Personel personel = new();
-                personel.firma.id= firmaToUpdate.id;
+                personel.firma.Id= firmaToUpdate.Id;
                 personelKayitFormu.Show();
                 personelKayitFormu.SaveMode(personel);
             }
@@ -379,7 +379,7 @@ namespace YektamakDesktop.Formlar.Genel
             if (personelGridFormu != null)
             {
                 Personel personelFilter = new();
-                personelFilter.firma.id = firmaToUpdate.id;
+                personelFilter.firma.Id = firmaToUpdate.Id;
                 personelGridFormu.FirmaMode(personelFilter);
                 personelGridFormu.Show();
             }
@@ -394,7 +394,7 @@ namespace YektamakDesktop.Formlar.Genel
             BankaHesabiGridFormu bankaHesabiGridFormu = BankaHesabiGridFormu.bankaHesabiGridFormu;
             if(bankaHesabiGridFormu != null)
             {
-                bankaHesabiGridFormu.FirmaMode(firmaToUpdate.id);
+                bankaHesabiGridFormu.FirmaMode(firmaToUpdate.Id);
                 bankaHesabiGridFormu.Show();
             }
         }

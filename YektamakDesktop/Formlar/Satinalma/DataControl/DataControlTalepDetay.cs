@@ -170,7 +170,7 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
                 }
                 if (stokKart.kod != "")
 				{
-                    IDataTableConverter dataTableConverter = new DataTableConverter();
+                    IDataTableHelper dataTableConverter = new DataTableHelper();
                     IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                     DataSet stokKartDataSet = jsonConverter.JsonStringToDataSet(await WebMethods.SaveStokKart(stokKart));
 					if (stokKartDataSet != null)

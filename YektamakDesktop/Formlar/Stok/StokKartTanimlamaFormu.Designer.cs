@@ -80,6 +80,7 @@
             comboListBoxStokTip = new CustomControls.CustomComboListBox();
             label22 = new System.Windows.Forms.Label();
             comboListBoxProfilTip = new CustomControls.CustomComboListBox();
+            rButtonKaydet = new CustomControls.RoundedButton();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,7 +91,7 @@
             textBoxId.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxId.BorderRadius = 5;
             textBoxId.BorderSize = 1;
-            textBoxId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxId.ForeColor = System.Drawing.Color.Black;
             textBoxId.isPlaceHolder = false;
             textBoxId.Location = new System.Drawing.Point(186, 61);
@@ -115,7 +116,7 @@
             textBoxkod.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxkod.BorderRadius = 5;
             textBoxkod.BorderSize = 1;
-            textBoxkod.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxkod.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxkod.ForeColor = System.Drawing.Color.Black;
             textBoxkod.isPlaceHolder = false;
             textBoxkod.Location = new System.Drawing.Point(186, 128);
@@ -143,7 +144,7 @@
             roundedButton2.BorderSize = 2;
             roundedButton2.FlatAppearance.BorderSize = 0;
             roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton2.ForeColor = System.Drawing.Color.White;
             roundedButton2.Location = new System.Drawing.Point(1819, 1);
             roundedButton2.Margin = new System.Windows.Forms.Padding(0);
@@ -182,9 +183,10 @@
             btnClose.BorderColor = System.Drawing.Color.Firebrick;
             btnClose.BorderRadius = 10;
             btnClose.BorderSize = 2;
+            btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             btnClose.FlatAppearance.BorderSize = 0;
             btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnClose.ForeColor = System.Drawing.Color.White;
             btnClose.Location = new System.Drawing.Point(812, 2);
             btnClose.Margin = new System.Windows.Forms.Padding(0);
@@ -205,9 +207,10 @@
             btnMinimize.BorderColor = System.Drawing.Color.Firebrick;
             btnMinimize.BorderRadius = 10;
             btnMinimize.BorderSize = 2;
+            btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             btnMinimize.FlatAppearance.BorderSize = 0;
             btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnMinimize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            btnMinimize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnMinimize.ForeColor = System.Drawing.Color.White;
             btnMinimize.Location = new System.Drawing.Point(772, 2);
             btnMinimize.Margin = new System.Windows.Forms.Padding(0);
@@ -229,7 +232,7 @@
             roundedButton3.BorderSize = 2;
             roundedButton3.FlatAppearance.BorderSize = 0;
             roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton3.ForeColor = System.Drawing.Color.White;
             roundedButton3.Location = new System.Drawing.Point(1899, 1);
             roundedButton3.Margin = new System.Windows.Forms.Padding(0);
@@ -249,9 +252,10 @@
             bntHelp.BorderColor = System.Drawing.Color.Firebrick;
             bntHelp.BorderRadius = 10;
             bntHelp.BorderSize = 2;
+            bntHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             bntHelp.FlatAppearance.BorderSize = 0;
             bntHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            bntHelp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            bntHelp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             bntHelp.ForeColor = System.Drawing.Color.White;
             bntHelp.Location = new System.Drawing.Point(732, 2);
             bntHelp.Margin = new System.Windows.Forms.Padding(0);
@@ -266,7 +270,7 @@
             // labelHeader
             // 
             labelHeader.AutoSize = true;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            labelHeader.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             labelHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             labelHeader.Location = new System.Drawing.Point(12, 6);
             labelHeader.Name = "labelHeader";
@@ -284,7 +288,7 @@
             roundedButton1.BorderSize = 2;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton1.ForeColor = System.Drawing.Color.White;
             roundedButton1.Location = new System.Drawing.Point(1859, 1);
             roundedButton1.Margin = new System.Windows.Forms.Padding(0);
@@ -299,7 +303,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label1.Location = new System.Drawing.Point(86, 67);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(74, 15);
@@ -309,7 +313,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label2.Location = new System.Drawing.Point(86, 135);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(65, 15);
@@ -323,7 +327,7 @@
             textBoxLogoKod.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxLogoKod.BorderRadius = 5;
             textBoxLogoKod.BorderSize = 1;
-            textBoxLogoKod.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxLogoKod.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxLogoKod.ForeColor = System.Drawing.Color.Black;
             textBoxLogoKod.isPlaceHolder = false;
             textBoxLogoKod.Location = new System.Drawing.Point(186, 162);
@@ -344,7 +348,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label3.Location = new System.Drawing.Point(86, 169);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(66, 15);
@@ -354,7 +358,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label4.Location = new System.Drawing.Point(86, 203);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(54, 15);
@@ -368,7 +372,7 @@
             textBoxStokAd.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxStokAd.BorderRadius = 5;
             textBoxStokAd.BorderSize = 1;
-            textBoxStokAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxStokAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxStokAd.ForeColor = System.Drawing.Color.Black;
             textBoxStokAd.isPlaceHolder = false;
             textBoxStokAd.Location = new System.Drawing.Point(186, 196);
@@ -400,7 +404,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label5.Location = new System.Drawing.Point(86, 236);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(75, 15);
@@ -410,7 +414,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label6.Location = new System.Drawing.Point(86, 276);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(76, 15);
@@ -431,7 +435,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label7.Location = new System.Drawing.Point(86, 314);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(96, 15);
@@ -452,7 +456,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label8.Location = new System.Drawing.Point(86, 388);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(68, 15);
@@ -473,7 +477,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label9.Location = new System.Drawing.Point(86, 426);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(68, 15);
@@ -494,7 +498,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label10.Location = new System.Drawing.Point(86, 465);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(58, 15);
@@ -508,7 +512,7 @@
             textBoxParcaAd.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxParcaAd.BorderRadius = 5;
             textBoxParcaAd.BorderSize = 1;
-            textBoxParcaAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxParcaAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxParcaAd.ForeColor = System.Drawing.Color.Black;
             textBoxParcaAd.isPlaceHolder = false;
             textBoxParcaAd.Location = new System.Drawing.Point(186, 458);
@@ -529,7 +533,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label11.Location = new System.Drawing.Point(86, 499);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(43, 15);
@@ -543,7 +547,7 @@
             textBoxAgirlik.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxAgirlik.BorderRadius = 5;
             textBoxAgirlik.BorderSize = 1;
-            textBoxAgirlik.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxAgirlik.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxAgirlik.ForeColor = System.Drawing.Color.Black;
             textBoxAgirlik.isPlaceHolder = false;
             textBoxAgirlik.Location = new System.Drawing.Point(186, 492);
@@ -564,7 +568,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label12.Location = new System.Drawing.Point(86, 533);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(40, 15);
@@ -578,7 +582,7 @@
             textBoxBoyut.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxBoyut.BorderRadius = 5;
             textBoxBoyut.BorderSize = 1;
-            textBoxBoyut.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxBoyut.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxBoyut.ForeColor = System.Drawing.Color.Black;
             textBoxBoyut.isPlaceHolder = false;
             textBoxBoyut.Location = new System.Drawing.Point(186, 526);
@@ -599,7 +603,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label13.Location = new System.Drawing.Point(86, 567);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(58, 15);
@@ -613,7 +617,7 @@
             textBoxMalzeme.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxMalzeme.BorderRadius = 5;
             textBoxMalzeme.BorderSize = 1;
-            textBoxMalzeme.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxMalzeme.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxMalzeme.ForeColor = System.Drawing.Color.Black;
             textBoxMalzeme.isPlaceHolder = false;
             textBoxMalzeme.Location = new System.Drawing.Point(186, 560);
@@ -634,7 +638,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label14.Location = new System.Drawing.Point(94, 641);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(28, 15);
@@ -648,7 +652,7 @@
             textBoxBoy.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxBoy.BorderRadius = 5;
             textBoxBoy.BorderSize = 1;
-            textBoxBoy.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxBoy.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxBoy.ForeColor = System.Drawing.Color.Black;
             textBoxBoy.Location = new System.Drawing.Point(94, 659);
             textBoxBoy.Multiline = false;
@@ -673,7 +677,7 @@
             textBoxEn.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxEn.BorderRadius = 5;
             textBoxEn.BorderSize = 1;
-            textBoxEn.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxEn.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxEn.ForeColor = System.Drawing.Color.Black;
             textBoxEn.Location = new System.Drawing.Point(195, 659);
             textBoxEn.Multiline = false;
@@ -694,7 +698,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label15.Location = new System.Drawing.Point(195, 641);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(20, 15);
@@ -708,7 +712,7 @@
             textBoxYukseklik.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxYukseklik.BorderRadius = 5;
             textBoxYukseklik.BorderSize = 1;
-            textBoxYukseklik.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxYukseklik.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxYukseklik.ForeColor = System.Drawing.Color.Black;
             textBoxYukseklik.Location = new System.Drawing.Point(295, 659);
             textBoxYukseklik.Multiline = false;
@@ -729,7 +733,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label16.Location = new System.Drawing.Point(295, 641);
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(59, 15);
@@ -743,7 +747,7 @@
             textBoxCap.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxCap.BorderRadius = 5;
             textBoxCap.BorderSize = 1;
-            textBoxCap.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxCap.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxCap.ForeColor = System.Drawing.Color.Black;
             textBoxCap.Location = new System.Drawing.Point(398, 659);
             textBoxCap.Multiline = false;
@@ -764,7 +768,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label17.Location = new System.Drawing.Point(398, 641);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(27, 15);
@@ -778,7 +782,7 @@
             textBoxUzunluk.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxUzunluk.BorderRadius = 5;
             textBoxUzunluk.BorderSize = 1;
-            textBoxUzunluk.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxUzunluk.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxUzunluk.ForeColor = System.Drawing.Color.Black;
             textBoxUzunluk.Location = new System.Drawing.Point(509, 659);
             textBoxUzunluk.Multiline = false;
@@ -799,7 +803,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label18.Location = new System.Drawing.Point(509, 641);
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(46, 15);
@@ -813,7 +817,7 @@
             textBoxEtKalinlik.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxEtKalinlik.BorderRadius = 5;
             textBoxEtKalinlik.BorderSize = 1;
-            textBoxEtKalinlik.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxEtKalinlik.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxEtKalinlik.ForeColor = System.Drawing.Color.Black;
             textBoxEtKalinlik.Location = new System.Drawing.Point(612, 659);
             textBoxEtKalinlik.Multiline = false;
@@ -834,7 +838,7 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label19.Location = new System.Drawing.Point(612, 641);
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(64, 15);
@@ -844,7 +848,7 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label20.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label20.Location = new System.Drawing.Point(86, 601);
             label20.Name = "label20";
             label20.Size = new System.Drawing.Size(57, 15);
@@ -858,7 +862,7 @@
             textBoxAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
             textBoxAciklama.BorderRadius = 5;
             textBoxAciklama.BorderSize = 1;
-            textBoxAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            textBoxAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxAciklama.ForeColor = System.Drawing.Color.Black;
             textBoxAciklama.isPlaceHolder = false;
             textBoxAciklama.Location = new System.Drawing.Point(186, 594);
@@ -879,7 +883,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label21.Location = new System.Drawing.Point(86, 101);
             label21.Name = "label21";
             label21.Size = new System.Drawing.Size(56, 15);
@@ -900,7 +904,7 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label22.Location = new System.Drawing.Point(86, 352);
             label22.Name = "label22";
             label22.Size = new System.Drawing.Size(60, 15);
@@ -918,11 +922,35 @@
             comboListBoxProfilTip.Size = new System.Drawing.Size(251, 36);
             comboListBoxProfilTip.TabIndex = 50;
             // 
+            // rButtonKaydet
+            // 
+            rButtonKaydet.BackColor = System.Drawing.Color.Transparent;
+            rButtonKaydet.BackgroundColor = System.Drawing.Color.Transparent;
+            rButtonKaydet.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            rButtonKaydet.BorderRadius = 20;
+            rButtonKaydet.BorderSize = 2;
+            rButtonKaydet.Cursor = System.Windows.Forms.Cursors.Hand;
+            rButtonKaydet.FlatAppearance.BorderSize = 0;
+            rButtonKaydet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            rButtonKaydet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            rButtonKaydet.ForeColor = System.Drawing.Color.White;
+            rButtonKaydet.Image = Properties.Resources.kaydet;
+            rButtonKaydet.Location = new System.Drawing.Point(772, 703);
+            rButtonKaydet.Name = "rButtonKaydet";
+            rButtonKaydet.Size = new System.Drawing.Size(47, 49);
+            rButtonKaydet.TabIndex = 52;
+            rButtonKaydet.TextColor = System.Drawing.Color.White;
+            rButtonKaydet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            rButtonKaydet.UseCompatibleTextRendering = true;
+            rButtonKaydet.UseVisualStyleBackColor = false;
+            rButtonKaydet.Click += rButtonKaydet_Click;
+            // 
             // StokKartTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(850, 723);
+            ClientSize = new System.Drawing.Size(850, 764);
+            Controls.Add(rButtonKaydet);
             Controls.Add(label22);
             Controls.Add(comboListBoxProfilTip);
             Controls.Add(label21);
@@ -1031,5 +1059,6 @@
         private CustomControls.CustomComboListBox comboListBoxStokTip;
         private System.Windows.Forms.Label label22;
         private CustomControls.CustomComboListBox comboListBoxProfilTip;
+        private CustomControls.RoundedButton rButtonKaydet;
     }
 }

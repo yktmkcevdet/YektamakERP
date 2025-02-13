@@ -158,7 +158,7 @@
                 MalzemeGrup malzemeGrup = new MalzemeGrup();
                 malzemeGrup.ad = rowData.GetCell(9)?.ToString() ?? "";
                 IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
-                IDataTableConverter dataTableConverter = new DataTableConverter();
+                IDataTableHelper dataTableConverter = new DataTableHelper();
                 malzemeGrup = dataTableConverter.DataRowToModel<MalzemeGrup>(jsonConvertHelper.JsonStringToDataSet(WebMethods.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
                 stokKart.parcaGrup.Id = malzemeGrup.parcaGrupId;
                 stokKart.malzemeGrup.Id = malzemeGrup.Id;

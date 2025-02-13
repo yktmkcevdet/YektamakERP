@@ -359,7 +359,7 @@ namespace YektamakDesktop.Formlar.Satis
 
                 DateTime gerceklesmeTarihi;
                 tarih = DateTime.Parse((dataRow.Cells["GerceklesmeTarihi"].Value != null) ? dataRow.Cells["GerceklesmeTarihi"].Value.ToString() : default(DateTime).ToString());
-                tarihStr=tarih.ToShortDateString();
+                tarihStr = tarih.ToShortDateString();
                 satisProjeSafha.gerceklesmeTarihi = (dataRow.Cells["GerceklesmeTarihi"].Value != null && DateTime.TryParse(tarihStr, out gerceklesmeTarihi)) ? gerceklesmeTarihi : default(DateTime);
 
                 satisProjeSafha.SafhaGerceklestiMi = (dataRow.Cells["isSafhaGerceklesti"].Value != null) ? bool.Parse(dataRow.Cells["isSafhaGerceklesti"].Value.ToString()) : false; //Safha Gerçekleşti mi
@@ -593,14 +593,15 @@ namespace YektamakDesktop.Formlar.Satis
             }
         }
 
-        private void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void roundedButton4_Click(object sender, EventArgs e)
         {
             CloseForm();
+        }
+
+        private void roundedButton5_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

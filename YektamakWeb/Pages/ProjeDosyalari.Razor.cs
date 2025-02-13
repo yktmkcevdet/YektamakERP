@@ -27,7 +27,7 @@ namespace YektamakWeb.Pages
                 DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
                 if (dataSet != null)
                 {
-                    IDataTableConverter DataTableConverter = new DataTableConverter();
+                    IDataTableHelper DataTableConverter = new DataTableHelper();
                     foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                     {
                         stokKart = DataTableConverter.DataRowToModel<StokKart>(dataRow);

@@ -78,9 +78,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             TreeNode treeNode;
             foreach (DataRow dataRow in dataSet.Tables[0].Select("rolId=1")) //RolId=1 yazılmasının sebebi menü başlıklarının admin rolü için tanımlanmış olduğundan dolayı.
             {
-                treeNode = new TreeNode(dataRow["Menu"].ToString());
+                treeNode = new TreeNode(dataRow["ad"].ToString());
                 treeNode.Checked = true;
-                treeNode.Name = dataRow["MenuId"].ToString();
+                treeNode.Name = dataRow["Id"].ToString();
                 // İkinci tablodan verileri kullanarak alt düğümleri oluştur
                 foreach (DataRow dr in dataSet.Tables[1].Select("rolId=" + comboListBoxRol.selectedDataRowId + " or rolId is null"))
                 {

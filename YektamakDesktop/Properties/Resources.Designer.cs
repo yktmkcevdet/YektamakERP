@@ -333,6 +333,16 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap kaydet {
+            get {
+                object obj = ResourceManager.GetObject("kaydet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap Magnifier {
             get {
                 object obj = ResourceManager.GetObject("Magnifier", resourceCulture);

@@ -89,7 +89,7 @@ namespace YektamakDesktop.Formlar.Genel
         {
             buttonPersonelGuncelle.Visible = true;
             personelToUpdate=personel;
-            comboListBoxFirma.SelectDataRowId(personel.firma.id);
+            comboListBoxFirma.SelectDataRowId(personel.firma.Id);
             textBoxIsim.TextCustom = personel.ad;
             textBoxSoyisim.TextCustom = personel.soyad;
             textBoxTelefon.TextCustom = personel.telefon;
@@ -106,7 +106,7 @@ namespace YektamakDesktop.Formlar.Genel
         {
             buttonPersonelGuncelle.Visible = false;
             personelToUpdate.firma.Id = -1;
-            personelToUpdate.firma.id= -1;
+            personelToUpdate.firma.Id= -1;
         }
 
         /// <summary>
@@ -154,8 +154,8 @@ namespace YektamakDesktop.Formlar.Genel
         private Personel GetCurrentPersonel()
         {
             personelToSave.Id=personelToUpdate.Id;
-            personelToSave.firma.id = comboListBoxFirma.selectedDataRowId;
-            personelToSave.firma.unvan = comboListBoxFirma.selectedDataRowValue;
+            personelToSave.firma.Id = comboListBoxFirma.selectedDataRowId;
+            personelToSave.firma.ad = comboListBoxFirma.selectedDataRowValue;
             personelToSave.ad = string.IsNullOrEmpty(textBoxIsim.TextCustom)?null: textBoxIsim.TextCustom;
             personelToSave.soyad = string.IsNullOrEmpty(textBoxSoyisim.TextCustom)?null:textBoxSoyisim.TextCustom;
             personelToSave.telefon = string.IsNullOrEmpty(textBoxTelefon.TextCustom) ? null : textBoxTelefon.TextCustom;

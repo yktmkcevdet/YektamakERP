@@ -12,12 +12,13 @@ using System.Text;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using Utilities.Implementations;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Satis
 {
     public partial class SatisProjeKayitFormu : Form, IForm
     {
-        private readonly ICache _cache;
+        private static ICache _cache;
         private WebMethods _webMethods;
         private static SatisProjeKayitFormu _satisProjeKayitFormu;
         public static SatisProjeKayitFormu satisProjeKayitFormu
@@ -26,7 +27,7 @@ namespace YektamakDesktop.Formlar.Satis
             {
                 if (_satisProjeKayitFormu == null)
                 {
-                    _satisProjeKayitFormu = new SatisProjeKayitFormu(new Cache(new JsonConvertHelper(),new DataTableConverter()));
+                    _satisProjeKayitFormu = new SatisProjeKayitFormu();
                     GlobalData.Yetki(ref _satisProjeKayitFormu);
                 }
                 return _satisProjeKayitFormu;
@@ -71,9 +72,8 @@ namespace YektamakDesktop.Formlar.Satis
         /// Pencere SaveMode metoduyla açılırsa true, UpdateMode metoduyla açılırsa false olur.
         /// </summary>
         public bool isSaveMode { get => _isSaveMode; }
-        public SatisProjeKayitFormu(ICache cache)
+        public SatisProjeKayitFormu()
         {
-            _cache = cache;
             InitializeComponent();
             LoadUnassignedProjeKod();
             LoadMusteriler();
@@ -81,6 +81,10 @@ namespace YektamakDesktop.Formlar.Satis
             controlsToDisable = new List<Control>();
             {
             }
+        }
+        public SatisProjeKayitFormu(ICache cache)
+        {
+            _cache = cache;
         }
 
         public SatisProjeKayitFormu(WebMethods webMethods)
@@ -146,9 +150,9 @@ namespace YektamakDesktop.Formlar.Satis
         /// </summary>
         public void SaveMode()
         {
-            textBoxProjeAsamalari.Enabled = false;
+            //textBoxProjeAsamalari.Enabled = false;
             textBoxSiparisKaydi.Enabled = false;
-            buttonProjeAsamalari.Enabled = false;
+            //buttonProjeAsamalari.Enabled = false;
             buttonSiparisKaydiEkle.Enabled = false;
             rButtonGuncelle.Visible = false;
             rButtonKaydet.Visible = true;
@@ -168,7 +172,7 @@ namespace YektamakDesktop.Formlar.Satis
             
             comboListBoxProjeKodu.AddDataRow(satisProje.projeKod.Id, satisProje.projeKod.kod);
             comboListBoxProjeKodu.SelectDataRowId(satisProje.projeKod.Id);
-            comboListBoxMusteri.SelectDataRowId(satisProje.musteri.id);
+            comboListBoxMusteri.SelectDataRowId(satisProje.musteri.Id);
             SatisSiparis satisSiparis=new SatisSiparis();
             satisSiparis.satisProje=satisProje;
             string httpResult = WebMethods.GetFilteredSatisSiparis(satisSiparis);
@@ -228,8 +232,8 @@ namespace YektamakDesktop.Formlar.Satis
                 satisProje.projeKod.Id = comboListBoxProjeKodu.selectedDataRowId;
                 satisProje.projeKod.kod = comboListBoxProjeKodu.selectedDataRowValue;
                 satisProje.musteri = new Firma();
-                satisProje.musteri.id = comboListBoxMusteri.selectedDataRowId;
-                satisProje.musteri.unvan = comboListBoxMusteri.selectedDataRowValue;
+                satisProje.musteri.Id = comboListBoxMusteri.selectedDataRowId;
+                satisProje.musteri.ad = comboListBoxMusteri.selectedDataRowValue;
                 satisProje.satisSorumlusu = new Personel();
                 satisProje.satisSorumlusu.Id = comboListBoxSatisSorumlusu.selectedDataRowId;
             }
@@ -297,46 +301,14 @@ namespace YektamakDesktop.Formlar.Satis
         /// </summary>
         private void LoadUnassignedProjeKod()
         {
-            string result = _webMethods.GetAllUnassignedProjeKod();
-
-            if (result.Contains("error",StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show(result);
-            }
-            else
-            {
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSetUnassignedProjeKod = jsonConverter.JsonStringToDataSet(result);
-                _unassignedProjeKodList = new List<Models.Proje>();
-                for (int i = 0; i < dataSetUnassignedProjeKod.Tables[0].Rows.Count; i++)
-                {
-                    Models.Proje projeKod = new();
-                    projeKod.Id = int.Parse(dataSetUnassignedProjeKod.Tables[0].Rows[i]["ProjeKodId"].ToString());
-                    projeKod.no = int.Parse(dataSetUnassignedProjeKod.Tables[0].Rows[i]["ProjeNo"].ToString());
-                    projeKod.marka.markaId = int.Parse(dataSetUnassignedProjeKod.Tables[0].Rows[i]["MarkaId"].ToString());
-                    projeKod.marka.markaAltGrup.altGrupId = int.Parse(dataSetUnassignedProjeKod.Tables[0].Rows[i]["MarkaAltGrupId"].ToString());
-                    projeKod.kod = dataSetUnassignedProjeKod.Tables[0].Rows[i]["kod"].ToString();
-                    _unassignedProjeKodList.Add(projeKod);
-                }
-            }
-            comboListBoxProjeKodu.ClearListBox();
-            if (_unassignedProjeKodList != null && _unassignedProjeKodList.Count > 0)
-            {
-                for (int i = 0; i < _unassignedProjeKodList.Count; i++)
-                {
-                    comboListBoxProjeKodu.AddDataRow(_unassignedProjeKodList[i].Id, _unassignedProjeKodList[i].kod);
-                }
-            }
+            ComboBoxListFill.GetLookupKod(_cache.unAssignedProjeList, ref comboListBoxProjeKodu);
         }
         /// <summary>
         /// comboListBoxMusteriler kontrolünün içine web servisteki bütün firma bilgilerini doldurur.
         /// </summary>
         private void LoadMusteriler()
         {
-            //foreach (Firma firma in GlobalData.firmaUnvanList)
-            //{
-            //    comboListBoxMusteri.AddDataRow(firma.id, firma.unvan);
-            //}
+            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref comboListBoxMusteri);
         }
         /// <summary>
         /// Yeni bir proje kodu eklemek için ProjeKodKayitFormu formunu açar.
@@ -381,8 +353,8 @@ namespace YektamakDesktop.Formlar.Satis
         /// <param name="firma"></param>
         internal void AddNewFirmaToComboList(Firma firma)
         {
-            comboListBoxMusteri.AddDataRow(firma.id, firma.unvan);
-            comboListBoxMusteri.SelectDataRowId(firma.id);
+            comboListBoxMusteri.AddDataRow(firma.Id, firma.ad);
+            comboListBoxMusteri.SelectDataRowId(firma.Id);
         }
         /// <summary>
         /// Proje safhalarını eklemek ve çıkarmak için ProjeSafhaGridForm formunu açar.
@@ -456,7 +428,7 @@ namespace YektamakDesktop.Formlar.Satis
             }
             if (!string.IsNullOrWhiteSpace(textBoxSiparisKaydi.TextCustom))
             {
-                satisSiparis.siparisId = Convert.ToInt32(textBoxSiparisKaydi.TextCustom);
+                satisSiparis.Id = Convert.ToInt32(textBoxSiparisKaydi.TextCustom);
                 satisSiparisKayitFormu.Setup(ModeSiparisKayit.UPDATE_FROM_SATISPROJEKAYIT, satisSiparis);
             }
             else

@@ -32,7 +32,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 			{ 
 				if (_satinalmaTalepFormuDetay == null) 
 				{
-					_satinalmaTalepFormuDetay = new SatinalmaTalepFormuDetay(new Cache(new JsonConvertHelper(), new DataTableConverter())); 
+					_satinalmaTalepFormuDetay = new SatinalmaTalepFormuDetay(new Cache(new JsonConvertHelper(), new DataTableHelper())); 
 					GlobalData.Yetki(ref _satinalmaTalepFormuDetay); 
 				}
 				return _satinalmaTalepFormuDetay; 

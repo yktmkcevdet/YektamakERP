@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "Yeni Profil",
+    "Projects": [
+      {
+        "Path": "Api\\Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -9,7 +9,7 @@ namespace Utilities
         public static IServiceCollection AddUtilities(this IServiceCollection services)
         {
             services.AddScoped<ICache, Cache>();
-            services.AddScoped<IDataTableConverter, DataTableConverter>();
+            services.AddScoped<IDataTableHelper, DataTableHelper>();
             services.AddScoped<IJsonConvertHelper, JsonConvertHelper>();
             services.AddScoped<ILoginHelper, LoginHelper>();
             services.AddScoped<IMailHandler, MailHandler>();

@@ -315,9 +315,9 @@ namespace YektamakDesktop
                 //MessageBox.Show("Filtreye uygun kayıt bulunamadı");
             }
         }
-        private static string RowFilterFromGridFilterFields<T>(DataGridViewColumn dataGridViewColumn, T filterModel,string filter) where T : class
+        public static string RowFilterFromGridFilterFields<T>(DataGridViewColumn dataGridViewColumn, T filterModel,string filter) where T : class
         {
-            Type type=null;
+            Type type;
             string valueLastOrDefault = "";
             string valueFirst = "";
             var subFields = System.Text.RegularExpressions.Regex.Split(dataGridViewColumn.Name, @"_");
@@ -344,7 +344,6 @@ namespace YektamakDesktop
                     
                     var deger = subField.GetValue(property.GetValue(filterModel));
                     valueLastOrDefault = (deger == null) ? string.Empty : deger.ToString();
-                    valueLastOrDefault = (deger == null) ? "" : deger.ToString();
                 }
             }
             if (fieldFirst != null)
@@ -360,7 +359,7 @@ namespace YektamakDesktop
 
             if (string.IsNullOrEmpty(filter) && valueLastOrDefault != "")
             {
-                if (type == typeof(byte) ||type == typeof(sbyte) ||type == typeof(short) ||type == typeof(ushort) ||type == typeof(int) ||type == typeof(uint) ||type == typeof(long) ||type == typeof(ulong))
+                if (typeof(int).IsAssignableFrom(type))
                 {
                     if (valueLastOrDefault != "0")
                     {
@@ -371,7 +370,7 @@ namespace YektamakDesktop
                 {
                     filter = $"{dataGridViewColumn.Name} = {valueLastOrDefault}";
                 }
-                else if (Nullable.GetUnderlyingType(type) == typeof(bool))
+                else if (type != null && Nullable.GetUnderlyingType(type) == typeof(bool))
                 {
                     filter = $"{dataGridViewColumn.Name} = {valueLastOrDefault}";
                 }
@@ -394,7 +393,7 @@ namespace YektamakDesktop
             }
             else if (valueLastOrDefault != "" && valueLastOrDefault != DateTime.MinValue.ToString())
             {
-                if (type == typeof(byte) || type == typeof(sbyte) || type == typeof(short) || type == typeof(ushort) || type == typeof(int) || type == typeof(uint) || type == typeof(long) || type == typeof(ulong))
+                if (typeof(int).IsAssignableFrom(type))
                 {
                     if (valueLastOrDefault != "0")
                     {
@@ -541,7 +540,7 @@ namespace YektamakDesktop
             int id = int.Parse(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
 
             int i = IndexOfDataSet(dataTable, id);
-            IDataTableConverter dataTableConverter = new DataTableConverter();
+            IDataTableHelper dataTableConverter = new DataTableHelper();
             model = dataTableConverter.DataRowToModel<T>(dataTable.Rows[i]);
             return model;
         }

@@ -355,7 +355,7 @@ namespace YektamakDesktop.Formlar.Satis
                 DataSet ds = JsonConvert.DeserializeObject<DataSet>(json);
                 if (CheckFields())
                 {
-                    satisFatura.satisSiparis.siparisId = int.TryParse(ds.Tables[0].Rows[0]["siparisId"].ToString(),out int outSiparisId)?outSiparisId:0;
+                    satisFatura.satisSiparis.Id = int.TryParse(ds.Tables[0].Rows[0]["siparisId"].ToString(),out int outSiparisId)?outSiparisId:0;
                     satisFatura.satisFaturaId = _satisFaturaId;
                     satisFatura.faturaNo = textBoxFaturaNo.TextCustom;
                     satisFatura.satisSiparis.satisProje.projeId = int.Parse(ds.Tables[0].Rows[0]["ProjeId"].ToString());

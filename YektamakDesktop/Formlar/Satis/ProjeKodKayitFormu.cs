@@ -192,7 +192,7 @@ namespace YektamakDesktop.Formlar.Satis
 
                 //Bu aşamada veritabanına projekod kayıt edilip projekodid alınacak
                 string result = await WebMethods.ProjeKodKaydet(projeKodToSave);
-                if (result.Contains("error",StringComparison.OrdinalIgnoreCase))
+                if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(result);
                 }
@@ -201,7 +201,7 @@ namespace YektamakDesktop.Formlar.Satis
                     MessageBox.Show("Kayıt Başarılı");
                     if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(SatisProjeKayitFormu))//SatisProjeKayitFormu tarafından çağırılmışsa
                     {
-                        IDataTableConverter dataTableConverter = new DataTableConverter();
+                        IDataTableHelper dataTableConverter = new DataTableHelper();
                         IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                         DataRow dataRow = jsonConverter.JsonStringToDataSet(result).Tables[0].Rows[0];
                         projeKodToSave = dataTableConverter.DataRowToModel<Models.Proje>(dataRow);
@@ -244,10 +244,10 @@ namespace YektamakDesktop.Formlar.Satis
                 //    }
                 //}
                 this.Enabled = false;
-                Models.Proje proje=new Models.Proje();
+                Models.Proje proje = new Models.Proje();
                 proje.Id = comboListBoxMarka.selectedDataRowId;
-                string serializeString= WebMethods.MaxProjeNo(proje);
-                IDataTableConverter dataTableConverter = new DataTableConverter();
+                string serializeString = WebMethods.MaxProjeNo(proje);
+                IDataTableHelper dataTableConverter = new DataTableHelper();
                 IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                 DataSet dataset = jsonConverter.JsonStringToDataSet(serializeString);
                 proje = dataTableConverter.DataRowToModel<Models.Proje>(dataset.Tables[0].Rows[0]);
@@ -264,6 +264,11 @@ namespace YektamakDesktop.Formlar.Satis
         private void buttonClose_Click(object sender, EventArgs e)
         {
             CloseForm();
+        }
+
+        private void rButtonGuncelle_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

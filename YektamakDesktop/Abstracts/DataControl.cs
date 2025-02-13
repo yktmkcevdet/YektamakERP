@@ -12,7 +12,7 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-		private readonly IDataTableConverter dataTableConverter;
+		private readonly IDataTableHelper dataTableConverter;
 		private readonly IJsonConvertHelper jsonConverter;
 
 		public bool newRec = true;
@@ -53,7 +53,7 @@ namespace YektamakDesktop.Abstracts
 			order=new Label();
 		}
 
-        public DataControl(IDataTableConverter dataTableConverter, IJsonConvertHelper jsonConverter)
+        public DataControl(IDataTableHelper dataTableConverter, IJsonConvertHelper jsonConverter)
         {
             this.dataTableConverter = dataTableConverter;
             this.jsonConverter = jsonConverter;

@@ -1,11 +1,10 @@
 ﻿namespace Models
 {
     [Serializable]
-    public class Personel:Cari,IEntity
+    public class Personel:IEntity
     {
         private int _Id;
-        public int Id
-        { get { return _Id; } set { _Id = value;base.Id = value; } }
+        public int Id;
         public string ad;
         public string soyad;
         public string telefon;//Daha sonra property içinde formatlama kuralları yazılacak +xx(xxx)xxxxxxx gibi
@@ -16,11 +15,7 @@
         private PersonelResim _personelResim;
         public PersonelResim personelResim { get { if (_personelResim == null) { _personelResim = new(); } return _personelResim; } set { _personelResim = value; } }
 
-        public Personel()
-        {
-            base.cariTuru = CariTuru.PERSONEL;
-            base.Id = Id;
-        }
+       
         
     }
 

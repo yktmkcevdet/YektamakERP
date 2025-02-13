@@ -116,8 +116,8 @@ namespace YektamakDesktop.Formlar.Genel
                 personel.soyad,
                 personel.telefon,
                 personel.mail,
-                personel.firma.id,
-                personel.firma.unvan,
+                personel.firma.Id,
+                personel.firma.ad,
                 personel.pozisyon
                 );
         }
@@ -155,7 +155,7 @@ namespace YektamakDesktop.Formlar.Genel
                 }
 
                 _personelFilter = GlobalData.GridFilter<Personel>(panelFilter);
-                _personelFilter.firma.id = _firmaId;
+                _personelFilter.firma.Id = _firmaId;
                 return _personelFilter;
             }
         }

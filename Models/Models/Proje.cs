@@ -17,5 +17,6 @@ namespace Models
 
         private Personel _personel;
         public Personel personel { get { if (_personel == null) { _personel = new(); } return _personel; } set { _personel = value; } }
+        public int satisSiparisId;
     }
 }

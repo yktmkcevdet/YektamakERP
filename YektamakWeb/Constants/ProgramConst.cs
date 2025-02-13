@@ -65,7 +65,7 @@ namespace YektamakWeb
             List<Proje> projeKod = new List<Proje>();
             string jsonString = WebMethods.GetProjeKodByUserId(proje);
             IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
-            IDataTableConverter DataTableConverter = new DataTableConverter();
+            IDataTableHelper DataTableConverter = new DataTableHelper();
             DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(jsonString);
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
@@ -84,7 +84,7 @@ namespace YektamakWeb
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
                 ParcaGrup parcaGrup1;
-                IDataTableConverter DataTableConverter = new DataTableConverter();
+                IDataTableHelper DataTableConverter = new DataTableHelper();
                 parcaGrup1 = DataTableConverter.DataRowToModel<ParcaGrup>(dataRow);
                 parcaGrups.Add(parcaGrup1);
             }
@@ -99,7 +99,7 @@ namespace YektamakWeb
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
                 MalzemeGrup malzemeGrup1;
-                IDataTableConverter DataTableConverter = new DataTableConverter();
+                IDataTableHelper DataTableConverter = new DataTableHelper();
                 malzemeGrup1 = DataTableConverter.DataRowToModel<MalzemeGrup>(dataRow);
                 malzemeGrups.Add(malzemeGrup1);
             }

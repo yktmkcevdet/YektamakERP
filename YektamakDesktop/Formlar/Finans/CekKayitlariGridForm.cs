@@ -103,12 +103,12 @@ namespace YektamakDesktop.Formlar.Finans
                 cek.tutar.dovizCinsi.id,
                 cek.tutar.dovizCinsi.sembol,
                 cek.vadeTarihi,
-                cek.cekiVerenFirma.id,
-                cek.cekiVerenFirma.unvan,
-                cek.cekiAlanFirma.id,
-                cek.cekiAlanFirma.unvan,
-                cek.cekSahibiBanka.id,
-                cek.cekSahibiBanka.unvan,
+                cek.cekiVerenFirma.Id,
+                cek.cekiVerenFirma.ad,
+                cek.cekiAlanFirma.Id,
+                cek.cekiAlanFirma.ad,
+                cek.cekSahibiBanka.Id,
+                cek.cekSahibiBanka.ad,
                 cek.cekinVerildigiTarih,
                 cek.cekResim.id
                 );

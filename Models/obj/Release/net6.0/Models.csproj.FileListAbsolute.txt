@@ -10,3 +10,15 @@ C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net6.0\
 C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net6.0\refint\Models.dll
 C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net6.0\Models.pdb
 C:\Users\yektamak-118\source\repos\YektamakWeb\Domain.Models\obj\Release\net6.0\ref\Models.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\bin\Release\net6.0\Models.deps.json
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\bin\Release\net6.0\Models.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\bin\Release\net6.0\Models.pdb
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.AssemblyInfoInputs.cache
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.AssemblyInfo.cs
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.csproj.CoreCompileInputs.cache
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.sourcelink.json
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\refint\Models.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\Models.pdb
+C:\Users\yektamak-118\source\repos\YektamakErp\Models\obj\Release\net6.0\ref\Models.dll

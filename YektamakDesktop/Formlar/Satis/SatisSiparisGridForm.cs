@@ -156,7 +156,7 @@ namespace YektamakDesktop.Formlar.Satis
                 else
                 {
                     MessageBox.Show("Silme İşlemi Başarılı");
-                    int i = GlobalData.IndexOfDataSet(dataTable, satisSiparis.siparisId);
+                    int i = GlobalData.IndexOfDataSet(dataTable, satisSiparis.Id);
                     dataTable.Rows[i].Delete();
                 }
                 this.Enabled = true;
@@ -197,7 +197,7 @@ namespace YektamakDesktop.Formlar.Satis
             if (rowIndex >= dataTable.Rows.Count) return null;
             SatisSiparis satisSiparis = new SatisSiparis();
             int siparisId = int.Parse(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-            satisSiparis.siparisId = siparisId;
+            satisSiparis.Id = siparisId;
             int i = GlobalData.IndexOfDataSet(dataTable, siparisId);
             satisSiparis = ConvertHelper.DataRowToModel<SatisSiparis>(dataTable.Rows[i]);
             return satisSiparis;
@@ -253,7 +253,7 @@ namespace YektamakDesktop.Formlar.Satis
         }
         public void UpdateRow(SatisSiparis satisSiparis)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, satisSiparis.siparisId);
+            int i = GlobalData.IndexOfDataSet(dataTable, satisSiparis.Id);
             if (i == -1)
             {
                 AddNewRow(satisSiparis);
@@ -266,11 +266,11 @@ namespace YektamakDesktop.Formlar.Satis
         private void AddNewRow(SatisSiparis satisSiparis)
         {
             dataTable.Rows.Add(
-                satisSiparis.siparisId,
+                satisSiparis.Id,
                satisSiparis.satisProje.projeKod.Id,
                satisSiparis.satisProje.projeKod.kod,
                satisSiparis.satisProje.projeKod.marka.markaId,
-               satisSiparis.satisProje.musteri.unvan,
+               satisSiparis.satisProje.musteri.ad,
                satisSiparis.siparisTarihi,
                satisSiparis.teslimVadesi,
                satisSiparis.satisTutari.tutar,

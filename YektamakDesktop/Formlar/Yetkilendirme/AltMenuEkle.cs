@@ -13,11 +13,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class AltMenuEkle : Form, IForm
     {
+        private static ICache _cache;
         private static AltMenuEkle _altMenuekle;
         public static AltMenuEkle altMenuekle
         {
@@ -35,6 +38,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         private bool _activeForm;
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
+        public AltMenuEkle(ICache cache)
+        {
+            _cache = cache;
+        }
         public AltMenuEkle()
         {
             InitializeComponent();
@@ -108,12 +115,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         public void SaveMode(Menu menu)
         {
-            //foreach (Menu anaMenu in GlobalData.menuList)
-            //{
-            //    comboListBoxAnaMenu.AddDataRow(int.Parse(anaMenu.Id.ToString()), anaMenu.ad.ToString());
-            //    comboListBoxForm.AddDataRow(int.Parse(anaMenu.Id.ToString()), anaMenu.ad.ToString());
-            //}
-            
+            ComboBoxListFill.GetLookupAd(_cache.ananaMenuList, ref comboListBoxAnaMenu);
+            ComboBoxListFill.GetLookupAd(_cache.menuList, ref comboListBoxForm);
             comboListBoxAnaMenu.SelectDataRowId(menu.Id);
         }
         private void buttonClose_Click(object sender, EventArgs e)

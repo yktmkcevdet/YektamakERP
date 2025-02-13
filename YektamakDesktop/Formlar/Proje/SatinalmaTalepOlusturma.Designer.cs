@@ -80,6 +80,9 @@
             panelHeader.Name = "panelHeader";
             panelHeader.Size = new System.Drawing.Size(1286, 32);
             panelHeader.TabIndex = 8;
+            panelHeader.MouseDown += panelHeader_MouseDown;
+            panelHeader.MouseMove += panelHeader_MouseMove;
+            panelHeader.MouseUp += panelHeader_MouseUp;
             // 
             // roundedButton3
             // 
@@ -88,9 +91,10 @@
             roundedButton3.BorderColor = System.Drawing.Color.Firebrick;
             roundedButton3.BorderRadius = 10;
             roundedButton3.BorderSize = 2;
+            roundedButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton3.FlatAppearance.BorderSize = 0;
             roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton3.ForeColor = System.Drawing.Color.White;
             roundedButton3.Location = new System.Drawing.Point(1254, 1);
             roundedButton3.Margin = new System.Windows.Forms.Padding(0);
@@ -106,7 +110,7 @@
             // labelHeader
             // 
             labelHeader.AutoSize = true;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            labelHeader.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             labelHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             labelHeader.Location = new System.Drawing.Point(12, 6);
             labelHeader.Name = "labelHeader";
@@ -122,9 +126,10 @@
             roundedButton1.BorderColor = System.Drawing.Color.Firebrick;
             roundedButton1.BorderRadius = 10;
             roundedButton1.BorderSize = 2;
+            roundedButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton1.ForeColor = System.Drawing.Color.White;
             roundedButton1.Location = new System.Drawing.Point(1220, 1);
             roundedButton1.Margin = new System.Windows.Forms.Padding(0);
@@ -143,9 +148,10 @@
             roundedButton2.BorderColor = System.Drawing.Color.Firebrick;
             roundedButton2.BorderRadius = 10;
             roundedButton2.BorderSize = 2;
+            roundedButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton2.FlatAppearance.BorderSize = 0;
             roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton2.ForeColor = System.Drawing.Color.White;
             roundedButton2.Location = new System.Drawing.Point(1190, 1);
             roundedButton2.Margin = new System.Windows.Forms.Padding(0);
@@ -366,7 +372,7 @@
             customTextBoxAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
             customTextBoxAciklama.BorderRadius = 5;
             customTextBoxAciklama.BorderSize = 1;
-            customTextBoxAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            customTextBoxAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             customTextBoxAciklama.ForeColor = System.Drawing.Color.Black;
             customTextBoxAciklama.isPlaceHolder = false;
             customTextBoxAciklama.Location = new System.Drawing.Point(594, 62);
@@ -400,9 +406,10 @@
             roundedButton4.BorderColor = System.Drawing.Color.Crimson;
             roundedButton4.BorderRadius = 40;
             roundedButton4.BorderSize = 5;
+            roundedButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton4.FlatAppearance.BorderSize = 0;
             roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            roundedButton4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton4.ForeColor = System.Drawing.Color.White;
             roundedButton4.Location = new System.Drawing.Point(35, 737);
             roundedButton4.Name = "roundedButton4";
@@ -416,17 +423,19 @@
             // customComboListBoxProjeKodu
             // 
             customComboListBoxProjeKodu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            customComboListBoxProjeKodu.Enabled = false;
             customComboListBoxProjeKodu.ListBoxVisualSize = 5;
             customComboListBoxProjeKodu.Location = new System.Drawing.Point(152, 78);
             customComboListBoxProjeKodu.Margin = new System.Windows.Forms.Padding(1);
             customComboListBoxProjeKodu.Name = "customComboListBoxProjeKodu";
             customComboListBoxProjeKodu.Padding = new System.Windows.Forms.Padding(1);
-            customComboListBoxProjeKodu.Size = new System.Drawing.Size(168, 38);
+            customComboListBoxProjeKodu.Size = new System.Drawing.Size(168, 36);
             customComboListBoxProjeKodu.TabIndex = 21;
             // 
             // customComboListBoxParcaGrubu
             // 
             customComboListBoxParcaGrubu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            customComboListBoxParcaGrubu.Enabled = false;
             customComboListBoxParcaGrubu.ListBoxVisualSize = 5;
             customComboListBoxParcaGrubu.Location = new System.Drawing.Point(154, 115);
             customComboListBoxParcaGrubu.Margin = new System.Windows.Forms.Padding(1);
@@ -439,6 +448,8 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ClientSize = new System.Drawing.Size(1286, 803);
             Controls.Add(customComboListBoxParcaGrubu);
             Controls.Add(customComboListBoxProjeKodu);
@@ -454,7 +465,9 @@
             Controls.Add(panelHeader);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "SatinalmaTalepOlusturma";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "SatinalmaTalepOlusturma";
+            Load += SatinalmaTalepOlusturma_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSatinalma).EndInit();
@@ -471,6 +484,15 @@
         private CustomControls.RoundedButton roundedButton2;
         private System.Windows.Forms.Label lblKayitSayisi;
         private System.Windows.Forms.DataGridView dataGridViewSatinalma;
+        private CustomControls.CustomTextBoxTarih customTextBoxTeslimTarihi;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private CustomControls.CustomTextBox customTextBoxAciklama;
+        private System.Windows.Forms.Label label4;
+        private CustomControls.RoundedButton roundedButton4;
+        private CustomControls.CustomComboListBox customComboListBoxProjeKodu;
+        private CustomControls.CustomComboListBox customComboListBoxParcaGrubu;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn proje_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn proje_kod;
@@ -492,14 +514,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn isSatinalma;
         private System.Windows.Forms.DataGridViewImageColumn guncelle;
         private System.Windows.Forms.DataGridViewImageColumn Sil;
-        private CustomControls.CustomTextBoxTarih customTextBoxTeslimTarihi;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private CustomControls.CustomTextBox customTextBoxAciklama;
-        private System.Windows.Forms.Label label4;
-        private CustomControls.RoundedButton roundedButton4;
-        private CustomControls.CustomComboListBox customComboListBoxProjeKodu;
-        private CustomControls.CustomComboListBox customComboListBoxParcaGrubu;
     }
 }

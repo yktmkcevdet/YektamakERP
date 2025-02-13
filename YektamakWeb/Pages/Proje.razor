@@ -30,7 +30,7 @@
             <td>
                 <select class="flex-column" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
                     <option value="" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in _cache.proje)
+                    @foreach (var item in _cache.projes)
                     {
                         <option value="@item.Id">@item.kod</option>
                     }
@@ -140,7 +140,7 @@ else
 <DialogFragment @ref="dialogFragment">@renderFragment()</DialogFragment> 
 @code {
     @inject IJsonConvertHelper jsonConvertHelper
-    @inject IDataTableConverter dataTableConverter
+    @inject IDataTableHelper dataTableConverter
     @inject ICache _cache
     private NavigationManager? navigation { get; set; }
     private PdfView pdfViewer;

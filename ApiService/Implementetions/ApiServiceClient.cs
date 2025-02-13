@@ -1,9 +1,9 @@
-﻿using ApiService.Implementetions;
+﻿using ApiService.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Text;
 
-namespace ApiService.Interfaces
+namespace ApiService.Implementetions
 {
     public class ApiServiceClient : IApiService
     {
@@ -23,12 +23,15 @@ namespace ApiService.Interfaces
         public async Task<string> PostAsync<T>(T entity, string apiAdres) where T : class
         {
             string postString = JsonConvert.SerializeObject(entity, _jsonSerializerSettings);
+            byte[] data = Encoding.UTF8.GetBytes(postString);
+            postString = JsonConvert.SerializeObject(data, _jsonSerializerSettings);
             var content = new StringContent(postString, Encoding.UTF8, "application/json");
-
             var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsStringAsync();
+            //response.EnsureSuccessStatusCode();
+            string result= await response.Content.ReadAsStringAsync();
+            if (result.Contains("error", StringComparison.OrdinalIgnoreCase)) return "0";
+            byte[] bytes= JsonConvert.DeserializeObject<byte[]>(result,_jsonSerializerSettings);
+            return Encoding.UTF8.GetString(bytes);
         }
 
         public async Task<string> GetAsync(string apiAdres)

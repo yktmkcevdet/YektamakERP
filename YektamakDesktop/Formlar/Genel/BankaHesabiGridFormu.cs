@@ -177,7 +177,7 @@ namespace YektamakDesktop.Formlar.Genel
         public void FirmaMode(int firmaId)
         {
             BankaHesabi bankaHesabi = new();
-            bankaHesabi.firma.id = firmaId;
+            bankaHesabi.firma.Id = firmaId;
             this.firmaId = firmaId;
         }
         /// <summary>
@@ -186,15 +186,15 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="firma"></param>
         public void FirmaMode(Firma firma)
         {
-            FirmaMode(firma.id);
+            FirmaMode(firma.Id);
         }
 
         private void buttonBankaHesabiEkle_Click(object sender, EventArgs e)
         {
             BankaHesabiKayitFormu bankaHesabiKayitFormu = BankaHesabiKayitFormu.bankaHesabiKayitFormu;
             Firma firma = new();
-            firma.id = firmaId;
-            firma.unvan = firmaUnvan;
+            firma.Id = firmaId;
+            firma.ad = firmaUnvan;
             bankaHesabiKayitFormu.Show();
             bankaHesabiKayitFormu.SaveMode(firma);
         }   
@@ -248,10 +248,10 @@ namespace YektamakDesktop.Formlar.Genel
                 bankaHesabi.IBAN,
                 bankaHesabi.dovizCinsi.id,
                 bankaHesabi.dovizCinsi.sembol,
-                bankaHesabi.firma.id,
-                bankaHesabi.firma.unvan,
-                bankaHesabi.banka.id,
-                bankaHesabi.banka.unvan);
+                bankaHesabi.firma.Id,
+                bankaHesabi.firma.ad,
+                bankaHesabi.banka.Id,
+                bankaHesabi.banka.ad);
         }
         public void UpdateRow(BankaHesabi bankaHesabi)
         {

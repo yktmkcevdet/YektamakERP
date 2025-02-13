@@ -84,9 +84,9 @@ namespace YektamakDesktop.Formlar.Genel
         public void SaveMode(Firma firma)
         {
             bankaHesabiToSave = new BankaHesabi();
-            bankaHesabiToSave.firma.unvan = firma.unvan;
-            bankaHesabiToSave.firma.id = firma.id;
-            comboBoxHesapSahibiFirma.SelectDataRowId(firma.id);
+            bankaHesabiToSave.firma.ad = firma.ad;
+            bankaHesabiToSave.firma.Id = firma.Id;
+            comboBoxHesapSahibiFirma.SelectDataRowId(firma.Id);
             rButtonGuncelle.Visible = false;
             //for (int i = 0; i < GlobalData.bankaList.Count; i++)
             //{
@@ -96,9 +96,9 @@ namespace YektamakDesktop.Formlar.Genel
         public void UpdateMode(BankaHesabi bankaHesabi)
         {
             bankaHesabiToUpdate = bankaHesabi;
-            comboBoxHesapSahibiFirma.SelectDataRowId(bankaHesabiToUpdate.firma.id);
+            comboBoxHesapSahibiFirma.SelectDataRowId(bankaHesabiToUpdate.firma.Id);
             rButtonGuncelle.Visible = true;
-            comboBoxBanka.SelectDataRowId(bankaHesabiToUpdate.banka.id);
+            comboBoxBanka.SelectDataRowId(bankaHesabiToUpdate.banka.Id);
             textBoxIBAN.TextCustom = bankaHesabiToUpdate.IBAN;
             textBoxHesapAdi.TextCustom = bankaHesabiToUpdate.hesapAdi;
             comboListBoxDovizTuru.SelectDataRowId(bankaHesabiToUpdate.dovizCinsi.id);
@@ -126,10 +126,10 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 bankaHesabi.hesapId = bankaHesabiToUpdate.hesapId;
                 bankaHesabi.hesapAdi = textBoxHesapAdi.TextCustom;
-                bankaHesabi.banka.id = comboBoxBanka.selectedDataRowId;
-                bankaHesabi.banka.unvan = comboBoxBanka.selectedDataRowValue;
-                bankaHesabi.firma.id = comboBoxHesapSahibiFirma.selectedDataRowId;
-                bankaHesabi.firma.unvan = comboBoxHesapSahibiFirma.selectedDataRowValue;
+                bankaHesabi.banka.Id = comboBoxBanka.selectedDataRowId;
+                bankaHesabi.banka.ad = comboBoxBanka.selectedDataRowValue;
+                bankaHesabi.firma.Id = comboBoxHesapSahibiFirma.selectedDataRowId;
+                bankaHesabi.firma.ad = comboBoxHesapSahibiFirma.selectedDataRowValue;
                 bankaHesabi.dovizCinsi.id = comboListBoxDovizTuru.selectedDataRowId;
                 bankaHesabi.dovizCinsi.sembol = comboListBoxDovizTuru.selectedDataRowValue;
                 bankaHesabi.IBAN = textBoxIBAN.TextCustom;
@@ -155,7 +155,7 @@ namespace YektamakDesktop.Formlar.Genel
                 }
                 else
                 {
-                    IDataTableConverter dataTableConverter = new DataTableConverter();
+                    IDataTableHelper dataTableConverter = new DataTableHelper();
                     IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                     //Firma kayıt formuna bankahesapId geri dönüyor
                     bankaHesabiToSave = dataTableConverter.DataRowToModel<BankaHesabi>(jsonConverter.JsonStringToDataSet(result).Tables[0].Rows[0]);

@@ -33,3 +33,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\Utilities\obj\Debug\net7.0\Utilit
 C:\Users\yektamak-118\source\repos\YektamakErp\Utilities\obj\Debug\net7.0\refint\Utilities.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Utilities\obj\Debug\net7.0\Utilities.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\Utilities\obj\Debug\net7.0\ref\Utilities.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Utilities\obj\Debug\net7.0\Utilities.sourcelink.json

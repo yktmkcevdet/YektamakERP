@@ -1,1163 +1,1163 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\YektamakWeb.bundle.scp.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\YektamakWeb.bundle.scp.css",
       "PackagePath": "staticwebassets\\YektamakWeb.uzs5126s05.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\LOGO.png",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\LOGO.png",
       "PackagePath": "staticwebassets\\LOGO.png"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\LOGO.png",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\LOGO.png",
       "PackagePath": "staticwebassets\\css\\LOGO.png"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\README.md",
       "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\.gitignore",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\.gitignore",
       "PackagePath": "staticwebassets\\external\\.gitignore"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\.gitattributes",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\.gitattributes",
       "PackagePath": "staticwebassets\\external\\bcmaps\\.gitattributes"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78ms-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78ms-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78ms-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\78ms-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\78ms-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\78ms-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\83pv-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\83pv-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\83pv-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90ms-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90ms-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90ms-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90ms-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90ms-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90ms-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90msp-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90msp-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90msp-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90msp-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90msp-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90msp-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90pv-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90pv-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90pv-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\90pv-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\90pv-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\90pv-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Add-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Add-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Add-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Add-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Add-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-0.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-0.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-0.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-1.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-1.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-1.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-3.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-3.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-3.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-4.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-4.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-4.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-5.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-5.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-5.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-6.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-6.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-6.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-UCS2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-CNS1-UCS2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-CNS1-UCS2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-0.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-0.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-0.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-1.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-1.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-1.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-3.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-3.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-3.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-4.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-4.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-4.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-5.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-5.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-5.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-UCS2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-GB1-UCS2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-GB1-UCS2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-0.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-0.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-0.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-1.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-1.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-1.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-3.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-3.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-3.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-4.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-4.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-4.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-5.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-5.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-5.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-6.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-6.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-6.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-UCS2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Japan1-UCS2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Japan1-UCS2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-0.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-0.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Korea1-0.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-1.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-1.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Korea1-1.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Korea1-2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-UCS2.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Adobe-Korea1-UCS2.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Adobe-Korea1-UCS2.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5pc-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5pc-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\B5pc-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5pc-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\B5pc-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\B5pc-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS1-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS1-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS1-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS1-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS1-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS1-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS2-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS2-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS2-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\CNS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\CNS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETHK-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETHK-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETHK-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETHK-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETHK-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETHK-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETen-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETen-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETen-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETen-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETen-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETen-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETenms-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETenms-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETenms-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETenms-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\ETenms-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\ETenms-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Ext-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Ext-RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Ext-RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Ext-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Ext-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GB-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GB-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GB-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GB-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GB-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBK-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBK-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK2K-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK2K-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBK2K-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK2K-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBK2K-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBK2K-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBKp-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBKp-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBKp-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBKp-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBKp-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBKp-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBT-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBT-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBT-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBT-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBT-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBTpc-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBTpc-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBTpc-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBTpc-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBTpc-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBTpc-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBpc-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBpc-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBpc-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBpc-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\GBpc-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\GBpc-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdla-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdla-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKdla-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdla-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdla-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKdla-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdlb-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdlb-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKdlb-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdlb-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKdlb-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKdlb-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKgccs-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKgccs-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKgccs-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKgccs-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKgccs-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKgccs-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm314-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm314-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKm314-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm314-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm314-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKm314-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm471-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm471-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKm471-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm471-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKm471-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKm471-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKscs-B5-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKscs-B5-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKscs-B5-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKscs-B5-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\HKscs-B5-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\HKscs-B5-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Hankaku.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Hankaku.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Hankaku.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Hiragana.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Hiragana.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Hiragana.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-Johab-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-Johab-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-Johab-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-Johab-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-Johab-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-Johab-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCms-UHC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-HW-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-HW-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCms-UHC-HW-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-HW-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-HW-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCms-UHC-HW-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCms-UHC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCms-UHC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCpc-EUC-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCpc-EUC-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCpc-EUC-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCpc-EUC-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\KSCpc-EUC-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\KSCpc-EUC-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Katakana.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Katakana.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Katakana.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\LICENSE",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\LICENSE",
       "PackagePath": "staticwebassets\\external\\bcmaps"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\NWP-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\NWP-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\NWP-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\NWP-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\NWP-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\NWP-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\RKSJ-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\RKSJ-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\RKSJ-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\RKSJ-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\RKSJ-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\RKSJ-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\Roman.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\Roman.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\Roman.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UCS2-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UCS2-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UCS2-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UCS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UCS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UCS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF16-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF16-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF16-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF16-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF16-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF16-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF8-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF8-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF8-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniCNS-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniCNS-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UCS2-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UCS2-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UCS2-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UCS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UCS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UCS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF16-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF16-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF16-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF16-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF16-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF16-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF8-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF8-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF8-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniGB-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniGB-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UCS2-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-HW-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-HW-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UCS2-HW-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-HW-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-HW-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UCS2-HW-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UCS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UCS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF16-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF16-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF16-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF16-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF16-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF16-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF8-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF8-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF8-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF16-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF16-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF16-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF16-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF16-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF16-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF8-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF8-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF8-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJIS2004-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJIS2004-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UCS2-HW-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UCS2-HW-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISPro-UCS2-HW-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UCS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UCS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISPro-UCS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISPro-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISPro-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX0213-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX0213-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISX0213-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX0213-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX0213-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISX0213-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX02132004-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX02132004-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISX02132004-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX02132004-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniJISX02132004-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniJISX02132004-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UCS2-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UCS2-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UCS2-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UCS2-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UCS2-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UCS2-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF16-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF16-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF16-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF16-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF16-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF16-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF32-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF32-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF32-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF32-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF32-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF32-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF8-H.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF8-H.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF8-H.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF8-V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\UniKS-UTF8-V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\UniKS-UTF8-V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\V.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\V.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\V.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\bcmaps\\WP-Symbol.bcmap",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\bcmaps\\WP-Symbol.bcmap",
       "PackagePath": "staticwebassets\\external\\bcmaps\\WP-Symbol.bcmap"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\babel-plugin-pdfjs-preprocessor.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\babel-plugin-pdfjs-preprocessor.mjs",
       "PackagePath": "staticwebassets\\external\\builder\\babel-plugin-pdfjs-preprocessor.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\builder.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\builder.mjs",
       "PackagePath": "staticwebassets\\external\\builder\\builder.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\confusing-comment-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\confusing-comment-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\confusing-comment-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\confusing-comment.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\confusing-comment.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\confusing-comment.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\css-comment-expected.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\css-comment-expected.css",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\css-comment-expected.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\css-comment.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\css-comment.css",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\css-comment.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\elif-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\elif-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\elif-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\elif.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\elif.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\elif.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\error-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-false-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-false-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\error-false-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-false.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error-false.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\error-false.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\error.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\error.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\expand-expected.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\expand-expected.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\expand-expected.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\expand.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\expand.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\expand.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-empty-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-empty-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-empty-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-empty.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-empty.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-empty.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-false-else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-false-else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-elif-false-else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-false-else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-false-else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-elif-false-else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-true-else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-true-else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-elif-true-else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-true-else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-elif-true-else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-elif-true-else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-false-else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-false-else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested-expected.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested-expected.css",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-nested-expected.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-nested-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested.css",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested.css",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-nested.css"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-nested.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-nested.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-elif-false-else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-elif-false-else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-true-elif-false-else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-elif-false-else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-elif-false-else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-true-elif-false-else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-else-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-else-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-true-else-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-else.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-true-else.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-true-else.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-unclosed-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-unclosed-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-unclosed-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-unclosed.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\if-unclosed.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\if-unclosed.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-expected.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-expected.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\include-expected.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-non-existent-expected.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-non-existent-expected.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\include-non-existent-expected.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-non-existent.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include-non-existent.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\include-non-existent.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include.html",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\include.html",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\include.html"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\js-comment-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\js-comment-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\js-comment-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\js-comment.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\js-comment.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\js-comment.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\undefined-define-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\undefined-define-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\undefined-define-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\undefined-define.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\undefined-define.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\undefined-define.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\unsupported-ifdef-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\unsupported-ifdef-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\unsupported-ifdef-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\unsupported-ifdef.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures\\unsupported-ifdef.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures\\unsupported-ifdef.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\blocks-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\blocks-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\blocks-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\blocks.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\blocks.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\blocks.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\comments-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\comments-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\comments-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\comments.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\comments.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\comments.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constants-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constants-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\constants-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constants.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constants.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\constants.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constructors-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constructors-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\constructors-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constructors.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\constructors.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\constructors.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\deadcode-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\deadcode-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\deadcode-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\deadcode.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\deadcode.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\deadcode.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\evals-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\evals-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\evals-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\evals.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\evals.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\evals.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\ifs-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\ifs-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\ifs-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\ifs.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\ifs.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\ifs.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\importalias-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\importalias-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\importalias-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\importalias.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\importalias.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\importalias.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\staticblock-expected.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\staticblock-expected.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\staticblock-expected.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\staticblock.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\fixtures_babel\\staticblock.js",
       "PackagePath": "staticwebassets\\external\\builder\\fixtures_babel\\staticblock.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\test-fixtures.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\test-fixtures.mjs",
       "PackagePath": "staticwebassets\\external\\builder\\test-fixtures.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\builder\\test-fixtures_babel.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\builder\\test-fixtures_babel.mjs",
       "PackagePath": "staticwebassets\\external\\builder\\test-fixtures_babel.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\cmapscompress\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\cmapscompress\\README.md",
       "PackagePath": "staticwebassets\\external\\cmapscompress\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\cmapscompress\\compress.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\cmapscompress\\compress.mjs",
       "PackagePath": "staticwebassets\\external\\cmapscompress\\compress.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\cmapscompress\\optimize.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\cmapscompress\\optimize.mjs",
       "PackagePath": "staticwebassets\\external\\cmapscompress\\optimize.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\cmapscompress\\parse.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\cmapscompress\\parse.mjs",
       "PackagePath": "staticwebassets\\external\\cmapscompress\\parse.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\CODE_OF_CONDUCT.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\CODE_OF_CONDUCT.md",
       "PackagePath": "staticwebassets\\external\\dist\\CODE_OF_CONDUCT.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\README.md",
       "PackagePath": "staticwebassets\\external\\dist\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\legacy\\build\\pdf.d.mts",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\legacy\\build\\pdf.d.mts",
       "PackagePath": "staticwebassets\\external\\dist\\legacy\\build\\pdf.d.mts"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\legacy\\web\\pdf_viewer.d.mts",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\legacy\\web\\pdf_viewer.d.mts",
       "PackagePath": "staticwebassets\\external\\dist\\legacy\\web\\pdf_viewer.d.mts"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\web\\pdf_viewer.d.mts",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\web\\pdf_viewer.d.mts",
       "PackagePath": "staticwebassets\\external\\dist\\web\\pdf_viewer.d.mts"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\dist\\webpack.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\dist\\webpack.mjs",
       "PackagePath": "staticwebassets\\external\\dist\\webpack.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\importL10n\\locales.mjs",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\importL10n\\locales.mjs",
       "PackagePath": "staticwebassets\\external\\importL10n\\locales.mjs"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\openjpeg\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\openjpeg\\README.md",
       "PackagePath": "staticwebassets\\external\\openjpeg\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\openjpeg\\openjpeg.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\openjpeg\\openjpeg.js",
       "PackagePath": "staticwebassets\\external\\openjpeg\\openjpeg.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\openjpeg\\openjpeg.wasm",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\openjpeg\\openjpeg.wasm",
       "PackagePath": "staticwebassets\\external\\openjpeg\\openjpeg.wasm"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\quickjs\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\quickjs\\README.md",
       "PackagePath": "staticwebassets\\external\\quickjs\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\quickjs\\quickjs-eval.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\quickjs\\quickjs-eval.js",
       "PackagePath": "staticwebassets\\external\\quickjs\\quickjs-eval.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitDingbats.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitDingbats.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitDingbats.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixed.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixed.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitFixed.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedBold.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedBold.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitFixedBold.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedBoldItalic.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedBoldItalic.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitFixedBoldItalic.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedItalic.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitFixedItalic.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitFixedItalic.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerif.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerif.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitSerif.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifBold.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifBold.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitSerifBold.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifBoldItalic.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifBoldItalic.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitSerifBoldItalic.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifItalic.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSerifItalic.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitSerifItalic.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSymbol.pfb",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\FoxitSymbol.pfb",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\FoxitSymbol.pfb"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LICENSE_FOXIT",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LICENSE_FOXIT",
       "PackagePath": "staticwebassets\\external\\standard_fonts"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LICENSE_LIBERATION",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LICENSE_LIBERATION",
       "PackagePath": "staticwebassets\\external\\standard_fonts"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Bold.ttf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Bold.ttf",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\LiberationSans-Bold.ttf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-BoldItalic.ttf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-BoldItalic.ttf",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\LiberationSans-BoldItalic.ttf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Italic.ttf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Italic.ttf",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\LiberationSans-Italic.ttf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Regular.ttf",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\LiberationSans-Regular.ttf",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\LiberationSans-Regular.ttf"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\external\\standard_fonts\\README.md",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\external\\standard_fonts\\README.md",
       "PackagePath": "staticwebassets\\external\\standard_fonts\\README.md"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\js\\pdfViewer.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\js\\pdfViewer.js",
       "PackagePath": "staticwebassets\\js\\pdfViewer.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\pdf.png",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\pdf.png",
       "PackagePath": "staticwebassets\\pdf.png"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\uploads\\ADET KONTROL-5.xlsx",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\uploads\\ADET KONTROL-5.xlsx",
       "PackagePath": "staticwebassets\\uploads\\ADET KONTROL-5.xlsx"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\uploads\\KodYapisi.xlsx",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\uploads\\KodYapisi.xlsx",
       "PackagePath": "staticwebassets\\uploads\\KodYapisi.xlsx"
     },
     {
-      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakWeb\\YektamakWeb\\wwwroot\\uploads\\LazerSiparisDosyaFormat.xlsx",
+      "Id": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakWeb\\wwwroot\\uploads\\LazerSiparisDosyaFormat.xlsx",
       "PackagePath": "staticwebassets\\uploads\\LazerSiparisDosyaFormat.xlsx"
     },
     {

@@ -1,12 +1,17 @@
+using ApiService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using Utilities;
+using YektamakDesktop.Common;
 using YektamakDesktop.Formlar;
+using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Proje;
+using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
+using YektamakDesktop.Formlar.Yetkilendirme;
 
 namespace YektamakDesktop
 {
@@ -23,42 +28,27 @@ namespace YektamakDesktop
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
-            // ServiceCollection oluþtur ve servisleri kaydet
-            var services = new ServiceCollection();
-            ConfigureServices(services);
-
-            // Servis saðlayýcýyý oluþtur
-            ServiceProvider s = services.BuildServiceProvider();
+            
             
             //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var mainForm = ServiceProviderServiceExtensions.GetRequiredService<MainWindow>(s);
-            var userLogin = ServiceProviderServiceExtensions.GetRequiredService<UserLogin>(s);
-            ServiceProviderServiceExtensions.GetRequiredService<GlobalData>(s);
-            ServiceProviderServiceExtensions.GetRequiredService<ProjeDosyalari>(s);
-            ServiceProviderServiceExtensions.GetRequiredService<StokKartTanimlamaFormu>(s);
-            //UserLogin userLogin = new UserLogin(new Cache(new JsonConvertHelper(),new DataTableConverter()));
+            DIContainer.ConfigureServices();
+            DIContainer.GetService<GlobalData>();
+            DIContainer.GetService<SatisProjeKayitFormu>();
+            DIContainer.GetService<FirmaGridForm>();
+            DIContainer.GetService<ProjeDosyalari>();
+            DIContainer.GetService<StokKartTanimlamaFormu>();
+            DIContainer.GetService<ExceldenVeriAlmaFormu>();
+            var userLogin = DIContainer.GetService<UserLogin>();
             Application.Run(userLogin);
 
-            // KullaniciGiris formu kapatýldýðýnda buraya gelir
             if (userLogin.loginStatus)
             {
+                var mainForm = DIContainer.GetService<MainWindow>();
                 Application.Run(mainForm);
             }
-        }
-        private static void ConfigureServices(IServiceCollection services)
-        {
-            // Servis kayýtlarý
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<UserLogin>();
-            services.AddSingleton<GlobalData>();
-            services.AddSingleton<ProjeDosyalari>();
-            services.AddSingleton<StokKartTanimlamaFormu>();
-            services.AddUtilities();
-            services.AddUtilities();
-            // Diðer servis kayýtlarýnýzý buraya ekleyin
         }
     }
 }

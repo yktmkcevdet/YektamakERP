@@ -84,7 +84,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             customTextBoxSayisalTutar.TextCustom = satinalmaSiparis.tutar.tutar.ToString();
             customComboListBoxTutarDoviz.SelectDataRowId(satinalmaSiparis.tutar.dovizCinsi.id);
             customTextBoxTarihSiaprisTarihi.TextCustom = satinalmaSiparis.siparisTarihi.ToString();
-            comboListBoxFirma.SelectDataRowId(satinalmaSiparis.firma.id);
+            comboListBoxFirma.SelectDataRowId(satinalmaSiparis.firma.Id);
             customTextBoxAciklama.TextCustom = satinalmaSiparis.siparisAciklamasi;
             comboListBoxKdv.SelectDataRowId(satinalmaSiparis.kdv.kdvId);
             comboListBoxTalepTip.SelectDataRowId(satinalmaSiparis.talepTip.talepTipId);
@@ -132,8 +132,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaSiparisToSave.tutar.dovizCinsi.id=customComboListBoxTutarDoviz.selectedDataRowId;
             satinalmaSiparisToSave.tutar.dovizCinsi.sembol = customComboListBoxTutarDoviz.selectedDataRowValue;
             satinalmaSiparisToSave.siparisTarihi= DateTime.TryParse(customTextBoxTarihSiaprisTarihi.TextCustom,out DateTime siparisTarihi)?siparisTarihi:DateTime.MinValue;
-            satinalmaSiparisToSave.firma.id=comboListBoxFirma.selectedDataRowId;
-            satinalmaSiparisToSave.firma.unvan = comboListBoxFirma.selectedDataRowValue;
+            satinalmaSiparisToSave.firma.Id=comboListBoxFirma.selectedDataRowId;
+            satinalmaSiparisToSave.firma.ad = comboListBoxFirma.selectedDataRowValue;
             satinalmaSiparisToSave.siparisAciklamasi = customTextBoxAciklama.TextCustom;
             satinalmaSiparisToSave.talepTip.talepTipId = comboListBoxTalepTip.selectedDataRowId;
             satinalmaSiparisToSave.talepTip.talepTipi = comboListBoxTalepTip.selectedDataRowValue;
@@ -194,7 +194,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 else
                 {
-                    IDataTableConverter dataTableConverter = new DataTableConverter();
+                    IDataTableHelper dataTableConverter = new DataTableHelper();
                     IJsonConvertHelper jsonConverter = new JsonConvertHelper();
                     DataSet dataSet = jsonConverter.JsonStringToDataSet(result);
                     satinalmaSiparisToSave = dataTableConverter.DataRowToModel<SatinalmaSiparis>(dataSet.Tables[0].Rows[0]);

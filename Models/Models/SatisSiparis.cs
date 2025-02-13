@@ -6,7 +6,7 @@
         /// <summary>
         /// SatisSiparis tablosu indeksi
         /// </summary>
-        public int siparisId;
+        public int Id;
         public string siparisNo;
         private SatisProje _satisProje;
         public SatisProje satisProje { get { if (_satisProje == null) { _satisProje = new(); } return _satisProje; } set { _satisProje= value; } }

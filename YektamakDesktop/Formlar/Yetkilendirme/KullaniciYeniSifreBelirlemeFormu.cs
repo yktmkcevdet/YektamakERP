@@ -56,7 +56,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     MessageBox.Show("Şifre değiştirildi");
                     this.Close();
-                    UserLogin kullaniciGiris = new UserLogin(new Cache(new JsonConvertHelper(),new DataTableConverter()));
+                    UserLogin kullaniciGiris = new UserLogin(new Cache(new JsonConvertHelper(),new DataTableHelper()));
                     kullaniciGiris.Show();
                 }
 

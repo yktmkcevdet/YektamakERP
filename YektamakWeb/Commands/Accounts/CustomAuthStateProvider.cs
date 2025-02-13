@@ -1,4 +1,5 @@
 ﻿using ApiService.Implementetions;
+using ApiService.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Security.Claims;

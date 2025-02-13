@@ -216,7 +216,7 @@ namespace YektamakDesktop.Formlar.Temp
 
         private async Task FirmaDelete(Firma firma)
         {
-            DialogResult dialogResult = MessageBox.Show(string.Format("{0} firmasını silmek istediğinizden emin misiniz", firma.unvan), "", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(string.Format("{0} firmasını silmek istediğinizden emin misiniz", firma.ad), "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 var httpTask = WebMethods.DeleteFirma(firma);
@@ -231,9 +231,9 @@ namespace YektamakDesktop.Formlar.Temp
                     MessageBox.Show("Silme İşlemi Başarılı");
                     //Console.WriteLine("FirmaSil result : " + result);
                     //Grid'de kullandığımız datasetten de silip gridi güncelleyelim
-                    int dataSetIndex = IndexOfDataSetRow(firma.id);
+                    int dataSetIndex = IndexOfDataSetRow(firma.Id);
                     dataSet.Tables[0].Rows.RemoveAt(dataSetIndex);
-                    int dataGridViewIndex = IndexOfGridRow(firma.id);
+                    int dataGridViewIndex = IndexOfGridRow(firma.Id);
                     dataGridViewFirma.Rows.RemoveAt(dataGridViewIndex);
                 }
                 this.Enabled = true;
@@ -253,8 +253,8 @@ namespace YektamakDesktop.Formlar.Temp
                 Firma firma = new Firma();
                 int firmaId = int.Parse(dataGridViewFirma.Rows[e.RowIndex].Cells[0].Value.ToString());
                 int dataSetIndex = IndexOfDataSetRow(firmaId);
-                firma.id = firmaId;
-                firma.unvan = dataSet.Tables[0].Rows[dataSetIndex]["Unvan"].ToString();
+                firma.Id = firmaId;
+                firma.ad = dataSet.Tables[0].Rows[dataSetIndex]["Unvan"].ToString();
                 firma.vergiDairesi = dataSet.Tables[0].Rows[dataSetIndex]["VergiDairesi"].ToString();
                 firma.vergiNumarasi = dataSet.Tables[0].Rows[dataSetIndex]["VergiNumarasi"].ToString();
                 firma.adres = new Adres();
@@ -319,8 +319,8 @@ namespace YektamakDesktop.Formlar.Temp
         {
             #region AddToDataSet
             DataRow newFirmaDataRow = dataSet.Tables[0].Rows.Add();
-            newFirmaDataRow["FirmaId"] = firma.id;
-            newFirmaDataRow["Unvan"] = firma.unvan;
+            newFirmaDataRow["FirmaId"] = firma.Id;
+            newFirmaDataRow["Unvan"] = firma.ad;
             newFirmaDataRow["VergiDairesi"] = firma.vergiDairesi;
             newFirmaDataRow["VergiNumarasi"] = firma.vergiNumarasi;
             if (firma.adres != null)
@@ -345,8 +345,8 @@ namespace YektamakDesktop.Formlar.Temp
             DataGridViewRow dataGridRow = new DataGridViewRow();
             dataGridRow.CreateCells(dataGridViewFirma);
 
-            dataGridRow.Cells[0].Value = firma.id;
-            dataGridRow.Cells[1].Value = firma.unvan;
+            dataGridRow.Cells[0].Value = firma.Id;
+            dataGridRow.Cells[1].Value = firma.ad;
             dataGridRow.Cells[2].Value = firma.vergiDairesi;
             if (firma.adres != null)
             {
@@ -380,9 +380,9 @@ namespace YektamakDesktop.Formlar.Temp
         public void UpdateFirmaOnGrid(Firma firma)
         {
             #region UpdateDataSet
-            int dataSetIndex = IndexOfDataSetRow(firma.id);
+            int dataSetIndex = IndexOfDataSetRow(firma.Id);
 
-            dataSet.Tables[0].Rows[dataSetIndex]["Unvan"] = firma.unvan;
+            dataSet.Tables[0].Rows[dataSetIndex]["Unvan"] = firma.ad;
             dataSet.Tables[0].Rows[dataSetIndex]["VergiDairesi"] = firma.vergiDairesi;
             dataSet.Tables[0].Rows[dataSetIndex]["VergiNumarasi"] = firma.vergiNumarasi;
             if (firma.adres != null)
@@ -406,9 +406,9 @@ namespace YektamakDesktop.Formlar.Temp
 
             #region UpdateDataGridView
 
-            int dataGridRowIndex = IndexOfGridRow(firma.id);
+            int dataGridRowIndex = IndexOfGridRow(firma.Id);
             //Console.WriteLine($"dataGridRowIndex : {dataGridRowIndex.ToString()}");
-            dataGridViewFirma.Rows[dataGridRowIndex].Cells[1].Value = firma.unvan;
+            dataGridViewFirma.Rows[dataGridRowIndex].Cells[1].Value = firma.ad;
             dataGridViewFirma.Rows[dataGridRowIndex].Cells[2].Value = firma.vergiDairesi;
             dataGridViewFirma.Rows[dataGridRowIndex].Cells[3].Value = firma.adres != null ? firma.adres.sehir : string.Empty;
             string sektorler = "";

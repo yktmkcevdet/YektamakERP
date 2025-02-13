@@ -105,7 +105,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             DataSet dataSetProjeKod = jsonConverter.JsonStringToDataSet(jsonStringProjeKod);
             foreach (DataRow dataRow in dataSetProjeKod.Tables[0].Rows)
             {
-                IDataTableConverter dataTableConverter = new DataTableConverter();
+                IDataTableHelper dataTableConverter = new DataTableHelper();
                 SatisProje projeKod = dataTableConverter.DataRowToModel<SatisProje>(dataRow);
                 comboListProjeKodu.AddDataRow(projeKod.projeKod.Id, projeKod.projeKod.kod);
             }
@@ -113,7 +113,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             DataSet dataSetTalepTipleri = jsonConverter.JsonStringToDataSet(jsonStringTalepTipleri);
             foreach (DataRow dataRow in dataSetTalepTipleri.Tables[0].Rows)
             {
-                IDataTableConverter dataTableConverter = new DataTableConverter();
+                IDataTableHelper dataTableConverter = new DataTableHelper();
                 TalepTip talepTip = dataTableConverter.DataRowToModel<TalepTip>(dataRow);
                 customCheckedComboBox1.AddDataRow(talepTip.talepTipId, talepTip.kod);
             }
@@ -179,7 +179,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Directory.Delete(tempFolder, true);
             SendMail(Environment.CurrentDirectory+"\\"+birlesmisDosyaAdi);
             satinalmaTeklifBaslik.teklifTalepTarihi = DateTime.Now;
-            satinalmaTeklifBaslik.teklifFirma.id = comboListBoxFirma.selectedDataRowId;
+            satinalmaTeklifBaslik.teklifFirma.Id = comboListBoxFirma.selectedDataRowId;
             WebMethods.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
             
         }

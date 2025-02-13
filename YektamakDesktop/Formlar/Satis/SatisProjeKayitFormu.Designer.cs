@@ -218,6 +218,7 @@
             buttonProjeAsamalari.BackColor = System.Drawing.Color.Silver;
             buttonProjeAsamalari.BackgroundImage = Properties.Resources.DataReviewWithMagnifier6;
             buttonProjeAsamalari.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            buttonProjeAsamalari.Cursor = System.Windows.Forms.Cursors.Hand;
             buttonProjeAsamalari.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonProjeAsamalari.ForeColor = System.Drawing.Color.Transparent;
             buttonProjeAsamalari.Location = new System.Drawing.Point(576, 256);

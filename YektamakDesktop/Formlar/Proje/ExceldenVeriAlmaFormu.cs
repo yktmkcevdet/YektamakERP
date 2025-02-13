@@ -13,28 +13,23 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using Utilities.Implementations;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Proje
 {
     public partial class ExceldenVeriAlmaFormu : Form, IForm
     {
         private string[] files;
+        private static ICache _cache;
         public ExceldenVeriAlmaFormu(ICache cache)
+        {
+            _cache = cache;
+        }
+        public ExceldenVeriAlmaFormu()
         {
             InitializeComponent();
             ButtonImageLoad();
-            Models.Proje proje = new();
-            proje.personel = cache.kullanici.personel;
-            string jsonString = WebMethods.GetProjeKodByUserId(proje);
-            
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(jsonString);
-            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
-            {
-                Models.Proje proje1;
-                proje1 = Common.ConvertHelper.DataRowToModel<Models.Proje>(dataRow);
-                customComboListProjeKodu.AddDataRow(proje1.Id, proje1.kod);
-            }
+            ComboBoxListFill.GetLookupKod(_cache.projes, ref customComboListProjeKodu);
         }
         #region declarations
         private ButtonImage buttonImageExcel = new ButtonImage();
@@ -47,7 +42,7 @@ namespace YektamakDesktop.Formlar.Proje
             {
                 if (_exceldenVeriAlmaFormu == null)
                 {
-                    _exceldenVeriAlmaFormu = new ExceldenVeriAlmaFormu(new Cache(new JsonConvertHelper(), new DataTableConverter()));
+                    _exceldenVeriAlmaFormu = new ExceldenVeriAlmaFormu();
                     GlobalData.Yetki(ref _exceldenVeriAlmaFormu);
                 }
                 return _exceldenVeriAlmaFormu;

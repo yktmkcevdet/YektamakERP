@@ -9,8 +9,8 @@ namespace Utilities.Implementations
     public class Cache : ICache
     {
         private readonly IJsonConvertHelper JsonConverter;
-        private readonly IDataTableConverter DataTableConverter;
-        public Cache(IJsonConvertHelper jsonConverter, IDataTableConverter dataTableConverter)
+        private readonly IDataTableHelper DataTableConverter;
+        public Cache(IJsonConvertHelper jsonConverter, IDataTableHelper dataTableConverter)
         {
             JsonConverter = jsonConverter;
             DataTableConverter = dataTableConverter;
@@ -38,7 +38,13 @@ namespace Utilities.Implementations
                 return new AnaMenu { rolId = kullanici.rolId };
             }
         }
-
+        private Menu menu
+        {
+            get
+            {
+                return new Menu();
+            }
+        }
         private List<AnaMenu> _anaMenuList;
         public List<AnaMenu> ananaMenuList
         {
@@ -53,6 +59,22 @@ namespace Utilities.Implementations
                     _anaMenuList = GetModelList(WebMethods.GetAnaMenu, anaMenu);
                 }
                 return _anaMenuList;
+            }
+        }
+        private List<Menu> _menuList;
+        public List<Menu> menuList
+        {
+            get
+            {
+                if (_menuList == null)
+                {
+                    _menuList = GetModelList(WebMethods.GetMenu, menu);
+                }
+                else if (_menuList.Count == 0)
+                {
+                    _menuList = GetModelList(WebMethods.GetMenu, menu);
+                }
+                return _menuList;
             }
         }
         private Yetki yetki
@@ -84,76 +106,88 @@ namespace Utilities.Implementations
                 return _parcaGrups;
             }
         }
-        private List<StokTip> _stokTip;
-        public List<StokTip> stokTip
+        private List<StokTip> _stokTips;
+        public List<StokTip> stokTips
         {
             get
             {
-                if (_stokTip == null)
+                if (_stokTips == null)
                 {
-                    _stokTip = GetModelList(WebMethods.GetStokTip, new StokTip());
+                    _stokTips = GetModelList(WebMethods.GetStokTip, new StokTip());
                 }
-                return _stokTip;
+                return _stokTips;
             }
         }
-        private List<ProfilTip> _profilTip;
-        public List<ProfilTip> profilTip
+        private List<ProfilTip> _profilTips;
+        public List<ProfilTip> profilTips
         {
             get
             {
-                if (_profilTip == null)
+                if (_profilTips == null)
                 {
-                    _profilTip = GetModelList(WebMethods.GetProfilTip, new ProfilTip());
+                    _profilTips = GetModelList(WebMethods.GetProfilTip, new ProfilTip());
                 }
-                return _profilTip;
+                return _profilTips;
             }
         }
-        private List<OlcuBirim> _olcuBirim;
-        public List<OlcuBirim> olcuBirim
+        private List<OlcuBirim> _olcuBirims;
+        public List<OlcuBirim> olcuBirims
         {
             get
             {
-                if (_olcuBirim == null)
+                if (_olcuBirims == null)
                 {
-                    _olcuBirim = GetModelList(WebMethods.GetOlcuBirim, new OlcuBirim());
+                    _olcuBirims = GetModelList(WebMethods.GetOlcuBirim, new OlcuBirim());
                 }
-                return _olcuBirim;
+                return _olcuBirims;
             }
         }
-        private List<MalzemeGrup> _malzemeGrup;
-        public List<MalzemeGrup> malzemeGrup
+        private List<MalzemeGrup> _malzemeGrups;
+        public List<MalzemeGrup> malzemeGrups
         {
             get
             {
-                if (_malzemeGrup == null)
+                if (_malzemeGrups == null)
                 {
-                    _malzemeGrup = GetModelList(WebMethods.GetMalzemeGrup, new MalzemeGrup());
+                    _malzemeGrups = GetModelList(WebMethods.GetMalzemeGrup, new MalzemeGrup());
                 }
-                return _malzemeGrup;
+                return _malzemeGrups;
             }
         }
-        private List<MalzemeStandart> _malzemeStandart;
-        public List<MalzemeStandart> malzemeStandart
+        private List<MalzemeStandart> _malzemeStandarts;
+        public List<MalzemeStandart> malzemeStandarts
         {
             get
             {
-                if (_malzemeStandart == null)
+                if (_malzemeStandarts == null)
                 {
-                    _malzemeStandart = GetModelList(WebMethods.GetMalzemeStandart, new MalzemeStandart());
+                    _malzemeStandarts = GetModelList(WebMethods.GetMalzemeStandart, new MalzemeStandart());
                 }
-                return _malzemeStandart;
+                return _malzemeStandarts;
             }
         }
-        private List<Proje> _proje;
-        public List<Proje> proje
+        private List<Proje> _projes;
+        public List<Proje> projes
         {
             get
             {
-                if (_proje == null)
+                if (_projes == null)
                 {
-                    _proje = GetModelList(WebMethods.GetProje, new Proje()).Where(x => x.personel.Id == kullanici.personel.Id).ToList();
+                    _projes = GetModelList(WebMethods.GetProje, new Proje()).Where(x => x.personel.Id == kullanici.personel.Id).ToList();
                 }
-                return _proje;
+                return _projes;
+            }
+        }
+        private List<Proje> _unAssignedProjeList;
+        public List<Proje> unAssignedProjeList
+        {
+            get
+            {
+                if (_unAssignedProjeList == null)
+                {
+                    _unAssignedProjeList = GetModelList(WebMethods.GetProje, new Proje()).Where(x => x.satisSiparisId == 0).ToList();
+                }
+                return _unAssignedProjeList;
             }
         }
         private List<Sektor> _sektorList;
@@ -171,8 +205,20 @@ namespace Utilities.Implementations
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
             DataTable dataTable = JsonConverter.JsonStringToDataSet(fetchFunction.Invoke(t)).Tables[0];
-            List<T> list = DataTableConverter.ToList<T>(dataTable.AsEnumerable().ToList());
+            List<T> list = DataTableConverter.DataTableRowsToModelList<T>(dataTable.AsEnumerable().ToList());
             return list;
+        }
+        private List<Firma> _firmaList;
+        public List<Firma> firmaList
+        {
+            get
+            {
+                if (_firmaList == null)
+                {
+                    _firmaList = GetModelList(WebMethods.GetFilteredFirma, new Firma());
+                }
+                return _firmaList;
+            }
         }
     }
 }

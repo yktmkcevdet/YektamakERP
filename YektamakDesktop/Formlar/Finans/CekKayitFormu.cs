@@ -141,9 +141,9 @@ namespace YektamakDesktop.Formlar.Finans
             rButtonGuncelle.Visible = true;
             customTextBoxCekNumarasi.TextCustom = cek.cekNumarasi;
             customTextBoxTutar.TextCustom = cek.tutar.tutar.ToString();
-            comboListBoxCekiVerenFirma.SelectDataRowId(cek.cekiVerenFirma.id);
-            comboListBoxCekiAlanFirma.SelectDataRowId(cek.cekiAlanFirma.id);
-            comboListBoxCekSahibiBanka.SelectDataRowId(cek.cekSahibiBanka.id);
+            comboListBoxCekiVerenFirma.SelectDataRowId(cek.cekiVerenFirma.Id);
+            comboListBoxCekiAlanFirma.SelectDataRowId(cek.cekiAlanFirma.Id);
+            comboListBoxCekSahibiBanka.SelectDataRowId(cek.cekSahibiBanka.Id);
             comboListBoxCekDovizCinsi.SelectDataRowId(cek.tutar.dovizCinsi.id);
             customTextBoxVadeTarihi.TextCustom = cek.vadeTarihi.ToString("dd.MM.yyyy");
             customTextBoxCekinVerildigiTarih.TextCustom = cek.cekinVerildigiTarih.ToString("dd.MM.yyyy");
@@ -355,13 +355,13 @@ namespace YektamakDesktop.Formlar.Finans
             cekToSave.cekResim.arkaYuzResimData = cekToUpdate.cekResim.arkaYuzResimData;
             cekToSave.cekResim.arkaYuzImageFormat=cekToSave.cekResim.arkaYuzImageFormat;
             cekToSave.cekNumarasi = customTextBoxCekNumarasi.TextCustom;
-            cekToSave.cekSahibiBanka.id = comboListBoxCekSahibiBanka.selectedDataRowId;
+            cekToSave.cekSahibiBanka.Id = comboListBoxCekSahibiBanka.selectedDataRowId;
             cekToSave.cekinVerildigiTarih = DateTime.Parse(customTextBoxCekinVerildigiTarih.TextCustom);
             cekToSave.vadeTarihi = DateTime.Parse(customTextBoxVadeTarihi.TextCustom);
             cekToSave.tutar.tutar = float.Parse(customTextBoxTutar.TextCustom);
             cekToSave.tutar.dovizCinsi.id = comboListBoxCekDovizCinsi.selectedDataRowId;
-            cekToSave.cekiAlanFirma.id = comboListBoxCekiAlanFirma.selectedDataRowId;
-            cekToSave.cekiVerenFirma.id = comboListBoxCekiVerenFirma.selectedDataRowId;
+            cekToSave.cekiAlanFirma.Id = comboListBoxCekiAlanFirma.selectedDataRowId;
+            cekToSave.cekiVerenFirma.Id = comboListBoxCekiVerenFirma.selectedDataRowId;
            
                 cekToSave.cekResim.onYuzResimData=cekOnYuzResimBytes;
                 cekToSave.cekResim.onYuzImageFormat = cekOnYuzResimFormat;

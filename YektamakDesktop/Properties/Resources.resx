@@ -124,9 +124,6 @@
   <data name="Magnify" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\magnify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="indir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\indir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="update_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>update-icon-png-18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,14 +142,23 @@
   <data name="aktar21" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aktar21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="step_passive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\step_passive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="aktar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aktar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dxf_passive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dxf_passive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="formBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\formBg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataReviewWithMagnifier5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="step1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\step1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="aktar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aktar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +178,8 @@
   <data name="pdf-passive" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pdf-passive1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arkaplan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arkaplan.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DataReviewWithMagnifier6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resimler\DataReviewWithMagnifier6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataReviewWithMagnifier7_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier7_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,6 +190,9 @@
   <data name="fromExcelButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fromExcelButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dxfImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dxfImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DataReviewWithMagnifier2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,11 +202,14 @@
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chaNge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chaNge.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DataReviewWithMagnifier7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chaNge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chaNge.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="indir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\indir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="step" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\step.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,8 +217,8 @@
   <data name="DataReviewWithMagnifier3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataReviewWithMagnifier6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resimler\DataReviewWithMagnifier6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arkaplan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arkaplan.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Plus_Symbol_PNG_Image_HD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\plus-symbol-png-image-hd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,16 +226,7 @@
   <data name="pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dxfImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dxfImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dxf_passive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dxf_passive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step_passive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\step_passive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="step1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\step1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="kaydet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kaydet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
