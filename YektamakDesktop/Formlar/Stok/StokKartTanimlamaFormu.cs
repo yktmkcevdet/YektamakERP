@@ -16,16 +16,26 @@ namespace YektamakDesktop.Formlar.Stok
         private static ICache _cache;
         private static StokKartTanimlamaFormu _stokKartTanimlamaFormu;
         private StokKart _stokKart;
-        public static StokKartTanimlamaFormu stokKartTanimlamaFormu(StokKart stokKart)
+        public StokKart stokKart
         {
-            if (_stokKartTanimlamaFormu == null)
+            get
             {
-                _stokKartTanimlamaFormu = new StokKartTanimlamaFormu(stokKart, _cache);
-                GlobalData.Yetki(ref _stokKartTanimlamaFormu);
+                if (_stokKart == null) _stokKart = new StokKart();
+                return _stokKart;
+            } 
+            set { _stokKart = value; }
+        }
+        public static StokKartTanimlamaFormu stokKartTanimlamaFormu
+        {
+            get
+            {
+                if (_stokKartTanimlamaFormu == null)
+                {
+                    _stokKartTanimlamaFormu = new StokKartTanimlamaFormu();
+                    GlobalData.Yetki(ref _stokKartTanimlamaFormu);
+                }
+                return _stokKartTanimlamaFormu;
             }
-            return _stokKartTanimlamaFormu;
-
-
         }
 
         private List<Control> _controlsToDisable;
@@ -35,37 +45,10 @@ namespace YektamakDesktop.Formlar.Stok
         public StokKartTanimlamaFormu(ICache cache)
         {
             _cache = cache;
-            InitializeComponent();
         }
-
-        public StokKartTanimlamaFormu(StokKart stokKart, ICache cache)
+        public StokKartTanimlamaFormu()
         {
-            _cache = cache;
             InitializeComponent();
-            textBoxId.TextCustom = stokKart.Id.ToString();
-            textBoxkod.TextCustom = stokKart.kod;
-            textBoxStokAd.TextCustom = stokKart.ad;
-            textBoxBoyut.TextCustom = stokKart.boyut;
-            textBoxUzunluk.TextCustom = stokKart.uzunluk.ToString();
-            textBoxAciklama.TextCustom = stokKart.aciklama;
-            textBoxAgirlik.TextCustom = stokKart.agirlik.ToString();
-            textBoxMalzeme.TextCustom = stokKart.malzeme;
-            textBoxParcaAd.TextCustom = stokKart.parcaAdi;
-            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref comboListBoxStokTip);
-            comboListBoxStokTip.SelectDataRowId(stokKart.stokTip.Id);
-            ComboBoxListFill.GetLookupAd(_cache.profilTips, ref comboListBoxProfilTip);
-            comboListBoxProfilTip.SelectDataRowId(stokKart.profilTipId);
-            ComboBoxListFill.GetLookupAd(_cache.olcuBirims, ref comboListBoxOlcuBirim);
-            comboListBoxOlcuBirim.SelectDataRowId(stokKart.olcuBirim.Id);
-            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref comboListBoxParcaGrup);
-            comboListBoxParcaGrup.SelectDataRowId(stokKart.parcaGrup.Id);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref comboListBoxMalzemeGrup);
-            comboListBoxMalzemeGrup.SelectDataRowId(stokKart.malzemeGrup.Id);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeStandarts, ref comboListBoxMalzemeStandart);
-            comboListBoxMalzemeStandart.SelectDataRowId(stokKart.malzemeStandart.Id);
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref comboListBoxProjeKod);
-            comboListBoxProjeKod.SelectDataRowId(stokKart.proje.Id);
-            _stokKart = currentData;
         }
         #region mouseDrag
         bool mouseDown;
@@ -118,15 +101,44 @@ namespace YektamakDesktop.Formlar.Stok
         private async void rButtonKaydet_Click(object sender, EventArgs e)
         {
             _stokKart = currentData;
-            string result=await WebMethods.SaveStokKart(_stokKart);
+            string result = await WebMethods.SaveStokKart(_stokKart);
             if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(result);
             }
         }
+
+        private void StokKartTanimlamaFormu_Load(object sender, EventArgs e)
+        {
+            textBoxId.TextCustom = stokKart.Id.ToString();
+            textBoxkod.TextCustom = stokKart.kod;
+            textBoxStokAd.TextCustom = stokKart.ad;
+            textBoxBoyut.TextCustom = stokKart.boyut;
+            textBoxUzunluk.TextCustom = stokKart.uzunluk.ToString();
+            textBoxAciklama.TextCustom = stokKart.aciklama;
+            textBoxAgirlik.TextCustom = stokKart.agirlik.ToString();
+            textBoxMalzeme.TextCustom = stokKart.malzeme;
+            textBoxParcaAd.TextCustom = stokKart.parcaAdi;
+            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref comboListBoxStokTip);
+            comboListBoxStokTip.SelectDataRowId(stokKart.stokTip.Id);
+            ComboBoxListFill.GetLookupAd(_cache.profilTips, ref comboListBoxProfilTip);
+            comboListBoxProfilTip.SelectDataRowId(stokKart.profilTipId);
+            ComboBoxListFill.GetLookupAd(_cache.olcuBirims, ref comboListBoxOlcuBirim);
+            comboListBoxOlcuBirim.SelectDataRowId(stokKart.olcuBirim.Id);
+            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref comboListBoxParcaGrup);
+            comboListBoxParcaGrup.SelectDataRowId(stokKart.parcaGrup.Id);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref comboListBoxMalzemeGrup);
+            comboListBoxMalzemeGrup.SelectDataRowId(stokKart.malzemeGrup.Id);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeStandarts, ref comboListBoxMalzemeStandart);
+            comboListBoxMalzemeStandart.SelectDataRowId(stokKart.malzemeStandart.Id);
+            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref comboListBoxProjeKod);
+            comboListBoxProjeKod.SelectDataRowId(stokKart.proje.Id);
+            _stokKart = currentData;
+        }
+
         private StokKart currentData
         {
-            get 
+            get
             {
                 StokKart stokKart = new StokKart();
 

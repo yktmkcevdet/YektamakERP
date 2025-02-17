@@ -2538,23 +2538,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yektamak-118\\.nuget\\packages\\": {},
+    "C:\\Users\\YEKTAMAK-121\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\YektamakDesktop.csproj",
+      "projectUniqueName": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\YektamakDesktop\\YektamakDesktop.csproj",
       "projectName": "YektamakDesktop",
-      "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\YektamakDesktop.csproj",
-      "packagesPath": "C:\\Users\\yektamak-118\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\obj\\",
+      "projectPath": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\YektamakDesktop\\YektamakDesktop.csproj",
+      "packagesPath": "C:\\Users\\YEKTAMAK-121\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\YektamakDesktop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\yektamak-118\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\YEKTAMAK-121\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2563,21 +2563,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows7.0",
           "projectReferences": {
-            "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj": {
-              "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj"
+            "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\ApiService\\ApiService.csproj": {
+              "projectPath": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\ApiService\\ApiService.csproj"
             },
-            "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj"
+            "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\Models\\Models.csproj"
             },
-            "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj": {
-              "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj"
+            "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\Utilities\\Utilities.csproj": {
+              "projectPath": "C:\\Users\\YEKTAMAK-121\\source\\repos\\YektamakERP\\Utilities\\Utilities.csproj"
             }
           }
         }
@@ -2592,7 +2591,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net7.0-windows7.0": {
@@ -2650,7 +2649,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

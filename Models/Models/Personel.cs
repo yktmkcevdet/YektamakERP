@@ -27,10 +27,4 @@
         public byte[] resimData;
         public string imageFormat;
     }
-
-    [Serializable]
-    public class CariPersonel
-    {
-        public Personel personel;
-    }
 }

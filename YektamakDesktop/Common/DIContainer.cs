@@ -32,6 +32,7 @@ namespace YektamakDesktop.Common
             services.AddSingleton<AltMenuEkle>();
             services.AddSingleton<FirmaGridForm>();
             services.AddSingleton<ExceldenVeriAlmaFormu>();
+            services.AddSingleton<SatinalmaTalepOlusturma>();
             services.AddSingleton<IDataGridHelper, DataGridHelper>();
             services.AddUtilities();
             services.AddApiServices();

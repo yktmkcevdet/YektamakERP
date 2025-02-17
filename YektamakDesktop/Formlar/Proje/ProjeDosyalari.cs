@@ -78,7 +78,7 @@ namespace YektamakDesktop.Formlar.Proje
                 if (value == true)
                 {
                     dataTable = GlobalData.FillDataTable(WebMethods.GetStokKart, stokKartFilter);
-                    DataRefresh();
+                    if(dataTable.Rows.Count>0)DataRefresh();
                 }
                 _activeForm = value; 
             } 
@@ -149,7 +149,7 @@ namespace YektamakDesktop.Formlar.Proje
 
         public void buttonEkle_Click(object sender, EventArgs e)
         {
-            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu(new StokKart());
+            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu;
             if (stokKartTanimlamaFormu != null)
             {
                 stokKartTanimlamaFormu.Show();
@@ -608,9 +608,10 @@ namespace YektamakDesktop.Formlar.Proje
         {
             StokKart stokKart = new StokKart();
             stokKart = ConvertHelper.DataRowToModel<StokKart>(dataTable.Rows[dataGridViewStokKart.SelectedRows[0].Index]);
-            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu(stokKart);
+            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu;
             if (stokKartTanimlamaFormu != null)
             {
+                stokKartTanimlamaFormu.stokKart=stokKart;
                 stokKartTanimlamaFormu.Show();
             }
         }
