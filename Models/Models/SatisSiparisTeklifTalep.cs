@@ -2,7 +2,7 @@
 {
     public class SatisSiparisTeklifTalep:IEntity
     {
-        public int teklifTalepId;
+        public int Id;
         public DateTime teklifTalepTarihi;
         public Personel satisSorumlusu;
         public Firma musteri;

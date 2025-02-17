@@ -1,25 +1,11 @@
-﻿using System;
+﻿using ApiService;
+using Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Models;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Threading.Tasks;
-using YektamakDesktop.Formlar.Genel;
-using System.Net.Http;
 using YektamakDesktop.CustomControls;
-using System.Net.Http.Headers;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Globalization;
-using YektamakDesktop.Formlar.Ortak;
-using static YektamakDesktop.Formlar.Yetkilendirme.Menuler;
-using ApiService;
 
 namespace YektamakDesktop.Formlar.Satis
 {
@@ -58,7 +44,7 @@ namespace YektamakDesktop.Formlar.Satis
             {
                 if (value)
                 {
-                    
+
                 }
                 _activeForm = value;
             }
@@ -72,7 +58,7 @@ namespace YektamakDesktop.Formlar.Satis
             this.Controls.Add(customDataGrid.detailPanel);
             controlsToDisable = new List<Control>
             {
-                
+
             };
 
         }
@@ -110,7 +96,7 @@ namespace YektamakDesktop.Formlar.Satis
         {
             if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(SatisSiparisTeklifTalepGridForm))
             {
-                if (satisSiparisTeklifTalepToUpdate != null && satisSiparisTeklifTalepToUpdate.teklifTalepId != 0)
+                if (satisSiparisTeklifTalepToUpdate != null && satisSiparisTeklifTalepToUpdate.Id != 0)
                 {
                     SatisSiparisTeklifTalepGridForm.satisSiparisTeklifTalepGridForm.UpdateRow(satisSiparisTeklifTalepToUpdate);
                 }
@@ -118,7 +104,7 @@ namespace YektamakDesktop.Formlar.Satis
             GlobalData.CloseForm(ref _satisSiparisTeklifTalepKayitFormu);
         }
 
-        
+
 
         /// <summary>
         /// Formdaki alanlara doğru veri girilip girilmediğini kontrol eder. 
@@ -142,8 +128,8 @@ namespace YektamakDesktop.Formlar.Satis
         private SatisSiparisTeklifTalep GetCurrentSatisSiparisTeklifTalep()
         {
             SatisSiparisTeklifTalep satisSiparisTeklifTalep = new SatisSiparisTeklifTalep();
-            satisSiparisTeklifTalep.teklifTalepId = _teklifTalepId;
-            
+            satisSiparisTeklifTalep.Id = _teklifTalepId;
+
             return satisSiparisTeklifTalep;
         }
         /// <summary>
@@ -160,8 +146,8 @@ namespace YektamakDesktop.Formlar.Satis
                 {
                     this.Enabled = false;
                     string result = await WebMethods.SaveSatisSiparisTeklifTalep(satisSiparisTeklifTalepToSave);
-                    
-                    if (result.Contains("error",StringComparison.OrdinalIgnoreCase))
+
+                    if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
                     {
                         MessageBox.Show(result);
                     }
@@ -201,7 +187,7 @@ namespace YektamakDesktop.Formlar.Satis
                 }
             }
         }
-       
+
         private void buttomMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -212,6 +198,15 @@ namespace YektamakDesktop.Formlar.Satis
             CloseForm();
         }
 
+        private void SatisSiparisTeklifTalepKayitFormu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelHeader_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

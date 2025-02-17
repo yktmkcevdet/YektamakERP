@@ -21,6 +21,11 @@ namespace Api.Controllers
         {
             return GeneralMethods.ResultData<SatisSiparis>(restData, DataBaseJobsSatisSiparis.GetFilteredSatisSiparis);
         }
+        [HttpGet, Route("api/GetReferansKaynak")]
+        public string GetReferansKaynak()
+        {
+            return DataBaseJobsSatisSiparis.GetReferansKaynak();
+        }
     }
 }
 

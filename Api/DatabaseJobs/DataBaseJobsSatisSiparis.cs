@@ -25,5 +25,9 @@ namespace Api.DatabaseJobs
         {
             return DataAccessLayer.dataAccesLayer.GetObject(satisSiparis, "spGetFilteredSatisSiparis");
         }
+        public static string GetReferansKaynak()
+        {
+            return DataAccessLayer.dataAccesLayer.GetObject("spGetReferansKaynak");
+        }
     }
 }

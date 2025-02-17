@@ -2,7 +2,7 @@
 {
     public class ReferansKaynak
     {
-        public int referansKaynakId;
-        public string referansKaynakAdi;
+        public int Id;
+        public string ad;
     }
 }

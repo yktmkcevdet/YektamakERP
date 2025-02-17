@@ -251,7 +251,7 @@ namespace YektamakDesktop.Formlar.Satis
         }
         public void UpdateRow(SatisSiparisTeklifTalep satisSiparisTeklifTalep)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, satisSiparisTeklifTalep.teklifTalepId);
+            int i = GlobalData.IndexOfDataSet(dataTable, satisSiparisTeklifTalep.Id);
             if (i == -1)
             {
                 AddNewRow(satisSiparisTeklifTalep);
@@ -264,7 +264,7 @@ namespace YektamakDesktop.Formlar.Satis
         private void AddNewRow(SatisSiparisTeklifTalep satisSiparisTeklifTalep)
         {
             dataTable.Rows.Add(
-                satisSiparisTeklifTalep.teklifTalepId
+                satisSiparisTeklifTalep.Id
                
                 );
         }

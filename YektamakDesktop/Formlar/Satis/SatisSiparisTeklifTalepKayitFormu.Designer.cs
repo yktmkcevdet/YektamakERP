@@ -45,10 +45,6 @@ namespace YektamakDesktop.Formlar.Satis
             label15 = new Label();
             comboListBoxSatisSorumlusu = new CustomComboListBox();
             satisSiparisBindingSource = new BindingSource(components);
-            labelHeader = new Label();
-            rButtonKapat = new RoundedButton();
-            rButtonGuncelle = new RoundedButton();
-            buttonKaydet = new RoundedButton();
             label7 = new Label();
             label8 = new Label();
             label6 = new Label();
@@ -58,10 +54,6 @@ namespace YektamakDesktop.Formlar.Satis
             label2 = new Label();
             label1 = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            panelHeader = new Panel();
-            buttonClose = new RoundedButton();
-            buttonHelp = new RoundedButton();
-            buttomMinimize = new RoundedButton();
             satisSiparisBindingSource1 = new BindingSource(components);
             comboListBoxMarka = new CustomComboListBox();
             comboListBoxMusteri = new CustomComboListBox();
@@ -72,9 +64,21 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxReferansKaynagi = new CustomComboListBox();
             label11 = new Label();
             label12 = new Label();
+            panelHeader = new Panel();
+            btnClose = new RoundedButton();
+            btnMinimize = new RoundedButton();
+            roundedButton3 = new RoundedButton();
+            bntHelp = new RoundedButton();
+            label13 = new Label();
+            roundedButton1 = new RoundedButton();
+            roundedButton2 = new RoundedButton();
+            buttonClose = new RoundedButton();
+            buttomMinimize = new RoundedButton();
+            roundedButton6 = new RoundedButton();
+            buttonKaydet = new RoundedButton();
             ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource).BeginInit();
-            panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource1).BeginInit();
+            panelHeader.SuspendLayout();
             SuspendLayout();
             // 
             // textBoxTeklifTalepTarihi
@@ -118,84 +122,12 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxSatisSorumlusu.Margin = new Padding(1);
             comboListBoxSatisSorumlusu.Name = "comboListBoxSatisSorumlusu";
             comboListBoxSatisSorumlusu.Padding = new Padding(1);
-            comboListBoxSatisSorumlusu.Size = new Size(251, 32);
+            comboListBoxSatisSorumlusu.Size = new Size(251, 36);
             comboListBoxSatisSorumlusu.TabIndex = 0;
             // 
             // satisSiparisBindingSource
             // 
             satisSiparisBindingSource.DataSource = typeof(SatisSiparis);
-            // 
-            // labelHeader
-            // 
-            labelHeader.AutoSize = true;
-            labelHeader.FlatStyle = FlatStyle.Flat;
-            labelHeader.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHeader.ForeColor = SystemColors.ButtonHighlight;
-            labelHeader.Location = new Point(16, 11);
-            labelHeader.Name = "labelHeader";
-            labelHeader.Size = new Size(225, 20);
-            labelHeader.TabIndex = 0;
-            labelHeader.Text = "Satış Sipariş Teklif Talep Formu";
-            // 
-            // rButtonKapat
-            // 
-            rButtonKapat.BackColor = Color.Brown;
-            rButtonKapat.BackgroundColor = Color.Brown;
-            rButtonKapat.BorderColor = Color.Crimson;
-            rButtonKapat.BorderRadius = 20;
-            rButtonKapat.BorderSize = 2;
-            rButtonKapat.FlatAppearance.BorderSize = 0;
-            rButtonKapat.FlatStyle = FlatStyle.Flat;
-            rButtonKapat.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            rButtonKapat.ForeColor = Color.White;
-            rButtonKapat.Location = new Point(446, 687);
-            rButtonKapat.Name = "rButtonKapat";
-            rButtonKapat.Size = new Size(120, 50);
-            rButtonKapat.TabIndex = 21;
-            rButtonKapat.Text = "KAPAT";
-            rButtonKapat.TextColor = Color.White;
-            rButtonKapat.UseVisualStyleBackColor = false;
-            rButtonKapat.Click += rButtonKapat_Click;
-            // 
-            // rButtonGuncelle
-            // 
-            rButtonGuncelle.BackColor = Color.CornflowerBlue;
-            rButtonGuncelle.BackgroundColor = Color.CornflowerBlue;
-            rButtonGuncelle.BorderColor = Color.RoyalBlue;
-            rButtonGuncelle.BorderRadius = 20;
-            rButtonGuncelle.BorderSize = 2;
-            rButtonGuncelle.FlatAppearance.BorderSize = 0;
-            rButtonGuncelle.FlatStyle = FlatStyle.Flat;
-            rButtonGuncelle.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            rButtonGuncelle.ForeColor = Color.White;
-            rButtonGuncelle.Location = new Point(106, 687);
-            rButtonGuncelle.Name = "rButtonGuncelle";
-            rButtonGuncelle.Size = new Size(120, 50);
-            rButtonGuncelle.TabIndex = 20;
-            rButtonGuncelle.Text = "GÜNCELLE";
-            rButtonGuncelle.TextColor = Color.White;
-            rButtonGuncelle.UseVisualStyleBackColor = false;
-            rButtonGuncelle.Click += rButtonGuncelle_Click;
-            // 
-            // buttonKaydet
-            // 
-            buttonKaydet.BackColor = Color.LimeGreen;
-            buttonKaydet.BackgroundColor = Color.LimeGreen;
-            buttonKaydet.BorderColor = Color.MediumSeaGreen;
-            buttonKaydet.BorderRadius = 20;
-            buttonKaydet.BorderSize = 2;
-            buttonKaydet.FlatAppearance.BorderSize = 0;
-            buttonKaydet.FlatStyle = FlatStyle.Flat;
-            buttonKaydet.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonKaydet.ForeColor = Color.White;
-            buttonKaydet.Location = new Point(106, 687);
-            buttonKaydet.Name = "buttonKaydet";
-            buttonKaydet.Size = new Size(120, 50);
-            buttonKaydet.TabIndex = 19;
-            buttonKaydet.Text = "KAYDET";
-            buttonKaydet.TextColor = Color.White;
-            buttonKaydet.UseVisualStyleBackColor = false;
-            buttonKaydet.Click += buttonKaydet_Click;
             // 
             // label7
             // 
@@ -290,87 +222,6 @@ namespace YektamakDesktop.Formlar.Satis
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
-            // panelHeader
-            // 
-            panelHeader.BackColor = Color.Red;
-            panelHeader.Controls.Add(buttonClose);
-            panelHeader.Controls.Add(buttonHelp);
-            panelHeader.Controls.Add(buttomMinimize);
-            panelHeader.Controls.Add(labelHeader);
-            panelHeader.Location = new Point(0, 0);
-            panelHeader.Margin = new Padding(0);
-            panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(946, 41);
-            panelHeader.TabIndex = 86;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
-            // 
-            // buttonClose
-            // 
-            buttonClose.BackColor = Color.Red;
-            buttonClose.BackgroundColor = Color.Red;
-            buttonClose.BorderColor = Color.LavenderBlush;
-            buttonClose.BorderRadius = 10;
-            buttonClose.BorderSize = 1;
-            buttonClose.FlatAppearance.BorderSize = 0;
-            buttonClose.FlatStyle = FlatStyle.Flat;
-            buttonClose.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonClose.ForeColor = Color.White;
-            buttonClose.Location = new Point(891, 4);
-            buttonClose.Margin = new Padding(0);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Padding = new Padding(3, 0, 0, 0);
-            buttonClose.Size = new Size(34, 30);
-            buttonClose.TabIndex = 106;
-            buttonClose.Text = "x";
-            buttonClose.TextColor = Color.White;
-            buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
-            // 
-            // buttonHelp
-            // 
-            buttonHelp.BackColor = Color.Red;
-            buttonHelp.BackgroundColor = Color.Red;
-            buttonHelp.BorderColor = Color.LavenderBlush;
-            buttonHelp.BorderRadius = 10;
-            buttonHelp.BorderSize = 1;
-            buttonHelp.FlatAppearance.BorderSize = 0;
-            buttonHelp.FlatStyle = FlatStyle.Flat;
-            buttonHelp.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonHelp.ForeColor = Color.White;
-            buttonHelp.Location = new Point(823, 4);
-            buttonHelp.Margin = new Padding(0);
-            buttonHelp.Name = "buttonHelp";
-            buttonHelp.Padding = new Padding(3, 0, 0, 0);
-            buttonHelp.Size = new Size(34, 30);
-            buttonHelp.TabIndex = 105;
-            buttonHelp.Text = "?";
-            buttonHelp.TextColor = Color.White;
-            buttonHelp.UseVisualStyleBackColor = false;
-            // 
-            // buttomMinimize
-            // 
-            buttomMinimize.BackColor = Color.Red;
-            buttomMinimize.BackgroundColor = Color.Red;
-            buttomMinimize.BorderColor = Color.LavenderBlush;
-            buttomMinimize.BorderRadius = 10;
-            buttomMinimize.BorderSize = 1;
-            buttomMinimize.FlatAppearance.BorderSize = 0;
-            buttomMinimize.FlatStyle = FlatStyle.Flat;
-            buttomMinimize.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            buttomMinimize.ForeColor = Color.White;
-            buttomMinimize.Location = new Point(857, 4);
-            buttomMinimize.Margin = new Padding(0);
-            buttomMinimize.Name = "buttomMinimize";
-            buttomMinimize.Padding = new Padding(3, 0, 0, 0);
-            buttomMinimize.Size = new Size(34, 30);
-            buttomMinimize.TabIndex = 104;
-            buttomMinimize.Text = "-";
-            buttomMinimize.TextColor = Color.White;
-            buttomMinimize.UseVisualStyleBackColor = false;
-            buttomMinimize.Click += buttomMinimize_Click;
-            // 
             // satisSiparisBindingSource1
             // 
             satisSiparisBindingSource1.DataSource = typeof(SatisSiparis);
@@ -383,7 +234,7 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxMarka.Margin = new Padding(1);
             comboListBoxMarka.Name = "comboListBoxMarka";
             comboListBoxMarka.Padding = new Padding(1);
-            comboListBoxMarka.Size = new Size(251, 32);
+            comboListBoxMarka.Size = new Size(251, 36);
             comboListBoxMarka.TabIndex = 87;
             // 
             // comboListBoxMusteri
@@ -394,7 +245,7 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxMusteri.Margin = new Padding(1);
             comboListBoxMusteri.Name = "comboListBoxMusteri";
             comboListBoxMusteri.Padding = new Padding(1);
-            comboListBoxMusteri.Size = new Size(538, 32);
+            comboListBoxMusteri.Size = new Size(538, 36);
             comboListBoxMusteri.TabIndex = 88;
             // 
             // textBoxTeklifKonusu
@@ -430,7 +281,7 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxAltGrup.Margin = new Padding(1);
             comboListBoxAltGrup.Name = "comboListBoxAltGrup";
             comboListBoxAltGrup.Padding = new Padding(1);
-            comboListBoxAltGrup.Size = new Size(251, 32);
+            comboListBoxAltGrup.Size = new Size(251, 36);
             comboListBoxAltGrup.TabIndex = 92;
             // 
             // label9
@@ -463,7 +314,7 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxReferansKaynagi.Margin = new Padding(1);
             comboListBoxReferansKaynagi.Name = "comboListBoxReferansKaynagi";
             comboListBoxReferansKaynagi.Padding = new Padding(1);
-            comboListBoxReferansKaynagi.Size = new Size(251, 32);
+            comboListBoxReferansKaynagi.Size = new Size(251, 36);
             comboListBoxReferansKaynagi.TabIndex = 95;
             // 
             // label11
@@ -488,13 +339,274 @@ namespace YektamakDesktop.Formlar.Satis
             label12.Text = "Referans Kaynağı";
             label12.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // panelHeader
+            // 
+            panelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panelHeader.BackColor = Color.Firebrick;
+            panelHeader.Controls.Add(buttonClose);
+            panelHeader.Controls.Add(buttomMinimize);
+            panelHeader.Controls.Add(btnClose);
+            panelHeader.Controls.Add(roundedButton6);
+            panelHeader.Controls.Add(btnMinimize);
+            panelHeader.Controls.Add(roundedButton3);
+            panelHeader.Controls.Add(bntHelp);
+            panelHeader.Controls.Add(label13);
+            panelHeader.Controls.Add(roundedButton1);
+            panelHeader.Controls.Add(roundedButton2);
+            panelHeader.Location = new Point(0, 0);
+            panelHeader.Name = "panelHeader";
+            panelHeader.Size = new Size(788, 32);
+            panelHeader.TabIndex = 96;
+            // 
+            // btnClose
+            // 
+            btnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnClose.BackColor = Color.Firebrick;
+            btnClose.BackgroundColor = Color.Firebrick;
+            btnClose.BorderColor = Color.Firebrick;
+            btnClose.BorderRadius = 10;
+            btnClose.BorderSize = 2;
+            btnClose.Cursor = Cursors.Hand;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClose.ForeColor = Color.White;
+            btnClose.Location = new Point(1400, 2);
+            btnClose.Margin = new Padding(0);
+            btnClose.Name = "btnClose";
+            btnClose.Padding = new Padding(3, 0, 0, 0);
+            btnClose.Size = new Size(29, 27);
+            btnClose.TabIndex = 103;
+            btnClose.Text = "X";
+            btnClose.TextColor = Color.White;
+            btnClose.UseVisualStyleBackColor = false;
+            // 
+            // btnMinimize
+            // 
+            btnMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMinimize.BackColor = Color.Firebrick;
+            btnMinimize.BackgroundColor = Color.Firebrick;
+            btnMinimize.BorderColor = Color.Firebrick;
+            btnMinimize.BorderRadius = 10;
+            btnMinimize.BorderSize = 2;
+            btnMinimize.Cursor = Cursors.Hand;
+            btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnMinimize.ForeColor = Color.White;
+            btnMinimize.Location = new Point(1360, 2);
+            btnMinimize.Margin = new Padding(0);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Padding = new Padding(3, 0, 0, 0);
+            btnMinimize.Size = new Size(29, 27);
+            btnMinimize.TabIndex = 101;
+            btnMinimize.Text = "-";
+            btnMinimize.TextColor = Color.White;
+            btnMinimize.UseVisualStyleBackColor = false;
+            // 
+            // roundedButton3
+            // 
+            roundedButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            roundedButton3.BackColor = Color.Firebrick;
+            roundedButton3.BackgroundColor = Color.Firebrick;
+            roundedButton3.BorderColor = Color.Firebrick;
+            roundedButton3.BorderRadius = 10;
+            roundedButton3.BorderSize = 2;
+            roundedButton3.FlatAppearance.BorderSize = 0;
+            roundedButton3.FlatStyle = FlatStyle.Flat;
+            roundedButton3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButton3.ForeColor = Color.White;
+            roundedButton3.Location = new Point(2487, 1);
+            roundedButton3.Margin = new Padding(0);
+            roundedButton3.Name = "roundedButton3";
+            roundedButton3.Padding = new Padding(3, 0, 0, 0);
+            roundedButton3.Size = new Size(29, 27);
+            roundedButton3.TabIndex = 100;
+            roundedButton3.Text = "X";
+            roundedButton3.TextColor = Color.White;
+            roundedButton3.UseVisualStyleBackColor = false;
+            // 
+            // bntHelp
+            // 
+            bntHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bntHelp.BackColor = Color.Firebrick;
+            bntHelp.BackgroundColor = Color.Firebrick;
+            bntHelp.BorderColor = Color.Firebrick;
+            bntHelp.BorderRadius = 10;
+            bntHelp.BorderSize = 2;
+            bntHelp.Cursor = Cursors.Hand;
+            bntHelp.FlatAppearance.BorderSize = 0;
+            bntHelp.FlatStyle = FlatStyle.Flat;
+            bntHelp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            bntHelp.ForeColor = Color.White;
+            bntHelp.Location = new Point(1320, 2);
+            bntHelp.Margin = new Padding(0);
+            bntHelp.Name = "bntHelp";
+            bntHelp.Padding = new Padding(3, 0, 0, 0);
+            bntHelp.Size = new Size(29, 27);
+            bntHelp.TabIndex = 102;
+            bntHelp.Text = "?";
+            bntHelp.TextColor = Color.White;
+            bntHelp.UseVisualStyleBackColor = false;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = SystemColors.ControlLightLight;
+            label13.Location = new Point(12, 6);
+            label13.Name = "label13";
+            label13.Size = new Size(201, 17);
+            label13.TabIndex = 1;
+            label13.Text = "Satış Sipariş Teklif Talep Formu";
+            // 
+            // roundedButton1
+            // 
+            roundedButton1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            roundedButton1.BackColor = Color.Firebrick;
+            roundedButton1.BackgroundColor = Color.Firebrick;
+            roundedButton1.BorderColor = Color.Firebrick;
+            roundedButton1.BorderRadius = 10;
+            roundedButton1.BorderSize = 2;
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = FlatStyle.Flat;
+            roundedButton1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButton1.ForeColor = Color.White;
+            roundedButton1.Location = new Point(2447, 1);
+            roundedButton1.Margin = new Padding(0);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Padding = new Padding(3, 0, 0, 0);
+            roundedButton1.Size = new Size(29, 27);
+            roundedButton1.TabIndex = 98;
+            roundedButton1.Text = "-";
+            roundedButton1.TextColor = Color.White;
+            roundedButton1.UseVisualStyleBackColor = false;
+            // 
+            // roundedButton2
+            // 
+            roundedButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            roundedButton2.BackColor = Color.Firebrick;
+            roundedButton2.BackgroundColor = Color.Firebrick;
+            roundedButton2.BorderColor = Color.Firebrick;
+            roundedButton2.BorderRadius = 10;
+            roundedButton2.BorderSize = 2;
+            roundedButton2.FlatAppearance.BorderSize = 0;
+            roundedButton2.FlatStyle = FlatStyle.Flat;
+            roundedButton2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButton2.ForeColor = Color.White;
+            roundedButton2.Location = new Point(2407, 1);
+            roundedButton2.Margin = new Padding(0);
+            roundedButton2.Name = "roundedButton2";
+            roundedButton2.Padding = new Padding(3, 0, 0, 0);
+            roundedButton2.Size = new Size(29, 27);
+            roundedButton2.TabIndex = 99;
+            roundedButton2.Text = "?";
+            roundedButton2.TextColor = Color.White;
+            roundedButton2.UseVisualStyleBackColor = false;
+            // 
+            // buttonClose
+            // 
+            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClose.BackColor = Color.Firebrick;
+            buttonClose.BackgroundColor = Color.Firebrick;
+            buttonClose.BorderColor = Color.Firebrick;
+            buttonClose.BorderRadius = 10;
+            buttonClose.BorderSize = 2;
+            buttonClose.Cursor = Cursors.Hand;
+            buttonClose.FlatAppearance.BorderSize = 0;
+            buttonClose.FlatStyle = FlatStyle.Flat;
+            buttonClose.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonClose.ForeColor = Color.White;
+            buttonClose.Location = new Point(750, 1);
+            buttonClose.Margin = new Padding(0);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Padding = new Padding(3, 0, 0, 0);
+            buttonClose.Size = new Size(29, 27);
+            buttonClose.TabIndex = 106;
+            buttonClose.Text = "X";
+            buttonClose.TextColor = Color.White;
+            buttonClose.UseVisualStyleBackColor = false;
+            buttonClose.Click += buttonClose_Click;
+            // 
+            // buttomMinimize
+            // 
+            buttomMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttomMinimize.BackColor = Color.Firebrick;
+            buttomMinimize.BackgroundColor = Color.Firebrick;
+            buttomMinimize.BorderColor = Color.Firebrick;
+            buttomMinimize.BorderRadius = 10;
+            buttomMinimize.BorderSize = 2;
+            buttomMinimize.Cursor = Cursors.Hand;
+            buttomMinimize.FlatAppearance.BorderSize = 0;
+            buttomMinimize.FlatStyle = FlatStyle.Flat;
+            buttomMinimize.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            buttomMinimize.ForeColor = Color.White;
+            buttomMinimize.Location = new Point(710, 1);
+            buttomMinimize.Margin = new Padding(0);
+            buttomMinimize.Name = "buttomMinimize";
+            buttomMinimize.Padding = new Padding(3, 0, 0, 0);
+            buttomMinimize.Size = new Size(29, 27);
+            buttomMinimize.TabIndex = 104;
+            buttomMinimize.Text = "-";
+            buttomMinimize.TextColor = Color.White;
+            buttomMinimize.UseVisualStyleBackColor = false;
+            buttomMinimize.Click += this.buttomMinimize_Click;
+            // 
+            // roundedButton6
+            // 
+            roundedButton6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            roundedButton6.BackColor = Color.Firebrick;
+            roundedButton6.BackgroundColor = Color.Firebrick;
+            roundedButton6.BorderColor = Color.Firebrick;
+            roundedButton6.BorderRadius = 10;
+            roundedButton6.BorderSize = 2;
+            roundedButton6.Cursor = Cursors.Hand;
+            roundedButton6.FlatAppearance.BorderSize = 0;
+            roundedButton6.FlatStyle = FlatStyle.Flat;
+            roundedButton6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButton6.ForeColor = Color.White;
+            roundedButton6.Location = new Point(670, 1);
+            roundedButton6.Margin = new Padding(0);
+            roundedButton6.Name = "roundedButton6";
+            roundedButton6.Padding = new Padding(3, 0, 0, 0);
+            roundedButton6.Size = new Size(29, 27);
+            roundedButton6.TabIndex = 105;
+            roundedButton6.Text = "?";
+            roundedButton6.TextColor = Color.White;
+            roundedButton6.UseVisualStyleBackColor = false;
+            // 
+            // buttonKaydet
+            // 
+            buttonKaydet.BackColor = Color.Transparent;
+            buttonKaydet.BackgroundColor = Color.Transparent;
+            buttonKaydet.BorderColor = Color.MediumSeaGreen;
+            buttonKaydet.BorderRadius = 20;
+            buttonKaydet.BorderSize = 2;
+            buttonKaydet.Cursor = Cursors.Hand;
+            buttonKaydet.FlatAppearance.BorderSize = 0;
+            buttonKaydet.FlatStyle = FlatStyle.Flat;
+            buttonKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonKaydet.ForeColor = Color.White;
+            buttonKaydet.Image = Resources.kaydet;
+            buttonKaydet.Location = new Point(725, 725);
+            buttonKaydet.Name = "buttonKaydet";
+            buttonKaydet.Size = new Size(47, 49);
+            buttonKaydet.TabIndex = 107;
+            buttonKaydet.TextColor = Color.White;
+            buttonKaydet.TextImageRelation = TextImageRelation.ImageAboveText;
+            buttonKaydet.UseCompatibleTextRendering = true;
+            buttonKaydet.UseVisualStyleBackColor = false;
+            buttonKaydet.Click += buttonKaydet_Click;
+            // 
             // SatisSiparisTeklifTalepKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.White;
-            ClientSize = new Size(946, 786);
+            ClientSize = new Size(788, 786);
+            Controls.Add(buttonKaydet);
+            Controls.Add(panelHeader);
             Controls.Add(comboListBoxReferansKaynagi);
             Controls.Add(label11);
             Controls.Add(label12);
@@ -504,8 +616,6 @@ namespace YektamakDesktop.Formlar.Satis
             Controls.Add(textBoxTeklifKonusu);
             Controls.Add(comboListBoxMusteri);
             Controls.Add(comboListBoxMarka);
-            Controls.Add(rButtonKapat);
-            Controls.Add(panelHeader);
             Controls.Add(textBoxTeklifTalepTarihi);
             Controls.Add(comboListBoxSatisSorumlusu);
             Controls.Add(label1);
@@ -518,8 +628,6 @@ namespace YektamakDesktop.Formlar.Satis
             Controls.Add(label7);
             Controls.Add(label14);
             Controls.Add(label15);
-            Controls.Add(buttonKaydet);
-            Controls.Add(rButtonGuncelle);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SatisSiparisTeklifTalepKayitFormu";
@@ -527,10 +635,11 @@ namespace YektamakDesktop.Formlar.Satis
             StartPosition = FormStartPosition.CenterParent;
             Text = "Satış Sipariş Kayıt";
             TransparencyKey = Color.Yellow;
+            Load += SatisSiparisTeklifTalepKayitFormu_Load;
             ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource1).EndInit();
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -584,7 +693,6 @@ namespace YektamakDesktop.Formlar.Satis
         private System.Windows.Forms.Label label5;
         private CustomControls.RoundedButton rButtonKapat;
         private CustomControls.RoundedButton rButtonGuncelle;
-        private CustomControls.RoundedButton buttonKaydet;
         private System.Windows.Forms.Label labelHeader;
         public CustomControls.CustomComboListBox comboListBoxProjeAsamalari;
         public CustomControls.CustomComboListBox comboListBoxSatisSorumlusu;
@@ -607,5 +715,17 @@ namespace YektamakDesktop.Formlar.Satis
         public CustomControls.CustomComboListBox comboListBoxReferansKaynagi;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private Panel panel1;
+        private RoundedButton btnClose;
+        private RoundedButton btnMinimize;
+        private RoundedButton roundedButton3;
+        private RoundedButton bntHelp;
+        private Label label13;
+        private RoundedButton roundedButton1;
+        private RoundedButton roundedButton2;
+        private RoundedButton roundedButton4;
+        private RoundedButton buttomMinimize;
+        private RoundedButton roundedButton6;
+        private RoundedButton buttonKaydet;
     }
 }
