@@ -1,5 +1,4 @@
-﻿using Api.DatabaseJobs;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using static Api.Controllers.GeneralMethods;
 
@@ -7,65 +6,84 @@ namespace Api.Controllers
 {
     public class StokKartController
 	{
-		[HttpPost,Route("api/GetStokKart")]
+        private readonly Business.IDataAccessLayer _dataAccessLayer;
+
+        public StokKartController(Business.IDataAccessLayer dataAccessLayer)
+        {
+            _dataAccessLayer = dataAccessLayer;
+        }
+
+        [HttpPost,Route("api/GetStokKart")]
 		public string GetStokKartFilter([FromBody] string restData)
 		{
-			return ResultData<StokKart>(restData, DatabaseJobsStokKart.GetStokKart);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<StokKart>(restData), "spGetStokKart");
+            return result;
 		}
         [HttpPost, Route("api/GetStokKartPdf")]
         public string GetStokKartPdf([FromBody] string restData)
         {
-            return ResultData<StokKart>(restData, DatabaseJobsStokKart.GetStokKartPdf);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<StokKart>(restData), "spGetStokKartPdf");
+            return result;
         }
         [HttpPost, Route("api/SaveStokKart")]
 		public string SaveStokKart([FromBody] string restData)
 		{
-			return ResultData<StokKart>(restData, DatabaseJobsStokKart.SaveStokKart);
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<StokKart>(restData), "spSaveStokKart");
+            return result;
 		}
 		[HttpPost,Route("api/GetMalzeme")]
 		public string GetMalzeme([FromBody] string restData)
 		{
-			return ResultData<Malzeme>(restData,DatabaseJobsStokKart.GetMalzeme);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Malzeme>(restData), "spGetMalzeme");
+            return result;
 		}
 		[HttpPost, Route("api/SaveMalzeme")]
 		public string SaveMalzeme([FromBody] string restData)
 		{
-			return ResultData<Malzeme>(restData, DatabaseJobsStokKart.SaveMalzeme);
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Malzeme>(restData), "spSaveMalzeme");
+            return result;
 		}
         [HttpPost, Route("api/GetParcaGrup")]
         public string GetParcaGrup([FromBody] string restData)
         {
-            return ResultData<ParcaGrup>(restData, DatabaseJobsStokKart.GetParcaGrup);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<ParcaGrup>(restData), "spGetParcaGrup");
+            return result;
         }
         [HttpPost, Route("api/DeleteProjeDosya")]
         public string DeleteProjeDosya([FromBody] string restData)
         {
-            return ResultData<Proje>(restData, DatabaseJobsStokKart.DeleteProjeDosya);
+            string result = _dataAccessLayer.DeleteObject(JsonStringToModel<Proje>(restData), "spDeleteProjeDosya");
+            return result;
         }
         [HttpPost, Route("api/GetMalzemeGrup")]
         public string GetMalzemeGrup([FromBody] string restData)
         {
-            return ResultData<MalzemeGrup>(restData, DatabaseJobsStokKart.GetMalzemeGrup);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<MalzemeGrup>(restData), "spGetMalzemeGrup");
+            return result;
         }
         [HttpPost, Route("api/GetStokTip")]
         public string GetStokTip([FromBody] string restData)
         {
-            return ResultData<StokTip>(restData, DatabaseJobsStokKart.GetStokTip);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<StokTip>(restData), "spGetStokTip");
+            return result;
         }
         [HttpPost, Route("api/GetProfilTip")]
         public string GetProfilTip([FromBody] string restData)
         {
-            return ResultData<ProfilTip>(restData, DatabaseJobsStokKart.GetProfilTip);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<ProfilTip>(restData), "spGetProfilTip");
+            return result;
         }
         [HttpPost, Route("api/GetOlcuBirim")]
         public string GetOlcuBirim([FromBody] string restData)
         {
-            return ResultData<OlcuBirim>(restData, DatabaseJobsStokKart.GetOlcuBirim);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<OlcuBirim>(restData), "spGetOlcuBirim");
+            return result;
         }
         [HttpPost, Route("api/GetMalzemeStandart")]
         public string GetMalzemeStandart([FromBody] string restData)
         {
-            return ResultData<MalzemeStandart>(restData, DatabaseJobsStokKart.GetMalzemeStandart);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<MalzemeStandart>(restData), "spGetMalzemeStandart");
+            return result;
         }
     }
 }

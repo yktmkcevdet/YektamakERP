@@ -29,6 +29,7 @@ namespace Utilities.Implementations
 
             return list;
         }
+        
         /// <summary>
         /// Datatable satırını model nesnesine dönüştürür
         /// </summary>
@@ -67,7 +68,8 @@ namespace Utilities.Implementations
                         }
                         else
                         {
-                            value = Convert.ChangeType(data, fieldInfo.FieldType);
+                            Type targetType = Nullable.GetUnderlyingType(fieldInfo.FieldType) ?? fieldInfo.FieldType;
+                            value = data == null ? null : Convert.ChangeType(data, targetType);
                         }
                     }
                     fieldInfo.SetValue(entity, value);
@@ -106,7 +108,7 @@ namespace Utilities.Implementations
                     MethodInfo method = typeof(DataTableHelper).GetMethod(nameof(DataRowToModel)).MakeGenericMethod(type);
                     
                     var converterInstance = new DataTableHelper();
-                    object value = method.Invoke(converterInstance, new object[] { dataRow, upClassName + propertyInfo.Name + "_" });
+                    object value = method.Invoke(converterInstance, new object[] { dataRow, upClassName + propertyInfo.Name });
                     propertyInfo.SetValue(entity, value);
                 }
             }

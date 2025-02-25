@@ -153,6 +153,26 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap dataload {
+            get {
+                object obj = ResourceManager.GetObject("dataload", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap dataload1 {
+            get {
+                object obj = ResourceManager.GetObject("dataload1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap DataReviewIcon {
             get {
                 object obj = ResourceManager.GetObject("DataReviewIcon", resourceCulture);

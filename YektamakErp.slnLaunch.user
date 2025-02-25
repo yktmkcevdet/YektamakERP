@@ -3,13 +3,14 @@
     "Name": "Yeni Profil",
     "Projects": [
       {
+        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
+        "Action": "Start",
+        "DebugTarget": "FinansalTakipDesktop"
+      },
+      {
         "Path": "Api\\Api.csproj",
         "Action": "Start",
         "DebugTarget": "IIS Express"
-      },
-      {
-        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
-        "Action": "Start"
       }
     ]
   }

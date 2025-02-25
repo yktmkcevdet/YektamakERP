@@ -1,15 +1,8 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Api.Business;
+using Api.TokenJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Api.TokenJobs;
 
 namespace Api
 {
@@ -19,6 +12,9 @@ namespace Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySql>();
+
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin
             //              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             // JWT Ayarlarýný yapýlandýrma

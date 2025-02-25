@@ -191,35 +191,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             private CustomTextBox _menuAdi;
             public CustomTextBox menuAdi { get { if (_menuAdi == null) _menuAdi = new(); return _menuAdi; } set { _menuAdi = value; } }
             private CustomTextBox _formAdi;
-            public CustomTextBox formAdi 
-            { 
-                get 
-                { 
-                    if (_formAdi == null) _formAdi = new(); 
-                    return _formAdi; 
-                } 
-                set 
-                { 
-                    _formAdi = value; 
-                } 
-            }
+            public CustomTextBox formAdi {get{if (_formAdi == null) _formAdi = new(); return _formAdi; }set {_formAdi = value; } }
 
             private CustomTextBox _icon;
-            public CustomTextBox icon 
-            {
-                get
-                {
-                    if (_icon == null)
-                    {
-                        _icon = new(); 
-                    }
-                    return _icon;
-                }
-                set
-                {
-                    _icon = value;
-                } 
-            }
+            public CustomTextBox icon {get{if (_icon == null) _icon = new(); return _icon;} set{_icon = value;} }
             private RoundedButton _iconButton;
             public RoundedButton iconButton
             {
@@ -267,7 +242,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             private async void ButtonSil_Click(object sender, EventArgs e)
             {
                 Menu menu = new();
-                menu.Id = Convert.ToInt32(menuId.TextCustom.Replace(".",""));
+                if(menuId.TextCustom!="")menu.Id = Convert.ToInt32(menuId.TextCustom.Replace(".",""));
                 await _webMethods.DeleteMenu(menu);
             }
         }

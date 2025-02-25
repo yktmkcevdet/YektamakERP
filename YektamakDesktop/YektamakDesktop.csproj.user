@@ -2,6 +2,10 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\FinansalTakipDesktop\FinansalTakipDesktop\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <ActiveDebugProfile>FinansalTakipDesktop</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="CustomControls\CustomCheckedComboBox.cs">
@@ -107,6 +111,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\SatinalmaTalepTeklifListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\Monday.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satis\SatisSiparisGridForm.cs">

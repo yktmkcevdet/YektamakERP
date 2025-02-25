@@ -102,7 +102,7 @@ namespace YektamakDesktop.Formlar.Temp
 
         private void buttonTumKayitlariGetir_Click(object sender, EventArgs e)
         {
-            string result = WebMethods.GetFilteredFirma(new Firma());
+            string result = WebMethods.GetFirma(new Firma());
             if (result.Length > 6 && result.Substring(0, 5) == "error")
             {
                 MessageBox.Show(result);

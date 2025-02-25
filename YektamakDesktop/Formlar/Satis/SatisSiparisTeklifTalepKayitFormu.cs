@@ -5,12 +5,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Utilities.Interfaces;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satis
 {
     public partial class SatisSiparisTeklifTalepKayitFormu : Form, IForm
     {
+        private static ICache _cache;
+        public SatisSiparisTeklifTalepKayitFormu(ICache cache)
+        {
+            _cache = cache;
+        }
         private static SatisSiparisTeklifTalepKayitFormu _satisSiparisTeklifTalepKayitFormu;
         public static SatisSiparisTeklifTalepKayitFormu satisSiparisTeklifTalepKayitFormu
         {
@@ -25,10 +32,17 @@ namespace YektamakDesktop.Formlar.Satis
             }
         }
         CustomDataGrid<DataControlTeklifTalepDosya> customDataGrid;
-        private SatisSiparisTeklifTalep _satisSiparisTeklifTalepToSave;
-        public SatisSiparisTeklifTalep satisSiparisTeklifTalepToSave { get => _satisSiparisTeklifTalepToSave; set => _satisSiparisTeklifTalepToSave = value; }
-        public SatisSiparisTeklifTalep _satisSiparisTeklifTalepToUpdate;
-        public SatisSiparisTeklifTalep satisSiparisTeklifTalepToUpdate { get => _satisSiparisTeklifTalepToUpdate; set => _satisSiparisTeklifTalepToUpdate = value; }
+        private SatisTeklifTalep _satisSiparisTeklifTalep;
+        public SatisTeklifTalep satisSiparisTeklifTalep
+        {
+            get {
+                if (_satisSiparisTeklifTalep == null) _satisSiparisTeklifTalep = new SatisTeklifTalep();
+                return _satisSiparisTeklifTalep;
+            }
+            set => _satisSiparisTeklifTalep = value;
+        }
+        public SatisTeklifTalep _satisSiparisTeklifTalepToUpdate;
+        public SatisTeklifTalep satisSiparisTeklifTalepToUpdate { get => _satisSiparisTeklifTalepToUpdate; set => _satisSiparisTeklifTalepToUpdate = value; }
         private List<Control> _controlsToDisable;
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
 
@@ -50,12 +64,19 @@ namespace YektamakDesktop.Formlar.Satis
             }
         }
         private int _teklifTalepId;
+        
         private SatisSiparisTeklifTalepKayitFormu()
         {
             InitializeComponent();
-            customDataGrid = new CustomDataGrid<DataControlTeklifTalepDosya>(2, 30, new Point(90, 447), new Size(700, 250));
-            this.Controls.Add(customDataGrid.headerPanel);
-            this.Controls.Add(customDataGrid.detailPanel);
+            customDataGrid = new CustomDataGrid<DataControlTeklifTalepDosya>(2, 30, new Point(5, 5), new Size(700, 250));
+            panel2.Controls.Add(customDataGrid.headerPanel);
+            panel2.Controls.Add(customDataGrid.detailPanel);
+            ComboBoxListFill.GetLookupAd(_cache.firmaList,ref comboListBoxMusteri);
+            ComboBoxListFill.GetLookupAd(_cache.markaList, ref comboListBoxMarka);
+            ComboBoxListFill.GetLookupAd(_cache.markaAltGrupList, ref comboListBoxAltGrup);
+            ComboBoxListFill.GetLookupAd(_cache.referansKaynakList, ref comboListBoxReferansKaynagi);
+            ComboBoxListFill.GetLookupAd(_cache.personelList, ref comboListBoxSatisSorumlusu);
+            comboListBoxSatisSorumlusu.SelectDataRowId(_cache.kullanici.personel.Id);
             controlsToDisable = new List<Control>
             {
 
@@ -118,18 +139,35 @@ namespace YektamakDesktop.Formlar.Satis
             result = GlobalData.CheckField("*Marka seçilmelidir!", this, comboListBoxMarka) && result;
             result = GlobalData.CheckField("*Alt grup seçilmelidir!", this, comboListBoxAltGrup) && result;
             result = GlobalData.CheckField("*Referans kaynağı seçimi yapılmalıdır!", this, comboListBoxReferansKaynagi) && result;
-            result = GlobalData.CheckField("*Sqtış sorumlusu seçilmelidir!", this, comboListBoxSatisSorumlusu) && result;
+            result = GlobalData.CheckField("*Satış sorumlusu seçilmelidir!", this, comboListBoxSatisSorumlusu) && result;
             return result;
         }
         /// <summary>
         /// Form üzerinde zorunlu alanların girilip girilmediğini kontrol eder, veriler girilmişse SatisSiparisTeklifTalep nesnesi olarak hafızaya alır.
         /// </summary>
         /// <returns></returns>
-        private SatisSiparisTeklifTalep GetCurrentSatisSiparisTeklifTalep()
+        private SatisTeklifTalep GetCurrentSatisSiparisTeklifTalep()
         {
-            SatisSiparisTeklifTalep satisSiparisTeklifTalep = new SatisSiparisTeklifTalep();
+            SatisTeklifTalep satisSiparisTeklifTalep = new SatisTeklifTalep();
             satisSiparisTeklifTalep.Id = _teklifTalepId;
-
+            satisSiparisTeklifTalep.teklifTalepTarihi = Convert.ToDateTime(textBoxTeklifTalepTarihi.TextCustom);
+            satisSiparisTeklifTalep.satisSorumlusu.Id = comboListBoxSatisSorumlusu.selectedDataRowId;
+            satisSiparisTeklifTalep.musteri.Id = comboListBoxMusteri.selectedDataRowId;
+            satisSiparisTeklifTalep.teklifKonusu = textBoxTeklifKonusu.TextCustom;
+            satisSiparisTeklifTalep.marka.Id = comboListBoxMarka.selectedDataRowId;
+            satisSiparisTeklifTalep.altGrup.Id = comboListBoxAltGrup.selectedDataRowId;
+            satisSiparisTeklifTalep.referansKaynakId = comboListBoxReferansKaynagi.selectedDataRowId;
+            foreach(DataControlTeklifTalepDosya item in customDataGrid.dataSource.Where(x=>x.newRec==false))
+            {
+                SatisSiparisTeklifTalepBelge belge = new SatisSiparisTeklifTalepBelge();
+                belge.Id=Int32.TryParse(item.teklifTalepDosyaId.TextCustom,out int id)?id:0;
+                belge.belgeAd = item.teklifTalepBelgeAd.TextCustom;
+                belge.belgeAciklama = item.teklifTalepBelgeAd.TextCustom;
+                belge.dosyaAd = item.teklifTalepDosyaAd.TextCustom;
+                belge.dosyaVeri = item.dosyaVeri;
+                belge.dosyaBoyut=Convert.ToDouble(item.boyut?.TextCustom);
+                satisSiparisTeklifTalep.belgeList.Add(belge);
+            }
             return satisSiparisTeklifTalep;
         }
         /// <summary>
@@ -141,11 +179,11 @@ namespace YektamakDesktop.Formlar.Satis
         {
             if (CheckFields())
             {
-                satisSiparisTeklifTalepToSave = GetCurrentSatisSiparisTeklifTalep();
-                if (satisSiparisTeklifTalepToSave != null)
+                satisSiparisTeklifTalep = GetCurrentSatisSiparisTeklifTalep();
+                if (satisSiparisTeklifTalep != null)
                 {
                     this.Enabled = false;
-                    string result = await WebMethods.SaveSatisSiparisTeklifTalep(satisSiparisTeklifTalepToSave);
+                    string result = await WebMethods.SaveSatisSiparisTeklifTalep(satisSiparisTeklifTalep);
 
                     if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
                     {
@@ -200,12 +238,28 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void SatisSiparisTeklifTalepKayitFormu_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void labelHeader_Click(object sender, EventArgs e)
-        {
-
+            textBoxTeklifTalepTarihi.TextCustom = satisSiparisTeklifTalep.teklifTalepTarihi?.ToString();
+            comboListBoxMusteri.SelectDataRowId(satisSiparisTeklifTalep.musteri.Id);
+            textBoxTeklifKonusu.TextCustom = satisSiparisTeklifTalep.teklifKonusu;
+            comboListBoxMarka.SelectDataRowId(satisSiparisTeklifTalep.marka.Id);
+            comboListBoxAltGrup.SelectDataRowId(satisSiparisTeklifTalep.altGrup.Id);
+            comboListBoxReferansKaynagi.SelectDataRowId(satisSiparisTeklifTalep.referansKaynakId);
+            comboListBoxSatisSorumlusu.SelectDataRowId(satisSiparisTeklifTalep.satisSorumlusu.Id);
+            List<DataControlTeklifTalepDosya> customDataGridList = new List<DataControlTeklifTalepDosya>();
+            foreach (var item in satisSiparisTeklifTalep.belgeList)
+            {
+                DataControlTeklifTalepDosya dataControlTeklifTalepDosya=new DataControlTeklifTalepDosya();
+                dataControlTeklifTalepDosya.teklifTalepDosyaId.TextCustom = item.Id.ToString();
+                dataControlTeklifTalepDosya.teklifTalepBelgeAd.TextCustom = item.belgeAd;
+                dataControlTeklifTalepDosya.teklifTalepDosyaAd.TextCustom = item.dosyaAd;
+                dataControlTeklifTalepDosya.dosyaVeri = item.dosyaVeri;
+                dataControlTeklifTalepDosya.teklifTalepDosyaId.TextCustom = item.Id.ToString();
+                dataControlTeklifTalepDosya.teklifTalepId.TextCustom = item.teklifTalepId.ToString();
+                dataControlTeklifTalepDosya.boyut.TextCustom = item.dosyaBoyut.ToString();
+                customDataGridList.Add(dataControlTeklifTalepDosya);
+            }
+            customDataGrid.dataSource = customDataGridList;
+            _teklifTalepId = satisSiparisTeklifTalep.Id;
         }
     }
 

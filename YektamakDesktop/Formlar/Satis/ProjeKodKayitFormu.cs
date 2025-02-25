@@ -134,8 +134,8 @@ namespace YektamakDesktop.Formlar.Satis
             //{
             //    comboListBoxMarka.AddDataRow(GlobalData.markaList[i].markaId, GlobalData.markaList[i].markaAd);
             //}
-            comboListBoxMarka.SelectDataRowId(projeKod.marka.markaId);
-            comboListBoxAltUrunGrubu.SelectDataRowId(projeKod.marka.markaAltGrup.altGrupId);
+            comboListBoxMarka.SelectDataRowId(projeKod.marka.Id);
+            comboListBoxAltUrunGrubu.SelectDataRowId(projeKod.marka.markaAltGrup.Id);
             projeKodToUpdate = projeKod;
         }
         /// <summary>
@@ -186,8 +186,8 @@ namespace YektamakDesktop.Formlar.Satis
             if (CheckFields())
             {
                 projeKodToSave.no = int.Parse(textBoxProjeNo.TextCustom);
-                projeKodToSave.marka.markaId = comboListBoxMarka.selectedDataRowId;
-                projeKodToSave.marka.markaAltGrup.altGrupId = comboListBoxAltUrunGrubu.selectedDataRowId;
+                projeKodToSave.marka.Id = comboListBoxMarka.selectedDataRowId;
+                projeKodToSave.marka.markaAltGrup.Id = comboListBoxAltUrunGrubu.selectedDataRowId;
                 projeKodToSave.kod = projeKodToSave.ProjeKodString();
 
                 //Bu aşamada veritabanına projekod kayıt edilip projekodid alınacak
@@ -253,7 +253,7 @@ namespace YektamakDesktop.Formlar.Satis
                 proje = dataTableConverter.DataRowToModel<Models.Proje>(dataset.Tables[0].Rows[0]);
                 this.Enabled = true;
                 textBoxProjeNo.TextCustom = (proje.Id + 1).ToString();
-                projeKodToSave.marka.markaId = comboListBoxMarka.selectedDataRowId;
+                projeKodToSave.marka.Id = comboListBoxMarka.selectedDataRowId;
             }
         }
         private void buttomMinimize_Click(object sender, EventArgs e)

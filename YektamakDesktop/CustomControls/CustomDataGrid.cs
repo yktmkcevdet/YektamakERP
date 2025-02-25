@@ -175,7 +175,7 @@ namespace YektamakDesktop.CustomControls
         {
             int controlPointX = 7;
             if(headerPanel.Controls.Count>0) return;
-            foreach (Control control in listControl.OrderBy(p => p.TabIndex))
+            foreach (Control control in listControl.Where(p=>p!=null).OrderBy(p => p.TabIndex))
             {
 				if (control.Tag != null)
 				{
@@ -214,7 +214,7 @@ namespace YektamakDesktop.CustomControls
         {
             if(orderNr < 2) return true;
             ControlList(dataSource[orderNr -2]);
-            foreach (Control control in listControl)
+            foreach (Control control in listControl.Where(p => p != null))
             {
                 FieldInfo fieldInfo = control.GetType().GetField("isMandatory");
 
@@ -242,7 +242,7 @@ namespace YektamakDesktop.CustomControls
             int leftPadding = 7;
             controlPointY =controlPointY - detailPanel.VerticalScroll.Value;
             leftPadding=leftPadding - detailPanel.HorizontalScroll.Value;
-            foreach (Control control in  listControl.OrderBy(p=>p.TabIndex))
+            foreach (Control control in  listControl.Where(p=>p!=null).OrderBy(p=>p.TabIndex))
             {
                 if((string)control.Tag == "No")
                 {
@@ -260,7 +260,7 @@ namespace YektamakDesktop.CustomControls
         private void SetControlEvents()
         {
             //foreach (PropertyInfo propertyInfo in dataRow.GetType().GetProperties())
-            foreach(Control control in listControl)
+            foreach(Control control in listControl.Where(p=>p!=null))
             {
 				//Type type = propertyInfo.PropertyType;
 				Type type = control.GetType();

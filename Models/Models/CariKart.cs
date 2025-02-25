@@ -23,6 +23,7 @@
         /// Cari türü Personelse PersonelId, Firmaysa FirmaId
         /// </summary>
         public int Id;
+        public int foreignId;
     }
     
 }

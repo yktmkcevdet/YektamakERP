@@ -1,61 +1,45 @@
-﻿using Api.DatabaseJobs;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
+using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
 {
     public class PersonelController:Controller
     {
-        private static JsonConverter[] jsonConverters;
-        private JsonSerializerSettings jsonSerializerSettings;
+        private readonly IDataAccessLayer _dataAccessLayer;
 
-        static PersonelController()
+        public PersonelController(IDataAccessLayer dataAccessLayer)
         {
-            IsoDateTimeConverter converter1 = new IsoDateTimeConverter();
-            converter1.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-            jsonConverters = new JsonConverter[] { converter1 };
-        }
-
-        public PersonelController()
-        {
-            JsonSerializerSettings settings1 = new JsonSerializerSettings();
-            settings1.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            settings1.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            settings1.Converters = jsonConverters;
-            this.jsonSerializerSettings = settings1;
+            _dataAccessLayer = dataAccessLayer;
         }
 
         [HttpPost, Route("api/SavePersonel/")]
         public string SavePersonel([FromBody]string restData)
         {
-            return GeneralMethods.ResultData<Personel>(restData, DataBaseJobsPersonel.SavePersonel);
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Personel>(restData), "spSavePersonel");
+            return result;
         }
 
         [HttpPost, Route("api/DeletePersonel/")]
         public string DeletePersonel([FromBody] string restData)
         {
-            return GeneralMethods.ResultData<Personel>(restData, DataBaseJobsPersonel.DeletePersonel);
+            string result = _dataAccessLayer.DeleteObject(JsonStringToModel<Personel>(restData), "spDeletePersonel");
+            return result;
         }
 
         [HttpPost, Route("api/GetPersonel/")]
         public string GetPersonel([FromBody] string restData)
         {
-            return GeneralMethods.ResultData<Personel>(restData,DataBaseJobsPersonel.GetPersonel);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Personel>(restData), "spGetPersonel");
+            return result;
         }
 
         [HttpPost, Route("api/GetPersonelResim/")]
         public string GetPersonelResim([FromBody] string restData)
         {
-            return GeneralMethods.ResultData<PersonelResim>(restData, DataBaseJobsPersonel.GetPersonelResim);
-        }
-
-        [HttpPost, Route("api/GetPersonelAndPicture/")]
-        public string GetPersonelAndPicture([FromBody] string restData)
-        {
-            return GeneralMethods.ResultData<Personel>(restData, DataBaseJobsPersonel.GetPersonelAndPicture);
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<PersonelResim>(restData), "spGetPersonelResim");
+            return result;
         }
     }
 }

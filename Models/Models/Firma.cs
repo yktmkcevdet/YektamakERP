@@ -1,11 +1,9 @@
 ﻿namespace Models
 {
     [Serializable]
-    public class Firma:Cari,IEntity
+    public class Firma:IEntity
     {
-        private int _Id;
-        public int Id { get { return _Id; } set { base.Id = value;_Id = value; } }
-        
+        public int Id;
         public string ad;
         private Adres _adres;
         public Adres adres { get { if (_adres == null) { _adres = new(); } return _adres; } set { _adres = value; } }
@@ -21,12 +19,6 @@
         public string faks;
         public string mail;
 
-
-        public Firma()  
-        {
-            base.cariTuru = CariTuru.FIRMA;
-            base.Id = Id;
-        }
     }
 
     [Serializable]

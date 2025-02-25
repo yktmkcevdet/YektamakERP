@@ -209,7 +209,7 @@ namespace YektamakDesktop.Formlar.Satis
                     //satisSiparisToUpdate = ConvertHelper.DataRowToModel<SatisSiparis>(dataSet.Tables[0].Rows[0]);
                     comboListBoxProjeKodu.ClearListBox();
                     comboListBoxProjeKodu.AddDataRow(satisSiparisToUpdate.satisProje.projeKod.Id, satisSiparisToUpdate.satisProje.projeKod.kod);
-                    comboListBoxMarka.AddDataRow(satisSiparisToUpdate.satisProje.projeKod.marka.markaId, satisSiparisToUpdate.satisProje.projeKod.marka.markaAd);
+                    comboListBoxMarka.AddDataRow(satisSiparisToUpdate.satisProje.projeKod.marka.Id, satisSiparisToUpdate.satisProje.projeKod.marka.ad);
                     comboListBoxMusteri.AddDataRow(satisSiparisToUpdate.satisProje.musteri.Id, satisSiparisToUpdate.satisProje.musteri.ad);
                     comboListBoxProjeKodu.SelectDataRowId(satisSiparisToUpdate.satisProje.projeKod.Id);
                     FillSatisSiparisKayitForm(satisSiparisToUpdate);
@@ -222,7 +222,7 @@ namespace YektamakDesktop.Formlar.Satis
                 case ModeSiparisKayit.UPDATE_FROM_SIPARISGRIDFORM:
                     comboListBoxProjeKodu.ClearListBox();
                     comboListBoxProjeKodu.AddDataRow(satisSiparis.satisProje.projeKod.Id, satisSiparis.satisProje.projeKod.kod);
-                    comboListBoxMarka.AddDataRow(satisSiparis.satisProje.projeKod.marka.markaId, satisSiparis.satisProje.projeKod.marka.markaAd);
+                    comboListBoxMarka.AddDataRow(satisSiparis.satisProje.projeKod.marka.Id, satisSiparis.satisProje.projeKod.marka.ad);
                     comboListBoxMusteri.AddDataRow(satisSiparis.satisProje.musteri.Id, satisSiparis.satisProje.musteri.ad);
                     comboListBoxProjeKodu.SelectDataRowId(satisSiparis.satisProje.projeKod.Id);
                     comboListBoxKdv.SelectDataRowValue("%"+satisSiparisToUpdate.kdv.kdvOrani.ToString());
@@ -267,8 +267,8 @@ namespace YektamakDesktop.Formlar.Satis
             satisSiparis.Id = _siparisId;
             satisSiparis.satisProje.projeKod.Id = comboListBoxProjeKodu.selectedDataRowId;
             satisSiparis.satisProje.projeKod.kod = comboListBoxProjeKodu.selectedDataRowValue;
-            satisSiparis.satisProje.projeKod.marka.markaId = comboListBoxMarka.selectedDataRowId;
-            satisSiparis.satisProje.projeKod.marka.markaAd = comboListBoxMarka.selectedDataRowValue;
+            satisSiparis.satisProje.projeKod.marka.Id = comboListBoxMarka.selectedDataRowId;
+            satisSiparis.satisProje.projeKod.marka.ad = comboListBoxMarka.selectedDataRowValue;
             satisSiparis.satisProje.musteri.Id = comboListBoxMusteri.selectedDataRowId;
             satisSiparis.satisProje.musteri.ad=comboListBoxMusteri.selectedDataRowValue;
             satisSiparis.kdv.kdvId = comboListBoxKdv.selectedDataRowId;
@@ -351,8 +351,8 @@ namespace YektamakDesktop.Formlar.Satis
                 Models.Proje projeKod = new();
                 projeKod.Id = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["ProjeKodId"].ToString());
                 projeKod.no = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["ProjeNo"].ToString());
-                projeKod.marka.markaId = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["MarkaId"].ToString());
-                projeKod.marka.markaAltGrup.altGrupId = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["MarkaAltGrupId"].ToString());
+                projeKod.marka.Id = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["MarkaId"].ToString());
+                projeKod.marka.markaAltGrup.Id = int.Parse(dataSetAssignedProjeKod.Tables[0].Rows[i]["MarkaAltGrupId"].ToString());
                 projeKod.kod = dataSetAssignedProjeKod.Tables[0].Rows[i]["kod"].ToString();
                 comboListBoxProjeKodu.AddDataRow(projeKod.Id, projeKod.kod);
             }
@@ -413,7 +413,7 @@ namespace YektamakDesktop.Formlar.Satis
                 dataSet = JsonConvert.DeserializeObject<DataSet>(json);
                 foreach (DataRow dr in dataSet.Tables[0].Rows)
                 {
-                    projeKod.marka.markaId = int.Parse(dr["markaId"].ToString());
+                    projeKod.marka.Id = int.Parse(dr["markaId"].ToString());
                     projeKod.Id = projeKodId;
                     projeKod.no = int.Parse(dr["projeNo"].ToString());
                 }
@@ -445,7 +445,7 @@ namespace YektamakDesktop.Formlar.Satis
         /// <param name="e"></param>
         private async void comboListBoxProjeKodu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboListBoxMarka.SelectDataRowId(satisSiparisToUpdate.satisProje.projeKod.marka.markaId);
+            comboListBoxMarka.SelectDataRowId(satisSiparisToUpdate.satisProje.projeKod.marka.Id);
             comboListBoxMusteri.SelectDataRowId(satisSiparisToUpdate.satisProje.musteri.Id);
         }
         /// <summary>

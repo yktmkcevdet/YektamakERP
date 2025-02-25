@@ -360,6 +360,7 @@
             Controls.Add(panelHeader);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "StokKartGridForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "SatinalmaTalepGridForm";
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();

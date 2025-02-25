@@ -998,7 +998,9 @@
             Controls.Add(textBoxId);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "StokKartTanimlamaFormu";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "StokKartTanimlamaFormu";
+            Load += StokKartTanimlamaFormu_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ResumeLayout(false);

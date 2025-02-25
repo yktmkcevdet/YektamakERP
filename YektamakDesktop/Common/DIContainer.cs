@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Utilities;
-using Utilities.Implementations;
-using Utilities.Interfaces;
 using YektamakDesktop.Formlar;
 using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Proje;
@@ -32,6 +30,10 @@ namespace YektamakDesktop.Common
             services.AddSingleton<AltMenuEkle>();
             services.AddSingleton<FirmaGridForm>();
             services.AddSingleton<ExceldenVeriAlmaFormu>();
+            services.AddSingleton<SatisSiparisTeklifTalepKayitFormu>();
+            services.AddSingleton<SatisSiparisTeklifTalepGridForm>();
+            services.AddSingleton<Monday>();
+            services.AddSingleton<Menuler>();
             services.AddSingleton<IDataGridHelper, DataGridHelper>();
             services.AddUtilities();
             services.AddApiServices();

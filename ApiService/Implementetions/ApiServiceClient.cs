@@ -34,6 +34,7 @@ namespace ApiService.Implementetions
             return Encoding.UTF8.GetString(bytes);
         }
 
+
         public async Task<string> GetAsync(string apiAdres)
         {
             var response = await _httpClient.GetAsync($"/api/{apiAdres}");
@@ -42,15 +43,13 @@ namespace ApiService.Implementetions
             return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> DeleteAsync<T>(T entity, string apiAdres) where T : class
+        public async Task<string> DeleteAsync<T>(string apiAdres) where T : class
         {
-            string postString = JsonConvert.SerializeObject(entity, _jsonSerializerSettings);
-            var content = new StringContent(postString, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);
+            var response = await _httpClient.DeleteAsync($"/api/{apiAdres}");
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsStringAsync();
         }
+
     }
 }

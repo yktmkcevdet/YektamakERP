@@ -7,6 +7,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Linq;
 
 namespace YektamakDesktop.Formlar.Satis
 {
@@ -38,13 +40,11 @@ namespace YektamakDesktop.Formlar.Satis
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SatisSiparisTeklifTalepKayitFormu));
             textBoxTeklifTalepTarihi = new CustomTextBoxTarih();
             label14 = new Label();
             label15 = new Label();
             comboListBoxSatisSorumlusu = new CustomComboListBox();
-            satisSiparisBindingSource = new BindingSource(components);
             label7 = new Label();
             label8 = new Label();
             label6 = new Label();
@@ -53,8 +53,6 @@ namespace YektamakDesktop.Formlar.Satis
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            satisSiparisBindingSource1 = new BindingSource(components);
             comboListBoxMarka = new CustomComboListBox();
             comboListBoxMusteri = new CustomComboListBox();
             textBoxTeklifKonusu = new CustomTextBox();
@@ -65,19 +63,18 @@ namespace YektamakDesktop.Formlar.Satis
             label11 = new Label();
             label12 = new Label();
             panelHeader = new Panel();
+            buttonClose = new RoundedButton();
+            buttomMinimize = new RoundedButton();
             btnClose = new RoundedButton();
+            roundedButton6 = new RoundedButton();
             btnMinimize = new RoundedButton();
             roundedButton3 = new RoundedButton();
             bntHelp = new RoundedButton();
             label13 = new Label();
             roundedButton1 = new RoundedButton();
             roundedButton2 = new RoundedButton();
-            buttonClose = new RoundedButton();
-            buttomMinimize = new RoundedButton();
-            roundedButton6 = new RoundedButton();
             buttonKaydet = new RoundedButton();
-            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource1).BeginInit();
+            panel2 = new Panel();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -124,10 +121,6 @@ namespace YektamakDesktop.Formlar.Satis
             comboListBoxSatisSorumlusu.Padding = new Padding(1);
             comboListBoxSatisSorumlusu.Size = new Size(251, 36);
             comboListBoxSatisSorumlusu.TabIndex = 0;
-            // 
-            // satisSiparisBindingSource
-            // 
-            satisSiparisBindingSource.DataSource = typeof(SatisSiparis);
             // 
             // label7
             // 
@@ -216,15 +209,6 @@ namespace YektamakDesktop.Formlar.Satis
             label1.TabIndex = 1;
             label1.Text = "Satış Sorumlusu";
             label1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
-            // satisSiparisBindingSource1
-            // 
-            satisSiparisBindingSource1.DataSource = typeof(SatisSiparis);
             // 
             // comboListBoxMarka
             // 
@@ -357,6 +341,57 @@ namespace YektamakDesktop.Formlar.Satis
             panelHeader.Name = "panelHeader";
             panelHeader.Size = new Size(788, 32);
             panelHeader.TabIndex = 96;
+            panelHeader.MouseDown += panelHeader_MouseDown;
+            panelHeader.MouseMove += panelHeader_MouseMove;
+            panelHeader.MouseUp += panelHeader_MouseUp;
+            // 
+            // buttonClose
+            // 
+            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClose.BackColor = Color.Firebrick;
+            buttonClose.BackgroundColor = Color.Firebrick;
+            buttonClose.BorderColor = Color.Firebrick;
+            buttonClose.BorderRadius = 10;
+            buttonClose.BorderSize = 2;
+            buttonClose.Cursor = Cursors.Hand;
+            buttonClose.FlatAppearance.BorderSize = 0;
+            buttonClose.FlatStyle = FlatStyle.Flat;
+            buttonClose.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonClose.ForeColor = Color.White;
+            buttonClose.Location = new Point(750, 1);
+            buttonClose.Margin = new Padding(0);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Padding = new Padding(3, 0, 0, 0);
+            buttonClose.Size = new Size(29, 27);
+            buttonClose.TabIndex = 106;
+            buttonClose.Text = "X";
+            buttonClose.TextColor = Color.White;
+            buttonClose.UseVisualStyleBackColor = false;
+            buttonClose.Click += buttonClose_Click;
+            // 
+            // buttomMinimize
+            // 
+            buttomMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttomMinimize.BackColor = Color.Firebrick;
+            buttomMinimize.BackgroundColor = Color.Firebrick;
+            buttomMinimize.BorderColor = Color.Firebrick;
+            buttomMinimize.BorderRadius = 10;
+            buttomMinimize.BorderSize = 2;
+            buttomMinimize.Cursor = Cursors.Hand;
+            buttomMinimize.FlatAppearance.BorderSize = 0;
+            buttomMinimize.FlatStyle = FlatStyle.Flat;
+            buttomMinimize.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            buttomMinimize.ForeColor = Color.White;
+            buttomMinimize.Location = new Point(710, 1);
+            buttomMinimize.Margin = new Padding(0);
+            buttomMinimize.Name = "buttomMinimize";
+            buttomMinimize.Padding = new Padding(3, 0, 0, 0);
+            buttomMinimize.Size = new Size(29, 27);
+            buttomMinimize.TabIndex = 104;
+            buttomMinimize.Text = "-";
+            buttomMinimize.TextColor = Color.White;
+            buttomMinimize.UseVisualStyleBackColor = false;
+            buttomMinimize.Click += buttomMinimize_Click;
             // 
             // btnClose
             // 
@@ -380,6 +415,29 @@ namespace YektamakDesktop.Formlar.Satis
             btnClose.Text = "X";
             btnClose.TextColor = Color.White;
             btnClose.UseVisualStyleBackColor = false;
+            // 
+            // roundedButton6
+            // 
+            roundedButton6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            roundedButton6.BackColor = Color.Firebrick;
+            roundedButton6.BackgroundColor = Color.Firebrick;
+            roundedButton6.BorderColor = Color.Firebrick;
+            roundedButton6.BorderRadius = 10;
+            roundedButton6.BorderSize = 2;
+            roundedButton6.Cursor = Cursors.Hand;
+            roundedButton6.FlatAppearance.BorderSize = 0;
+            roundedButton6.FlatStyle = FlatStyle.Flat;
+            roundedButton6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButton6.ForeColor = Color.White;
+            roundedButton6.Location = new Point(670, 1);
+            roundedButton6.Margin = new Padding(0);
+            roundedButton6.Name = "roundedButton6";
+            roundedButton6.Padding = new Padding(3, 0, 0, 0);
+            roundedButton6.Size = new Size(29, 27);
+            roundedButton6.TabIndex = 105;
+            roundedButton6.Text = "?";
+            roundedButton6.TextColor = Color.White;
+            roundedButton6.UseVisualStyleBackColor = false;
             // 
             // btnMinimize
             // 
@@ -504,77 +562,6 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton2.TextColor = Color.White;
             roundedButton2.UseVisualStyleBackColor = false;
             // 
-            // buttonClose
-            // 
-            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonClose.BackColor = Color.Firebrick;
-            buttonClose.BackgroundColor = Color.Firebrick;
-            buttonClose.BorderColor = Color.Firebrick;
-            buttonClose.BorderRadius = 10;
-            buttonClose.BorderSize = 2;
-            buttonClose.Cursor = Cursors.Hand;
-            buttonClose.FlatAppearance.BorderSize = 0;
-            buttonClose.FlatStyle = FlatStyle.Flat;
-            buttonClose.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonClose.ForeColor = Color.White;
-            buttonClose.Location = new Point(750, 1);
-            buttonClose.Margin = new Padding(0);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Padding = new Padding(3, 0, 0, 0);
-            buttonClose.Size = new Size(29, 27);
-            buttonClose.TabIndex = 106;
-            buttonClose.Text = "X";
-            buttonClose.TextColor = Color.White;
-            buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
-            // 
-            // buttomMinimize
-            // 
-            buttomMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttomMinimize.BackColor = Color.Firebrick;
-            buttomMinimize.BackgroundColor = Color.Firebrick;
-            buttomMinimize.BorderColor = Color.Firebrick;
-            buttomMinimize.BorderRadius = 10;
-            buttomMinimize.BorderSize = 2;
-            buttomMinimize.Cursor = Cursors.Hand;
-            buttomMinimize.FlatAppearance.BorderSize = 0;
-            buttomMinimize.FlatStyle = FlatStyle.Flat;
-            buttomMinimize.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            buttomMinimize.ForeColor = Color.White;
-            buttomMinimize.Location = new Point(710, 1);
-            buttomMinimize.Margin = new Padding(0);
-            buttomMinimize.Name = "buttomMinimize";
-            buttomMinimize.Padding = new Padding(3, 0, 0, 0);
-            buttomMinimize.Size = new Size(29, 27);
-            buttomMinimize.TabIndex = 104;
-            buttomMinimize.Text = "-";
-            buttomMinimize.TextColor = Color.White;
-            buttomMinimize.UseVisualStyleBackColor = false;
-            buttomMinimize.Click += this.buttomMinimize_Click;
-            // 
-            // roundedButton6
-            // 
-            roundedButton6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            roundedButton6.BackColor = Color.Firebrick;
-            roundedButton6.BackgroundColor = Color.Firebrick;
-            roundedButton6.BorderColor = Color.Firebrick;
-            roundedButton6.BorderRadius = 10;
-            roundedButton6.BorderSize = 2;
-            roundedButton6.Cursor = Cursors.Hand;
-            roundedButton6.FlatAppearance.BorderSize = 0;
-            roundedButton6.FlatStyle = FlatStyle.Flat;
-            roundedButton6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            roundedButton6.ForeColor = Color.White;
-            roundedButton6.Location = new Point(670, 1);
-            roundedButton6.Margin = new Padding(0);
-            roundedButton6.Name = "roundedButton6";
-            roundedButton6.Padding = new Padding(3, 0, 0, 0);
-            roundedButton6.Size = new Size(29, 27);
-            roundedButton6.TabIndex = 105;
-            roundedButton6.Text = "?";
-            roundedButton6.TextColor = Color.White;
-            roundedButton6.UseVisualStyleBackColor = false;
-            // 
             // buttonKaydet
             // 
             buttonKaydet.BackColor = Color.Transparent;
@@ -598,6 +585,13 @@ namespace YektamakDesktop.Formlar.Satis
             buttonKaydet.UseVisualStyleBackColor = false;
             buttonKaydet.Click += buttonKaydet_Click;
             // 
+            // panel2
+            // 
+            panel2.Location = new Point(93, 416);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(637, 289);
+            panel2.TabIndex = 108;
+            // 
             // SatisSiparisTeklifTalepKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -605,6 +599,7 @@ namespace YektamakDesktop.Formlar.Satis
             AutoSize = true;
             BackColor = Color.White;
             ClientSize = new Size(788, 786);
+            Controls.Add(panel2);
             Controls.Add(buttonKaydet);
             Controls.Add(panelHeader);
             Controls.Add(comboListBoxReferansKaynagi);
@@ -636,8 +631,6 @@ namespace YektamakDesktop.Formlar.Satis
             Text = "Satış Sipariş Kayıt";
             TransparencyKey = Color.Yellow;
             Load += SatisSiparisTeklifTalepKayitFormu_Load;
-            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)satisSiparisBindingSource1).EndInit();
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ResumeLayout(false);
@@ -649,27 +642,43 @@ namespace YektamakDesktop.Formlar.Satis
         {
             private CustomTextBox _teklifTalepDosyaId;
             public CustomTextBox teklifTalepDosyaId { get { if (_teklifTalepDosyaId == null) _teklifTalepDosyaId = new(); return _teklifTalepDosyaId; } set { _teklifTalepDosyaId = value; } }
-            
+            private CustomTextBox _teklifTalepId;
+            public CustomTextBox teklifTalepId { get { if (_teklifTalepId == null) _teklifTalepId = new(); return _teklifTalepId; } set { _teklifTalepId = value; } }
             private CustomTextBox _teklifTalepBelgeAdi;
-            public CustomTextBox teklifTalepBelgeAdi { get { if (_teklifTalepBelgeAdi == null) _teklifTalepBelgeAdi = new(); return _teklifTalepBelgeAdi; } set { _teklifTalepBelgeAdi = value; } }
+            public CustomTextBox teklifTalepBelgeAd { get { if (_teklifTalepBelgeAdi == null) _teklifTalepBelgeAdi = new(); return _teklifTalepBelgeAdi; } set { _teklifTalepBelgeAdi = value; } }
             
             private CustomTextBox _teklifTalepDosyaAdi;
-            public CustomTextBox teklifTalepDosyaAdi { get { if (_teklifTalepDosyaAdi == null) _teklifTalepDosyaAdi = new(); return _teklifTalepDosyaAdi; } set { _teklifTalepDosyaAdi = value; } }
-            
+            public CustomTextBox teklifTalepDosyaAd { get { if (_teklifTalepDosyaAdi == null) _teklifTalepDosyaAdi = new(); return _teklifTalepDosyaAdi; } 
+                set 
+                {
+                    _teklifTalepDosyaAdi = value;
+                } 
+            }
+            private CustomTextBox _dosyaUzanti;
+            public CustomTextBox dosyaUzanti { get { if (_dosyaUzanti == null) { _dosyaUzanti = new(); } return _dosyaUzanti; } set { _dosyaUzanti = value; } }
             private CustomTextBox _boyut;
             public CustomTextBox boyut{ get { if (_boyut == null) { _boyut = new(); } return _boyut; } set { _boyut = value; } }
-            
+            private byte[] _dosyaVeri;
+            public byte[] dosyaVeri { get { return _dosyaVeri; } set { _dosyaVeri = value; } }
+
             private RoundedButton _iconButton;
             public RoundedButton iconButton{ get {if (_iconButton == null) {_iconButton = new(); } return _iconButton; } set { _iconButton = value; } }
+            private RoundedButton _iconButtonView;
+            public RoundedButton iconButtonView { get { if (_iconButtonView == null) { _iconButtonView = new(); } return _iconButtonView; } set { _iconButtonView = value; } }
             public DataControlTeklifTalepDosya()
             {
                 teklifTalepDosyaId = new() { TabIndex = 1, Width = 0, Visible = false, Tag = "TeklifTalepDosyaId" };
-                teklifTalepBelgeAdi = new() { TabIndex = 2, Width = 200, Tag = "Belge Adı" };
-                teklifTalepDosyaAdi = new() { TabIndex = 3, Width = 200, Tag = "Dosya Adı" };
-                boyut = new() { TabIndex = 4, Width = 100, Tag = "Boyut(MB)" };
-                iconButton = new() { TabIndex = 5, Width = 35, Height = 28, Tag = " Ekle", BackgroundImage = Resources.Plus_Symbol_PNG_Image_HD, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
+                teklifTalepId = new() { TabIndex = 2, Width = 0, Visible = false, Tag = "TeklifTalepId" };
+                teklifTalepBelgeAd = new() { TabIndex = 3, Width = 150, Tag = "Belge Adı" };
+                teklifTalepDosyaAd = new() { TabIndex = 4, Width = 150, Tag = "Dosya Adı" };
+                teklifTalepDosyaAd.TextChanged += teklifTalepDosyaAd_TextChanged;
+                dosyaUzanti = new() { TabIndex = 5, Width = 50, Tag = "Uzantı" };
+                boyut = new() { TabIndex = 6, Width = 100, Tag = "Boyut(MB)" };
+                iconButton = new() { TabIndex = 7, Width = 35, Height = 28, Tag = " Ekle", BackgroundImage = Resources.Plus_Symbol_PNG_Image_HD, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
                 iconButton.Click += ButtonDosyaEkle_Click;
-                
+                iconButtonView = new() { TabIndex = 8, Width = 45, Height = 28, Tag = "Göster", BackgroundImage = Resources.DataReviewWithMagnifier2, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
+                iconButtonView.Click += ButtonDosyaGoruntule_Click;
+                dosyaVeri = new byte[0];
             }
 
             private void ButtonDosyaEkle_Click(object sender, EventArgs e)
@@ -677,11 +686,27 @@ namespace YektamakDesktop.Formlar.Satis
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 if(openFileDialog.ShowDialog()==DialogResult.OK)
                 {
-                    _teklifTalepBelgeAdi.TextCustom = Path.GetFileName(openFileDialog.FileName);
-                    _teklifTalepDosyaAdi.TextCustom = openFileDialog.FileName;
-                    _boyut.TextCustom = (openFileDialog.OpenFile().Length / 1024.0 / 1024.0).ToString("N2");
+                    teklifTalepBelgeAd.TextCustom = Path.GetFileName(openFileDialog.FileName);
+                    teklifTalepDosyaAd.TextCustom = openFileDialog.FileName;
+                    dosyaVeri = File.ReadAllBytes(openFileDialog.FileName);
+                    boyut.TextCustom = (openFileDialog.OpenFile().Length / 1024.0 / 1024.0).ToString("N2");
                 }
             }
+            private void ButtonDosyaGoruntule_Click(object sender, EventArgs e)
+            {
+                string tempFilePath = Path.GetTempFileName()+"."+dosyaUzanti.TextCustom;
+                using (MemoryStream ms = new MemoryStream(dosyaVeri))
+                {
+                    File.WriteAllBytes(tempFilePath, ms.ToArray());
+                    Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+                }
+            }
+            private void teklifTalepDosyaAd_TextChanged(object sender, EventArgs e)
+            {
+                dosyaUzanti.TextCustom = teklifTalepDosyaAd.TextCustom.Split('.').Last();
+            }
+
+
         }
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -698,14 +723,11 @@ namespace YektamakDesktop.Formlar.Satis
         public CustomControls.CustomComboListBox comboListBoxSatisSorumlusu;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private CustomControls.CustomTextBoxTarih textBoxTeklifTalepTarihi;
         private System.Windows.Forms.Panel panelHeader;
         private CustomControls.RoundedButton buttonClose;
         private CustomControls.RoundedButton buttonHelp;
         private CustomControls.RoundedButton buttomMinimize;
-        private System.Windows.Forms.BindingSource satisSiparisBindingSource;
-        private System.Windows.Forms.BindingSource satisSiparisBindingSource1;
         public CustomControls.CustomComboListBox comboListBoxMarka;
         public CustomControls.CustomComboListBox comboListBoxMusteri;
         private CustomControls.CustomTextBox textBoxTeklifKonusu;
@@ -724,8 +746,8 @@ namespace YektamakDesktop.Formlar.Satis
         private RoundedButton roundedButton1;
         private RoundedButton roundedButton2;
         private RoundedButton roundedButton4;
-        private RoundedButton buttomMinimize;
         private RoundedButton roundedButton6;
         private RoundedButton buttonKaydet;
+        private Panel panel2;
     }
 }

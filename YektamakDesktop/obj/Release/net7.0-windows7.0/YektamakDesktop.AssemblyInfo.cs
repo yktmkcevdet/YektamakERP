@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YektamakDesktop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+145a3ec9d029564b03a2304f4e7b02a1280b7fb2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+068817ea3f48c12b5d1677db97d26cf8363d30a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("YektamakDesktop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YektamakDesktop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

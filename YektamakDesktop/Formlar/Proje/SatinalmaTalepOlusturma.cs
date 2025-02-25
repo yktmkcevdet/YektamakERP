@@ -25,7 +25,7 @@ namespace YektamakDesktop.Formlar.Proje
         public SatinalmaTalepOlusturma()
         {
             InitializeComponent();
-
+            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref customComboListBoxParcaGrubu);
         }
         private SatinalmaTalepBaslik _satinalmaTalepBaslik;
         public SatinalmaTalepBaslik satinalmaTalepBaslik
@@ -145,6 +145,7 @@ namespace YektamakDesktop.Formlar.Proje
         {
             bool chck;
             chck = GlobalData.CheckField("Teslim tarihi girilmelidir", this, customTextBoxTeslimTarihi);
+            chck = GlobalData.CheckField("Parça Grubu seçilmelidir", this, customComboListBoxParcaGrubu);
             if (!chck) return;
             SatinalmaTalepBaslik satinalmaTalepBaslik = new SatinalmaTalepBaslik();
             satinalmaTalepBaslik.proje.Id = customComboListBoxProjeKodu.selectedDataRowId;

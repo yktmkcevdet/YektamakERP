@@ -154,8 +154,8 @@ namespace YektamakDesktop.Formlar.Satis
                 satisProje.musteri.ad,
                 satisProje.projeKod.Id,
                 satisProje.projeKod.no,
-                satisProje.projeKod.marka.markaId,
-                satisProje.projeKod.marka.markaAltGrup.altGrupId,
+                satisProje.projeKod.marka.Id,
+                satisProje.projeKod.marka.markaAltGrup.Id,
                 satisProje.satisSorumlusu.Id,
                 satisProje.projeKod.kod);
         }

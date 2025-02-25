@@ -1,6 +1,5 @@
-﻿using YektamakDesktop.Formlar.Stok;
+﻿using ApiService;
 using Models;
-using ApiService;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,16 +8,18 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using YektamakDesktop.Formlar.Ortak;
-using YektamakDesktop.Common;
 using Utilities.Interfaces;
-using Utilities.Implementations;
+using YektamakDesktop.Common;
+using YektamakDesktop.Formlar.Ortak;
+using YektamakDesktop.Formlar.Stok;
 
 namespace YektamakDesktop.Formlar.Proje
 {
     public partial class ProjeDosyalari : Form, IForm, IGridForm<StokKart>
     {
         private static ICache _cache;
+        private static IJsonConvertHelper _jsonConvertHelper;
+        private static IDataTableHelper _dataTableHelper;
         private static ProjeDosyalari _projeDosyalari;
         public static ProjeDosyalari projeDosyalari
         {
@@ -72,25 +73,32 @@ namespace YektamakDesktop.Formlar.Proje
         public List<Control> _controlsToDisable;
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         public bool _activeForm;
-        public bool activeForm { get { return _activeForm; } 
-            set 
+        public bool activeForm
+        {
+            get { return _activeForm; }
+            set
             {
                 if (value == true)
                 {
                     dataTable = GlobalData.FillDataTable(WebMethods.GetStokKart, stokKartFilter);
-                    DataRefresh();
+                    if (dataTable.Rows.Count > 0) DataRefresh();
                 }
-                _activeForm = value; 
-            } 
+                _activeForm = value;
+            }
         }
         public ProjeDosyalari()
         {
             InitializeComponent();
             controlsToDisable = new List<Control> { panelFilter, panelHeader };
+            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref projeKodu);
+            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref parcaGrubu);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref parcaAltGrubu);
         }
-        public ProjeDosyalari(ICache cache)
+        public ProjeDosyalari(ICache cache,IJsonConvertHelper jsonConvertHelper,IDataTableHelper dataTableHelper)
         {
             _cache = cache;
+            _jsonConvertHelper = jsonConvertHelper;
+            _dataTableHelper = dataTableHelper;
         }
         #region mouseDrag
         bool mouseDown;
@@ -115,8 +123,6 @@ namespace YektamakDesktop.Formlar.Proje
             mouseDown = false;
         }
         #endregion mouseDrag
-
-
         public void AddNewRow(StokKart stokKart)
         {
             dataTable.Rows.Add(
@@ -149,7 +155,7 @@ namespace YektamakDesktop.Formlar.Proje
 
         public void buttonEkle_Click(object sender, EventArgs e)
         {
-            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu(new StokKart());
+            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu;
             if (stokKartTanimlamaFormu != null)
             {
                 stokKartTanimlamaFormu.Show();
@@ -158,7 +164,7 @@ namespace YektamakDesktop.Formlar.Proje
 
         public void buttonFiltre_Click(object sender, EventArgs e)
         {
-            stokKartFilter.proje.Id = projeKod.selectedDataRowId;
+            stokKartFilter.proje.Id = projeKodu.selectedDataRowId;
             DataRefresh();
         }
 
@@ -186,13 +192,12 @@ namespace YektamakDesktop.Formlar.Proje
                 stokKart.Id = Convert.ToInt32(dataGridViewStokKart.Rows[e.RowIndex].Cells["Id"].Value.ToString());
                 string serializeString = WebMethods.GetStokKartPdf(stokKart);
 
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSet = jsonConverter.JsonStringToDataSet(serializeString);
+                DataSet dataSet = _jsonConvertHelper.JsonStringToDataSet(serializeString);
                 if (dataSet != null)
                 {
                     foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                     {
-                        stokKart = Common.ConvertHelper.DataRowToModel<StokKart>(dataRow);
+                        stokKart = _dataTableHelper.DataRowToModel<StokKart>(dataRow);
                     }
                 }
                 if (isPdf)
@@ -282,9 +287,7 @@ namespace YektamakDesktop.Formlar.Proje
         public void form_Load(object sender, EventArgs e)
         {
             //GlobalData.PlaceFilterFields(dataGridViewStokKart, panelFilter);
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref projeKod);
-            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref parcaGrubu);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref parcaAltGrubu);
+            
 
         }
 
@@ -303,7 +306,7 @@ namespace YektamakDesktop.Formlar.Proje
 
         private void projeKod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            stokKartFilter.proje.Id = projeKod.selectedDataRowId;
+            stokKartFilter.proje.Id = projeKodu.selectedDataRowId;
             _dataTable = new DataTable();
             DataRefresh();
         }
@@ -574,7 +577,7 @@ namespace YektamakDesktop.Formlar.Proje
                 return;
             }
             SatinalmaTalepBaslik satinalmaTalepBaslik = new SatinalmaTalepBaslik();
-            satinalmaTalepBaslik.proje.Id = projeKod.selectedDataRowId;
+            satinalmaTalepBaslik.proje.Id = projeKodu.selectedDataRowId;
             satinalmaTalepBaslik.parcaGrupId = parcaGrubu.selectedDataRowId;
             if (stokKarts.Count == 0)
             {
@@ -607,10 +610,11 @@ namespace YektamakDesktop.Formlar.Proje
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StokKart stokKart = new StokKart();
-            stokKart = ConvertHelper.DataRowToModel<StokKart>(dataTable.Rows[dataGridViewStokKart.SelectedRows[0].Index]);
-            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu(stokKart);
+            stokKart = _dataTableHelper.DataRowToModel<StokKart>(dataTable.Rows[dataGridViewStokKart.SelectedRows[0].Index]);
+            StokKartTanimlamaFormu stokKartTanimlamaFormu = StokKartTanimlamaFormu.stokKartTanimlamaFormu;
             if (stokKartTanimlamaFormu != null)
             {
+                stokKartTanimlamaFormu.stokKart = stokKart;
                 stokKartTanimlamaFormu.Show();
             }
         }
@@ -619,12 +623,12 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (e.RowIndex > -1)
             {
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value.ToString() =="false") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value.ToString() == "false") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
                 if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value.ToString() == "false") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
                 if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isStep"].Value.ToString() == "false") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
                 string isSatinalmaString = dataGridViewStokKart.Rows[e.RowIndex].Cells["isSatinalma"].Value.ToString();
-                bool isSatinalma=(isSatinalmaString=="1")?true:false;
-                if(isSatinalma) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                bool isSatinalma = (isSatinalmaString == "1") ? true : false;
+                if (isSatinalma) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Models.Attributes;
+using System.Text.RegularExpressions;
 
 namespace Models
 {
@@ -10,14 +11,19 @@ namespace Models
         /// </summary>
         public bool? sec;
         public int Id;
+        [FilterAttribute]
         public string kod;
+        public string logoKod;
+        [FilterAttribute]
         public string ad;
+        [FilterAttribute]
         public string boyut;
         public double uzunluk;
         public string aciklama;
         public double agirlik;
         public int miktar;
         public string malzeme;
+        [FilterAttribute]
         public string parcaAdi;
         public int adet;
         public int fark;
@@ -29,6 +35,11 @@ namespace Models
         public bool? isStep;
         public bool? isSatinalma;
         public bool? isFromExcel;
+        public double etKalinligi;
+        public double en;
+        public double boy;
+        public double cap;
+        public double yukseklik;
         private OlcuBirim _olcuBirim;
         public OlcuBirim olcuBirim { get { if (_olcuBirim == null) { _olcuBirim = new OlcuBirim(); } return _olcuBirim; } set { _olcuBirim = value; } }
         private ParcaGrup _parcaGrup;
@@ -67,12 +78,14 @@ namespace Models
     }
     public class ParcaGrup:IEntity
     {
+        [FilterAttribute]
         public int Id;
         public string kod;
         public string ad;
     }
     public class ParcaAltGrup:IEntity
     {
+        [FilterAttribute]
         public int Id;
         public string kod;
         public string ad;

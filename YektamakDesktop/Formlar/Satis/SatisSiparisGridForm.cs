@@ -269,7 +269,7 @@ namespace YektamakDesktop.Formlar.Satis
                 satisSiparis.Id,
                satisSiparis.satisProje.projeKod.Id,
                satisSiparis.satisProje.projeKod.kod,
-               satisSiparis.satisProje.projeKod.marka.markaId,
+               satisSiparis.satisProje.projeKod.marka.Id,
                satisSiparis.satisProje.musteri.ad,
                satisSiparis.siparisTarihi,
                satisSiparis.teslimVadesi,

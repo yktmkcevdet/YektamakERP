@@ -54,6 +54,10 @@ namespace ApiService
         {
             return await PostAsyncMethod(projeKod, "GetFilteredSatisSiparis");
         }
+        public static string GetReferansKaynak()
+        {
+            return Get("GetReferansKaynak");
+        }
 
     }
 }

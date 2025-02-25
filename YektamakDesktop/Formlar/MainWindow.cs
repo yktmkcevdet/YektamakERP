@@ -80,7 +80,7 @@ namespace YektamakDesktop
             foreach (AnaMenu anaMenu in _cache.ananaMenuList)
             {
                 MenuButtonOlustur(anaMenu.ad, anaMenu.icon, 6, y); //Girişi yapan kullanıcının yetkisi dahilinde olan menü öğelerinin butonlarını oluşturur.
-                y += 67;
+                y += 51;
             }
             IconButton exitButton = new IconButton()
             {
@@ -124,11 +124,11 @@ namespace YektamakDesktop
                 IconChar = iconChar,
                 IconColor = Color.Gainsboro,
                 IconFont = IconFont.Auto,
-                IconSize = 32,
+                IconSize = 20,
                 ImageAlign = ContentAlignment.MiddleLeft,
                 Location = new Point(x, y),
                 Padding = new Padding(10, 0, 20, 0),
-                Size = new Size(166, 70),
+                Size = new Size(166, 50),
                 Text = text,
                 TextAlign = ContentAlignment.MiddleLeft,
                 TextImageRelation = TextImageRelation.ImageBeforeText,
@@ -163,15 +163,15 @@ namespace YektamakDesktop
                         IconColor = Color.Gainsboro,
                         Location = new Point(x, y),
                         ForeColor = Color.Gainsboro,
-                        Size = new Size(163, 119),
-                        Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                        Size = new Size(100, 60),
+                        Font = new Font("Segoe UI", 9, FontStyle.Bold),
                         IconChar = iconChar,
                         TextAlign = ContentAlignment.MiddleCenter,
-                        TextImageRelation = TextImageRelation.ImageAboveText,
+                        TextImageRelation = TextImageRelation.ImageBeforeText,
                         UseVisualStyleBackColor = true,
                         Padding = new Padding(10, 0, 0, 0),
-                        IconSize = 32,
-                        CornerRadius = 20,
+                        IconSize = 20,
+                        CornerRadius = 15,
                     };
                     button.Click += button_Click;
                     button.BringToFront();

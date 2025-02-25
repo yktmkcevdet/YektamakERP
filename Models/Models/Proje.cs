@@ -1,8 +1,11 @@
 ﻿
+using Models.Attributes;
+
 namespace Models
 {
     public class Proje:IEntity
     {
+        [FilterAttribute]
         public int Id;
         public int no;
         public string ProjeKodString()

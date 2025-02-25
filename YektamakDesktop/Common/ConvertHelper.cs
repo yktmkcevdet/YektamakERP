@@ -47,7 +47,7 @@ namespace YektamakDesktop.Common
             // T türündeki field ve property'leri al ve cachele
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
+            
             // DataTable sütunlarını oluştur
             AddColumns(table, fields, "");
             AddColumns(table, properties, "");
@@ -81,19 +81,18 @@ namespace YektamakDesktop.Common
             foreach (var member in members)
             {
                 Type memberType = GetMemberType(member);
-                string seperator = string.IsNullOrEmpty(parentName) ? "" : "_";
                 if (IsComplexType(memberType))
                 {
                     // Eğer member kompleks bir türse, içindeki alanları analiz et
                     var innerFields = memberType.GetFields(BindingFlags.Public | BindingFlags.Instance);
                     var innerProperties = memberType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    AddColumns(table, innerFields, $"{parentName}{seperator}{member.Name}");
-                    AddColumns(table, innerProperties, $"{parentName}{seperator}{member.Name}");
+                    AddColumns(table, innerFields, $"{parentName}{member.Name}");
+                    AddColumns(table, innerProperties, $"{parentName}{member.Name}");
                 }
                 else
                 {
                     // Eğer basit bir türse, doğrudan sütun ekle
-                    var columnName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{seperator}{member.Name}";
+                    var columnName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{member.Name}";
                     var columnType = Nullable.GetUnderlyingType(memberType) ?? memberType;
                     table.Columns.Add(columnName, columnType);
                 }
@@ -112,20 +111,19 @@ namespace YektamakDesktop.Common
             {
                 Type memberType = GetMemberType(member);
                 object value = GetValue(member, entity);
-                string seperator = string.IsNullOrEmpty(parentName) ? "" : "_";
 
                 if (IsComplexType(memberType) && value != null)
                 {
                     // Eğer member kompleks bir türse, içindeki alanları analiz et
                     var innerFields = memberType.GetFields(BindingFlags.Public | BindingFlags.Instance);
                     var innerProperties = memberType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    AddValues(row, innerFields, value, $"{parentName}{seperator}{member.Name}");
-                    AddValues(row, innerProperties, value, $"{parentName}{seperator}{member.Name}");
+                    AddValues(row, innerFields, value, $"{parentName}{member.Name}");
+                    AddValues(row, innerProperties, value, $"{parentName}{member.Name}");
                 }
                 else
                 {
                     // Eğer basit bir türse, doğrudan değer ekle
-                    var columnName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{seperator}{member.Name}";
+                    var columnName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{member.Name}";
                     row[columnName] = value ?? DBNull.Value;
                 }
             }
@@ -221,7 +219,8 @@ namespace YektamakDesktop.Common
                         }
                         else
                         {
-                            value = Convert.ChangeType(data, fieldInfo.FieldType);
+                            Type targetType = Nullable.GetUnderlyingType(fieldInfo.FieldType) ?? fieldInfo.FieldType;
+                            value = data == null ? null : Convert.ChangeType(data, targetType);
                         }
                     }
                     fieldInfo.SetValue(entity, value);
@@ -281,7 +280,7 @@ namespace YektamakDesktop.Common
                 else if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
                 {
                     MethodInfo method = typeof(ConvertHelper).GetMethod("DataRowToModel").MakeGenericMethod(type);
-                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name + "_" });
+                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name  });
                     propertyInfo.SetValue(entity, value);
                 }
             }

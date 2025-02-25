@@ -50,12 +50,6 @@
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            KullaniciId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            KullaniciAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PersonelId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PersonelAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            RolId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            RolAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             buttonFiltre = new System.Windows.Forms.Button();
             labelUyariKulllaniciAdi = new System.Windows.Forms.Label();
             labelUyariSifre = new System.Windows.Forms.Label();
@@ -63,6 +57,12 @@
             labelUyariPersonel = new System.Windows.Forms.Label();
             labelUyariRol = new System.Windows.Forms.Label();
             button1 = new System.Windows.Forms.Button();
+            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            PersonelId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            PersonelAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            RolId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            RolAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -330,7 +330,7 @@
             comboListBoxRol.Margin = new System.Windows.Forms.Padding(1);
             comboListBoxRol.Name = "comboListBoxRol";
             comboListBoxRol.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxRol.Size = new System.Drawing.Size(204, 32);
+            comboListBoxRol.Size = new System.Drawing.Size(204, 36);
             comboListBoxRol.TabIndex = 51;
             // 
             // label7
@@ -363,7 +363,7 @@
             comboListBoxPersonel.Margin = new System.Windows.Forms.Padding(1);
             comboListBoxPersonel.Name = "comboListBoxPersonel";
             comboListBoxPersonel.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxPersonel.Size = new System.Drawing.Size(378, 32);
+            comboListBoxPersonel.Size = new System.Drawing.Size(378, 36);
             comboListBoxPersonel.TabIndex = 54;
             // 
             // label4
@@ -394,7 +394,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { KullaniciId, KullaniciAdi, PersonelId, PersonelAdi, RolId, RolAdi });
+            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, ad, PersonelId, PersonelAd, RolId, RolAdi });
             dataGridView1.Location = new System.Drawing.Point(6, 377);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -402,47 +402,6 @@
             dataGridView1.Size = new System.Drawing.Size(683, 284);
             dataGridView1.TabIndex = 55;
             dataGridView1.CellClick += dataGridView1_CellClick;
-            // 
-            // KullaniciId
-            // 
-            KullaniciId.HeaderText = "Id";
-            KullaniciId.Name = "ad";
-            KullaniciId.ReadOnly = true;
-            KullaniciId.Visible = false;
-            // 
-            // KullaniciAdi
-            // 
-            KullaniciAdi.HeaderText = "Kullanicı Adı";
-            KullaniciAdi.Name = "KullaniciAdi";
-            KullaniciAdi.ReadOnly = true;
-            KullaniciAdi.Width = 200;
-            // 
-            // PersonelId
-            // 
-            PersonelId.HeaderText = "PersonelId";
-            PersonelId.Name = "PersonelId";
-            PersonelId.ReadOnly = true;
-            PersonelId.Visible = false;
-            // 
-            // PersonelAdi
-            // 
-            PersonelAdi.HeaderText = "Personel Adı";
-            PersonelAdi.Name = "PersonelAdi";
-            PersonelAdi.ReadOnly = true;
-            // 
-            // RolId
-            // 
-            RolId.HeaderText = "RolId";
-            RolId.Name = "RolId";
-            RolId.ReadOnly = true;
-            RolId.Visible = false;
-            // 
-            // RolAdi
-            // 
-            RolAdi.HeaderText = "Rol";
-            RolAdi.Name = "RolAdi";
-            RolAdi.ReadOnly = true;
-            RolAdi.Width = 150;
             // 
             // buttonFiltre
             // 
@@ -516,6 +475,47 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // Id
+            // 
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // ad
+            // 
+            ad.HeaderText = "Kullanicı Adı";
+            ad.Name = "ad";
+            ad.ReadOnly = true;
+            ad.Width = 200;
+            // 
+            // PersonelId
+            // 
+            PersonelId.HeaderText = "PersonelId";
+            PersonelId.Name = "PersonelId";
+            PersonelId.ReadOnly = true;
+            PersonelId.Visible = false;
+            // 
+            // PersonelAd
+            // 
+            PersonelAd.HeaderText = "Personel Adı";
+            PersonelAd.Name = "PersonelAd";
+            PersonelAd.ReadOnly = true;
+            // 
+            // RolId
+            // 
+            RolId.HeaderText = "RolId";
+            RolId.Name = "RolId";
+            RolId.ReadOnly = true;
+            RolId.Visible = false;
+            // 
+            // RolAdi
+            // 
+            RolAdi.HeaderText = "Rol";
+            RolAdi.Name = "RolAdi";
+            RolAdi.ReadOnly = true;
+            RolAdi.Width = 150;
+            // 
             // KullaniciKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -581,17 +581,17 @@
         private CustomControls.RoundedButton roundedButton3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonFiltre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KullaniciId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KullaniciAdi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelAdi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RolId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RolAdi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelId;
         private System.Windows.Forms.Label labelUyariKulllaniciAdi;
         private System.Windows.Forms.Label labelUyariSifre;
         private System.Windows.Forms.Label labelUyariSifreTekrar;
         private System.Windows.Forms.Label labelUyariPersonel;
         private System.Windows.Forms.Label labelUyariRol;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelAd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RolId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RolAdi;
     }
 }

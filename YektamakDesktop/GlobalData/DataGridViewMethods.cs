@@ -10,6 +10,11 @@ using System.Runtime.Serialization.Formatters;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
+using System.Text.RegularExpressions;
+using YektamakDesktop.Common;
+using Models.Attributes;
 
 namespace YektamakDesktop
 {
@@ -271,7 +276,7 @@ namespace YektamakDesktop
         /// Datatable nesnesini datagrid'e aktarır
         /// </summary>
         /// <param name="dataTable"></param>
-        public static void FillDataGrid<T>(DataTable dataTable, DataGridView dataGridView, T filterModel) where T : class, new()
+        public static void FillDataGrid<T>(DataTable dataTable, DataGridView dataGridView, T filterModel) where T : class, IEntity, new()
         {
             dataGridView.Rows.Clear();
             if (dataTable.Rows.Count == 0)
@@ -281,17 +286,21 @@ namespace YektamakDesktop
             }
 
             DataView dataView = new DataView(dataTable);
-            foreach (DataGridViewColumn dataGridViewColumn in dataGridView.Columns)
-            {
-                if (dataGridViewColumn.DataPropertyName == "filtre")
-                {
-                    dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
-                }
-                if (dataGridViewColumn.DataPropertyName == "cbxFiltre")
-                {
-                    dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
-                }
-            }
+            string rowFilter="";
+            RowFilterFromGridFilterFields(filterModel, ref rowFilter);
+            dataView.RowFilter = rowFilter==""?"":rowFilter.Substring(5);
+            //foreach (DataGridViewColumn dataGridViewColumn in dataGridView.Columns)
+            //{
+
+            //    if (dataGridViewColumn.DataPropertyName == "filtre")
+            //    {
+            //        dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
+            //    }
+            //    if (dataGridViewColumn.DataPropertyName == "cbxFiltre")
+            //    {
+            //        dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
+            //    }
+            //}
             dataTable = dataView.ToTable();
             if (dataTable.Rows.Count > 0)
             {
@@ -315,12 +324,66 @@ namespace YektamakDesktop
                 //MessageBox.Show("Filtreye uygun kayıt bulunamadı");
             }
         }
+        public static void MemberList<T>(T model, string upClassName, ref Dictionary<string,(Type,string)> members) where T : class
+        {
+            List<MemberInfo> values = model.GetType().GetMembers().ToList();
+            
+            foreach (MemberInfo memberInfo in model.GetType().GetMembers())
+            {
+                if (memberInfo is FieldInfo fieldInfo)
+                {
+                   members.Add(upClassName + fieldInfo.Name, (memberInfo.GetType(), fieldInfo.GetValue(model)?.ToString()));
+                }
+                else if (memberInfo is PropertyInfo propertyInfo)
+                {
+                    if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
+                    {
+                        Type entityType = propertyInfo.PropertyType; // IEntity'yi implemente eden tipi al
+                        object instance = Activator.CreateInstance(entityType); // Yeni bir nesne oluştur
+                        MemberList(propertyInfo.GetValue(model), upClassName + memberInfo.Name, ref members);
+                    }
+                }
+            }
+        }
+        public static void RowFilterFromGridFilterFields<T>(T model,ref string filter, string upClassName = "") where T : class
+        {
+            List<MemberInfo> values = model.GetType().GetMembers().ToList();
+
+            foreach (MemberInfo memberInfo in model.GetType().GetMembers())
+            {
+                if (memberInfo is FieldInfo fieldInfo)
+                {
+                    if (fieldInfo.GetCustomAttribute<FilterAttribute>() != null)
+                    {
+                        if (fieldInfo.GetValue(model) != null && fieldInfo.GetValue(model)?.ToString() != "0")
+                        {
+                            if(typeof(string).IsAssignableFrom(fieldInfo.FieldType))
+                            {
+                                filter += $" and {upClassName + fieldInfo.Name}  like '%{fieldInfo.GetValue(model)?.ToString()}%'";
+                            }
+                            else
+                            {
+                                filter += $" and {upClassName + fieldInfo.Name} = '{fieldInfo.GetValue(model)?.ToString()}'";
+                            }
+                        }
+                    }
+                }
+                else if (memberInfo is PropertyInfo propertyInfo)
+                {
+                    if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
+                    {
+                        RowFilterFromGridFilterFields(propertyInfo.GetValue(model), ref filter, upClassName + memberInfo.Name);
+                    }
+                }
+            }
+        }
         public static string RowFilterFromGridFilterFields<T>(DataGridViewColumn dataGridViewColumn, T filterModel,string filter) where T : class
         {
             Type type;
             string valueLastOrDefault = "";
             string valueFirst = "";
-            var subFields = System.Text.RegularExpressions.Regex.Split(dataGridViewColumn.Name, @"_");
+            var subFields = Regex.Split(dataGridViewColumn.Name, @"_");
+            var s = dataGridViewColumn.Name.Split("_");
             var fieldLastOrDefault = filterModel.GetType().GetField(dataGridViewColumn.Name);
             var fieldFirst = filterModel.GetType().GetField(dataGridViewColumn.Name + "First");
             var property = filterModel.GetType().GetProperty(subFields[0]);
@@ -337,7 +400,7 @@ namespace YektamakDesktop
                     subField = subProperty.PropertyType.GetField(subFields[2]);
                     type =  subField.FieldType;
                     var deger = subField.GetValue(subProperty.GetValue(property.GetValue(filterModel)));
-                    valueLastOrDefault =(deger==null)?string.Empty:deger.ToString();
+                    valueLastOrDefault =(deger==null)?string.Empty:deger.ToString(); 
                 }
                 else
                 {

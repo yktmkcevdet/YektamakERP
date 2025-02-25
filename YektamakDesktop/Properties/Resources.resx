@@ -181,6 +181,9 @@
   <data name="DataReviewWithMagnifier6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resimler\DataReviewWithMagnifier6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chaNge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chaNge.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DataReviewWithMagnifier7_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier7_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -202,8 +205,8 @@
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chaNge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chaNge.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="kaydet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kaydet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataReviewWithMagnifier7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\datareviewwithmagnifier7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,13 +223,16 @@
   <data name="arkaplan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arkaplan.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dataload" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Plus_Symbol_PNG_Image_HD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resimler\plus-symbol-png-image-hd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="kaydet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\kaydet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dataload1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataload1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

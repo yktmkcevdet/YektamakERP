@@ -20,6 +20,7 @@ namespace ApiService
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISatinalmaTalep, SatinalmaTalep>();
+            services.AddTransient<ISatisService, SatisService>();
             return services;
         }
     }

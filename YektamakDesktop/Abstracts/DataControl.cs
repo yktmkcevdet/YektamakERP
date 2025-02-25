@@ -12,8 +12,8 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-		private readonly IDataTableHelper dataTableConverter;
-		private readonly IJsonConvertHelper jsonConverter;
+		private readonly IDataTableHelper _dataTableConverter;
+		private readonly IJsonConvertHelper _jsonConverter;
 
 		public bool newRec = true;
 		private RoundedButton _buttonSil;
@@ -55,20 +55,20 @@ namespace YektamakDesktop.Abstracts
 
         public DataControl(IDataTableHelper dataTableConverter, IJsonConvertHelper jsonConverter)
         {
-            this.dataTableConverter = dataTableConverter;
-            this.jsonConverter = jsonConverter;
+            _dataTableConverter = dataTableConverter;
+            _jsonConverter = jsonConverter;
         }
 
         public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()
 		{
 			T filterData = new T();
 			string result = method(filterData);
-			DataSet dataSet = jsonConverter.JsonStringToDataSet(result);
+			DataSet dataSet = _jsonConverter.JsonStringToDataSet(result);
 			List<T> listEntity = new List<T>();
 			foreach (DataRow dataRow in dataSet.Tables[0].Rows)
 			{
 				T entity = new T();
-				entity = dataTableConverter.DataRowToModel<T>(dataRow);
+				entity = _dataTableConverter.DataRowToModel<T>(dataRow);
 				listEntity.Add(entity);
 			}
 			return listEntity;

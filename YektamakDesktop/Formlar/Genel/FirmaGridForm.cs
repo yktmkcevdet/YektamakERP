@@ -59,7 +59,7 @@ namespace YektamakDesktop.Formlar.Genel
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = _dataGridHelper.FillDataTable(WebMethods.GetFilteredFirma, firmaFilter);
+                    _dataTable = _dataGridHelper.FillDataTable(WebMethods.GetFirma, firmaFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }

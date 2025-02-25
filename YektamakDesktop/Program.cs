@@ -41,6 +41,12 @@ namespace YektamakDesktop
             DIContainer.GetService<ProjeDosyalari>();
             DIContainer.GetService<StokKartTanimlamaFormu>();
             DIContainer.GetService<ExceldenVeriAlmaFormu>();
+            DIContainer.GetService<SatisSiparisTeklifTalepKayitFormu>();
+            DIContainer.GetService<SatisSiparisTeklifTalepGridForm>();
+            DIContainer.GetService<SatinalmaTalepOlusturma>();
+            DIContainer.GetService<AltMenuEkle>();
+            DIContainer.GetService<Menuler>();
+            DIContainer.GetService<Monday>();
             var userLogin = DIContainer.GetService<UserLogin>();
             Application.Run(userLogin);
 

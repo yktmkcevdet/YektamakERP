@@ -35,9 +35,18 @@
             roundedButton2 = new CustomControls.RoundedButton();
             lblKayitSayisi = new System.Windows.Forms.Label();
             dataGridViewSatinalma = new System.Windows.Forms.DataGridView();
+            customTextBoxTeslimTarihi = new CustomControls.CustomTextBoxTarih();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            customTextBoxAciklama = new CustomControls.CustomTextBox();
+            label4 = new System.Windows.Forms.Label();
+            roundedButton4 = new CustomControls.RoundedButton();
+            customComboListBoxProjeKodu = new CustomControls.CustomComboListBox();
+            customComboListBoxParcaGrubu = new CustomControls.CustomComboListBox();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            proje_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            proje_kod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            projeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            projekod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             kod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             boyut = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,22 +58,13 @@
             isPdf = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             isDxf = new System.Windows.Forms.DataGridViewTextBoxColumn();
             isStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaAltGrup_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaAltGrup_ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaGrup_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaGrup_ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            parcaAltGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            parcaAltGrupAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            parcaGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            parcaGrupAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             isSatinalma = new System.Windows.Forms.DataGridViewTextBoxColumn();
             guncelle = new System.Windows.Forms.DataGridViewImageColumn();
             Sil = new System.Windows.Forms.DataGridViewImageColumn();
-            customTextBoxTeslimTarihi = new CustomControls.CustomTextBoxTarih();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            customTextBoxAciklama = new CustomControls.CustomTextBox();
-            label4 = new System.Windows.Forms.Label();
-            roundedButton4 = new CustomControls.RoundedButton();
-            customComboListBoxProjeKodu = new CustomControls.CustomComboListBox();
-            customComboListBoxParcaGrubu = new CustomControls.CustomComboListBox();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSatinalma).BeginInit();
             SuspendLayout();
@@ -178,154 +178,12 @@
             dataGridViewSatinalma.AllowUserToDeleteRows = false;
             dataGridViewSatinalma.AllowUserToOrderColumns = true;
             dataGridViewSatinalma.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewSatinalma.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, proje_Id, proje_kod, kod, ad, boyut, uzunluk, malzeme, aciklama, agirlik, miktar, isPdf, isDxf, isStep, parcaAltGrup_Id, parcaAltGrup_ad, parcaGrup_Id, parcaGrup_ad, isSatinalma, guncelle, Sil });
+            dataGridViewSatinalma.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, projeId, projekod, kod, ad, boyut, uzunluk, malzeme, aciklama, agirlik, miktar, isPdf, isDxf, isStep, parcaAltGrupId, parcaAltGrupAd, parcaGrupId, parcaGrupAd, isSatinalma, guncelle, Sil });
             dataGridViewSatinalma.Location = new System.Drawing.Point(3, 190);
             dataGridViewSatinalma.Name = "dataGridViewSatinalma";
             dataGridViewSatinalma.RowTemplate.Height = 25;
             dataGridViewSatinalma.Size = new System.Drawing.Size(1279, 541);
             dataGridViewSatinalma.TabIndex = 11;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "stokKartId";
-            Id.Name = "Id";
-            Id.Visible = false;
-            // 
-            // proje_Id
-            // 
-            proje_Id.DataPropertyName = "filtre";
-            proje_Id.HeaderText = "Proje Id";
-            proje_Id.Name = "proje_Id";
-            proje_Id.Visible = false;
-            // 
-            // proje_kod
-            // 
-            proje_kod.HeaderText = "Proje Kodu";
-            proje_kod.Name = "proje_kod";
-            proje_kod.ReadOnly = true;
-            // 
-            // kod
-            // 
-            kod.HeaderText = "Stok Kodu";
-            kod.Name = "kod";
-            kod.ReadOnly = true;
-            // 
-            // ad
-            // 
-            ad.DataPropertyName = "filtre";
-            ad.HeaderText = "Stok Adı";
-            ad.Name = "ad";
-            ad.ReadOnly = true;
-            // 
-            // boyut
-            // 
-            boyut.HeaderText = "Boyut";
-            boyut.Name = "boyut";
-            boyut.ReadOnly = true;
-            // 
-            // uzunluk
-            // 
-            uzunluk.HeaderText = "Uzunluk";
-            uzunluk.Name = "uzunluk";
-            uzunluk.ReadOnly = true;
-            // 
-            // malzeme
-            // 
-            malzeme.HeaderText = "Malzeme";
-            malzeme.Name = "malzeme";
-            malzeme.ReadOnly = true;
-            // 
-            // aciklama
-            // 
-            aciklama.HeaderText = "Açıklama";
-            aciklama.Name = "aciklama";
-            aciklama.ReadOnly = true;
-            // 
-            // agirlik
-            // 
-            agirlik.HeaderText = "Ağırlık";
-            agirlik.Name = "agirlik";
-            agirlik.ReadOnly = true;
-            // 
-            // miktar
-            // 
-            miktar.HeaderText = "Miktar";
-            miktar.Name = "miktar";
-            miktar.ReadOnly = true;
-            // 
-            // isPdf
-            // 
-            isPdf.DataPropertyName = "filtre";
-            isPdf.HeaderText = "Pdf?";
-            isPdf.Name = "isPdf";
-            isPdf.ReadOnly = true;
-            isPdf.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            isPdf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            isPdf.Visible = false;
-            // 
-            // isDxf
-            // 
-            isDxf.DataPropertyName = "filtre";
-            isDxf.HeaderText = "Dxf?";
-            isDxf.Name = "isDxf";
-            isDxf.ReadOnly = true;
-            isDxf.Visible = false;
-            // 
-            // isStep
-            // 
-            isStep.DataPropertyName = "filtre";
-            isStep.HeaderText = "Step?";
-            isStep.Name = "isStep";
-            isStep.ReadOnly = true;
-            isStep.Visible = false;
-            // 
-            // parcaAltGrup_Id
-            // 
-            parcaAltGrup_Id.DataPropertyName = "filtre";
-            parcaAltGrup_Id.HeaderText = "parcaAltGrup_Id";
-            parcaAltGrup_Id.Name = "parcaAltGrup_Id";
-            parcaAltGrup_Id.ReadOnly = true;
-            parcaAltGrup_Id.Visible = false;
-            // 
-            // parcaAltGrup_ad
-            // 
-            parcaAltGrup_ad.HeaderText = "Parça Alt Grup";
-            parcaAltGrup_ad.Name = "parcaAltGrup_ad";
-            parcaAltGrup_ad.ReadOnly = true;
-            // 
-            // parcaGrup_Id
-            // 
-            parcaGrup_Id.DataPropertyName = "filtre";
-            parcaGrup_Id.HeaderText = "parcaGrup_Id";
-            parcaGrup_Id.Name = "parcaGrup_Id";
-            parcaGrup_Id.ReadOnly = true;
-            parcaGrup_Id.Visible = false;
-            // 
-            // parcaGrup_ad
-            // 
-            parcaGrup_ad.HeaderText = "Parça Grubu";
-            parcaGrup_ad.Name = "parcaGrup_ad";
-            parcaGrup_ad.ReadOnly = true;
-            // 
-            // isSatinalma
-            // 
-            isSatinalma.DataPropertyName = "filtre";
-            isSatinalma.HeaderText = "SatınalmaTalepAçıldı?";
-            isSatinalma.Name = "isSatinalma";
-            isSatinalma.ReadOnly = true;
-            isSatinalma.Visible = false;
-            // 
-            // guncelle
-            // 
-            guncelle.HeaderText = "Güncelle";
-            guncelle.Name = "guncelle";
-            guncelle.Visible = false;
-            // 
-            // Sil
-            // 
-            Sil.HeaderText = "Sil";
-            Sil.Name = "Sil";
-            Sil.Visible = false;
             // 
             // customTextBoxTeslimTarihi
             // 
@@ -444,6 +302,148 @@
             customComboListBoxParcaGrubu.Size = new System.Drawing.Size(168, 36);
             customComboListBoxParcaGrubu.TabIndex = 22;
             // 
+            // Id
+            // 
+            Id.HeaderText = "stokKartId";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // projeId
+            // 
+            projeId.DataPropertyName = "filtre";
+            projeId.HeaderText = "Proje Id";
+            projeId.Name = "projeId";
+            projeId.Visible = false;
+            // 
+            // projekod
+            // 
+            projekod.HeaderText = "Proje Kodu";
+            projekod.Name = "projekod";
+            projekod.ReadOnly = true;
+            // 
+            // kod
+            // 
+            kod.HeaderText = "Stok Kodu";
+            kod.Name = "kod";
+            kod.ReadOnly = true;
+            // 
+            // ad
+            // 
+            ad.DataPropertyName = "filtre";
+            ad.HeaderText = "Stok Adı";
+            ad.Name = "ad";
+            ad.ReadOnly = true;
+            // 
+            // boyut
+            // 
+            boyut.HeaderText = "Boyut";
+            boyut.Name = "boyut";
+            boyut.ReadOnly = true;
+            // 
+            // uzunluk
+            // 
+            uzunluk.HeaderText = "Uzunluk";
+            uzunluk.Name = "uzunluk";
+            uzunluk.ReadOnly = true;
+            // 
+            // malzeme
+            // 
+            malzeme.HeaderText = "Malzeme";
+            malzeme.Name = "malzeme";
+            malzeme.ReadOnly = true;
+            // 
+            // aciklama
+            // 
+            aciklama.HeaderText = "Açıklama";
+            aciklama.Name = "aciklama";
+            aciklama.ReadOnly = true;
+            // 
+            // agirlik
+            // 
+            agirlik.HeaderText = "Ağırlık";
+            agirlik.Name = "agirlik";
+            agirlik.ReadOnly = true;
+            // 
+            // miktar
+            // 
+            miktar.HeaderText = "Miktar";
+            miktar.Name = "miktar";
+            miktar.ReadOnly = true;
+            // 
+            // isPdf
+            // 
+            isPdf.DataPropertyName = "filtre";
+            isPdf.HeaderText = "Pdf?";
+            isPdf.Name = "isPdf";
+            isPdf.ReadOnly = true;
+            isPdf.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            isPdf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            isPdf.Visible = false;
+            // 
+            // isDxf
+            // 
+            isDxf.DataPropertyName = "filtre";
+            isDxf.HeaderText = "Dxf?";
+            isDxf.Name = "isDxf";
+            isDxf.ReadOnly = true;
+            isDxf.Visible = false;
+            // 
+            // isStep
+            // 
+            isStep.DataPropertyName = "filtre";
+            isStep.HeaderText = "Step?";
+            isStep.Name = "isStep";
+            isStep.ReadOnly = true;
+            isStep.Visible = false;
+            // 
+            // parcaAltGrupId
+            // 
+            parcaAltGrupId.DataPropertyName = "filtre";
+            parcaAltGrupId.HeaderText = "parcaAltGrup_Id";
+            parcaAltGrupId.Name = "parcaAltGrupId";
+            parcaAltGrupId.ReadOnly = true;
+            parcaAltGrupId.Visible = false;
+            // 
+            // parcaAltGrupAd
+            // 
+            parcaAltGrupAd.HeaderText = "Parça Alt Grup";
+            parcaAltGrupAd.Name = "parcaAltGrupAd";
+            parcaAltGrupAd.ReadOnly = true;
+            // 
+            // parcaGrupId
+            // 
+            parcaGrupId.DataPropertyName = "filtre";
+            parcaGrupId.HeaderText = "parcaGrup_Id";
+            parcaGrupId.Name = "parcaGrupId";
+            parcaGrupId.ReadOnly = true;
+            parcaGrupId.Visible = false;
+            // 
+            // parcaGrupAd
+            // 
+            parcaGrupAd.HeaderText = "Parça Grubu";
+            parcaGrupAd.Name = "parcaGrupAd";
+            parcaGrupAd.ReadOnly = true;
+            // 
+            // isSatinalma
+            // 
+            isSatinalma.DataPropertyName = "filtre";
+            isSatinalma.HeaderText = "SatınalmaTalepAçıldı?";
+            isSatinalma.Name = "isSatinalma";
+            isSatinalma.ReadOnly = true;
+            isSatinalma.Visible = false;
+            // 
+            // guncelle
+            // 
+            guncelle.HeaderText = "Güncelle";
+            guncelle.Name = "guncelle";
+            guncelle.Visible = false;
+            // 
+            // Sil
+            // 
+            Sil.HeaderText = "Sil";
+            Sil.Name = "Sil";
+            Sil.Visible = false;
+            // 
             // SatinalmaTalepOlusturma
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -494,8 +494,8 @@
         private CustomControls.CustomComboListBox customComboListBoxProjeKodu;
         private CustomControls.CustomComboListBox customComboListBoxParcaGrubu;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proje_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proje_kod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projekod;
         private System.Windows.Forms.DataGridViewTextBoxColumn kod;
         private System.Windows.Forms.DataGridViewTextBoxColumn ad;
         private System.Windows.Forms.DataGridViewTextBoxColumn boyut;
@@ -507,10 +507,10 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn isPdf;
         private System.Windows.Forms.DataGridViewTextBoxColumn isDxf;
         private System.Windows.Forms.DataGridViewTextBoxColumn isStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaAltGrup_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaAltGrup_ad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaGrup_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaGrup_ad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parcaAltGrupId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parcaAltGrupAd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parcaGrupId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parcaGrupAd;
         private System.Windows.Forms.DataGridViewTextBoxColumn isSatinalma;
         private System.Windows.Forms.DataGridViewImageColumn guncelle;
         private System.Windows.Forms.DataGridViewImageColumn Sil;

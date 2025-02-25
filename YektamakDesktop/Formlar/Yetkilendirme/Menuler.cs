@@ -1,24 +1,21 @@
-﻿using YektamakDesktop.CustomControls;
-using YektamakDesktop.Formlar.Satinalma;
-using YektamakDesktop.Formlar.Satinalma.DataControl;
-using Models;
-using ApiService;
+﻿using ApiService;
+using ApiService.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class Menuler : Form
     {
+        private static ICache _cache;
+        private static IDataTableHelper _dataTableHelper;
+        private static IJsonConvertHelper _jsonConvertHelper;
         private static Menuler _menuler;
         public static Menuler menuler { get { if (_menuler == null) { _menuler = new(); GlobalData.Yetki(ref _menuler); } return _menuler; } set { _menuler = value; } }
         
@@ -32,8 +29,13 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             this.Controls.Add(customDataGrid.headerPanel);
             this.Controls.Add(customDataGrid.detailPanel);
         }
+        public Menuler(ICache cache, IDataTableHelper dataTableHelper, IJsonConvertHelper jsonConvertHelper)
+        {
+            _cache = cache;
+            _dataTableHelper = dataTableHelper;
+            _jsonConvertHelper = jsonConvertHelper;
+        }
 
-        
         #region mouseDrag
         private void panelHeader_MouseDown(object sender, MouseEventArgs e)
         {
@@ -75,16 +77,18 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void Menuler_Load(object sender, EventArgs e)
         {
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(WebMethods.GetMenu());
+            DataSet dataSet = _jsonConvertHelper.JsonStringToDataSet(WebMethods.GetMenu());
             List<DataControlMenu> menuList = new List<DataControlMenu>();
 
-            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                IDataTableHelper dataTableConverter = new DataTableHelper();
-                DataRow dataRow = dataSet.Tables[0].Rows[i];
-                menuList.Add(dataTableConverter.DataRowToModel<DataControlMenu>(dataRow));
-                menuList[i].newRec = false;
+                DataControlMenu menu = new DataControlMenu();
+                menu.menuAdi.TextCustom = dataRow["ad"].ToString();
+                menu.menuId.TextCustom = dataRow["Id"].ToString();
+                menu.formAdi.TextCustom = dataRow["formAdi"].ToString();
+                menu.icon.TextCustom = dataRow["icon"].ToString();
+                menuList.Add(menu);
+                menu.newRec = false;
             }
             customDataGrid.dataSource = menuList;
         }

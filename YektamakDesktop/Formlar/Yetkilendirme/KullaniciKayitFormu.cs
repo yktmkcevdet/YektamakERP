@@ -146,12 +146,12 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 i = dataGridView1.Rows.Count;
                 dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells["KullaniciId"].Value = int.Parse(dr["KullaniciId"].ToString());
-                dataGridView1.Rows[i].Cells["KullaniciAdi"].Value = dr["KullaniciAdi"].ToString();
+                dataGridView1.Rows[i].Cells["Id"].Value = int.Parse(dr["Id"].ToString());
+                dataGridView1.Rows[i].Cells["ad"].Value = dr["ad"].ToString();
                 dataGridView1.Rows[i].Cells["RolId"].Value = dr["RolId"].ToString();
                 dataGridView1.Rows[i].Cells["RolAdi"].Value = dr["Rol"].ToString();
                 dataGridView1.Rows[i].Cells["PersonelId"].Value = dr["PersonelId"].ToString();
-                dataGridView1.Rows[i].Cells["PersonelAdi"].Value = dr["PersonelAdi"].ToString();
+                dataGridView1.Rows[i].Cells["PersonelAd"].Value = dr["PersonelAd"].ToString();
             }
         }
 
@@ -160,8 +160,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             if (e.RowIndex >= 0)
             {
                 dataGridView1.Rows[e.RowIndex].Selected = true;
-                _kullaniciId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["KullaniciId"].Value.ToString());
-                textBoxKullaniciAdi.TextCustom = dataGridView1.Rows[e.RowIndex].Cells["KullaniciAdi"].Value.ToString();
+                _kullaniciId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                textBoxKullaniciAdi.TextCustom = dataGridView1.Rows[e.RowIndex].Cells["ad"].Value.ToString();
                 comboListBoxPersonel.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["PersonelId"].Value.ToString()));
                 comboListBoxRol.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["RolId"].Value.ToString()));
             }

@@ -10,19 +10,21 @@ namespace YektamakDesktop.Common
     {
         public static void GetLookupAd<T>(List<T> list, ref CustomComboListBox customComboListBox) where T : IEntity,new()
         {
-            customComboListBox.AddDataRow(0, "<TÜM KAYITLAR>");
+            customComboListBox.AddDataRow(-1, "<SEÇİM YAP>");
             foreach (T model in list)
             {
                 customComboListBox.AddDataRow(Convert.ToInt32(model.GetType().GetField("Id").GetValue(model)), model.GetType().GetField("ad").GetValue(model).ToString());
             }
+            customComboListBox.SelectDataRowId(-1);
         }
         public static void GetLookupKod<T>(List<T> list, ref CustomComboListBox customComboListBox) where T : IEntity, new()
         {
-            customComboListBox.AddDataRow(0, "<TÜM KAYITLAR>");
+            customComboListBox.AddDataRow(-1, "<SEÇİM YAP>");
             foreach (T model in list)
             {
                 customComboListBox.AddDataRow(Convert.ToInt32(model.GetType().GetField("Id").GetValue(model)), model.GetType().GetField("kod").GetValue(model).ToString());
             }
+            customComboListBox.SelectDataRowId(-1);
         }
     }
 }

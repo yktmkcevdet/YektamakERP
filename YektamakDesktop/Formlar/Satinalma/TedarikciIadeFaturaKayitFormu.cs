@@ -271,8 +271,8 @@ namespace YektamakDesktop.Formlar.TedarikciIade
                         Models.Proje projeKod = new Models.Proje();
                         projeKod.Id = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["ProjeKodId"].ToString());
                         projeKod.no = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["ProjeNo"].ToString());
-                        projeKod.marka.markaId = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["MarkaId"].ToString());
-                        projeKod.marka.markaAltGrup.altGrupId = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["MarkaAltGrupId"].ToString());
+                        projeKod.marka.Id = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["MarkaId"].ToString());
+                        projeKod.marka.markaAltGrup.Id = int.Parse(dataSetOrderedProjeKod.Tables[0].Rows[i]["MarkaAltGrupId"].ToString());
                         _orderedProjeKodList.Add(projeKod);
                     }
                 }

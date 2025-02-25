@@ -10,9 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Implementations;
 using Utilities.Interfaces;
-using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar;
 
@@ -22,10 +20,12 @@ namespace YektamakDesktop
     {
         private static ICache _cache;
         private static IJsonConvertHelper _converter;
-        public GlobalData(ICache cache,IJsonConvertHelper jsonConverter)
+        private static IDataTableHelper _dataTableHelper;
+        public GlobalData(ICache cache,IJsonConvertHelper jsonConverter,IDataTableHelper dataTableHelper)
         {
             _cache = cache;
             _converter = jsonConverter;
+            _dataTableHelper = dataTableHelper;
         }
         public static List<string> ibanErrorList;
         

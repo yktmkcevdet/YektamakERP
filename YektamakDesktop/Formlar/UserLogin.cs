@@ -103,7 +103,7 @@ namespace YektamakDesktop.Formlar
                     user.salt = dr["salt"].ToString();
                     user.sifre= GlobalData.HashPassword(customTextBoxSifre.TextCustom, user.salt);
                     user.personel = new Personel();
-                    user.personel.Id = int.Parse(dr["personel_Id"].ToString());
+                    user.personel.Id = int.Parse(dr["personelId"].ToString());
                     user.personel.mail = dr["Mail"].ToString();
                     user.rolId = int.Parse(dr["rolId"].ToString());
                     user.isSifreDegisti = int.TryParse(dr["IsSifreDegisti"].ToString(), out int isSifreDegistiInt)

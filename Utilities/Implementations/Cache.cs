@@ -208,6 +208,12 @@ namespace Utilities.Implementations
             List<T> list = DataTableConverter.DataTableRowsToModelList<T>(dataTable.AsEnumerable().ToList());
             return list;
         }
+        public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
+        {
+            DataTable dataTable = JsonConverter.JsonStringToDataSet(fetchFunction.Invoke()).Tables[0];
+            List<T> list = DataTableConverter.DataTableRowsToModelList<T>(dataTable.AsEnumerable().ToList());
+            return list;
+        }
         private List<Firma> _firmaList;
         public List<Firma> firmaList
         {
@@ -215,9 +221,57 @@ namespace Utilities.Implementations
             {
                 if (_firmaList == null)
                 {
-                    _firmaList = GetModelList(WebMethods.GetFilteredFirma, new Firma());
+                    _firmaList = GetModelList(WebMethods.GetFirma, new Firma());
                 }
                 return _firmaList;
+            }
+        }
+        private List<Personel> _personelList;
+        public List<Personel> personelList
+        {
+            get
+            {
+                if (_personelList == null)
+                {
+                    _personelList = GetModelList(WebMethods.GetPersonel, new Personel());
+                }
+                return _personelList;
+            }
+        }
+        private List<Marka> _markaList;
+        public List<Marka> markaList
+        {
+            get
+            {
+                if (_markaList == null)
+                {
+                    _markaList = GetModelList<Marka>(WebMethods.GetMarka);
+                }
+                return _markaList;
+            }
+        }
+        private List<MarkaAltGrup> _markaAltGrupList;
+        public List<MarkaAltGrup> markaAltGrupList
+        {
+            get
+            {
+                if (_markaAltGrupList == null)
+                {
+                    _markaAltGrupList = GetModelList<MarkaAltGrup>(WebMethods.GetMarkaAltGrup);
+                }
+                return _markaAltGrupList;
+            }
+        }
+        private List<ReferansKaynak> _referansKaynakList;
+        public List<ReferansKaynak> referansKaynakList
+        {
+            get
+            {
+                if (_referansKaynakList == null)
+                {
+                    _referansKaynakList = GetModelList<ReferansKaynak>(WebMethods.GetReferansKaynak);
+                }
+                return _referansKaynakList;
             }
         }
     }
