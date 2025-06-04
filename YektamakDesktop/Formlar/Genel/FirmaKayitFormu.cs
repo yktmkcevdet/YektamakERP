@@ -36,14 +36,6 @@ namespace YektamakDesktop.Formlar.Genel
 		private FirmaKayitFormu()
 		{
 			InitializeComponent();
-   //         for (int i = 0; i < GlobalData.sektorList.Count; i++)
-   //         {
-   //             customCheckedComboBoxSektorler.AddDataRow(GlobalData.sektorList[i].Id, GlobalData.sektorList[i].ad);
-   //         }
-   //         controlsToDisable = new List<Control>
-			//{
-
-			//};
 		}
         #region mouseDrag
         bool mouseDown;
@@ -166,46 +158,10 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                GetCurrentFirma();
-                if (firmaToSave != null)
-                {
-                    string result = await WebMethods.SaveFirma(firmaToSave);
-                    if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
-                    {
-                        MessageBox.Show(result);
-                    }
-                    else
-                    {
-                        IDataTableHelper dataTableConverter = new DataTableHelper();
-                        IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                        firmaToSave = dataTableConverter.DataRowToModel<Firma>(jsonConverter.JsonStringToDataSet(result).Tables[0].Rows[0]);
-                        if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(FirmaGridForm))
-                        {
-                            if (firmaToSave != null && firmaToSave.Id != 0)
-                            {
-                                FirmaGridForm.firmaGridForm.UpdateRow(firmaToSave);
-                            }
-                        }
-                        UpdateMode(firmaToSave);
-                        MessageBox.Show("Kayıt başarılı");
-                    }
-                }
+                
             }
         }
-        /// <summary>
-        /// Firmaya bağlı banka hesabı eklemek için banka hesabı kayıt formunu açar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonBankaHesabiEkle_Click(object sender, EventArgs e)
-        {
-            BankaHesabiKayitFormu bankaHesabiKayitFormu = BankaHesabiKayitFormu.bankaHesabiKayitFormu;
-            if (bankaHesabiKayitFormu != null)
-            {
-                bankaHesabiKayitFormu.Show();
-                bankaHesabiKayitFormu.SaveMode(firmaToUpdate);
-            }
-        }
+        
         /// <summary>
         /// Firmaya bağlı yetkili personel eklemek için personel kayıt formunu açar
         /// </summary>
@@ -261,7 +217,7 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="personel"></param>
         private void AddNewPersonelToComboList(Personel personel)
         {
-            comboListBoxYetililer.AddDataRow(personel.Id, ListBoxStringFormat.FormatString(personel.ad, 20, HorizontalAlignment.Left) +
+            comboListBoxYetililer.AddDataRow(personel.Id??0, ListBoxStringFormat.FormatString(personel.ad, 20, HorizontalAlignment.Left) +
                 ListBoxStringFormat.FormatString(personel.soyad, 20, HorizontalAlignment.Left));
             //Console.WriteLine("Added personel id : "+personel.id.ToString()+", ad : "+personel.ad+", soyad : "+personel.soyad);
         }
@@ -304,34 +260,7 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="e"></param>
         private async void buttonBankaHesabiSil_Click(object sender, EventArgs e)
         {
-            BankaHesabi bankaHesabi=new BankaHesabi();
-            bankaHesabi.hesapId = comboListBoxBankaHesaplari.selectedDataRowId;
-            if (bankaHesabi.hesapId <= 0)
-            {
-                MessageBox.Show("Lütfen silmek istediğiniz banka hesabını seçiniz");
-            }
-            else
-            {
-
-                DialogResult dialogResult = MessageBox.Show(string.Format("{0} hesabını silmek istediğinizden emin misiniz",
-                    comboListBoxBankaHesaplari.selectedDataRowValue), "", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    var httpTask = WebMethods.DeleteBankaHesabi(bankaHesabi);
-                    this.Enabled = false;
-                    string result = await httpTask;
-                    if (result.Length > 6 && result.Substring(0, 5) == "error")
-                    {
-                        MessageBox.Show(result);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Silme İşlemi Başarılı");
-                        comboListBoxBankaHesaplari.RemoveDataRow(bankaHesabi.hesapId);
-                    }
-                    this.Enabled = true;
-                }
-            }
+           
         }
         /// <summary>
         /// Seçili personeli siler
@@ -349,23 +278,7 @@ namespace YektamakDesktop.Formlar.Genel
             else
             {
 
-                DialogResult dialogResult = MessageBox.Show(string.Format("{0} isimli yetkiliyi silmek istediğinizden emin misiniz",
-                    comboListBoxYetililer.selectedDataRowValue), "", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    string result = WebMethods.DeletePersonel(personel);
-                    this.Enabled = false;
-                    if (result.Length > 6 && result.Substring(0, 5) == "error")
-                    {
-                        MessageBox.Show(result);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Silme İşlemi Başarılı");
-                        comboListBoxYetililer.RemoveDataRow(personel.Id);
-                    }
-                    this.Enabled = true;
-                }
+                
             }
         }
         /// <summary>
@@ -391,12 +304,7 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="e"></param>
         private void buttonBankaHesabiGrid_Click(object sender, EventArgs e)
         {
-            BankaHesabiGridFormu bankaHesabiGridFormu = BankaHesabiGridFormu.bankaHesabiGridFormu;
-            if(bankaHesabiGridFormu != null)
-            {
-                bankaHesabiGridFormu.FirmaMode(firmaToUpdate.Id);
-                bankaHesabiGridFormu.Show();
-            }
+            
         }
 
         private void buttomMinimize_Click(object sender, EventArgs e)

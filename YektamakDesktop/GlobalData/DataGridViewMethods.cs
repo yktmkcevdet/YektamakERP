@@ -1,20 +1,24 @@
-﻿using YektamakDesktop.CustomControls;
+﻿using ApiService.Interfaces;
 using Models;
+using Models.Attributes;
 using Newtonsoft.Json;
-using ApiService;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Text.RegularExpressions;
-using YektamakDesktop.Common;
-using Models.Attributes;
+using YektamakDesktop.CustomControls;
+using ApiService;
+using ApiService.Implementetions;
+using Newtonsoft.Json.Converters;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Globalization;
+using ApiService.Constants;
 
 namespace YektamakDesktop
 {
@@ -139,7 +143,7 @@ namespace YektamakDesktop
                 {
                     for (int i = 0; i < dataTable.Rows.Count; i++)
                     {
-                        if (id == int.Parse(dataTable.Rows[i][0].ToString()))
+                        if (id == int.Parse(dataTable.Rows[i]["Id"].ToString()))
                         {
                             return i;
                         }
@@ -267,40 +271,54 @@ namespace YektamakDesktop
             }
             else
             {
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                dataTable = jsonConverter.JsonStringToDataSet(result).Tables[0];
+                IJsonConverter jsonConverter = new Utilities.Implementations.JsonConverter();
+                dataTable = jsonConverter.DeserializeToDataSet(result).Tables[0];
             }
+            return dataTable;
+        }
+        /// <summary>
+        /// Webmethod fonksiyonu ile modele ait veriler filtre nesnesine göre veritabanından çekilir ve datatable nesnesine aktarır
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="filterModel"></param>
+        /// <returns></returns>
+        public static async Task<DataTable> FillDataTableAsync<T>(Func<T, Task<string>> func, T filterModel) where T : class
+        {
+            DataTable dataTable = new DataTable();
+
+            string result = await func(filterModel); // Async fonksiyon çağrılıyor
+
+            if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(result);
+            }
+            else
+            {
+                
+                dataTable = _converter.DeserializeToDataSet(result).Tables[0];
+            }
+
             return dataTable;
         }
         /// <summary>
         /// Datatable nesnesini datagrid'e aktarır
         /// </summary>
         /// <param name="dataTable"></param>
-        public static void FillDataGrid<T>(DataTable dataTable, DataGridView dataGridView, T filterModel) where T : class, IEntity, new()
+        public static string FillDataGrid<T>(DataTable dataTable, DataGridView dataGridView, T filterModel) where T : class, IEntity, new()
         {
+            string rowFilter = "";
             dataGridView.Rows.Clear();
-            if (dataTable.Rows.Count == 0)
+            if (dataTable==null || dataTable.Rows.Count == 0)
             {
-                MessageBox.Show("Görüntülenecek kayıt yok");
-                return;
+                //MessageBox.Show("Görüntülenecek kayıt yok");
+                return rowFilter;
             }
 
             DataView dataView = new DataView(dataTable);
-            string rowFilter="";
+            
             RowFilterFromGridFilterFields(filterModel, ref rowFilter);
             dataView.RowFilter = rowFilter==""?"":rowFilter.Substring(5);
-            //foreach (DataGridViewColumn dataGridViewColumn in dataGridView.Columns)
-            //{
-
-            //    if (dataGridViewColumn.DataPropertyName == "filtre")
-            //    {
-            //        dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
-            //    }
-            //    if (dataGridViewColumn.DataPropertyName == "cbxFiltre")
-            //    {
-            //        dataView.RowFilter = RowFilterFromGridFilterFields(dataGridViewColumn, filterModel, dataView.RowFilter);
-            //    }
-            //}
             dataTable = dataView.ToTable();
             if (dataTable.Rows.Count > 0)
             {
@@ -323,6 +341,7 @@ namespace YektamakDesktop
             {
                 //MessageBox.Show("Filtreye uygun kayıt bulunamadı");
             }
+            return rowFilter;
         }
         public static void MemberList<T>(T model, string upClassName, ref Dictionary<string,(Type,string)> members) where T : class
         {
@@ -355,7 +374,7 @@ namespace YektamakDesktop
                 {
                     if (fieldInfo.GetCustomAttribute<FilterAttribute>() != null)
                     {
-                        if (fieldInfo.GetValue(model) != null && fieldInfo.GetValue(model)?.ToString() != "0")
+                        if (fieldInfo.GetValue(model) != null && (Nullable.GetUnderlyingType(fieldInfo.FieldType) != null || fieldInfo.GetValue(model)?.ToString() != "0") && fieldInfo.GetValue(model)?.ToString() != "-1")
                         {
                             if(typeof(string).IsAssignableFrom(fieldInfo.FieldType))
                             {
@@ -374,6 +393,23 @@ namespace YektamakDesktop
                     {
                         RowFilterFromGridFilterFields(propertyInfo.GetValue(model), ref filter, upClassName + memberInfo.Name);
                     }
+                    else
+                    {
+                        if (propertyInfo.GetCustomAttribute<FilterAttribute>() != null)
+                        {
+                            if (propertyInfo.GetValue(model) != null && (Nullable.GetUnderlyingType(propertyInfo.PropertyType) != null || propertyInfo.GetValue(model)?.ToString() != "0") && propertyInfo.GetValue(model)?.ToString() != "-1")
+                            {
+                                if (typeof(string).IsAssignableFrom(propertyInfo.PropertyType))
+                                {
+                                    filter += $" and {upClassName + propertyInfo.Name}  like '%{propertyInfo.GetValue(model)?.ToString()}%'";
+                                }
+                                else
+                                {
+                                    filter += $" and {upClassName + propertyInfo.Name} = '{propertyInfo.GetValue(model)?.ToString()}'";
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -388,9 +424,9 @@ namespace YektamakDesktop
             var fieldFirst = filterModel.GetType().GetField(dataGridViewColumn.Name + "First");
             var property = filterModel.GetType().GetProperty(subFields[0]);
             type = (fieldLastOrDefault==null ? null : fieldLastOrDefault.FieldType);
-            if (property != null)
+            if (property!=null && typeof(IEntity).IsAssignableFrom(property.PropertyType))
             {
-                string fieldName = subFields[1];
+                string fieldName = subFields[0];
                 var subField = property.PropertyType.GetField(fieldName);
                 type = subField.FieldType;
                 if (subField == null)
@@ -493,45 +529,87 @@ namespace YektamakDesktop
             return filter;
         }
 
-        public static void UpdateDataRow<T>(DataTable dataTable, T model, int i) where T : IEntity
+        public static void UpdateDataRow<T>(ref DataTable dataTable, T model, int i) where T : IEntity
         {
-            UpdateFields(dataTable, model, i,"");
-            UpdateProperties(dataTable, model, i, "");
+            UpdateFields(ref dataTable, model, i,"");
+            UpdateProperties(ref dataTable, model, i, "");
         }
 
-        private static void UpdateFields<T>(DataTable dataTable, T model, int i, string columnNamePreFix) where T : IEntity
+        private static void UpdateFields<T>(ref DataTable dataTable, T model, int i, string columnNamePreFix) where T : IEntity
         {
             foreach (FieldInfo fieldInfo in model.GetType().GetFields())
             {
                 string columnName = columnNamePreFix+fieldInfo.Name;
                 if (dataTable.Columns.Contains(columnName))
                 {
-                    dataTable.Rows[i][columnName] = fieldInfo.GetValue(model);
+                    var value = fieldInfo.GetValue(model);
+
+                    if (value is string stringValue)
+                    {
+                        dataTable.Rows[i][columnName] = stringValue;
+                    }
+                    else
+                    {
+                        dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(value??0);
+                    }
+                    //dataTable.Rows[i][columnName] = fieldInfo.GetValue(model).ToString();
                 }
             }
         }
-        private static void UpdateProperties<T>(DataTable dataTable, T model, int i,string columnNamePreFix) where T : IEntity
+        private static void UpdateProperties<T>(ref DataTable dataTable, T model, int i,string columnNamePreFix) where T : IEntity
         {
             foreach (PropertyInfo propertyInfo in model.GetType().GetProperties())
             {
                 string columnName = columnNamePreFix+propertyInfo.Name;
                 if (dataTable.Columns.Contains(columnName))
                 {
-                    dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(propertyInfo.GetValue(model));
+                    var value = propertyInfo.GetValue(model);
+
+                    if (value is null)
+                    {
+                        dataTable.Rows[i][columnName] = null;
+                    }
+                    else if (value is string stringValue)
+                    {
+                        dataTable.Rows[i][columnName] = stringValue;
+                    }
+                    else if (value is double d)
+                    {
+                        dataTable.Rows[i][columnName] = d % 1 == 0 ? ((int)d).ToString() : d.ToString(CultureInfo.InvariantCulture);
+                    }
+                    else if (value is decimal m)
+                    {
+                        dataTable.Rows[i][columnName] = m % 1 == 0 ? ((int)m).ToString() : m.ToString(CultureInfo.InvariantCulture);
+                    }
+                    else if (value is float f)
+                    {
+                        dataTable.Rows[i][columnName] = f % 1 == 0 ? ((int)f).ToString() : f.ToString(CultureInfo.InvariantCulture);
+                    }
+                    else if (value.GetType().IsPrimitive || value is DateTime)
+                    {
+                        // Basit türler için ToString kullan
+                        dataTable.Rows[i][columnName] = Convert.ToString(value, CultureInfo.InvariantCulture);
+                    }
+                    else
+                    {
+                        // Karmaşık nesneler için JSON serileştirme
+                        dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(value);
+                    }
+                    //dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(propertyInfo.GetValue(model)).ToString();
                 }
 
                 else if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
                 {
-                    UpdateNestedFields(dataTable, model, i, propertyInfo, columnName);
+                    UpdateNestedFields(ref dataTable, model, i, propertyInfo, columnName);
                 }
             }
         }
 
-        private static void UpdateNestedFields<T>(DataTable dataTable, T model, int i, PropertyInfo propertyInfo, string columnNamePreFix) where T : IEntity
+        private static void UpdateNestedFields<T>(ref DataTable dataTable, T model, int i, PropertyInfo propertyInfo, string columnNamePreFix) where T : IEntity
         {
             foreach (PropertyInfo nestedPropertyInfo in propertyInfo.PropertyType.GetProperties())
             {
-                string columnName = columnNamePreFix + "_" + nestedPropertyInfo.Name;
+                string columnName = columnNamePreFix + nestedPropertyInfo.Name;
                 if (dataTable.Columns.Contains(columnName))
                 {
                     var nestedModel = propertyInfo.GetValue(model);
@@ -540,13 +618,13 @@ namespace YektamakDesktop
                 else if (typeof(IEntity).IsAssignableFrom(nestedPropertyInfo.GetValue(propertyInfo.GetValue(model)).GetType()))
                 {
                     var nestedModel = (IEntity)nestedPropertyInfo.GetValue(propertyInfo.GetValue(model));
-                    UpdateFields(dataTable, nestedModel, i, columnName+"_");
+                    UpdateFields(ref dataTable, nestedModel, i, columnName+"_");
                 }
                 
             }
             foreach (FieldInfo fieldInfo in propertyInfo.PropertyType.GetFields())
             {
-                string columnName = columnNamePreFix + "_" + fieldInfo.Name;
+                string columnName = columnNamePreFix + fieldInfo.Name;
                 if (dataTable.Columns.Contains(columnName))
                 {
                     var nestedModel = propertyInfo.GetValue(model);
@@ -591,7 +669,7 @@ namespace YektamakDesktop
                 }
                 else if (e.ColumnIndex == dataGridView.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)//Delete
                 {
-                    DeleteRow(SelectedData<T>(dataTable,dataGridView,e.RowIndex),ref dataTable);
+                    DeleteRow(SelectedData<T>(dataTable,dataGridView,e.RowIndex), ref dataTable);
                 }
             }
         }
@@ -603,8 +681,8 @@ namespace YektamakDesktop
             int id = int.Parse(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
 
             int i = IndexOfDataSet(dataTable, id);
-            IDataTableHelper dataTableConverter = new DataTableHelper();
-            model = dataTableConverter.DataRowToModel<T>(dataTable.Rows[i]);
+            IDataTableMapper dataTableConverter = new DataTableMapper();
+            model = dataTableConverter.MapToEntity<T>(dataTable.Rows[i]);
             return model;
         }
         private static void UpdateMode<T>(T model) where T:IEntity,new()
@@ -616,8 +694,25 @@ namespace YektamakDesktop
             DialogResult dialogResult = MessageBox.Show(string.Format("Kaydı silmek istediğinizden emin misiniz"), "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                MethodInfo methodInfo = typeof(WebMethods).GetMethod("Delete"+model.GetType().Name);
-                string result= methodInfo.Invoke(null, new object[] { model }).ToString();
+                HttpClient httpClient = new HttpClient();
+                httpClient.BaseAddress = new Uri(ApiBaseUrl.server);
+                IApiService apiService = new ApiServiceClient(httpClient);
+                // Model tipi
+                var modelType = model.GetType();
+
+                // "Post" metodunu generic olarak al
+                MethodInfo methodInfo = typeof(IApiService)
+                    .GetMethods()
+                    .First(m => m.Name == "Post" && m.IsGenericMethod);
+
+                // Method'u ilgili generic tipe göre yapılandır
+                MethodInfo genericMethod = methodInfo.MakeGenericMethod(modelType);
+
+                // methodName'i oluştur
+                string methodName = "Delete" + modelType.Name;
+
+                // Invoke et
+                string result = genericMethod.Invoke(apiService, new object[] { model, methodName }).ToString();
                 if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(result);

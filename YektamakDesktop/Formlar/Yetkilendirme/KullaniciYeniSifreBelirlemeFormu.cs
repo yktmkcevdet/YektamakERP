@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class KullaniciYeniSifreBelirlemeFormu : Form, IForm
     {
-        
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        public KullaniciYeniSifreBelirlemeFormu(IKullaniciYetkiService kullaniciYetkiService)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+        }
         public Kullanici kullanici;
         private List<Control> _controlsToDisable;
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
@@ -46,7 +51,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 kullanici.sifre = hashedPassword;
                 kullanici.salt = salt;
                 kullanici.isSifreDegisti= true;
-                string httpResult = WebMethods.SaveKullanici(kullanici);
+                string httpResult = _kullaniciYetkiService.SaveKullanici(kullanici);
                 if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(httpResult);
@@ -56,7 +61,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     MessageBox.Show("Şifre değiştirildi");
                     this.Close();
-                    UserLogin kullaniciGiris = new UserLogin(new Cache(new JsonConvertHelper(),new DataTableHelper()));
+                    UserLogin kullaniciGiris = UserLogin.userLogin;
                     kullaniciGiris.Show();
                 }
 

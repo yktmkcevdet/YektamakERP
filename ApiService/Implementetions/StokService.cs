@@ -1,0 +1,90 @@
+﻿using ApiService.Common;
+using ApiService.Interfaces;
+using Models;
+using System.Data;
+
+namespace ApiService.Implementetions
+{
+    public class StokService : IStokService
+    {
+        private readonly IApiService _apiService;
+
+        public StokService(IApiService apiService)
+        {
+            _apiService = apiService;
+        }
+
+        public string GetMalzeme(Malzeme malzeme = null)
+        {
+            return _apiService.Post(malzeme, "GetMalzeme");
+        }
+        public string GetStokGrup(StokGrup stokGrup)
+        {
+            return _apiService.Post(stokGrup, "GetStokGrup");
+        }
+        public string GetMalzemeGrup(MalzemeGrup malzemeGrup)
+        {
+            return _apiService.Post(malzemeGrup, "GetMalzemeGrup");
+        }
+        public string GetMalzemeAltGrup(MalzemeAltGrup malzemeAltGrup)
+        {
+            return _apiService.Post(malzemeAltGrup, "GetMalzemeAltGrup");
+        }
+        public string GetMalzemeAltGrup2(MalzemeAltGrup2 malzemeAltGrup2)
+        {
+            return _apiService.Post(malzemeAltGrup2, "GetMalzemeAltGrup2");
+        }
+        public async Task<string> GetMalzemeAltGrup2Async(MalzemeAltGrup2 malzemeAltGrup2)
+        {
+            return await _apiService.PostAsync(malzemeAltGrup2, "GetMalzemeAltGrup2");
+        }
+        public string GetMalzemeStandart(MalzemeStandart malzemeStandart)
+        {
+            return _apiService.Post(malzemeStandart, "GetMalzemeStandart");
+        }
+        public string GetOlcuBirim(OlcuBirim olcuBirim)
+        {
+            return _apiService.Post(olcuBirim, "GetOlcuBirim");
+        }
+        public string GetProfilTip(ProfilTip profilTip)
+        {
+            return _apiService.Post(profilTip, "GetProfilTip");
+        }
+        public async Task<string> GetStokKart(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, "GetStokKart");
+        }
+        public async Task<string> GetStokKartAsync(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, $"GetStokKart/");
+        }
+
+        public async Task<string> GetStokKartPdf(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, "GetStokKartPdf");
+        }
+
+        public async Task<string> GetStokKartPdfAsync(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, $"GetStokKartPdf/");
+        }
+
+        public string GetStokTip(StokTip stokTip)
+        {
+            return _apiService.Post(stokTip, "GetStokTip");
+        }
+
+        public async Task<string> SaveStokKart(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, "SaveStokKart");
+        }
+        public async Task<string> DeleteStokKart(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, "DeleteStokKart");
+        }
+        public async Task<string> SaveStokKartHammadde(StokKart stokKart)
+        {
+            return await _apiService.PostAsync(stokKart, "SaveStokKartHammadde");
+        }
+    }
+}

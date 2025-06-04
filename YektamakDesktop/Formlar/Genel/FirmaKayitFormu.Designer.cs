@@ -232,7 +232,7 @@
             // 
             // buttonPersonelGrid
             // 
-            buttonPersonelGrid.BackgroundImage = Properties.Resources.DataReviewWithMagnifier6;
+            buttonPersonelGrid.BackgroundImage = Properties.Resources.pngegg;
             buttonPersonelGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonPersonelGrid.Location = new System.Drawing.Point(733, 544);
             buttonPersonelGrid.Name = "buttonPersonelGrid";
@@ -243,18 +243,17 @@
             // 
             // buttonBankaHesabiGrid
             // 
-            buttonBankaHesabiGrid.BackgroundImage = Properties.Resources.DataReviewWithMagnifier6;
+            buttonBankaHesabiGrid.BackgroundImage = Properties.Resources.pngegg;
             buttonBankaHesabiGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonBankaHesabiGrid.Location = new System.Drawing.Point(733, 497);
             buttonBankaHesabiGrid.Name = "buttonBankaHesabiGrid";
             buttonBankaHesabiGrid.Size = new System.Drawing.Size(38, 32);
             buttonBankaHesabiGrid.TabIndex = 52;
             buttonBankaHesabiGrid.UseVisualStyleBackColor = true;
-            buttonBankaHesabiGrid.Click += buttonBankaHesabiGrid_Click;
             // 
             // buttonPersonelSil
             // 
-            buttonPersonelSil.BackgroundImage = Properties.Resources.delete_icon;
+            buttonPersonelSil.BackgroundImage = Properties.Resources.sil;
             buttonPersonelSil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonPersonelSil.Location = new System.Drawing.Point(689, 542);
             buttonPersonelSil.Name = "buttonPersonelSil";
@@ -265,7 +264,7 @@
             // 
             // buttonBankaHesabiSil
             // 
-            buttonBankaHesabiSil.BackgroundImage = Properties.Resources.delete_icon;
+            buttonBankaHesabiSil.BackgroundImage = Properties.Resources.sil;
             buttonBankaHesabiSil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonBankaHesabiSil.Location = new System.Drawing.Point(689, 497);
             buttonBankaHesabiSil.Name = "buttonBankaHesabiSil";
@@ -427,7 +426,7 @@
             // 
             // buttonYetkiliEkle
             // 
-            buttonYetkiliEkle.BackgroundImage = Properties.Resources.Plus_Symbol_PNG_Image_HD;
+            buttonYetkiliEkle.BackgroundImage = Properties.Resources.ekle;
             buttonYetkiliEkle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonYetkiliEkle.Location = new System.Drawing.Point(645, 543);
             buttonYetkiliEkle.Name = "buttonYetkiliEkle";
@@ -438,14 +437,13 @@
             // 
             // buttonBankaHesabiEkle
             // 
-            buttonBankaHesabiEkle.BackgroundImage = Properties.Resources.Plus_Symbol_PNG_Image_HD;
+            buttonBankaHesabiEkle.BackgroundImage = Properties.Resources.ekle;
             buttonBankaHesabiEkle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             buttonBankaHesabiEkle.Location = new System.Drawing.Point(645, 498);
             buttonBankaHesabiEkle.Name = "buttonBankaHesabiEkle";
             buttonBankaHesabiEkle.Size = new System.Drawing.Size(38, 32);
             buttonBankaHesabiEkle.TabIndex = 26;
             buttonBankaHesabiEkle.UseVisualStyleBackColor = true;
-            buttonBankaHesabiEkle.Click += buttonBankaHesabiEkle_Click;
             // 
             // customCheckedComboBoxSektorler
             // 

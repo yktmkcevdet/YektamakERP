@@ -34,7 +34,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "4.0.1",
           "Microsoft.CodeAnalysis.VisualBasic": "4.0.1",
-          "System.Drawing.Common": "4.7.3"
+          "System.Drawing.Common": "6.0.0"
         },
         "runtime": {
           "lib/net6.0-windows7.0/FastReport.Compat.dll": {
@@ -73,6 +73,46 @@
           }
         }
       },
+      "HarfBuzzSharp/8.3.0.1": {
+        "dependencies": {
+          "HarfBuzzSharp.NativeAssets.Win32": "8.3.0.1",
+          "HarfBuzzSharp.NativeAssets.macOS": "8.3.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/HarfBuzzSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "8.3.0.1"
+          }
+        }
+      },
+      "HarfBuzzSharp.NativeAssets.macOS/8.3.0.1": {
+        "runtimeTargets": {
+          "runtimes/osx/native/libHarfBuzzSharp.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "HarfBuzzSharp.NativeAssets.Win32/8.3.0.1": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/libHarfBuzzSharp.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libHarfBuzzSharp.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libHarfBuzzSharp.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "MathNet.Numerics.Signed/5.0.0": {
         "runtime": {
           "lib/net6.0/MathNet.Numerics.dll": {
@@ -89,7 +129,7 @@
           "System.Memory": "4.5.5",
           "System.Reflection.Metadata": "5.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
         "runtime": {
@@ -350,23 +390,19 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/5.0.0": {},
-      "Microsoft.Win32.SystemEvents/4.7.0": {
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
-        },
+      "Microsoft.Win32.SystemEvents/6.0.0": {
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {
-            "assemblyVersion": "4.0.2.0",
-            "fileVersion": "4.700.19.56404"
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         },
         "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "4.0.2.0",
-            "fileVersion": "4.700.19.56404"
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
@@ -438,6 +474,19 @@
           }
         }
       },
+      "PdfiumViewer/2.13.0": {
+        "runtime": {
+          "lib/net20/PdfiumViewer.dll": {
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
+          }
+        },
+        "resources": {
+          "lib/net20/nl/PdfiumViewer.resources.dll": {
+            "locale": "nl"
+          }
+        }
+      },
       "SharpZipLib/1.4.2": {
         "runtime": {
           "lib/net6.0/ICSharpCode.SharpZipLib.dll": {
@@ -457,12 +506,28 @@
       "SixLabors.ImageSharp/2.1.9": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0"
+          "System.Text.Encoding.CodePages": "6.0.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.1.9.0"
+          }
+        }
+      },
+      "Spire.PDF/11.4.10": {
+        "dependencies": {
+          "HarfBuzzSharp": "8.3.0.1",
+          "System.Drawing.Common": "6.0.0",
+          "System.Security.Cryptography.Pkcs": "8.0.1",
+          "System.Security.Cryptography.Xml": "8.0.2",
+          "System.Security.Permissions": "6.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Spire.Pdf.dll": {
+            "assemblyVersion": "11.4.10.0",
+            "fileVersion": "11.4.10.1360"
           }
         }
       },
@@ -495,29 +560,28 @@
           }
         }
       },
-      "System.Drawing.Common/4.7.3": {
+      "System.Drawing.Common/6.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0",
-          "Microsoft.Win32.SystemEvents": "4.7.0"
+          "Microsoft.Win32.SystemEvents": "6.0.0"
         },
         "runtime": {
-          "lib/netstandard2.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "4.0.0.2",
-            "fileVersion": "4.6.29719.1"
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": {
+          "runtimes/unix/lib/net6.0/System.Drawing.Common.dll": {
             "rid": "unix",
             "assetType": "runtime",
-            "assemblyVersion": "4.0.2.3",
-            "fileVersion": "4.700.21.51508"
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           },
-          "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
+          "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "4.0.2.3",
-            "fileVersion": "4.700.21.51508"
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
@@ -541,6 +605,22 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "runtime": {
           "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Security.AccessControl/6.0.0": {
+        "runtime": {
+          "lib/net6.0/System.Security.AccessControl.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Security.AccessControl.dll": {
+            "rid": "win",
+            "assetType": "runtime",
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
@@ -576,26 +656,57 @@
           }
         }
       },
-      "System.Text.Encoding.CodePages/5.0.0": {
+      "System.Security.Permissions/6.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
+          "System.Security.AccessControl": "6.0.0",
+          "System.Windows.Extensions": "6.0.0"
         },
         "runtime": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20.51904"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20.51904"
+          "lib/net6.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
-      "System.Threading.Tasks.Extensions/4.5.4": {}
+      "System.Text.Encoding.CodePages/6.0.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Threading.Tasks.Extensions/4.5.4": {},
+      "System.Windows.Extensions/6.0.0": {
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Windows.Extensions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Windows.Extensions.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -647,6 +758,27 @@
       "sha512": "sha512-3/Fb0N04yYK8An07oox5ISlUyNgsnWildHfoP69uqTEOsemQemRyciphMkXZOcdBupjUD+lVsRE3FqG41/dzPA==",
       "path": "fontawesome.sharp/6.3.0",
       "hashPath": "fontawesome.sharp.6.3.0.nupkg.sha512"
+    },
+    "HarfBuzzSharp/8.3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rwLpl+W6uqu0DuvzqNhTMuFcXfy1Vc0uq0YXgPEmtTSfeUSAye1FcARrm2YIPOSiCBwBOGu3cLvMX5Fp6OKe2g==",
+      "path": "harfbuzzsharp/8.3.0.1",
+      "hashPath": "harfbuzzsharp.8.3.0.1.nupkg.sha512"
+    },
+    "HarfBuzzSharp.NativeAssets.macOS/8.3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2o6U05LAmK+rwX7TvmJ2X0anXJG2hSE7kHVmCshhHy0tKfByJ5ykBacvhmmooHchlOwq15KBZeROGafCT8nN+g==",
+      "path": "harfbuzzsharp.nativeassets.macos/8.3.0.1",
+      "hashPath": "harfbuzzsharp.nativeassets.macos.8.3.0.1.nupkg.sha512"
+    },
+    "HarfBuzzSharp.NativeAssets.Win32/8.3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ow0DtGEUjo65qhiI22of7qiVbN1xDFsZ5P5xJljRmGZ5WSxNy+1batLNJFGxahqhB1MTHYV8kAXf0GqC8WaevQ==",
+      "path": "harfbuzzsharp.nativeassets.win32/8.3.0.1",
+      "hashPath": "harfbuzzsharp.nativeassets.win32.8.3.0.1.nupkg.sha512"
     },
     "MathNet.Numerics.Signed/5.0.0": {
       "type": "package",
@@ -746,19 +878,12 @@
       "path": "microsoft.io.recyclablememorystream/3.0.0",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512"
     },
-    "Microsoft.NETCore.Platforms/5.0.0": {
+    "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
-      "path": "microsoft.netcore.platforms/5.0.0",
-      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
-    },
-    "Microsoft.Win32.SystemEvents/4.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
-      "path": "microsoft.win32.systemevents/4.7.0",
-      "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+      "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+      "path": "microsoft.win32.systemevents/6.0.0",
+      "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
     },
     "netDxf/2023.11.10": {
       "type": "package",
@@ -788,6 +913,13 @@
       "path": "pdfium.net.sdk/4.96.2704",
       "hashPath": "pdfium.net.sdk.4.96.2704.nupkg.sha512"
     },
+    "PdfiumViewer/2.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Nw4owBmJzDVXoMRjCnqPbET07CPOawwhcNjt+PyRaSxONN9bsFF+cm9kcMsDLEAEaxsiDJo5jls8bCQjvjidkA==",
+      "path": "pdfiumviewer/2.13.0",
+      "hashPath": "pdfiumviewer.2.13.0.nupkg.sha512"
+    },
     "SharpZipLib/1.4.2": {
       "type": "package",
       "serviceable": true,
@@ -808,6 +940,13 @@
       "sha512": "sha512-VcjfKbOExie3RgZGrQL1jJMI4iZ3J9B6ifDo2QpDVJUYhTZKVcKnBhpNOHqbvNjHgadAks1jzhRjB7OZet1PJA==",
       "path": "sixlabors.imagesharp/2.1.9",
       "hashPath": "sixlabors.imagesharp.2.1.9.nupkg.sha512"
+    },
+    "Spire.PDF/11.4.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1mBzHheZCoqnn9fBmQabEJplbsl13d35Fn40ROfUmKPV4wf7Q+Zs/v5ldF0UQrZ6GFWfWLHW6XSsN0FI4YnMjA==",
+      "path": "spire.pdf/11.4.10",
+      "hashPath": "spire.pdf.11.4.10.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",
@@ -837,12 +976,12 @@
       "path": "system.diagnostics.diagnosticsource/9.0.1",
       "hashPath": "system.diagnostics.diagnosticsource.9.0.1.nupkg.sha512"
     },
-    "System.Drawing.Common/4.7.3": {
+    "System.Drawing.Common/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-B3+wwhAeoUQ6KeshWSq3IRLQiMoqPEzSHzyVyxTI/EbYuqIp90lXrRISlip2AF+5tj74ycIVPpnRY4M424HahA==",
-      "path": "system.drawing.common/4.7.3",
-      "hashPath": "system.drawing.common.4.7.3.nupkg.sha512"
+      "sha512": "sha512-NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "path": "system.drawing.common/6.0.0",
+      "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
     },
     "System.Formats.Asn1/8.0.1": {
       "type": "package",
@@ -872,6 +1011,13 @@
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
+    "System.Security.AccessControl/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AUADIc0LIEQe7MzC+I0cl0rAT8RrTAKFHl53yHjEUzNVIaUlhFY11vc2ebiVJzVBuOzun6F7FBA+8KAbGTTedQ==",
+      "path": "system.security.accesscontrol/6.0.0",
+      "hashPath": "system.security.accesscontrol.6.0.0.nupkg.sha512"
+    },
     "System.Security.Cryptography.Pkcs/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -886,12 +1032,19 @@
       "path": "system.security.cryptography.xml/8.0.2",
       "hashPath": "system.security.cryptography.xml.8.0.2.nupkg.sha512"
     },
-    "System.Text.Encoding.CodePages/5.0.0": {
+    "System.Security.Permissions/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
-      "path": "system.text.encoding.codepages/5.0.0",
-      "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
+      "sha512": "sha512-T/uuc7AklkDoxmcJ7LGkyX1CcSviZuLCa4jg3PekfJ7SU0niF0IVTXwUiNVP9DSpzou2PpxJ+eNY2IfDM90ZCg==",
+      "path": "system.security.permissions/6.0.0",
+      "hashPath": "system.security.permissions.6.0.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZFCILZuOvtKPauZ/j/swhvw68ZRi9ATCfvGbk1QfydmcXBkIWecWKn/250UH7rahZ5OoDBaiAudJtPvLwzw85A==",
+      "path": "system.text.encoding.codepages/6.0.0",
+      "hashPath": "system.text.encoding.codepages.6.0.0.nupkg.sha512"
     },
     "System.Threading.Tasks.Extensions/4.5.4": {
       "type": "package",
@@ -899,6 +1052,13 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "System.Windows.Extensions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
+      "path": "system.windows.extensions/6.0.0",
+      "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     }
   }
 }

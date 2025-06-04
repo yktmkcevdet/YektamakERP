@@ -1,68 +1,121 @@
 ﻿using Models.Attributes;
+using Models.Interface;
 using System.Text.RegularExpressions;
 
 namespace Models
 {
     [Serializable]
-    public class StokKart:IEntity
+    public class StokKart : IEntity
     {
-        /// <summary>
+        
+        public int? Id { get; set; }
+        public int? hammaddeId { get; set; }
+        /// <summary>   
         /// bu alan sanal olarak seçim yapmak için oluşturuldu, veritabanında bir karşılığı yok.
         /// </summary>
-        public bool? sec;
-        public int Id;
+        public bool? sec { get; set; }
         [FilterAttribute]
-        public string kod;
-        public string logoKod;
+        public string parcaKod { get; set; }
+        public string kod { get; set; }
+        public string logoKod { get; set; }
         [FilterAttribute]
-        public string ad;
+        public string ad { get; set; }
         [FilterAttribute]
-        public string boyut;
-        public double uzunluk;
-        public string aciklama;
-        public double agirlik;
-        public int miktar;
-        public string malzeme;
+        public string boyut { get; set; }
+        public double? uzunluk { get; set; }
+        public string aciklama { get; set; }
+        public double agirlik { get; set; }
+        public int? miktar { get; set; }
+        public string malzeme { get; set; }
         [FilterAttribute]
-        public string parcaAdi;
-        public int adet;
-        public int fark;
+        public string parcaAdi { get; set; }
+        public int adet { get; set; }
+        public int fark { get; set; }
+        private StokGrup _stokGrup;
+        [FilterAttribute]
+        public StokGrup stokGrup { get { if (_stokGrup == null) { _stokGrup = new StokGrup(); } return _stokGrup; } set { _stokGrup = value; } }
         private StokTip _stokTip;
-        public StokTip stokTip { get { if (_stokTip == null) { _stokTip = new StokTip(); } return _stokTip; } set { _stokTip = value; } }
-        public int profilTipId;
-        public bool? isPdf;
-        public bool? isDxf;
-        public bool? isStep;
-        public bool? isSatinalma;
-        public bool? isFromExcel;
-        public double etKalinligi;
-        public double en;
-        public double boy;
-        public double cap;
-        public double yukseklik;
+        
+        public StokTip stokTip 
+        { 
+            get 
+            { 
+                if (_stokTip == null) 
+                {
+                    _stokTip = new StokTip();
+                    
+                }
+                else if(_stokGrup.Id == 1)
+                {
+                    _stokTip.Id = 2; //Eğer stok grubu metal ise stok tipi yarı mamül olarak ayarlanır.
+                }
+                return _stokTip; 
+            } 
+            set 
+            { 
+                _stokTip = value; 
+            } 
+        }
+        public int profilTipId { get; set; }
+
+        [FilterAttribute]
+        public int? isSatinalma;
+        public bool? isFromExcel { get; set; }
+        public double etKalinligi { get; set; }
+        public double en { get; set; }
+        public double boy { get; set; }
+        public double cap { get; set; }
+        public double yukseklik { get; set; }
         private OlcuBirim _olcuBirim;
         public OlcuBirim olcuBirim { get { if (_olcuBirim == null) { _olcuBirim = new OlcuBirim(); } return _olcuBirim; } set { _olcuBirim = value; } }
-        private ParcaGrup _parcaGrup;
-        public ParcaGrup parcaGrup{get{if (_parcaGrup == null){_parcaGrup = new ParcaGrup();}return _parcaGrup;}set { _parcaGrup = value; } }
-        private ParcaAltGrup _parcaAltgrup;
-        public ParcaAltGrup parcaAltGrup{get{if ( _parcaAltgrup == null){_parcaAltgrup=new ParcaAltGrup();}return _parcaAltgrup;}set { _parcaAltgrup = value; } }
+        
         private MalzemeGrup _malzemeGrup;
+        [FilterAttribute]
         public MalzemeGrup malzemeGrup { get { if (_malzemeGrup == null) { _malzemeGrup = new MalzemeGrup(); } return _malzemeGrup; } set { _malzemeGrup = value; } }
+        private MalzemeAltGrup _malzemeAltGrup;
+        [FilterAttribute]
+        public MalzemeAltGrup malzemeAltGrup { get { if (_malzemeAltGrup == null) { _malzemeAltGrup = new MalzemeAltGrup(); } return _malzemeAltGrup; } set { _malzemeAltGrup = value; } }
+        private MalzemeAltGrup2 _malzemeAltGrup2;
+        [FilterAttribute]
+        public MalzemeAltGrup2 malzemeAltGrup2 { get { if (_malzemeAltGrup2 == null) { _malzemeAltGrup2 = new MalzemeAltGrup2(); } return _malzemeAltGrup2; } set { _malzemeAltGrup2 = value; } }
         private MalzemeStandart _malzemeStandart;
         public MalzemeStandart malzemeStandart { get { if (_malzemeStandart == null) { _malzemeStandart = new MalzemeStandart(); } return _malzemeStandart; } set { _malzemeStandart = value; } }
-        public byte[] pdf;
-        public byte[] step;
-        public byte[] dxf;
+
+        private List<StokKartDosya> _stokKartDosya;
+        public List<StokKartDosya> stokKartDosya
+        {
+            get
+            {
+                if (_stokKartDosya == null)
+                {
+                    _stokKartDosya = new List<StokKartDosya>();
+                }
+                return _stokKartDosya;
+            }
+            set
+            {
+                _stokKartDosya = value;
+            }
+        }
+        [FilterAttribute]
+        public int? isPdf;
+        [FilterAttribute]
+        public int? isDxf;
+        [FilterAttribute]
+        public int? isStep;
+        public byte[] pdf { get; set; }
+        public byte[] step { get; set; }
+        public byte[] dxf { get; set; }
         private Proje _proje;
         public Proje proje { get { if (_proje == null) _proje = new Proje(); return _proje; } set { _proje = value; } }
-        public string pdfFileName() { return kod + ".pdf"; }
+        public string pdfFileName() { return parcaKod + ".pdf"; }
         public string dxfFileName()
-        {   
-            string dxfAd = kod + "_" + malzeme + "_" + dxfAddition() + adet + "adet" + ".dxf";
+        {
+            string dxfAd = parcaKod + "_" + malzeme + "_" + dxfAddition() + adet + "adet" + ".dxf";
             return dxfAd;
         }
-        public string stepFileName() { return kod + ".step"; }
-        public string dxfAddition() 
+        public string stepFileName() { return parcaKod + ".step"; }
+        public string dxfAddition()
         {
             string pattern = @"\b(\d+)\.\d+\b"; // Sayısal kısmı yakalayan desen
 
@@ -70,28 +123,71 @@ namespace Models
             Match match = Regex.Match(boyut, pattern);
             if (match.Success)
             {
-                string result = match.Groups[1].Value+"mm_"; // Tam sayı kısmını al
+                string result = match.Groups[1].Value + "mm_"; // Tam sayı kısmını al
                 return result;
             }
-            return ""; 
+            return "";
+        }
+        string FormatKod(string kod,int spc)
+        {
+            return string.IsNullOrWhiteSpace(kod) ? "0".PadLeft(spc,'0') : kod.PadLeft(spc, '0');
+        }
+
+       
+        public string hammaddeKod
+        {
+            get
+            {
+                return string.Join("_",
+                FormatKod(stokGrup.kod, 2),
+                FormatKod(malzemeGrup.kod, 3),
+                FormatKod(malzemeAltGrup.kod, 4),
+                string.Join("",FormatKod(malzemeAltGrup2.kod, 1),
+                FormatKod(boyut, 2),
+                FormatKod(malzeme,2)));
+            }
         }
     }
-    public class ParcaGrup:IEntity
+    public class StokGrup : IEntity
     {
         [FilterAttribute]
         public int Id;
         public string kod;
         public string ad;
     }
-    public class ParcaAltGrup:IEntity
+    public class MalzemeGrup : IEntity
     {
         [FilterAttribute]
         public int Id;
+        private StokGrup _stokGrup;
+        public StokGrup stokGrup { get { if (_stokGrup == null) { _stokGrup = new StokGrup(); } return _stokGrup; } set { _stokGrup = value; } }
         public string kod;
         public string ad;
+    }
+    public class MalzemeAltGrup : IEntity
+    {
+        [FilterAttribute]
+        public int? Id;
+        private MalzemeGrup _malzemeGrup;
+        public MalzemeGrup malzemeGrup { get { if (_malzemeGrup == null) { _malzemeGrup = new MalzemeGrup(); } return _malzemeGrup; } set { _malzemeGrup = value; } }
+        public string kod;
+        public string ad;
+    }
+    public class MalzemeAltGrup2 : IEntity,IBaseEntity
+    {
+        [FilterAttribute]
+        public int? Id { get; set; }
+        public string ad { get; set; }
+        public string kod { get; set; }
+        private MalzemeAltGrup _malzemeAltGrup;
+        public MalzemeAltGrup malzemeAltGrup { get { if (_malzemeAltGrup == null) { _malzemeAltGrup = new MalzemeAltGrup(); } return _malzemeAltGrup; } set { _malzemeAltGrup = value; } }
+
+
+        public bool isUretim;
     }
     public class StokTip : IEntity
     {
+        [FilterAttribute]
         public int Id;
         public string kod;
         public string ad;
@@ -108,5 +204,14 @@ namespace Models
         public string kod;
         public string ad;
     }
-
+    public class StokKartDosya : IEntity
+    {
+        public int Id;
+        public int stokKartId;
+        private DosyaTip _dosyaTip;
+        public DosyaTip dosyaTip { get { if (_dosyaTip == null) { _dosyaTip = new DosyaTip(); } return _dosyaTip; } set { _dosyaTip = value; } }
+        public string dosyaAd;
+        public string dosyaUzanti;
+        public byte[] dosya;
+    }
 }

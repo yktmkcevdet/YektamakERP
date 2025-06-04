@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using YektamakDesktop.Common;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
     public partial class PersonelGridFormu : Form, IForm, IGridForm<Personel>
     {
+        private static IPersonelService _personelService;
+        private PersonelGridFormu(IPersonelService personelService)
+        {
+            _personelService = personelService;
+        }
         private static PersonelGridFormu _personelGridFormu;
         public static PersonelGridFormu personelGridFormu
         {
@@ -37,7 +44,7 @@ namespace YektamakDesktop.Formlar.Genel
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = GlobalData.FillDataTable(WebMethods.GetPersonel, personelFilter);
+                    _dataTable = GlobalData.FillDataTable(_personelService.GetPersonel, personelFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }
@@ -98,14 +105,14 @@ namespace YektamakDesktop.Formlar.Genel
 
         public void UpdateRow(Personel personel)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, personel.Id);
+            int i = GlobalData.IndexOfDataSet(dataTable, personel.Id??-1);
             if (i == -1)
             {
                 AddNewRow(personel);
             }
             else
             {
-                GlobalData.UpdateDataRow(dataTable, personel, i);
+                GlobalData.UpdateDataRow(ref _dataTable, personel, i);
             }
         }
         public void AddNewRow(Personel personel)

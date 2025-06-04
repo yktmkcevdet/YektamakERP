@@ -1,40 +1,45 @@
-﻿using Models;
-using ApiService;
+﻿using ApiService.Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using Utilities.Interfaces;
-using System.Linq;
 using YektamakDesktop.Common;
-using ApiService.Interfaces;
-using System.Drawing;
-using System.Reflection;
 
 namespace YektamakDesktop.Formlar.Proje
 {
     public partial class SatinalmaTalepOlusturma : Form, IForm
     {
         private static ICache _cache;
-        private static ISatinalmaTalep _satinalmaTalep;
-        public SatinalmaTalepOlusturma(ICache cache, ISatinalmaTalep satinalmaTalep)
+        private static ISatinalmaService _satinalmaTalepService;
+        private static IStokService _stokService;
+        private static IJsonConverter _jsonConverter;
+        private static IDataTableMapper _dataTableMapper;
+        public SatinalmaTalepOlusturma(ICache cache, ISatinalmaService satinalmaTalep, IStokService stokService, IJsonConverter jsonConverter, IDataTableMapper dataTableMapper)
         {
             _cache = cache;
-            _satinalmaTalep = satinalmaTalep;
+            _satinalmaTalepService = satinalmaTalep;
+            _stokService = stokService;
+            _jsonConverter = jsonConverter;
+            _dataTableMapper = dataTableMapper;
         }
         public SatinalmaTalepOlusturma()
         {
             InitializeComponent();
-            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref customComboListBoxParcaGrubu);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref cbxMalzemeGrubu);
+            ComboBoxListFill.GetLookupAd(_cache.kullaniciList, ref cbxKullaniciId);
+            ComboBoxListFill.GetLookupKod(_cache.projes, ref cbxProjeKodu);
         }
-        private SatinalmaTalepBaslik _satinalmaTalepBaslik;
-        public SatinalmaTalepBaslik satinalmaTalepBaslik
+        private SatinalmaTalep _satinalmaTalepBaslik;
+        public SatinalmaTalep satinalmaTalepBaslik
         {
             get
             {
                 if (_satinalmaTalepBaslik == null)
                 {
-                    _satinalmaTalepBaslik = new SatinalmaTalepBaslik();
+                    _satinalmaTalepBaslik = new SatinalmaTalep();
                 }
                 return _satinalmaTalepBaslik;
             }
@@ -43,20 +48,20 @@ namespace YektamakDesktop.Formlar.Proje
                 _satinalmaTalepBaslik = value;
             }
         }
-        private static List<StokKart> _stokKarts;
-        public static List<StokKart> stokKarts
+        private static List<SatinalmaTalepDetay> _satinalmaTalepDetays;
+        public static List<SatinalmaTalepDetay> satinalmaTalepDetays
         {
             get
             {
-                if (_stokKarts == null)
+                if (_satinalmaTalepDetays == null)
                 {
-                    _stokKarts = new List<StokKart>();
+                    _satinalmaTalepDetays = new List<SatinalmaTalepDetay>();
                 }
-                return _stokKarts;
+                return _satinalmaTalepDetays;
             }
             set
             {
-                _stokKarts = value;
+                _satinalmaTalepDetays = value;
             }
         }
 
@@ -73,14 +78,14 @@ namespace YektamakDesktop.Formlar.Proje
                 }
                 if (_dataTable.Rows.Count == 0)
                 {
-                    _dataTable = Common.ConvertHelper.ToDataTable(stokKarts);
+                    _dataTable = Common.ConvertHelper.ToDataTable(satinalmaTalepDetays);
                 }
                 return _dataTable;
             }
             set
             {
-                DataRefresh();
                 _dataTable = value;
+                DataRefresh();
             }
         }
         private StokKart _stokKartFilter;
@@ -143,46 +148,88 @@ namespace YektamakDesktop.Formlar.Proje
 
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
-            bool chck;
-            chck = GlobalData.CheckField("Teslim tarihi girilmelidir", this, customTextBoxTeslimTarihi);
-            chck = GlobalData.CheckField("Parça Grubu seçilmelidir", this, customComboListBoxParcaGrubu);
-            if (!chck) return;
-            SatinalmaTalepBaslik satinalmaTalepBaslik = new SatinalmaTalepBaslik();
-            satinalmaTalepBaslik.proje.Id = customComboListBoxProjeKodu.selectedDataRowId;
-            satinalmaTalepBaslik.parcaGrupId = customComboListBoxParcaGrubu.selectedDataRowId;
-            satinalmaTalepBaslik.talepTarihi = DateTime.Parse(DateTime.Now.ToShortDateString());
-            foreach (DataGridViewRow row in dataGridViewSatinalma.Rows)
+            try
             {
-                SatinalmaTalepDetay satinalmaTalepDetay = new SatinalmaTalepDetay();
-                satinalmaTalepDetay.stokKart.Id = Convert.ToInt32(row.Cells["Id"].Value.ToString());
-                satinalmaTalepDetay.miktar = Convert.ToDouble(row.Cells["miktar"].Value.ToString());
-                satinalmaTalepBaslik.satinalmaTalepDetay.Add(satinalmaTalepDetay);
+                // Validasyon kontrollerini tek seferde yap
+                if (!ValidateInputs())
+                    return;
+
+                // Satınalma talebini oluştur
+                var satinalmaTalep = CreateSatinalmaTalep();
+
+                // Kaydet ve sonucu kontrol et
+                string result = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
+
+                HandleSaveResult(result);
             }
-            string result = await _satinalmaTalep.SaveSatinalmaTalep(satinalmaTalepBaslik);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Beklenmeyen bir hata oluştu: {ex.Message}", "Hata",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ValidateInputs()
+        {
+            bool isValid = true;
+
+            // Tüm validasyonları çalıştır, kısa devre yapmadan
+            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", this, customTextBoxTeslimTarihi);
+            isValid &= GlobalData.CheckField("Parça Grubu seçilmelidir", this, cbxMalzemeGrubu);
+
+            return isValid;
+        }
+
+        private SatinalmaTalep CreateSatinalmaTalep()
+        {
+            var satinalmaTalep = new SatinalmaTalep
+            {
+                proje = { Id = cbxProjeKodu.selectedDataRowId },
+                malzemeGrupId = cbxMalzemeGrubu.selectedDataRowId,
+                talepTarihi = DateTime.Today,
+                talepEdenKullaniciId = cbxKullaniciId.selectedDataRowId,
+                satinalmaTalepDetays = _satinalmaTalepDetays,
+            };
+
+            return satinalmaTalep;
+        }
+
+        private void HandleSaveResult(string result)
+        {
             if (result == "0")
             {
-                MessageBox.Show("Kayıt başarısız");
-                return;
+                MessageBox.Show("Kayıt başarısız", "Hata",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Kayıt başarılı");
-
-                this.Invoke(new Action(() =>
+                DataSet dataSet = _jsonConverter.DeserializeToDataSet(result);
+                if (dataSet.Tables[0].Columns[0].ColumnName.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    GlobalData.CloseForm(ref _satinalmaTalepOlusturma);
-                }));
+                    MessageBox.Show("Kayıt başarısız: " + dataSet.Tables[0].Rows[0][0].ToString(), "Hata",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                MessageBox.Show("Kayıt başarılı", "Bilgi",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // UI thread'de çalıştığımız için Invoke'a gerek yok
+                DataRow dataRow = _jsonConverter.DeserializeToDataSet(result).Tables[0].Rows[0];
+                _satinalmaTalepBaslik = _dataTableMapper.MapToEntity<SatinalmaTalep>(dataRow);
+                dataTable = ConvertHelper.ToDataTable(_satinalmaTalepBaslik.satinalmaTalepDetays);
+                //GlobalData.CloseForm(ref _satinalmaTalepOlusturma);
             }
         }
 
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        public void SaveMode(SatinalmaTalepBaslik satinalmaTalepBaslik, List<StokKart> stokKarts)
+        public void SaveMode(SatinalmaTalep satinalmaTalep)
         {
-            _stokKarts = stokKarts;
-            dataTable = ConvertHelper.ToDataTable(stokKarts);
-            this.satinalmaTalepBaslik = satinalmaTalepBaslik;
-            customComboListBoxParcaGrubu.SelectDataRowId(satinalmaTalepBaslik.parcaGrupId);
-            customComboListBoxProjeKodu.SelectDataRowId(satinalmaTalepBaslik.proje.Id);
+            _satinalmaTalepDetays = satinalmaTalep.satinalmaTalepDetays;
+            dataTable = ConvertHelper.ToDataTable(satinalmaTalepDetays);
+            cbxKullaniciId.SelectDataRowId(satinalmaTalep.talepEdenKullaniciId);
+            cbxMalzemeGrubu.SelectDataRowId(satinalmaTalep.malzemeGrupId);
+            cbxProjeKodu.SelectDataRowId(satinalmaTalep.proje.Id);
+            this.satinalmaTalepBaslik = satinalmaTalep;
             lblKayitSayisi.Text = $"Toplam kayıt sayısı: {dataTable.Rows.Count}";
         }
         public void dataTableRowChanged(object sender, DataRowChangeEventArgs e)
@@ -202,8 +249,6 @@ namespace YektamakDesktop.Formlar.Proje
 
         private void SatinalmaTalepOlusturma_Load(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref customComboListBoxProjeKodu);
-            ComboBoxListFill.GetLookupAd(_cache.parcaGrups, ref customComboListBoxParcaGrubu);
         }
 
         private void roundedButton3_MouseHover(object sender, EventArgs e)
@@ -224,6 +269,40 @@ namespace YektamakDesktop.Formlar.Proje
         private void roundedButton4_MouseHover(object sender, EventArgs e)
         {
             this.Cursor = Cursors.Hand;
+        }
+        private Form detayForm;
+
+        private void dataGridViewSatinalma_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            detayForm?.Close();
+            detayForm = null;
+        }
+
+        private void dataGridViewSatinalma_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridViewSatinalma_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var row = dataGridViewSatinalma.Rows[e.RowIndex];
+                if (row.Cells["Id"].Value != null)
+                {
+                    SatinalmaTalepDetay satinalmaTalepDetay = new SatinalmaTalepDetay
+                    {
+                        Id = Convert.ToInt32(row.Cells["Id"].Value),
+                    };
+                    detayForm = new SatinalmaTalepSatirDetayForm(satinalmaTalepDetay);
+                    detayForm.FormBorderStyle = FormBorderStyle.None;
+                    detayForm.StartPosition = FormStartPosition.Manual;
+                    detayForm.BackColor = Color.LightYellow;
+                    detayForm.Location = Cursor.Position;
+
+                    detayForm.Show();
+                }
+            }
         }
     }
 }

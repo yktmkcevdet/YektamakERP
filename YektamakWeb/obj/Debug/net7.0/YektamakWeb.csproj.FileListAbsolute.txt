@@ -40,3 +40,6 @@ C:\Users\yektamak-118\source\repos\YektamakWeb\YektamakWeb\bin\Debug\net7.0\Micr
 C:\Users\yektamak-118\source\repos\YektamakWeb\YektamakWeb\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\yektamak-118\source\repos\YektamakWeb\YektamakWeb\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\yektamak-118\source\repos\YektamakWeb\YektamakWeb\obj\Debug\net7.0\Yektamak.A099CA48.Up2Date
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net7.0\YektamakWeb.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net7.0\refint\YektamakWeb.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net7.0\YektamakWeb.pdb

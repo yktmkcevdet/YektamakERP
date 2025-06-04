@@ -67,6 +67,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox;
+        public System.Windows.Forms.TextBox textBox;
     }
 }

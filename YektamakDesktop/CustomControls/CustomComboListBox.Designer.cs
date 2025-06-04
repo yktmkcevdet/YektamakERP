@@ -38,7 +38,7 @@
             // 
             listBox.FormattingEnabled = true;
             listBox.HorizontalScrollbar = true;
-            listBox.ItemHeight = 15;
+            listBox.ItemHeight = 12;
             listBox.Location = new System.Drawing.Point(1, 28);
             listBox.Name = "listBox";
             listBox.Size = new System.Drawing.Size(247, 199);
@@ -88,6 +88,8 @@
             textBox.UnderlinedStyle = false;
             textBox.TextChanged += textBox_TextChanged;
             textBox.Key_Up += textBox_Key_Up;
+            textBox.DoubleClick += CustomComboListBox_DoubleClick;
+            textBox.Load += textBox_Load;
             // 
             // CustomComboListBox
             // 
@@ -107,6 +109,11 @@
             MouseLeave += CustomCheckedComboBox_MouseLeave;
             Resize += CustomCheckedComboBox_Resize;
             ResumeLayout(false);
+        }
+
+        private void TextBox_DoubleClick(object sender, System.EventArgs e)
+        {
+            
         }
 
         #endregion

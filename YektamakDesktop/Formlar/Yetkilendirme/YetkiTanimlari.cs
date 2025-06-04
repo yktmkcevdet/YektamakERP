@@ -7,11 +7,17 @@ using System.Drawing;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class YetkiTanimlari : Form, IForm
     {
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+        }
         private static YetkiTanimlari _yetkiTanimlari;
         public static YetkiTanimlari yetkiTanimlari
         {
@@ -29,7 +35,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         private bool _activeForm;
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        public YetkiTanimlari()
+        private YetkiTanimlari()
         {
             InitializeComponent();
             controlsToDisable = new List<Control>()
@@ -72,9 +78,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             treeView1.Nodes.Clear();
             Kullanici kullanici = new Kullanici();
             kullanici.rolId = comboListBoxRol.selectedDataRowId;
-            string httpResult = WebMethods.GetKullaniciYetki(kullanici);
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(httpResult);
+            string httpResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
+            IJsonConverter jsonConverter = new JsonConverter();
+            DataSet dataSet = jsonConverter.DeserializeToDataSet(httpResult);
             TreeNode treeNode;
             foreach (DataRow dataRow in dataSet.Tables[0].Select("rolId=1")) //RolId=1 yazılmasının sebebi menü başlıklarının admin rolü için tanımlanmış olduğundan dolayı.
             {
@@ -151,7 +157,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 yetki.menu.Id= int.Parse(e.Node.Name);
             }
 
-			string httpResult = await WebMethods.SaveYetki(yetki);
+			string httpResult = await _kullaniciYetkiService.SaveYetki(yetki);
             if (httpResult.Contains("error"))
             {
                 MessageBox.Show(httpResult);
@@ -204,7 +210,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             Ekran ekran = new();
             ekran.altMenuId = int.Parse(treeView1.SelectedNode.Name);
             ekran.menu.Id = int.Parse(treeView1.SelectedNode.Parent.Name);
-            string httpResult = await WebMethods.DeleteEkran(ekran);
+            string httpResult = await _kullaniciYetkiService.DeleteEkran(ekran);
             if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(httpResult);

@@ -34,8 +34,9 @@ namespace Api.Controllers
         [HttpDelete, Route("api/DeleteSatisSiparisTeklifTalep/{teklifTalepId}")]
         public string DeleteSatisTeklifTalep(string teklifTalepId)
         {
-            string result = _dataAccessLayer.DeleteObject(teklifTalepId, "spDeleteSatisSiparisTeklifTalep");
-            return result;
+            SatisTeklifTalep satisTeklifTalep = new SatisTeklifTalep();
+            satisTeklifTalep.Id = int.Parse(teklifTalepId);
+            return _dataAccessLayer.DeleteObject(satisTeklifTalep, "spDeleteSatisSiparisTeklifTalep");
         }
     }
 }

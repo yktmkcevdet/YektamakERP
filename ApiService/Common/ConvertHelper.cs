@@ -108,7 +108,7 @@ namespace ApiService.Common
                 else if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
                 {
                     MethodInfo method = typeof(ConvertHelper).GetMethod("DataRowToModel").MakeGenericMethod(type);
-                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name + "_" });
+                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name  });
                     propertyInfo.SetValue(entity, value);
                 }
             }
@@ -136,6 +136,27 @@ namespace ApiService.Common
             }
 
             return dataSet;
+        }
+        /// <summary>
+        /// Datatable satırlarını model listesine çevirir.
+        /// Masaüstü uygulması için DataGridView nesnesini model listesine çevirmek için kullanılır.
+        /// Blazor uygulamasında da kullanılabilmesi için Datatable'a çevirme işlemi yapılmıştır.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static List<T> DataTableRowsToModelList<T>(List<DataRow> dt) where T : IEntity, new()
+        {
+            List<T> list = new List<T>();
+
+            foreach (DataRow row in dt)
+            {
+                T obj = new T();
+                obj = DataRowToModel<T>(row);
+                list.Add(obj);
+            }
+
+            return list;
         }
     }
 }

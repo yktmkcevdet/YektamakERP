@@ -14,14 +14,15 @@ namespace YektamakDesktop.Formlar.Satis
     public partial class Monday : Form, IForm
     {
         private static ISatisService _satisService;
-        public Monday()
-        {
-            InitializeComponent();
-            this.Shown += Form1_Shown;
-        }
+        
         public Monday(ISatisService satisService)
         {
             _satisService = satisService;
+        }
+        private Monday()
+        {
+            this.Shown += Form1_Shown;
+            InitializeComponent();
         }
         private static Monday _monday;
         public static Monday monday

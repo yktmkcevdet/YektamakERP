@@ -1,9 +1,20 @@
 ﻿@using YektamakWeb.Commands.Accounts
+@using Utilities.Interfaces
+@using Models.DTO
+
 @inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-    <NavMenu />
-    </div>
+@inject ICache cache
+@inject CustomAuthStateProvider authStateProvider
+@inject NavigationManager navigation
+<div class="bb-page">
+
+    <Sidebar @ref="sidebar"
+    Href="/"
+    IconName="IconName.BootstrapFill"
+    Title="Yektamak"
+    DataProvider="SidebarDataProvider"
+    onclick="ToggleSidebar"/>
+
     <main>
         <AuthorizeView>
             <Authorized>
@@ -13,28 +24,40 @@
                     </p>
                 </div>
             </Authorized>
-            <NotAuthorized>
-                <a href="/signin-google">Google ile Giriş Yap</a>
-            </NotAuthorized>
         </AuthorizeView>
+
         <article class="content px-4">
-            @Body
+            <div class="py-2">@Body</div> 
         </article>
     </main>
 </div>
 @code {
+    public static Sidebar sidebar = default!;
+    IEnumerable<NavItem>? navItems = default!;
     @inject LoginService loginService
-    private bool isSidebarOpen = true;
-    protected async override void OnInitialized()
-    {
-        StateHasChanged();
-    }
-    private void ToggleSidebar()
-    {
-        isSidebarOpen = !isSidebarOpen;
-    }
+    
+    
     private void LogOut()
     {
         loginService.LogoutAsync();
+    }
+    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
+    {
+        if (navItems is null)
+            navItems = GetNavItems();
+
+        return await Task.FromResult(request.ApplyTo(navItems));
+    }
+
+    private IEnumerable<NavItem> GetNavItems()
+    {
+        foreach (AnaMenu menu in cache.ananaMenuList)
+        {
+            yield return new NavItem { Id = menu.Id.ToString(), Href = $"/{char.ToUpper(menu.ad[0]) + menu.ad.Substring(1).ToLower()}", IconName = IconName.HouseDoorFill, Text = menu.ad };
+        }
+    }
+    private void ToggleSidebar()
+    {
+        sidebar.ToggleSidebar();
     }
 }

@@ -3,6 +3,7 @@
     public class Kullanici:IEntity
     {
         public int Id;
+        public string kod;
         public string ad;
         public string sifre;
         public string salt;

@@ -29,10 +29,12 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(JsonStringToModel<Kullanici>(restData), "spGetKullanici");
             return result;
 		}
-        [HttpGet, Route("api/users/{username}")]
+        [HttpGet, Route("api/GetKullanici/{username}")]
         public string GetUser(string username)
         {
-            string result = _dataAccessLayer.GetObject("spGetKullanici");
+            Kullanici kullanici = new Kullanici();
+            kullanici.ad = username;
+            string result = _dataAccessLayer.GetObject(kullanici,"spGetKullanici");
             return result;
         }
 
@@ -75,10 +77,10 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(JsonStringToModel<Yetki>(restData), "spGetYetki");
             return result;
         }
-        [HttpGet, Route("api/GetMenu")]
-        public string GetMenu()
+        [HttpPost, Route("api/GetMenu")]
+        public string GetMenu([FromBody]string restData)
         {
-            string result = _dataAccessLayer.GetObject("spGetMenu");
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Menu>(restData),"spGetMenu");
             return result;
         }
         [HttpPost,Route("api/SaveMenu")]

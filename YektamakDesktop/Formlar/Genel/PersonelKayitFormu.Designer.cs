@@ -206,7 +206,7 @@
             buttonPersonelGuncelle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonPersonelGuncelle.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonPersonelGuncelle.ForeColor = System.Drawing.Color.White;
-            buttonPersonelGuncelle.Location = new System.Drawing.Point(205, 345);
+            buttonPersonelGuncelle.Location = new System.Drawing.Point(112, 348);
             buttonPersonelGuncelle.Name = "buttonPersonelGuncelle";
             buttonPersonelGuncelle.Size = new System.Drawing.Size(150, 66);
             buttonPersonelGuncelle.TabIndex = 20;

@@ -146,6 +146,32 @@
   },
   {
     "ContainingType": "Api.Controllers.KullaniciController",
+    "Method": "GetUser",
+    "RelativePath": "api/GetKullanici/{username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.KullaniciController",
     "Method": "GetKullaniciYetki",
     "RelativePath": "api/GetKullaniciYetki",
     "HttpMethod": "POST",
@@ -174,10 +200,16 @@
     "ContainingType": "Api.Controllers.KullaniciController",
     "Method": "GetMenu",
     "RelativePath": "api/GetMenu",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "restData",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.String",
@@ -320,32 +352,6 @@
     "Parameters": [
       {
         "Name": "restData",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.KullaniciController",
-    "Method": "GetUser",
-    "RelativePath": "api/users/{username}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "username",
         "Type": "System.String",
         "IsRequired": true
       }

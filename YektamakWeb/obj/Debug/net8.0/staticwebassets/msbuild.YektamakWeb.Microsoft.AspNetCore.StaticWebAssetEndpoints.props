@@ -1,29 +1,5 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/bootstrap/bootstrap.min.bpk8xqwxhs.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bpk8xqwxhs"},{"Name":"integrity","Value":"sha256-z8OR40MowJ8GgK6P89Y\u002BhiJK5\u002BcclzFHzLhFQLL92bg="},{"Name":"label","Value":"_content/YektamakWeb/css/bootstrap/bootstrap.min.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"162720"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022z8OR40MowJ8GgK6P89Y\u002BhiJK5\u002BcclzFHzLhFQLL92bg=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 11:16:38 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/bootstrap/bootstrap.min.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-z8OR40MowJ8GgK6P89Y\u002BhiJK5\u002BcclzFHzLhFQLL92bg="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"162720"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022z8OR40MowJ8GgK6P89Y\u002BhiJK5\u002BcclzFHzLhFQLL92bg=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 11:16:38 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/bootstrap/bootstrap.min.css.8inm30yfxf.map">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css.map'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8inm30yfxf"},{"Name":"integrity","Value":"sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="},{"Name":"label","Value":"_content/YektamakWeb/css/bootstrap/bootstrap.min.css.map"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"449111"},{"Name":"Content-Type","Value":"text/plain"},{"Name":"ETag","Value":"\u0022gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 11:16:38 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/bootstrap/bootstrap.min.css.map">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css.map'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"449111"},{"Name":"Content-Type","Value":"text/plain"},{"Name":"ETag","Value":"\u0022gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 11:16:38 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/LOGO.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\LOGO.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
@@ -147,14 +123,14 @@
     <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-TOTZudPggxNF9c5Vt7VSyJ6RSGyPsHv6VnUTz5zgUbw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3079"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022TOTZudPggxNF9c5Vt7VSyJ6RSGyPsHv6VnUTz5zgUbw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 14 Jan 2025 13:09:59 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-UJUOhRTwWGdW9FnbVZ7ua96YJQ3Ihz7ieVz9njBFgHM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5237"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022UJUOhRTwWGdW9FnbVZ7ua96YJQ3Ihz7ieVz9njBFgHM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Feb 2025 14:02:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/site.g7oblokj4i.css">
+    <StaticWebAssetEndpoint Include="_content/YektamakWeb/css/site.g43mol9n9c.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"g7oblokj4i"},{"Name":"integrity","Value":"sha256-TOTZudPggxNF9c5Vt7VSyJ6RSGyPsHv6VnUTz5zgUbw="},{"Name":"label","Value":"_content/YektamakWeb/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3079"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022TOTZudPggxNF9c5Vt7VSyJ6RSGyPsHv6VnUTz5zgUbw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 14 Jan 2025 13:09:59 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"g43mol9n9c"},{"Name":"integrity","Value":"sha256-UJUOhRTwWGdW9FnbVZ7ua96YJQ3Ihz7ieVz9njBFgHM="},{"Name":"label","Value":"_content/YektamakWeb/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5237"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022UJUOhRTwWGdW9FnbVZ7ua96YJQ3Ihz7ieVz9njBFgHM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Feb 2025 14:02:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/YektamakWeb/external/.gitignore">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\external\.gitignore'))</AssetFile>
@@ -3396,17 +3372,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qtv4hpuvuw"},{"Name":"integrity","Value":"sha256-4jBjSfNR9kfrXy3/BihsWjUjnD9oUGAVapTRp6a4fh8="},{"Name":"label","Value":"_content/YektamakWeb/js/pdfViewer.js"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"379"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u00224jBjSfNR9kfrXy3/BihsWjUjnD9oUGAVapTRp6a4fh8=\u0022"},{"Name":"Last-Modified","Value":"Mon, 03 Feb 2025 13:45:24 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/YektamakWeb/js/site.0sv7vu70hg.js">
+    <StaticWebAssetEndpoint Include="_content/YektamakWeb/js/site.ifa3ob3m1t.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"0sv7vu70hg"},{"Name":"integrity","Value":"sha256-oMO5fh2\u002BolEttMvb7yvYj\u002BKycQWZfsyCqtU20n\u002BQwqs="},{"Name":"label","Value":"_content/YektamakWeb/js/site.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"897"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022oMO5fh2\u002BolEttMvb7yvYj\u002BKycQWZfsyCqtU20n\u002BQwqs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 15 Jan 2025 14:04:26 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ifa3ob3m1t"},{"Name":"integrity","Value":"sha256-ctQ1LSN4UiWJ3wAAhqdc4fVEwceZv7PJR8ScEfICp0w="},{"Name":"label","Value":"_content/YektamakWeb/js/site.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"898"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ctQ1LSN4UiWJ3wAAhqdc4fVEwceZv7PJR8ScEfICp0w=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Feb 2025 14:20:24 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/YektamakWeb/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-oMO5fh2\u002BolEttMvb7yvYj\u002BKycQWZfsyCqtU20n\u002BQwqs="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"897"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022oMO5fh2\u002BolEttMvb7yvYj\u002BKycQWZfsyCqtU20n\u002BQwqs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 15 Jan 2025 14:04:26 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ctQ1LSN4UiWJ3wAAhqdc4fVEwceZv7PJR8ScEfICp0w="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"898"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022ctQ1LSN4UiWJ3wAAhqdc4fVEwceZv7PJR8ScEfICp0w=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Feb 2025 14:20:24 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/YektamakWeb/LOGO.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LOGO.png'))</AssetFile>

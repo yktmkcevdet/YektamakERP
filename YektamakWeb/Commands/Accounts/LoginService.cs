@@ -1,13 +1,7 @@
-﻿using ApiService.Implementetions;
-using ApiService.Interfaces;
+﻿using ApiService.Interfaces;
 using BlazorApp1.Features.Commands.Account.Login;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
-using Microsoft.IdentityModel.Tokens;
 using Models;
-using System.Data;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Utilities.Implementations;
@@ -35,7 +29,7 @@ namespace YektamakWeb.Commands.Accounts
             JwtHelper jwtHelper = new JwtHelper(_configuration);
             Kullanici user = new Kullanici();
             user = await _userService.GetKullaniciAsync(username);
-            string sifre = loginHelper.HashPassword(password, user.salt);
+            string sifre = loginHelper.ComputeHash(password, user.salt);
             if (CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(sifre), Encoding.UTF8.GetBytes(user.sifre)))
             {
                 var jwtToken = new LoginHandler(_configuration).GenerateJwtToken(user);

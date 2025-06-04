@@ -26,7 +26,7 @@ namespace YektamakDesktop.CustomControls
         public bool isPlaceHolder { get => _isPlaceholder; set => _isPlaceholder = value; }
         private bool isPasswordChar = false;
         private string watermarkText = string.Empty;
-        public bool isMandatory=false;
+        public bool isMandatory = false;
         public CustomTextBox()
         {
             InitializeComponent();
@@ -137,7 +137,7 @@ namespace YektamakDesktop.CustomControls
                 if (isPasswordChar)
                     textBox.UseSystemPasswordChar = false;
             }
-            else if (!_isPlaceholder) 
+            else if (!_isPlaceholder)
             {
                 textBox.ForeColor = this.ForeColor;
             }
@@ -232,6 +232,11 @@ namespace YektamakDesktop.CustomControls
         [Category("Action")]
         [Description("Occurs when the click on the control.")]
         public new event EventHandler Click;
+
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Occurs when the double click on the control.")]
+        public new event EventHandler DoubleClick;
 
         [Browsable(true)]
         [Category("Focus")]
@@ -471,6 +476,15 @@ namespace YektamakDesktop.CustomControls
             {
                 MouseLeave(this, e);
             }
+        }
+
+        private void TextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.DoubleClick != null)
+            {
+                this.DoubleClick(this, e);
+            }
+
         }
     }
 }

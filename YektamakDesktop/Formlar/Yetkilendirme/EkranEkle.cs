@@ -13,11 +13,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ApiService;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class EkranEkle : Form, IForm
     {
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        public EkranEkle(IKullaniciYetkiService kullaniciYetkiService)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+        }
         private static Menu _menu;
         public static Menu menu
         {
@@ -112,7 +118,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             menu.ad = customTextBoxMenuAdi.TextCustom;
             menu.formAdi = customComboListBoxFormlar.selectedDataRowValue;
             menu.icon = customComboListBoxIcon.selectedDataRowValue;
-            string result = await WebMethods.SaveMenu(menu);
+            string result = await _kullaniciYetkiService.SaveMenu(menu);
             if (!result.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Kayıt başarılı");

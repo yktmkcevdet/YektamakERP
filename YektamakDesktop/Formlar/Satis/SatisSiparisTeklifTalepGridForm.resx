@@ -117,6 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonTumKayitlariGetir.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACcAAAAmCAYAAABH/4KQAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAABFVJREFUWEfFmEtMFEkYx2HGrGhw1+UEB6JB0KzGDaDeIGoCEbKJXsA9GF0eB06Q
+        wA0S2dXIyQPCHTxD9GSAExkeWZ9Rs9mL6wWPatZX8B2h/f96ujrDUPT0OD34Jb8U0/VV1b+/+urRFGRr
+        i4uLxxYWFoZVJlQuCSeNJa8On2Nes/xZIpHYOT8//5cGfJUiIiy8wFX1sdvrLhrLUdQ66MvrOjfjTdWh
+        bdpyZWl6enqPN0z2JmHV6iSSaNlQBN+MjIwc11Dx5IghLd/CDBpnuaOjo01DFiVHzmDeVOZdmGF2dvZ9
+        Y2PjWQ2dWaAa5CPHAlH+vayoqDij4bclVVjMW5XWDvJNb2/vY0loFutz0JtOa8PNYGZmZqWkpOS6pFSI
+        QleUMTlcTW+w2XR1db2RlAGx3RVlTJWR5Zq2CKeurs4pLS111LVLZWWl09TU5ExMTFjbgKK3Kt+7okYk
+        o+edldYG2dLd3e2KGhgYcCYnJ/3n4+PjTn9/v1NcXOyKT22TSm1t7bIknRfJxaGHw+lOhvb2dv/tGbS6
+        utr/3dzcvM6fetqkPzcQvaD6np6elcLCwlvq/6BwI8cNwupMR0AUjLjR0VE3ChuJIzpGJH7Q0tLitqcu
+        SBxRlaRn4rSIBeZbGHFTU1O+v6kH2uEDTLd5FiSOcRS59xJ2URQhzuoIdMTbIoykJtH5DQxKglNHTuFv
+        xKX3Y8gkDiTqi5gQJYHiiAqhBoRA6u/W1lY/BxGIuKGhIWtfwPSGELeq6M2r3B0qcmVlZf608reJnJnu
+        1MhRR+Ij0rwIaUDUeYkQ4uC22JtzzlFn/KmnjhyrqanxMXlHpIPE0Zcn7h9Ri7hIV2suOUeUPXEPxa+I
+        23Cf4209Z39BmN8biQvKuUziUsYj58o59CM/IYjs2NiY/5zF09bW5uajyU8bpIBErQguAT8L95SI7IKJ
+        sPr6eleIunZhEZFvQcJ4AXy1Uj+pvCySFwCdEn/aGmwmvJSkwFPxu4gJ9z63Uw6bdj23QXQlhSm9KX5B
+        l2/fM3osEk0nm+87Sbkg1t7piN7c3NwTW+N8wjaFMEmAB+IwetaZHCv5prR1kg84HjWdiELgW5X8R2Bt
+        1FJNG+FxRXHZ1lmUIIy9U6LItc9iShxAQ5DFOzs7/+Cb0tZpFOhz0KmqqjKr84sE/q2S/wBsERlta0ND
+        wznd61/YOs8F9jNt1O5UCoTdV3lS/CBCG1/hp/v6+h7ZBskWppFVqc3ZCGMq74lTYqvI2ori8fhv+iKf
+        HhwcfKsFs2obOAimME0Ue9lrcUOcEN8kzBhf4XsFR8p/Ov8+coaaC2e6GJ5RJ59VLgJqY0RRftI0PlLJ
+        qtwnQuVYJuM78kdxVFwRd8T/4oNgUCMgFZ4RJXyeC3Z+2jaKn0TkhsgdYr84E4vFLqm8Jrji8EH8rwc3
+        2YSiRB0+rYJIFYvkmZlnY7pZNFxtdgkEHxGHBELKBXV8IK/9/0coKyj4Co9jdIzUfVf7AAAAAElFTkSu
+        QmCC
+</value>
+  </data>
   <metadata name="teklifTalepTarihi.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -159,7 +185,6 @@
   <metadata name="Onay.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Onay.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

@@ -4,6 +4,6 @@ namespace ApiService.Interfaces
 {
     public interface IUserService
     {
-        Task<Kullanici> GetKullaniciAsync(string username);
+        public Task<Kullanici> GetKullaniciAsync(string username);
     }
 }

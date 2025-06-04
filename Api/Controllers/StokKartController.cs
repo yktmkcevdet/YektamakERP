@@ -31,7 +31,19 @@ namespace Api.Controllers
             string result = _dataAccessLayer.SaveObject(JsonStringToModel<StokKart>(restData), "spSaveStokKart");
             return result;
 		}
-		[HttpPost,Route("api/GetMalzeme")]
+        [HttpPost, Route("api/DeleteStokKart")]
+        public string DeleteStokKart([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(JsonStringToModel<StokKart>(restData), "spDeleteStokKart");
+            return result;
+        }
+        [HttpPost, Route("api/SaveStokKartHammadde")]
+        public string SaveStokKartHammadde([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<StokKart>(restData), "spSaveStokKartHammadde");
+            return result;
+        }
+        [HttpPost,Route("api/GetMalzeme")]
 		public string GetMalzeme([FromBody] string restData)
 		{
             string result = _dataAccessLayer.GetObject(JsonStringToModel<Malzeme>(restData), "spGetMalzeme");
@@ -43,16 +55,10 @@ namespace Api.Controllers
             string result = _dataAccessLayer.SaveObject(JsonStringToModel<Malzeme>(restData), "spSaveMalzeme");
             return result;
 		}
-        [HttpPost, Route("api/GetParcaGrup")]
-        public string GetParcaGrup([FromBody] string restData)
+        [HttpPost, Route("api/GetStokGrup")]
+        public string GetStokGrup([FromBody] string restData)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<ParcaGrup>(restData), "spGetParcaGrup");
-            return result;
-        }
-        [HttpPost, Route("api/DeleteProjeDosya")]
-        public string DeleteProjeDosya([FromBody] string restData)
-        {
-            string result = _dataAccessLayer.DeleteObject(JsonStringToModel<Proje>(restData), "spDeleteProjeDosya");
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<StokGrup>(restData), "spGetStokGrup");
             return result;
         }
         [HttpPost, Route("api/GetMalzemeGrup")]
@@ -61,6 +67,25 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(JsonStringToModel<MalzemeGrup>(restData), "spGetMalzemeGrup");
             return result;
         }
+        [HttpPost, Route("api/GetMalzemeAltGrup2")]
+        public string GetMalzemeAltGrup2([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<MalzemeAltGrup2>(restData), "spGetMalzemeAltGrup2");
+            return result;
+        }
+        [HttpPost, Route("api/GetMalzemeAltGrup")]
+        public string GetMalzemeAltGrup([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<MalzemeAltGrup>(restData), "spGetMalzemeAltGrup");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteProjeDosya")]
+        public string DeleteProjeDosya([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(JsonStringToModel<Proje>(restData), "spDeleteProjeDosya");
+            return result;
+        }
+        
         [HttpPost, Route("api/GetStokTip")]
         public string GetStokTip([FromBody] string restData)
         {

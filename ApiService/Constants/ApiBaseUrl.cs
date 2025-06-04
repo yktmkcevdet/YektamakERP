@@ -1,18 +1,15 @@
-﻿using Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Web;
-using static System.Net.WebRequestMethods;
 
 namespace ApiService.Constants
 {
     public class ApiBaseUrl
     {
-        public const string localhostServer = "https://localhost:5001"; //https://localhost:44398
-        public const string azureServer = "https://localhost:44314";//"https://172.16.9.160:443";
+        public const string localhostServer = "https://localhost:44314";
+        public const string azureServer = "https://172.16.9.160:443";//"https://172.16.9.160:443";
         //public const string azureServer = "https://yektamakwebapp.azurewebsites.net";
         public static string server = GetServerUrl();
         public static string GetServerUrl()
@@ -31,7 +28,7 @@ namespace ApiService.Constants
         {
             try
             {
-                using (TcpClient client = new TcpClient("localhost", 5001))
+                using (TcpClient client = new TcpClient("localhost", 44314))
                 {
                     return true;
                 }

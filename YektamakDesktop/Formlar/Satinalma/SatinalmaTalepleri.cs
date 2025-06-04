@@ -11,22 +11,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YektamakDesktop.Common;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepleri : Form, IForm, IGridForm<SatinalmaTalepDetay>
     {
-        public SatinalmaTalepleri()
+        private static ISatinalmaService _satinalmaService;
+        private SatinalmaTalepleri(ISatinalmaService satinalmaService)
+        {
+            _satinalmaService = satinalmaService;
+        }
+        private SatinalmaTalepleri()
         {
             InitializeComponent();
             dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             dataGridView.DefaultCellStyle.ForeColor = Color.Black;
             dataGridView.DefaultCellStyle.BackColor = Color.White;
             GlobalData.FillDataGrid(dataTable, dataGridView, satinalmaTalepDetayFilter);
-            //for (int i = 0; i < GlobalData.firmaUnvanList.Count; i++)
-            //{
-            //    customComboListBoxFirma.AddDataRow(GlobalData.firmaUnvanList[i].id, GlobalData.firmaUnvanList[i].unvan);
-            //}
         }
         private static SatinalmaTalepleri _satinalmaTalepleri;
         public static SatinalmaTalepleri satinalmaTalepleri
@@ -53,20 +55,13 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
         }
         private DataTable _dataTable;
-        public DataTable dataTable
+        public DataTable dataTable => _dataTable;
+
+        public async Task LoadDataTableAsync()
         {
-            get
-            {
-                if (_dataTable == null)
-                {
-                    _dataTable = new DataTable();
-                    _dataTable = GlobalData.FillDataTable(WebMethods.GetFilteredSatinalmaTalepDetay, satinalmaTalepDetayFilter);
-                    _dataTable.RowDeleted += dataTableRowChanged;
-                    _dataTable.RowChanged += dataTableRowChanged;
-                }
-                return _dataTable;
-            }
-            set { _dataTable = value; }
+            _dataTable = await GlobalData.FillDataTableAsync(_satinalmaService.GetFilteredSatinalmaTalepDetay, satinalmaTalepDetayFilter);
+            _dataTable.RowDeleted += dataTableRowChanged;
+            _dataTable.RowChanged += dataTableRowChanged;
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -152,7 +147,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     satinalmaTalepDetayList.Add(satinalmaTalepDetay);
                 }
             }
-            WebMethods.SaveSatinalmaTeklifTalep(satinalmaTalepDetayList);
+            _satinalmaService.SaveSatinalmaTeklifTalep(satinalmaTalepDetayList);
         }
     }   
 }

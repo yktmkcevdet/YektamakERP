@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Models;
 using System;
 using System.Data;
@@ -13,11 +14,31 @@ namespace YektamakDesktop.Formlar
 {
     public partial class UserLogin : Form
     {
-        private readonly ICache _cache;
-        public UserLogin(ICache cache)
+        private static ICache _cache;
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        private static IPasswordService _passwordService;
+        public UserLogin(ICache cache, IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService)
         {
-            _cache = cache;
             InitializeComponent();
+            _cache = cache;
+            _kullaniciYetkiService = kullaniciYetkiService;
+            _passwordService = passwordService;
+        }
+        private UserLogin()
+        {
+            InitializeComponent();
+        }
+        private static UserLogin _userLogin;
+        public static UserLogin userLogin
+        {
+            get
+            {
+                if (_userLogin == null)
+                {
+                    _userLogin = new UserLogin();
+                }
+                return _userLogin;
+            }
         }
         public bool loginStatus { get; private set; }
         private bool newPasswordMode = false;
@@ -56,7 +77,8 @@ namespace YektamakDesktop.Formlar
         public bool VerifyPassword(Kullanici user, string storedHash)
         {
             string hashedPassword = user.sifre;
-            return hashedPassword == storedHash;
+            //return hashedPassword == storedHash;
+            return _passwordService.VerifyPassword(customTextBoxSifre.TextCustom, storedHash);
         }
         private void buttonClose_Click(object sender, EventArgs e)
         {
@@ -90,18 +112,18 @@ namespace YektamakDesktop.Formlar
                 string storedHashPassword = "";
                 string password = customTextBoxSifre.TextCustom;
 
-				Kullanici user = new Kullanici();
+                Kullanici user = new Kullanici();
                 user.ad = customTextBoxKullaniciAdi.TextCustom;
-                string jsonString = WebMethods.GetKullanici(user);
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSet = jsonConverter.JsonStringToDataSet(jsonString);
-                
+                string jsonString = _kullaniciYetkiService.GetKullanici(user.ad);
+                IJsonConverter jsonConverter = new JsonConverter();
+                DataSet dataSet = jsonConverter.DeserializeToDataSet(jsonString);
+
                 foreach (DataRow dr in dataSet.Tables[0].Rows)
                 {
                     storedHashPassword = dataSet.Tables[0].Rows[0]["sifre"].ToString();
                     user.Id = int.Parse(dr["Id"].ToString());
                     user.salt = dr["salt"].ToString();
-                    user.sifre= GlobalData.HashPassword(customTextBoxSifre.TextCustom, user.salt);
+                    user.sifre = GlobalData.HashPassword(customTextBoxSifre.TextCustom, user.salt);
                     user.personel = new Personel();
                     user.personel.Id = int.Parse(dr["personelId"].ToString());
                     user.personel.mail = dr["Mail"].ToString();
@@ -116,7 +138,7 @@ namespace YektamakDesktop.Formlar
                     {
                         InitializeComponentsNewPassword();
 
-					}
+                    }
                     else if (newPasswordMode == true)
                     {
                         if (CheckFields())
@@ -237,14 +259,17 @@ namespace YektamakDesktop.Formlar
         {
             GlobalData.HandleException(async () =>
             {
-                string salt = GlobalData.GenerateSalt();
+                //string salt = GlobalData.GenerateSalt();
+                
                 string password = customTextBoxYeniSifre.TextCustom;
-                string hashedPassword = GlobalData.HashPassword(password, salt);
+                string salt = _passwordService.HashPassword(password).Hash;
+                //string hashedPassword = GlobalData.HashPassword(password, salt);
+                string hashedPassword = _passwordService.HashPassword(password).CombinedHash;
 
                 kullanici.sifre = hashedPassword;
                 kullanici.salt = salt;
                 kullanici.isSifreDegisti = true;
-                string httpResult = WebMethods.SaveKullanici(kullanici);
+                string httpResult = _kullaniciYetkiService.SaveKullanici(kullanici);
                 if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(httpResult);

@@ -60,7 +60,7 @@
             textBox.PlaceholderText = "";
             textBox.ReadOnly = false;
             textBox.SelectionStart = 0;
-            textBox.Size = new System.Drawing.Size(106, 32);
+            textBox.Size = new System.Drawing.Size(106, 38);
             textBox.TabIndex = 7;
             textBox.TextAlignment = System.Windows.Forms.HorizontalAlignment.Right;
             textBox.TextCustom = "";
@@ -87,6 +87,6 @@
 
         #endregion
         private System.Windows.Forms.MonthCalendar monthCalendar;
-        private CustomTextBox textBox;
+        public CustomTextBox textBox;
     }
 }

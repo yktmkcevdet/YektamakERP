@@ -5,11 +5,18 @@ using System;
 using System.Data;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
+using System.Threading.Tasks;
 
 namespace YektamakDesktop.Formlar.Satinalma.DataControl
 {
     public class DataControlSatinalmaFaturaDetay: Abstracts.DataControl, IEntity
     {
+        private static ISatinalmaService _satinalmaService;
+        public DataControlSatinalmaFaturaDetay(ISatinalmaService satinalmaService)
+        {
+            _satinalmaService = satinalmaService;
+        }
         public static int firmaId;
         public static int dovizid;
         public CustomTextBox satinalmaFaturaDetayId { get; set; }
@@ -46,18 +53,21 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
             dovizCinsiId = new CustomComboListBox() { TabIndex = 6, Width = 100, Visible = true, Tag = "Dvz Cinsi", Location = new System.Drawing.Point(406, 0) };
             //GlobalData.ComboDovizCinsi(_dovizCinsiId);
             dovizCinsiId.SelectDataRowId(dovizid);
+        }
+        public string result { get; private set; }
+        public async Task InitAsync()
+        {
             SatinalmaSiparis satinalmaSiparis = new();
             satinalmaSiparis.firma.Id = firmaId;
-            satinalmaSiparis.tutar.dovizCinsi.id=dovizid;
-            string result = WebMethods.GetFilteredSatinalmaSiparis(satinalmaSiparis);
-            
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(result);
-            satinalmaSiparis = GlobalData.GetModelFromDatabase(WebMethods.GetFilteredSatinalmaSiparis, satinalmaSiparis);
-            
+            satinalmaSiparis.tutar.dovizCinsi.Id = dovizid;
+            result = await _satinalmaService.GetFilteredSatinalmaSiparis(satinalmaSiparis);
+            IJsonConverter jsonConverter = new JsonConverter();
+            DataSet dataSet = jsonConverter.DeserializeToDataSet(result);
+            satinalmaSiparis = await GlobalData.GetModelFromDatabase(_satinalmaService.GetFilteredSatinalmaSiparis, satinalmaSiparis);
+
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                satinalmaSiparisId.AddDataRow(Convert.ToInt32(dataRow["satinalmaSiparisId"].ToString()),dataRow["projeKod_projeKodString"].ToString()+" - " + dataRow["talepTip_talepTipi"].ToString());
+                satinalmaSiparisId.AddDataRow(Convert.ToInt32(dataRow["satinalmaSiparisId"].ToString()), dataRow["projeKod_projeKodString"].ToString() + " - " + dataRow["talepTip_talepTipi"].ToString());
             }
         }
     }

@@ -46,7 +46,7 @@
             comboListBoxRol = new CustomControls.CustomComboListBox();
             label7 = new System.Windows.Forms.Label();
             labelPersonel = new System.Windows.Forms.Label();
-            comboListBoxPersonel = new CustomControls.CustomComboListBox();
+            cbxPersonel = new CustomControls.CustomComboListBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -357,14 +357,14 @@
             // 
             // comboListBoxPersonel
             // 
-            comboListBoxPersonel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxPersonel.ListBoxVisualSize = 5;
-            comboListBoxPersonel.Location = new System.Drawing.Point(296, 191);
-            comboListBoxPersonel.Margin = new System.Windows.Forms.Padding(1);
-            comboListBoxPersonel.Name = "comboListBoxPersonel";
-            comboListBoxPersonel.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxPersonel.Size = new System.Drawing.Size(378, 36);
-            comboListBoxPersonel.TabIndex = 54;
+            cbxPersonel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            cbxPersonel.ListBoxVisualSize = 5;
+            cbxPersonel.Location = new System.Drawing.Point(296, 191);
+            cbxPersonel.Margin = new System.Windows.Forms.Padding(1);
+            cbxPersonel.Name = "comboListBoxPersonel";
+            cbxPersonel.Padding = new System.Windows.Forms.Padding(1);
+            cbxPersonel.Size = new System.Drawing.Size(378, 36);
+            cbxPersonel.TabIndex = 54;
             // 
             // label4
             // 
@@ -405,7 +405,7 @@
             // 
             // buttonFiltre
             // 
-            buttonFiltre.BackgroundImage = Properties.Resources.DataReviewWithMagnifier5;
+            buttonFiltre.BackgroundImage = Properties.Resources.pngegg;
             buttonFiltre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             buttonFiltre.Location = new System.Drawing.Point(48, 328);
             buttonFiltre.Name = "buttonFiltre";
@@ -529,7 +529,7 @@
             Controls.Add(labelUyariKulllaniciAdi);
             Controls.Add(buttonFiltre);
             Controls.Add(dataGridView1);
-            Controls.Add(comboListBoxPersonel);
+            Controls.Add(cbxPersonel);
             Controls.Add(label4);
             Controls.Add(label5);
             Controls.Add(comboListBoxRol);
@@ -573,7 +573,7 @@
         private CustomControls.CustomComboListBox comboListBoxRol;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelPersonel;
-        private CustomControls.CustomComboListBox comboListBoxPersonel;
+        private CustomControls.CustomComboListBox cbxPersonel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private CustomControls.RoundedButton roundedButton2;

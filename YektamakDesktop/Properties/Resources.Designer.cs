@@ -73,59 +73,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap aktar1 {
-            get {
-                object obj = ResourceManager.GetObject("aktar1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
         internal static System.Drawing.Bitmap aktar2 {
             get {
                 object obj = ResourceManager.GetObject("aktar2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap aktar21 {
-            get {
-                object obj = ResourceManager.GetObject("aktar21", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap arkaplan {
-            get {
-                object obj = ResourceManager.GetObject("arkaplan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap chabge {
-            get {
-                object obj = ResourceManager.GetObject("chabge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap chaNge {
-            get {
-                object obj = ResourceManager.GetObject("chaNge", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +103,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap dataload {
+        internal static System.Drawing.Bitmap data_update_icon {
             get {
-                object obj = ResourceManager.GetObject("dataload", resourceCulture);
+                object obj = ResourceManager.GetObject("data-update-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,109 +113,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap dataload1 {
+        internal static System.Drawing.Bitmap data_update_icon1 {
             get {
-                object obj = ResourceManager.GetObject("dataload1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewIcon {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier2 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier3 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier4 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier5 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier5", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier6 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier6", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier7 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier7", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataReviewWithMagnifier7_1 {
-            get {
-                object obj = ResourceManager.GetObject("DataReviewWithMagnifier7_1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap delete_icon {
-            get {
-                object obj = ResourceManager.GetObject("delete_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("data-update-icon1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +143,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap dxfImg {
+        internal static System.Drawing.Bitmap ekle {
             get {
-                object obj = ResourceManager.GetObject("dxfImg", resourceCulture);
+                object obj = ResourceManager.GetObject("ekle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,19 +153,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap FilterIcon {
+        internal static System.Drawing.Bitmap ekle45x45 {
             get {
-                object obj = ResourceManager.GetObject("FilterIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap formBg {
-            get {
-                object obj = ResourceManager.GetObject("formBg", resourceCulture);
+                object obj = ResourceManager.GetObject("ekle45x45", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -343,9 +183,9 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap indir {
+        internal static System.Drawing.Bitmap iosTypeAdd2 {
             get {
-                object obj = ResourceManager.GetObject("indir", resourceCulture);
+                object obj = ResourceManager.GetObject("iosTypeAdd2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -356,26 +196,6 @@ namespace YektamakDesktop.Properties {
         internal static System.Drawing.Bitmap kaydet {
             get {
                 object obj = ResourceManager.GetObject("kaydet", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap Magnifier {
-            get {
-                object obj = ResourceManager.GetObject("Magnifier", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap Magnify {
-            get {
-                object obj = ResourceManager.GetObject("Magnify", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,9 +223,39 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap Plus_Symbol_PNG_Image_HD {
+        internal static System.Drawing.Bitmap pngegg {
             get {
-                object obj = ResourceManager.GetObject("Plus_Symbol_PNG_Image_HD", resourceCulture);
+                object obj = ResourceManager.GetObject("pngegg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap save {
+            get {
+                object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap sil {
+            get {
+                object obj = ResourceManager.GetObject("sil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap sil1 {
+            get {
+                object obj = ResourceManager.GetObject("sil1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -426,26 +276,6 @@ namespace YektamakDesktop.Properties {
         internal static System.Drawing.Bitmap step_passive {
             get {
                 object obj = ResourceManager.GetObject("step_passive", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap step1 {
-            get {
-                object obj = ResourceManager.GetObject("step1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
-        internal static System.Drawing.Bitmap update_icon {
-            get {
-                object obj = ResourceManager.GetObject("update_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

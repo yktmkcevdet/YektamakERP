@@ -8,15 +8,18 @@ using System.Drawing;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
     public partial class FirmaGridForm : Form, IForm,IGridForm<Firma>
     {
         private static IDataGridHelper _dataGridHelper; 
-        public FirmaGridForm(IDataGridHelper dataGridHelper)
+        private static IFirmaService _firmaService;
+        public FirmaGridForm(IDataGridHelper dataGridHelper, IFirmaService firmaService)
         {
             _dataGridHelper = dataGridHelper;
+            _firmaService = firmaService;
         }
         public FirmaGridForm()
         {
@@ -59,7 +62,7 @@ namespace YektamakDesktop.Formlar.Genel
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = _dataGridHelper.FillDataTable(WebMethods.GetFirma, firmaFilter);
+                    _dataTable = _dataGridHelper.FillDataTable(_firmaService.GetFirma, firmaFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }
@@ -141,14 +144,14 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="firma"></param>
         public void UpdateRow(Firma firma)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, firma.Id);
+            int i = GlobalData.IndexOfDataSet(dataTable, firma.Id??0);
             if (i == -1)
             {
                 AddNewRow(firma);
             }
             else
             {
-                GlobalData.UpdateDataRow(dataTable, firma, i);
+                GlobalData.UpdateDataRow(ref _dataTable, firma, i);
             }
         }
         /// <summary>

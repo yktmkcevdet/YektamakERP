@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\FinansalTakipDesktop\FinansalTakipDesktop\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
     <ActiveDebugProfile>FinansalTakipDesktop</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -41,37 +41,7 @@
     <Compile Update="Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Finans\CariKartKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\CariOdemeKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\CariOdemelerGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\CekKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\CekKayitlariGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\ResimGoruntule.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\TahakkukFisiKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\TahakkukFisleriGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\TaksitliIslemlerGrid.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\TaksitliIslemOtomatikTaksitlendirme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\TaksitliOdemeKayitFormu.cs">
+    <Compile Update="Formlar\Genel\AnaVeriTanimlamaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Genel\DovizKurlari.cs">
@@ -92,16 +62,16 @@
     <Compile Update="Formlar\Proje\ExceldenVeriAlmaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Proje\ProfilOptimizasyon.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Proje\ProjeDosyalari.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Proje\SatinalmaTalepOlusturma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaSiparisKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaSiparisGridForm.cs">
+    <Compile Update="Formlar\Proje\SatinalmaTalepSatirDetay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\SatinalmaTalepGridForm.cs">
@@ -116,28 +86,19 @@
     <Compile Update="Formlar\Satis\Monday.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Satis\SatisSiparisGridForm.cs">
+    <Compile Update="Formlar\Satis\SatisTeklifMaliyetKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Stok\MalzemeGrubu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Stok\StokKartTanimlamaFormu.cs">
+    <Compile Update="Formlar\Stok\StokKartKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\UserLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Ortak\ExceldenVeriAlmaFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Formlar\Ortak\PdfGoruntuleme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaFaturaGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaFaturaKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\SatinalmaTalepFormu.cs">
@@ -161,18 +122,15 @@
     <Compile Update="Formlar\Yetkilendirme\YetkiTanimlari.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Temp\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Formlar\Satinalma\SatinalmaTalepGridForm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Satis\SatisProjeGridForm.resx">
+    <EmbeddedResource Update="Formlar\Yetkilendirme\KullaniciKayitFormu.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Yetkilendirme\KullaniciKayitFormu.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

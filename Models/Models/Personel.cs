@@ -3,9 +3,9 @@
     [Serializable]
     public class Personel:IEntity
     {
-        private int _Id;
-        public int Id;
+        public int? Id;
         public string ad;
+        public string kod;
         public string soyad;
         public string telefon;//Daha sonra property içinde formatlama kuralları yazılacak +xx(xxx)xxxxxxx gibi
         public string mail;//Daha sonra property içinde formatlama kuralları yazılacak ****@***.com** gibi

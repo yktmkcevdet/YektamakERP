@@ -15,12 +15,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class AltMenuEkle : Form, IForm
     {
         private static ICache _cache;
+        private static IKullaniciYetkiService _kullaniciYetkiService;
         private static AltMenuEkle _altMenuekle;
         public static AltMenuEkle altMenuekle
         {
@@ -38,9 +40,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         private bool _activeForm;
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        public AltMenuEkle(ICache cache)
+        public AltMenuEkle(ICache cache,IKullaniciYetkiService kullaniciYetkiService)
         {
             _cache = cache;
+            _kullaniciYetkiService = kullaniciYetkiService;
         }
         public AltMenuEkle()
         {
@@ -101,7 +104,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             ekran.altMenuId = comboListBoxForm.selectedDataRowId;
             ekran.ekranAdi = customTextBoxMenuAdi.TextCustom;
             ekran.formAdi = comboListBoxForm.selectedDataRowValue;
-            string httpResult = await WebMethods.SaveEkran(ekran);
+            string httpResult = await _kullaniciYetkiService.SaveEkran(ekran);
 
             if (!httpResult.Contains("error"))
             {

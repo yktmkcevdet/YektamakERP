@@ -2,7 +2,7 @@
 {
     public interface ILoginHelper
     {
-        public string HashPassword(string password, string salt);
-        public string GenerateSalt();
+        public string ComputeHash(string password, string salt);
+        public string GenerateCryptographicSalt();
     }
 }

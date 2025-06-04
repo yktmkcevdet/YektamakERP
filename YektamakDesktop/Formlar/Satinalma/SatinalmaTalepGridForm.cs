@@ -13,11 +13,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepGridForm : Form, IForm
     {
+        private static ISatinalmaService _satinalmaService;
+        private SatinalmaTalepGridForm(ISatinalmaService satinalmaService)
+        {
+            _satinalmaService = satinalmaService;
+        }
         private static SatinalmaTalepGridForm _satinalmaTalepGridForm;
         public static SatinalmaTalepGridForm satinalmaTalepGridForm
         {
@@ -79,15 +85,15 @@ namespace YektamakDesktop.Formlar.Satinalma
         #endregion MouseDrag
         private async void buttonTumKayitlariGetir_Click(object sender, EventArgs e)
         {
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(await WebMethods.GetSatinalmaTalep(new SatinalmaTalepBaslik()));
+            IJsonConverter jsonConverter = new JsonConverter();
+            DataSet dataSet = jsonConverter.DeserializeToDataSet(await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep()));
             //GlobalData.FillDataGrid(dataSet.Tables[0],dataGridView1,new SatinalmaTalepBaslik());
         }
         private async void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.ColumnIndex == dataGridView1.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex || e.ColumnIndex == dataGridView1.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
             {
-                SatinalmaTalepBaslik satinalmaTalepBaslik = new();
+                SatinalmaTalep satinalmaTalepBaslik = new();
                 satinalmaTalepBaslik.Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["satinalmaTalepBaslikId"].Value);
                 satinalmaTalepBaslik.talepTarihi = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells["talepTarihi"].Value);
                 satinalmaTalepBaslik.proje.Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["projeKodId"].Value);
@@ -103,7 +109,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     DialogResult dialogResult = MessageBox.Show(String.Format("{0} nolu satınalma talebini silmek istediğinizden emin misiniz?", satinalmaTalepBaslik.Id), "Kayıt silinsin mi?", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        await WebMethods.DeleteSatinalmaTalep(satinalmaTalepBaslik);
+                        _satinalmaService.DeleteSatinalmaTalep(satinalmaTalepBaslik);
                         dataGridView1.Rows.RemoveAt(e.RowIndex);
                     }
                 }

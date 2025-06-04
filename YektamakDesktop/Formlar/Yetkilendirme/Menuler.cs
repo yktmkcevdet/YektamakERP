@@ -1,5 +1,6 @@
 ﻿using ApiService;
 using ApiService.Common;
+using ApiService.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,8 +15,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
     public partial class Menuler : Form
     {
         private static ICache _cache;
-        private static IDataTableHelper _dataTableHelper;
-        private static IJsonConvertHelper _jsonConvertHelper;
+        private static IDataTableMapper _dataTableHelper;
+        private static IJsonConverter _jsonConvertHelper;
+        private static IKullaniciYetkiService _kullaniciYetkiService;
         private static Menuler _menuler;
         public static Menuler menuler { get { if (_menuler == null) { _menuler = new(); GlobalData.Yetki(ref _menuler); } return _menuler; } set { _menuler = value; } }
         
@@ -29,11 +31,12 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             this.Controls.Add(customDataGrid.headerPanel);
             this.Controls.Add(customDataGrid.detailPanel);
         }
-        public Menuler(ICache cache, IDataTableHelper dataTableHelper, IJsonConvertHelper jsonConvertHelper)
+        public Menuler(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper,IKullaniciYetkiService kullaniciYetkiService)
         {
             _cache = cache;
             _dataTableHelper = dataTableHelper;
             _jsonConvertHelper = jsonConvertHelper;
+            _kullaniciYetkiService = kullaniciYetkiService;
         }
 
         #region mouseDrag
@@ -77,7 +80,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void Menuler_Load(object sender, EventArgs e)
         {
-            DataSet dataSet = _jsonConvertHelper.JsonStringToDataSet(WebMethods.GetMenu());
+            DataSet dataSet = _jsonConvertHelper.DeserializeToDataSet(_kullaniciYetkiService.GetMenu());
             List<DataControlMenu> menuList = new List<DataControlMenu>();
 
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)

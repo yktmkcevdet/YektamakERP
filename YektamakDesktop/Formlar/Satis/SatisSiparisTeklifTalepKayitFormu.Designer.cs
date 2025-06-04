@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace YektamakDesktop.Formlar.Satis
 {
-    partial class SatisSiparisTeklifTalepKayitFormu
+    partial class SatisTeklifTalepKayitFormu
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace YektamakDesktop.Formlar.Satis
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SatisSiparisTeklifTalepKayitFormu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SatisTeklifTalepKayitFormu));
             textBoxTeklifTalepTarihi = new CustomTextBoxTarih();
             label14 = new Label();
             label15 = new Label();
@@ -574,7 +574,7 @@ namespace YektamakDesktop.Formlar.Satis
             buttonKaydet.FlatStyle = FlatStyle.Flat;
             buttonKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             buttonKaydet.ForeColor = Color.White;
-            buttonKaydet.Image = Resources.kaydet;
+            buttonKaydet.Image = Resources.save;
             buttonKaydet.Location = new Point(725, 725);
             buttonKaydet.Name = "buttonKaydet";
             buttonKaydet.Size = new Size(47, 49);
@@ -674,9 +674,9 @@ namespace YektamakDesktop.Formlar.Satis
                 teklifTalepDosyaAd.TextChanged += teklifTalepDosyaAd_TextChanged;
                 dosyaUzanti = new() { TabIndex = 5, Width = 50, Tag = "Uzantı" };
                 boyut = new() { TabIndex = 6, Width = 100, Tag = "Boyut(MB)" };
-                iconButton = new() { TabIndex = 7, Width = 35, Height = 28, Tag = " Ekle", BackgroundImage = Resources.Plus_Symbol_PNG_Image_HD, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
+                iconButton = new() { TabIndex = 7, Width = 35, Height = 28, Tag = " Ekle", BackgroundImage = Resources.ekle, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
                 iconButton.Click += ButtonDosyaEkle_Click;
-                iconButtonView = new() { TabIndex = 8, Width = 45, Height = 28, Tag = "Göster", BackgroundImage = Resources.DataReviewWithMagnifier2, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
+                iconButtonView = new() { TabIndex = 8, Width = 45, Height = 28, Tag = "Göster", BackgroundImage = Resources.pngegg, BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
                 iconButtonView.Click += ButtonDosyaGoruntule_Click;
                 dosyaVeri = new byte[0];
             }
@@ -705,8 +705,6 @@ namespace YektamakDesktop.Formlar.Satis
             {
                 dosyaUzanti.TextCustom = teklifTalepDosyaAd.TextCustom.Split('.').Last();
             }
-
-
         }
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

@@ -2,7 +2,7 @@
 @using BlazorApp1.Features.Commands.Account.Login
 @using Microsoft.AspNetCore.Components.Rendering
 @using Models
-@using ApiService
+@using ApiService.Interfaces
 @using System.Data
 @using Utilities.Interfaces
 @using YektamakWeb.Components.Dialogs
@@ -29,8 +29,8 @@
             </td>
             <td>
                 <select class="flex-column" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in _cache.projes)
+                    <option value="-1" selected disabled>Seçim Yapınız</option>
+                    @foreach (var item in cache.projes)
                     {
                         <option value="@item.Id">@item.kod</option>
                     }
@@ -39,12 +39,12 @@
         </tr>
         <tr>
             <td>
-                <label class="flex-column" style="width:max-content">Parça Grubu</label>
+                <label class="flex-column" style="width:max-content">Stok Grubu</label>
             </td>
             <td>
-                <select class="flex-column" @bind="selectedParcaGrupId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in parcaGrup)
+                <select class="flex-column" @bind="selectedStokGrupId" @bind:after="GetProjeDosyalari">
+                    <option value="-1" selected enabled>Seçim Yapınız</option>
+                    @foreach (var item in stokGrup)
                     {
                         <option value="@item.Key">@item.Value</option>
                     }
@@ -57,7 +57,7 @@
             </td>
             <td>
                 <select class="flex-column" @bind="selectedMalzemeGrupId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
+                    <option value="-1" selected enabled>Seçim Yapınız</option>
                     @foreach (var item in malzemeGrup)
                     {
                         <option value="@item.Key">@item.Value</option>
@@ -70,9 +70,7 @@
                 <label class="flex-column" style="width:max-content">Parça Adı</label>
             </td>
             <td>
-                <input class="flex-column" @bind="parcaAdi" @bind:after="GetProjeDosyalari">
-                        
-                </input>
+                <input class="flex-column" @bind="parcaAdi" @bind:after="GetProjeDosyalari" />
             </td>
         </tr>
     </table>
@@ -98,13 +96,12 @@ else
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th id="stokKartId">Ürün ID</th>
+                    <th id="stokKartId">Stok ID</th>
+                    <th> <input type="checkbox">Seç</th>
                     <th>Proje Kodu</th>
                     <th>Ürün Kodu</th>
                     <th>Ürün Adı</th>
                     <th>pdf</th>
-                    <th>dxf</th>
-                    <th>step</th>
                 </tr>
             </thead>
             <tbody>
@@ -112,18 +109,14 @@ else
                 {
                     <tr>
                         <td>@stokKart.Id</td>
+                        <td><input type="checkbox">@stokKart.sec</td>
                         <td>@stokKart.proje.kod</td>
                         <td>@stokKart.kod</td>
                         <td>@stokKart.ad</td>
                         <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
                             <img src="/pdf.png" alt="Default Image" class="default-image" />
                         </td>
-                        <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
-                            <img src="/pdf.png" alt="Default Image" class="default-image" />
-                        </td>
-                        <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
-                            <img src="/pdf.png" alt="Default Image" class="default-image" />
-                        </td>
+                        
                     </tr>
                 }
             </tbody>
@@ -139,19 +132,20 @@ else
 <PdfView @ref="pdfViewer" />
 <DialogFragment @ref="dialogFragment">@renderFragment()</DialogFragment> 
 @code {
-    @inject IJsonConvertHelper jsonConvertHelper
-    @inject IDataTableHelper dataTableConverter
-    @inject ICache _cache
+    @inject IJsonConverter jsonConvertHelper
+    @inject IDataTableMapper dataTableConverter
+    @inject ICache cache
+    @inject IStokService stokService
     private NavigationManager? navigation { get; set; }
     private PdfView pdfViewer;
     private string message;
     private bool IsLoading;
     private int selectedProjeId;
     private int stokKartId;
-    private int selectedParcaGrupId;
+    private int selectedStokGrupId;
     private int selectedMalzemeGrupId;
     private string parcaAdi=string.Empty;
-    Dictionary<int, string> parcaGrup = new Dictionary<int, string>();
+    Dictionary<int, string> stokGrup = new Dictionary<int, string>();
     Dictionary<int, string> malzemeGrup = new Dictionary<int, string>();
     private DialogFragment? dialogFragment;
     private RenderFragment renderFragment() => __builder =>
@@ -177,20 +171,20 @@ else
             // API çağrısı yap
             StokKart stokKart = new StokKart();
             stokKart.proje.Id = selectedProjeId;
-            stokKart.parcaGrup.Id = selectedParcaGrupId;
+            stokKart.stokGrup.Id = selectedStokGrupId;
             stokKart.ad = parcaAdi;
             stokKart.malzemeGrup.Id = selectedMalzemeGrupId;
-            string serializeString = WebMethods.GetStokKart(stokKart);
-            DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
+            string serializeString = await stokService.GetStokKart(stokKart);
+            DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
             if (dataSet != null)
             {
                 foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                 {
-                    stokKart = dataTableConverter.DataRowToModel<StokKart>(dataRow);
+                    stokKart = dataTableConverter.MapToEntity<StokKart>(dataRow);
                     stokKarts.Add(stokKart);
-                    if (parcaGrup.Count(id => id.Key == stokKart.parcaGrup.Id) == 0)
+                    if (stokGrup.Count(id => id.Key == stokKart.stokGrup.Id) == 0)
                     {
-                        parcaGrup.Add(stokKart.parcaGrup.Id, stokKart.parcaGrup.kod);
+                        stokGrup.Add(stokKart.stokGrup.Id, stokKart.stokGrup.ad);
                     }
                     if (malzemeGrup.Count(id => id.Key == stokKart.malzemeGrup.Id) == 0)
                     {
@@ -207,17 +201,17 @@ else
         }
     }
 
-    private void PdfGoster(int stokKartId)
+    private async void PdfGoster(int? stokKartId)
     {
         StokKart stokKart = new StokKart();
         stokKart.Id = stokKartId;
-        string serializeString = WebMethods.GetStokKartPdf(stokKart);
-        DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
+        string serializeString = await stokService.GetStokKartPdf(stokKart);
+        DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
         if (dataSet != null)
         {
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                stokKart = dataTableConverter.DataRowToModel<StokKart>(dataRow);
+                stokKart = dataTableConverter.MapToEntity<StokKart>(dataRow);
             }
         }
         

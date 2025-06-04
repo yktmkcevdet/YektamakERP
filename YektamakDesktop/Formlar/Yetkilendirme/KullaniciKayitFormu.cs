@@ -1,24 +1,29 @@
-﻿using YektamakDesktop.Formlar.Ortak;
+﻿using ApiService.Interfaces;
 using Models;
-
 using Newtonsoft.Json;
-using ApiService;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class KullaniciKayitFormu : Form, IForm
     {
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        private static IPasswordService _passwordService;
+        private static ICache _cache;
+        public KullaniciKayitFormu(IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, ICache cache)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+            _passwordService = passwordService;
+            _cache = cache;
+        }
         private static KullaniciKayitFormu _kullaniciKayitFormu;
         public static KullaniciKayitFormu kullaniciKayitFormu
         {
@@ -52,6 +57,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 comboListBoxRol.AddDataRow((int)rol, Enum.GetName(rol));
             }
+            ComboBoxListFill.GetLookupAd(_cache.personelList, ref cbxPersonel);
         }
         #region mouseDrag
         bool mouseDown;
@@ -93,17 +99,17 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 string salt = GlobalData.GenerateSalt();
                 string password = customTextBoxSifre.TextCustom;
                 string kullaniciAdi = textBoxKullaniciAdi.TextCustom;
-                string hashedPassword = GlobalData.HashPassword(password, salt);
-
+                //string hashedPassword = GlobalData.HashPassword(password, salt);
+                string hashedPassword = _passwordService.HashPassword(password).CombinedHash;
                 Kullanici kullanici = new Kullanici();
                 kullanici.Id = _kullaniciId;
                 kullanici.ad = kullaniciAdi;
                 kullanici.sifre = hashedPassword;
                 kullanici.salt = salt;
-                kullanici.personel.Id = comboListBoxPersonel.selectedDataRowId;
+                kullanici.personel.Id = cbxPersonel.selectedDataRowId;
                 kullanici.rolId = comboListBoxRol.selectedDataRowId;
                 kullanici.isSifreDegisti = false;
-                string httpResult = WebMethods.SaveKullanici(kullanici);
+                string httpResult = _kullaniciYetkiService.SaveKullanici(kullanici);
                 if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(httpResult);
@@ -132,11 +138,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             Kullanici kullanici = new Kullanici();
             kullanici.ad = textBoxKullaniciAdi.TextCustom;
             kullanici.rolId = comboListBoxRol.selectedDataRowId == -1 ? 0 : comboListBoxRol.selectedDataRowId;
-            int boslukIndex = comboListBoxPersonel.selectedDataRowId == -1 ? 0 : comboListBoxPersonel.selectedDataRowValue.IndexOf(' ');
-            string personelAdi = comboListBoxPersonel.selectedDataRowValue;
-            kullanici.personel.ad = comboListBoxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(0, boslukIndex);
-            kullanici.personel.soyad = comboListBoxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(boslukIndex + 1, personelAdi.Length - boslukIndex - 1);
-            string result = WebMethods.GetKullanici(kullanici);
+            int boslukIndex = cbxPersonel.selectedDataRowId == -1 ? 0 : cbxPersonel.selectedDataRowValue.IndexOf(' ');
+            string personelAdi = cbxPersonel.selectedDataRowValue;
+            kullanici.personel.ad = cbxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(0, boslukIndex);
+            kullanici.personel.soyad = cbxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(boslukIndex + 1, personelAdi.Length - boslukIndex - 1);
+            string result = _kullaniciYetkiService.GetKullanici(kullanici);
             byte[] bytes = JsonConvert.DeserializeObject<byte[]>(result);
             string json = Encoding.UTF8.GetString(bytes);
             DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(json);
@@ -162,7 +168,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 dataGridView1.Rows[e.RowIndex].Selected = true;
                 _kullaniciId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString());
                 textBoxKullaniciAdi.TextCustom = dataGridView1.Rows[e.RowIndex].Cells["ad"].Value.ToString();
-                comboListBoxPersonel.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["PersonelId"].Value.ToString()));
+                cbxPersonel.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["PersonelId"].Value.ToString()));
                 comboListBoxRol.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["RolId"].Value.ToString()));
             }
         }
@@ -189,7 +195,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 result = false;
                 labelUyariSifreTekrar.Text = "Şifre uyuşmuyor!";
             }
-            if (comboListBoxPersonel.selectedDataRowId == -1)
+            if (cbxPersonel.selectedDataRowId == -1)
             {
                 result = false;
                 labelUyariPersonel.Text = "Personel seçilmelidir!";
@@ -211,7 +217,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             textBoxKullaniciAdi.TextCustom = "";
             customTextBoxSifre.TextCustom = "";
             customTextBoxSifreTekrar.TextCustom = "";
-            comboListBoxPersonel.SelectDataRowId(-1);
+            cbxPersonel.SelectDataRowId(-1);
             comboListBoxRol.SelectDataRowId(-1);
         }
 

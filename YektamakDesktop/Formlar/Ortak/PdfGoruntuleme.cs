@@ -1,7 +1,7 @@
-﻿using Patagames.Pdf.Net.Controls.WinForms;
-using Patagames.Pdf.Net.Controls.WinForms.ToolBars;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using Spire.Pdf;
 
 namespace YektamakDesktop.Formlar.Ortak
 {
@@ -27,13 +27,19 @@ namespace YektamakDesktop.Formlar.Ortak
         
         private void InitializePdfViewer()
         {
-            PdfViewer pdfViewer = new PdfViewer
-            {
-                Dock = DockStyle.Fill
-            };
-            pdfViewer.LoadDocument(_pdfFilePath);
-            
-            Controls.Add(pdfViewer);
+            WebBrowser webBrowser = new WebBrowser();
+            webBrowser.Dock = DockStyle.Fill;
+            this.Controls.Add(webBrowser);
+            webBrowser.Navigate(_pdfFilePath);
+            //PdfViewer pdfViewer = new PdfViewer
+            //{
+            //    Dock = DockStyle.Fill
+            //};
+            //using (var pdfDocument = PdfDocument.Load(_pdfFilePath))
+            //{
+            //    pdfViewer.Document = pdfDocument;
+            //}
+            //Controls.Add(pdfViewer);
         }   
 
         private void OpenPdfButton_Click(string pdfFilePath)

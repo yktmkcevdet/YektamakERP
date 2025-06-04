@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Models;
 using Models.DTO;
 using System.Data;
@@ -8,12 +9,32 @@ namespace Utilities.Implementations
 {
     public class Cache : ICache
     {
-        private readonly IJsonConvertHelper JsonConverter;
-        private readonly IDataTableHelper DataTableConverter;
-        public Cache(IJsonConvertHelper jsonConverter, IDataTableHelper dataTableConverter)
+        private readonly IJsonConverter JsonConverter;
+        private readonly IDataTableMapper DataTableConverter;
+        private readonly IProjeService _projeService;
+        private readonly IStokService _stokService;
+        private readonly IKullaniciYetkiService _kullaniciYetki;
+        private readonly IFirmaService _firmaService;
+        private readonly IPersonelService _personelService;
+        private readonly ISatisService _satisService;
+        private readonly IDovizCinsiService _dovizCinsiService;
+        private readonly IMaliyetService _maliyetService;
+        private readonly IAnaVeriService _anaVeriService;
+        public Cache(IJsonConverter jsonConverter, IDataTableMapper dataTableConverter, IProjeService projeService, 
+            IStokService stokService,IKullaniciYetkiService kullaniciYetki,IFirmaService firmaService,IPersonelService personelService,ISatisService satisService,
+            IDovizCinsiService dovizCinsiService,IMaliyetService maliyetService,IAnaVeriService anaVeriService)
         {
             JsonConverter = jsonConverter;
             DataTableConverter = dataTableConverter;
+            _projeService = projeService;
+            _stokService = stokService;
+            _kullaniciYetki = kullaniciYetki;
+            _firmaService = firmaService;
+            _personelService = personelService;
+            _satisService = satisService;
+            _dovizCinsiService = dovizCinsiService;
+            _maliyetService = maliyetService;
+            _anaVeriService = anaVeriService;
         }
         private Kullanici _kullanici;
         public Kullanici kullanici
@@ -29,6 +50,22 @@ namespace Utilities.Implementations
             set
             {
                 _kullanici = value;
+            }
+        }
+        private List<Kullanici> _kullaniciList;
+        public List<Kullanici> kullaniciList
+        {
+            get
+            {
+                if (_kullaniciList == null)
+                {
+                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Kullanici());
+                }
+                else if (_kullaniciList.Count == 0)
+                {
+                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Kullanici());
+                }
+                return _kullaniciList;
             }
         }
         private AnaMenu anaMenu
@@ -52,11 +89,11 @@ namespace Utilities.Implementations
             {
                 if (_anaMenuList == null)
                 {
-                    _anaMenuList = GetModelList(WebMethods.GetAnaMenu, anaMenu);
+                    _anaMenuList = GetModelList(_kullaniciYetki.GetAnaMenu, anaMenu);
                 }
                 else if (_anaMenuList.Count == 0)
                 {
-                    _anaMenuList = GetModelList(WebMethods.GetAnaMenu, anaMenu);
+                    _anaMenuList = GetModelList(_kullaniciYetki.GetAnaMenu, anaMenu);
                 }
                 return _anaMenuList;
             }
@@ -68,11 +105,11 @@ namespace Utilities.Implementations
             {
                 if (_menuList == null)
                 {
-                    _menuList = GetModelList(WebMethods.GetMenu, menu);
+                    _menuList = GetModelList(_kullaniciYetki.GetMenu, menu);
                 }
                 else if (_menuList.Count == 0)
                 {
-                    _menuList = GetModelList(WebMethods.GetMenu, menu);
+                    _menuList = GetModelList(_kullaniciYetki.GetMenu, menu);
                 }
                 return _menuList;
             }
@@ -88,22 +125,57 @@ namespace Utilities.Implementations
             {
                 if (_yetkiList == null)
                 {
-                    _yetkiList = GetModelList(WebMethods.GetYetki, yetki);
+                    _yetkiList = GetModelList(_kullaniciYetki.GetYetki, yetki);
                 }
                 return _yetkiList;
             }
         }
-
-        private List<ParcaGrup> _parcaGrups;
-        public List<ParcaGrup> parcaGrups
+        private List<StokGrup> _stokGrups;
+        public List<StokGrup> stokGrups
+        {
+            get
+            {
+                if (_stokGrups == null)
+                {
+                    _stokGrups = GetModelList(_stokService.GetStokGrup, new StokGrup());
+                }
+                return _stokGrups;
+            }
+        }
+        private List<MalzemeGrup> _parcaGrups;
+        public List<MalzemeGrup> malzemeGrups
         {
             get
             {
                 if (_parcaGrups == null)
                 {
-                    _parcaGrups = GetModelList(WebMethods.GetParcaGrup, new ParcaGrup());
+                    _parcaGrups = GetModelList(_stokService.GetMalzemeGrup, new MalzemeGrup());
                 }
                 return _parcaGrups;
+            }
+        }
+        private List<MalzemeAltGrup> _malzemeAltGrups;
+        public List<MalzemeAltGrup> malzemeAltGrups
+        {
+            get
+            {
+                if (_malzemeAltGrups == null)
+                {
+                    _malzemeAltGrups = GetModelList(_stokService.GetMalzemeAltGrup, new MalzemeAltGrup());
+                }
+                return _malzemeAltGrups;
+            }
+        }
+        private List<MalzemeAltGrup2> _malzemeAltGrup2s;
+        public List<MalzemeAltGrup2> malzemeAltGrup2List
+        {
+            get
+            {
+                if (_malzemeAltGrup2s == null)
+                {
+                    _malzemeAltGrup2s = GetModelList(_stokService.GetMalzemeAltGrup2, new MalzemeAltGrup2());
+                }
+                return _malzemeAltGrup2s;
             }
         }
         private List<StokTip> _stokTips;
@@ -113,7 +185,7 @@ namespace Utilities.Implementations
             {
                 if (_stokTips == null)
                 {
-                    _stokTips = GetModelList(WebMethods.GetStokTip, new StokTip());
+                    _stokTips = GetModelList(_stokService.GetStokTip, new StokTip());
                 }
                 return _stokTips;
             }
@@ -125,7 +197,7 @@ namespace Utilities.Implementations
             {
                 if (_profilTips == null)
                 {
-                    _profilTips = GetModelList(WebMethods.GetProfilTip, new ProfilTip());
+                    _profilTips = GetModelList(_stokService.GetProfilTip, new ProfilTip());
                 }
                 return _profilTips;
             }
@@ -137,23 +209,12 @@ namespace Utilities.Implementations
             {
                 if (_olcuBirims == null)
                 {
-                    _olcuBirims = GetModelList(WebMethods.GetOlcuBirim, new OlcuBirim());
+                    _olcuBirims = GetModelList(_stokService.GetOlcuBirim, new OlcuBirim());
                 }
                 return _olcuBirims;
             }
         }
-        private List<MalzemeGrup> _malzemeGrups;
-        public List<MalzemeGrup> malzemeGrups
-        {
-            get
-            {
-                if (_malzemeGrups == null)
-                {
-                    _malzemeGrups = GetModelList(WebMethods.GetMalzemeGrup, new MalzemeGrup());
-                }
-                return _malzemeGrups;
-            }
-        }
+        
         private List<MalzemeStandart> _malzemeStandarts;
         public List<MalzemeStandart> malzemeStandarts
         {
@@ -161,7 +222,7 @@ namespace Utilities.Implementations
             {
                 if (_malzemeStandarts == null)
                 {
-                    _malzemeStandarts = GetModelList(WebMethods.GetMalzemeStandart, new MalzemeStandart());
+                    _malzemeStandarts = GetModelList(_stokService.GetMalzemeStandart, new MalzemeStandart());
                 }
                 return _malzemeStandarts;
             }
@@ -173,7 +234,7 @@ namespace Utilities.Implementations
             {
                 if (_projes == null)
                 {
-                    _projes = GetModelList(WebMethods.GetProje, new Proje()).Where(x => x.personel.Id == kullanici.personel.Id).ToList();
+                    _projes = GetModelList(_projeService.GetProje, new Proje()).Where(x => x.personel.Id == kullanici.personel.Id).ToList();
                 }
                 return _projes;
             }
@@ -185,7 +246,7 @@ namespace Utilities.Implementations
             {
                 if (_unAssignedProjeList == null)
                 {
-                    _unAssignedProjeList = GetModelList(WebMethods.GetProje, new Proje()).Where(x => x.satisSiparisId == 0).ToList();
+                    _unAssignedProjeList = GetModelList(_projeService.GetProje, new Proje()).Where(x => x.satisSiparisId == 0).ToList();
                 }
                 return _unAssignedProjeList;
             }
@@ -197,21 +258,21 @@ namespace Utilities.Implementations
             {
                 if (_sektorList == null)
                 {
-                    _sektorList = GetModelList(WebMethods.GetSektor, new Sektor());
+                    _sektorList = GetModelList(_firmaService.GetSektor, new Sektor());
                 }
                 return _sektorList;
             }
         }
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
-            DataTable dataTable = JsonConverter.JsonStringToDataSet(fetchFunction.Invoke(t)).Tables[0];
-            List<T> list = DataTableConverter.DataTableRowsToModelList<T>(dataTable.AsEnumerable().ToList());
+            DataTable dataTable = JsonConverter.DeserializeToDataSet(fetchFunction.Invoke(t)).Tables[0];
+            List<T> list = DataTableConverter.MapToEntityList<T>(dataTable.AsEnumerable().ToList());
             return list;
         }
         public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
         {
-            DataTable dataTable = JsonConverter.JsonStringToDataSet(fetchFunction.Invoke()).Tables[0];
-            List<T> list = DataTableConverter.DataTableRowsToModelList<T>(dataTable.AsEnumerable().ToList());
+            DataTable dataTable = JsonConverter.DeserializeToDataSet(fetchFunction.Invoke()).Tables[0];
+            List<T> list = DataTableConverter.MapToEntityList<T>(dataTable.AsEnumerable().ToList());
             return list;
         }
         private List<Firma> _firmaList;
@@ -221,7 +282,7 @@ namespace Utilities.Implementations
             {
                 if (_firmaList == null)
                 {
-                    _firmaList = GetModelList(WebMethods.GetFirma, new Firma());
+                    _firmaList = GetModelList<Firma>(_firmaService.GetFirma,new Firma());
                 }
                 return _firmaList;
             }
@@ -233,7 +294,7 @@ namespace Utilities.Implementations
             {
                 if (_personelList == null)
                 {
-                    _personelList = GetModelList(WebMethods.GetPersonel, new Personel());
+                    _personelList = GetModelList(_personelService.GetPersonel, new Personel());
                 }
                 return _personelList;
             }
@@ -245,7 +306,7 @@ namespace Utilities.Implementations
             {
                 if (_markaList == null)
                 {
-                    _markaList = GetModelList<Marka>(WebMethods.GetMarka);
+                    _markaList = GetModelList<Marka>(_projeService.GetMarka);
                 }
                 return _markaList;
             }
@@ -257,7 +318,7 @@ namespace Utilities.Implementations
             {
                 if (_markaAltGrupList == null)
                 {
-                    _markaAltGrupList = GetModelList<MarkaAltGrup>(WebMethods.GetMarkaAltGrup);
+                    _markaAltGrupList = GetModelList<MarkaAltGrup>(_projeService.GetMarkaAltGrup);
                 }
                 return _markaAltGrupList;
             }
@@ -269,10 +330,71 @@ namespace Utilities.Implementations
             {
                 if (_referansKaynakList == null)
                 {
-                    _referansKaynakList = GetModelList<ReferansKaynak>(WebMethods.GetReferansKaynak);
+                    _referansKaynakList = GetModelList<ReferansKaynak>(_satisService.GetReferansKaynak);
                 }
                 return _referansKaynakList;
             }
         }
+        private List<DovizCinsi> _dovizCinsiList;
+        public List<DovizCinsi> dovizCinsiList
+        {
+            get
+            {
+                if (_dovizCinsiList == null)
+                {
+                    _dovizCinsiList = GetModelList<DovizCinsi>(_dovizCinsiService.GetDovizCinsi);
+                }
+                return _dovizCinsiList;
+            }
+        }
+        private List<MaliyetUnsur> _maliyetUnsurList;
+        public List<MaliyetUnsur> maliyetUnsurList
+        {
+            get
+            {
+                if (_maliyetUnsurList == null)
+                {
+                    _maliyetUnsurList = GetModelList<MaliyetUnsur>(_maliyetService.GetMaliyetUnsur);
+                }
+                return _maliyetUnsurList;
+            }
+            set
+            {
+                _maliyetUnsurList = value;
+            }
+        }
+        private List<MaliyetTespitKanal> _maliyetTespitKanalList;
+        public List<MaliyetTespitKanal> maliyetTespitKanalList
+        {
+            get
+            {
+                if (_maliyetTespitKanalList == null)
+                {
+                    _maliyetTespitKanalList = GetModelList<MaliyetTespitKanal>(_maliyetService.GetMaliyetTespitKanal);
+                }
+                return _maliyetTespitKanalList;
+            }
+            set
+            {
+                _maliyetTespitKanalList = value;
+            }
+        }
+        private List<DosyaTip> _dosyaTipList;
+        public List<DosyaTip> dosyaTipList
+        {
+            get
+            {
+                if (_dosyaTipList == null)
+                {
+                    _dosyaTipList = GetModelList<DosyaTip>(_anaVeriService.GetDosyaTip);
+                }
+                return _dosyaTipList;
+            }
+            set
+            {
+                _dosyaTipList = value;
+            }
+        }
+
     }
 }

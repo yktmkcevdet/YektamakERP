@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Models;
 using Newtonsoft.Json;
 using System;
@@ -19,13 +20,15 @@ namespace YektamakDesktop
     public partial class GlobalData
     {
         private static ICache _cache;
-        private static IJsonConvertHelper _converter;
-        private static IDataTableHelper _dataTableHelper;
-        public GlobalData(ICache cache,IJsonConvertHelper jsonConverter,IDataTableHelper dataTableHelper)
+        private static IJsonConverter _converter;
+        private static IDataTableMapper _dataTableHelper;
+        private static IKullaniciYetkiService _kullaniciYetkiService;
+        public GlobalData(ICache cache,IJsonConverter jsonConverter,IDataTableMapper dataTableHelper, IKullaniciYetkiService kullaniciYetkiService)
         {
             _cache = cache;
             _converter = jsonConverter;
             _dataTableHelper = dataTableHelper;
+            _kullaniciYetkiService = kullaniciYetkiService;
         }
         public static List<string> ibanErrorList;
         
@@ -145,7 +148,7 @@ namespace YektamakDesktop
         public static bool Yetki<T>(ref T form) where T : Form
         {
             bool yetki = false;
-            DataSet dataSet = _converter.JsonStringToDataSet(WebMethods.GetKullaniciYetki(_cache.kullanici));
+            DataSet dataSet = _converter.DeserializeToDataSet(_kullaniciYetkiService.GetKullaniciYetki(_cache.kullanici));
             if (dataSet.Tables[1].Select("Id is not null and FormAdi='" + form.Name + "'").Count() > 0)
             {
                 yetki = true;
@@ -167,7 +170,7 @@ namespace YektamakDesktop
         public static T GetModelFromDatabase<T>(Func<T,string> func,T model,int rowIndex=0) where T : IEntity, new()
         {
             string result = func(model);
-            DataSet dataSet= _converter.JsonStringToDataSet(result);
+            DataSet dataSet= _converter.DeserializeToDataSet(result);
             if (dataSet.Tables[0].Rows.Count > 0)
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[rowIndex];
@@ -182,7 +185,7 @@ namespace YektamakDesktop
         public static async Task<T> GetModelFromDatabase<T>(Func<T, Task<string>> func, T model, int rowIndex = 0) where T : IEntity, new()
         {
             string result = await func(model);
-            DataSet dataSet = _converter.JsonStringToDataSet(result);
+            DataSet dataSet = _converter.DeserializeToDataSet(result);
             DataRow dataRow = dataSet.Tables[0].Rows[rowIndex];
             return Common.ConvertHelper.DataRowToModel<T>(dataRow);
         }
@@ -208,7 +211,9 @@ namespace YektamakDesktop
 
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                form.Controls.Add(WarningLabel(mesaj, customTextBox));
+                customTextBox.textBox.BackColor = Color.Red;
+                customTextBox.PlaceholderText = mesaj;
+                //form.Controls.Add(WarningLabel(mesaj, customTextBox));
                 result = false;
             }
             return result;
@@ -219,9 +224,11 @@ namespace YektamakDesktop
 
             object value = customComboListBox.selectedDataRowId;
 
-            if (value == null || value.ToString()=="-1" || string.IsNullOrWhiteSpace(value.ToString()))
+            if (customComboListBox.listBoxDataRows.Count>0 && (value == null || value.ToString()=="-1" || string.IsNullOrWhiteSpace(value.ToString())))
             {
-                form.Controls.Add(WarningLabel(mesaj, customComboListBox));
+                customComboListBox.textBox.textBox.BackColor = Color.Red;
+                customComboListBox.textBox.PlaceholderText = mesaj;
+                //form.Controls.Add(WarningLabel(mesaj, customComboListBox));
                 result = false;
             }
             return result;
@@ -234,7 +241,9 @@ namespace YektamakDesktop
 
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                form.Controls.Add(WarningLabel(mesaj, textBox));
+                textBox.BackColor = Color.Red;
+                textBox.PlaceholderText = mesaj;
+                //form.Controls.Add(WarningLabel(mesaj, textBox));
                 result = false;
             }
             return result;
@@ -247,7 +256,9 @@ namespace YektamakDesktop
 
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                form.Controls.Add(WarningLabel(mesaj, customTextBoxTarih));
+                customTextBoxTarih.textBox.BackColor = Color.Red;
+                customTextBoxTarih.textBox.PlaceholderText = mesaj;
+                //form.Controls.Add(WarningLabel(mesaj, customTextBoxTarih));
                 result = false;
             }
             return result;
@@ -260,9 +271,11 @@ namespace YektamakDesktop
 
             if (value == 0)
             {
-                Label label = WarningLabel(mesaj, customTextBoxSayisal);
-                form.Controls.Add(label);
-                label.BringToFront();
+                customTextBoxSayisal.textBox.BackColor = Color.Red;
+                customTextBoxSayisal.textBox.PlaceholderText = mesaj;
+                //Label label = WarningLabel(mesaj, customTextBoxSayisal);
+                //form.Controls.Add(label);
+                //label.BringToFront();
                 result = false;
             }
             return result;

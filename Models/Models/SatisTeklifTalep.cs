@@ -20,6 +20,9 @@
         public bool isOnay;
         private List<SatisSiparisTeklifTalepBelge> _belgeList;
         public List<SatisSiparisTeklifTalepBelge> belgeList { get { if (_belgeList == null) { _belgeList = new(); } return _belgeList; } set { _belgeList = value; } }
+        private List<SatisTeklifMaliyet> _satisTeklifMaliyetList;
+        public List<SatisTeklifMaliyet> satisTeklifMaliyetList { get { if (_satisTeklifMaliyetList == null) { _satisTeklifMaliyetList = new(); } return _satisTeklifMaliyetList; } set { _satisTeklifMaliyetList = value; } }
+        public bool isMaliyetTalep;
     }
     public class  SatisSiparisTeklifTalepBelge:IEntity
     {
@@ -31,5 +34,15 @@
         public string belgeAciklama;
         public byte[] dosyaVeri;
         public double dosyaBoyut;
+    }
+    public class SatisTeklifMaliyet : IEntity
+    {
+        public int Id;
+        public int teklifTalepId;
+        public int maliyetUnsurId;
+        public int maliyetTespitKanali;
+        public double maliyetTutar;
+        public int dovizCinsiId;
+        public byte[] belge;
     }
 }

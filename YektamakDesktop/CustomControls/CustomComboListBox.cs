@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
@@ -109,6 +106,11 @@ namespace YektamakDesktop.CustomControls
         [Category("Behavior")]
         [Description("Occurs when the value of the SelectedIndex property changes.")]
         public event EventHandler SelectedIndexChanged;
+
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Occurs when the double click on the control.")]
+        public new event EventHandler DoubleClick;
 
         public CustomComboListBox()
         {
@@ -495,6 +497,19 @@ namespace YektamakDesktop.CustomControls
                 CloseListBox();
             }
             focusOnTextBox = false;
+        }
+
+        private void CustomComboListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.DoubleClick != null)
+            {
+                this.DoubleClick(sender, e);
+            }
+        }
+
+        private void textBox_Load(object sender, EventArgs e)
+        {
+
         }
     }
     /// <summary>

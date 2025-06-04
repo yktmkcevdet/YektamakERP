@@ -12,6 +12,8 @@ using ApiService;
 using YektamakDesktop.Common;
 using Utilities.Interfaces;
 using ApiService.Interfaces;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace YektamakDesktop.Formlar.Satis
 {
@@ -21,15 +23,17 @@ namespace YektamakDesktop.Formlar.Satis
     public partial class SatisSiparisTeklifTalepGridForm : Form, IForm
     {
         private static ICache _cache;
-        private static IJsonConvertHelper _jsonConvertHelper;
-        private static IDataTableHelper _dataTableHelper;
+        private static IJsonConverter _jsonConvertHelper;
+        private static IDataTableMapper _dataTableHelper;
         private static ISatisService _satisService;
-        public SatisSiparisTeklifTalepGridForm(ICache cache, IJsonConvertHelper jsonConvertHelper, IDataTableHelper dataTableHelper,ISatisService satisService)
+        private static IMailHandler _mailHandler;
+        public SatisSiparisTeklifTalepGridForm(ICache cache, IJsonConverter jsonConvertHelper, IDataTableMapper dataTableHelper, ISatisService satisService, IMailHandler mailHandler)
         {
             _dataTableHelper = dataTableHelper;
             _cache = cache;
             _jsonConvertHelper = jsonConvertHelper;
             _satisService = satisService;
+            _mailHandler = mailHandler;
         }
         private static SatisSiparisTeklifTalepGridForm _satisSiparisTeklifTalepGridForm;
         public static SatisSiparisTeklifTalepGridForm satisSiparisTeklifTalepGridForm
@@ -61,7 +65,7 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = GlobalData.FillDataTable(WebMethods.GetSatisTeklifTalep, satisSiparisTeklifTalepFilter);
+                    _dataTable = GlobalData.FillDataTable(_satisService.GetSatisTeklifTalep, satisSiparisTeklifTalepFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }
@@ -81,7 +85,7 @@ namespace YektamakDesktop.Formlar.Satis
             }
         }
         ToolTip buttonFiltreToolTip;
-        public SatisSiparisTeklifTalepGridForm()
+        private SatisSiparisTeklifTalepGridForm()
         {
             InitializeComponent();
             SetToolTips();
@@ -148,8 +152,7 @@ namespace YektamakDesktop.Formlar.Satis
             DialogResult dialogResult = MessageBox.Show(string.Format("{0} nolu teklif talebini silmek istediğinizden emin misiniz", satisTeklifTalep.Id), "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                string satisTekliftalepJson = _jsonConvertHelper.StringToJsonString(satisTeklifTalep.Id.ToString());
-                var httpTask = _satisService.DeleteSatisSiparisTeklifTalep(satisTekliftalepJson);
+                var httpTask = _satisService.DeleteSatisSiparisTeklifTalep(satisTeklifTalep.Id.ToString());
                 this.Enabled = false;
                 string result = await httpTask;
                 if (result.Length > 6 && result.Substring(0, 5) == "error")
@@ -203,7 +206,7 @@ namespace YektamakDesktop.Formlar.Satis
             satisSiparisTeklifTalep.Id = teklifTalepId;
             int i = GlobalData.IndexOfDataSet(dataTable, teklifTalepId);
             //satisSiparisTeklifTalep = ConvertHelper.DataRowToModel<SatisSiparisTeklifTalep>(dataTable.Rows[i]);
-            satisSiparisTeklifTalep = _dataTableHelper.DataRowToModel<SatisTeklifTalep>(_jsonConvertHelper.JsonStringToDataSet(WebMethods.GetSatisTeklifTalep(satisSiparisTeklifTalep)).Tables[0].Rows[0]);
+            satisSiparisTeklifTalep = _dataTableHelper.MapToEntity<SatisTeklifTalep>(_jsonConvertHelper.DeserializeToDataSet(_satisService.GetSatisTeklifTalep(satisSiparisTeklifTalep)).Tables[0].Rows[0]);
             return satisSiparisTeklifTalep;
         }
         /// <summary>
@@ -212,7 +215,7 @@ namespace YektamakDesktop.Formlar.Satis
         /// <param name="firma"></param>
         public void UpdateTeklifTalep(SatisTeklifTalep satisSiparisTeklifTalep)
         {
-            SatisSiparisTeklifTalepKayitFormu satisSiparisTeklifTalepKayitFormu = SatisSiparisTeklifTalepKayitFormu.satisSiparisTeklifTalepKayitFormu;
+            SatisTeklifTalepKayitFormu satisSiparisTeklifTalepKayitFormu = SatisTeklifTalepKayitFormu.satisTeklifTalepKayitFormu;
             if (satisSiparisTeklifTalepKayitFormu != null)
             {
                 satisSiparisTeklifTalepKayitFormu.satisSiparisTeklifTalep = satisSiparisTeklifTalep;
@@ -230,10 +233,10 @@ namespace YektamakDesktop.Formlar.Satis
         /// <param name="e"></param>
         private void buttonSatisSiparisEkle_Click(object sender, EventArgs e)
         {
-            SatisSiparisTeklifTalepKayitFormu satisSiparisTeklifTalepKayitFormu = SatisSiparisTeklifTalepKayitFormu.satisSiparisTeklifTalepKayitFormu;
-            if (satisSiparisTeklifTalepKayitFormu != null)
+            SatisTeklifTalepKayitFormu satisTeklifTalepKayitFormu = SatisTeklifTalepKayitFormu.satisTeklifTalepKayitFormu;
+            if (satisTeklifTalepKayitFormu != null)
             {
-                satisSiparisTeklifTalepKayitFormu.Show();
+                satisTeklifTalepKayitFormu.Show();
             }
         }
         private void CloseForm()
@@ -263,7 +266,7 @@ namespace YektamakDesktop.Formlar.Satis
             }
             else
             {
-                GlobalData.UpdateDataRow(dataTable, satisSiparisTeklifTalep, i);
+                GlobalData.UpdateDataRow(ref _dataTable, satisSiparisTeklifTalep, i);
             }
         }
         private void AddNewRow(SatisTeklifTalep satisSiparisTeklifTalep)
@@ -283,9 +286,62 @@ namespace YektamakDesktop.Formlar.Satis
             GlobalData.ResizeFilterFields(dataGridView, panelFilter);
         }
 
-        private void maliyetİçinPMToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void maliyetTalep_Click(object sender, EventArgs e)
         {
+            SatisTeklifTalep satisTeklifTalep = SelectedData(dataGridView.CurrentRow.Index);
+            if (satisTeklifTalep == null) return;
+            if (satisTeklifTalep.isMaliyetTalep == true)
+            {
+                MessageBox.Show("Bu teklif talebi için daha önce maliyet talebi iletilmiştir.");
+            }
+            else
+            {
+                satisTeklifTalep.isMaliyetTalep = true;
+            }
+            string result = await _satisService.SaveSatisSiparisTeklifTalep(satisTeklifTalep);
+            if (result.Contains("error"))
+            {
+                MessageBox.Show(result);
+            }
+            else
+            {
+                _mailHandler.SendMail("cevdet.oguz@yektamak.com.tr", "Maliyet Talebi", $"{satisTeklifTalep.musteri.ad} müşteri teklifi için maliyet talebi istenmektedir.");
+                MessageBox.Show("Maliyet talebi başarıyla iletilmiştir.");
+            }
+        }
 
+        private void dataGridView_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            if (e.ColumnIndex == dataGridView.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex || e.ColumnIndex == dataGridView.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
+            {
+                Cursor.Current = Cursors.Hand;
+            }
+        }
+
+        private void dataGridView_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) // Sağ tıklama kontrolü
+            {
+                var hitTestInfo = dataGridView.HitTest(e.X, e.Y); // Tıklanan hücreyi belirle
+
+                if (hitTestInfo.RowIndex >= 0) // Eğer geçerli bir satır tıklanmışsa
+                {
+                    dataGridView.ClearSelection(); // Önceki seçimleri temizle
+                    dataGridView.Rows[hitTestInfo.RowIndex].Selected = true; // Tıklanan satırı seç
+                    contextMenuStrip1.Show(dataGridView, e.Location); // Sağ tıklama menüsünü göster
+                }
+            }
+        }
+
+        private void maliyetFormuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SatisTeklifMaliyetKayitFormu satisTeklifMaliyetKayitFormu = SatisTeklifMaliyetKayitFormu.satisTeklifMaliyetKayitFormu;
+            if (satisTeklifMaliyetKayitFormu != null)
+            {
+                satisTeklifMaliyetKayitFormu.satisTeklifTalep = SelectedData(dataGridView.CurrentRow.Index);
+                satisTeklifMaliyetKayitFormu.Show();
+            }
         }
     }
 }

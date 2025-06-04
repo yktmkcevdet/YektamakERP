@@ -4,11 +4,17 @@ using ApiService;
 using System.Data;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satinalma.DataControl
 {
     public class DataControlSatinalmaSiparisDetay: Abstracts.DataControl, IEntity
     {
+        private static IStokService _stokService;
+        private DataControlSatinalmaSiparisDetay(IStokService stokService)
+        {
+            _stokService = stokService;
+        }
         public CustomTextBox satinalmaSiparisDetayId { get; set; }
         public CustomTextBox satinalmaSiparisId {  get; set; }
         private CustomComboListBox _stokKartId;
@@ -19,8 +25,8 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
             {
                 _stokKartId = value;
                 
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSet = jsonConverter.JsonStringToDataSet(WebMethods.GetStokKart());
+                IJsonConverter jsonConverter = new JsonConverter();
+                DataSet dataSet = jsonConverter.DeserializeToDataSet(_stokService.GetStokKart().Result);
                 FillComboBoxListFromDataSet(_stokKartId, dataSet);
             }
         }

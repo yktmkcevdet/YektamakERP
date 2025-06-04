@@ -89,7 +89,7 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
             {
                 foreach (StokKart stokKart in stokKartList)
                 {
-                    customComboListBox.AddDataRow(stokKart.Id, stokKart.kod);
+                    customComboListBox.AddDataRow(stokKart.Id??0, stokKart.parcaKod);
                 }
             }
         }

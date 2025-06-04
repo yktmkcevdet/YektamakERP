@@ -29,14 +29,27 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SatisSiparisTeklifTalepGridForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SatisSiparisTeklifTalepGridForm));
             panelFilter = new System.Windows.Forms.Panel();
             buttonTumKayitlariGetir = new System.Windows.Forms.Button();
             dataGridView = new System.Windows.Forms.DataGridView();
+            buttonSatisSiparisTeklifTalepEkle = new System.Windows.Forms.Button();
+            panelFooter = new System.Windows.Forms.Panel();
+            panelHeader = new System.Windows.Forms.Panel();
+            buttonClose = new CustomControls.RoundedButton();
+            buttomMinimize = new CustomControls.RoundedButton();
+            buttonHelp = new CustomControls.RoundedButton();
+            roundedButton3 = new CustomControls.RoundedButton();
+            label1 = new System.Windows.Forms.Label();
+            roundedButton1 = new CustomControls.RoundedButton();
+            roundedButton2 = new CustomControls.RoundedButton();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            maliyetTalep = new System.Windows.Forms.ToolStripMenuItem();
+            maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             teklifTalepTarihi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             firmaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,18 +68,6 @@
             Onay = new System.Windows.Forms.DataGridViewImageColumn();
             Guncelle = new System.Windows.Forms.DataGridViewImageColumn();
             Sil = new System.Windows.Forms.DataGridViewImageColumn();
-            buttonSatisSiparisTeklifTalepEkle = new System.Windows.Forms.Button();
-            panelFooter = new System.Windows.Forms.Panel();
-            panelHeader = new System.Windows.Forms.Panel();
-            buttonClose = new CustomControls.RoundedButton();
-            buttomMinimize = new CustomControls.RoundedButton();
-            buttonHelp = new CustomControls.RoundedButton();
-            roundedButton3 = new CustomControls.RoundedButton();
-            label1 = new System.Windows.Forms.Label();
-            roundedButton1 = new CustomControls.RoundedButton();
-            roundedButton2 = new CustomControls.RoundedButton();
-            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            maliyetİçinPMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             panelHeader.SuspendLayout();
@@ -90,15 +91,16 @@
             // 
             buttonTumKayitlariGetir.AutoSize = true;
             buttonTumKayitlariGetir.BackColor = System.Drawing.Color.Transparent;
+            buttonTumKayitlariGetir.BackgroundImage = (System.Drawing.Image)resources.GetObject("buttonTumKayitlariGetir.BackgroundImage");
             buttonTumKayitlariGetir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            buttonTumKayitlariGetir.Cursor = System.Windows.Forms.Cursors.Hand;
             buttonTumKayitlariGetir.FlatAppearance.BorderSize = 0;
             buttonTumKayitlariGetir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonTumKayitlariGetir.ForeColor = System.Drawing.SystemColors.Window;
-            buttonTumKayitlariGetir.Image = Properties.Resources.dataload1;
             buttonTumKayitlariGetir.Location = new System.Drawing.Point(1054, 17);
             buttonTumKayitlariGetir.Margin = new System.Windows.Forms.Padding(0);
             buttonTumKayitlariGetir.Name = "buttonTumKayitlariGetir";
-            buttonTumKayitlariGetir.Size = new System.Drawing.Size(45, 44);
+            buttonTumKayitlariGetir.Size = new System.Drawing.Size(45, 45);
             buttonTumKayitlariGetir.TabIndex = 13;
             buttonTumKayitlariGetir.UseVisualStyleBackColor = false;
             buttonTumKayitlariGetir.Click += buttonTumKayitlariGetir_Click;
@@ -140,148 +142,24 @@
             dataGridView.Size = new System.Drawing.Size(1239, 566);
             dataGridView.TabIndex = 3;
             dataGridView.CellClick += dataGridViewSatisSiparis_CellClick;
+            dataGridView.CellMouseMove += dataGridView_CellMouseMove;
             dataGridView.ColumnWidthChanged += dataGridViewSatisSiparisTeklifTalep_ColumnWidthChanged;
             dataGridView.Scroll += dataGridViewSatisSiparisTeklifTalep_Scroll;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "teklifTalepId";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            Id.Visible = false;
-            // 
-            // teklifTalepTarihi
-            // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            teklifTalepTarihi.DefaultCellStyle = dataGridViewCellStyle2;
-            teklifTalepTarihi.HeaderText = "Teklif Talep Tarihi";
-            teklifTalepTarihi.Name = "teklifTalepTarihi";
-            teklifTalepTarihi.ReadOnly = true;
-            // 
-            // firmaId
-            // 
-            firmaId.HeaderText = "firmaId";
-            firmaId.Name = "firmaId";
-            firmaId.ReadOnly = true;
-            firmaId.Visible = false;
-            // 
-            // musteriAd
-            // 
-            musteriAd.HeaderText = "Müşteri";
-            musteriAd.Name = "musteriAd";
-            musteriAd.ReadOnly = true;
-            // 
-            // teklifKonusu
-            // 
-            teklifKonusu.HeaderText = "Teklif Konusu";
-            teklifKonusu.Name = "teklifKonusu";
-            teklifKonusu.ReadOnly = true;
-            // 
-            // marka_MarkaId
-            // 
-            marka_MarkaId.HeaderText = "MarkaId";
-            marka_MarkaId.Name = "marka_MarkaId";
-            marka_MarkaId.ReadOnly = true;
-            marka_MarkaId.Visible = false;
-            // 
-            // markaAd
-            // 
-            markaAd.HeaderText = "Marka";
-            markaAd.Name = "markaAd";
-            markaAd.ReadOnly = true;
-            // 
-            // AltGrup_altGrupId
-            // 
-            AltGrup_altGrupId.HeaderText = "altGrupId";
-            AltGrup_altGrupId.Name = "AltGrup_altGrupId";
-            AltGrup_altGrupId.ReadOnly = true;
-            AltGrup_altGrupId.Visible = false;
-            // 
-            // altGrupAd
-            // 
-            altGrupAd.HeaderText = "Alt Grup";
-            altGrupAd.Name = "altGrupAd";
-            altGrupAd.ReadOnly = true;
-            // 
-            // referansKaynak_referansKaynakId
-            // 
-            referansKaynak_referansKaynakId.HeaderText = "referansKaynakId";
-            referansKaynak_referansKaynakId.Name = "referansKaynak_referansKaynakId";
-            referansKaynak_referansKaynakId.ReadOnly = true;
-            referansKaynak_referansKaynakId.Visible = false;
-            // 
-            // referansKaynakAd
-            // 
-            referansKaynakAd.HeaderText = "Referans Kaynağı";
-            referansKaynakAd.Name = "referansKaynakAd";
-            referansKaynakAd.ReadOnly = true;
-            // 
-            // satisSorumlusuId
-            // 
-            satisSorumlusuId.HeaderText = "satisSorumluId";
-            satisSorumlusuId.Name = "satisSorumlusuId";
-            satisSorumlusuId.ReadOnly = true;
-            satisSorumlusuId.Visible = false;
-            // 
-            // satisSorumlusuAd
-            // 
-            satisSorumlusuAd.HeaderText = "Satış Sorumlusu";
-            satisSorumlusuAd.Name = "satisSorumlusuAd";
-            satisSorumlusuAd.ReadOnly = true;
-            // 
-            // maliyetSorumlusu_PersonelId
-            // 
-            maliyetSorumlusu_PersonelId.HeaderText = "maliyetSorumlusu_PersonelId";
-            maliyetSorumlusu_PersonelId.Name = "maliyetSorumlusu_PersonelId";
-            maliyetSorumlusu_PersonelId.ReadOnly = true;
-            maliyetSorumlusu_PersonelId.Visible = false;
-            // 
-            // maliyetSorumlusu_PersonelAd
-            // 
-            maliyetSorumlusu_PersonelAd.HeaderText = "Maliyet Sorumlusu";
-            maliyetSorumlusu_PersonelAd.Name = "maliyetSorumlusu_PersonelAd";
-            maliyetSorumlusu_PersonelAd.ReadOnly = true;
-            // 
-            // Onay
-            // 
-            Onay.HeaderText = "Onay";
-            Onay.Image = (System.Drawing.Image)resources.GetObject("Onay.Image");
-            Onay.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Onay.Name = "Onay";
-            Onay.ReadOnly = true;
-            Onay.Width = 50;
-            // 
-            // Guncelle
-            // 
-            Guncelle.HeaderText = "Guncelle";
-            Guncelle.Image = Properties.Resources.update_icon;
-            Guncelle.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Guncelle.Name = "Guncelle";
-            Guncelle.ReadOnly = true;
-            Guncelle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            Guncelle.Width = 50;
-            // 
-            // Sil
-            // 
-            Sil.HeaderText = "Sil";
-            Sil.Image = Properties.Resources.delete_icon;
-            Sil.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Sil.Name = "Sil";
-            Sil.ReadOnly = true;
-            Sil.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            Sil.Width = 50;
+            dataGridView.MouseDown += dataGridView_MouseDown;
             // 
             // buttonSatisSiparisTeklifTalepEkle
             // 
-            buttonSatisSiparisTeklifTalepEkle.BackColor = System.Drawing.Color.Silver;
-            buttonSatisSiparisTeklifTalepEkle.BackgroundImage = Properties.Resources.Plus_Symbol_PNG_Image_HD;
+            buttonSatisSiparisTeklifTalepEkle.BackColor = System.Drawing.Color.Transparent;
+            buttonSatisSiparisTeklifTalepEkle.BackgroundImage = Properties.Resources.ekle45x45;
             buttonSatisSiparisTeklifTalepEkle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            buttonSatisSiparisTeklifTalepEkle.Cursor = System.Windows.Forms.Cursors.Hand;
+            buttonSatisSiparisTeklifTalepEkle.FlatAppearance.BorderSize = 0;
+            buttonSatisSiparisTeklifTalepEkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonSatisSiparisTeklifTalepEkle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttonSatisSiparisTeklifTalepEkle.ForeColor = System.Drawing.Color.Transparent;
-            buttonSatisSiparisTeklifTalepEkle.Location = new System.Drawing.Point(1155, 9);
+            buttonSatisSiparisTeklifTalepEkle.ForeColor = System.Drawing.SystemColors.Window;
+            buttonSatisSiparisTeklifTalepEkle.Location = new System.Drawing.Point(1123, 16);
             buttonSatisSiparisTeklifTalepEkle.Name = "buttonSatisSiparisTeklifTalepEkle";
-            buttonSatisSiparisTeklifTalepEkle.Size = new System.Drawing.Size(58, 52);
+            buttonSatisSiparisTeklifTalepEkle.Size = new System.Drawing.Size(45, 45);
             buttonSatisSiparisTeklifTalepEkle.TabIndex = 11;
             buttonSatisSiparisTeklifTalepEkle.UseVisualStyleBackColor = false;
             buttonSatisSiparisTeklifTalepEkle.Click += buttonSatisSiparisEkle_Click;
@@ -460,16 +338,153 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { maliyetİçinPMToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { maliyetTalep, maliyetFormuToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            contextMenuStrip1.Size = new System.Drawing.Size(157, 48);
             // 
-            // maliyetİçinPMToolStripMenuItem
+            // maliyetTalep
             // 
-            maliyetİçinPMToolStripMenuItem.Name = "maliyetİçinPMToolStripMenuItem";
-            maliyetİçinPMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            maliyetİçinPMToolStripMenuItem.Text = "Maliyet için PM";
-            maliyetİçinPMToolStripMenuItem.Click += maliyetİçinPMToolStripMenuItem_Click;
+            maliyetTalep.Name = "maliyetTalep";
+            maliyetTalep.Size = new System.Drawing.Size(156, 22);
+            maliyetTalep.Text = "Maliyet için PM";
+            maliyetTalep.Click += maliyetTalep_Click;
+            // 
+            // maliyetFormuToolStripMenuItem
+            // 
+            maliyetFormuToolStripMenuItem.Name = "maliyetFormuToolStripMenuItem";
+            maliyetFormuToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            maliyetFormuToolStripMenuItem.Text = "Maliyet Formu";
+            maliyetFormuToolStripMenuItem.Click += maliyetFormuToolStripMenuItem_Click;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "teklifTalepId";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // teklifTalepTarihi
+            // 
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            teklifTalepTarihi.DefaultCellStyle = dataGridViewCellStyle2;
+            teklifTalepTarihi.HeaderText = "Teklif Talep Tarihi";
+            teklifTalepTarihi.Name = "teklifTalepTarihi";
+            teklifTalepTarihi.ReadOnly = true;
+            // 
+            // firmaId
+            // 
+            firmaId.HeaderText = "firmaId";
+            firmaId.Name = "firmaId";
+            firmaId.ReadOnly = true;
+            firmaId.Visible = false;
+            // 
+            // musteriAd
+            // 
+            musteriAd.HeaderText = "Müşteri";
+            musteriAd.Name = "musteriAd";
+            musteriAd.ReadOnly = true;
+            // 
+            // teklifKonusu
+            // 
+            teklifKonusu.HeaderText = "Teklif Konusu";
+            teklifKonusu.Name = "teklifKonusu";
+            teklifKonusu.ReadOnly = true;
+            // 
+            // marka_MarkaId
+            // 
+            marka_MarkaId.HeaderText = "MarkaId";
+            marka_MarkaId.Name = "marka_MarkaId";
+            marka_MarkaId.ReadOnly = true;
+            marka_MarkaId.Visible = false;
+            // 
+            // markaAd
+            // 
+            markaAd.HeaderText = "Marka";
+            markaAd.Name = "markaAd";
+            markaAd.ReadOnly = true;
+            // 
+            // AltGrup_altGrupId
+            // 
+            AltGrup_altGrupId.HeaderText = "altGrupId";
+            AltGrup_altGrupId.Name = "AltGrup_altGrupId";
+            AltGrup_altGrupId.ReadOnly = true;
+            AltGrup_altGrupId.Visible = false;
+            // 
+            // altGrupAd
+            // 
+            altGrupAd.HeaderText = "Alt Grup";
+            altGrupAd.Name = "altGrupAd";
+            altGrupAd.ReadOnly = true;
+            // 
+            // referansKaynak_referansKaynakId
+            // 
+            referansKaynak_referansKaynakId.HeaderText = "referansKaynakId";
+            referansKaynak_referansKaynakId.Name = "referansKaynak_referansKaynakId";
+            referansKaynak_referansKaynakId.ReadOnly = true;
+            referansKaynak_referansKaynakId.Visible = false;
+            // 
+            // referansKaynakAd
+            // 
+            referansKaynakAd.HeaderText = "Referans Kaynağı";
+            referansKaynakAd.Name = "referansKaynakAd";
+            referansKaynakAd.ReadOnly = true;
+            // 
+            // satisSorumlusuId
+            // 
+            satisSorumlusuId.HeaderText = "satisSorumluId";
+            satisSorumlusuId.Name = "satisSorumlusuId";
+            satisSorumlusuId.ReadOnly = true;
+            satisSorumlusuId.Visible = false;
+            // 
+            // satisSorumlusuAd
+            // 
+            satisSorumlusuAd.HeaderText = "Satış Sorumlusu";
+            satisSorumlusuAd.Name = "satisSorumlusuAd";
+            satisSorumlusuAd.ReadOnly = true;
+            // 
+            // maliyetSorumlusu_PersonelId
+            // 
+            maliyetSorumlusu_PersonelId.HeaderText = "maliyetSorumlusu_PersonelId";
+            maliyetSorumlusu_PersonelId.Name = "maliyetSorumlusu_PersonelId";
+            maliyetSorumlusu_PersonelId.ReadOnly = true;
+            maliyetSorumlusu_PersonelId.Visible = false;
+            // 
+            // maliyetSorumlusu_PersonelAd
+            // 
+            maliyetSorumlusu_PersonelAd.HeaderText = "Maliyet Sorumlusu";
+            maliyetSorumlusu_PersonelAd.Name = "maliyetSorumlusu_PersonelAd";
+            maliyetSorumlusu_PersonelAd.ReadOnly = true;
+            // 
+            // Onay
+            // 
+            Onay.HeaderText = "Onay";
+            Onay.Image = (System.Drawing.Image)resources.GetObject("Onay.Image");
+            Onay.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Onay.Name = "Onay";
+            Onay.ReadOnly = true;
+            Onay.Visible = false;
+            Onay.Width = 50;
+            // 
+            // Guncelle
+            // 
+            Guncelle.HeaderText = "Guncelle";
+            Guncelle.Image = Properties.Resources.data_update_icon1;
+            Guncelle.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Guncelle.Name = "Guncelle";
+            Guncelle.ReadOnly = true;
+            Guncelle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Guncelle.Width = 50;
+            // 
+            // Sil
+            // 
+            Sil.HeaderText = "Sil";
+            Sil.Image = Properties.Resources.sil1;
+            Sil.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Sil.Name = "Sil";
+            Sil.ReadOnly = true;
+            Sil.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Sil.Width = 50;
             // 
             // SatisSiparisTeklifTalepGridForm
             // 
@@ -502,6 +517,18 @@
         private System.Windows.Forms.Button buttonSatisSiparisTeklifTalepEkle;
         private CustomControls.RoundedButton buttonClose;
         private CustomControls.RoundedButton buttomMinimize;
+        private System.Windows.Forms.Panel panel1;
+        private CustomControls.RoundedButton roundedButton3;
+        private System.Windows.Forms.Label label1;
+        private CustomControls.RoundedButton roundedButton1;
+        private CustomControls.RoundedButton roundedButton2;
+        private CustomControls.RoundedButton roundedButton4;
+        private CustomControls.RoundedButton roundedButton5;
+        private CustomControls.RoundedButton buttonHelp;
+        private System.Windows.Forms.Button buttonTumKayitlariGetir;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem maliyetTalep;
+        private System.Windows.Forms.ToolStripMenuItem maliyetFormuToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn teklifTalepTarihi;
         private System.Windows.Forms.DataGridViewTextBoxColumn firmaId;
@@ -520,16 +547,5 @@
         private System.Windows.Forms.DataGridViewImageColumn Onay;
         private System.Windows.Forms.DataGridViewImageColumn Guncelle;
         private System.Windows.Forms.DataGridViewImageColumn Sil;
-        private System.Windows.Forms.Panel panel1;
-        private CustomControls.RoundedButton roundedButton3;
-        private System.Windows.Forms.Label label1;
-        private CustomControls.RoundedButton roundedButton1;
-        private CustomControls.RoundedButton roundedButton2;
-        private CustomControls.RoundedButton roundedButton4;
-        private CustomControls.RoundedButton roundedButton5;
-        private CustomControls.RoundedButton buttonHelp;
-        private System.Windows.Forms.Button buttonTumKayitlariGetir;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem maliyetİçinPMToolStripMenuItem;
     }
 }

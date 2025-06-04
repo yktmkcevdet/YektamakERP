@@ -16,7 +16,7 @@ namespace ApiService.Implementetions
 
         public async Task<Kullanici> GetKullaniciAsync(string username)
         {
-            var response = await _apiService.GetAsync($"users/{username}");
+            var response = await _apiService.GetAsync($"GetKullanici/{username}");
             DataSet dataSet = ConvertHelper.JsonStringToDataSet(response);
             if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0) return null;
             return ConvertHelper.DataRowToModel<Kullanici>(dataSet.Tables[0].Rows[0]);

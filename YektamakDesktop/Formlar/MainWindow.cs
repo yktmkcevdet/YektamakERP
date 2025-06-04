@@ -216,8 +216,8 @@ namespace YektamakDesktop
                 // Form bulunduysa açar.
                 if (targetType != null)
                 {
-                    object[] parameters = new object[] { GlobalData.kendiFirmaId };
-                    MethodInfo method = targetType.GetMethod("FirmaMode", new Type[] { typeof(int) });
+                    //object[] parameters = new object[] { GlobalData.kendiFirmaId };
+                    //MethodInfo method = targetType.GetMethod("FirmaMode", new Type[] { typeof(int) });
                     Type type = Type.GetType(targetType.ToString());
 
                     PropertyInfo propertyInfo = type.GetProperty(type.Name[0].ToString().ToLower() + type.Name.Substring(1), BindingFlags.Static | BindingFlags.Public);
@@ -227,7 +227,7 @@ namespace YektamakDesktop
                     {
                         form.StartPosition = FormStartPosition.CenterScreen;
                         form.Show();
-                        method?.Invoke(form, parameters); //method null değilse invoke eder. ? işareti null kontrolünü sağlıyor.
+                        //method?.Invoke(form, parameters); //method null değilse invoke eder. ? işareti null kontrolünü sağlıyor.
                     }
                 }
                 else

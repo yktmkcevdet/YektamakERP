@@ -8,11 +8,17 @@ using System.IO;
 using System.Linq;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satinalma.DataControl
 {
     public class DataControlTalepDetay : Abstracts.DataControl,IEntity
 	{
+		private static IStokService _stokService;
+		private DataControlTalepDetay(IStokService stokService)
+		{
+            _stokService = stokService;
+        }
         public CustomTextBox _filePath;
         public CustomTextBox filePath { get => _filePath; set { _filePath = value; } }
         private CustomTextBox _parcaAdi;
@@ -100,10 +106,10 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
 			set
 			{
 				_malzemeId = value;
-				string jsonString = WebMethods.GetMalzeme(new Malzeme());
+				string jsonString = _stokService.GetMalzeme();
                 
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSet = jsonConverter.JsonStringToDataSet(jsonString);
+                IJsonConverter jsonConverter = new JsonConverter();
+                DataSet dataSet = jsonConverter.DeserializeToDataSet(jsonString);
                 FillComboBoxListFromDataSet(_malzemeId, dataSet);
 			}
 		}
@@ -124,7 +130,7 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
 			{
 				foreach (StokKart stokKart in stokKartList)
 				{
-					customComboListBox.AddDataRow(stokKart.Id, stokKart.kod);
+					customComboListBox.AddDataRow(stokKart.Id??0, stokKart.parcaKod);
 				}
 			}
 		}
@@ -153,32 +159,32 @@ namespace YektamakDesktop.Formlar.Satinalma.DataControl
 				StokKart stokKart = new StokKart();
 				//stokKart.proje.malzemeId = _malzemeId.selectedDataRowId;
 				//stokKart.proje.malzemeKodu = _malzemeId.textBox.TextCustom;
-				stokKart.kod = customComboListBox.textBox.TextCustom;
+				stokKart.parcaKod = customComboListBox.textBox.TextCustom;
 				stokKart.ad = _parcaAdi.TextCustom;
 				stokKart.boyut = _boyut.TextCustom;
-				if (File.Exists(filePath.TextCustom + "\\" + stokKart.kod + ".pdf"))
+				if (File.Exists(filePath.TextCustom + "\\" + stokKart.parcaKod + ".pdf"))
 				{
-					stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.kod + ".pdf");
+					stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.parcaKod + ".pdf");
 				}
-                if (File.Exists(filePath.TextCustom + "\\" + stokKart.kod + ".dxf"))
+                if (File.Exists(filePath.TextCustom + "\\" + stokKart.parcaKod + ".dxf"))
                 {
-                    stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.kod + ".dxf");
+                    stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.parcaKod + ".dxf");
                 }
-                if (File.Exists(filePath.TextCustom + "\\" + stokKart.kod + ".step"))
+                if (File.Exists(filePath.TextCustom + "\\" + stokKart.parcaKod + ".step"))
                 {
-                    stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.kod + ".step");
+                    stokKart.pdf = File.ReadAllBytes(filePath.TextCustom + "\\" + stokKart.parcaKod + ".step");
                 }
-                if (stokKart.kod != "")
+                if (stokKart.parcaKod != "")
 				{
-                    IDataTableHelper dataTableConverter = new DataTableHelper();
-                    IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                    DataSet stokKartDataSet = jsonConverter.JsonStringToDataSet(await WebMethods.SaveStokKart(stokKart));
+                    IDataTableMapper dataTableConverter = new DataTableMapper();
+                    IJsonConverter jsonConverter = new JsonConverter();
+                    DataSet stokKartDataSet = jsonConverter.DeserializeToDataSet(await _stokService.SaveStokKart(stokKart));
 					if (stokKartDataSet != null)
 					{
-						stokKart = dataTableConverter.DataRowToModel<StokKart>(stokKartDataSet.Tables[0].Rows[0]);
+						stokKart = dataTableConverter.MapToEntity<StokKart>(stokKartDataSet.Tables[0].Rows[0]);
 						//stokKartList.Add(stokKart);
 						FillComboBoxListFromDataSet(_stokKartId, stokKartDataSet);
-						_stokKartId.SelectDataRowId(stokKart.Id);
+						_stokKartId.SelectDataRowId(stokKart.Id??0);
 						/*if (!malzemeList.Any(x => x.malzemeId == stokKart.proje.malzemeId))
 						{
 							malzemeList.Add(stokKart.proje);

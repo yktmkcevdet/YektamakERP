@@ -326,7 +326,7 @@
             // Guncelle
             // 
             Guncelle.HeaderText = "Güncelle";
-            Guncelle.Image = Properties.Resources.update_icon;
+            Guncelle.Image = Properties.Resources.data_update_icon;
             Guncelle.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             Guncelle.Name = "Guncelle";
             Guncelle.ReadOnly = true;
@@ -334,7 +334,7 @@
             // Sil
             // 
             Sil.HeaderText = "Sil";
-            Sil.Image = Properties.Resources.delete_icon;
+            Sil.Image = Properties.Resources.sil;
             Sil.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             Sil.Name = "Sil";
             Sil.ReadOnly = true;

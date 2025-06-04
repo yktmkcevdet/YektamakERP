@@ -9,7 +9,8 @@
 
     public class DovizCinsi:IEntity
     {
-        public int id;
-        public string sembol;
+        public int Id;
+        public string kod;
+        public string ad;
     }
 }

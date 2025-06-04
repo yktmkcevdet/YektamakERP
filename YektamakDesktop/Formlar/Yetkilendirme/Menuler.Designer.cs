@@ -6,6 +6,7 @@ using ApiService;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -185,7 +186,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         public class DataControlMenu : Abstracts.DataControl, IEntity
         {
-            private WebMethods _webMethods;
+            private static IKullaniciYetkiService _kullaniciYetkiService;
             private CustomTextBox _menuId;
             public CustomTextBox menuId { get { if (_menuId == null) _menuId = new(); return _menuId; } set { _menuId = value; } }
             private CustomTextBox _menuAdi;
@@ -217,14 +218,14 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 menuAdi = new() { TabIndex = 2,Width = 200, Tag="Menu Adı" };
                 formAdi = new() { TabIndex = 3,Width = 200, Tag="Form Adı" };
                 icon = new() { TabIndex = 4, Width = 100, Tag = "İkon" };
-                iconButton = new() { TabIndex = 5, Width = 35,Height=28, Tag = "Güncelle",BackgroundImage=Resources.update_icon,BackColor=Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
+                iconButton = new() { TabIndex = 5, Width = 35,Height=28, Tag = "Güncelle",BackgroundImage=Resources.data_update_icon,BackColor=Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom };
                 buttonSil.Click += ButtonSil_Click;
                 iconButton.Click += IconButton_Click;
             }
 
-            public DataControlMenu(WebMethods webMethods)
+            public DataControlMenu(IKullaniciYetkiService kullaniciYetkiService)
             {
-                _webMethods = webMethods;
+                _kullaniciYetkiService = kullaniciYetkiService;
             }
 
             private void IconButton_Click(object sender, EventArgs e)
@@ -243,7 +244,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 Menu menu = new();
                 if(menuId.TextCustom!="")menu.Id = Convert.ToInt32(menuId.TextCustom.Replace(".",""));
-                await _webMethods.DeleteMenu(menu);
+                await _kullaniciYetkiService.DeleteMenu(menu);
             }
         }
 

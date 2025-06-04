@@ -142,7 +142,6 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.formBg;
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(687, 266);
             Controls.Add(totalCount);

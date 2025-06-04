@@ -50,6 +50,7 @@ namespace ApiService.Implementetions
                 client.DefaultRequestHeaders.Add("Authorization", apiKey);
 
                 var requestBody = new { query };
+                var request = JsonConvert.SerializeObject(requestBody);
                 var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync(url, content);
@@ -65,6 +66,8 @@ namespace ApiService.Implementetions
 
                         foreach (PropertyInfo fieldInfo in mondayTeklif.GetType().GetProperties())
                         {
+                            var deneme = item["column_values"].ToList();
+                            var deneme2 = deneme.FirstOrDefault(x => x["id"].ToString() == fieldInfo.Name);
                             var value = item["column_values"].ToList().FirstOrDefault(x => x["id"].ToString() == fieldInfo.Name)["text"];
                             Type type = typeof(DateTime);
                             string strValue = (fieldInfo.PropertyType == type) ? (value.ToString() == "" ? DateTime.MinValue : value).ToString() : value.ToString();
@@ -82,13 +85,25 @@ namespace ApiService.Implementetions
         }
         public async Task<string> SaveSatisSiparisTeklifTalep(string siparisTeklifTalep) 
         {
-            var response = await _apiService.GetAsync($"savesatissiparistekliftalep/{siparisTeklifTalep}");
-            return response;
+            return await _apiService.GetAsync($"savesatissiparistekliftalep/{siparisTeklifTalep}");
         }
         public async Task<string> DeleteSatisSiparisTeklifTalep(string siparisTeklifTalep)
         {
-            var response = await _apiService.GetAsync($"DeleteSatisSiparisTeklifTalep/{siparisTeklifTalep}");
-            return response;
+            return await _apiService.DeleteAsync($"DeleteSatisSiparisTeklifTalep/{siparisTeklifTalep}");
+        }
+
+        public string GetReferansKaynak()
+        {
+            return _apiService.Get("GetReferansKaynak");
+        }
+
+        public string GetSatisTeklifTalep(SatisTeklifTalep satisTeklifTalep)
+        {
+            return _apiService.Post(satisTeklifTalep, "GetSatisTeklifTalep");
+        }
+        public async Task<string> SaveSatisSiparisTeklifTalep(SatisTeklifTalep satisTeklifTalep)
+        {
+            return await _apiService.PostAsync(satisTeklifTalep, "SaveSatisSiparisTeklifTalep");
         }
     }
 }

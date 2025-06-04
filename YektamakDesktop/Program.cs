@@ -36,17 +36,24 @@ namespace YektamakDesktop
             Application.SetCompatibleTextRenderingDefault(false);
             DIContainer.ConfigureServices();
             DIContainer.GetService<GlobalData>();
-            DIContainer.GetService<SatisProjeKayitFormu>();
+            DIContainer.GetService<EkranEkle>();
             DIContainer.GetService<FirmaGridForm>();
+            DIContainer.GetService<PersonelKayitFormu>();
             DIContainer.GetService<ProjeDosyalari>();
-            DIContainer.GetService<StokKartTanimlamaFormu>();
+            DIContainer.GetService<StokKartKayitFormu>();
             DIContainer.GetService<ExceldenVeriAlmaFormu>();
-            DIContainer.GetService<SatisSiparisTeklifTalepKayitFormu>();
+            DIContainer.GetService<SatisTeklifTalepKayitFormu>();
             DIContainer.GetService<SatisSiparisTeklifTalepGridForm>();
             DIContainer.GetService<SatinalmaTalepOlusturma>();
             DIContainer.GetService<AltMenuEkle>();
             DIContainer.GetService<Menuler>();
             DIContainer.GetService<Monday>();
+            DIContainer.GetService<StokKartGridForm>();
+            DIContainer.GetService<YetkiTanimlari>();
+            DIContainer.GetService<SatisTeklifMaliyetKayitFormu>();
+            DIContainer.GetService<KullaniciKayitFormu>();
+            DIContainer.GetService<SatinalmaTalepSatirDetayForm>();
+
             var userLogin = DIContainer.GetService<UserLogin>();
             Application.Run(userLogin);
 

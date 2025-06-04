@@ -12,9 +12,9 @@ namespace YektamakDesktop.Common
 {
     public class DataGridHelper: IDataGridHelper
     {
-        private readonly IJsonConvertHelper _jsonConverter;
+        private readonly IJsonConverter _jsonConverter;
 
-        public DataGridHelper(IJsonConvertHelper jsonConverter)
+        public DataGridHelper(IJsonConverter jsonConverter)
         {
             _jsonConverter = jsonConverter;
         }
@@ -36,7 +36,7 @@ namespace YektamakDesktop.Common
             }
             else
             {
-                dataTable = _jsonConverter.JsonStringToDataSet(result).Tables[0];
+                dataTable = _jsonConverter.DeserializeToDataSet(result).Tables[0];
             }
             return dataTable;
         }

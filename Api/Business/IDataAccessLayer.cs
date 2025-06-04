@@ -22,4 +22,13 @@ namespace Api.Business
         //void AddParameters<T, U>(T model, U cmd, string parameterPrefix) where T : class where U : DbCommand;
         DataTable ListToDataTable<T>(List<T> list, Type type) where T : class;
     }
+    public interface IDataAccessLayerAsync
+    {
+        Task<string> SaveObjectAsync<T>(T model, string sqlCommandName) where T : class;
+        Task<string> GetObjectAsync<T>(T model, string sqlCommandName) where T : class;
+        Task<string> GetObjectAsync(string sqlCommandName);
+        Task<string> GetObjectAsync(string parameter, string sqlCommandName);
+        Task<string> DeleteObjectAsync<T>(T model, string sqlCommandName) where T : class;
+        DataTable ListToDataTable<T>(List<T> list, Type type) where T : class;
+    }
 }

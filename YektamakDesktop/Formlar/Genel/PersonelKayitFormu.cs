@@ -11,12 +11,17 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
     public partial class PersonelKayitFormu : Form, IForm
     {
-
+        private static IPersonelService _personelService;
+        public PersonelKayitFormu(IPersonelService personelService)
+        {
+            _personelService = personelService;
+        }
         private static PersonelKayitFormu _personelKayitFormu;
 
         public static PersonelKayitFormu personelKayitFormu
@@ -89,7 +94,7 @@ namespace YektamakDesktop.Formlar.Genel
         {
             buttonPersonelGuncelle.Visible = true;
             personelToUpdate=personel;
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id);
+            comboListBoxFirma.SelectDataRowId(personel.firma.Id??-1);
             textBoxIsim.TextCustom = personel.ad;
             textBoxSoyisim.TextCustom = personel.soyad;
             textBoxTelefon.TextCustom = personel.telefon;
@@ -118,7 +123,7 @@ namespace YektamakDesktop.Formlar.Genel
             buttonPersonelGuncelle.Visible = false;
             personelToSave=JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
             personelToUpdate= JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id);
+            comboListBoxFirma.SelectDataRowId(personel.firma.Id??-1);
             comboListBoxFirma.Enabled= false;
         }
         private void buttonResimSec_Click(object sender, EventArgs e)
@@ -179,12 +184,12 @@ namespace YektamakDesktop.Formlar.Genel
             result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, comboListBoxFirma);
             return result;
         }
-        private void buttonPersonelKaydet_Click(object sender, EventArgs e)
+        private async void buttonPersonelKaydet_Click(object sender, EventArgs e)
         {
             if (CheckFields())
             {
                 personelToSave = GetCurrentPersonel();
-                string result = WebMethods.SavePersonel(personelToSave);
+                string result = await _personelService.SavePersonel(personelToSave);
                 this.Enabled = false;
                 if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
@@ -192,8 +197,8 @@ namespace YektamakDesktop.Formlar.Genel
                 }
                 else
                 {
-                    IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                    DataSet datasetPersonel = jsonConverter.JsonStringToDataSet(result);
+                    IJsonConverter jsonConverter = new Utilities.Implementations.JsonConverter();
+                    DataSet datasetPersonel = jsonConverter.DeserializeToDataSet(result);
                     int personelId = int.Parse(datasetPersonel.Tables[0].Rows[0][0].ToString());
                     personelToSave.Id = personelId;
                     if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(FirmaKayitFormu))//FirmaKayitFormu tarafından çağırılmışsa

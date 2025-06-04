@@ -33,19 +33,20 @@
             // 
             // textBox
             // 
+            textBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            textBox.Location = new System.Drawing.Point(7, 5);
+            textBox.Location = new System.Drawing.Point(4, 3);
             textBox.Margin = new System.Windows.Forms.Padding(0);
             textBox.Name = "textBox";
-            textBox.Size = new System.Drawing.Size(236, 17);
+            textBox.Size = new System.Drawing.Size(251, 24);
             textBox.TabIndex = 0;
             textBox.Click += textBox_Click;
             textBox.TextChanged += textBox_TextChanged;
+            textBox.DoubleClick += TextBox_DoubleClick;
             textBox.Enter += textBox1_Enter;
+            textBox.KeyDown += textBox1_KeyDown;
             textBox.KeyPress += textBox1_KeyPress;
             textBox.KeyUp += textBox1_KeyUp;
-            textBox.KeyDown += textBox1_KeyDown;
             textBox.Leave += textBox1_Leave;
             textBox.LostFocus += textBox_LostFocus;
             textBox.MouseLeave += textBox_MouseLeave;
@@ -59,12 +60,14 @@
             ForeColor = System.Drawing.Color.DimGray;
             Name = "CustomTextBox";
             Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            Size = new System.Drawing.Size(250, 27);
+            Size = new System.Drawing.Size(262, 25);
             Enter += CustomTextBox_Enter;
             Leave += CustomTextBox_Leave;
             ResumeLayout(false);
             PerformLayout();
         }
+
+
 
         #endregion
 

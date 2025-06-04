@@ -19,8 +19,18 @@ namespace ApiService
                 });
 
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ISatinalmaTalep, SatinalmaTalep>();
+            services.AddTransient<ISatinalmaService, SatinalmaService>();
             services.AddTransient<ISatisService, SatisService>();
+            services.AddTransient<IStokService, StokService>();
+            services.AddTransient<IProjeService, ProjeService>();
+            services.AddTransient<IKullaniciYetkiService, KullaniciYetkiService>();
+            services.AddTransient<IFirmaService, FirmaService>();
+            services.AddTransient<IPersonelService, PersonelService>();
+            services.AddTransient<IProjeService, ProjeService>();
+            services.AddTransient<ICariService, CariService>();
+            services.AddTransient<IDovizCinsiService, DovizCinsiService>();
+            services.AddTransient<IMaliyetService, MaliyetService>();
+            services.AddTransient<IAnaVeriService, AnaVeriService>();
             return services;
         }
     }

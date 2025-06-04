@@ -6,7 +6,7 @@ namespace Utilities.Implementations
 {
     public class LoginHelper:ILoginHelper
     {
-        public string HashPassword(string password, string salt)
+        public string ComputeHash(string password, string salt)
         {
             using var sha256 = SHA256.Create();
             var saltedPassword = password + salt;
@@ -14,7 +14,7 @@ namespace Utilities.Implementations
             var hash = sha256.ComputeHash(bytes);
             return BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
-        public string GenerateSalt()
+        public string GenerateCryptographicSalt()
         {
             byte[] saltBytes = new byte[16];
             using (var rng = RandomNumberGenerator.Create())

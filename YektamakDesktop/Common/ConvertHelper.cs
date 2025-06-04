@@ -34,6 +34,7 @@ namespace YektamakDesktop.Common
 
             return list;
         }
+        
         /// <summary>
         /// Model listesini datatable'a çevirir.
         /// </summary>
@@ -69,9 +70,8 @@ namespace YektamakDesktop.Common
             return table;
         }
 
-
         /// <summary>
-        /// DataTable'a sütun ekler (Field ve Property için)
+        /// Model içindeki Field ve Property'leri DataTable'a sütun olarak ekler
         /// </summary>
         /// <param name="table"></param>
         /// <param name="members"></param>
@@ -98,6 +98,7 @@ namespace YektamakDesktop.Common
                 }
             }
         }
+        
         /// <summary>
         /// DataRow'a değer ekler (Field ve Property için)
         /// </summary>
@@ -128,6 +129,7 @@ namespace YektamakDesktop.Common
                 }
             }
         }
+        
         /// <summary>
         /// Member türünü alır (Field veya Property)
         /// </summary>
@@ -142,7 +144,13 @@ namespace YektamakDesktop.Common
                 _ => throw new ArgumentException("Member must be a field or property.")
             };
 
-        // Helper: Member değerini alır (Field veya Property)
+        /// <summary>
+        /// Member değerini alır (Field veya Property)
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private static object GetValue(MemberInfo member, object entity) =>
             member switch
             {
@@ -150,6 +158,7 @@ namespace YektamakDesktop.Common
                 PropertyInfo property => property.GetValue(entity),
                 _ => throw new ArgumentException("Member must be a field or property.")
             };
+        
         /// <summary>
         /// Kompleks türleri kontrol eder
         /// </summary>
@@ -157,29 +166,25 @@ namespace YektamakDesktop.Common
         /// <returns></returns>
         private static bool IsComplexType(Type type)
         {
-            // Nullable türü kontrol et
-            var underlyingType = Nullable.GetUnderlyingType(type);
-            if (underlyingType != null)
-            {
-                // Eğer nullable tür bool ise, kompleks olarak sayma
-                if (underlyingType == typeof(bool))
-                    return false;
-            }
+            // Nullable türse, gerçek tipini al
+            var underlyingType = Nullable.GetUnderlyingType(type) ?? type;
 
             // Eğer byte[] ise kompleks sayma
-            if (type == typeof(byte[]))
+            if (underlyingType == typeof(byte[]))
                 return false;
 
-            // Eğer liste türü ise kompleks sayma (string hariç)
-            if (typeof(IEnumerable).IsAssignableFrom(type) && type != typeof(string))
+            // IEnumerable olup string olmayanlar kompleks sayılmaz (liste gibi düşünülmüş)
+            if (typeof(IEnumerable).IsAssignableFrom(type) && underlyingType != typeof(string))
                 return false;
 
-            // Basit türleri kontrol et
-            return !(type.IsPrimitive || type.IsEnum || type.Equals(typeof(string)) || type.Equals(typeof(decimal)));
+            // Basit türler
+            return !(underlyingType.IsPrimitive
+                     || underlyingType.IsEnum
+                     || underlyingType == typeof(string)
+                     || underlyingType == typeof(decimal)
+                     || underlyingType == typeof(DateTime)
+                     || underlyingType == typeof(Guid));
         }
-
-
-
 
         /// <summary>
         /// DataRow'ı model nesnesine çevirir.
@@ -202,25 +207,21 @@ namespace YektamakDesktop.Common
                     }
                     else
                     {
+                        var underlyingType = Nullable.GetUnderlyingType(fieldInfo.FieldType) ?? fieldInfo.FieldType;
+                        var type=fieldInfo.FieldType;
                         object data = dataRow[upClassName + fieldInfo.Name];
-                        if (data.ToString() == "" && (fieldInfo.FieldType == typeof(int) || fieldInfo.FieldType == typeof(float) || fieldInfo.FieldType == typeof(float) || fieldInfo.FieldType == typeof(double))) //data değeri sayısal değerse
+                        if (data.ToString() == "" && (type == typeof(int) || type == typeof(float) || type == typeof(double))) //data değeri sayısal değerse
                         {
                             value = Convert.ChangeType(0, fieldInfo.FieldType);
                         }
-                        else if (Nullable.GetUnderlyingType(fieldInfo.FieldType) == typeof(bool))
+                        else if (underlyingType == typeof(bool))
                         {
-                            data = data?.ToString() == "true" ? "1" : data?.ToString() == "false" ? "0" : data;
+                            data = data?.ToString() == "true" ? true : data?.ToString() == "false" ? false : data;
                             value = data?.ToString() == "1" ? true : data?.ToString() == "0" ? false : null;
-                        }
-                        else if (fieldInfo.FieldType == typeof(bool))
-                        {
-                            data = data?.ToString() == "true" ? "1" : data?.ToString() == "false" ? "0" : data;
-                            value = data?.ToString() == "1" ? true : false;
                         }
                         else
                         {
-                            Type targetType = Nullable.GetUnderlyingType(fieldInfo.FieldType) ?? fieldInfo.FieldType;
-                            value = data == null ? null : Convert.ChangeType(data, targetType);
+                            value = data == null || (data.ToString() is string str && string.IsNullOrWhiteSpace(str)) ? null : Convert.ChangeType(data, underlyingType);
                         }
                     }
                     fieldInfo.SetValue(entity, value);
@@ -235,19 +236,21 @@ namespace YektamakDesktop.Common
                     {
                         object value = null;
                         string data = dataRow[upClassName + propertyInfo.Name].ToString();
-                        if (data.ToString() == "" && propertyInfo.PropertyType == typeof(int))
+                        if (data == null && (propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(float) || propertyInfo.PropertyType == typeof(double)))
                         {
                             value = Convert.ChangeType(0, propertyInfo.PropertyType);
                         }
                         else
                         {
-                            value = Convert.ChangeType(data, propertyInfo.PropertyType);
+                            Type targetType = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
+                            value = data == null || (data.ToString() is string str && string.IsNullOrWhiteSpace(str)) ? null : Convert.ChangeType(data, targetType);
+                            //value = Convert.ChangeType(data, propertyInfo.PropertyType);
                         }
                         propertyInfo.SetValue(entity, value);
                     }
                     else
                     {
-                        string data = dataRow[upClassName + propertyInfo.Name].ToString();
+                        var data = dataRow[upClassName + propertyInfo.Name].ToString();
                         if (typeof(UserControl).IsAssignableFrom(type))
                         {
                             if (type == typeof(CustomComboListBox))
@@ -269,18 +272,33 @@ namespace YektamakDesktop.Common
                         }
                         else
                         {
-                            object value = JsonConvert.DeserializeObject(data, type);
+                            object value;
+                            if (data.ToString() == "" && (propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(float) || propertyInfo.PropertyType == typeof(double))) //data değeri sayısal değerse
+                            {
+                                value = Convert.ChangeType(0, propertyInfo.PropertyType);
+                            }
+                            else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(bool) || propertyInfo.PropertyType == typeof(bool))
+                            {
+                                value = data?.ToString() == "true" ? true : false;
+                            }
+                            else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(double))
+                            {
+                                Type targetType = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
+                                value = data == null || (data.ToString() is string str && string.IsNullOrWhiteSpace(str)) ? null : Convert.ChangeType(data, targetType);
+                            }
+                            else
+                            {
+                                value = JsonConvert.DeserializeObject(data, type);
+                            }
                             propertyInfo.SetValue(entity, value);
                         }
 
                     }
                 }
-
-
                 else if (typeof(IEntity).IsAssignableFrom(propertyInfo.PropertyType))
                 {
                     MethodInfo method = typeof(ConvertHelper).GetMethod("DataRowToModel").MakeGenericMethod(type);
-                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name  });
+                    object value = method.Invoke(null, new object[] { dataRow, upClassName + propertyInfo.Name });
                     propertyInfo.SetValue(entity, value);
                 }
             }

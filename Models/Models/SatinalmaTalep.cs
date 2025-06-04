@@ -1,11 +1,11 @@
 ﻿namespace Models
 {
-    public class SatinalmaTalepBaslik:IEntity
+    public class SatinalmaTalep:IEntity
 	{
 		public int Id;
 		public string satinalmaTalepNo;
 		public DateTime talepTarihi;
-		public long parcaGrupId;
+		public long malzemeGrupId;
         private Proje _proje;
 		public Proje proje
 		{
@@ -40,32 +40,16 @@
 			}
 		}
 		public string aciklama;
-		private List<SatinalmaTalepDetay> _satinalmaTalepDetay;
-		public List<SatinalmaTalepDetay> satinalmaTalepDetay
+		private List<SatinalmaTalepDetay> _satinalmaTalepDetays;
+		public List<SatinalmaTalepDetay> satinalmaTalepDetays
 		{
-			get { if (_satinalmaTalepDetay == null) _satinalmaTalepDetay = new List<SatinalmaTalepDetay>(); return _satinalmaTalepDetay; }
-			set { _satinalmaTalepDetay = value; }
+			get { if (_satinalmaTalepDetays == null) _satinalmaTalepDetays = new List<SatinalmaTalepDetay>(); return _satinalmaTalepDetays; }
+			set { _satinalmaTalepDetays = value; }
 		}
 	}
 	public class SatinalmaTalepDetay : IEntity
 	{
-		public int id;
-		//private SatinalmaTalepBaslik _satinalmaTalepBaslik;
-		//public SatinalmaTalepBaslik satinalmaTalepBaslik
-		//{
-		//	get
-		//	{
-		//		if (_satinalmaTalepBaslik == null)
-		//		{
-		//			_satinalmaTalepBaslik=new SatinalmaTalepBaslik();
-		//		}
-		//		return _satinalmaTalepBaslik;
-		//	}
-		//	set
-		//	{
-		//		_satinalmaTalepBaslik = value;
-		//	}
-		//}
+		public int Id;
 		private StokKart _stokKart;
 		public StokKart stokKart{
 			get
@@ -81,15 +65,28 @@
 				_stokKart = value;
 			}
 		}
-		public double miktar;
+		public int? miktar;
 		public string aciklama;
 		public DateTime talepTarihi;
-	}
+		private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
+        public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
+        {
+            get { if (_satinalmaTalepSatirDetays == null) _satinalmaTalepSatirDetays = new List<SatinalmaTalepSatirDetay>(); return _satinalmaTalepSatirDetays; }
+            set { _satinalmaTalepSatirDetays = value; }
+        }
+    }
 	public class TalepTip:IEntity
 	{
 		public int talepTipId;
 		public string talepTipi;
 		public string kod;
 	}
+	public class SatinalmaTalepSatirDetay:IEntity
+	{
+		public int Id;
+        public int satinalmaDetayId;
+        public int? stokKartId;
+        public int? miktar;
+    }
 
 }

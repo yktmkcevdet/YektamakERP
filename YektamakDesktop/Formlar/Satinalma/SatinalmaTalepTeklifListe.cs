@@ -1,31 +1,22 @@
-﻿using System;
+﻿using Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Compression;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using YektamakDesktop.Abstracts;
-using Models;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using FastReport.Data;
-using YektamakDesktop.CustomControls;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using ApiService;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.CustomControls;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepTeklifListe : Form,IForm
     {
-        private WebMethods _webMethods;
         private DataSet _dataSetSatinalmaTalepler;
         private DataSet dataSetSatinalmaTalepler { get { if (_dataSetSatinalmaTalepler == null) _dataSetSatinalmaTalepler = new();return _dataSetSatinalmaTalepler; } set { _dataSetSatinalmaTalepler = value; } }
         public static SatinalmaTalepTeklifListe _satinalmaTalepTeklifListe;
@@ -52,10 +43,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             InitializeComponent();
         }
 
-        public SatinalmaTalepTeklifListe(WebMethods webMethods)
-        {
-            _webMethods = webMethods;
-        }
 
         #region MouseDrag
         bool mouseDown;
@@ -100,32 +87,32 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private async void SatinalmaTalepTeklifListe_Load(object sender, EventArgs e)
         {
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            string jsonStringProjeKod = WebMethods.GetFilteredSatisProje(new SatisProje());
-            DataSet dataSetProjeKod = jsonConverter.JsonStringToDataSet(jsonStringProjeKod);
-            foreach (DataRow dataRow in dataSetProjeKod.Tables[0].Rows)
-            {
-                IDataTableHelper dataTableConverter = new DataTableHelper();
-                SatisProje projeKod = dataTableConverter.DataRowToModel<SatisProje>(dataRow);
-                comboListProjeKodu.AddDataRow(projeKod.projeKod.Id, projeKod.projeKod.kod);
-            }
-            string jsonStringTalepTipleri = _webMethods.GetTalepTipleri();
-            DataSet dataSetTalepTipleri = jsonConverter.JsonStringToDataSet(jsonStringTalepTipleri);
-            foreach (DataRow dataRow in dataSetTalepTipleri.Tables[0].Rows)
-            {
-                IDataTableHelper dataTableConverter = new DataTableHelper();
-                TalepTip talepTip = dataTableConverter.DataRowToModel<TalepTip>(dataRow);
-                customCheckedComboBox1.AddDataRow(talepTip.talepTipId, talepTip.kod);
-            }
-            //foreach(Firma firma in GlobalData.firmaUnvanList)
+            //IJsonConvertHelper jsonConverter = new JsonConvertHelper();
+            //string jsonStringProjeKod = WebMethods.GetFilteredSatisProje(new SatisProje());
+            //DataSet dataSetProjeKod = jsonConverter.JsonStringToDataSet(jsonStringProjeKod);
+            //foreach (DataRow dataRow in dataSetProjeKod.Tables[0].Rows)
             //{
-            //    comboListBoxFirma.AddDataRow(firma.id, firma.unvan);
+            //    IDataTableHelper dataTableConverter = new DataTableHelper();
+            //    SatisProje projeKod = dataTableConverter.DataRowToModel<SatisProje>(dataRow);
+            //    comboListProjeKodu.AddDataRow(projeKod.projeKod.Id, projeKod.projeKod.kod);
             //}
-            SatinalmaTalepBaslik satinalmaTalepBaslik = new SatinalmaTalepBaslik();
-            satinalmaTalepBaslik.proje.Id = comboListProjeKodu.selectedDataRowId;
-            string jsonString = await WebMethods.GetSatinalmaTalep(satinalmaTalepBaslik);
-            dataSetSatinalmaTalepler = jsonConverter.JsonStringToDataSet(jsonString);
-            //GlobalData.FillDataGrid(dataSetSatinalmaTalepler.Tables[1], dataGridView1, satinalmaTalepBaslik);
+            //string jsonStringTalepTipleri = _webMethods.GetTalepTipleri();
+            //DataSet dataSetTalepTipleri = jsonConverter.JsonStringToDataSet(jsonStringTalepTipleri);
+            //foreach (DataRow dataRow in dataSetTalepTipleri.Tables[0].Rows)
+            //{
+            //    IDataTableHelper dataTableConverter = new DataTableHelper();
+            //    TalepTip talepTip = dataTableConverter.DataRowToModel<TalepTip>(dataRow);
+            //    customCheckedComboBox1.AddDataRow(talepTip.talepTipId, talepTip.kod);
+            //}
+            ////foreach(Firma firma in GlobalData.firmaUnvanList)
+            ////{
+            ////    comboListBoxFirma.AddDataRow(firma.id, firma.unvan);
+            ////}
+            //SatinalmaTalepBaslik satinalmaTalepBaslik = new SatinalmaTalepBaslik();
+            //satinalmaTalepBaslik.proje.Id = comboListProjeKodu.selectedDataRowId;
+            //string jsonString = await WebMethods.GetSatinalmaTalep(satinalmaTalepBaslik);
+            //dataSetSatinalmaTalepler = jsonConverter.JsonStringToDataSet(jsonString);
+            ////GlobalData.FillDataGrid(dataSetSatinalmaTalepler.Tables[1], dataGridView1, satinalmaTalepBaslik);
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -144,7 +131,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     byte[] pdfData = JsonConvert.DeserializeObject<byte[]>(jsonString);
                     StokKart stokKart = new();
                     stokKart.pdf = pdfData;
-                    stokKart.kod = dataGridViewRow.Cells["stokKartKodu"].Value.ToString();
+                    stokKart.parcaKod = dataGridViewRow.Cells["stokKartKodu"].Value.ToString();
                     binaryDataList.Add(stokKart);
                     SatinalmaTeklifDetay satinalmaTeklifDetay = new SatinalmaTeklifDetay();
                     satinalmaTeklifDetay.satinalmaTalepDetayId = Convert.ToInt32(dataGridViewRow.Cells["satinalmaTalepDetayId"].Value.ToString());
@@ -157,7 +144,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // Geçici klasöre dosyaları yazma
             for (int i = 0; i < binaryDataList.Count; i++)
             {
-                string dosyaYolu = Path.Combine(tempFolder, binaryDataList[i].kod + ".pdf"); // Dosya adını ve yolunu oluştur
+                string dosyaYolu = Path.Combine(tempFolder, binaryDataList[i].parcaKod + ".pdf"); // Dosya adını ve yolunu oluştur
                 File.WriteAllBytes(dosyaYolu, binaryDataList[i].pdf); // Dosyayı diske yaz
             }
             
@@ -180,7 +167,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             SendMail(Environment.CurrentDirectory+"\\"+birlesmisDosyaAdi);
             satinalmaTeklifBaslik.teklifTalepTarihi = DateTime.Now;
             satinalmaTeklifBaslik.teklifFirma.Id = comboListBoxFirma.selectedDataRowId;
-            WebMethods.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
+            //WebMethods.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
             
         }
 
@@ -206,7 +193,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             
             talepTipFiltre=talepTipFiltre.Substring(0, talepTipFiltre.Length - 13)+")";
             DataTable dataTable = dataSetSatinalmaTalepler.Tables[1].Select($"ProjeKod='{comboListProjeKodu.selectedDataRowValue}' and {talepTipFiltre}").CopyToDataTable();
-            GlobalData.FillDataGrid(dataTable, dataGridView1, new SatinalmaTalepBaslik());
+            GlobalData.FillDataGrid(dataTable, dataGridView1, new SatinalmaTalep());
         }
         private void SendMail(string ekDosya)
         {

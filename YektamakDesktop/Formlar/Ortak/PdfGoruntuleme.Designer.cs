@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(934, 678);
+            ClientSize = new System.Drawing.Size(948, 678);
             Name = "PdfGoruntuleme";
             Text = "PdfGoruntuleme";
             FormClosing += PdfGoruntuleme_FormClosing;

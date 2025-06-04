@@ -12,8 +12,8 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-		private readonly IDataTableHelper _dataTableConverter;
-		private readonly IJsonConvertHelper _jsonConverter;
+		private readonly IDataTableMapper _dataTableConverter;
+		private readonly IJsonConverter _jsonConverter;
 
 		public bool newRec = true;
 		private RoundedButton _buttonSil;
@@ -23,14 +23,14 @@ namespace YektamakDesktop.Abstracts
 			set
 			{
 				_buttonSil = value;
-				_buttonSil.Tag = "  Sil";
+				_buttonSil.Tag = "Sil";
 				_buttonSil.Width = 35;
 				_buttonSil.Height = 28;
 				_buttonSil.TabIndex = 99;
 				_buttonSil.BorderRadius = 5;
 				_buttonSil.BackColor = Color.Transparent;
-				_buttonSil.BackgroundImage = Resources.delete_icon;
-				_buttonSil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+				_buttonSil.BackgroundImage = Resources.sil;
+				_buttonSil.BackgroundImageLayout = ImageLayout.Zoom;
 			}
 		}
 		private Label _order;
@@ -53,7 +53,7 @@ namespace YektamakDesktop.Abstracts
 			order=new Label();
 		}
 
-        public DataControl(IDataTableHelper dataTableConverter, IJsonConvertHelper jsonConverter)
+        public DataControl(IDataTableMapper dataTableConverter, IJsonConverter jsonConverter)
         {
             _dataTableConverter = dataTableConverter;
             _jsonConverter = jsonConverter;
@@ -63,12 +63,12 @@ namespace YektamakDesktop.Abstracts
 		{
 			T filterData = new T();
 			string result = method(filterData);
-			DataSet dataSet = _jsonConverter.JsonStringToDataSet(result);
+			DataSet dataSet = _jsonConverter.DeserializeToDataSet(result);
 			List<T> listEntity = new List<T>();
 			foreach (DataRow dataRow in dataSet.Tables[0].Rows)
 			{
 				T entity = new T();
-				entity = _dataTableConverter.DataRowToModel<T>(dataRow);
+				entity = _dataTableConverter.MapToEntity<T>(dataRow);
 				listEntity.Add(entity);
 			}
 			return listEntity;

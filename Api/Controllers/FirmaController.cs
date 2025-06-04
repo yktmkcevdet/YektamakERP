@@ -24,5 +24,11 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(JsonStringToModel<Firma>(firma), "spGetFirma");
             return result;
         }
+        [HttpGet, Route("api/GetFirma")]
+        public string GetFirma()
+        {
+            string result = _dataAccessLayer.GetObject("spGetFirma");
+            return result;
+        }
     }
 }
