@@ -80,7 +80,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void Menuler_Load(object sender, EventArgs e)
         {
-            DataSet dataSet = _jsonConvertHelper.DeserializeToDataSet(_kullaniciYetkiService.GetMenu());
+            string json = _kullaniciYetkiService.GetMenu(new Models.Menu());
+            DataSet dataSet = _jsonConvertHelper.DeserializeToDataSet(json);
             List<DataControlMenu> menuList = new List<DataControlMenu>();
 
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
@@ -88,7 +89,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 DataControlMenu menu = new DataControlMenu();
                 menu.menuAdi.TextCustom = dataRow["ad"].ToString();
                 menu.menuId.TextCustom = dataRow["Id"].ToString();
-                menu.formAdi.TextCustom = dataRow["formAdi"].ToString();
+                menu.formAdi.TextCustom = dataRow["formAd"].ToString();
                 menu.icon.TextCustom = dataRow["icon"].ToString();
                 menuList.Add(menu);
                 menu.newRec = false;

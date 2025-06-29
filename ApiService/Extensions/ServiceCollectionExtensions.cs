@@ -18,19 +18,21 @@ namespace ApiService
                     ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 });
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ISatinalmaService, SatinalmaService>();
-            services.AddTransient<ISatisService, SatisService>();
-            services.AddTransient<IStokService, StokService>();
-            services.AddTransient<IProjeService, ProjeService>();
-            services.AddTransient<IKullaniciYetkiService, KullaniciYetkiService>();
-            services.AddTransient<IFirmaService, FirmaService>();
-            services.AddTransient<IPersonelService, PersonelService>();
-            services.AddTransient<IProjeService, ProjeService>();
-            services.AddTransient<ICariService, CariService>();
-            services.AddTransient<IDovizCinsiService, DovizCinsiService>();
-            services.AddTransient<IMaliyetService, MaliyetService>();
-            services.AddTransient<IAnaVeriService, AnaVeriService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISatinalmaTalepService, SatinalmaTalepService>();
+            services.AddScoped<ISatinalmaTeklifService, SatinalmaTeklifService>();
+            services.AddScoped<ISatisService, SatisService>();
+            services.AddScoped<IStokService, StokService>();
+            services.AddScoped<IProjeService, ProjeService>();
+            services.AddScoped<IKullaniciYetkiService, KullaniciYetkiService>();
+            services.AddScoped<IFirmaService, FirmaService>();
+            services.AddScoped<IPersonelService, PersonelService>();
+            services.AddScoped<IProjeService, ProjeService>();
+            services.AddScoped<ICariService, CariService>();
+            services.AddScoped<IDovizCinsiService, DovizCinsiService>();
+            services.AddScoped<IMaliyetService, MaliyetService>();
+            services.AddScoped<IAnaVeriService, AnaVeriService>();
+            services.AddScoped<IVadeService, VadeService>();
             return services;
         }
     }

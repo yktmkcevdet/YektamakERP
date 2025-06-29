@@ -183,6 +183,16 @@ namespace YektamakDesktop.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_attachment_24 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-attachment-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap iosTypeAdd2 {
             get {
                 object obj = ResourceManager.GetObject("iosTypeAdd2", resourceCulture);

@@ -18,7 +18,7 @@ namespace Api.Controllers
         [HttpPost, Route("api/SaveErrorLog/")]
         public string SaveErrorLog([FromBody] string restData)
         {
-            string result = _dataAccessLayer.SaveObject(restData,"spGetMarka");
+            string result = _dataAccessLayer.SaveObject(restData,"spSaveErrorLog");
             return GeneralMethods.ResultData<ErrorLog>(result);
         }
     }

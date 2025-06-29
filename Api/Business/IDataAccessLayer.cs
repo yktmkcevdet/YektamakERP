@@ -7,6 +7,7 @@ namespace Api.Business
     public interface IDataAccessLayer
     {
         string SaveObject<T>(T model, string sqlCommandName) where T : class;
+        string SaveObject(string json, string sqlCommandName);
         string GetObject<T>(T model, string sqlCommandName) where T : class;
         string GetObject(string sqlCommandName);
         /// <summary>

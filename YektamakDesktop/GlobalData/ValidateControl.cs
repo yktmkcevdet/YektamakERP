@@ -108,8 +108,7 @@ namespace YektamakDesktop
             if (customTextBoxTarih == null)
                 throw new ArgumentNullException(nameof(customTextBoxTarih));
 
-            bool isValid = !string.IsNullOrWhiteSpace(customTextBoxTarih.TextCustom) &&
-                          DateTime.TryParse(customTextBoxTarih.TextCustom, out _);
+            bool isValid = customTextBoxTarih.TextCustom==null;
 
             if (isValid)
             {

@@ -1,11 +1,8 @@
-﻿using Models;
-using System.Data.SqlClient;
-using System.Data;
+﻿using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Reflection;
 using Npgsql;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 namespace Api.DatabaseJobs
 {
     public static partial class DataBaseJobsGeneral
@@ -51,6 +48,19 @@ namespace Api.DatabaseJobs
         internal static MySqlConnection MySqlConnection()
         {
             MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            try
+            {
+                mySqlConnection.Open();
+                return mySqlConnection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        internal static MySqlConnection MySqlConnectionYerel()
+        {
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=127.0.0.1;Database=yektamakdb;User ID=root;Password=Yektamak@dmin;");
             try
             {
                 mySqlConnection.Open();

@@ -63,14 +63,7 @@ namespace YektamakDesktop.Abstracts
 		{
 			T filterData = new T();
 			string result = method(filterData);
-			DataSet dataSet = _jsonConverter.DeserializeToDataSet(result);
-			List<T> listEntity = new List<T>();
-			foreach (DataRow dataRow in dataSet.Tables[0].Rows)
-			{
-				T entity = new T();
-				entity = _dataTableConverter.MapToEntity<T>(dataRow);
-				listEntity.Add(entity);
-			}
+            List<T> listEntity = _jsonConverter.DeserializeToModelList<T>(result);
 			return listEntity;
 		}
 		public virtual void FillComboBoxListFromDataSet(CustomComboListBox customComboListBox, DataSet dataSet)

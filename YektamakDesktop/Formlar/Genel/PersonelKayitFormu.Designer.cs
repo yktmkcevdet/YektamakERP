@@ -48,8 +48,8 @@
             textBoxTelefon = new CustomControls.CustomTextBox();
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            textBoxSoyisim = new CustomControls.CustomTextBox();
-            textBoxIsim = new CustomControls.CustomTextBox();
+            ctbSoyisim = new CustomControls.CustomTextBox();
+            ctbIsim = new CustomControls.CustomTextBox();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             openFileDialogResim = new System.Windows.Forms.OpenFileDialog();
             label13 = new System.Windows.Forms.Label();
             label14 = new System.Windows.Forms.Label();
-            comboListBoxFirma = new CustomControls.CustomComboListBox();
+            clbFirma = new CustomControls.CustomComboListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPersonel).BeginInit();
             panelHeader.SuspendLayout();
             SuspendLayout();
@@ -378,53 +378,53 @@
             // 
             // textBoxSoyisim
             // 
-            textBoxSoyisim.BackColor = System.Drawing.Color.White;
-            textBoxSoyisim.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            textBoxSoyisim.BorderFocusColor = System.Drawing.Color.HotPink;
-            textBoxSoyisim.BorderRadius = 0;
-            textBoxSoyisim.BorderSize = 2;
-            textBoxSoyisim.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBoxSoyisim.ForeColor = System.Drawing.Color.Black;
-            textBoxSoyisim.isPlaceHolder = false;
-            textBoxSoyisim.Location = new System.Drawing.Point(485, 109);
-            textBoxSoyisim.Multiline = false;
-            textBoxSoyisim.Name = "textBoxSoyisim";
-            textBoxSoyisim.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            textBoxSoyisim.PasswordChar = false;
-            textBoxSoyisim.PlaceholderColor = System.Drawing.Color.DarkGray;
-            textBoxSoyisim.PlaceholderText = "";
-            textBoxSoyisim.ReadOnly = false;
-            textBoxSoyisim.SelectionStart = 0;
-            textBoxSoyisim.Size = new System.Drawing.Size(250, 32);
-            textBoxSoyisim.TabIndex = 5;
-            textBoxSoyisim.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            textBoxSoyisim.TextCustom = "";
-            textBoxSoyisim.UnderlinedStyle = false;
+            ctbSoyisim.BackColor = System.Drawing.Color.White;
+            ctbSoyisim.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            ctbSoyisim.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbSoyisim.BorderRadius = 0;
+            ctbSoyisim.BorderSize = 2;
+            ctbSoyisim.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbSoyisim.ForeColor = System.Drawing.Color.Black;
+            ctbSoyisim.isPlaceHolder = false;
+            ctbSoyisim.Location = new System.Drawing.Point(485, 109);
+            ctbSoyisim.Multiline = false;
+            ctbSoyisim.Name = "textBoxSoyisim";
+            ctbSoyisim.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            ctbSoyisim.PasswordChar = false;
+            ctbSoyisim.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbSoyisim.PlaceholderText = "";
+            ctbSoyisim.ReadOnly = false;
+            ctbSoyisim.SelectionStart = 0;
+            ctbSoyisim.Size = new System.Drawing.Size(250, 32);
+            ctbSoyisim.TabIndex = 5;
+            ctbSoyisim.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbSoyisim.TextCustom = "";
+            ctbSoyisim.UnderlinedStyle = false;
             // 
             // textBoxIsim
             // 
-            textBoxIsim.BackColor = System.Drawing.Color.White;
-            textBoxIsim.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            textBoxIsim.BorderFocusColor = System.Drawing.Color.HotPink;
-            textBoxIsim.BorderRadius = 0;
-            textBoxIsim.BorderSize = 2;
-            textBoxIsim.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBoxIsim.ForeColor = System.Drawing.Color.Black;
-            textBoxIsim.isPlaceHolder = false;
-            textBoxIsim.Location = new System.Drawing.Point(485, 64);
-            textBoxIsim.Multiline = false;
-            textBoxIsim.Name = "textBoxIsim";
-            textBoxIsim.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            textBoxIsim.PasswordChar = false;
-            textBoxIsim.PlaceholderColor = System.Drawing.Color.DarkGray;
-            textBoxIsim.PlaceholderText = "";
-            textBoxIsim.ReadOnly = false;
-            textBoxIsim.SelectionStart = 0;
-            textBoxIsim.Size = new System.Drawing.Size(250, 32);
-            textBoxIsim.TabIndex = 4;
-            textBoxIsim.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            textBoxIsim.TextCustom = "";
-            textBoxIsim.UnderlinedStyle = false;
+            ctbIsim.BackColor = System.Drawing.Color.White;
+            ctbIsim.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            ctbIsim.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbIsim.BorderRadius = 0;
+            ctbIsim.BorderSize = 2;
+            ctbIsim.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbIsim.ForeColor = System.Drawing.Color.Black;
+            ctbIsim.isPlaceHolder = false;
+            ctbIsim.Location = new System.Drawing.Point(485, 64);
+            ctbIsim.Multiline = false;
+            ctbIsim.Name = "textBoxIsim";
+            ctbIsim.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            ctbIsim.PasswordChar = false;
+            ctbIsim.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbIsim.PlaceholderText = "";
+            ctbIsim.ReadOnly = false;
+            ctbIsim.SelectionStart = 0;
+            ctbIsim.Size = new System.Drawing.Size(250, 32);
+            ctbIsim.TabIndex = 4;
+            ctbIsim.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbIsim.TextCustom = "";
+            ctbIsim.UnderlinedStyle = false;
             // 
             // label3
             // 
@@ -499,14 +499,14 @@
             // 
             // comboListBoxFirma
             // 
-            comboListBoxFirma.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxFirma.ListBoxVisualSize = 5;
-            comboListBoxFirma.Location = new System.Drawing.Point(485, 287);
-            comboListBoxFirma.Margin = new System.Windows.Forms.Padding(1);
-            comboListBoxFirma.Name = "comboListBoxFirma";
-            comboListBoxFirma.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxFirma.Size = new System.Drawing.Size(361, 36);
-            comboListBoxFirma.TabIndex = 38;
+            clbFirma.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbFirma.ListBoxVisualSize = 5;
+            clbFirma.Location = new System.Drawing.Point(485, 287);
+            clbFirma.Margin = new System.Windows.Forms.Padding(1);
+            clbFirma.Name = "comboListBoxFirma";
+            clbFirma.Padding = new System.Windows.Forms.Padding(1);
+            clbFirma.Size = new System.Drawing.Size(361, 36);
+            clbFirma.TabIndex = 38;
             // 
             // PersonelKayitFormu
             // 
@@ -514,7 +514,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new System.Drawing.Size(1073, 426);
-            Controls.Add(comboListBoxFirma);
+            Controls.Add(clbFirma);
             Controls.Add(label13);
             Controls.Add(label14);
             Controls.Add(panelHeader);
@@ -527,9 +527,9 @@
             Controls.Add(buttonPersonelGuncelle);
             Controls.Add(label3);
             Controls.Add(buttonPersonelKaydet);
-            Controls.Add(textBoxIsim);
+            Controls.Add(ctbIsim);
             Controls.Add(textBoxPozisyon);
-            Controls.Add(textBoxSoyisim);
+            Controls.Add(ctbSoyisim);
             Controls.Add(label12);
             Controls.Add(label5);
             Controls.Add(label6);
@@ -566,8 +566,8 @@
         private CustomControls.RoundedButton buttonKapat;
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label labelHeader;
-        public CustomControls.CustomTextBox textBoxIsim;
-        public CustomControls.CustomTextBox textBoxSoyisim;
+        public CustomControls.CustomTextBox ctbIsim;
+        public CustomControls.CustomTextBox ctbSoyisim;
         public CustomControls.CustomTextBox textBoxTelefon;
         public CustomControls.CustomTextBox textBoxEmail;
         public CustomControls.CustomTextBox textBoxPozisyon;
@@ -581,6 +581,6 @@
         private CustomControls.RoundedButton buttomMinimize;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private CustomControls.CustomComboListBox comboListBoxFirma;
+        private CustomControls.CustomComboListBox clbFirma;
     }
 }

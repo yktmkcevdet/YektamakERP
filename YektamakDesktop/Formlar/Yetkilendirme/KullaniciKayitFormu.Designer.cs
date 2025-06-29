@@ -28,28 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelHeader = new System.Windows.Forms.Panel();
-            roundedButton3 = new CustomControls.RoundedButton();
-            roundedButton2 = new CustomControls.RoundedButton();
-            roundedButton1 = new CustomControls.RoundedButton();
-            labelHeader = new System.Windows.Forms.Label();
-            rButtonKullaniciKaydet = new CustomControls.RoundedButton();
-            textBoxKullaniciAdi = new CustomControls.CustomTextBox();
+            rButtonKullaniciKaydet = new YektamakDesktop.CustomControls.RoundedButton();
+            textBoxKullaniciAdi = new YektamakDesktop.CustomControls.CustomTextBox();
             label2 = new System.Windows.Forms.Label();
             labelKullaniciAdi = new System.Windows.Forms.Label();
-            customTextBoxSifre = new CustomControls.CustomTextBox();
+            customTextBoxSifre = new YektamakDesktop.CustomControls.CustomTextBox();
             label1 = new System.Windows.Forms.Label();
             labelSifre = new System.Windows.Forms.Label();
-            customTextBoxSifreTekrar = new CustomControls.CustomTextBox();
+            customTextBoxSifreTekrar = new YektamakDesktop.CustomControls.CustomTextBox();
             label3 = new System.Windows.Forms.Label();
             labelSifreTekrar = new System.Windows.Forms.Label();
-            comboListBoxRol = new CustomControls.CustomComboListBox();
+            comboListBoxRol = new YektamakDesktop.CustomControls.CustomComboListBox();
             label7 = new System.Windows.Forms.Label();
             labelPersonel = new System.Windows.Forms.Label();
-            cbxPersonel = new CustomControls.CustomComboListBox();
+            cbxPersonel = new YektamakDesktop.CustomControls.CustomComboListBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
             buttonFiltre = new System.Windows.Forms.Button();
             labelUyariKulllaniciAdi = new System.Windows.Forms.Label();
             labelUyariSifre = new System.Windows.Forms.Label();
@@ -57,109 +51,9 @@
             labelUyariPersonel = new System.Windows.Forms.Label();
             labelUyariRol = new System.Windows.Forms.Label();
             button1 = new System.Windows.Forms.Button();
-            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PersonelId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PersonelAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            RolId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            RolAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             SuspendLayout();
-            // 
-            // panelHeader
-            // 
-            panelHeader.BackColor = System.Drawing.Color.Red;
-            panelHeader.Controls.Add(roundedButton3);
-            panelHeader.Controls.Add(roundedButton2);
-            panelHeader.Controls.Add(roundedButton1);
-            panelHeader.Controls.Add(labelHeader);
-            panelHeader.Location = new System.Drawing.Point(0, 0);
-            panelHeader.Name = "panelHeader";
-            panelHeader.Size = new System.Drawing.Size(923, 56);
-            panelHeader.TabIndex = 1;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
-            // 
-            // roundedButton3
-            // 
-            roundedButton3.BackColor = System.Drawing.Color.Red;
-            roundedButton3.BackgroundColor = System.Drawing.Color.Red;
-            roundedButton3.BorderColor = System.Drawing.Color.LavenderBlush;
-            roundedButton3.BorderRadius = 10;
-            roundedButton3.BorderSize = 2;
-            roundedButton3.FlatAppearance.BorderSize = 0;
-            roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton3.ForeColor = System.Drawing.Color.White;
-            roundedButton3.Location = new System.Drawing.Point(876, 9);
-            roundedButton3.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton3.Name = "roundedButton3";
-            roundedButton3.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton3.Size = new System.Drawing.Size(40, 38);
-            roundedButton3.TabIndex = 97;
-            roundedButton3.Text = "x";
-            roundedButton3.TextColor = System.Drawing.Color.White;
-            roundedButton3.UseVisualStyleBackColor = false;
-            roundedButton3.Click += roundedButton3_Click;
-            // 
-            // roundedButton2
-            // 
-            roundedButton2.BackColor = System.Drawing.Color.Red;
-            roundedButton2.BackgroundColor = System.Drawing.Color.Red;
-            roundedButton2.BorderColor = System.Drawing.Color.LavenderBlush;
-            roundedButton2.BorderRadius = 10;
-            roundedButton2.BorderSize = 2;
-            roundedButton2.FlatAppearance.BorderSize = 0;
-            roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton2.ForeColor = System.Drawing.Color.White;
-            roundedButton2.Location = new System.Drawing.Point(796, 9);
-            roundedButton2.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton2.Name = "roundedButton2";
-            roundedButton2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton2.Size = new System.Drawing.Size(40, 38);
-            roundedButton2.TabIndex = 96;
-            roundedButton2.Text = "?";
-            roundedButton2.TextColor = System.Drawing.Color.White;
-            roundedButton2.UseVisualStyleBackColor = false;
-            // 
-            // roundedButton1
-            // 
-            roundedButton1.BackColor = System.Drawing.Color.Red;
-            roundedButton1.BackgroundColor = System.Drawing.Color.Red;
-            roundedButton1.BorderColor = System.Drawing.Color.LavenderBlush;
-            roundedButton1.BorderRadius = 10;
-            roundedButton1.BorderSize = 2;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.Location = new System.Drawing.Point(836, 9);
-            roundedButton1.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton1.Size = new System.Drawing.Size(40, 38);
-            roundedButton1.TabIndex = 95;
-            roundedButton1.Text = "-";
-            roundedButton1.TextColor = System.Drawing.Color.White;
-            roundedButton1.UseVisualStyleBackColor = false;
-            roundedButton1.Click += roundedButton1_Click;
-            // 
-            // labelHeader
-            // 
-            labelHeader.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            labelHeader.AutoSize = true;
-            labelHeader.BackColor = System.Drawing.Color.Red;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            labelHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            labelHeader.Location = new System.Drawing.Point(3, 9);
-            labelHeader.Name = "labelHeader";
-            labelHeader.Size = new System.Drawing.Size(221, 30);
-            labelHeader.TabIndex = 0;
-            labelHeader.Text = "Kullanıcı Kayıt formu";
-            labelHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rButtonKullaniciKaydet
             // 
@@ -172,9 +66,9 @@
             rButtonKullaniciKaydet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             rButtonKullaniciKaydet.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             rButtonKullaniciKaydet.ForeColor = System.Drawing.Color.White;
-            rButtonKullaniciKaydet.Location = new System.Drawing.Point(403, 285);
+            rButtonKullaniciKaydet.Location = new System.Drawing.Point(557, 247);
             rButtonKullaniciKaydet.Name = "rButtonKullaniciKaydet";
-            rButtonKullaniciKaydet.Size = new System.Drawing.Size(150, 66);
+            rButtonKullaniciKaydet.Size = new System.Drawing.Size(117, 66);
             rButtonKullaniciKaydet.TabIndex = 24;
             rButtonKullaniciKaydet.Text = "KAYDET";
             rButtonKullaniciKaydet.TextColor = System.Drawing.Color.White;
@@ -355,13 +249,13 @@
             labelPersonel.Text = "Rol";
             labelPersonel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboListBoxPersonel
+            // cbxPersonel
             // 
             cbxPersonel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             cbxPersonel.ListBoxVisualSize = 5;
             cbxPersonel.Location = new System.Drawing.Point(296, 191);
             cbxPersonel.Margin = new System.Windows.Forms.Padding(1);
-            cbxPersonel.Name = "comboListBoxPersonel";
+            cbxPersonel.Name = "cbxPersonel";
             cbxPersonel.Padding = new System.Windows.Forms.Padding(1);
             cbxPersonel.Size = new System.Drawing.Size(378, 36);
             cbxPersonel.TabIndex = 54;
@@ -388,28 +282,14 @@
             label5.Text = "Personel";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, ad, PersonelId, PersonelAd, RolId, RolAdi });
-            dataGridView1.Location = new System.Drawing.Point(6, 377);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(683, 284);
-            dataGridView1.TabIndex = 55;
-            dataGridView1.CellClick += dataGridView1_CellClick;
-            // 
             // buttonFiltre
             // 
+            buttonFiltre.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             buttonFiltre.BackgroundImage = Properties.Resources.pngegg;
-            buttonFiltre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            buttonFiltre.Location = new System.Drawing.Point(48, 328);
+            buttonFiltre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            buttonFiltre.Location = new System.Drawing.Point(48, 281);
             buttonFiltre.Name = "buttonFiltre";
-            buttonFiltre.Size = new System.Drawing.Size(61, 43);
+            buttonFiltre.Size = new System.Drawing.Size(34, 32);
             buttonFiltre.TabIndex = 56;
             buttonFiltre.UseVisualStyleBackColor = true;
             buttonFiltre.Click += buttonFiltre_Click;
@@ -467,7 +347,7 @@
             // button1
             // 
             button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            button1.Location = new System.Drawing.Point(12, 285);
+            button1.Location = new System.Drawing.Point(781, 47);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(101, 28);
             button1.TabIndex = 96;
@@ -475,52 +355,34 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // Id
+            // headerPanel1
             // 
-            Id.HeaderText = "Id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            Id.Visible = false;
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Kullanıcı kayıt Formu";
+            headerPanel1.Location = new System.Drawing.Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new System.Drawing.Size(924, 32);
+            headerPanel1.TabIndex = 97;
             // 
-            // ad
+            // universalGrid1
             // 
-            ad.HeaderText = "Kullanicı Adı";
-            ad.Name = "ad";
-            ad.ReadOnly = true;
-            ad.Width = 200;
-            // 
-            // PersonelId
-            // 
-            PersonelId.HeaderText = "PersonelId";
-            PersonelId.Name = "PersonelId";
-            PersonelId.ReadOnly = true;
-            PersonelId.Visible = false;
-            // 
-            // PersonelAd
-            // 
-            PersonelAd.HeaderText = "Personel Adı";
-            PersonelAd.Name = "PersonelAd";
-            PersonelAd.ReadOnly = true;
-            // 
-            // RolId
-            // 
-            RolId.HeaderText = "RolId";
-            RolId.Name = "RolId";
-            RolId.ReadOnly = true;
-            RolId.Visible = false;
-            // 
-            // RolAdi
-            // 
-            RolAdi.HeaderText = "Rol";
-            RolAdi.Name = "RolAdi";
-            RolAdi.ReadOnly = true;
-            RolAdi.Width = 150;
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(48, 319);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(819, 291);
+            universalGrid1.TabIndex = 98;
             // 
             // KullaniciKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(924, 673);
+            Controls.Add(universalGrid1);
+            Controls.Add(headerPanel1);
             Controls.Add(button1);
             Controls.Add(labelUyariRol);
             Controls.Add(labelUyariPersonel);
@@ -528,7 +390,6 @@
             Controls.Add(labelUyariSifre);
             Controls.Add(labelUyariKulllaniciAdi);
             Controls.Add(buttonFiltre);
-            Controls.Add(dataGridView1);
             Controls.Add(cbxPersonel);
             Controls.Add(label4);
             Controls.Add(label5);
@@ -545,21 +406,16 @@
             Controls.Add(label2);
             Controls.Add(labelKullaniciAdi);
             Controls.Add(rButtonKullaniciKaydet);
-            Controls.Add(panelHeader);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "KullaniciKayitFormu";
             Text = "KullaniciKayitFormu";
-            panelHeader.ResumeLayout(false);
-            panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            FormClosing += KullaniciKayitFormu_FormClosing;
+            Load += KullaniciKayitFormu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.Label labelHeader;
         private CustomControls.RoundedButton rButtonKullaniciKaydet;
         public CustomControls.CustomTextBox textBoxKullaniciAdi;
         private System.Windows.Forms.Label label2;
@@ -576,10 +432,6 @@
         private CustomControls.CustomComboListBox cbxPersonel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private CustomControls.RoundedButton roundedButton2;
-        private CustomControls.RoundedButton roundedButton1;
-        private CustomControls.RoundedButton roundedButton3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonFiltre;
         private System.Windows.Forms.Label labelUyariKulllaniciAdi;
         private System.Windows.Forms.Label labelUyariSifre;
@@ -587,11 +439,7 @@
         private System.Windows.Forms.Label labelUyariPersonel;
         private System.Windows.Forms.Label labelUyariRol;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonelAd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RolId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RolAdi;
+        private CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

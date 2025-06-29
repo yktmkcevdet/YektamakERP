@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Models.DTO;
 using Utilities.Interfaces;
+using Patagames.Pdf.Net.Controls.WinForms;
 
 namespace YektamakDesktop
 {
@@ -22,6 +23,7 @@ namespace YektamakDesktop
         private bool _activeForm;
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
         private ToolTip buttonFiltreToolTip;
+        private DateTime _oturumBaslangicZamani;
         private DataSet _dataSet;
         public DataSet dataSet
         {
@@ -39,6 +41,18 @@ namespace YektamakDesktop
             controlsToDisable = new List<Control>
             {
             };
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
+            timer.Start();
+
+            _oturumBaslangicZamani = DateTime.Now;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan oturumSuresi = DateTime.Now - _oturumBaslangicZamani;
+            lblOturumSuresi.Text = "Oturum Süresi: " + oturumSuresi.ToString(@"hh\:mm\:ss");
         }
         #region mouseDrag
         bool mouseDown;
@@ -72,12 +86,13 @@ namespace YektamakDesktop
         private async void AnaSayfa_Load(object sender, EventArgs e)
         {
             this.Enabled = false;
-            GlobalData.Start();
+            
             GlobalData.AddNewForm(this);
+            lblKullanici.Text = _cache.kullanici.personel.ad;
             this.Enabled = true;
 
             int y = 6; //Menu butonlarının ana menu panelindeki y koordinatını gösterir..
-            foreach (AnaMenu anaMenu in _cache.ananaMenuList)
+            foreach (AnaMenuDTO anaMenu in _cache.ananaMenuList)
             {
                 MenuButtonOlustur(anaMenu.ad, anaMenu.icon, 6, y); //Girişi yapan kullanıcının yetkisi dahilinde olan menü öğelerinin butonlarını oluşturur.
                 y += 51;
@@ -93,18 +108,22 @@ namespace YektamakDesktop
                 Font = new Font("Segoe UI", 16, FontStyle.Bold),
                 IconSize = 32,
                 ImageAlign = ContentAlignment.MiddleLeft,
-                Location = new Point(6, 545),
-                Padding = new Padding(10, 0, 20, 0),
-                Size = new Size(166, 70),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                Padding = new Padding(10, 0, 20, 10),
+                //Size = new Size(166, 70),
+                AutoSizeMode= AutoSizeMode.GrowAndShrink,
+                AutoSize = true,
                 Text = "ÇIKIŞ",
                 TextAlign = ContentAlignment.MiddleLeft,
                 TextImageRelation = TextImageRelation.ImageBeforeText,
                 UseVisualStyleBackColor = true,
+                Dock = DockStyle.Bottom
             };
             exitButton.FlatAppearance.BorderSize = 0;
+            exitButton.Cursor = Cursors.Hand;
             exitButton.Click += buttonCikis_Click;
             exitButton.BringToFront();
-            this.panelAnaMenu.Controls.Add(exitButton);
+            this.panelExit.Controls.Add(exitButton);
             controlsToDisable.Add(exitButton);
         }
         /// <summary>
@@ -135,6 +154,7 @@ namespace YektamakDesktop
                 UseVisualStyleBackColor = true,
             };
             button.FlatAppearance.BorderSize = 0;
+            button.Cursor = Cursors.Hand;
             button.Click += menuButton_Click;
             button.BringToFront();
             this.panelAnaMenu.Controls.Add(button);
@@ -157,28 +177,31 @@ namespace YektamakDesktop
                     RoundedIconButton button = new()
                     {
                         FlatStyle = FlatStyle.Flat,
-                        Name = yetki.ekran.formAdi.ToString(),
+                        Name = yetki.ekran.formAd.ToString(),
                         Text = yetki.ekran.ekranAdi.ToString(),
                         BackColor = Color.BlueViolet,
                         IconColor = Color.Gainsboro,
                         Location = new Point(x, y),
                         ForeColor = Color.Gainsboro,
-                        Size = new Size(100, 60),
+                        Size = new Size(125, 60),
                         Font = new Font("Segoe UI", 9, FontStyle.Bold),
                         IconChar = iconChar,
                         TextAlign = ContentAlignment.MiddleCenter,
                         TextImageRelation = TextImageRelation.ImageBeforeText,
                         UseVisualStyleBackColor = true,
                         Padding = new Padding(10, 0, 0, 0),
-                        IconSize = 20,
+                        IconSize = 30,
                         CornerRadius = 15,
                     };
+                    button.FlatAppearance.BorderSize = 0;
+                    button.FlatAppearance.MouseOverBackColor = Color.DarkBlue;
+                    button.Cursor = Cursors.Hand;
                     button.Click += button_Click;
                     button.BringToFront();
                     this.panelMenu.Controls.Add(button);
                     controlsToDisable.Add(button);
                     x += button.Width + 10;
-                    if (x > 143 + 3 * button.Width)
+                    if (x > panelMenu.Width - button.Width)
                     {
                         x = buttonX;
                         y += button.Height + 10;
@@ -198,49 +221,55 @@ namespace YektamakDesktop
                 Button button = (Button)sender;
 
                 // Form adını kullanarak tüm assembly'leri tarar.
-                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                Type targetType = null;
-
-                foreach (var assembly in assemblies)
-                {
-                    // İlgili formun türünü bulmaya çalışır.
-
-                    targetType = assembly.GetTypes()
-                        .Where(type => typeof(Form).IsAssignableFrom(type) && type.Name == button.Name)
-                        .FirstOrDefault();
-
-                    if (targetType != null)
-                        break;
-                }
+                Type targetType = GetFormInstance(button.Name);
 
                 // Form bulunduysa açar.
                 if (targetType != null)
                 {
-                    //object[] parameters = new object[] { GlobalData.kendiFirmaId };
-                    //MethodInfo method = targetType.GetMethod("FirmaMode", new Type[] { typeof(int) });
                     Type type = Type.GetType(targetType.ToString());
 
                     PropertyInfo propertyInfo = type.GetProperty(type.Name[0].ToString().ToLower() + type.Name.Substring(1), BindingFlags.Static | BindingFlags.Public);
                     object formInstance = propertyInfo.GetValue(null);
                     Form form = formInstance as Form;
-                    if(form != null)
+                    if (form != null)
                     {
                         form.StartPosition = FormStartPosition.CenterScreen;
                         form.Show();
-                        //method?.Invoke(form, parameters); //method null değilse invoke eder. ? işareti null kontrolünü sağlıyor.
                     }
                 }
                 else
                 {
-                    // Form bulunamazsa hata döndürür.
                     MessageBox.Show("Form bulunamadı: " + button.Name);
                 }
             }
             catch (Exception ex)
             {
-                // Olası istisnaları işler.
                 MessageBox.Show("Bir hata oluştu: " + ex.Message);
             }
+        }
+        /// <summary>
+        /// Retrieves the <see cref="Type"/> of a form with the specified name from the currently loaded assemblies.
+        /// </summary>
+        /// <remarks>This method searches all assemblies loaded in the current application domain for a
+        /// class that inherits from <see cref="Form"/> and matches the specified name. If multiple assemblies contain
+        /// forms with the same name, the first match is returned.</remarks>
+        /// <param name="formName">The name of the form to locate. This is case-sensitive and must match the name of a class that inherits from
+        /// <see cref="Form"/>.</param>
+        /// <returns>The <see cref="Type"/> of the form if found; otherwise, <see langword="null"/>.</returns>
+        private static Type GetFormInstance(string formName)
+        {
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Type targetType = null;
+            foreach (var assembly in assemblies)
+            {
+                targetType = assembly.GetTypes()
+                    .Where(type => typeof(Form).IsAssignableFrom(type) && type.Name == formName)
+                    .FirstOrDefault();
+
+                if (targetType != null)
+                    break;
+            }
+            return targetType;
         }
 
 
@@ -278,17 +307,7 @@ namespace YektamakDesktop
         }
 
 
-        /// <summary>
-        /// Gloabal Data'da alınan listelerde güncelleme oldu ise programı kapatmadan güncellenebilmesini sağlar.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.Enabled = false;
-            MessageBox.Show("GlobalData listeleri güncellendi.");
-            this.Enabled = true;
-        }
+
         /// <summary>
         /// Buttona tıklandığında uygulamayı kapatır.
         /// </summary>
@@ -297,11 +316,6 @@ namespace YektamakDesktop
         private void buttonCikis_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-        private void CloseForm()
-        {
-            this.Close();
-            GlobalData.RemoveLastForm();
         }
 
         private void buttomMinimize_Click(object sender, EventArgs e)
@@ -350,9 +364,10 @@ namespace YektamakDesktop
             }
 
         }
-        private void btnGeneralDefinitions_Click(object sender, EventArgs e)
+
+        private void lblKullanici_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.color1);
+
         }
     }
 }

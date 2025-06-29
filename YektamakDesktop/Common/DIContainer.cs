@@ -6,12 +6,17 @@ using System;
 using Utilities;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar;
 using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Proje;
+using YektamakDesktop.Formlar.Satinalma;
+using YektamakDesktop.Formlar.Satinalma.Teklif;
 using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
 using YektamakDesktop.Formlar.Yetkilendirme;
+using YektamakDesktop.Helpers;
+using static YektamakDesktop.Formlar.Yetkilendirme.Menuler;
 
 namespace YektamakDesktop.Common
 {
@@ -24,29 +29,37 @@ namespace YektamakDesktop.Common
             var services = new ServiceCollection();
 
             // Servisleri ekleyin
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<UserLogin>();
-            services.AddSingleton<GlobalData>();
-            services.AddSingleton<ProjeDosyalari>();
-            services.AddSingleton<StokKartKayitFormu>();
-            services.AddSingleton<SatinalmaTalepOlusturma>();
-            services.AddSingleton<AltMenuEkle>();
-            services.AddSingleton<FirmaGridForm>();
-            services.AddSingleton<PersonelKayitFormu>();
-            services.AddSingleton<ExceldenVeriAlmaFormu>();
-            services.AddSingleton<SatisTeklifTalepKayitFormu>();
-            services.AddSingleton<SatisSiparisTeklifTalepGridForm>();
-            services.AddSingleton<Monday>();
-            services.AddSingleton<Menuler>();
-            services.AddSingleton<EkranEkle>();
-            services.AddSingleton<StokKartGridForm>();
-            services.AddSingleton<YetkiTanimlari>();
-            services.AddSingleton<SatisTeklifMaliyetKayitFormu>();
-            services.AddSingleton<KullaniciKayitFormu>();
-            services.AddSingleton<MalzemeAltGrup2>();
-            services.AddSingleton<SatinalmaTalepSatirDetayForm>();
-            services.AddSingleton(typeof(AnaVeriTanimlamaFormu<>));
-            services.AddSingleton<IDataGridHelper, DataGridHelper>();
+            services.AddTransient<MainWindow>();
+            services.AddTransient<UserLogin>();
+            services.AddTransient<GlobalData>();
+            services.AddTransient<ProjeDosyalari>();
+            services.AddTransient<StokKartKayitFormu>();
+            services.AddTransient<SatinalmaTalepKayitFormu>();
+            services.AddTransient<AltMenuEkle>();
+            services.AddTransient<FirmaGridForm>();
+            services.AddTransient<PersonelKayitFormu>();
+            services.AddTransient<ExceldenVeriAlmaFormu>();
+            services.AddTransient<SatisTeklifTalepKayitFormu>();
+            services.AddTransient<SatisSiparisTeklifTalepGridForm>();
+            services.AddTransient<Monday>();
+            services.AddTransient<Menuler>();
+            services.AddTransient<EkranEkle>();
+            services.AddTransient<StokKartGridForm>();
+            services.AddTransient<YetkiTanimlari>();
+            services.AddTransient<SatisTeklifMaliyetKayitFormu>();
+            services.AddTransient<KullaniciKayitFormu>();
+            services.AddTransient<MalzemeAltGrup2>();
+            services.AddTransient<SatinalmaTalepler>();
+            services.AddTransient<SatinalmaTalepOnayFormu>();
+            services.AddTransient<PermissionManager>();
+            services.AddTransient<DataControlMenu>();
+            services.AddTransient<SatinalmaTalepTeklifFormu>();
+            services.AddTransient<ExcelTanimlamaFormu>();
+            services.AddSingleton<MailGonder>();
+            services.AddSingleton<SatinalmaTeklifTaleplerFormu>();
+            services.AddSingleton<SatinalmaTeklifKayitFormu>();
+            services.AddTransient(typeof(AnaVeriTanimlamaFormu<>));
+            services.AddTransient<IDataGridHelper, DataGridHelper>();
             services.Configure<PasswordHashingOptions>(options =>
             {
                 options.Iterations = 120000; // Higher for more security

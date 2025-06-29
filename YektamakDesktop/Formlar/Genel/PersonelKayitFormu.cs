@@ -83,10 +83,10 @@ namespace YektamakDesktop.Formlar.Genel
                 buttonPersonelGuncelle,
                 buttonResimSec,
                 textBoxEmail,
-                comboListBoxFirma,
-                textBoxIsim,
+                clbFirma,
+                ctbIsim,
                 textBoxPozisyon,
-                textBoxSoyisim,
+                ctbSoyisim,
                 textBoxTelefon
             };
         }
@@ -94,9 +94,9 @@ namespace YektamakDesktop.Formlar.Genel
         {
             buttonPersonelGuncelle.Visible = true;
             personelToUpdate=personel;
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id??-1);
-            textBoxIsim.TextCustom = personel.ad;
-            textBoxSoyisim.TextCustom = personel.soyad;
+            clbFirma.SelectDataRowId(personel.firma.Id??-1);
+            ctbIsim.TextCustom = personel.ad;
+            ctbSoyisim.TextCustom = personel.soyad;
             textBoxTelefon.TextCustom = personel.telefon;
             textBoxEmail.TextCustom = personel.mail;
             textBoxPozisyon.TextCustom = personel.pozisyon;
@@ -123,8 +123,8 @@ namespace YektamakDesktop.Formlar.Genel
             buttonPersonelGuncelle.Visible = false;
             personelToSave=JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
             personelToUpdate= JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id??-1);
-            comboListBoxFirma.Enabled= false;
+            clbFirma.SelectDataRowId(personel.firma.Id??-1);
+            clbFirma.Enabled= false;
         }
         private void buttonResimSec_Click(object sender, EventArgs e)
         {
@@ -159,10 +159,10 @@ namespace YektamakDesktop.Formlar.Genel
         private Personel GetCurrentPersonel()
         {
             personelToSave.Id=personelToUpdate.Id;
-            personelToSave.firma.Id = comboListBoxFirma.selectedDataRowId;
-            personelToSave.firma.ad = comboListBoxFirma.selectedDataRowValue;
-            personelToSave.ad = string.IsNullOrEmpty(textBoxIsim.TextCustom)?null: textBoxIsim.TextCustom;
-            personelToSave.soyad = string.IsNullOrEmpty(textBoxSoyisim.TextCustom)?null:textBoxSoyisim.TextCustom;
+            personelToSave.firma.Id = clbFirma.selectedDataRowId;
+            personelToSave.firma.ad = clbFirma.selectedDataRowValue;
+            personelToSave.ad = string.IsNullOrEmpty(ctbIsim.TextCustom)?null: ctbIsim.TextCustom;
+            personelToSave.soyad = string.IsNullOrEmpty(ctbSoyisim.TextCustom)?null:ctbSoyisim.TextCustom;
             personelToSave.telefon = string.IsNullOrEmpty(textBoxTelefon.TextCustom) ? null : textBoxTelefon.TextCustom;
             personelToSave.mail = string.IsNullOrEmpty(textBoxEmail.TextCustom) ? null : textBoxEmail.TextCustom;
             personelToSave.pozisyon = string.IsNullOrEmpty(textBoxPozisyon.TextCustom) ? null : textBoxPozisyon.TextCustom;
@@ -177,11 +177,10 @@ namespace YektamakDesktop.Formlar.Genel
         /// </summary>
         private bool CheckFields()
         {
-            GlobalData.ClearWarningLabels(this);
             bool result = true;
-            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, textBoxIsim);
-            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, textBoxSoyisim);
-            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, comboListBoxFirma);
+            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, ctbIsim);
+            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, ctbSoyisim);
+            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, clbFirma);
             return result;
         }
         private async void buttonPersonelKaydet_Click(object sender, EventArgs e)

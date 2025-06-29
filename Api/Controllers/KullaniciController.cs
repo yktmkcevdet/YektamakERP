@@ -19,20 +19,26 @@ namespace Api.Controllers
         [HttpPost, Route("api/SaveKullanici")]
         public string SaveKullanici([FromBody] string restData)
         {
-            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Kullanici>(restData), "spSaveKullanici");
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Models.Kullanici>(restData), "spSaveKullanici");
             return result;
 		}
         
         [HttpPost, Route("api/GetKullanici")]
         public string GetKullanici([FromBody] string restData)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<Kullanici>(restData), "spGetKullanici");
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Models.Kullanici>(restData), "spGetKullanici");
             return result;
 		}
+        [HttpPost, Route("api/GetRol")]
+        public string GetRol([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Models.Kullanici>(restData), "spGetRol");
+            return result;
+        }
         [HttpGet, Route("api/GetKullanici/{username}")]
         public string GetUser(string username)
         {
-            Kullanici kullanici = new Kullanici();
+            Models.Kullanici kullanici = new Models.Kullanici();
             kullanici.ad = username;
             string result = _dataAccessLayer.GetObject(kullanici,"spGetKullanici");
             return result;
@@ -41,7 +47,7 @@ namespace Api.Controllers
         [HttpPost, Route("api/GetKullaniciYetki")]
         public string GetKullaniciYetki([FromBody] string restData)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<Kullanici>(restData), "spGetKullaniciYetki");
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Models.Kullanici>(restData), "spGetKullaniciYetki");
             return result;
 		}
 
@@ -58,7 +64,12 @@ namespace Api.Controllers
             string result = _dataAccessLayer.SaveObject(JsonStringToModel<Yetki>(restData), "spSaveYetki");
             return result;
 		}
-
+        [HttpPost, Route("api/SaveAlanYetki")]
+        public string SaveAlanYetki([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Models.DTO.AlanYetkiDTO>(restData), "spSaveAlanYetki");
+            return result;
+        }
         [HttpPost, Route("api/DeleteEkran")]
         public string DeleteEkran([FromBody] string restData)
         {
@@ -68,7 +79,7 @@ namespace Api.Controllers
         [HttpPost, Route("api/GetAnaMenu")]
         public string GetAnaMenu([FromBody] string restData)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<AnaMenu>(restData), "spGetAnaMenu");
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<AnaMenuDTO>(restData), "spGetAnaMenu");
             return result;
         }
         [HttpPost, Route("api/GetYetki")]
@@ -93,6 +104,12 @@ namespace Api.Controllers
         public string DeleteMenu([FromBody] string restData)
         {
             string result = _dataAccessLayer.DeleteObject(JsonStringToModel<Menu>(restData), "spDeleteMenu");
+            return result;
+        }
+        [HttpPost, Route("api/GetAlanYetki")]
+        public string GetAlanYetki([FromBody] string restData)
+        {
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<Models.DTO.AlanYetkiDTO>(restData), "spGetAlanYetki");
             return result;
         }
     }

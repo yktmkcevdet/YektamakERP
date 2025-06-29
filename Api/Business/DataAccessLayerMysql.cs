@@ -34,7 +34,7 @@ namespace Api.Business
             }
             catch (Exception ex)
             {
-                return "error 1 : veritabanı hatası " + ex.Message;
+                throw new Exception("error 1 : veritabanı hatası " + ex.Message);
             }
             finally
             {
@@ -176,7 +176,7 @@ namespace Api.Business
         /// <param name="model">Parametre değerlerinin alınacağı veri modeli nesnesi</param>
         /// <param name="cmd">Parametrelerin ekleneceği stored procedure adı</param>
         /// <param name="parameterPrefix">Eğer model içinde model varsa üst model adı önek olarak parametreye eklenir.</param>
-        public void AddParameters<T>(T model, MySqlCommand cmd, string parameterPrefix="") where T : class
+        public void AddParameters<T>(T model, MySqlCommand cmd, string parameterPrefix = "") where T : class
         {
             if (model == null) return;
             if (cmd.Parameters.Count == 0)
@@ -184,7 +184,8 @@ namespace Api.Business
                 if (cmd is DbCommand)
                 {
                     GetStoredProcedureParameters(cmd);
-                };
+                }
+                ;
             }
             var memberList = model.GetType().GetMembers().Where(x => x.MemberType == MemberTypes.Property || x.MemberType == MemberTypes.Field).ToList();
 
@@ -200,7 +201,30 @@ namespace Api.Business
                 }
                 else if (member is PropertyInfo propertyInfo)
                 {
-                    field = propertyInfo.GetValue(model);
+                    if (propertyInfo.PropertyType == typeof(char))
+                    {
+                        field = model;
+                        foreach (MySqlParameter parameter in cmd.Parameters)
+                        {
+                            string parameterName = member.Name;
+                            if (parameter.ParameterName.Substring(1, parameter.ParameterName.Length - 1).Equals(parameterName, StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (parameter.Value == null || parameter.Value.ToString() == "0" || parameter.Value.ToString() == "")
+                                {
+                                    cmd.Parameters.RemoveAt(parameter.ParameterName);
+                                    parameter.ParameterName = parameterName;
+                                    parameter.Value = field;
+                                    cmd.Parameters.Add(parameter);
+                                }
+                                break;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        field = propertyInfo.GetValue(model);
+                    }
                 }
                 else
                 {
@@ -359,5 +383,31 @@ namespace Api.Business
                 conn.Close();
             }
         }
+
+        public string SaveObject(string json, string sqlCommandName) 
+        {
+            MySqlConnection conn = DataBaseJobsGeneral.MySqlConnection();
+            MySqlCommand cmd = new MySqlCommand(sqlCommandName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                AddParameters(json, cmd, "");
+
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                DataSet dataSet = new DataSet();
+                sqlDataAdapter.Fill(dataSet);
+                string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error 1 : veritabanı hatası " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
     }
 }

@@ -1,24 +1,23 @@
-﻿using ApiService.Interfaces;
+﻿using ApiService.Constants;
+using ApiService.Implementetions;
+using ApiService.Interfaces;
 using Models;
 using Models.Attributes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
-using ApiService;
-using ApiService.Implementetions;
-using Newtonsoft.Json.Converters;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Globalization;
-using ApiService.Constants;
 
 namespace YektamakDesktop
 {
@@ -283,7 +282,7 @@ namespace YektamakDesktop
         /// <param name="func"></param>
         /// <param name="filterModel"></param>
         /// <returns></returns>
-        public static async Task<DataTable> FillDataTableAsync<T>(Func<T, Task<string>> func, T filterModel) where T : class
+        public static async Task<DataTable> FillDataTableAsync<T>(Func<T, Task<string>> func, T filterModel) where T : class, IEntity, new()
         {
             DataTable dataTable = new DataTable();
 
@@ -295,8 +294,9 @@ namespace YektamakDesktop
             }
             else
             {
-                
-                dataTable = _converter.DeserializeToDataSet(result).Tables[0];
+                DataTable rows = _converter.DeserializeToDataSet(result).Tables[0];
+                var entityList = _dataTableHelper.MapToEntityList<T>(rows); // Ensure T has a parameterless constructor
+                dataTable = _convertHelper.ToDataTable(entityList); // Convert entity list to DataTable
             }
 
             return dataTable;
@@ -548,9 +548,13 @@ namespace YektamakDesktop
                     {
                         dataTable.Rows[i][columnName] = stringValue;
                     }
+                    else if(value is DateTime dateValue)
+                    {
+                        dataTable.Rows[i][columnName] = dateValue;
+                    }
                     else
                     {
-                        dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(value??0);
+                        dataTable.Rows[i][columnName] = JsonConvert.SerializeObject(value);
                     }
                     //dataTable.Rows[i][columnName] = fieldInfo.GetValue(model).ToString();
                 }
@@ -567,7 +571,7 @@ namespace YektamakDesktop
 
                     if (value is null)
                     {
-                        dataTable.Rows[i][columnName] = null;
+                        dataTable.Rows[i][columnName] = DBNull.Value;
                     }
                     else if (value is string stringValue)
                     {
@@ -613,7 +617,7 @@ namespace YektamakDesktop
                 if (dataTable.Columns.Contains(columnName))
                 {
                     var nestedModel = propertyInfo.GetValue(model);
-                    dataTable.Rows[i][columnName] = nestedPropertyInfo.GetValue(nestedModel);
+                    dataTable.Rows[i][columnName] = nestedPropertyInfo.GetValue(nestedModel)??DBNull.Value;
                 }
                 else if (typeof(IEntity).IsAssignableFrom(nestedPropertyInfo.GetValue(propertyInfo.GetValue(model)).GetType()))
                 {
@@ -681,8 +685,7 @@ namespace YektamakDesktop
             int id = int.Parse(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
 
             int i = IndexOfDataSet(dataTable, id);
-            IDataTableMapper dataTableConverter = new DataTableMapper();
-            model = dataTableConverter.MapToEntity<T>(dataTable.Rows[i]);
+            model = _dataTableHelper.MapToEntity<T>(dataTable.Rows[i]);
             return model;
         }
         private static void UpdateMode<T>(T model) where T:IEntity,new()

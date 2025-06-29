@@ -82,7 +82,7 @@ namespace YektamakDesktop.CustomControls
 
 
         private int _selectedDataRowId = -1;
-        public int selectedDataRowId { get => _selectedDataRowId; }
+        public int selectedDataRowId { get => _selectedDataRowId; set { SelectDataRowId(value); } }
         private string _selectedDataRowValue;
         public string selectedDataRowValue { get => _selectedDataRowValue; }
 

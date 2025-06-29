@@ -241,7 +241,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void SatisSiparisTeklifTalepKayitFormu_Load(object sender, EventArgs e)
         {
-            textBoxTeklifTalepTarihi.TextCustom = satisSiparisTeklifTalep.teklifTalepTarihi?.ToString();
+            textBoxTeklifTalepTarihi.TextCustom = satisSiparisTeklifTalep.teklifTalepTarihi;
             comboListBoxMusteri.SelectDataRowId(satisSiparisTeklifTalep.musteri.Id??-1);
             textBoxTeklifKonusu.TextCustom = satisSiparisTeklifTalep.teklifKonusu;
             comboListBoxMarka.SelectDataRowId(satisSiparisTeklifTalep.marka.Id);

@@ -11,10 +11,12 @@ namespace Utilities.Implementations
     public class JsonConverter : IJsonConverter
     {
         private readonly ILogger<JsonConverter> _logger;
+        private readonly IDataTableMapper _dataTableMapper;
 
-        public JsonConverter(ILogger<JsonConverter> logger = null)
+        public JsonConverter(ILogger<JsonConverter> logger = null, IDataTableMapper dataTableMapper = null)
         {
             _logger = logger;
+            _dataTableMapper = dataTableMapper;
         }
 
         /// <summary>
@@ -114,7 +116,7 @@ namespace Utilities.Implementations
         /// <returns>Deserialize edilmiş model nesnesi</returns>
         /// <exception cref="ArgumentException">Geçersiz parametre durumunda</exception>
         /// <exception cref="JsonException">Deserializasyon hatası durumunda</exception>
-        public T DeserializeToModel<T>(string encodedJsonString)
+        public List<T> DeserializeToModelList<T>(string encodedJsonString) where T : IEntity, new()
         {
             if (string.IsNullOrWhiteSpace(encodedJsonString))
                 throw new ArgumentException("Encoded JSON string cannot be null or empty.", nameof(encodedJsonString));
@@ -124,12 +126,13 @@ namespace Utilities.Implementations
                 var decodedJson = DecodeBase64JsonString(encodedJsonString);
                 var obj = JObject.Parse(decodedJson);
                 var jsonModel = obj["Table"].FirstOrDefault();
-                var model=jsonModel.ToObject<T>();
-                //var model = JsonConvert.DeserializeObject<T>(jsonModel.ToString());
-                
+                //var model=jsonModel.ToObject<T>();
+
+                var dataTable = DeserializeToDataSet(encodedJsonString)?.Tables[0];
+                var modelList = _dataTableMapper.MapToEntityList<T>(dataTable) ;
 
                 _logger?.LogDebug("Successfully deserialized model of type {ModelType}.", typeof(T).Name);
-                return model;
+                return modelList;
             }
             catch (Exception ex)
             {

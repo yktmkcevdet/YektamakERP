@@ -1,6 +1,4 @@
 ﻿using ApiService.Interfaces;
-using Microsoft.Office.Interop.Outlook;
-using Models;
 using Models.Interface;
 using System;
 using System.Collections.Generic;

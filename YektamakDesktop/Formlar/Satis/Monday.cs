@@ -1,4 +1,5 @@
 ﻿using ApiService.Interfaces;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ namespace YektamakDesktop.Formlar.Satis
         {
             get
             {
-                if (_monday == null)
+                if (_monday == null || _monday.IsDisposed)
                 {
                     _monday = new Monday();
                     GlobalData.Yetki(ref _monday);
@@ -43,11 +44,6 @@ namespace YektamakDesktop.Formlar.Satis
         private async void Monday_Load(object sender, EventArgs e)
         {
         }
-        private void CloseForm()
-        {
-            GlobalData.CloseForm(ref _monday);
-        }
-
         private void Monday_FormClosed(object sender, FormClosedEventArgs e)
         {
 
@@ -55,14 +51,15 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void Monday_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            universalGrid1.SaveSettings(this.Name);
         }
         private async Task VerileriYukleAsync()
         {
             try
             {
-                var teklifler = await _satisService.GetMondayTeklif();
-                dataGridView1.DataSource = teklifler;
+                List<MondayTeklif> teklifler = await _satisService.GetMondayTeklif();
+                //dataGridView1.DataSource = teklifler;
+                universalGrid1.SetData(teklifler, this.Name);
             }
             catch (Exception ex)
             {
@@ -72,11 +69,6 @@ namespace YektamakDesktop.Formlar.Satis
         private async void Form1_Shown(object sender, EventArgs e)
         {
             await VerileriYukleAsync();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            CloseForm();
         }
     }
 }

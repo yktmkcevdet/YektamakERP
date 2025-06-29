@@ -33,9 +33,9 @@
             buttonHelp = new CustomControls.RoundedButton();
             buttomMinimize = new CustomControls.RoundedButton();
             labelHeader = new System.Windows.Forms.Label();
-            comboListBoxAnaMenu = new CustomControls.CustomComboListBox();
-            comboListBoxForm = new CustomControls.CustomComboListBox();
-            customTextBoxMenuAdi = new CustomControls.CustomTextBox();
+            clbAnaMenu = new CustomControls.CustomComboListBox();
+            clbForm = new CustomControls.CustomComboListBox();
+            ctbMenuAdi = new CustomControls.CustomTextBox();
             rButtonKaydet = new CustomControls.RoundedButton();
             rButtonKapat = new CustomControls.RoundedButton();
             label2 = new System.Windows.Forms.Label();
@@ -146,49 +146,49 @@
             // 
             // comboListBoxAnaMenu
             // 
-            comboListBoxAnaMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxAnaMenu.ListBoxVisualSize = 5;
-            comboListBoxAnaMenu.Location = new System.Drawing.Point(177, 89);
-            comboListBoxAnaMenu.Margin = new System.Windows.Forms.Padding(1);
-            comboListBoxAnaMenu.Name = "comboListBoxAnaMenu";
-            comboListBoxAnaMenu.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxAnaMenu.Size = new System.Drawing.Size(188, 36);
-            comboListBoxAnaMenu.TabIndex = 54;
+            clbAnaMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbAnaMenu.ListBoxVisualSize = 5;
+            clbAnaMenu.Location = new System.Drawing.Point(177, 89);
+            clbAnaMenu.Margin = new System.Windows.Forms.Padding(1);
+            clbAnaMenu.Name = "comboListBoxAnaMenu";
+            clbAnaMenu.Padding = new System.Windows.Forms.Padding(1);
+            clbAnaMenu.Size = new System.Drawing.Size(188, 36);
+            clbAnaMenu.TabIndex = 54;
             // 
             // comboListBoxForm
             // 
-            comboListBoxForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxForm.ListBoxVisualSize = 5;
-            comboListBoxForm.Location = new System.Drawing.Point(177, 127);
-            comboListBoxForm.Margin = new System.Windows.Forms.Padding(1);
-            comboListBoxForm.Name = "comboListBoxForm";
-            comboListBoxForm.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxForm.Size = new System.Drawing.Size(294, 36);
-            comboListBoxForm.TabIndex = 55;
+            clbForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbForm.ListBoxVisualSize = 5;
+            clbForm.Location = new System.Drawing.Point(177, 127);
+            clbForm.Margin = new System.Windows.Forms.Padding(1);
+            clbForm.Name = "comboListBoxForm";
+            clbForm.Padding = new System.Windows.Forms.Padding(1);
+            clbForm.Size = new System.Drawing.Size(294, 36);
+            clbForm.TabIndex = 55;
             // 
             // customTextBoxMenuAdi
             // 
-            customTextBoxMenuAdi.BackColor = System.Drawing.Color.White;
-            customTextBoxMenuAdi.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            customTextBoxMenuAdi.BorderFocusColor = System.Drawing.Color.HotPink;
-            customTextBoxMenuAdi.BorderRadius = 0;
-            customTextBoxMenuAdi.BorderSize = 2;
-            customTextBoxMenuAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            customTextBoxMenuAdi.ForeColor = System.Drawing.Color.Black;
-            customTextBoxMenuAdi.Location = new System.Drawing.Point(179, 163);
-            customTextBoxMenuAdi.Multiline = false;
-            customTextBoxMenuAdi.Name = "customTextBoxMenuAdi";
-            customTextBoxMenuAdi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            customTextBoxMenuAdi.PasswordChar = false;
-            customTextBoxMenuAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
-            customTextBoxMenuAdi.PlaceholderText = "";
-            customTextBoxMenuAdi.ReadOnly = false;
-            customTextBoxMenuAdi.SelectionStart = 0;
-            customTextBoxMenuAdi.Size = new System.Drawing.Size(250, 32);
-            customTextBoxMenuAdi.TabIndex = 56;
-            customTextBoxMenuAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            customTextBoxMenuAdi.TextCustom = "";
-            customTextBoxMenuAdi.UnderlinedStyle = false;
+            ctbMenuAdi.BackColor = System.Drawing.Color.White;
+            ctbMenuAdi.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            ctbMenuAdi.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbMenuAdi.BorderRadius = 0;
+            ctbMenuAdi.BorderSize = 2;
+            ctbMenuAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbMenuAdi.ForeColor = System.Drawing.Color.Black;
+            ctbMenuAdi.Location = new System.Drawing.Point(179, 163);
+            ctbMenuAdi.Multiline = false;
+            ctbMenuAdi.Name = "customTextBoxMenuAdi";
+            ctbMenuAdi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            ctbMenuAdi.PasswordChar = false;
+            ctbMenuAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbMenuAdi.PlaceholderText = "";
+            ctbMenuAdi.ReadOnly = false;
+            ctbMenuAdi.SelectionStart = 0;
+            ctbMenuAdi.Size = new System.Drawing.Size(250, 32);
+            ctbMenuAdi.TabIndex = 56;
+            ctbMenuAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbMenuAdi.TextCustom = "";
+            ctbMenuAdi.UnderlinedStyle = false;
             // 
             // rButtonKaydet
             // 
@@ -342,9 +342,9 @@
             Controls.Add(labelAnaMenu);
             Controls.Add(rButtonKapat);
             Controls.Add(rButtonKaydet);
-            Controls.Add(customTextBoxMenuAdi);
-            Controls.Add(comboListBoxForm);
-            Controls.Add(comboListBoxAnaMenu);
+            Controls.Add(ctbMenuAdi);
+            Controls.Add(clbForm);
+            Controls.Add(clbAnaMenu);
             Controls.Add(panelHeader);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "AltMenuEkle";
@@ -359,9 +359,9 @@
 
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label labelHeader;
-        private CustomControls.CustomComboListBox comboListBoxAnaMenu;
-        private CustomControls.CustomComboListBox comboListBoxForm;
-        private CustomControls.CustomTextBox customTextBoxMenuAdi;
+        private CustomControls.CustomComboListBox clbAnaMenu;
+        private CustomControls.CustomComboListBox clbForm;
+        private CustomControls.CustomTextBox ctbMenuAdi;
         private CustomControls.RoundedButton rButtonKaydet;
         private CustomControls.RoundedButton rButtonKapat;
         private System.Windows.Forms.Label label2;

@@ -11,6 +11,8 @@ namespace YektamakWeb.Pages
     {
         [Inject]
         private IStokService _stokService { get; set; }
+        [Inject]
+        IDataTableMapper _dataTableMapper { get; set; }
         public List<StokKart> stokKarts = new List<StokKart>();
         private string message;
         private int selectedProjeId;
@@ -28,10 +30,9 @@ namespace YektamakWeb.Pages
                 DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
                 if (dataSet != null)
                 {
-                    IDataTableMapper DataTableConverter = new DataTableMapper();
                     foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                     {
-                        stokKart = DataTableConverter.MapToEntity<StokKart>(dataRow);
+                        stokKart = _dataTableMapper.MapToEntity<StokKart>(dataRow);
                         stokKarts.Add(stokKart);
                     }
                 }

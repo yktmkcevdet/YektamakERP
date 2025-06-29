@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using Utilities.Implementations;
 using Utilities.Interfaces;
 
@@ -8,11 +10,27 @@ namespace Utilities
     {
         public static IServiceCollection AddUtilities(this IServiceCollection services)
         {
+            // Serilog'u yapılandır
+            //Log.Logger = new LoggerConfiguration()
+            //    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+            //    .CreateLogger();
+
+            //// Serilog'u .NET logging sistemine bağla
+            //services.AddLogging(loggingBuilder =>
+            //{
+            //    loggingBuilder.ClearProviders();
+            //    loggingBuilder.AddSerilog();
+            //});
+
+            // Utilities servislerini ekle
+            services.AddScoped<IAppLogger, AppLogger>();
             services.AddScoped<ICache, Cache>();
             services.AddScoped<IDataTableMapper, DataTableMapper>();
             services.AddScoped<IJsonConverter, JsonConverter>();
             services.AddScoped<ILoginHelper, LoginHelper>();
             services.AddScoped<IMailHandler, MailHandler>();
+            services.AddScoped<IConvertHelper, ConvertHelper>();
+
             return services;
         }
     }

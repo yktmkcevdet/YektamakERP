@@ -12,7 +12,7 @@ namespace YektamakDesktop.CustomControls
     /// User controlleri içerebilen datagrid şeklinde bir görünüm oluşturur.
     /// Form üzerinde oluşturulan bir panel üzerine yerleştirilir.
     /// </summary>
-    public class CustomDataGrid<T> : IDisposable where T : Abstracts.DataControl,new()
+    public partial class CustomDataGrid<T> : UserControl where T : Abstracts.DataControl,new()
     {
         int orderNr = 1;
         List<Control> listControl = new List<Control>();
@@ -84,6 +84,12 @@ namespace YektamakDesktop.CustomControls
             _headerLocation = headerLocation;
             _detailSize = detailSize;
         }
+
+        public CustomDataGrid()
+        {
+            InitializeComponent();
+        }
+
         private void DetailPanel_Scroll(object sender, ScrollEventArgs e)
         {
             headerPanel.Location = new Point(_headerLocation.X - detailPanel.HorizontalScroll.Value, _headerLocation.Y);
@@ -132,9 +138,31 @@ namespace YektamakDesktop.CustomControls
             AddDataRow(new T());
             //controlPointY = 0;
         }
+        private void RePlaceControls(T dataControl)
+        {
+            orderNr = int.Parse(dataControl.order.Text);
+            foreach (var dataCtl in dataSource.Where(dc=>int.Parse(dc.order.Text)> int.Parse(dataControl.order.Text)))
+            {
+                foreach(PropertyInfo propertyInfo in dataCtl.GetType().GetProperties().Where(p=> typeof(Control).IsAssignableFrom(p.PropertyType)))
+                {
+                    Control control = (Control)propertyInfo.GetValue(dataCtl);
+                    if (control != null)
+                    {
+                        if ((string)control.Tag == "No")
+                        {
+                            control.TextChanged -= ControlValueChange;
+                            control.Text = orderNr++.ToString();
+                        }
+                        control.Location = new Point(control.Location.X, control.Location.Y - control.Height);
+                    }
+                }
+                
+            }
+        }
         public void DeleteRow(object sender, EventArgs e)
         {
             T dataControl = dataSource.SingleOrDefault(x => x.GetType().GetProperties().Any(z => z.GetValue(x) == sender));
+            RePlaceControls(dataControl);
             if (dataControl != null && !(bool)dataControl.GetType().GetField("newRec").GetValue(dataControl))
             {
                 dataSource.Remove(dataControl);
@@ -153,14 +181,15 @@ namespace YektamakDesktop.CustomControls
                     }
                 }
             }
-            controlPointY = 0;
-            orderNr = 1;
-            for (int i=0;i< dataSource.Count;i++)
-            {
-                T dataRow = dataSource[i];
-                ControlList(dataRow);
-                PlaceControls();
-            }
+            
+            //controlPointY = 0;
+            //orderNr = 1;
+            //for (int i=0;i< dataSource.Count;i++)
+            //{
+            //    T dataRow = dataSource[i];
+            //    ControlList(dataRow);
+            //    PlaceControls();
+            //}
         }
         private void ControlList(T dataRow)
         {
@@ -257,6 +286,7 @@ namespace YektamakDesktop.CustomControls
             
             controlPointY = controlPointY + _rowSpace;
         }
+       
         private void SetControlEvents()
         {
             //foreach (PropertyInfo propertyInfo in dataRow.GetType().GetProperties())

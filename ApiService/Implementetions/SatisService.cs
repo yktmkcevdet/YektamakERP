@@ -35,6 +35,12 @@ namespace ApiService.Implementetions
                     name
                     items_page {
                         items {
+                            assets {
+                                id
+                                url
+                                public_url
+                                name
+                            }
                             name
                             column_values {
                                 id
@@ -60,19 +66,39 @@ namespace ApiService.Implementetions
                 {
                     JObject jsonResponse = JObject.Parse(responseBody);
                     JArray items = (JArray)jsonResponse["data"]["boards"][0]["items_page"]["items"];
+
                     foreach (var item in items)
                     {
                         MondayTeklif mondayTeklif = new MondayTeklif();
-
-                        foreach (PropertyInfo fieldInfo in mondayTeklif.GetType().GetProperties())
+                        mondayTeklif.belgeler = new();
+                        foreach (PropertyInfo propertyInfo in mondayTeklif.GetType().GetProperties())
                         {
                             var deneme = item["column_values"].ToList();
-                            var deneme2 = deneme.FirstOrDefault(x => x["id"].ToString() == fieldInfo.Name);
-                            var value = item["column_values"].ToList().FirstOrDefault(x => x["id"].ToString() == fieldInfo.Name)["text"];
+                            var deneme2 = deneme.FirstOrDefault(x => x["id"].ToString() == propertyInfo.Name);
+                            var value = item["column_values"].ToList().FirstOrDefault(x => x["id"].ToString() == propertyInfo.Name)["text"];
                             Type type = typeof(DateTime);
-                            string strValue = (fieldInfo.PropertyType == type) ? (value.ToString() == "" ? DateTime.MinValue : value).ToString() : value.ToString();
-                            fieldInfo.SetValue(mondayTeklif, Convert.ChangeType(strValue, fieldInfo.PropertyType));
+                            string strValue = (propertyInfo.PropertyType == type) ? (value.ToString() == "" ? DateTime.MinValue : value).ToString() : value.ToString();
+                            propertyInfo.SetValue(mondayTeklif, Convert.ChangeType(strValue, propertyInfo.PropertyType));
+                            //foreach (var assets in item["assets"])
+                            //{
+                            //    using (HttpClient client1 = new HttpClient())
+                            //    {
+                            //        try
+                            //        {
+                            //            byte[] fileBytes = await client1.GetByteArrayAsync(assets["public_url"].ToString());
+                                        
+                            //            mondayTeklif.belgeler.Add(fileBytes);
+                            //        }
+                            //        catch (HttpRequestException ex)
+                            //        {
+                            //            Console.WriteLine($"HTTP hatası: {ex.Message}");
+                            //            return null;
+                            //        }
+                            //    }
+
+                            //}
                         }
+                        
                         mondayTeklifs.Add(mondayTeklif);
                     }
                     return mondayTeklifs;

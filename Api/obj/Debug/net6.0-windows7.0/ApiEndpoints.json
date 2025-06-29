@@ -94,6 +94,32 @@
   },
   {
     "ContainingType": "Api.Controllers.KullaniciController",
+    "Method": "GetAlanYetki",
+    "RelativePath": "api/GetAlanYetki",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restData",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.KullaniciController",
     "Method": "GetAnaMenu",
     "RelativePath": "api/GetAnaMenu",
     "HttpMethod": "POST",
@@ -224,6 +250,32 @@
   },
   {
     "ContainingType": "Api.Controllers.KullaniciController",
+    "Method": "GetRol",
+    "RelativePath": "api/GetRol",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restData",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.KullaniciController",
     "Method": "GetYetki",
     "RelativePath": "api/GetYetki",
     "HttpMethod": "POST",
@@ -263,6 +315,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.KullaniciController",
+    "Method": "SaveAlanYetki",
+    "RelativePath": "api/SaveAlanYetki",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restData",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Api.Controllers.KullaniciController",

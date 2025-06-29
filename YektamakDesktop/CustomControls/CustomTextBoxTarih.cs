@@ -14,9 +14,11 @@ namespace YektamakDesktop.CustomControls
     /// </summary>
     public partial class CustomTextBoxTarih : UserControl
     {
-        
-
+        [Browsable(true)]
+        [Category("Behavior")]
+        public event EventHandler Guncelle;
         private bool _focusOnTextBox = false;
+        
         private bool focusOnTextBox
         {
             get => _focusOnTextBox;
@@ -59,23 +61,31 @@ namespace YektamakDesktop.CustomControls
         private Color placeholderColor = Color.DarkGray;
         private void SetPlaceHolder()
         {
-            if (string.IsNullOrWhiteSpace(textBox.TextCustom) && placeholderText != "")
+            if (textBox.TextCustom == null && placeholderText != "")
             {
                 textBox.TextCustom = placeholderText;
                 textBox.ForeColor = placeholderColor;
             }
         }
-        public string TextCustom
+        public DateTime? TextCustom
         {
             get
             {
-                return textBox.TextCustom;
+                return string.IsNullOrWhiteSpace(textBox.TextCustom) ? (DateTime?)null : Convert.ToDateTime(textBox.TextCustom);
             }
             set
             {
-                textBox.TextCustom = value;
+                if (value.HasValue)
+                {
+                    textBox.isPlaceHolder = false;
+                    textBox.TextCustom = value.Value.ToShortDateString();
+                }
                 SetPlaceHolder();
             }
+        }
+        protected virtual void OnGuncelle(EventArgs e)
+        {
+            Guncelle?.Invoke(this, e);
         }
 
         private bool isTextBoxClickEventEnabled = true;
@@ -125,7 +135,9 @@ namespace YektamakDesktop.CustomControls
             {
                 focusOnTextBox = false;
                 Resize_MonthCalendar();
+                
             }
+            OnGuncelle(EventArgs.Empty);
         }
 
         private void textBox_TextChanged(object sender, EventArgs e)
@@ -196,7 +208,7 @@ namespace YektamakDesktop.CustomControls
                 {
                     focusOnTextBox = false;
                 }
-                monthCalendar.SelectionStart = string.IsNullOrWhiteSpace(textBox.TextCustom) ? DateTime.Now : (DateTime.TryParse(textBox.TextCustom.ToString(),out DateTime date)?date: monthCalendar.SelectionStart);
+                monthCalendar.SelectionStart = string.IsNullOrWhiteSpace(textBox.TextCustom) ? DateTime.Now : (DateTime.TryParse(textBox.TextCustom.ToString(), out DateTime date) ? date : monthCalendar.SelectionStart);
                 monthCalendar.SelectionEnd = monthCalendar.SelectionStart;
                 Resize_MonthCalendar();
             }
@@ -224,7 +236,8 @@ namespace YektamakDesktop.CustomControls
 
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            textBox.TextCustom = monthCalendar.SelectionEnd.ToShortDateString();
+            TextCustom = monthCalendar.SelectionEnd;
+            OnGuncelle(EventArgs.Empty);
             focusOnTextBox = false;
             isTextBoxClickEventEnabled = true;
             isTextBoxEnterEventEnabled = true;
@@ -270,6 +283,7 @@ namespace YektamakDesktop.CustomControls
             if (e.KeyChar == (char)Keys.Enter)
             {
                 TariheDonustur();
+                OnGuncelle(EventArgs.Empty);
                 focusOnTextBox = false;
                 Resize_MonthCalendar();
             }
@@ -277,7 +291,7 @@ namespace YektamakDesktop.CustomControls
 
         private void CustomTextBoxTarih_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

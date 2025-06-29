@@ -317,6 +317,11 @@ namespace Api.Business
             }
 			return table;
 		}
+
+        public string SaveObject(string json, string sqlCommandName)
+        {
+            throw new NotImplementedException();
+        }
     }
    
     

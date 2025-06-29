@@ -1,10 +1,13 @@
 ﻿using ApiService;
 using ApiService.Interfaces;
+using Microsoft.VisualBasic.ApplicationServices;
 using Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
@@ -12,58 +15,30 @@ using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar
 {
-    public partial class UserLogin : Form
+    public partial class UserLogin : Form,IForm
     {
-        private static ICache _cache;
-        private static IKullaniciYetkiService _kullaniciYetkiService;
-        private static IPasswordService _passwordService;
-        public UserLogin(ICache cache, IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService)
+        private readonly ICache _cache;
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly IPasswordService _passwordService;
+        private readonly IJsonConverter _jsonConverter;
+        public UserLogin(ICache cache, IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, IJsonConverter jsonConverter)
         {
             InitializeComponent();
             _cache = cache;
             _kullaniciYetkiService = kullaniciYetkiService;
             _passwordService = passwordService;
+            _jsonConverter = jsonConverter;
+            GlobalData.AddNewForm(this);
+            controlsToDisable = new List<Control>();
+            var s = _cache.kullaniciListAsync();
         }
-        private UserLogin()
-        {
-            InitializeComponent();
-        }
-        private static UserLogin _userLogin;
-        public static UserLogin userLogin
-        {
-            get
-            {
-                if (_userLogin == null)
-                {
-                    _userLogin = new UserLogin();
-                }
-                return _userLogin;
-            }
-        }
-        public bool loginStatus { get; private set; }
+        
+        public bool loginStatus { get; set; }
+        public List<Control> controlsToDisable { get; set; }
+        public bool activeForm { get; set; }
+
         private bool newPasswordMode = false;
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
+
         private void roundedButtonLogin_Click(object sender, EventArgs e)
         {
             LoginProcedures();
@@ -78,22 +53,18 @@ namespace YektamakDesktop.Formlar
         {
             string hashedPassword = user.sifre;
             //return hashedPassword == storedHash;
-            return _passwordService.VerifyPassword(customTextBoxSifre.TextCustom, storedHash);
-        }
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            return _passwordService.VerifyPassword(ctbSifre.TextCustom, storedHash);
         }
         /// <summary>
         /// Enter'a basıldığında giriş butonuna basılmış gibi işlemleri yapar.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void KullaniciGiris_KeyPress(object sender, KeyPressEventArgs e)
+        private async void KullaniciGiris_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoginProcedures();
+                await LoginProcedures();
             }
             if (e.KeyChar == (char)Keys.F1)
             {
@@ -103,35 +74,21 @@ namespace YektamakDesktop.Formlar
         /// Kullanıcı adı ve şifre girildikten sonra giriş işlemlerini yapar. 
         /// Şifre ilk kez kullanılıyorsa şifre yenileme alanlarını görünür yapar.
         /// </summary>
-        private void LoginProcedures()
+        private async Task LoginProcedures()
         {
-            GlobalData.HandleException(async () =>
+            try
             {
                 if (!CheckFields()) return;
                 this.Enabled = false;
                 string storedHashPassword = "";
-                string password = customTextBoxSifre.TextCustom;
+                string password = ctbSifre.TextCustom;
 
                 Kullanici user = new Kullanici();
-                user.ad = customTextBoxKullaniciAdi.TextCustom;
-                string jsonString = _kullaniciYetkiService.GetKullanici(user.ad);
-                IJsonConverter jsonConverter = new JsonConverter();
-                DataSet dataSet = jsonConverter.DeserializeToDataSet(jsonString);
-
-                foreach (DataRow dr in dataSet.Tables[0].Rows)
-                {
-                    storedHashPassword = dataSet.Tables[0].Rows[0]["sifre"].ToString();
-                    user.Id = int.Parse(dr["Id"].ToString());
-                    user.salt = dr["salt"].ToString();
-                    user.sifre = GlobalData.HashPassword(customTextBoxSifre.TextCustom, user.salt);
-                    user.personel = new Personel();
-                    user.personel.Id = int.Parse(dr["personelId"].ToString());
-                    user.personel.mail = dr["Mail"].ToString();
-                    user.rolId = int.Parse(dr["rolId"].ToString());
-                    user.isSifreDegisti = int.TryParse(dr["IsSifreDegisti"].ToString(), out int isSifreDegistiInt)
-                             ? isSifreDegistiInt == 1
-                             : false;
-                }
+                user.ad = ctbKullaniciAdi.TextCustom;
+                string jsonString = await _kullaniciYetkiService.GetKullaniciAsync(user);
+                user = _jsonConverter.DeserializeToModelList<Kullanici>(jsonString)[0];
+                storedHashPassword = user.sifre;
+                user.sifre = GlobalData.HashPassword(ctbSifre.TextCustom, user.salt);
                 if (VerifyPassword(user, storedHashPassword))
                 {
                     if (user.isSifreDegisti == false && newPasswordMode == false)
@@ -156,8 +113,12 @@ namespace YektamakDesktop.Formlar
                 {
                     MessageBox.Show("Kullanıcı adı ya da şifre hatalı");
                 }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }   
                 this.Enabled = true;
-            });
         }
         /// <summary>
         /// Yeni şifre tanımlamak için program içinde dinamik olarak tanımlanan şifre textbox alanlarının passwordchar olarak gözükmesini sağlar.
@@ -174,10 +135,9 @@ namespace YektamakDesktop.Formlar
         }
         private bool CheckFields()
         {
-            GlobalData.ClearWarningLabels(this);
             bool result = true;
-            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", this, customTextBoxKullaniciAdi);
-            result &= GlobalData.CheckField("* Şifre girilmelidir!", this, customTextBoxSifre);
+            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", this, ctbKullaniciAdi);
+            result &= GlobalData.CheckField("* Şifre girilmelidir!", this, ctbSifre);
             
             if (newPasswordMode)
             {
@@ -227,16 +187,10 @@ namespace YektamakDesktop.Formlar
             if (!validationResult)
             {
                 this.Width += 100;
-                this.panelHeader.Width += 100;
-                this.buttonHelp.Location = new Point(this.buttonHelp.Location.X + 100, this.buttonHelp.Location.Y);
-                this.buttonClose.Location = new Point(this.buttonClose.Location.X + 100, this.buttonClose.Location.Y);
             }
             else
             {
                 this.Width -= 100;
-                this.panelHeader.Width -= 100;
-                this.buttonHelp.Location = new Point(this.buttonHelp.Location.X - 100, this.buttonHelp.Location.Y);
-                this.buttonClose.Location = new Point(this.buttonClose.Location.X - 100, this.buttonClose.Location.Y);
             }
         }
         /// <summary>
@@ -293,8 +247,8 @@ namespace YektamakDesktop.Formlar
         {
             if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.KullaniciAdi))
             {
-                customTextBoxKullaniciAdi.isPlaceHolder = false;
-                customTextBoxKullaniciAdi.TextCustom = Properties.Settings.Default.KullaniciAdi;
+                ctbKullaniciAdi.isPlaceHolder = false;
+                ctbKullaniciAdi.TextCustom = Properties.Settings.Default.KullaniciAdi;
             }
         }
     }

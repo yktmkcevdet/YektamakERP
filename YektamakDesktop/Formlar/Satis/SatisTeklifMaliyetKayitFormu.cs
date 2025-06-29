@@ -93,7 +93,7 @@ namespace YektamakDesktop.Formlar.Satis
         private void SatisTeklifMaliyetKayitFormu_Load(object sender, EventArgs e)
         {
             teklifTalepId.TextCustom = _satisTeklifTalep.Id.ToString();
-            teklifTalepTarihi.TextCustom = _satisTeklifTalep.teklifTalepTarihi?.ToString();
+            teklifTalepTarihi.TextCustom = _satisTeklifTalep.teklifTalepTarihi;
             musteriId.SelectDataRowId(_satisTeklifTalep.musteri.Id??-1);
             teklifKonusu.TextCustom = _satisTeklifTalep.teklifKonusu;
             markaId.SelectDataRowId(_satisTeklifTalep.marka.Id);

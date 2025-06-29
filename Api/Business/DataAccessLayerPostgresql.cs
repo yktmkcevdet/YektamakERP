@@ -440,5 +440,10 @@ namespace Api.Business
         {
             throw new NotImplementedException();
         }
+
+        public string SaveObject(string json, string sqlCommandName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

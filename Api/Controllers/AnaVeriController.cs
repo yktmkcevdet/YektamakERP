@@ -3,6 +3,7 @@ using Models;
 using Microsoft.AspNetCore.Mvc;
 using Api.Business;
 using static Api.Controllers.GeneralMethods;
+using Models.Models;
 
 namespace Api.Controllers
 {
@@ -58,6 +59,24 @@ namespace Api.Controllers
         public string GetDosyaTip()
         {
             return _dataAccessLayer.GetObject("spGetDosyaTip");
+        }
+        [HttpPost, Route("api/SaveExcelForm")]
+        public string SaveExcelForm([FromBody] string restData)
+        {
+            return _dataAccessLayer.SaveObject(JsonStringToModel<ExcelForm>(restData), "spSaveExcelForm");
+        }
+        
+        [HttpPost, Route("api/GetExcelForm")]
+        public string GetExcelForm([FromBody] string excelForm)
+        {
+            try
+            {
+                return _dataAccessLayer.GetObject(JsonStringToModel<ExcelForm>(excelForm), "spGetExcelForm");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Excel formu alınırken hata oluştu: {ex.Message}");
+            }
         }
     }
 }

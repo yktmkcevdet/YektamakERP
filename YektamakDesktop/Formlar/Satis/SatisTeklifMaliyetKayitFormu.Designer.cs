@@ -343,7 +343,6 @@ namespace YektamakDesktop.Formlar.Satis
             teklifTalepTarihi.Padding = new Padding(1);
             teklifTalepTarihi.Size = new Size(145, 32);
             teklifTalepTarihi.TabIndex = 16;
-            teklifTalepTarihi.TextCustom = "";
             // 
             // label5
             // 

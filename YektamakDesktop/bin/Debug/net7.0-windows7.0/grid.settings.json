@@ -1,0 +1,527 @@
+{
+  "SatinalmaTalepOnay": [
+    {
+      "Name": "Id",
+      "Width": 0,
+      "DisplayIndex": 0,
+      "Visible": true
+    },
+    {
+      "Name": "satinalmaTalepNo",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": true
+    },
+    {
+      "Name": "talepTarihi",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": true
+    },
+    {
+      "Name": "teslimTarihi",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": true
+    },
+    {
+      "Name": "projekod",
+      "Width": 100,
+      "DisplayIndex": 4,
+      "Visible": true
+    },
+    {
+      "Name": "onayKullanicipersonelad",
+      "Width": 100,
+      "DisplayIndex": 5,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 6,
+      "Visible": true
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 7,
+      "Visible": true
+    }
+  ],
+  "SatinalmaTalepOnayFormu": [
+    {
+      "Name": "Sec",
+      "Width": 100,
+      "DisplayIndex": 4,
+      "Visible": false
+    },
+    {
+      "Name": "Id",
+      "Width": 5,
+      "DisplayIndex": 0,
+      "Visible": false
+    },
+    {
+      "Name": "Talep No",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Tarihi",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": true
+    },
+    {
+      "Name": "Teslim Tarihi",
+      "Width": 100,
+      "DisplayIndex": 5,
+      "Visible": true
+    },
+    {
+      "Name": "Malzeme Grubu Adı",
+      "Width": 100,
+      "DisplayIndex": 8,
+      "Visible": true
+    },
+    {
+      "Name": "Proje Kod",
+      "Width": 100,
+      "DisplayIndex": 7,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Eden Kullanıcı Id",
+      "Width": 100,
+      "DisplayIndex": 6,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Eden",
+      "Width": 132,
+      "DisplayIndex": 11,
+      "Visible": true
+    },
+    {
+      "Name": "Onaylayan Kullanıcı Id",
+      "Width": 100,
+      "DisplayIndex": 9,
+      "Visible": true
+    },
+    {
+      "Name": "Onaylayan",
+      "Width": 100,
+      "DisplayIndex": 10,
+      "Visible": true
+    },
+    {
+      "Name": "Açıklama",
+      "Width": 100,
+      "DisplayIndex": 12,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 13,
+      "Visible": true
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": false
+    }
+  ],
+  "KullaniciKayitFormu": [
+    {
+      "Name": "Sec",
+      "Width": 100,
+      "DisplayIndex": 4,
+      "Visible": false
+    },
+    {
+      "Name": "Id",
+      "Width": 33,
+      "DisplayIndex": 0,
+      "Visible": true
+    },
+    {
+      "Name": "ad",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": true
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": false
+    }
+  ],
+  "SatinalmaTalepTeklifFormu": [
+    {
+      "Name": "Sec",
+      "Width": 57,
+      "DisplayIndex": 0,
+      "Visible": true
+    },
+    {
+      "Name": "Id",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": false
+    },
+    {
+      "Name": "Talep No",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": true
+    },
+    {
+      "Name": "Proje Id ",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": false
+    },
+    {
+      "Name": "Proje Kod",
+      "Width": 75,
+      "DisplayIndex": 4,
+      "Visible": true
+    },
+    {
+      "Name": "Grup Id",
+      "Width": 100,
+      "DisplayIndex": 13,
+      "Visible": true
+    },
+    {
+      "Name": "Malzeme Grup Id",
+      "Width": 100,
+      "DisplayIndex": 16,
+      "Visible": true
+    },
+    {
+      "Name": "Malzeme Alt Grup Id",
+      "Width": 100,
+      "DisplayIndex": 18,
+      "Visible": true
+    },
+    {
+      "Name": "Stok Kart Id",
+      "Width": 100,
+      "DisplayIndex": 5,
+      "Visible": false
+    },
+    {
+      "Name": "Stok Kart Kodu",
+      "Width": 100,
+      "DisplayIndex": 6,
+      "Visible": true
+    },
+    {
+      "Name": "Stok Kart Adı",
+      "Width": 165,
+      "DisplayIndex": 7,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Miktarı",
+      "Width": 100,
+      "DisplayIndex": 8,
+      "Visible": true
+    },
+    {
+      "Name": "Ağırlık",
+      "Width": 100,
+      "DisplayIndex": 9,
+      "Visible": true
+    },
+    {
+      "Name": "Açıklama",
+      "Width": 100,
+      "DisplayIndex": 10,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Tarihi",
+      "Width": 100,
+      "DisplayIndex": 17,
+      "Visible": true
+    },
+    {
+      "Name": "Teslim Tarihi",
+      "Width": 100,
+      "DisplayIndex": 19,
+      "Visible": true
+    },
+    {
+      "Name": "Onaylayan",
+      "Width": 100,
+      "DisplayIndex": 11,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Eden",
+      "Width": 99,
+      "DisplayIndex": 12,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 14,
+      "Visible": false
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 15,
+      "Visible": false
+    }
+  ],
+  "YetkiTanimlari": [
+    {
+      "Name": "Sec",
+      "Width": 100,
+      "DisplayIndex": 0,
+      "Visible": true
+    },
+    {
+      "Name": "Alan Adı",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": true
+    },
+    {
+      "Name": "Yetki",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": false
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 4,
+      "Visible": false
+    }
+  ],
+  "SatinalmaTeklifTaleplerFormu": [
+    {
+      "Name": "Sec",
+      "Width": 100,
+      "DisplayIndex": 0,
+      "Visible": false
+    },
+    {
+      "Name": "Id",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": false
+    },
+    {
+      "Name": "Teklif No",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": true
+    },
+    {
+      "Name": "Proje Id",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": false
+    },
+    {
+      "Name": "Parça Grup Id",
+      "Width": 100,
+      "DisplayIndex": 4,
+      "Visible": false
+    },
+    {
+      "Name": "Teklif Talep Tarihi",
+      "Width": 100,
+      "DisplayIndex": 5,
+      "Visible": true
+    },
+    {
+      "Name": "Termin Süresi",
+      "Width": 72,
+      "DisplayIndex": 6,
+      "Visible": true
+    },
+    {
+      "Name": "Teklif Tarihi",
+      "Width": 100,
+      "DisplayIndex": 7,
+      "Visible": true
+    },
+    {
+      "Name": "Firma Id",
+      "Width": 100,
+      "DisplayIndex": 8,
+      "Visible": false
+    },
+    {
+      "Name": "Firma Adı",
+      "Width": 100,
+      "DisplayIndex": 9,
+      "Visible": true
+    },
+    {
+      "Name": "Firma Maili",
+      "Width": 100,
+      "DisplayIndex": 10,
+      "Visible": true
+    },
+    {
+      "Name": "Ödeme Vade Id",
+      "Width": 100,
+      "DisplayIndex": 11,
+      "Visible": false
+    },
+    {
+      "Name": "Vade",
+      "Width": 100,
+      "DisplayIndex": 14,
+      "Visible": true
+    },
+    {
+      "Name": "Açıklama",
+      "Width": 100,
+      "DisplayIndex": 12,
+      "Visible": true
+    },
+    {
+      "Name": "Tutar",
+      "Width": 100,
+      "DisplayIndex": 13,
+      "Visible": true
+    },
+    {
+      "Name": "Döviz Cinsi Id",
+      "Width": 100,
+      "DisplayIndex": 15,
+      "Visible": false
+    },
+    {
+      "Name": "Teklif Geçerlilik Süresi",
+      "Width": 100,
+      "DisplayIndex": 16,
+      "Visible": true
+    },
+    {
+      "Name": "Teklif Durumu Id",
+      "Width": 100,
+      "DisplayIndex": 17,
+      "Visible": false
+    },
+    {
+      "Name": "satinalmaTeklifDetayList",
+      "Width": 100,
+      "DisplayIndex": 18,
+      "Visible": false
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 19,
+      "Visible": true
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 20,
+      "Visible": true
+    }
+  ],
+  "SatinalmaTeklifKayitFormu": [
+    {
+      "Name": "Sec",
+      "Width": 100,
+      "DisplayIndex": 0,
+      "Visible": false
+    },
+    {
+      "Name": "Id",
+      "Width": 100,
+      "DisplayIndex": 1,
+      "Visible": false
+    },
+    {
+      "Name": "Birim fiyat",
+      "Width": 100,
+      "DisplayIndex": 8,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Detay Id",
+      "Width": 100,
+      "DisplayIndex": 2,
+      "Visible": false
+    },
+    {
+      "Name": "Stok Kart Id",
+      "Width": 100,
+      "DisplayIndex": 3,
+      "Visible": false
+    },
+    {
+      "Name": "Stok Kart Kod",
+      "Width": 122,
+      "DisplayIndex": 4,
+      "Visible": true
+    },
+    {
+      "Name": "Stok Kart Ad",
+      "Width": 220,
+      "DisplayIndex": 5,
+      "Visible": true
+    },
+    {
+      "Name": "Miktar",
+      "Width": 100,
+      "DisplayIndex": 6,
+      "Visible": true
+    },
+    {
+      "Name": "Ağırlık",
+      "Width": 100,
+      "DisplayIndex": 7,
+      "Visible": true
+    },
+    {
+      "Name": "Talep Açıklama",
+      "Width": 100,
+      "DisplayIndex": 9,
+      "Visible": true
+    },
+    {
+      "Name": "guncelle",
+      "Width": 100,
+      "DisplayIndex": 10,
+      "Visible": false
+    },
+    {
+      "Name": "Sil",
+      "Width": 100,
+      "DisplayIndex": 11,
+      "Visible": false
+    }
+  ],
+  "Monday": []
+}

@@ -3,6 +3,7 @@ using ApiService.Interfaces;
 using Models;
 using Models.DTO;
 using System.Data;
+using System.Threading.Tasks;
 using Utilities.Interfaces;
 
 namespace Utilities.Implementations
@@ -20,9 +21,10 @@ namespace Utilities.Implementations
         private readonly IDovizCinsiService _dovizCinsiService;
         private readonly IMaliyetService _maliyetService;
         private readonly IAnaVeriService _anaVeriService;
+        private readonly IVadeService _vadeService;
         public Cache(IJsonConverter jsonConverter, IDataTableMapper dataTableConverter, IProjeService projeService, 
             IStokService stokService,IKullaniciYetkiService kullaniciYetki,IFirmaService firmaService,IPersonelService personelService,ISatisService satisService,
-            IDovizCinsiService dovizCinsiService,IMaliyetService maliyetService,IAnaVeriService anaVeriService)
+            IDovizCinsiService dovizCinsiService,IMaliyetService maliyetService,IAnaVeriService anaVeriService, IVadeService vadeService)
         {
             JsonConverter = jsonConverter;
             DataTableConverter = dataTableConverter;
@@ -35,15 +37,16 @@ namespace Utilities.Implementations
             _dovizCinsiService = dovizCinsiService;
             _maliyetService = maliyetService;
             _anaVeriService = anaVeriService;
+            _vadeService = vadeService;
         }
-        private Kullanici _kullanici;
-        public Kullanici kullanici
+        private Models.Kullanici _kullanici;
+        public Models.Kullanici kullanici
         {
             get
             {
                 if (_kullanici == null)
                 {
-                    _kullanici = new Kullanici();
+                    _kullanici = new Models.Kullanici();
                 }
                 return _kullanici;
             }
@@ -53,26 +56,51 @@ namespace Utilities.Implementations
             }
         }
         private List<Kullanici> _kullaniciList;
+        public async Task<List<Kullanici>> kullaniciListAsync()
+        {
+            if (_kullaniciList == null || _kullaniciList.Count == 0)
+            {
+                _kullaniciList = await GetModelListAsync<Kullanici>(async () => { return await _kullaniciYetki.GetKullaniciAsync(new Kullanici()); });
+            }
+            return _kullaniciList;
+            
+        }
         public List<Kullanici> kullaniciList
         {
             get
             {
                 if (_kullaniciList == null)
                 {
-                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Kullanici());
+                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Models.Kullanici());
                 }
                 else if (_kullaniciList.Count == 0)
                 {
-                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Kullanici());
+                    _kullaniciList = GetModelList(_kullaniciYetki.GetKullanici, new Models.Kullanici());
                 }
                 return _kullaniciList;
             }
         }
-        private AnaMenu anaMenu
+        private List<Rol> _rolList;
+        public List<Rol> rolList
         {
             get
             {
-                return new AnaMenu { rolId = kullanici.rolId };
+                if (_rolList == null)
+                {
+                    _rolList = GetModelList(_kullaniciYetki.GetRol, new Rol());
+                }
+                else if (_rolList.Count == 0)
+                {
+                    _rolList = GetModelList(_kullaniciYetki.GetRol, new Rol());
+                }
+                return _rolList;
+            }
+        }
+        private AnaMenuDTO anaMenu
+        {
+            get
+            {
+                return new AnaMenuDTO { rolId = kullanici.rol.Id??0 };
             }
         }
         private Menu menu
@@ -82,8 +110,8 @@ namespace Utilities.Implementations
                 return new Menu();
             }
         }
-        private List<AnaMenu> _anaMenuList;
-        public List<AnaMenu> ananaMenuList
+        private List<AnaMenuDTO> _anaMenuList;
+        public List<AnaMenuDTO> ananaMenuList
         {
             get
             {
@@ -116,7 +144,7 @@ namespace Utilities.Implementations
         }
         private Yetki yetki
         {
-            get { return new Yetki { rolId = kullanici.rolId }; }
+            get { return new Yetki { rolId = kullanici.rol.Id ?? 0 }; }
         }
         private List<Yetki> _yetkiList;
         public List<Yetki> yetkiList
@@ -234,7 +262,7 @@ namespace Utilities.Implementations
             {
                 if (_projes == null)
                 {
-                    _projes = GetModelList(_projeService.GetProje, new Proje()).Where(x => x.personel.Id == kullanici.personel.Id).ToList();
+                    _projes = GetModelList(_projeService.GetProje, new Proje());
                 }
                 return _projes;
             }
@@ -265,14 +293,20 @@ namespace Utilities.Implementations
         }
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
-            DataTable dataTable = JsonConverter.DeserializeToDataSet(fetchFunction.Invoke(t)).Tables[0];
-            List<T> list = DataTableConverter.MapToEntityList<T>(dataTable.AsEnumerable().ToList());
+            var jsonResult = fetchFunction.Invoke(t);
+            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
             return list;
         }
         public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
         {
-            DataTable dataTable = JsonConverter.DeserializeToDataSet(fetchFunction.Invoke()).Tables[0];
-            List<T> list = DataTableConverter.MapToEntityList<T>(dataTable.AsEnumerable().ToList());
+            var jsonResult = fetchFunction.Invoke();
+            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
+            return list;
+        }
+        public async Task<List<T>> GetModelListAsync<T>(Func<Task<string>> fetchFunction) where T : IEntity, new()
+        {
+            var jsonResult = await fetchFunction();
+            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
             return list;
         }
         private List<Firma> _firmaList;
@@ -347,6 +381,18 @@ namespace Utilities.Implementations
                 return _dovizCinsiList;
             }
         }
+        private List<Vade> _vadeList;
+        public List<Vade> vadeList
+        {
+            get
+            {
+                if (_vadeList == null)
+                {
+                    _vadeList = GetModelList<Vade>(_vadeService.GetVade);
+                }
+                return _vadeList;
+            }
+        }
         private List<MaliyetUnsur> _maliyetUnsurList;
         public List<MaliyetUnsur> maliyetUnsurList
         {
@@ -395,6 +441,5 @@ namespace Utilities.Implementations
                 _dosyaTipList = value;
             }
         }
-
     }
 }

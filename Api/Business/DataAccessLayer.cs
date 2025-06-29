@@ -284,6 +284,7 @@ namespace Api.Business
                 "BIT" => MySqlDbType.Bit,
                 "DATETIME" => MySqlDbType.DateTime,
                 "MEDIUMBLOB" => MySqlDbType.MediumBlob,
+                "LONGBLOB"=>MySqlDbType.LongBlob,
                 _ => MySqlDbType.VarChar
             };
         }

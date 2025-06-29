@@ -3,8 +3,9 @@
     [Serializable]
     public class Firma:IEntity
     {
-        public int? Id;
-        public string ad;
+        public int? Id { get; set; }
+        public string ad { get; set; }
+        public string kod { get; set; }
         private Adres _adres;
         public Adres adres { get { if (_adres == null) { _adres = new(); } return _adres; } set { _adres = value; } }
         public string vergiDairesi;

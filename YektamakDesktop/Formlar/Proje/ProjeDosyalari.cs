@@ -1,8 +1,5 @@
-﻿using ApiService;
-using ApiService.Interfaces;
+﻿using ApiService.Interfaces;
 using Models;
-using Newtonsoft.Json.Linq;
-using Spire.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,10 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.Formlar.Ortak;
+using YektamakDesktop.Formlar.Satinalma;
 using YektamakDesktop.Formlar.Stok;
 
 namespace YektamakDesktop.Formlar.Proje
@@ -130,27 +127,11 @@ namespace YektamakDesktop.Formlar.Proje
             mouseDown = false;
         }
         #endregion mouseDrag
-        public void AddNewRow(StokKart stokKart)
+        public async void AddNewRow(StokKart stokKart)
         {
-            DataTable dataTable = _dataTable;
-            dataTable.Rows.Add(
-                stokKart.Id,
-                stokKart.hammaddeId,
-                stokKart.parcaKod,
-                stokKart.ad,
-                stokKart.boyut,
-                stokKart.proje,
-                stokKart.uzunluk,
-                stokKart.aciklama,
-                stokKart.agirlik,
-                stokKart.miktar,
-                stokKart.malzemeAltGrup,
-                stokKart.malzemeGrup,
-                stokKart.isPdf,
-                stokKart.isDxf,
-                stokKart.isStep,
-                stokKart.isSatinalma
-                );
+            await GetDataTableAsync();
+            List<StokKart> stokKarts = new List<StokKart> { stokKart };
+            _dataTable=ConvertHelper.ToDataTable(stokKarts);
         }
 
         public void buttomMinimize_Click(object sender, EventArgs e)
@@ -212,7 +193,7 @@ namespace YektamakDesktop.Formlar.Proje
                 }
                 if (isPdf)
                 {
-                    if (stokKart.isPdf == 1)
+                    if (stokKart.isPdf == true)
                     {
                         string tempFilePath = Path.Combine(Path.GetTempPath(), stokKart.pdfFileName());
                         // Byte[]'i geçici bir dosyaya yaz
@@ -232,14 +213,14 @@ namespace YektamakDesktop.Formlar.Proje
                         //    UseShellExecute = true
                         //});
                     }
-                    else if (stokKart.isPdf == 0)
+                    else if (stokKart.isPdf == false)
                     {
                         MessageBox.Show("PDF dosyası bulunamadı.");
                     }
                 }
                 if (isDxf)
                 {
-                    if (stokKart.isDxf == 1)
+                    if (stokKart.isDxf == true)
                     {
                         string tempFilePath = Path.Combine(Path.GetTempPath(), stokKart.dxfFileName());
                         // Byte[]'i geçici bir dosyaya yaz
@@ -255,14 +236,14 @@ namespace YektamakDesktop.Formlar.Proje
                             UseShellExecute = true
                         });
                     }
-                    else if (stokKart.isDxf == 0)
+                    else if (stokKart.isDxf == false)
                     {
                         MessageBox.Show("DXF dosyası bulunamadı.");
                     }
                 }
                 if (isStep)
                 {
-                    if (stokKart.isStep == 1)
+                    if (stokKart.isStep == true)
                     {
                         string tempFilePath = Path.Combine(Path.GetTempPath(), stokKart.stepFileName());
                         // Byte[]'i geçici bir dosyaya yaz
@@ -274,7 +255,7 @@ namespace YektamakDesktop.Formlar.Proje
                             UseShellExecute = true
                         });
                     }
-                    else if (stokKart.isStep == 0)
+                    else if (stokKart.isStep == false)
                     {
                         MessageBox.Show("STEP dosyası bulunamadı.");
                     }
@@ -357,7 +338,7 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (chkSatinalma.Checked)
             {
-                stokKartFilter.isSatinalma = 0;
+                stokKartFilter.isSatinalma = false;
             }
             else
             {
@@ -370,7 +351,7 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (chkPdf.Checked)
             {
-                stokKartFilter.isPdf = 0;
+                stokKartFilter.isPdf =false;
             }
             else
             {
@@ -383,7 +364,7 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (chkDxf.Checked)
             {
-                stokKartFilter.isDxf = 0;
+                stokKartFilter.isDxf = false;
             }
             else
             {
@@ -396,7 +377,7 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (chkStep.Checked)
             {
-                stokKartFilter.isStep = 0;
+                stokKartFilter.isStep = false;
             }
             else
             {
@@ -488,7 +469,7 @@ namespace YektamakDesktop.Formlar.Proje
                 this.Cursor = Cursors.Hand;
 
                 // ToolTip metni ayarla
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value.ToString() == "true")
+                if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value == true)
                 {
                     string toolTipText = dataGridViewStokKart.Rows[e.RowIndex].Cells["kod"].Value?.ToString() + ".pdf";
                     // ToolTip zaten gösteriliyorsa tekrarlamayı önle
@@ -508,7 +489,7 @@ namespace YektamakDesktop.Formlar.Proje
                 this.Cursor = Cursors.Hand;
 
                 // ToolTip metni ayarla
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value.ToString() == "true")
+                if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value == true)
                 {
                     string toolTipText = dataGridViewStokKart.Rows[e.RowIndex].Cells["kod"].Value?.ToString() + ".dxf";
                     // ToolTip zaten gösteriliyorsa tekrarlamayı önle
@@ -557,17 +538,17 @@ namespace YektamakDesktop.Formlar.Proje
             if (dataGridViewStokKart.Columns["pdf"].Index == e.ColumnIndex && dataGridViewStokKart.Columns["pdf"] is DataGridViewImageColumn)
             {
                 // PDF dosyasının var olup olmadığını kontrol et
-                string pdfFilePath = dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value?.ToString(); // PDF dosyası var mı yok mu hücresine erişim
-                pdfFilePath = pdfFilePath == "true" ? "true" : pdfFilePath == "false" ? "false" : null; // 1 ve 0 değerlerini true ve false'a çevir
-                bool? pdfExists = bool.TryParse(pdfFilePath, out bool val) ? val : null;// Dosyanın mevcut olup olmadığını kontrol et
+                bool? pdfFilePath = (bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value; // PDF dosyası var mı yok mu hücresine erişim
+                pdfFilePath = pdfFilePath == true ? true : false; // 1 ve 0 değerlerini true ve false'a çevir
+                bool? pdfExists = pdfFilePath;// Dosyanın mevcut olup olmadığını kontrol et
 
                 e.Value = pdfExists == true ? Properties.Resources.pdf : pdfExists == false ? Properties.Resources.pdf_passive : null;
             }
             if (dataGridViewStokKart.Columns["dxf"].Index == e.ColumnIndex && dataGridViewStokKart.Columns["dxf"] is DataGridViewImageColumn)
             {
-                string dxffFilePath = dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value?.ToString(); // DXF dosyası var mı yok mu hücresine erişim
-                dxffFilePath = dxffFilePath == "true" ? "true" : dxffFilePath == "false" ? "false" : null; // 1 ve 0 değerlerini true ve false'a çevir
-                bool? dxfExists = bool.TryParse(dxffFilePath, out bool val) ? val : null;// Dosyanın mevcut olup olmadığını kontrol et
+                bool? dxffFilePath = (bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value; // DXF dosyası var mı yok mu hücresine erişim
+                dxffFilePath = dxffFilePath == true ? true : dxffFilePath == false ? false : null; // 1 ve 0 değerlerini true ve false'a çevir
+                bool? dxfExists = dxffFilePath;// Dosyanın mevcut olup olmadığını kontrol et
                 e.Value = dxfExists == true ? Properties.Resources.dxfImage : dxfExists == false ? Properties.Resources.dxf_passive : null;
             }
             if (dataGridViewStokKart.Columns["step"].Index == e.ColumnIndex && dataGridViewStokKart.Columns["step"] is DataGridViewImageColumn)
@@ -581,14 +562,16 @@ namespace YektamakDesktop.Formlar.Proje
 
         private async void CreateSatinalmaTalep(object sender, EventArgs e)
         {
-            List<StokKart> stokKarts = new List<StokKart>();
-            stokKarts = ConvertHelper.ToList<StokKart>(_dataTable.AsEnumerable().Where(row => row.Field<string>("sec") == "True").ToList());
+            DataView dataView= _dataTable.AsDataView();
+            dataView.RowFilter = "sec=True"; // Sadece seçili satırları filtrele
+            var stokKartList = dataView.ToTable(); // Filtrelenmiş DataTable'ı al
+            List<StokKart> stokKarts = _dataTableHelper.MapToEntityList<StokKart>(stokKartList);
             if(!ValidateForm(stokKarts)) return;
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.MarqueeAnimationSpeed = 30;
             progressBar1.Visible = true;
-            SatinalmaTalepOlusturma satinalmaTalepOlusturma = SatinalmaTalepOlusturma.satinalmaTalepOlusturma;
-            satinalmaTalepOlusturma.SaveMode(await CreateSatinalmaTalep(stokKarts));
+            SatinalmaTalepKayitFormu satinalmaTalepOlusturma = SatinalmaTalepKayitFormu.satinalmaTalepKayitFormu;
+            satinalmaTalepOlusturma.UpdateMode(await CreateSatinalmaTalep(stokKarts));
             satinalmaTalepOlusturma.Show();
             progressBar1.Visible = false;
         }
@@ -600,17 +583,17 @@ namespace YektamakDesktop.Formlar.Proje
                 MessageBox.Show("Satınalma talebi oluşturulacak satırlar seçilmelidir.");
                 return false;
             }
-            if (stokKarts.Any(x => x.isPdf == 0))
+            if (stokKarts.Any(x => x.isPdf == false))
             {
                 MessageBox.Show("PDF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
-            if (stokKarts.Any(x => x.isDxf == 0))
+            if (stokKarts.Any(x => x.isDxf == false))
             {
                 MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
-            if (stokKarts.Any(x => x.isSatinalma == 1))
+            if (stokKarts.Any(x => x.isSatinalma == true))
             {
                 MessageBox.Show("Satınalma talebi açılmış kayıtlar seçilemez.");
                 return false;
@@ -621,8 +604,10 @@ namespace YektamakDesktop.Formlar.Proje
         {
             SatinalmaTalep satinalmaTalep = new SatinalmaTalep();
             satinalmaTalep.proje.Id = projeKodu.selectedDataRowId;
-            satinalmaTalep.malzemeGrupId = cbxMalzemeGrup.selectedDataRowId;
-            satinalmaTalep.talepEdenKullaniciId = _cache.kullanici.Id;
+            satinalmaTalep.malzemeGrup.Id = cbxMalzemeGrup.selectedDataRowId;
+            satinalmaTalep.talepEdenKullanici.Id = _cache.kullanici.Id;
+            satinalmaTalep.teslimTarihi = DateTime.Now;
+            satinalmaTalep.talepTarihi = DateTime.Now;
             satinalmaTalep.satinalmaTalepDetays = await CreateSatinalmaTalepDetay(stokKarts);
             return satinalmaTalep;
         }
@@ -633,27 +618,36 @@ namespace YektamakDesktop.Formlar.Proje
             foreach (var stokKart in stokKarts)
             {
                 var satinalmaTalepDetay = new SatinalmaTalepDetay();
-                var satinalmaTalepSatirDetay = new Models.SatinalmaTalepSatirDetay()
+                var satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetay()
                 {
-                    stokKartId = stokKart.Id,
+                    stokKart = stokKart,
+                    stokKartKod = stokKart.kod,
+                    stokKartAd = stokKart.ad,
                     miktar = stokKart.miktar,
                 };
+
                 if (stokKart.hammaddeId != null)
                 {
-                    StokKart hammadde = new StokKart { Id=stokKart.hammaddeId };
-                    hammadde =_dataTableHelper.MapToEntity<StokKart>(_jsonConvertHelper.DeserializeToDataSet(await _stokService.GetStokKart(hammadde)).Tables[0].Rows[0]);
-
+                    StokKart hammadde = new StokKart { Id = stokKart.hammaddeId };
+                    hammadde = _dataTableHelper.MapToEntity<StokKart>(_jsonConvertHelper.DeserializeToDataSet(await _stokService.GetStokKart(hammadde)).Tables[0].Rows[0]);
+                    hammadde.proje.Id = stokKart.proje.Id;
+                    hammadde.proje.kod = stokKart.proje.kod;
+                    if (stokKart.malzemeGrup.Id == 30) hammadde.uzunluk = stokKart.uzunluk;
                     satinalmaTalepDetay.stokKart = hammadde;
+                    satinalmaTalepDetay.miktar = stokKart.miktar;
+                    satinalmaTalepDetay.agirlik = (stokKart.miktar.HasValue? stokKart.miktar.Value:0) * (stokKart.agirlik.HasValue ? stokKart.agirlik.Value : 0);
                     satinalmaTalepDetay.satinalmaTalepSatirDetays.Add(satinalmaTalepSatirDetay);
                 }
                 else
                 {
                     satinalmaTalepDetay.stokKart = stokKart;
                 }
-                var mevcut = satinalmaTalepDetays.FirstOrDefault(x => x.stokKart.Id == satinalmaTalepDetay.stokKart.Id);
+                
+                var mevcut = satinalmaTalepDetays.FirstOrDefault(x => x.stokKart.Id == satinalmaTalepDetay.stokKart.Id && x.stokKart.uzunluk == satinalmaTalepDetay.stokKart.uzunluk);
                 if (mevcut != null)
                 {
                     mevcut.miktar += stokKart.miktar;
+                    mevcut.agirlik += (stokKart.miktar.HasValue ? stokKart.miktar.Value : 0) * (stokKart.agirlik.HasValue ? stokKart.agirlik.Value : 0);
                     mevcut.satinalmaTalepSatirDetays.Add(satinalmaTalepSatirDetay);
                 }
                 else
@@ -664,7 +658,7 @@ namespace YektamakDesktop.Formlar.Proje
             return satinalmaTalepDetays;
         }
 
-        private void dataGridViewStokKart_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void dataGridViewStokKart_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) // Sağ tıklama kontrolü
             {
@@ -685,9 +679,10 @@ namespace YektamakDesktop.Formlar.Proje
             stokKartFilter.Id = Convert.ToInt32(dataGridViewStokKart.Rows[dataGridViewStokKart.SelectedRows[0].Index].Cells["Id"].Value);
             DataRow dataRow = _jsonConvertHelper.DeserializeToDataSet(await _stokService.GetStokKartPdf(stokKartFilter)).Tables[0].Rows[0];
             int dtId = GlobalData.IndexOfDataSet(_dataTable, int.Parse(dataGridViewStokKart.Rows[dataGridViewStokKart.SelectedRows[0].Index].Cells[0].Value.ToString()));
-            _dataTable.Rows[dtId].ItemArray = dataRow.ItemArray;
+            //_dataTable.Rows[dtId].ItemArray = dataRow.ItemArray;
 
-            stokKart = _dataTableHelper.MapToEntity<StokKart>(_dataTable.Rows[dtId]);
+            //stokKart = _dataTableHelper.MapToEntity<StokKart>(_dataTable.Rows[dtId]);
+            stokKart = _dataTableHelper.MapToEntity<StokKart>(dataRow);
             StokKartKayitFormu stokKartTanimlamaFormu = StokKartKayitFormu.stokKartKayitFormu;
             if (stokKartTanimlamaFormu != null)
             {
@@ -700,12 +695,10 @@ namespace YektamakDesktop.Formlar.Proje
         {
             if (e.RowIndex > -1)
             {
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value.ToString() == "0") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value.ToString() == "0") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
-                if (dataGridViewStokKart.Rows[e.RowIndex].Cells["isStep"].Value.ToString() == "0") dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
-                string isSatinalmaString = dataGridViewStokKart.Rows[e.RowIndex].Cells["isSatinalma"].Value.ToString();
-                bool isSatinalma = (isSatinalmaString == "1") ? true : false;
-                if (isSatinalma) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isPdf"].Value == false) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isDxf"].Value == false) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                //if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isStep"].Value == false) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Cyan;
+                if ((bool)dataGridViewStokKart.Rows[e.RowIndex].Cells["isSatinalma"].Value==true) dataGridViewStokKart.Rows[e.RowIndex].DefaultCellStyle.BackColor =Color.Aqua;
             }
         }
 

@@ -2,7 +2,7 @@
 {
     public class Ekran:IEntity
     {
-        public int ekranId;
+        public int Id;
         private Menu _menu;
         public Menu menu
         {
@@ -19,14 +19,15 @@
         }
         public int altMenuId;
         public string ekranAdi;
-        public string formAdi;
+        public string formAd;
     }
     public class Menu:IEntity
     {
         public int Id;
         public string ad;
-        public string formAdi;
+        public string formAd;
         public string icon;
+        public string model;
     }
     public class Yetki:IEntity
     {

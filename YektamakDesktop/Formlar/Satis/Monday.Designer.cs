@@ -28,57 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new System.Windows.Forms.DataGridView();
-            Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             SuspendLayout();
             // 
-            // dataGridView1
+            // headerPanel1
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Column1 });
-            dataGridView1.Location = new System.Drawing.Point(12, 97);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(1493, 650);
-            dataGridView1.TabIndex = 0;
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Caption";
+            headerPanel1.Location = new System.Drawing.Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new System.Drawing.Size(1517, 32);
+            headerPanel1.TabIndex = 2;
             // 
-            // Column1
+            // universalGrid1
             // 
-            Column1.HeaderText = "Column1";
-            Column1.Name = "Column1";
-            // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(589, 28);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(42, 76);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1386, 647);
+            universalGrid1.TabIndex = 3;
             // 
             // Monday
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1517, 759);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
+            Controls.Add(universalGrid1);
+            Controls.Add(headerPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "Monday";
             Text = "Monday";
             FormClosing += Monday_FormClosing;
             FormClosed += Monday_FormClosed;
             Load += Monday_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.Button button1;
+        private CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

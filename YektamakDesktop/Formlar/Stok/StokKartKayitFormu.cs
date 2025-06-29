@@ -64,9 +64,9 @@ namespace YektamakDesktop.Formlar.Stok
         {
             InitializeComponent();
             customDataGrid = new CustomDataGrid<DataControlStokKartDosyalar>(2, 30, new Point(5, 5), new Size(700, 250));
-            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref cbxStokTip);
+            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
             ComboBoxListFill.GetLookupAd(_cache.olcuBirims, ref comboListBoxOlcuBirim);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref cbxStokGrup);
+            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeStandarts, ref comboListBoxMalzemeStandart);
             ComboBoxListFill.GetLookupKod(_cache.projes, ref comboListBoxProjeKod);
             panel1.Controls.Add(customDataGrid.headerPanel);
@@ -126,13 +126,12 @@ namespace YektamakDesktop.Formlar.Stok
         private bool CheckFields()
         {
             bool result = true;
-            GlobalData.ClearWarningLabels(this);
-            result = GlobalData.CheckField("*", this, ctxbStokAd) && result;
-            result = GlobalData.CheckField("*", this, cbxStokTip) && result;
-            result = GlobalData.CheckField("*", this, cbxStokGrup) && result;
-            result = GlobalData.CheckField("*", this, cbxMalzemeGrup) && result;
-            result = GlobalData.CheckField("*", this, cbxMalzemeAltGrup2) && result;
-            result = GlobalData.CheckField("*", this, cbxMalzemeAltGrup) && result;
+            result = GlobalData.CheckField("*", this, ctbStokAd) && result;
+            result = GlobalData.CheckField("*", this, clbStokTip) && result;
+            result = GlobalData.CheckField("*", this, clbStokGrup) && result;
+            result = GlobalData.CheckField("*", this, clbMalzemeGrup) && result;
+            result = GlobalData.CheckField("*", this, clbMalzemeAltGrup2) && result;
+            result = GlobalData.CheckField("*", this, clbMalzemeAltGrup) && result;
             return result;
         }
         private async void rButtonKaydet_Click(object sender, EventArgs e)
@@ -172,7 +171,7 @@ namespace YektamakDesktop.Formlar.Stok
             textBoxId.TextCustom = stokKart.Id.ToString();
             textBoxkod.TextCustom = stokKart.parcaKod;
             textBoxBoyut.TextCustom = stokKart.boyut;
-            ctxbStokAd.TextCustom = stokKart.ad;
+            ctbStokAd.TextCustom = stokKart.ad;
             textBoxUzunluk.TextCustom = stokKart.uzunluk.ToString();
             textBoxAciklama.TextCustom = stokKart.aciklama;
             textBoxAgirlik.TextCustom = stokKart.agirlik.ToString();
@@ -181,14 +180,14 @@ namespace YektamakDesktop.Formlar.Stok
             textBoxYukseklik.TextCustom = stokKart.yukseklik.ToString();
             textBoxCap.TextCustom = stokKart.cap.ToString();
             textBoxEtKalinlik.TextCustom = stokKart.etKalinligi.ToString();
-            cbxStokTip.SelectDataRowId(stokKart.stokTip.Id);
+            clbStokTip.SelectDataRowId(stokKart.stokTip.Id);
             comboListBoxOlcuBirim.SelectDataRowId(stokKart.olcuBirim.Id);
             comboListBoxProjeKod.SelectDataRowId(stokKart.proje.Id);
             comboListBoxMalzemeStandart.SelectDataRowId(stokKart.malzemeStandart.Id);
-            cbxStokGrup.SelectDataRowId(stokKart.stokGrup.Id);
-            cbxMalzemeGrup.SelectDataRowId(stokKart.malzemeGrup.Id);
-            cbxMalzemeAltGrup.SelectDataRowId(stokKart.malzemeAltGrup.Id ?? 0);
-            cbxMalzemeAltGrup2.SelectDataRowId(stokKart.malzemeAltGrup2.Id ?? 0);
+            clbStokGrup.SelectDataRowId(stokKart.stokGrup.Id);
+            clbMalzemeGrup.SelectDataRowId(stokKart.malzemeGrup.Id);
+            clbMalzemeAltGrup.SelectDataRowId(stokKart.malzemeAltGrup.Id ?? 0);
+            clbMalzemeAltGrup2.SelectDataRowId(stokKart.malzemeAltGrup2.Id ?? 0);
             List<DataControlStokKartDosyalar> dataControlStokKartDosyalars = new List<DataControlStokKartDosyalar>();
             foreach(var item in stokKart.stokKartDosya)
             {
@@ -212,52 +211,52 @@ namespace YektamakDesktop.Formlar.Stok
         }
         private void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxMalzemeGrup.SelectDataRowId(-1);
-            cbxMalzemeAltGrup.SelectDataRowId(-1);
-            cbxMalzemeAltGrup2.SelectDataRowId(-1);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(x => x.stokGrup.Id == cbxStokGrup.selectedDataRowId).ToList(), ref cbxMalzemeGrup);
-            stokKart.stokGrup = _cache.stokGrups.FirstOrDefault(x => x.Id == cbxStokGrup.selectedDataRowId);
+            clbMalzemeGrup.SelectDataRowId(-1);
+            clbMalzemeAltGrup.SelectDataRowId(-1);
+            clbMalzemeAltGrup2.SelectDataRowId(-1);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(x => x.stokGrup.Id == clbStokGrup.selectedDataRowId).ToList(), ref clbMalzemeGrup);
+            stokKart.stokGrup = _cache.stokGrups.FirstOrDefault(x => x.Id == clbStokGrup.selectedDataRowId);
             textBoxLogoKod.TextCustom = stokKart.hammaddeKod;
         }
         private void cbxMalzemeGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxMalzemeAltGrup.SelectDataRowId(-1);
-            cbxMalzemeAltGrup2.SelectDataRowId(-1);
-            if (_cache.malzemeAltGrups.Count(x => x.malzemeGrup.Id == cbxMalzemeGrup.selectedDataRowId) == 0)
+            clbMalzemeAltGrup.SelectDataRowId(-1);
+            clbMalzemeAltGrup2.SelectDataRowId(-1);
+            if (_cache.malzemeAltGrups.Count(x => x.malzemeGrup.Id == clbMalzemeGrup.selectedDataRowId) == 0)
             {
-                cbxMalzemeAltGrup.Enabled = false;
-                cbxMalzemeAltGrup2.Enabled = false;
-                cbxMalzemeAltGrup2.SelectDataRowId(-1);
+                clbMalzemeAltGrup.Enabled = false;
+                clbMalzemeAltGrup2.Enabled = false;
+                clbMalzemeAltGrup2.SelectDataRowId(-1);
             }
             else
             {
-                cbxMalzemeAltGrup.Enabled = true;
-                cbxMalzemeAltGrup2.Enabled = true;
+                clbMalzemeAltGrup.Enabled = true;
+                clbMalzemeAltGrup2.Enabled = true;
             }
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == cbxMalzemeGrup.selectedDataRowId).ToList(), ref cbxMalzemeAltGrup);
-            stokKart.malzemeGrup = _cache.malzemeGrups.FirstOrDefault(x => x.Id == cbxMalzemeGrup.selectedDataRowId);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == clbMalzemeGrup.selectedDataRowId).ToList(), ref clbMalzemeAltGrup);
+            stokKart.malzemeGrup = _cache.malzemeGrups.FirstOrDefault(x => x.Id == clbMalzemeGrup.selectedDataRowId);
             textBoxLogoKod.TextCustom = stokKart.hammaddeKod;
         }
         private void cbxMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxMalzemeAltGrup2.SelectDataRowId(-1);
-            if (_cache.malzemeAltGrup2List.Count(x => x.malzemeAltGrup.Id == cbxMalzemeAltGrup.selectedDataRowId) == 0)
+            clbMalzemeAltGrup2.SelectDataRowId(-1);
+            if (_cache.malzemeAltGrup2List.Count(x => x.malzemeAltGrup.Id == clbMalzemeAltGrup.selectedDataRowId) == 0)
             {
-                cbxMalzemeAltGrup2.Enabled = false;
-                cbxMalzemeAltGrup2.SelectDataRowId(-1);
+                clbMalzemeAltGrup2.Enabled = false;
+                clbMalzemeAltGrup2.SelectDataRowId(-1);
             }
             else
             {
-                cbxMalzemeAltGrup2.Enabled = true;
+                clbMalzemeAltGrup2.Enabled = true;
             }
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == cbxMalzemeAltGrup.selectedDataRowId).ToList(), ref cbxMalzemeAltGrup2);
-            stokKart.malzemeAltGrup = _cache.malzemeAltGrups.FirstOrDefault(x => x.Id == cbxMalzemeAltGrup.selectedDataRowId);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == clbMalzemeAltGrup.selectedDataRowId).ToList(), ref clbMalzemeAltGrup2);
+            stokKart.malzemeAltGrup = _cache.malzemeAltGrups.FirstOrDefault(x => x.Id == clbMalzemeAltGrup.selectedDataRowId);
             textBoxLogoKod.TextCustom = stokKart.hammaddeKod;
         }
 
         private void cbxMalzemeAltGrup2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            stokKart.malzemeAltGrup2 = _cache.malzemeAltGrup2List.FirstOrDefault(x => x.Id == cbxMalzemeAltGrup2.selectedDataRowId);
+            stokKart.malzemeAltGrup2 = _cache.malzemeAltGrup2List.FirstOrDefault(x => x.Id == clbMalzemeAltGrup2.selectedDataRowId);
             textBoxLogoKod.TextCustom = stokKart.hammaddeKod;
         }
 
@@ -270,16 +269,16 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKart.Id = int.TryParse(textBoxId.TextCustom, out int id)?id:null;
                 stokKart.parcaKod = textBoxkod.TextCustom;
                 stokKart.boyut=textBoxBoyut.TextCustom;
-                stokKart.ad = ctxbStokAd.TextCustom;
+                stokKart.ad = ctbStokAd.TextCustom;
                 stokKart.uzunluk = Convert.ToInt32(textBoxUzunluk.TextCustom.Replace(".", ""));
                 stokKart.aciklama = textBoxAciklama.TextCustom;
                 stokKart.agirlik = Double.TryParse(textBoxAgirlik.TextCustom, out Double agrlk)?agrlk:0;
-                stokKart.stokTip.Id = cbxStokTip.selectedDataRowId;
+                stokKart.stokTip.Id = clbStokTip.selectedDataRowId;
                 stokKart.olcuBirim.Id = comboListBoxOlcuBirim.selectedDataRowId;
-                stokKart.stokGrup = _cache.stokGrups.FirstOrDefault(x => x.Id == cbxStokGrup.selectedDataRowId);
-                stokKart.malzemeGrup = _cache.malzemeGrups.FirstOrDefault(x => x.Id == cbxMalzemeGrup.selectedDataRowId);
-                stokKart.malzemeAltGrup = _cache.malzemeAltGrups.FirstOrDefault(x => x.Id == cbxMalzemeAltGrup.selectedDataRowId);
-                stokKart.malzemeAltGrup2 = _cache.malzemeAltGrup2List.FirstOrDefault(x => x.Id == cbxMalzemeAltGrup2.selectedDataRowId);
+                stokKart.stokGrup = _cache.stokGrups.FirstOrDefault(x => x.Id == clbStokGrup.selectedDataRowId);
+                stokKart.malzemeGrup = _cache.malzemeGrups.FirstOrDefault(x => x.Id == clbMalzemeGrup.selectedDataRowId);
+                stokKart.malzemeAltGrup = _cache.malzemeAltGrups.FirstOrDefault(x => x.Id == clbMalzemeAltGrup.selectedDataRowId);
+                stokKart.malzemeAltGrup2 = _cache.malzemeAltGrup2List.FirstOrDefault(x => x.Id == clbMalzemeAltGrup2.selectedDataRowId);
                 stokKart.malzemeStandart.Id = comboListBoxMalzemeStandart.selectedDataRowId;
                 stokKart.proje.Id = comboListBoxProjeKod.selectedDataRowId;
                 stokKart.etKalinligi = Convert.ToDouble(textBoxEtKalinlik.TextCustom.Replace(".", ""));
@@ -288,6 +287,11 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKart.cap = Convert.ToDouble(textBoxCap.TextCustom.Replace(".", ""));
                 stokKart.logoKod = textBoxLogoKod.TextCustom;
                 stokKart.yukseklik = Convert.ToDouble(textBoxYukseklik.TextCustom.Replace(".", ""));
+                stokKart.isSatinalma = checkBoxIsSatinalma.Checked;
+                stokKart.isPdf= checkBoxIsPdf.Checked;
+                stokKart.isFromExcel = checkBoxIsFromExcel.Checked;
+                stokKart.isStep= checkBoxIsStep.Checked;
+                stokKart.isDxf = checkBoxIsDxf.Checked;
                 foreach (var row in customDataGrid.dataSource.Where(x=>x.newRec==false).ToList())
                 {
                     StokKartDosya stokKartDosya = new StokKartDosya();

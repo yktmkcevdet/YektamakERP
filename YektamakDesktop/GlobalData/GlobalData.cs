@@ -1,6 +1,4 @@
-﻿using ApiService;
-using ApiService.Interfaces;
-using Models;
+﻿using ApiService.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +7,6 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.CustomControls;
@@ -23,12 +20,15 @@ namespace YektamakDesktop
         private static IJsonConverter _converter;
         private static IDataTableMapper _dataTableHelper;
         private static IKullaniciYetkiService _kullaniciYetkiService;
-        public GlobalData(ICache cache,IJsonConverter jsonConverter,IDataTableMapper dataTableHelper, IKullaniciYetkiService kullaniciYetkiService)
+        private static IConvertHelper _convertHelper;
+        public GlobalData(ICache cache,IJsonConverter jsonConverter,IDataTableMapper dataTableHelper, IKullaniciYetkiService kullaniciYetkiService,
+                            IConvertHelper convertHelper)
         {
             _cache = cache;
             _converter = jsonConverter;
             _dataTableHelper = dataTableHelper;
             _kullaniciYetkiService = kullaniciYetkiService;
+            _convertHelper = convertHelper;
         }
         public static List<string> ibanErrorList;
         
@@ -89,9 +89,9 @@ namespace YektamakDesktop
         /// </summary>
         public static void RemoveLastForm()
         {
-            activeFormStack.Pop();            
-            if (activeFormStack.Count>0)
+            if (activeFormStack!=null && activeFormStack.Count>1)
             {
+            activeFormStack.Pop();           
                 Form tempForm = activeFormStack.Peek();
                 if (tempForm is IForm iForm)
                 {
@@ -149,7 +149,7 @@ namespace YektamakDesktop
         {
             bool yetki = false;
             DataSet dataSet = _converter.DeserializeToDataSet(_kullaniciYetkiService.GetKullaniciYetki(_cache.kullanici));
-            if (dataSet.Tables[1].Select("Id is not null and FormAdi='" + form.Name + "'").Count() > 0)
+            if (dataSet.Tables[1].Select("Id is not null and FormAd='" + form.Name + "'").Count() > 0)
             {
                 yetki = true;
                 GlobalData.AddNewForm(form);
@@ -161,34 +161,7 @@ namespace YektamakDesktop
             }
             return yetki;
         }
-        /// <summary>
-        /// web isteklerinden dönen json değerlerini dataset nesnesine dönüştürür
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-       
-        public static T GetModelFromDatabase<T>(Func<T,string> func,T model,int rowIndex=0) where T : IEntity, new()
-        {
-            string result = func(model);
-            DataSet dataSet= _converter.DeserializeToDataSet(result);
-            if (dataSet.Tables[0].Rows.Count > 0)
-            {
-                DataRow dataRow = dataSet.Tables[0].Rows[rowIndex];
-                return Common.ConvertHelper.DataRowToModel<T>(dataRow);
-            }
-            else
-            {
-                return model;
-            }
-            
-        }
-        public static async Task<T> GetModelFromDatabase<T>(Func<T, Task<string>> func, T model, int rowIndex = 0) where T : IEntity, new()
-        {
-            string result = await func(model);
-            DataSet dataSet = _converter.DeserializeToDataSet(result);
-            DataRow dataRow = dataSet.Tables[0].Rows[rowIndex];
-            return Common.ConvertHelper.DataRowToModel<T>(dataRow);
-        }
+        
         private static Label WarningLabel(string mesaj,Control control)
         {
             Label warningLabel = new Label();
@@ -286,6 +259,7 @@ namespace YektamakDesktop
 
             if (customCheckedComboBox.checkedCount==0)
             {
+                customCheckedComboBox.BackColor = Color.Red;
                 form.Controls.Add(WarningLabel(mesaj, customCheckedComboBox));
                 result = false;
             }
@@ -312,7 +286,7 @@ namespace YektamakDesktop
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="form"></param>
-        public static void CloseForm<T>(ref T form) where T : Form,IForm
+        public static void CloseForm<T>(ref T form) where T : Form
         {
             form.Close();
             form.Dispose();

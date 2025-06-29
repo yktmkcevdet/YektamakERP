@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Models;
+using System.Data;
 
 namespace Utilities.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Utilities.Interfaces
     {
         DataSet DeserializeToDataSet(string result);
         string SerializeModelToEncodedJson<T>(T model);
-        T DeserializeToModel<T>(string result);
+        List<T> DeserializeToModelList<T>(string result) where T : IEntity, new();
         string DecodeBase64JsonString(string result);
         string EncodeStringToBase64Json(string result);
         bool IsValidEncodedJson(string encodedJsonString);

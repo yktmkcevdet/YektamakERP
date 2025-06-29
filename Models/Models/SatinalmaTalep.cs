@@ -5,7 +5,14 @@
 		public int Id;
 		public string satinalmaTalepNo;
 		public DateTime talepTarihi;
-		public long malzemeGrupId;
+        public DateTime teslimTarihi;
+		public bool? onayDurum { get; set; }
+		private MalzemeGrup _malzemeGrup;
+		public MalzemeGrup malzemeGrup
+        {
+            get { if (_malzemeGrup == null) _malzemeGrup = new MalzemeGrup(); return _malzemeGrup; }
+            set { _malzemeGrup = value; }
+        }
         private Proje _proje;
 		public Proje proje
 		{
@@ -22,8 +29,16 @@
 				_proje = value;
 			}
 		}
-		public int talepEdenKullaniciId;
-		public TalepTip _talepTip;
+		private Kullanici _talepEdenKullanici;
+        public Kullanici talepEdenKullanici { 
+			get { if (_talepEdenKullanici == null) _talepEdenKullanici = new Kullanici(); return _talepEdenKullanici; } 
+			set { _talepEdenKullanici = value; } }
+		private Kullanici _onayKullanici;
+		public Kullanici onayKullanici { 
+			get { if (_onayKullanici == null) _onayKullanici = new Kullanici(); return _onayKullanici; } 
+			set { _onayKullanici = value; } 
+		}
+        public TalepTip _talepTip;
 		public TalepTip talepTip
 		{
 			get
@@ -49,7 +64,7 @@
 	}
 	public class SatinalmaTalepDetay : IEntity
 	{
-		public int Id;
+		public int? Id;
 		private StokKart _stokKart;
 		public StokKart stokKart{
 			get
@@ -65,9 +80,10 @@
 				_stokKart = value;
 			}
 		}
-		public int? miktar;
+		public double? miktar;
+		public double agirlik;
 		public string aciklama;
-		public DateTime talepTarihi;
+		public DateTime? talepTarihi;
 		private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
         {
@@ -83,10 +99,26 @@
 	}
 	public class SatinalmaTalepSatirDetay:IEntity
 	{
-		public int Id;
-        public int satinalmaDetayId;
-        public int? stokKartId;
-        public int? miktar;
+		public int? Id;
+		private StokKart _stokKart;
+		public StokKart stokKart
+		{
+			get
+			{
+				if (_stokKart == null)
+				{
+					_stokKart = new StokKart();
+				}
+				return _stokKart;
+			}
+			set
+			{
+				_stokKart = value;
+			}
+        }
+        public double? miktar;
+		public string stokKartKod;
+        public string stokKartAd;
     }
 
 }

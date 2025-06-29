@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            monthCalendar = new System.Windows.Forms.MonthCalendar();
             textBox = new CustomTextBox();
+            monthCalendar = new System.Windows.Forms.MonthCalendar();
             SuspendLayout();
-            // 
-            // monthCalendar
-            // 
-            monthCalendar.Location = new System.Drawing.Point(1, 30);
-            monthCalendar.Name = "monthCalendar";
-            monthCalendar.TabIndex = 5;
-            monthCalendar.Visible = false;
-            monthCalendar.DateSelected += monthCalendar_DateSelected;
-            monthCalendar.Leave += monthCalendar_Leave;
             // 
             // textBox
             // 
@@ -60,7 +51,7 @@
             textBox.PlaceholderText = "";
             textBox.ReadOnly = false;
             textBox.SelectionStart = 0;
-            textBox.Size = new System.Drawing.Size(106, 38);
+            textBox.Size = new System.Drawing.Size(106, 32);
             textBox.TabIndex = 7;
             textBox.TextAlignment = System.Windows.Forms.HorizontalAlignment.Right;
             textBox.TextCustom = "";
@@ -70,23 +61,30 @@
             textBox.Leave += textBox_Leave;
             textBox.Enter += textBox_Enter;
             // 
+            // monthCalendar
+            // 
+            monthCalendar.Location = new System.Drawing.Point(2, 32);
+            monthCalendar.Name = "monthCalendar";
+            monthCalendar.TabIndex = 8;
+            monthCalendar.DateSelected += monthCalendar_DateSelected;
+            // 
             // CustomTextBoxTarih
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            Controls.Add(textBox);
             Controls.Add(monthCalendar);
+            Controls.Add(textBox);
             Margin = new System.Windows.Forms.Padding(1);
             Name = "CustomTextBoxTarih";
             Padding = new System.Windows.Forms.Padding(1);
-            Size = new System.Drawing.Size(234, 191);
+            Size = new System.Drawing.Size(106, 92);
             Load += CustomTextBoxTarih_Load;
             ResumeLayout(false);
         }
 
         #endregion
-        private System.Windows.Forms.MonthCalendar monthCalendar;
         public CustomTextBox textBox;
+        private System.Windows.Forms.MonthCalendar monthCalendar;
     }
 }

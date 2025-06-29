@@ -24,9 +24,9 @@ C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiSe
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.AssemblyInfoInputs.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.AssemblyInfo.cs
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.csproj.CoreCompileInputs.cache
+C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.sourcelink.json
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.csproj.Up2Date
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\refint\ApiService.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ref\ApiService.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Debug\net7.0\ApiService.sourcelink.json

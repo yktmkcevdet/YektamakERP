@@ -7,7 +7,9 @@ namespace Utilities.Interfaces
     {
         public Kullanici kullanici { get; set; }
         public List<Kullanici> kullaniciList { get;  }
-        public List<AnaMenu> ananaMenuList { get; }
+        public Task<List<Kullanici>> kullaniciListAsync();
+        public List<Rol> rolList { get; }
+        public List<AnaMenuDTO> ananaMenuList { get; }
         public List<Menu> menuList { get; }
         public List<Yetki> yetkiList { get; }
         public List<StokGrup> stokGrups { get; }
@@ -27,6 +29,7 @@ namespace Utilities.Interfaces
         public List<MarkaAltGrup> markaAltGrupList { get; }
         public List<ReferansKaynak> referansKaynakList { get; }
         public List<DovizCinsi> dovizCinsiList { get; }
+        public List<Vade> vadeList { get; }
         public List<MaliyetUnsur> maliyetUnsurList { get; set; }
         public List<MaliyetTespitKanal> maliyetTespitKanalList { get; set; }
         public List<DosyaTip> dosyaTipList { get; set; }

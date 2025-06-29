@@ -17,6 +17,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -187,6 +189,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         public class DataControlMenu : Abstracts.DataControl, IEntity
         {
             private static IKullaniciYetkiService _kullaniciYetkiService;
+            public DataControlMenu(IKullaniciYetkiService kullaniciYetkiService)
+            {
+                _kullaniciYetkiService=kullaniciYetkiService;
+            }
             private CustomTextBox _menuId;
             public CustomTextBox menuId { get { if (_menuId == null) _menuId = new(); return _menuId; } set { _menuId = value; } }
             private CustomTextBox _menuAdi;
@@ -223,16 +229,12 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 iconButton.Click += IconButton_Click;
             }
 
-            public DataControlMenu(IKullaniciYetkiService kullaniciYetkiService)
-            {
-                _kullaniciYetkiService = kullaniciYetkiService;
-            }
 
             private void IconButton_Click(object sender, EventArgs e)
             {
                 Menu menu = new();
                 menu.ad= menuAdi.TextCustom;
-                menu.formAdi=formAdi.TextCustom;
+                menu.formAd=formAdi.TextCustom;
                 menu.Id=Convert.ToInt32(menuId.TextCustom);
                 menu.icon=icon.TextCustom;
                 EkranEkle.menu = menu;

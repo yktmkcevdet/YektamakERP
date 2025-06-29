@@ -51,7 +51,7 @@
 
     private IEnumerable<NavItem> GetNavItems()
     {
-        foreach (AnaMenu menu in cache.ananaMenuList)
+        foreach (AnaMenuDTO menu in cache.ananaMenuList)
         {
             yield return new NavItem { Id = menu.Id.ToString(), Href = $"/{char.ToUpper(menu.ad[0]) + menu.ad.Substring(1).ToLower()}", IconName = IconName.HouseDoorFill, Text = menu.ad };
         }

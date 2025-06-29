@@ -13,7 +13,7 @@ namespace Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySql>();
+            builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySqlLocal>();
 
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin
             //              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

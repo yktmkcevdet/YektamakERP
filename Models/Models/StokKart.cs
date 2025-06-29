@@ -24,8 +24,8 @@ namespace Models
         public string boyut { get; set; }
         public double? uzunluk { get; set; }
         public string aciklama { get; set; }
-        public double agirlik { get; set; }
-        public int? miktar { get; set; }
+        public double? agirlik { get; set; }
+        public double? miktar { get; set; }
         public string malzeme { get; set; }
         [FilterAttribute]
         public string parcaAdi { get; set; }
@@ -59,7 +59,7 @@ namespace Models
         public int profilTipId { get; set; }
 
         [FilterAttribute]
-        public int? isSatinalma;
+        public bool? isSatinalma;
         public bool? isFromExcel { get; set; }
         public double etKalinligi { get; set; }
         public double en { get; set; }
@@ -98,11 +98,11 @@ namespace Models
             }
         }
         [FilterAttribute]
-        public int? isPdf;
+        public bool? isPdf;
         [FilterAttribute]
-        public int? isDxf;
+        public bool? isDxf;
         [FilterAttribute]
-        public int? isStep;
+        public bool? isStep;
         public byte[] pdf { get; set; }
         public byte[] step { get; set; }
         public byte[] dxf { get; set; }
@@ -111,19 +111,19 @@ namespace Models
         public string pdfFileName() { return parcaKod + ".pdf"; }
         public string dxfFileName()
         {
-            string dxfAd = parcaKod + "_" + malzeme + "_" + dxfAddition() + adet + "adet" + ".dxf";
+            string dxfAd = $"{parcaKod}_{malzeme}_{dxfAddition()}mm_{adet}adet.dxf";
             return dxfAd;
         }
         public string stepFileName() { return parcaKod + ".step"; }
         public string dxfAddition()
         {
-            string pattern = @"\b(\d+)\.\d+\b"; // Sayısal kısmı yakalayan desen
+            string pattern = @"(\d+(?:\.\d+)?)"; // Sayısal kısmı yakalayan desen
 
             // Regex ile eşleşmeyi bul
             Match match = Regex.Match(boyut, pattern);
             if (match.Success)
             {
-                string result = match.Groups[1].Value + "mm_"; // Tam sayı kısmını al
+                string result = match.Groups[1].Value; // Tam sayı kısmını al
                 return result;
             }
             return "";

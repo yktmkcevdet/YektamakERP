@@ -30,17 +30,18 @@
         {
             panelHeader = new System.Windows.Forms.Panel();
             label1 = new System.Windows.Forms.Label();
-            buttonClose = new CustomControls.RoundedButton();
-            buttonHelp = new CustomControls.RoundedButton();
-            buttomMinimize = new CustomControls.RoundedButton();
+            buttonClose = new YektamakDesktop.CustomControls.RoundedButton();
+            buttonHelp = new YektamakDesktop.CustomControls.RoundedButton();
+            buttomMinimize = new YektamakDesktop.CustomControls.RoundedButton();
             labelHeader = new System.Windows.Forms.Label();
-            customComboListBoxFormlar = new CustomControls.CustomComboListBox();
-            customTextBoxMenuAdi = new CustomControls.CustomTextBox();
-            rButtonKaydet = new CustomControls.RoundedButton();
+            customComboListBoxFormlar = new YektamakDesktop.CustomControls.CustomComboListBox();
+            customTextBoxMenuAdi = new YektamakDesktop.CustomControls.CustomTextBox();
+            rButtonKaydet = new YektamakDesktop.CustomControls.RoundedButton();
             label9 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            customComboListBoxIcon = new CustomControls.CustomComboListBox();
+            customComboListBoxIcon = new YektamakDesktop.CustomControls.CustomComboListBox();
             label3 = new System.Windows.Forms.Label();
+            roundedIconButton1 = new YektamakDesktop.CustomControls.RoundedIconButton();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             // 
             customComboListBoxFormlar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             customComboListBoxFormlar.ListBoxVisualSize = 5;
-            customComboListBoxFormlar.Location = new System.Drawing.Point(183, 87);
+            customComboListBoxFormlar.Location = new System.Drawing.Point(165, 87);
             customComboListBoxFormlar.Margin = new System.Windows.Forms.Padding(1);
             customComboListBoxFormlar.Name = "customComboListBoxFormlar";
             customComboListBoxFormlar.Padding = new System.Windows.Forms.Padding(1);
@@ -173,7 +174,7 @@
             customTextBoxMenuAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             customTextBoxMenuAdi.ForeColor = System.Drawing.Color.Black;
             customTextBoxMenuAdi.isPlaceHolder = false;
-            customTextBoxMenuAdi.Location = new System.Drawing.Point(184, 129);
+            customTextBoxMenuAdi.Location = new System.Drawing.Point(166, 129);
             customTextBoxMenuAdi.Multiline = false;
             customTextBoxMenuAdi.Name = "customTextBoxMenuAdi";
             customTextBoxMenuAdi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
@@ -199,7 +200,7 @@
             rButtonKaydet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             rButtonKaydet.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             rButtonKaydet.ForeColor = System.Drawing.Color.White;
-            rButtonKaydet.Location = new System.Drawing.Point(247, 229);
+            rButtonKaydet.Location = new System.Drawing.Point(400, 240);
             rButtonKaydet.Name = "rButtonKaydet";
             rButtonKaydet.Size = new System.Drawing.Size(102, 45);
             rButtonKaydet.TabIndex = 20;
@@ -212,7 +213,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label9.Location = new System.Drawing.Point(30, 87);
+            label9.Location = new System.Drawing.Point(12, 87);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(102, 30);
             label9.TabIndex = 21;
@@ -223,7 +224,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(30, 131);
+            label2.Location = new System.Drawing.Point(12, 131);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(104, 30);
             label2.TabIndex = 22;
@@ -234,29 +235,45 @@
             // 
             customComboListBoxIcon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             customComboListBoxIcon.ListBoxVisualSize = 5;
-            customComboListBoxIcon.Location = new System.Drawing.Point(184, 165);
+            customComboListBoxIcon.Location = new System.Drawing.Point(166, 165);
             customComboListBoxIcon.Margin = new System.Windows.Forms.Padding(1);
             customComboListBoxIcon.Name = "customComboListBoxIcon";
             customComboListBoxIcon.Padding = new System.Windows.Forms.Padding(1);
             customComboListBoxIcon.Size = new System.Drawing.Size(251, 36);
             customComboListBoxIcon.TabIndex = 23;
+            customComboListBoxIcon.SelectedIndexChanged += customComboListBoxIcon_SelectedIndexChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label3.Location = new System.Drawing.Point(30, 173);
+            label3.Location = new System.Drawing.Point(12, 173);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(54, 30);
             label3.TabIndex = 24;
             label3.Text = "Icon";
             label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // roundedIconButton1
+            // 
+            roundedIconButton1.CornerRadius = 10;
+            roundedIconButton1.FlatAppearance.BorderSize = 0;
+            roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            roundedIconButton1.IconColor = System.Drawing.Color.Black;
+            roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            roundedIconButton1.Location = new System.Drawing.Point(427, 173);
+            roundedIconButton1.Name = "roundedIconButton1";
+            roundedIconButton1.Size = new System.Drawing.Size(75, 40);
+            roundedIconButton1.TabIndex = 25;
+            roundedIconButton1.UseVisualStyleBackColor = true;
+            // 
             // EkranEkle
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(514, 297);
+            Controls.Add(roundedIconButton1);
             Controls.Add(label3);
             Controls.Add(customComboListBoxIcon);
             Controls.Add(label2);
@@ -290,5 +307,6 @@
         private System.Windows.Forms.Label label2;
         private CustomControls.CustomComboListBox customComboListBoxIcon;
         private System.Windows.Forms.Label label3;
+        private CustomControls.RoundedIconButton roundedIconButton1;
     }
 }

@@ -49,6 +49,7 @@
     [Inject] IHttpContextAccessor? _httpContextAccessor { get; set; }
     [Inject] IProjeService _projeService { get; set; }
     [Inject] IStokService _stokService { get; set; }
+    [Inject] IDataTableMapper _dataTableMapper { get; set; }
     @inject ICache _cache
     private List<string> selectedFiles = new();
     private ElementReference inputElement; // HTML input öğesine referans
@@ -160,8 +161,7 @@
                 MalzemeGrup malzemeGrup = new MalzemeGrup();
                 malzemeGrup.ad = rowData.GetCell(9)?.ToString() ?? "";
                 IJsonConverter jsonConvertHelper = new JsonConverter();
-                IDataTableMapper dataTableConverter = new DataTableMapper();
-                malzemeGrup = dataTableConverter.MapToEntity<MalzemeGrup>(jsonConvertHelper.DeserializeToDataSet(_stokService.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
+                malzemeGrup = _dataTableMapper.MapToEntity<MalzemeGrup>(jsonConvertHelper.DeserializeToDataSet(_stokService.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
                 stokKart.malzemeGrup.Id = malzemeGrup.Id;
                 stokKart.proje.Id = proje.Id;
                 stokKart.parcaKod = rowData.GetCell(1)?.ToString() ?? "";

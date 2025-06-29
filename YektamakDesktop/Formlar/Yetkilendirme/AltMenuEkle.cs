@@ -84,10 +84,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private bool CheckFields()
         {
             bool result = true;
-            GlobalData.ClearWarningLabels(this);
-            result = GlobalData.CheckField("* Menü adı girilmelidir", altMenuekle, customTextBoxMenuAdi) ? result : false;
-            result = GlobalData.CheckField("* Ana menü seçimi yapılmalıdır.", altMenuekle, comboListBoxAnaMenu) ? result : false;
-            result = GlobalData.CheckField("* Form seçimi yapılmalıdır.", altMenuekle, comboListBoxForm) ? result : false;
+            result = GlobalData.CheckField("* Menü adı girilmelidir", altMenuekle, ctbMenuAdi) ? result : false;
+            result = GlobalData.CheckField("* Ana menü seçimi yapılmalıdır.", altMenuekle, clbAnaMenu) ? result : false;
+            result = GlobalData.CheckField("* Form seçimi yapılmalıdır.", altMenuekle, clbForm) ? result : false;
             return result;
         }
 
@@ -100,10 +99,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {   
             if (!CheckFields()) return;
             Ekran ekran = new Ekran();
-            ekran.menu.Id = comboListBoxAnaMenu.selectedDataRowId;
-            ekran.altMenuId = comboListBoxForm.selectedDataRowId;
-            ekran.ekranAdi = customTextBoxMenuAdi.TextCustom;
-            ekran.formAdi = comboListBoxForm.selectedDataRowValue;
+            ekran.menu.Id = clbAnaMenu.selectedDataRowId;
+            ekran.altMenuId = clbForm.selectedDataRowId;
+            ekran.ekranAdi = ctbMenuAdi.TextCustom;
+            ekran.formAd = clbForm.selectedDataRowValue;
             string httpResult = await _kullaniciYetkiService.SaveEkran(ekran);
 
             if (!httpResult.Contains("error"))
@@ -118,9 +117,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         public void SaveMode(Menu menu)
         {
-            ComboBoxListFill.GetLookupAd(_cache.ananaMenuList, ref comboListBoxAnaMenu);
-            ComboBoxListFill.GetLookupAd(_cache.menuList, ref comboListBoxForm);
-            comboListBoxAnaMenu.SelectDataRowId(menu.Id);
+            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbAnaMenu);
+            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbForm);
+            clbAnaMenu.SelectDataRowId(menu.Id);
         }
         private void buttonClose_Click(object sender, EventArgs e)
         {

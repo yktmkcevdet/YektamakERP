@@ -1,13 +1,26 @@
-﻿using Models;
+﻿using Microsoft.Extensions.Logging;
+using Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Data;
+using System.Globalization;
 using System.Reflection;
+using Utilities.Implementations.Converters;
 using Utilities.Interfaces;
 
 namespace Utilities.Implementations
 {
     public class DataTableMapper : IDataTableMapper
     {
+        private readonly IAppLogger _logger;
+        private readonly IConvertHelper _convertHelper;
+
+        public DataTableMapper(IAppLogger logger, IConvertHelper convertHelper)
+        {
+            _logger = logger;
+            _convertHelper = convertHelper;
+        }
+
         /// <summary>
         /// DataTable satırlarını entity listesine dönüştürür.
         /// Masaüstü uygulaması için DataGridView nesnesini model listesine çevirmek için kullanılır.
@@ -16,20 +29,28 @@ namespace Utilities.Implementations
         /// <typeparam name="T">Dönüştürülecek entity tipi</typeparam>
         /// <param name="dataRows">Dönüştürülecek DataRow listesi</param>
         /// <returns>Entity listesi</returns>
-        public List<T> MapToEntityList<T>(List<DataRow> dataRows) where T : IEntity, new()
+        public List<T> MapToEntityList<T>(DataTable dataTable) where T : IEntity, new()
         {
-            if (dataRows == null)
-                return new List<T>();
-
-            var entityList = new List<T>();
-
-            foreach (var row in dataRows)
+            try
             {
-                var entity = MapToEntity<T>(row);
-                entityList.Add(entity);
-            }
+                List<DataRow> dataRows = dataTable?.AsEnumerable().ToList();
+                if (dataRows == null)
+                    return new List<T>();
 
-            return entityList;
+                var entityList = new List<T>();
+
+                foreach (var row in dataRows)
+                {
+                    var entity = MapToEntity<T>(row);
+                    entityList.Add(entity);
+                }
+
+                return entityList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         /// <summary>
@@ -101,6 +122,13 @@ namespace Utilities.Implementations
         /// </summary>
         private void MapSimpleProperty<T>(T entity, DataRow dataRow, PropertyInfo property, string columnName) where T : IEntity
         {
+            var settings = new JsonSerializerSettings
+            {
+                Converters = new List<Newtonsoft.Json.JsonConverter>
+                {
+                    new MultiFormatDateTimeConverter()
+                }
+            };
             var propertyType = property.PropertyType;
 
             if (IsSimpleType(propertyType))
@@ -111,10 +139,15 @@ namespace Utilities.Implementations
             else
             {
                 var jsonData = dataRow[columnName]?.ToString();
+                _logger?.LogInfo($"Mapping property '{propertyType}' with JSON data: {jsonData}");
                 if (!string.IsNullOrEmpty(jsonData))
                 {
-                    var value = JsonConvert.DeserializeObject(jsonData, propertyType);
-                    property.SetValue(entity, value);
+                    if(propertyType == typeof(DateTime))
+                    {
+                        jsonData = JsonConvert.SerializeObject(jsonData); // otomatik olarak çift tırnak içine alır
+                    }
+                    var result = JsonConvert.DeserializeObject(jsonData, propertyType, settings);
+                    property.SetValue(entity, result);
                 }
             }
         }

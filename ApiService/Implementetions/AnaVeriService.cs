@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,21 @@ namespace ApiService.Implementetions
         public string GetDosyaTip()
         {
             return _apiService.Get($"GetDosyaTip");
+        }
+        public async Task<string> SaveExcelForm(ExcelForm excelForm)
+        {
+            return await _apiService.PostAsync(excelForm, "SaveExcelForm");
+        }
+        public async Task<string> GetExcelForm(ExcelForm excelForm)
+        {
+            try
+            {
+                return await _apiService.PostAsync(excelForm, "GetExcelForm");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Excel formu alınırken hata oluştu: {ex.Message}");
+            }
         }
     }
 }

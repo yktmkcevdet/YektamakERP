@@ -1,10 +1,11 @@
 ﻿namespace Models
 {
-    public class SatinalmaTeklifBaslik
+    public class SatinalmaTeklifBaslik:IEntity
     {
-        public int teklifId;
-        public DateTime teklifTalepTarihi;
-        public Firma _teklifFirma;
+        public int? Id { get; set; }
+        public string teklifNo { get; set; }
+        public DateTime teklifTalepTarihi { get; set; }
+        private Firma _teklifFirma;
         public Firma teklifFirma
         {
             get
@@ -20,8 +21,8 @@
                 _teklifFirma = value;
             }
         }
-        public DateTime teklifTarihi;
-        public Tutar _teklifTutar;
+        public DateTime? teklifTarihi { get; set; }
+        private Tutar _teklifTutar;
         public Tutar teklifTutar
         {
             get
@@ -37,11 +38,23 @@
                 _teklifTutar = value;
             }
         }
-        public int teklifGecerlilikSuresi;
-        public int terminSuresi;
-        public int vade;
-        public string aciklama;
-        public List<SatinalmaTeklifDetay> _satinalmaTeklifDetayList;
+        public int teklifGecerlilikSuresi { get; set; }
+        public int? terminSuresi { get; set; }
+        private Vade _vade;
+        public Vade vade
+        {
+            get
+            {
+                if(_vade == null)
+                {
+                    _vade=new Vade();
+                }
+                return _vade;
+            }
+            set { _vade = value; }
+        }
+        public string aciklama { get; set; }
+        private List<SatinalmaTeklifDetay> _satinalmaTeklifDetayList;
         public List<SatinalmaTeklifDetay> satinalmaTeklifDetayList
         {
             get
@@ -55,10 +68,24 @@
             }
         }
     }
-    public class SatinalmaTeklifDetay
+    public class SatinalmaTeklifDetay:IEntity
     {
-        public int teklifDetayId;
-        public int satinalmaTalepDetayId; 
-        public Tutar tutar;
+        public int? Id { get; set; }
+        private SatinalmaTalepDetay _satinalmaTalepDetay;
+        public SatinalmaTalepDetay satinalmaTalepDetay 
+        {
+            get { if (_satinalmaTalepDetay == null) { _satinalmaTalepDetay = new(); } return _satinalmaTalepDetay; } set { _satinalmaTalepDetay = value; } } 
+        private Tutar _birimFiyat;
+        public Tutar birimFiyat
+        {
+            get
+            {
+                if (_birimFiyat == null) { _birimFiyat = new(); } return _birimFiyat;
+            }
+            set
+            {
+                _birimFiyat = value;
+            }
+        }
     }
 }

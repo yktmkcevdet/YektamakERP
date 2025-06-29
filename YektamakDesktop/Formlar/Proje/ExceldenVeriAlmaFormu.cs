@@ -128,7 +128,7 @@ namespace YektamakDesktop.Formlar.Proje
 
             // Batch processing için liste
             var stokKartList = new List<StokKart>();
-            const int batchSize = 1; // Her seferinde * kayıt işle
+            const int batchSize = 169; // Her seferinde * kayıt işle
             DateTime startTime = DateTime.Now;
             for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
             {

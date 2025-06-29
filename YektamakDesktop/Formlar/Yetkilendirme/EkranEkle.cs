@@ -63,7 +63,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             InitializeComponent();
             CustomComboLists_Load();
-            customComboListBoxFormlar.SelectDataRowValue(menu.formAdi);
+            customComboListBoxFormlar.SelectDataRowValue(menu.formAd);
             customComboListBoxIcon.SelectDataRowValue(menu.icon);
             customTextBoxMenuAdi.TextCustom = menu.ad;
         }
@@ -116,7 +116,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private async void rButtonKaydet_Click(object sender, EventArgs e)
         {
             menu.ad = customTextBoxMenuAdi.TextCustom;
-            menu.formAdi = customComboListBoxFormlar.selectedDataRowValue;
+            menu.formAd = customComboListBoxFormlar.selectedDataRowValue;
             menu.icon = customComboListBoxIcon.selectedDataRowValue;
             string result = await _kullaniciYetkiService.SaveMenu(menu);
             if (!result.Contains("error", StringComparison.OrdinalIgnoreCase))
@@ -127,6 +127,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 MessageBox.Show(result);
             }
+        }
+
+        private void customComboListBoxIcon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            roundedIconButton1.IconChar= (IconChar)Enum.Parse(typeof(IconChar), customComboListBoxIcon.selectedDataRowValue, true);
         }
     }
 }

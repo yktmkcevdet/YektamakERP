@@ -87,7 +87,6 @@ namespace YektamakDesktop.Formlar.Satis
             textBoxTeklifTalepTarihi.Padding = new Padding(1);
             textBoxTeklifTalepTarihi.Size = new Size(134, 32);
             textBoxTeklifTalepTarihi.TabIndex = 83;
-            textBoxTeklifTalepTarihi.TextCustom = "";
             // 
             // label14
             // 

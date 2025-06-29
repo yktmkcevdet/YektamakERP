@@ -5,10 +5,12 @@ namespace ApiService.Interfaces
 {
     public interface IKullaniciYetkiService
     {
-        public string GetAnaMenu(AnaMenu anaMenu);
+        public string GetAnaMenu(AnaMenuDTO anaMenu);
         public string GetMenu(Menu menu=null);
         public string GetYetki(Yetki yetki); 
+        public Task<string> GetKullaniciAsync(Kullanici kullanici);
         public string GetKullanici(Kullanici kullanici);
+        public string GetRol(Rol rol);
         public string GetKullanici(string kullanici);
         public string SaveKullanici(Kullanici kullanici);
         public Task<string> DeleteMenu(Menu menu);
@@ -17,5 +19,7 @@ namespace ApiService.Interfaces
         public Task<string> SaveMenu(Menu menu);
         public string GetKullaniciYetki(Kullanici kullanici);
         public Task<string> SaveYetki(Yetki yetki);
+        public Task<string> SaveAlanYetki(AlanYetkiDTO alanYetki);
+        public Task<string> GetAlanYetki(AlanYetkiDTO alanYetki);
     }
 }

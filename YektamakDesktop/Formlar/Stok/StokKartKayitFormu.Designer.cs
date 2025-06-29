@@ -54,13 +54,13 @@ namespace YektamakDesktop.Formlar.Stok
             textBoxLogoKod = new CustomTextBox();
             label3 = new Label();
             label4 = new Label();
-            ctxbStokAd = new CustomTextBox();
-            cbxStokGrup = new CustomComboListBox();
+            ctbStokAd = new CustomTextBox();
+            clbStokGrup = new CustomComboListBox();
             label5 = new Label();
             label6 = new Label();
             comboListBoxMalzemeStandart = new CustomComboListBox();
             label7 = new Label();
-            cbxMalzemeGrup = new CustomComboListBox();
+            clbMalzemeGrup = new CustomComboListBox();
             label8 = new Label();
             comboListBoxOlcuBirim = new CustomComboListBox();
             label9 = new Label();
@@ -80,12 +80,12 @@ namespace YektamakDesktop.Formlar.Stok
             label20 = new Label();
             textBoxAciklama = new CustomTextBox();
             label21 = new Label();
-            cbxStokTip = new CustomComboListBox();
+            clbStokTip = new CustomComboListBox();
             rButtonKaydet = new RoundedButton();
             label23 = new Label();
-            cbxMalzemeAltGrup = new CustomComboListBox();
+            clbMalzemeAltGrup = new CustomComboListBox();
             label24 = new Label();
-            cbxMalzemeAltGrup2 = new CustomComboListBox();
+            clbMalzemeAltGrup2 = new CustomComboListBox();
             panel1 = new Panel();
             textBoxAgirlik = new CustomTextBoxSayisal();
             label10 = new Label();
@@ -99,6 +99,11 @@ namespace YektamakDesktop.Formlar.Stok
             label28 = new Label();
             label29 = new Label();
             textBoxBoyut = new CustomTextBox();
+            checkBoxIsSatinalma = new CheckBox();
+            checkBoxIsPdf = new CheckBox();
+            checkBoxIsFromExcel = new CheckBox();
+            checkBoxIsStep = new CheckBox();
+            checkBoxIsDxf = new CheckBox();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -385,40 +390,40 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // ctxbStokAd
             // 
-            ctxbStokAd.BackColor = Color.White;
-            ctxbStokAd.BorderColor = Color.Silver;
-            ctxbStokAd.BorderFocusColor = Color.HotPink;
-            ctxbStokAd.BorderRadius = 5;
-            ctxbStokAd.BorderSize = 1;
-            ctxbStokAd.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            ctxbStokAd.ForeColor = Color.Black;
-            ctxbStokAd.isPlaceHolder = false;
-            ctxbStokAd.Location = new Point(186, 240);
-            ctxbStokAd.Multiline = false;
-            ctxbStokAd.Name = "ctxbStokAd";
-            ctxbStokAd.Padding = new Padding(7, 5, 7, 5);
-            ctxbStokAd.PasswordChar = false;
-            ctxbStokAd.PlaceholderColor = Color.DarkGray;
-            ctxbStokAd.PlaceholderText = "";
-            ctxbStokAd.ReadOnly = false;
-            ctxbStokAd.SelectionStart = 0;
-            ctxbStokAd.Size = new Size(575, 28);
-            ctxbStokAd.TabIndex = 13;
-            ctxbStokAd.TextAlignment = HorizontalAlignment.Left;
-            ctxbStokAd.TextCustom = "";
-            ctxbStokAd.UnderlinedStyle = false;
+            ctbStokAd.BackColor = Color.White;
+            ctbStokAd.BorderColor = Color.Silver;
+            ctbStokAd.BorderFocusColor = Color.HotPink;
+            ctbStokAd.BorderRadius = 5;
+            ctbStokAd.BorderSize = 1;
+            ctbStokAd.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            ctbStokAd.ForeColor = Color.Black;
+            ctbStokAd.isPlaceHolder = false;
+            ctbStokAd.Location = new Point(186, 240);
+            ctbStokAd.Multiline = false;
+            ctbStokAd.Name = "ctxbStokAd";
+            ctbStokAd.Padding = new Padding(7, 5, 7, 5);
+            ctbStokAd.PasswordChar = false;
+            ctbStokAd.PlaceholderColor = Color.DarkGray;
+            ctbStokAd.PlaceholderText = "";
+            ctbStokAd.ReadOnly = false;
+            ctbStokAd.SelectionStart = 0;
+            ctbStokAd.Size = new Size(575, 28);
+            ctbStokAd.TabIndex = 13;
+            ctbStokAd.TextAlignment = HorizontalAlignment.Left;
+            ctbStokAd.TextCustom = "";
+            ctbStokAd.UnderlinedStyle = false;
             // 
             // cbxStokGrup
             // 
-            cbxStokGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cbxStokGrup.ListBoxVisualSize = 5;
-            cbxStokGrup.Location = new Point(56, 422);
-            cbxStokGrup.Margin = new Padding(1);
-            cbxStokGrup.Name = "cbxStokGrup";
-            cbxStokGrup.Padding = new Padding(1);
-            cbxStokGrup.Size = new Size(201, 36);
-            cbxStokGrup.TabIndex = 15;
-            cbxStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
+            clbStokGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clbStokGrup.ListBoxVisualSize = 5;
+            clbStokGrup.Location = new Point(56, 422);
+            clbStokGrup.Margin = new Padding(1);
+            clbStokGrup.Name = "cbxStokGrup";
+            clbStokGrup.Padding = new Padding(1);
+            clbStokGrup.Size = new Size(201, 36);
+            clbStokGrup.TabIndex = 15;
+            clbStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -463,15 +468,15 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // cbxMalzemeGrup
             // 
-            cbxMalzemeGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cbxMalzemeGrup.ListBoxVisualSize = 5;
-            cbxMalzemeGrup.Location = new Point(262, 422);
-            cbxMalzemeGrup.Margin = new Padding(1);
-            cbxMalzemeGrup.Name = "cbxMalzemeGrup";
-            cbxMalzemeGrup.Padding = new Padding(1);
-            cbxMalzemeGrup.Size = new Size(251, 36);
-            cbxMalzemeGrup.TabIndex = 19;
-            cbxMalzemeGrup.SelectedIndexChanged += cbxMalzemeGrup_SelectedIndexChanged;
+            clbMalzemeGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clbMalzemeGrup.ListBoxVisualSize = 5;
+            clbMalzemeGrup.Location = new Point(262, 422);
+            clbMalzemeGrup.Margin = new Padding(1);
+            clbMalzemeGrup.Name = "cbxMalzemeGrup";
+            clbMalzemeGrup.Padding = new Padding(1);
+            clbMalzemeGrup.Size = new Size(251, 36);
+            clbMalzemeGrup.TabIndex = 19;
+            clbMalzemeGrup.SelectedIndexChanged += cbxMalzemeGrup_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -772,14 +777,14 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // cbxStokTip
             // 
-            cbxStokTip.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cbxStokTip.ListBoxVisualSize = 5;
-            cbxStokTip.Location = new Point(186, 137);
-            cbxStokTip.Margin = new Padding(1);
-            cbxStokTip.Name = "cbxStokTip";
-            cbxStokTip.Padding = new Padding(1);
-            cbxStokTip.Size = new Size(251, 36);
-            cbxStokTip.TabIndex = 48;
+            clbStokTip.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clbStokTip.ListBoxVisualSize = 5;
+            clbStokTip.Location = new Point(186, 137);
+            clbStokTip.Margin = new Padding(1);
+            clbStokTip.Name = "cbxStokTip";
+            clbStokTip.Padding = new Padding(1);
+            clbStokTip.Size = new Size(251, 36);
+            clbStokTip.TabIndex = 48;
             // 
             // rButtonKaydet
             // 
@@ -816,15 +821,15 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // cbxMalzemeAltGrup
             // 
-            cbxMalzemeAltGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup.Location = new Point(519, 422);
-            cbxMalzemeAltGrup.Margin = new Padding(1);
-            cbxMalzemeAltGrup.Name = "cbxMalzemeAltGrup";
-            cbxMalzemeAltGrup.Padding = new Padding(1);
-            cbxMalzemeAltGrup.Size = new Size(251, 36);
-            cbxMalzemeAltGrup.TabIndex = 53;
-            cbxMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
+            clbMalzemeAltGrup.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clbMalzemeAltGrup.ListBoxVisualSize = 5;
+            clbMalzemeAltGrup.Location = new Point(519, 422);
+            clbMalzemeAltGrup.Margin = new Padding(1);
+            clbMalzemeAltGrup.Name = "cbxMalzemeAltGrup";
+            clbMalzemeAltGrup.Padding = new Padding(1);
+            clbMalzemeAltGrup.Size = new Size(251, 36);
+            clbMalzemeAltGrup.TabIndex = 53;
+            clbMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
             // 
             // label24
             // 
@@ -838,15 +843,15 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // cbxMalzemeAltGrup2
             // 
-            cbxMalzemeAltGrup2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup2.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup2.Location = new Point(783, 422);
-            cbxMalzemeAltGrup2.Margin = new Padding(1);
-            cbxMalzemeAltGrup2.Name = "cbxMalzemeAltGrup2";
-            cbxMalzemeAltGrup2.Padding = new Padding(1);
-            cbxMalzemeAltGrup2.Size = new Size(251, 36);
-            cbxMalzemeAltGrup2.TabIndex = 55;
-            cbxMalzemeAltGrup2.SelectedIndexChanged += cbxMalzemeAltGrup2_SelectedIndexChanged;
+            clbMalzemeAltGrup2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clbMalzemeAltGrup2.ListBoxVisualSize = 5;
+            clbMalzemeAltGrup2.Location = new Point(783, 422);
+            clbMalzemeAltGrup2.Margin = new Padding(1);
+            clbMalzemeAltGrup2.Name = "cbxMalzemeAltGrup2";
+            clbMalzemeAltGrup2.Padding = new Padding(1);
+            clbMalzemeAltGrup2.Size = new Size(251, 36);
+            clbMalzemeAltGrup2.TabIndex = 55;
+            clbMalzemeAltGrup2.SelectedIndexChanged += cbxMalzemeAltGrup2_SelectedIndexChanged;
             // 
             // panel1
             // 
@@ -878,7 +883,7 @@ namespace YektamakDesktop.Formlar.Stok
             textBoxAgirlik.Size = new Size(69, 32);
             textBoxAgirlik.TabIndex = 59;
             textBoxAgirlik.TextAlignment = HorizontalAlignment.Right;
-            textBoxAgirlik.TextCustom = "0";
+            textBoxAgirlik.TextCustom = "0,000";
             textBoxAgirlik.UnderlinedStyle = false;
             // 
             // label10
@@ -999,11 +1004,66 @@ namespace YektamakDesktop.Formlar.Stok
             textBoxBoyut.TextCustom = "";
             textBoxBoyut.UnderlinedStyle = false;
             // 
+            // checkBoxIsSatinalma
+            // 
+            checkBoxIsSatinalma.AutoSize = true;
+            checkBoxIsSatinalma.Location = new Point(665, 313);
+            checkBoxIsSatinalma.Name = "checkBoxIsSatinalma";
+            checkBoxIsSatinalma.Size = new Size(15, 14);
+            checkBoxIsSatinalma.TabIndex = 70;
+            checkBoxIsSatinalma.UseVisualStyleBackColor = true;
+            checkBoxIsSatinalma.Visible = false;
+            // 
+            // checkBoxIsPdf
+            // 
+            checkBoxIsPdf.AutoSize = true;
+            checkBoxIsPdf.Location = new Point(686, 313);
+            checkBoxIsPdf.Name = "checkBoxIsPdf";
+            checkBoxIsPdf.Size = new Size(15, 14);
+            checkBoxIsPdf.TabIndex = 71;
+            checkBoxIsPdf.UseVisualStyleBackColor = true;
+            checkBoxIsPdf.Visible = false;
+            // 
+            // checkBoxIsFromExcel
+            // 
+            checkBoxIsFromExcel.AutoSize = true;
+            checkBoxIsFromExcel.Location = new Point(707, 313);
+            checkBoxIsFromExcel.Name = "checkBoxIsFromExcel";
+            checkBoxIsFromExcel.Size = new Size(15, 14);
+            checkBoxIsFromExcel.TabIndex = 72;
+            checkBoxIsFromExcel.UseVisualStyleBackColor = true;
+            checkBoxIsFromExcel.Visible = false;
+            // 
+            // checkBoxIsStep
+            // 
+            checkBoxIsStep.AutoSize = true;
+            checkBoxIsStep.Location = new Point(728, 313);
+            checkBoxIsStep.Name = "checkBoxIsStep";
+            checkBoxIsStep.Size = new Size(15, 14);
+            checkBoxIsStep.TabIndex = 73;
+            checkBoxIsStep.UseVisualStyleBackColor = true;
+            checkBoxIsStep.Visible = false;
+            // 
+            // checkBoxIsDxf
+            // 
+            checkBoxIsDxf.AutoSize = true;
+            checkBoxIsDxf.Location = new Point(755, 313);
+            checkBoxIsDxf.Name = "checkBoxIsDxf";
+            checkBoxIsDxf.Size = new Size(15, 14);
+            checkBoxIsDxf.TabIndex = 74;
+            checkBoxIsDxf.UseVisualStyleBackColor = true;
+            checkBoxIsDxf.Visible = false;
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1040, 822);
+            Controls.Add(checkBoxIsDxf);
+            Controls.Add(checkBoxIsStep);
+            Controls.Add(checkBoxIsFromExcel);
+            Controls.Add(checkBoxIsPdf);
+            Controls.Add(checkBoxIsSatinalma);
             Controls.Add(label29);
             Controls.Add(textBoxBoyut);
             Controls.Add(label28);
@@ -1018,12 +1078,12 @@ namespace YektamakDesktop.Formlar.Stok
             Controls.Add(label10);
             Controls.Add(panel1);
             Controls.Add(label24);
-            Controls.Add(cbxMalzemeAltGrup2);
+            Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(label23);
-            Controls.Add(cbxMalzemeAltGrup);
+            Controls.Add(clbMalzemeAltGrup);
             Controls.Add(rButtonKaydet);
             Controls.Add(label21);
-            Controls.Add(cbxStokTip);
+            Controls.Add(clbStokTip);
             Controls.Add(label20);
             Controls.Add(textBoxAciklama);
             Controls.Add(textBoxEtKalinlik);
@@ -1043,13 +1103,13 @@ namespace YektamakDesktop.Formlar.Stok
             Controls.Add(label8);
             Controls.Add(comboListBoxOlcuBirim);
             Controls.Add(label7);
-            Controls.Add(cbxMalzemeGrup);
+            Controls.Add(clbMalzemeGrup);
             Controls.Add(label6);
             Controls.Add(comboListBoxMalzemeStandart);
             Controls.Add(label5);
-            Controls.Add(cbxStokGrup);
+            Controls.Add(clbStokGrup);
             Controls.Add(label4);
-            Controls.Add(ctxbStokAd);
+            Controls.Add(ctbStokAd);
             Controls.Add(label3);
             Controls.Add(textBoxLogoKod);
             Controls.Add(label2);
@@ -1085,13 +1145,13 @@ namespace YektamakDesktop.Formlar.Stok
         private CustomControls.CustomTextBox textBoxLogoKod;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private CustomControls.CustomTextBox ctxbStokAd;
-        private CustomControls.CustomComboListBox cbxStokGrup;
+        private CustomControls.CustomTextBox ctbStokAd;
+        private CustomControls.CustomComboListBox clbStokGrup;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private CustomControls.CustomComboListBox comboListBoxMalzemeStandart;
         private System.Windows.Forms.Label label7;
-        private CustomControls.CustomComboListBox cbxMalzemeGrup;
+        private CustomControls.CustomComboListBox clbMalzemeGrup;
         private System.Windows.Forms.Label label8;
         private CustomControls.CustomComboListBox comboListBoxOlcuBirim;
         private System.Windows.Forms.Label label9;
@@ -1112,12 +1172,12 @@ namespace YektamakDesktop.Formlar.Stok
         private System.Windows.Forms.Label label20;
         private CustomControls.CustomTextBox textBoxAciklama;
         private System.Windows.Forms.Label label21;
-        private CustomControls.CustomComboListBox cbxStokTip;
+        private CustomControls.CustomComboListBox clbStokTip;
         private CustomControls.RoundedButton rButtonKaydet;
         private System.Windows.Forms.Label label23;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup;
+        private CustomControls.CustomComboListBox clbMalzemeAltGrup;
         private System.Windows.Forms.Label label24;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup2;
+        private CustomControls.CustomComboListBox clbMalzemeAltGrup2;
         CustomDataGrid<DataControlStokKartDosyalar> customDataGrid;
         public class DataControlStokKartDosyalar : Abstracts.DataControl, IEntity
         {
@@ -1193,5 +1253,10 @@ namespace YektamakDesktop.Formlar.Stok
         private Label label28;
         private Label label29;
         private CustomTextBox textBoxBoyut;
+        private CheckBox checkBoxIsSatinalma;
+        private CheckBox checkBoxIsPdf;
+        private CheckBox checkBoxIsFromExcel;
+        private CheckBox checkBoxIsStep;
+        private CheckBox checkBoxIsDxf;
     }
 }
