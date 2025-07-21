@@ -110,6 +110,7 @@ namespace YektamakDesktop.CustomControls
             set
             {
                 textBox.Text = value;
+                
                 SetPlaceHolder();
             }
         }
@@ -193,7 +194,6 @@ namespace YektamakDesktop.CustomControls
             set { textBox.SelectionStart = value; }
         }
 
-
         [Browsable(true)]
         [Category("Property Changed")]
         [Description("Event is raised when the value of the Text property is changed on Control.")]
@@ -248,6 +248,7 @@ namespace YektamakDesktop.CustomControls
         [Category("Focus")]
         [Description("Occurs when the control is mouse left")]
         public new event EventHandler MouseLeave;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected override void OnPaint(PaintEventArgs e)
         {

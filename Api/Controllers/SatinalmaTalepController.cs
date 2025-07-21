@@ -1,10 +1,10 @@
 ﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using static Api.Controllers.GeneralMethods;
+using Models.DTO;
 namespace Api.Controllers
 {
-    public class SatinalmaTalepController : Controller
+    public class SatinalmaTalepController:Controller
     {
         private readonly IDataAccessLayer _dataAccesLayer;
 
@@ -14,39 +14,39 @@ namespace Api.Controllers
         }
 
         [HttpPost, Route("api/SaveSatinalmaTalep")]
-        public string SaveSatinalmaTalep([FromBody] string restData)
+        public string SaveSatinalmaTalep([FromBody] SatinalmaTalep restData)
         {
-            string result = _dataAccesLayer.SaveObject(JsonStringToModel<SatinalmaTalep>(restData), "spSaveSatinalmaTalep");
+            string result = _dataAccesLayer.SaveObject(restData, "spSaveSatinalmaTalep");
             return result;
         }
         [HttpPost, Route("api/GetSatinalmaTalepDetay")]
-        public string GetSatinalmaTalepDetay([FromBody] string restData)
+        public string GetSatinalmaTalepDetay([FromBody] SatinalmaTalepDetay restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToModel<SatinalmaTalepDetay>(restData), "spGetSatinalmaTalepDetay");
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalepDetay");
             return result;
         }
         [HttpPost, Route("api/GetSatinalmaTalepSatirDetay")]
-        public string GetSatinalmaTalepSatirDetay([FromBody] string restData)
+        public string GetSatinalmaTalepSatirDetay([FromBody] SatinalmaTalepSatirDetayDTO restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToModel<SatinalmaTalepSatirDetay>(restData), "spGetSatinalmaTalepSatirDetay");
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalepSatirDetay");
             return result;
         }
         [HttpPost, Route("api/GetSatinalmaTalep")]
-        public string GetSatinalmaTalep([FromBody] string restData)
+        public string GetSatinalmaTalep([FromBody] SatinalmaTalep restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToModel<SatinalmaTalep>(restData), "spGetSatinalmaTalep");
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalep");
             return result;
         }
         [HttpPost, Route("api/DeleteSatinalmaTalep")]
-        public string DeleteSatinalmaTalep([FromBody] string restData)
+        public string DeleteSatinalmaTalep([FromBody] SatinalmaTalep restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToModel<SatinalmaTalep>(restData), "spDeleteSatinalmaTalep");
+            string result = _dataAccesLayer.DeleteObject(restData, "spDeleteSatinalmaTalep");
             return result;
         }
         [HttpPost, Route("api/SatinalmaTalepOnay")]
-        public string SatinalmaTalepOnay([FromBody] string restData)
+        public string SatinalmaTalepOnay([FromBody] SatinalmaTalep restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToModel<SatinalmaTalep>(restData), "fnSatinalmaTalepOnay");
+            string result = _dataAccesLayer.GetObject(restData, "fnSatinalmaTalepOnay");
             return result;
         }
     }

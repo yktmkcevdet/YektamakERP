@@ -1,4 +1,5 @@
 using Api.Business;
+using Api.Converters;
 using Api.TokenJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -38,7 +39,11 @@ namespace Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]))
                 };
             });
-
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new MultiFormatDateTimeConverter());
+                });
             builder.Services.AddAuthorization();
 
             // TokenService'i DI'ye ekleyin

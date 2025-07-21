@@ -38,6 +38,7 @@
     <PackageReference Include="Pdfium.Net.SDK" Version="4.96.2704" />
     <PackageReference Include="RtfPipe" Version="2.0.7677.4303" />
     <PackageReference Include="Spire.PDF" Version="11.4.10" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
   </ItemGroup>
 
   <ItemGroup>

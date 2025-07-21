@@ -60,6 +60,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Patagames.Pdf.WinForms.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Patagames.Pdf.Wpf.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Patagames.Pdf.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\RtfPipe.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Serilog.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Serilog.Extensions.Hosting.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\Serilog.Extensions.Logging.dll
@@ -72,6 +73,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Diagnostics.EventLog.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Formats.Asn1.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.IO.Pipelines.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Linq.Dynamic.Core.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Security.Cryptography.Pkcs.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Security.Cryptography.Xml.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\app.publish\System.Text.Encodings.Web.dll

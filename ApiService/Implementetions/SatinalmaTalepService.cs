@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 
 namespace ApiService.Implementetions
 {
@@ -35,7 +36,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(satinalmaTalepDetay, "GetSatinalmaTalepDetay");
         }
-        public string GetSatinalmaTalepSatirDetay(SatinalmaTalepSatirDetay satinalmaTalepSatirDetay)
+        public string GetSatinalmaTalepSatirDetay(SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay)
         {
             return _apiService.Post(satinalmaTalepSatirDetay, "GetSatinalmaTalepSatirDetay");
         }

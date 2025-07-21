@@ -169,13 +169,13 @@ namespace YektamakDesktop.Formlar.Genel
         /// <param name="e"></param>
         private void buttonYetkiliEkle_Click(object sender, EventArgs e)
         {
-            PersonelKayitFormu personelKayitFormu = PersonelKayitFormu.personelKayitFormu;
+            PersonelKayitFormu personelKayitFormu = FormFactory.CreateForm<PersonelKayitFormu>();
             if(personelKayitFormu != null)
             {
                 Personel personel = new();
                 personel.firma.Id= firmaToUpdate.Id;
-                personelKayitFormu.Show();
-                personelKayitFormu.SaveMode(personel);
+                personelKayitFormu.ShowDialog();
+                personelKayitFormu.UpdateMode(personel);
             }
         }
         /// <summary>

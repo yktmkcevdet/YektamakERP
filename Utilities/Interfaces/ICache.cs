@@ -25,6 +25,7 @@ namespace Utilities.Interfaces
         public List<Sektor> sektorList { get; }
         public List<Firma> firmaList { get; }
         public List<Personel> personelList { get; }
+        public List<Pozisyon> pozisyonList { get; }
         public List<Marka> markaList { get; }
         public List<MarkaAltGrup> markaAltGrupList { get; }
         public List<ReferansKaynak> referansKaynakList { get; }

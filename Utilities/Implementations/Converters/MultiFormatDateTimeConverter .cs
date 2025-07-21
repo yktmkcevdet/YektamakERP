@@ -8,12 +8,12 @@
     {
         private readonly string[] formats = new[]
         {
-        "dd.MM.yyyy HH:mm:ss",
-        "dd.MM.yyyy",
-        "yyyy-MM-ddTHH:mm:ss",
-        "yyyy-MM-dd",
-        "yyyy-MM-dd HH:mm:ss.ffffff"
-    };
+            "dd.MM.yyyy HH:mm:ss",
+            "dd.MM.yyyy",
+            "yyyy-MM-ddTHH:mm:ss",
+            "yyyy-MM-dd",
+            "yyyy-MM-dd HH:mm:ss.ffffff"
+        };
 
         public override bool CanConvert(Type objectType)
         {

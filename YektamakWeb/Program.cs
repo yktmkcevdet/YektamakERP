@@ -34,6 +34,7 @@ builder.Services.AddUtilities();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthStateProvider>());
 builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<YektamakWeb.Commands.Accounts.UserService>();
 builder.Services.AddScoped<LoginService>();

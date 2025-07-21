@@ -30,40 +30,14 @@ namespace YektamakDesktop
             CultureInfo culture = new CultureInfo("tr-TR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
-
             
-            
-            //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             DIContainer.ConfigureServices();
             DIContainer.GetService<GlobalData>();
-            DIContainer.GetService<EkranEkle>();
-            DIContainer.GetService<FirmaGridForm>();
-            DIContainer.GetService<PersonelKayitFormu>();
-            DIContainer.GetService<ProjeDosyalari>();
-            DIContainer.GetService<StokKartKayitFormu>();
-            DIContainer.GetService<ExceldenVeriAlmaFormu>();
-            DIContainer.GetService<SatisTeklifTalepKayitFormu>();
-            DIContainer.GetService<SatisSiparisTeklifTalepGridForm>();
-            DIContainer.GetService<SatinalmaTalepKayitFormu>();
-            DIContainer.GetService<AltMenuEkle>();
-            DIContainer.GetService<Menuler>();
-            DIContainer.GetService<Monday>();
-            DIContainer.GetService<StokKartGridForm>();
-            DIContainer.GetService<YetkiTanimlari>();
-            DIContainer.GetService<SatisTeklifMaliyetKayitFormu>();
-            DIContainer.GetService<KullaniciKayitFormu>();
-            DIContainer.GetService<SatinalmaTalepler>();
-            DIContainer.GetService<SatinalmaTalepOnayFormu>();
             DIContainer.GetService<PermissionManager>();
             DIContainer.GetService<DataControlMenu>();
-            DIContainer.GetService<SatinalmaTalepTeklifFormu>();
-            DIContainer.GetService<ExcelTanimlamaFormu>();
-            DIContainer.GetService<MailGonder>();
-            DIContainer.GetService<SatinalmaTeklifKayitFormu>();
-            DIContainer.GetService<SatinalmaTeklifTaleplerFormu>();
             GlobalData.Start();
             while (true)
             {
@@ -82,7 +56,6 @@ namespace YektamakDesktop
                     break; // login baþarýsýzsa veya kullanýcý çýkmak isterse döngüyü kýr
                 }
             }
-
             Application.Exit();
         }
     }

@@ -30,19 +30,20 @@
         {
             components = new System.ComponentModel.Container();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             btnTeklif = new YektamakDesktop.CustomControls.RoundedIconButton();
-            cbxStokGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
-            cbxMalzemeGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbStokGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbMalzemeGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
             ctxBeginTeslimTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
             ctxEndTeslimTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
-            cbxMalzemeAltGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbMalzemeAltGrupId = new YektamakDesktop.CustomControls.CustomComboListBox();
             contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
             parçaListesiniGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ctbBeginTalepTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
             ctbEndTalepTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
             panel1 = new System.Windows.Forms.Panel();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            label1 = new System.Windows.Forms.Label();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,14 +60,6 @@
             headerPanel1.Size = new System.Drawing.Size(1009, 32);
             headerPanel1.TabIndex = 0;
             // 
-            // universalGrid1
-            // 
-            universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(0, 240);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1007, 372);
-            universalGrid1.TabIndex = 1;
-            // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
@@ -75,16 +68,23 @@
             // btnTeklif
             // 
             btnTeklif.BackColor = System.Drawing.Color.FromArgb(128, 255, 128);
+            btnTeklif.BorderColor = System.Drawing.Color.Black;
+            btnTeklif.BorderSize = 0;
             btnTeklif.CornerRadius = 10;
             btnTeklif.Cursor = System.Windows.Forms.Cursors.Hand;
             btnTeklif.FlatAppearance.BorderSize = 0;
             btnTeklif.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnTeklif.ForeColor = System.Drawing.SystemColors.ControlText;
+            btnTeklif.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnTeklif.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnTeklif.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnTeklif.HoverColor2 = System.Drawing.Color.Navy;
             btnTeklif.IconChar = FontAwesome.Sharp.IconChar.CommentDollar;
             btnTeklif.IconColor = System.Drawing.Color.Black;
             btnTeklif.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            btnTeklif.IconSize = 24;
             btnTeklif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnTeklif.Location = new System.Drawing.Point(481, 200);
+            btnTeklif.Location = new System.Drawing.Point(846, 200);
             btnTeklif.Name = "btnTeklif";
             btnTeklif.Size = new System.Drawing.Size(149, 34);
             btnTeklif.TabIndex = 4;
@@ -92,29 +92,33 @@
             btnTeklif.UseVisualStyleBackColor = false;
             btnTeklif.Click += btnTeklif_Click;
             // 
-            // cbxStokGrupId
+            // clbStokGrupId
             // 
-            cbxStokGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxStokGrupId.ListBoxVisualSize = 5;
-            cbxStokGrupId.Location = new System.Drawing.Point(49, 38);
-            cbxStokGrupId.Margin = new System.Windows.Forms.Padding(1);
-            cbxStokGrupId.Name = "cbxStokGrupId";
-            cbxStokGrupId.Padding = new System.Windows.Forms.Padding(1);
-            cbxStokGrupId.Size = new System.Drawing.Size(250, 36);
-            cbxStokGrupId.TabIndex = 5;
-            cbxStokGrupId.SelectedIndexChanged += cbxStokGrupId_SelectedIndexChanged;
+            clbStokGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbStokGrupId.ListBoxVisualSize = 5;
+            clbStokGrupId.Location = new System.Drawing.Point(49, 38);
+            clbStokGrupId.Margin = new System.Windows.Forms.Padding(1);
+            clbStokGrupId.Name = "clbStokGrupId";
+            clbStokGrupId.Padding = new System.Windows.Forms.Padding(1);
+            clbStokGrupId.selectedDataRowId = null;
+            clbStokGrupId.selectedDataRowValue = null;
+            clbStokGrupId.Size = new System.Drawing.Size(250, 36);
+            clbStokGrupId.TabIndex = 5;
+            clbStokGrupId.SelectedIndexChanged += cbxStokGrupId_SelectedIndexChanged;
             // 
-            // cbxMalzemeGrupId
+            // clbMalzemeGrupId
             // 
-            cbxMalzemeGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeGrupId.ListBoxVisualSize = 5;
-            cbxMalzemeGrupId.Location = new System.Drawing.Point(49, 76);
-            cbxMalzemeGrupId.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrupId.Name = "cbxMalzemeGrupId";
-            cbxMalzemeGrupId.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrupId.Size = new System.Drawing.Size(250, 36);
-            cbxMalzemeGrupId.TabIndex = 6;
-            cbxMalzemeGrupId.SelectedIndexChanged += cbxMalzemeGrupId_SelectedIndexChanged;
+            clbMalzemeGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbMalzemeGrupId.ListBoxVisualSize = 5;
+            clbMalzemeGrupId.Location = new System.Drawing.Point(49, 76);
+            clbMalzemeGrupId.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrupId.Name = "clbMalzemeGrupId";
+            clbMalzemeGrupId.Padding = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrupId.selectedDataRowId = null;
+            clbMalzemeGrupId.selectedDataRowValue = null;
+            clbMalzemeGrupId.Size = new System.Drawing.Size(250, 36);
+            clbMalzemeGrupId.TabIndex = 6;
+            clbMalzemeGrupId.SelectedIndexChanged += cbxMalzemeGrupId_SelectedIndexChanged;
             // 
             // ctxBeginTeslimTarihi
             // 
@@ -126,7 +130,6 @@
             ctxBeginTeslimTarihi.Size = new System.Drawing.Size(145, 32);
             ctxBeginTeslimTarihi.TabIndex = 9;
             ctxBeginTeslimTarihi.TextCustom = null;
-            ctxBeginTeslimTarihi.Guncelle += ctxBeginTeslimTarihi_Guncelle;
             // 
             // ctxEndTeslimTarihi
             // 
@@ -138,19 +141,20 @@
             ctxEndTeslimTarihi.Size = new System.Drawing.Size(145, 32);
             ctxEndTeslimTarihi.TabIndex = 10;
             ctxEndTeslimTarihi.TextCustom = null;
-            ctxEndTeslimTarihi.Guncelle += ctxEndTeslimTarihi_Guncelle;
             // 
-            // cbxMalzemeAltGrupId
+            // clbMalzemeAltGrupId
             // 
-            cbxMalzemeAltGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrupId.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrupId.Location = new System.Drawing.Point(49, 114);
-            cbxMalzemeAltGrupId.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrupId.Name = "cbxMalzemeAltGrupId";
-            cbxMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrupId.Size = new System.Drawing.Size(250, 36);
-            cbxMalzemeAltGrupId.TabIndex = 11;
-            cbxMalzemeAltGrupId.SelectedIndexChanged += cbxMalzemeAltGrupId_SelectedIndexChanged;
+            clbMalzemeAltGrupId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbMalzemeAltGrupId.ListBoxVisualSize = 5;
+            clbMalzemeAltGrupId.Location = new System.Drawing.Point(49, 114);
+            clbMalzemeAltGrupId.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrupId.Name = "clbMalzemeAltGrupId";
+            clbMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrupId.selectedDataRowId = null;
+            clbMalzemeAltGrupId.selectedDataRowValue = null;
+            clbMalzemeAltGrupId.Size = new System.Drawing.Size(250, 36);
+            clbMalzemeAltGrupId.TabIndex = 11;
+            clbMalzemeAltGrupId.SelectedIndexChanged += clbMalzemeAltGrupId_SelectedIndexChanged;
             // 
             // contextMenuStrip2
             // 
@@ -175,7 +179,6 @@
             ctbBeginTalepTarihi.Size = new System.Drawing.Size(145, 32);
             ctbBeginTalepTarihi.TabIndex = 12;
             ctbBeginTalepTarihi.TextCustom = null;
-            ctbBeginTalepTarihi.Guncelle += ctxBeginTalepTarihi_Guncelle;
             // 
             // ctbEndTalepTarihi
             // 
@@ -187,31 +190,49 @@
             ctbEndTalepTarihi.Size = new System.Drawing.Size(145, 32);
             ctbEndTalepTarihi.TabIndex = 13;
             ctbEndTalepTarihi.TextCustom = null;
-            ctbEndTalepTarihi.Guncelle += ctxEndTalepTarihi_Guncelle;
             // 
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.Location = new System.Drawing.Point(470, 40);
+            panel1.Location = new System.Drawing.Point(369, 57);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(495, 150);
+            panel1.Size = new System.Drawing.Size(471, 171);
             panel1.TabIndex = 14;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(-2, 252);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1009, 400);
+            universalGrid1.TabIndex = 15;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(369, 38);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(132, 15);
+            label1.TabIndex = 16;
+            label1.Text = "Teklif İstenecek Firmalar";
             // 
             // SatinalmaTalepTeklifFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1007, 650);
+            Controls.Add(label1);
+            Controls.Add(universalGrid1);
             Controls.Add(panel1);
             Controls.Add(ctbEndTalepTarihi);
             Controls.Add(ctbBeginTalepTarihi);
-            Controls.Add(cbxMalzemeAltGrupId);
+            Controls.Add(clbMalzemeAltGrupId);
             Controls.Add(ctxEndTeslimTarihi);
             Controls.Add(ctxBeginTeslimTarihi);
-            Controls.Add(cbxMalzemeGrupId);
-            Controls.Add(cbxStokGrupId);
+            Controls.Add(clbMalzemeGrupId);
+            Controls.Add(clbStokGrupId);
             Controls.Add(btnTeklif);
-            Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "SatinalmaTalepTeklifFormu";
@@ -220,23 +241,30 @@
             Load += SatinalmaTalepTeklifFormu_Load;
             contextMenuStrip2.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
+        }
+
+        private void UniversalGrid1_MouseDown1(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
 
         private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private CustomControls.RoundedIconButton btnTeklif;
-        private CustomControls.CustomComboListBox cbxStokGrupId;
-        private CustomControls.CustomComboListBox cbxMalzemeGrupId;
+        private CustomControls.CustomComboListBox clbStokGrupId;
+        private CustomControls.CustomComboListBox clbMalzemeGrupId;
         private CustomControls.CustomTextBoxTarih ctxBeginTeslimTarihi;
         private CustomControls.CustomTextBoxTarih ctxEndTeslimTarihi;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrupId;
+        private CustomControls.CustomComboListBox clbMalzemeAltGrupId;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem parçaListesiniGösterToolStripMenuItem;
         private CustomControls.CustomTextBoxTarih ctbBeginTalepTarihi;
         private CustomControls.CustomTextBoxTarih ctbEndTalepTarihi;
         private System.Windows.Forms.Panel panel1;
+        private CustomControls.UniversalGrid universalGrid1;
+        private System.Windows.Forms.Label label1;
     }
 }

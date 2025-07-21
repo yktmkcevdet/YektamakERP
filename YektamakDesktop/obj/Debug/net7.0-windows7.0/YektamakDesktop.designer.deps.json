@@ -962,6 +962,14 @@
           }
         }
       },
+      "System.Linq.Dynamic.Core/1.6.6": {
+        "runtime": {
+          "lib/net7.0/System.Linq.Dynamic.Core.dll": {
+            "assemblyVersion": "1.6.6.0",
+            "fileVersion": "1.6.6.0"
+          }
+        }
+      },
       "System.Memory/4.5.5": {},
       "System.Reflection.Metadata/5.0.0": {
         "runtime": {
@@ -1599,6 +1607,13 @@
       "sha512": "sha512-uXf5o8eV/gtzDQY4lGROLFMWQvcViKcF8o4Q6KpIOjloAQXrnscQSu6gTxYJMHuNJnh7szIF9AzkaEq+zDLoEg==",
       "path": "system.io.pipelines/9.0.1",
       "hashPath": "system.io.pipelines.9.0.1.nupkg.sha512"
+    },
+    "System.Linq.Dynamic.Core/1.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DalpBR6IiZsT61Z9h3ujGxhOALmJUE6hrbeWjRUL24AxDIvhxzhxftSrRrF1G8vNggpadDfRiej6ImrpYS8sJA==",
+      "path": "system.linq.dynamic.core/1.6.6",
+      "hashPath": "system.linq.dynamic.core.1.6.6.nupkg.sha512"
     },
     "System.Memory/4.5.5": {
       "type": "package",

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid(_cache);
             SuspendLayout();
             // 
             // headerPanel1

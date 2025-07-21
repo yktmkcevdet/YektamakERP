@@ -1,44 +1,40 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.Models;
 using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Helpers;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
-    public partial class MailGonder : Form, IForm
+    public partial class MailGonder : Form
     {
-        private static ISatinalmaTeklifService _satinalmaTeklifService;
-        private static IJsonConverter _jsonConverter;
-        public MailGonder()
-        {
-            InitializeComponent();
-            controlsToDisable = new List<Control>();
-        }
+        private readonly ISatinalmaTeklifService _satinalmaTeklifService;
+        private readonly IJsonConverter _jsonConverter;
+
         public MailGonder(ISatinalmaTeklifService satinalmaTeklifService, IJsonConverter jsonConverter)
         {
             _satinalmaTeklifService = satinalmaTeklifService;
             _jsonConverter = jsonConverter;
+            InitializeComponent();
         }
-        private static MailGonder _mailgonder;
-        private List<SatinalmaTeklifBaslik> _satinalmaTeklifBaslikList;
-        public List<SatinalmaTeklifBaslik> satinalmaTeklifBaslikList
+        private SatinalmaTeklifBaslik _satinalmaTeklifBaslik;
+        public SatinalmaTeklifBaslik satinalmaTeklifBaslik
         {
-            get 
+            get
             {
-                if (_satinalmaTeklifBaslikList == null) { _satinalmaTeklifBaslikList = new(); }
-                return _satinalmaTeklifBaslikList;
+                if (_satinalmaTeklifBaslik == null) { _satinalmaTeklifBaslik = new(); }
+                return _satinalmaTeklifBaslik;
             }
-            set 
+            set
             {
-                _satinalmaTeklifBaslikList = value;
+                _satinalmaTeklifBaslik = value;
             }
         }
 
@@ -77,21 +73,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Font currentFont = rtbBody.SelectionFont;
             rtbBody.SelectionFont = new Font(currentFont.FontFamily, newSize, currentFont.Style);
         }
-
-        public static MailGonder mailGonder
-        {
-            get
-            {
-                if (_mailgonder == null || _mailgonder.IsDisposed)
-                {
-                    _mailgonder = new MailGonder();
-                    GlobalData.Yetki(ref _mailgonder);
-                }
-                return _mailgonder;
-            }
-        }
-        public List<Control> controlsToDisable { get; set; }
-        public bool activeForm { get; set; }
         private Mail _mail;
         public Mail mail
         {
@@ -119,7 +100,30 @@ namespace YektamakDesktop.Formlar.Satinalma
                 atch.Image = Properties.Resources.icons8_attachment_24;
                 atch.Tag = dosya.fileName;
                 atch.Text = dosya.fileName;
+                atch.Cursor = Cursors.Hand;
                 atch.Click += (s, e) =>
+                {
+                    var fileName = atch.Tag.ToString();
+                    var fileData = dosya.fileData;
+                    using (MemoryStream ms = new MemoryStream(fileData))
+                    {
+                        using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                        {
+                            //ms.WriteTo(fs);
+                            Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
+                        }
+                    }
+                    //MessageBox.Show($"Dosya {fileName} olarak kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+                atch.Size = new Size(25, 25);
+                atch.Location = new Point(10, 190 + (mail.attachmentData.IndexOf(dosya) * 30));
+                var lbl = new Label();
+                lbl.Text = dosya.fileName;
+                lbl.Size = new Size(325, 25);
+                lbl.Location = new Point(40, 190 + (mail.attachmentData.IndexOf(dosya) * 30));
+                lbl.ForeColor = Color.Blue;
+                lbl.Cursor = Cursors.Hand;
+                lbl.Click += (s, e) =>
                 {
                     var fileName = atch.Tag.ToString();
                     var fileData = dosya.fileData;
@@ -130,16 +134,27 @@ namespace YektamakDesktop.Formlar.Satinalma
                             ms.WriteTo(fs);
                         }
                     }
-                    MessageBox.Show($"Dosya {fileName} olarak kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
                 };
-                atch.Size = new Size(25, 25);
-                atch.Location = new Point(10, 190 + (mail.attachmentData.IndexOf(dosya) * 30));
-                var lbl = new Label();
-                lbl.Text = dosya.fileName;
-                lbl.Size = new Size(325, 25);
-                lbl.Location = new Point(40, 190 + (mail.attachmentData.IndexOf(dosya) * 30));
+                var del = new PictureBox();
+                del.Image = Properties.Resources.sil;
+                del.SizeMode = PictureBoxSizeMode.StretchImage;
+                del.Width = atch.Width;
+                del.Height = atch.Height;
+                del.Tag = dosya.fileName;
+                del.Text = dosya.fileName;
+                del.Cursor = Cursors.Hand;
+                del.Location = new Point(lbl.Location.X + lbl.Width, 190 + (mail.attachmentData.IndexOf(dosya) * 30));
+                del.Click += (s, e) =>
+                {
+                    mail.attachmentData.Remove(dosya);
+                    this.Controls.Remove(atch);
+                    this.Controls.Remove(lbl);
+                    this.Controls.Remove(del);
+                };
                 this.Controls.Add(lbl);
                 this.Controls.Add(atch);
+                this.Controls.Add(del);
             }
         }
 
@@ -147,11 +162,14 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             try
             {
+                var loadingForm = new Loading(); // içi boş sadece dönen gif
+                loadingForm.StartPosition = FormStartPosition.CenterScreen;
+                loadingForm.Show();
                 mail.To = tbxMailTo.TextCustom;
                 mail.Subject = tbxKonu.TextCustom;
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // rtf'yi html'e döndürmek için gerekli
                 mail.Body = RtfPipe.Rtf.ToHtml(rtbBody.Rtf);
-                string jsonResult = await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslikList);
+                string jsonResult =await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
                 Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
                 if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
@@ -161,8 +179,9 @@ namespace YektamakDesktop.Formlar.Satinalma
                 {
                     MailHelper.SendMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
                     MessageBox.Show("Mail başarıyla gönderildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    GlobalData.CloseForm(ref _mailgonder);
+                    this.Close();
                 }
+                loadingForm.Close();
             }
             catch (Exception ex)
             {
@@ -172,7 +191,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         public void UpdateMode(SatinalmaTeklifBaslik satinalmaTeklifBaslik)
         {
-            satinalmaTeklifBaslikList.Add(satinalmaTeklifBaslik);
+            this.satinalmaTeklifBaslik = satinalmaTeklifBaslik;
         }
         private void MailGonder_Load(object sender, EventArgs e)
         {
@@ -230,8 +249,75 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void yellowItem_Click(object sender, EventArgs e)
         {
-            
+
             rtbBody.SelectionColor = Color.Yellow;
+        }
+
+        private void görüntüleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAttach_Click(object sender, EventArgs e)
+        {
+            var mailAttachment = new MailAttachament();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mailAttachment.fileData = File.ReadAllBytes(openFileDialog.FileName);
+                mailAttachment.fileName = Path.GetFileName(openFileDialog.FileName);
+                mail.attachmentData.Add(mailAttachment);
+                //dosyaAdControl.TextCustom = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                //dosyaUzantiControl.TextCustom = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+            }
+
+            var atch = new PictureBox();
+            atch.Image = Properties.Resources.icons8_attachment_24;
+            atch.Tag = mailAttachment.fileName;
+            atch.Text = mailAttachment.fileName;
+            atch.Cursor = Cursors.Hand;
+            atch.Size = new Size(25, 25);
+            atch.Location = new Point(10, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+            
+            var lbl = new Label();
+            lbl.Text = mailAttachment.fileName;
+            lbl.Size = new Size(325, 25);
+            lbl.Location = new Point(40, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+            lbl.ForeColor = Color.Blue;
+            lbl.Cursor = Cursors.Hand;
+            lbl.Click += (s, e) =>
+            {
+                var fileName = atch.Tag.ToString();
+                var fileData = mailAttachment.fileData;
+                using (MemoryStream ms = new MemoryStream(fileData))
+                {
+                    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        ms.WriteTo(fs);
+                    }
+                }
+                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
+            };
+
+            var del = new PictureBox();
+            del.Image = Properties.Resources.sil;
+            del.SizeMode = PictureBoxSizeMode.StretchImage;
+            del.Width = atch.Width;
+            del.Height = atch.Height;
+            del.Tag = mailAttachment.fileName;
+            del.Text = mailAttachment.fileName;
+            del.Cursor = Cursors.Hand;
+            del.Location = new Point(lbl.Location.X + lbl.Width, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+            del.Click += (s, e) =>
+            {
+                mail.attachmentData.Remove(mailAttachment);
+                this.Controls.Remove(atch);
+                this.Controls.Remove(lbl);
+                this.Controls.Remove(del);
+            };
+            this.Controls.Add(lbl);
+            this.Controls.Add(atch);
+            this.Controls.Add(del);
         }
     }
 }

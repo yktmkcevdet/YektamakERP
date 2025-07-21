@@ -19,10 +19,21 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(personel, "GetPersonel");
         }
-
+        public string GetPozisyon(Pozisyon pozisyon)
+        {
+            return _apiService.Post(pozisyon, "GetPozisyon");
+        }
         public async Task<string> SavePersonel(Personel personel)
         {
             return await _apiService.PostAsync(personel, "SavePersonel");
+        }
+        public async Task<string> SavePersonelResim(PersonelResim personelResim)
+        {
+            return await _apiService.PostAsync(personelResim, "SavePersonelResim");
+        }
+        public async Task<string> DeletePersonel(Personel personel)
+        {
+            return await _apiService.PostAsync(personel, "DeletePersonel");
         }
     }
 }

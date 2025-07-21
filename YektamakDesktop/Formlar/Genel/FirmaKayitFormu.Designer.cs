@@ -478,7 +478,7 @@
             buttonClose.BackColor = System.Drawing.Color.Red;
             buttonClose.BackgroundColor = System.Drawing.Color.Red;
             buttonClose.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonClose.BorderRadius = 10;
+            buttonClose.CornerRadius = 10;
             buttonClose.BorderSize = 2;
             buttonClose.FlatAppearance.BorderSize = 0;
             buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -500,7 +500,7 @@
             buttonHelp.BackColor = System.Drawing.Color.Red;
             buttonHelp.BackgroundColor = System.Drawing.Color.Red;
             buttonHelp.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonHelp.BorderRadius = 10;
+            buttonHelp.CornerRadius = 10;
             buttonHelp.BorderSize = 2;
             buttonHelp.FlatAppearance.BorderSize = 0;
             buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -521,7 +521,7 @@
             buttomMinimize.BackColor = System.Drawing.Color.Red;
             buttomMinimize.BackgroundColor = System.Drawing.Color.Red;
             buttomMinimize.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttomMinimize.BorderRadius = 10;
+            buttomMinimize.CornerRadius = 10;
             buttomMinimize.BorderSize = 2;
             buttomMinimize.FlatAppearance.BorderSize = 0;
             buttomMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -555,7 +555,7 @@
             rButtonKapat.BackColor = System.Drawing.Color.Brown;
             rButtonKapat.BackgroundColor = System.Drawing.Color.Brown;
             rButtonKapat.BorderColor = System.Drawing.Color.Crimson;
-            rButtonKapat.BorderRadius = 40;
+            rButtonKapat.CornerRadius = 40;
             rButtonKapat.BorderSize = 5;
             rButtonKapat.FlatAppearance.BorderSize = 0;
             rButtonKapat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -575,7 +575,7 @@
             rButtonFirmaGuncelle.BackColor = System.Drawing.Color.CornflowerBlue;
             rButtonFirmaGuncelle.BackgroundColor = System.Drawing.Color.CornflowerBlue;
             rButtonFirmaGuncelle.BorderColor = System.Drawing.Color.RoyalBlue;
-            rButtonFirmaGuncelle.BorderRadius = 40;
+            rButtonFirmaGuncelle.CornerRadius = 40;
             rButtonFirmaGuncelle.BorderSize = 5;
             rButtonFirmaGuncelle.FlatAppearance.BorderSize = 0;
             rButtonFirmaGuncelle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -595,7 +595,7 @@
             rButtonFirmaKaydet.BackColor = System.Drawing.Color.LimeGreen;
             rButtonFirmaKaydet.BackgroundColor = System.Drawing.Color.LimeGreen;
             rButtonFirmaKaydet.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            rButtonFirmaKaydet.BorderRadius = 40;
+            rButtonFirmaKaydet.CornerRadius = 40;
             rButtonFirmaKaydet.BorderSize = 5;
             rButtonFirmaKaydet.FlatAppearance.BorderSize = 0;
             rButtonFirmaKaydet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

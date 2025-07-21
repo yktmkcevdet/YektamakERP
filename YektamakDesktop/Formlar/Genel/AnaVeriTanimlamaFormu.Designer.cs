@@ -70,7 +70,7 @@ namespace YektamakDesktop.Formlar.Genel
             buttonClose.BackColor = System.Drawing.Color.Firebrick;
             buttonClose.BackgroundColor = System.Drawing.Color.Firebrick;
             buttonClose.BorderColor = System.Drawing.Color.Firebrick;
-            buttonClose.BorderRadius = 10;
+            buttonClose.CornerRadius = 10;
             buttonClose.BorderSize = 2;
             buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
             buttonClose.FlatAppearance.BorderSize = 0;
@@ -94,7 +94,7 @@ namespace YektamakDesktop.Formlar.Genel
             buttomMinimize.BackColor = System.Drawing.Color.Firebrick;
             buttomMinimize.BackgroundColor = System.Drawing.Color.Firebrick;
             buttomMinimize.BorderColor = System.Drawing.Color.Firebrick;
-            buttomMinimize.BorderRadius = 10;
+            buttomMinimize.CornerRadius = 10;
             buttomMinimize.BorderSize = 2;
             buttomMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             buttomMinimize.FlatAppearance.BorderSize = 0;
@@ -118,7 +118,7 @@ namespace YektamakDesktop.Formlar.Genel
             roundedButton6.BackColor = System.Drawing.Color.Firebrick;
             roundedButton6.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton6.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton6.BorderRadius = 10;
+            roundedButton6.CornerRadius = 10;
             roundedButton6.BorderSize = 2;
             roundedButton6.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton6.FlatAppearance.BorderSize = 0;
@@ -141,7 +141,7 @@ namespace YektamakDesktop.Formlar.Genel
             btnClose.BackColor = System.Drawing.Color.Firebrick;
             btnClose.BackgroundColor = System.Drawing.Color.Firebrick;
             btnClose.BorderColor = System.Drawing.Color.Firebrick;
-            btnClose.BorderRadius = 10;
+            btnClose.CornerRadius = 10;
             btnClose.BorderSize = 2;
             btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             btnClose.FlatAppearance.BorderSize = 0;
@@ -164,7 +164,7 @@ namespace YektamakDesktop.Formlar.Genel
             btnMinimize.BackColor = System.Drawing.Color.Firebrick;
             btnMinimize.BackgroundColor = System.Drawing.Color.Firebrick;
             btnMinimize.BorderColor = System.Drawing.Color.Firebrick;
-            btnMinimize.BorderRadius = 10;
+            btnMinimize.CornerRadius = 10;
             btnMinimize.BorderSize = 2;
             btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             btnMinimize.FlatAppearance.BorderSize = 0;
@@ -187,7 +187,7 @@ namespace YektamakDesktop.Formlar.Genel
             roundedButton3.BackColor = System.Drawing.Color.Firebrick;
             roundedButton3.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton3.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton3.BorderRadius = 10;
+            roundedButton3.CornerRadius = 10;
             roundedButton3.BorderSize = 2;
             roundedButton3.FlatAppearance.BorderSize = 0;
             roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -209,7 +209,7 @@ namespace YektamakDesktop.Formlar.Genel
             bntHelp.BackColor = System.Drawing.Color.Firebrick;
             bntHelp.BackgroundColor = System.Drawing.Color.Firebrick;
             bntHelp.BorderColor = System.Drawing.Color.Firebrick;
-            bntHelp.BorderRadius = 10;
+            bntHelp.CornerRadius = 10;
             bntHelp.BorderSize = 2;
             bntHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             bntHelp.FlatAppearance.BorderSize = 0;
@@ -243,7 +243,7 @@ namespace YektamakDesktop.Formlar.Genel
             roundedButton1.BackColor = System.Drawing.Color.Firebrick;
             roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton1.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderRadius = 10;
+            roundedButton1.CornerRadius = 10;
             roundedButton1.BorderSize = 2;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -265,7 +265,7 @@ namespace YektamakDesktop.Formlar.Genel
             roundedButton2.BackColor = System.Drawing.Color.Firebrick;
             roundedButton2.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton2.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton2.BorderRadius = 10;
+            roundedButton2.CornerRadius = 10;
             roundedButton2.BorderSize = 2;
             roundedButton2.FlatAppearance.BorderSize = 0;
             roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

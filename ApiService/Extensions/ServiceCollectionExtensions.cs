@@ -8,7 +8,7 @@ namespace ApiService
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
-            services.AddHttpClient<IApiService, ApiServiceClient>(client =>
+            services.AddHttpClient<IApiService, ApiServiceClientNotDecoded>(client =>
             {
                 client.BaseAddress = new Uri(ApiBaseUrl.server); // API'nin temel adresi
             })
@@ -33,6 +33,7 @@ namespace ApiService
             services.AddScoped<IMaliyetService, MaliyetService>();
             services.AddScoped<IAnaVeriService, AnaVeriService>();
             services.AddScoped<IVadeService, VadeService>();
+            services.AddScoped<IConfigurationService, ConfigurationService>();
             return services;
         }
     }

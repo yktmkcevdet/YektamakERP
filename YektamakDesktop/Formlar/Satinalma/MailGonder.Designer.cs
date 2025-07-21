@@ -54,9 +54,15 @@
             redItem = new System.Windows.Forms.ToolStripMenuItem();
             blueItem = new System.Windows.Forms.ToolStripMenuItem();
             yellowItem = new System.Windows.Forms.ToolStripMenuItem();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            görüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ekleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            btnAttach = new YektamakDesktop.CustomControls.RoundedIconButton();
             tsMain.SuspendLayout();
             toolStripContainer1.SuspendLayout();
             cmsColors.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // headerPanel1
@@ -82,14 +88,21 @@
             // btnSendMail
             // 
             btnSendMail.BackColor = System.Drawing.SystemColors.Control;
+            btnSendMail.BorderColor = System.Drawing.Color.Black;
+            btnSendMail.BorderSize = 0;
             btnSendMail.CornerRadius = 20;
             btnSendMail.Cursor = System.Windows.Forms.Cursors.Hand;
             btnSendMail.FlatAppearance.BorderSize = 0;
             btnSendMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSendMail.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            btnSendMail.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnSendMail.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnSendMail.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnSendMail.HoverColor2 = System.Drawing.Color.Navy;
             btnSendMail.IconChar = FontAwesome.Sharp.IconChar.MailBulk;
             btnSendMail.IconColor = System.Drawing.Color.DeepSkyBlue;
             btnSendMail.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSendMail.IconSize = 24;
             btnSendMail.Location = new System.Drawing.Point(954, 719);
             btnSendMail.Name = "btnSendMail";
             btnSendMail.Size = new System.Drawing.Size(45, 40);
@@ -286,13 +299,22 @@
             // 
             // btnTo
             // 
+            btnTo.BackColor = System.Drawing.Color.Transparent;
+            btnTo.BorderColor = System.Drawing.Color.Black;
+            btnTo.BorderSize = 0;
             btnTo.CornerRadius = 10;
             btnTo.FlatAppearance.BorderSize = 0;
             btnTo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnTo.ForeColor = System.Drawing.Color.White;
+            btnTo.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnTo.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnTo.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnTo.HoverColor2 = System.Drawing.Color.Navy;
             btnTo.IconChar = FontAwesome.Sharp.IconChar.None;
             btnTo.IconColor = System.Drawing.Color.Black;
             btnTo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnTo.IconSize = 24;
             btnTo.Location = new System.Drawing.Point(34, 53);
             btnTo.Name = "btnTo";
             btnTo.Size = new System.Drawing.Size(46, 23);
@@ -303,13 +325,22 @@
             // 
             // btnCc
             // 
+            btnCc.BackColor = System.Drawing.Color.Transparent;
+            btnCc.BorderColor = System.Drawing.Color.Black;
+            btnCc.BorderSize = 0;
             btnCc.CornerRadius = 10;
             btnCc.FlatAppearance.BorderSize = 0;
             btnCc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnCc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnCc.ForeColor = System.Drawing.Color.White;
+            btnCc.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnCc.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnCc.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnCc.HoverColor2 = System.Drawing.Color.Navy;
             btnCc.IconChar = FontAwesome.Sharp.IconChar.None;
             btnCc.IconColor = System.Drawing.Color.Black;
             btnCc.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCc.IconSize = 24;
             btnCc.Location = new System.Drawing.Point(34, 82);
             btnCc.Name = "btnCc";
             btnCc.Size = new System.Drawing.Size(46, 23);
@@ -320,13 +351,22 @@
             // 
             // btnBcc
             // 
+            btnBcc.BackColor = System.Drawing.Color.Transparent;
+            btnBcc.BorderColor = System.Drawing.Color.Black;
+            btnBcc.BorderSize = 0;
             btnBcc.CornerRadius = 10;
             btnBcc.FlatAppearance.BorderSize = 0;
             btnBcc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnBcc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnBcc.ForeColor = System.Drawing.Color.White;
+            btnBcc.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnBcc.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnBcc.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnBcc.HoverColor2 = System.Drawing.Color.Navy;
             btnBcc.IconChar = FontAwesome.Sharp.IconChar.None;
             btnBcc.IconColor = System.Drawing.Color.Black;
             btnBcc.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnBcc.IconSize = 24;
             btnBcc.Location = new System.Drawing.Point(34, 121);
             btnBcc.Name = "btnBcc";
             btnBcc.Size = new System.Drawing.Size(46, 23);
@@ -376,12 +416,63 @@
             yellowItem.Size = new System.Drawing.Size(67, 22);
             yellowItem.Click += yellowItem_Click;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { görüntüleToolStripMenuItem, ekleToolStripMenuItem, silToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(128, 70);
+            // 
+            // görüntüleToolStripMenuItem
+            // 
+            görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
+            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            görüntüleToolStripMenuItem.Text = "Görüntüle";
+            görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
+            // 
+            // ekleToolStripMenuItem
+            // 
+            ekleToolStripMenuItem.Name = "ekleToolStripMenuItem";
+            ekleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            ekleToolStripMenuItem.Text = "Ekle";
+            // 
+            // silToolStripMenuItem
+            // 
+            silToolStripMenuItem.Name = "silToolStripMenuItem";
+            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            silToolStripMenuItem.Text = "Sil";
+            // 
+            // roundedIconButton1
+            // 
+            btnAttach.BackColor = System.Drawing.Color.Transparent;
+            btnAttach.BorderColor = System.Drawing.Color.Black;
+            btnAttach.BorderSize = 0;
+            btnAttach.CornerRadius = 20;
+            btnAttach.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnAttach.FlatAppearance.BorderSize = 0;
+            btnAttach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnAttach.ForeColor = System.Drawing.Color.White;
+            btnAttach.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnAttach.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnAttach.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnAttach.HoverColor2 = System.Drawing.Color.Navy;
+            btnAttach.IconChar = FontAwesome.Sharp.IconChar.Paperclip;
+            btnAttach.IconColor = System.Drawing.Color.Black;
+            btnAttach.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAttach.IconSize = 24;
+            btnAttach.Location = new System.Drawing.Point(5, 153);
+            btnAttach.Name = "roundedIconButton1";
+            btnAttach.Size = new System.Drawing.Size(28, 28);
+            btnAttach.TabIndex = 22;
+            btnAttach.UseVisualStyleBackColor = false;
+            btnAttach.Click += btnAttach_Click;
+            // 
             // MailGonder
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Control;
             ClientSize = new System.Drawing.Size(1017, 782);
+            Controls.Add(btnAttach);
             Controls.Add(label2);
             Controls.Add(btnBcc);
             Controls.Add(btnCc);
@@ -404,6 +495,7 @@
             toolStripContainer1.ResumeLayout(false);
             toolStripContainer1.PerformLayout();
             cmsColors.ResumeLayout(false);
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -434,5 +526,10 @@
         private System.Windows.Forms.ToolStripMenuItem redItem;
         private System.Windows.Forms.ToolStripMenuItem blueItem;
         private System.Windows.Forms.ToolStripMenuItem yellowItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ekleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
+        private CustomControls.RoundedIconButton btnAttach;
     }
 }

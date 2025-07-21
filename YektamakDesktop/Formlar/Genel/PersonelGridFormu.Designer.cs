@@ -79,7 +79,7 @@
             buttonClose.BackColor = System.Drawing.Color.Red;
             buttonClose.BackgroundColor = System.Drawing.Color.Red;
             buttonClose.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonClose.BorderRadius = 10;
+            buttonClose.CornerRadius = 10;
             buttonClose.BorderSize = 2;
             buttonClose.FlatAppearance.BorderSize = 0;
             buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -101,7 +101,7 @@
             buttonHelp.BackColor = System.Drawing.Color.Red;
             buttonHelp.BackgroundColor = System.Drawing.Color.Red;
             buttonHelp.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonHelp.BorderRadius = 10;
+            buttonHelp.CornerRadius = 10;
             buttonHelp.BorderSize = 2;
             buttonHelp.FlatAppearance.BorderSize = 0;
             buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -122,7 +122,7 @@
             buttomMinimize.BackColor = System.Drawing.Color.Red;
             buttomMinimize.BackgroundColor = System.Drawing.Color.Red;
             buttomMinimize.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttomMinimize.BorderRadius = 10;
+            buttomMinimize.CornerRadius = 10;
             buttomMinimize.BorderSize = 2;
             buttomMinimize.FlatAppearance.BorderSize = 0;
             buttomMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -260,7 +260,7 @@
             rButtonCikis.BackColor = System.Drawing.Color.Brown;
             rButtonCikis.BackgroundColor = System.Drawing.Color.Brown;
             rButtonCikis.BorderColor = System.Drawing.Color.Crimson;
-            rButtonCikis.BorderRadius = 40;
+            rButtonCikis.CornerRadius = 40;
             rButtonCikis.BorderSize = 5;
             rButtonCikis.FlatAppearance.BorderSize = 0;
             rButtonCikis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

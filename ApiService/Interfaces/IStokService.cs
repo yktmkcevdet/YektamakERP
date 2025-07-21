@@ -18,6 +18,10 @@ namespace ApiService.Interfaces
         public string GetMalzemeStandart(MalzemeStandart malzemeStandart);
         public Task<string> SaveStokKart(StokKart stokKart);
         public Task<string> SaveStokKartHammadde(StokKart stokKart);
+        public Task<string> GetStokGrupKriter();
+        public string GetExcelGrupParametre();
+        public Task<string> DeleteStokKart(StokKart stokKart);
+        public Task<string> DeleteStokKartDosya(StokKartDosya stokKartDosya);
 
     }
 }

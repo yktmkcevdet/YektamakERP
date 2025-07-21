@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using ApiService.Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,12 +13,14 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-		private readonly IDataTableMapper _dataTableConverter;
-		private readonly IJsonConverter _jsonConverter;
+        public readonly IDataTableMapper _dataTableConverter;
+        public readonly IJsonConverter _jsonConverter;
+		public readonly ICache _cache;
+        public readonly IStokService _stokService;
 
-		public bool newRec = true;
-		private RoundedButton _buttonSil;
-		public RoundedButton buttonSil
+        public bool newRec = true;
+		private RoundedIconButton _buttonSil;
+		public RoundedIconButton buttonSil
 		{
 			get => _buttonSil;
 			set
@@ -27,11 +30,12 @@ namespace YektamakDesktop.Abstracts
 				_buttonSil.Width = 35;
 				_buttonSil.Height = 28;
 				_buttonSil.TabIndex = 99;
-				_buttonSil.BorderRadius = 5;
+				_buttonSil.CornerRadius = 5;
 				_buttonSil.BackColor = Color.Transparent;
 				_buttonSil.BackgroundImage = Resources.sil;
 				_buttonSil.BackgroundImageLayout = ImageLayout.Zoom;
-			}
+				_buttonSil.Cursor = Cursors.Hand;
+            }
 		}
 		private Label _order;
 		public Label order 
@@ -49,14 +53,16 @@ namespace YektamakDesktop.Abstracts
 		}
 		public DataControl()
 		{
-			buttonSil = new RoundedButton();
+			buttonSil = new RoundedIconButton();
 			order=new Label();
 		}
 
-        public DataControl(IDataTableMapper dataTableConverter, IJsonConverter jsonConverter)
+        public DataControl(IDataTableMapper dataTableConverter, IJsonConverter jsonConverter, ICache cache, IStokService stokService)
         {
             _dataTableConverter = dataTableConverter;
             _jsonConverter = jsonConverter;
+			_cache = cache;
+			_stokService = stokService;
         }
 
         public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()

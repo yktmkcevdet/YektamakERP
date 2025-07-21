@@ -1,6 +1,8 @@
 ﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Ocsp;
 using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
@@ -14,15 +16,27 @@ namespace Api.Controllers
             _dataAccessLayer = dataAccessLayer;
         }
         [HttpPost, Route("api/SaveProje")]
-        public string SaveProje([FromBody] string proje)
+        public string SaveProje([FromBody] Proje proje)
         {
-            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Proje>(proje), "spSaveProje");
+            string result = _dataAccessLayer.SaveObject(proje, "spSaveProje");
             return result;
         }
         [HttpPost, Route("api/GetProje")]
-        public string GetProje([FromBody] string proje)
+        public string GetProje([FromBody] Proje proje)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<Proje>(proje), "spGetProje");
+            string result = _dataAccessLayer.GetObject(proje, "spGetProje");
+            return result;
+        }
+        [HttpPost, Route("api/SaveProjeStokKart")]
+        public string SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
+        {
+            string result = _dataAccessLayer.SaveObject(projeStokKart, "spSaveProjeStokKart");
+            return result;
+        }
+        [HttpPost, Route("api/GetProjeStokKart")]
+        public string GetProjeStokKart([FromBody] ProjeStokKart projeStokKart)
+        {
+            string result = _dataAccessLayer.GetObject(projeStokKart, "spGetProjeStokKart");
             return result;
         }
     }

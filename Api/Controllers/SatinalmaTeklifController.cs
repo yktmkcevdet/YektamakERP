@@ -14,21 +14,21 @@ namespace Api.Controllers
             _dataAccesLayer = dataAccesLayer;
         }
         [HttpPost, Route("api/SaveSatinalmaTeklif")]
-        public string SaveSatinalmaTalep([FromBody] string restData)
+        public string SaveSatinalmaTalep([FromBody] SatinalmaTeklifBaslik restData)
         {
-            string result = _dataAccesLayer.SaveObject(JsonStringToString(restData), "spSaveSatinalmaTeklif");
+            string result = _dataAccesLayer.SaveObject(restData, "spSaveSatinalmaTeklif");
             return result;
         }
         [HttpPost, Route("api/GetSatinalmaTeklif")]
-        public string GetSatinalmaTeklif([FromBody] string restData)
+        public string GetSatinalmaTeklif([FromBody] SatinalmaTeklifBaslik restData)
         {
-            string result = _dataAccesLayer.GetObject(JsonStringToString(restData), "spGetSatinalmaTeklif");
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTeklif");
             return result;
         }
         [HttpPost, Route("api/DeleteSatinalmaTeklif")]
-        public string DeleteSatinalmaTeklif([FromBody] string restData)
+        public string DeleteSatinalmaTeklif([FromBody] SatinalmaTeklifBaslik restData)
         {
-            string result = _dataAccesLayer.DeleteObject(JsonStringToModel<SatinalmaTeklifBaslik>(restData), "spDeleteSatinalmaTeklif");
+            string result = _dataAccesLayer.DeleteObject(restData, "spDeleteSatinalmaTeklif");
             return result;
         }
     }

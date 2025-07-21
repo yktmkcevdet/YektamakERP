@@ -1,90 +1,61 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
+using Models.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.Formlar.Genel;
-using DataTable = System.Data.DataTable;
 
 namespace YektamakDesktop.Formlar.Stok
 {
-    public partial class StokKartGridForm : Form, IForm, IGridForm<StokKart>
+    public partial class StokKartGridForm : Form, IForm
     {
-        private static IStokService _stokService;
-        private static ICache _cache;
-        private static IJsonConverter _jsonConverter;
-        private static IDataTableMapper _dataTableMapper;
-        public StokKartGridForm(IStokService stokService)
+        private readonly IStokService _stokService;
+        private readonly ICache _cache;
+        private readonly IJsonConverter _jsonConverter;
+        public StokKartGridForm(ICache cache, IJsonConverter jsonConvertHelper, IStokService stokService)
         {
             _stokService = stokService;
-        }
-        private static StokKartGridForm _stokKartGridForm;
-        public static StokKartGridForm stokKartGridForm
-        {
-            get
-            {
-                if (_stokKartGridForm == null)
-                {
-                    _stokKartGridForm = new StokKartGridForm();
-                    GlobalData.Yetki(ref _stokKartGridForm);
-                }
-                return _stokKartGridForm;
-            }
-            set
-            {
-                _stokKartGridForm = value;
-            }
-        }
-        public StokKartGridForm()
-        {
+            _cache = cache;
+            _jsonConverter = jsonConvertHelper;
+            _stokService = stokService;
             InitializeComponent();
-            controlsToDisable = new List<Control> { panelFilter, panelHeader };
             ComboBoxListFill.GetLookupKod(_cache.projes, ref projeKodu);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref cbxStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref cbxMalzemeGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List, ref cbxMalzemeAltGrup2);
             ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups, ref cbxMalzemeAltGrup);
             ComboBoxListFill.GetLookupAd(_cache.stokTips, ref cbxStokTip);
+            universalGrid1.kullanici = _cache.kullanici;
+            universalGrid1.Grid.CellClick += Grid_CellClick;
+            universalGrid1.SetData(stokKartDTOs, this.Name, true);
         }
-        public StokKartGridForm(ICache cache, IJsonConverter jsonConvertHelper, IStokService stokService,IDataTableMapper dataTableMapper)
+        private List<StokKartDTO> _stokKartDTOs;
+        public List<StokKartDTO> stokKartDTOs
         {
-            _cache = cache;
-            _jsonConverter = jsonConvertHelper;
-            _stokService = stokService;
-            _dataTableMapper = dataTableMapper;
-        }
-        #region MouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
+            get
             {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
+                if (_stokKartDTOs == null)
+                {
+                    _stokKartDTOs = new List<StokKartDTO>();
+                }
+                return _stokKartDTOs;
+            }
+            set
+            {
+                _stokKartDTOs = value;
             }
         }
 
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion MouseDrag
-        private static List<StokKart> _stokKarts;
-        public static List<StokKart> stokKarts
+        private List<StokKart> _stokKarts;
+        private List<StokKart> stokKarts
         {
             get
             {
@@ -100,46 +71,6 @@ namespace YektamakDesktop.Formlar.Stok
             }
         }
 
-        private DataTable _dataTable;
-        private DataTable dataTable
-        {
-            get
-            {
-                if (_dataTable == null)
-                {
-                    _dataTable = new DataTable();
-                    _dataTable.RowDeleted += dataTableRowChanged;
-                    _dataTable.RowChanged += dataTableRowChanged;
-                }
-                if (_dataTable.Rows.Count == 0)
-                {
-                    _dataTable = ConvertHelper.ToDataTable(stokKarts);
-                }
-                return _dataTable;
-            }
-            set
-            {
-                _dataTable = value;
-                DataRefresh();
-            }
-        }
-        public async Task<DataTable> GetDataTableAsync()
-        {
-            if (_dataTable == null)
-            {
-                _dataTable = new DataTable();
-                
-            }
-
-            if (_dataTable.Rows.Count == 0)
-            {
-                _dataTable = await GlobalData.FillDataTableAsync(_stokService.GetStokKart, stokKartFilter);
-            }
-            _dataTable.RowDeleted += dataTableRowChanged;
-            _dataTable.RowChanged += dataTableRowChanged;
-            DataRefresh();
-            return _dataTable;
-        }
         private StokKart _stokKartFilter;
         private StokKart stokKartFilter
         {
@@ -148,10 +79,6 @@ namespace YektamakDesktop.Formlar.Stok
                 if (_stokKartFilter == null)
                 {
                     _stokKartFilter = new StokKart();
-                }
-                if (_stokKartFilter.proje.Id == 0)
-                {
-                    _stokKartFilter.proje.Id = -1;
                 }
                 return _stokKartFilter;
             }
@@ -169,58 +96,41 @@ namespace YektamakDesktop.Formlar.Stok
                 _activeForm = value;
             }
         }
-
-        private void DataRefresh()
+        private async Task GridDoldur()
         {
-           label7.Text= GlobalData.FillDataGrid(_dataTable, dataGridViewStokKart, stokKartFilter);
-            //_dataTable.Rows.Cast<DataRow>().ToList().ForEach(row => row["sec"] = false);
-
-            lblKayitSayisi.Text = $"Görüntülenen Kayıt Sayısı: {dataGridViewStokKart.RowCount}";
-            lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı: {_dataTable.Rows.Count}";
-        }
-        public void dataTableRowChanged(object sender, DataRowChangeEventArgs e)
-        {
-            DataRefresh();
-        }
-        public void dataTableRowInserted(object sender, DataTableNewRowEventArgs e)
-        {
-            DataRefresh();
-        }
-        private async void malzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            stokKartFilter.malzemeGrup.Id = cbxMalzemeGrup.selectedDataRowId;
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == stokKartFilter.malzemeGrup.Id).ToList(), ref cbxMalzemeAltGrup);
-            await GetDataTableAsync();
-        }
-
-        public void UpdateRow(StokKart stokKart)
-        {
-            int i = GlobalData.IndexOfDataSet(_dataTable, stokKart.Id ?? 0);
-            if (i == -1)
+            this.Enabled = false;
+            stokKarts.Clear();
+            string jsonResult = await _stokService.GetStokKart(stokKartFilter);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
+            if (result.result != null)
             {
-                AddNewRow(stokKart);
+                List<StokKart> stokKarts = JsonConvert.DeserializeObject<List<StokKart>>(result.result);
+                List<StokKartDTO> pskDTOs = new List<StokKartDTO>();
+                foreach (var sk in stokKarts)
+                {
+                    pskDTOs.Add(ConvertHelper.ToDTO<StokKartDTO>(sk));
+                }
+                stokKartDTOs = pskDTOs;
             }
             else
             {
-                GlobalData.UpdateDataRow(ref _dataTable, stokKart, i);
+                stokKartDTOs = null;
             }
+            universalGrid1.SetData(stokKartDTOs, this.Name, true);
+            this.Enabled = true;
         }
-
-        public async void AddNewRow(StokKart stokKart)
+        private void malzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await GetDataTableAsync();
-            DataRow dataRow = ConvertHelper.ToDataRow(stokKart);
-            dataTable.Rows.Add(dataRow);
-        }
+            stokKartFilter.malzemeGrup.Id = cbxMalzemeGrup.selectedDataRowId;
+            StokKartDTO stokKartDTO = ConvertHelper.ToDTO<StokKartDTO>(stokKartFilter);
+            universalGrid1.Filtrele(stokKartDTO, this.Name);
+            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == stokKartFilter.malzemeGrup.Id).ToList(), ref cbxMalzemeAltGrup);
 
-        public void form_Load(object sender, EventArgs e)
-        {
-            //GlobalData.PlaceFilterFields(dataGridViewStokKart, panelFilter);
         }
 
         public void buttonEkle_Click(object sender, EventArgs e)
         {
-            StokKartKayitFormu stokKartTanimlamaFormu = StokKartKayitFormu.stokKartKayitFormu;
+            StokKartKayitFormu stokKartTanimlamaFormu = FormFactory.CreateForm<StokKartKayitFormu>();
             stokKartTanimlamaFormu.stokKart.malzemeGrup.Id = cbxMalzemeGrup.selectedDataRowId;
             stokKartTanimlamaFormu.stokKart.malzemeAltGrup.Id = cbxMalzemeAltGrup.selectedDataRowId;
             stokKartTanimlamaFormu.stokKart.malzemeAltGrup2.Id = cbxMalzemeAltGrup2.selectedDataRowId;
@@ -230,73 +140,25 @@ namespace YektamakDesktop.Formlar.Stok
             }
         }
 
-        public async void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1) return;
-            StokKart stokKartDosya = new StokKart();
-            stokKartDosya.Id = Convert.ToInt32(dataGridViewStokKart.Rows[e.RowIndex].Cells["Id"].Value);
-            var stokKart=_jsonConverter.DeserializeToModelList<StokKart>(await _stokService.GetStokKartPdf(stokKartDosya)).FirstOrDefault();
-            var dataRow= ConvertHelper.ToDataRow(stokKart);
-            int dtId = GlobalData.IndexOfDataSet(_dataTable, int.Parse(dataGridViewStokKart.Rows[e.RowIndex].Cells[0].Value.ToString()));
-            _dataTable.Rows[dtId].ItemArray = dataRow.ItemArray;
-            GlobalData.DataGridViewCellClick<StokKart>(ref _dataTable, dataGridViewStokKart, e);
-        }
-
-        public void buttonTumKayitlariGetir_Click(object sender, EventArgs e)
-        {
-            DataRefresh();
-        }
-
-        public void buttonFiltre_Click(object sender, EventArgs e)
-        {
-            GlobalData.ResizeFilterFields(dataGridViewStokKart, panelFilter);
-        }
-
-        public void dataGridView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            GlobalData.ResizeFilterFields(dataGridViewStokKart, panelFilter);
-        }
-
-        public void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-
-        public void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        int oldScrollOffset = 0;
-        public void dataGridView_Scroll(object sender, ScrollEventArgs e)
-        {
-            GlobalData.AdjustControlsOnScroll(dataGridViewStokKart, panelFilter, e, ref oldScrollOffset);
-        }
-
         private async void projeKodu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            stokKartFilter.proje.Id = projeKodu.selectedDataRowId;
-            await GetDataTableAsync();
-        }
-        public void CloseForm()
-        {
-            GlobalData.CloseForm(ref _stokKartGridForm);
+            await GridDoldur();
         }
 
-        private async void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             stokKartFilter.stokGrup.Id = cbxStokGrup.selectedDataRowId;
+            StokKartDTO stokKartDTO = ConvertHelper.ToDTO<StokKartDTO>(stokKartFilter);
+            universalGrid1.Filtrele(stokKartDTO,this.Name);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(x => x.stokGrup.Id == stokKartFilter.stokGrup.Id).ToList(), ref cbxMalzemeGrup);
-            await GetDataTableAsync();
         }
 
-        private async void cbxMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             stokKartFilter.malzemeAltGrup.Id = cbxMalzemeAltGrup.selectedDataRowId;
-            var a = _cache.malzemeAltGrup2List.ToList();
-            MalzemeAltGrup malzemeAltGrup = new MalzemeAltGrup();
-            malzemeAltGrup = a[0].malzemeAltGrup;
+            StokKartDTO stokKartDTO = ConvertHelper.ToDTO<StokKartDTO>(stokKartFilter);
+            universalGrid1.Filtrele(stokKartDTO, this.Name);
             ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == stokKartFilter.malzemeAltGrup.Id).ToList(), ref cbxMalzemeAltGrup2);
-            await GetDataTableAsync();
         }
 
         private void cbxMalzemeAltGrup2_DoubleClick(object sender, EventArgs e)
@@ -306,10 +168,41 @@ namespace YektamakDesktop.Formlar.Stok
             if (anaVeriTanimlamaFormu != null) anaVeriTanimlamaFormu.Show();
         }
 
-        private async void cbxStokTip_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxStokTip_SelectedIndexChanged(object sender, EventArgs e)
         {
             stokKartFilter.stokTip.Id = cbxStokTip.selectedDataRowId;
-            await GetDataTableAsync();
+        }
+        private void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1) return;
+                universalGrid1.Grid.Rows[e.RowIndex].Selected = true;
+                if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)
+                {
+                    if (universalGrid1.Grid.Rows[e.RowIndex].Cells[1].Value == null)
+                        return;
+
+
+                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)//Update
+                    {
+                        var stokKartDTO = (StokKartDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+                        StokKart stokKart = ConvertHelper.ToEntity<StokKart>(stokKartDTO);
+                        StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+                        stokKartKayitFormu.UpdateMode(stokKart);
+                        stokKartKayitFormu.Show();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata: {ex.Message}");
+            }
+        }
+
+        private void StokKartGridForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveSettings();
         }
     }
 

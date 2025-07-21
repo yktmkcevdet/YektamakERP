@@ -9,18 +9,13 @@ namespace Models.DTO
 {
     public class KullaniciDTO:IEntity
     {
-        [GridDisplay(Header = "Id", Visible = true)]
-        public int? Id { get; set; }
-        [GridDisplay(Header = "kod", Visible = true)]
-        public string kod { get; set; }
-        [GridDisplay(Header = "ad", Visible = true)]
-        public string ad { get; set; }
-        public string sifre { get; set; }
-        public string salt { get; set; }
-        public int? personelId { get; set; }
-        public string personelad { get; set; }
-        public int? rolId { get; set; }
-        public string rolad { get; set; }
-        public bool? isSifreDegisti { get; set; }
+        [GridDisplay(Header = "Id", Visible = true)] public int? Id { get; set; }
+        [GridDisplay(Header = "kod", Visible = true)] public string kod { get; set; }
+        [GridDisplay(Header = "ad", Visible = true)] public string ad { get; set; }
+        [GridDisplay(Header = "Personel Id", Visible = false)] public int? personelId { get; set; }
+        [GridDisplay(Header = "Personel ad", Visible = false)] public string personeladSoyad { get; set; }
+        [GridDisplay(Header = "Rol Id", Visible = false)] public int? rolId { get; set; }
+        [GridDisplay(Header = "Rol ad", Visible = false)] public string rolad { get; set; }
+        [GridDisplay(Header = "Şifre değiştir", Visible = false)] public bool? isSifreDegisti { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace ApiService.Interfaces
 {
     public interface ISatinalmaTeklifService
     {
-        public Task<string> SaveSatinalmaTeklif(List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks);
+        public Task<string> SaveSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBasliks);
         public Task<string> GetSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBaslik);
         public Task<string> DeleteSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBaslik);
     }

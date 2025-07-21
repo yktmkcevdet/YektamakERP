@@ -82,9 +82,22 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(stokKart, "DeleteStokKart");
         }
+        public async Task<string> DeleteStokKartDosya(StokKartDosya stokKartDosya)
+        {
+            return await _apiService.PostAsync(stokKartDosya, "DeleteStokKartDosya");
+        }
         public async Task<string> SaveStokKartHammadde(StokKart stokKart)
         {
             return await _apiService.PostAsync(stokKart, "SaveStokKartHammadde");
+        }
+
+        public async Task<string> GetStokGrupKriter()
+        {
+            return await _apiService.GetAsync("StokGrupKriter");
+        }
+        public string GetExcelGrupParametre()
+        {
+            return _apiService.Get("GetExcelGrupParametre");
         }
     }
 }

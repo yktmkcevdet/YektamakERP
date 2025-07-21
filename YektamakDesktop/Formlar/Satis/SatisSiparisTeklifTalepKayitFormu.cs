@@ -3,6 +3,7 @@ using ApiService.Interfaces;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -66,7 +67,7 @@ namespace YektamakDesktop.Formlar.Satis
                 _activeForm = value;
             }
         }
-        private int _teklifTalepId;
+        private int? _teklifTalepId;
         
         private SatisTeklifTalepKayitFormu()
         {
@@ -79,7 +80,7 @@ namespace YektamakDesktop.Formlar.Satis
             ComboBoxListFill.GetLookupAd(_cache.markaAltGrupList, ref comboListBoxAltGrup);
             ComboBoxListFill.GetLookupAd(_cache.referansKaynakList, ref comboListBoxReferansKaynagi);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref comboListBoxSatisSorumlusu);
-            comboListBoxSatisSorumlusu.SelectDataRowId(_cache.kullanici.personel.Id??-1);
+            comboListBoxSatisSorumlusu.SelectDataRowId(_cache.kullanici.personel.Id);
             controlsToDisable = new List<Control>
             {
 

@@ -252,9 +252,10 @@ namespace Api.Business
                             foreach (MySqlParameter parameter in cmd.Parameters)
                             {
                                 string parameterName = member.Name;
-                                if (parameter.ParameterName.Substring(1, parameter.ParameterName.Length - 1).Equals(parameterName, StringComparison.OrdinalIgnoreCase))
+                                if (parameter.ParameterName.Equals($"{parameterName}", StringComparison.OrdinalIgnoreCase) || 
+                                    parameter.ParameterName.Equals($"@{parameterName}", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    if (parameter.Value == null || parameter.Value.ToString() == "0" || parameter.Value.ToString() == "")
+                                    if (parameter.Value == null || parameter.Value.ToString() == "0" || parameter.Value.ToString() == "" || parameter.Value.ToString() == "[]")
                                     {
                                         cmd.Parameters.RemoveAt(parameter.ParameterName);
                                         parameter.ParameterName = parameterName;

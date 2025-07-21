@@ -103,7 +103,7 @@
             btnDosyaSec.BackColor = System.Drawing.Color.MediumSlateBlue;
             btnDosyaSec.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             btnDosyaSec.BorderColor = System.Drawing.Color.PaleVioletRed;
-            btnDosyaSec.BorderRadius = 8;
+            btnDosyaSec.CornerRadius = 8;
             btnDosyaSec.BorderSize = 0;
             btnDosyaSec.FlatAppearance.BorderSize = 0;
             btnDosyaSec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -122,7 +122,7 @@
             btnSave.BackColor = System.Drawing.Color.MediumSlateBlue;
             btnSave.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             btnSave.BorderColor = System.Drawing.Color.PaleVioletRed;
-            btnSave.BorderRadius = 8;
+            btnSave.CornerRadius = 8;
             btnSave.BorderSize = 0;
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

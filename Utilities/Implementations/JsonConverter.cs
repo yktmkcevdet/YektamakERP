@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Text;
+using Utilities.Implementations.Converters;
 using Utilities.Interfaces;
 
 namespace Utilities.Implementations
@@ -12,11 +12,21 @@ namespace Utilities.Implementations
     {
         private readonly ILogger<JsonConverter> _logger;
         private readonly IDataTableMapper _dataTableMapper;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         public JsonConverter(ILogger<JsonConverter> logger = null, IDataTableMapper dataTableMapper = null)
         {
             _logger = logger;
             _dataTableMapper = dataTableMapper;
+            _jsonSerializerSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                DateFormatString = "yyyy-MM-dd HH:mm:ss",
+                Converters = new List<Newtonsoft.Json.JsonConverter>
+                {
+                    new MultiFormatDateTimeConverter()
+                }
+            };
         }
 
         /// <summary>
@@ -87,16 +97,15 @@ namespace Utilities.Implementations
                 return new DataSet();
             }
 
-            if (ContainsError(encodedJsonString))
-            {
-                _logger?.LogWarning("Error detected in JSON response: {Response}", encodedJsonString);
-                return null;
-            }
+            //if (ContainsError(encodedJsonString))
+            //{
+            //    _logger?.LogWarning("Error detected in JSON response: {Response}", encodedJsonString);
+            //    return null;
+            //}
 
             try
             {
-                var decodedJson = DecodeBase64JsonString(encodedJsonString);
-                var dataSet = JsonConvert.DeserializeObject<DataSet>(decodedJson);
+                var dataSet = JsonConvert.DeserializeObject<DataSet>(encodedJsonString, _jsonSerializerSettings);
 
                 _logger?.LogDebug("Successfully deserialized DataSet from JSON string.");
                 return dataSet ?? new DataSet();
@@ -123,11 +132,6 @@ namespace Utilities.Implementations
 
             try
             {
-                var decodedJson = DecodeBase64JsonString(encodedJsonString);
-                var obj = JObject.Parse(decodedJson);
-                var jsonModel = obj["Table"].FirstOrDefault();
-                //var model=jsonModel.ToObject<T>();
-
                 var dataTable = DeserializeToDataSet(encodedJsonString)?.Tables[0];
                 var modelList = _dataTableMapper.MapToEntityList<T>(dataTable) ;
 
@@ -199,6 +203,33 @@ namespace Utilities.Implementations
         {
             return jsonResponse.Contains("error", StringComparison.OrdinalIgnoreCase);
         }
+        /// <summary>
+        /// JSON string'i belirtilen model tipine dönüştürür
+        /// </summary>
+        /// <typeparam name="T">Dönüştürülecek model tipi</typeparam>
+        /// <param name="encodedJsonString">Base64 encode edilmiş JSON string</param>
+        /// <returns>Deserialize edilmiş model nesnesi</returns>
+        /// <exception cref="ArgumentException">Geçersiz parametre durumunda</exception>
+        /// <exception cref="JsonException">Deserializasyon hatası durumunda</exception>
+        public List<T> ToModelList<T>(string encodedJsonString) where T : IEntity, new()
+        {
+            if (string.IsNullOrWhiteSpace(encodedJsonString))
+                throw new ArgumentException("Encoded JSON string cannot be null or empty.", nameof(encodedJsonString));
+
+            try
+            {
+                var modelList = JsonConvert.DeserializeObject<List<T>>(encodedJsonString, _jsonSerializerSettings);
+
+                _logger?.LogDebug("Successfully deserialized model of type {ModelType}.", typeof(T).Name);
+                return modelList;
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogError(ex, "Failed to deserialize JSON string to model of type {ModelType}: {EncodedString}",
+                                 typeof(T).Name, encodedJsonString);
+                throw;
+            }
+        }
     }
 
     // Extension Methods (Utilities/Extensions klasörüne)
@@ -227,5 +258,8 @@ namespace Utilities.Implementations
         {
             return model == null ? string.Empty : converter.SerializeModelToEncodedJson(model);
         }
+       
+        
     }
+
 }

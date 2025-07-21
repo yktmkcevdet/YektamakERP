@@ -22,9 +22,13 @@ namespace ApiService.Implementetions
             return await _apiService.PostAsync(menu,"DeleteMenu");
         }
 
-        public async Task<string> GetAlanYetki(Models.DTO.AlanYetkiDTO alanYetki)
+        public async Task<string> GetAlanYetki(AlanYetkiDTO alanYetki)
         {
             return await _apiService.PostAsync(alanYetki, "GetAlanYetki");
+        }
+        public async Task<string> DeleteAlanYetki(AlanYetki alanYetki)
+        {
+            return await _apiService.PostAsync(alanYetki, "DeleteAlanYetki");
         }
 
         public string GetAnaMenu(AnaMenuDTO anaMenu)
@@ -36,7 +40,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(kullanici, "GetKullanici");
         }
-        public string GetKullanici(Models.Kullanici kullanici)
+        public string GetKullanici(Kullanici kullanici)
         {
             return _apiService.Post(kullanici, "GetKullanici");
         }
@@ -45,7 +49,7 @@ namespace ApiService.Implementetions
             return _apiService.Get($"GetKullanici/{kullanici}");
         }
 
-        public string GetKullaniciYetki(Models.Kullanici kullanici)
+        public string GetKullaniciYetki(Kullanici kullanici)
         {
             return _apiService.Post(kullanici, "GetKullaniciYetki");
         }
@@ -74,7 +78,7 @@ namespace ApiService.Implementetions
             return await _apiService.PostAsync(ekran, "SaveEkran");
         }
 
-        public string SaveKullanici(Models.Kullanici kullanici)
+        public string SaveKullanici(Kullanici kullanici)
         {
             return _apiService.Post(kullanici, "SaveKullanici");
         }
@@ -88,7 +92,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(yetki, "SaveYetki");
         }
-        public async Task<string> SaveAlanYetki(Models.DTO.AlanYetkiDTO alanYetki)
+        public async Task<string> SaveAlanYetki(AlanYetkiDTO alanYetki)
         {
             return await _apiService.PostAsync(alanYetki, "SaveAlanYetki");
         }

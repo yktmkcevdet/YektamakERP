@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.53" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.63" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -54,13 +54,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ApiService.dll" size="49664">
+  <file name="ApiService.dll" size="65536">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>pcvUQhMMg9LRS+i4aelvqgHKXSkOwncAt9+rLs4Hjqs=</dsig:DigestValue>
+      <dsig:DigestValue>0+1iEmiX8ASH5e5zHd4/zVNaXxkQWPF3c9E9VATxzkg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BouncyCastle.Cryptography.dll" size="7161624">
@@ -666,13 +666,13 @@
       <dsig:DigestValue>ryT6NCt/nwhifrGy+UEPL2SXCx4TXF/kg3h4+Ks+y2g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Models.dll" size="56320">
+  <file name="Models.dll" size="98304">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>53mLfUxSF7mnLrJuvV1Y/njK6a66E+9GH+jUlI/FwHk=</dsig:DigestValue>
+      <dsig:DigestValue>nq0l4Y8yfUWzEWEOoymvTEi1oErOryMCPznwuAto/x8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="netDxf.dll" size="767488">
@@ -817,6 +817,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>kYAxoe8moeISLRGmG7OJhYCakE6L7NLoRgvKrglcZ0Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="RtfPipe.dll" size="183808">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>P+wm4iDBPmabSVW/B3bhy05AD/o+cnPmpWVNfYTkXAk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ru\Microsoft.CodeAnalysis.CSharp.resources.dll" size="513664">
@@ -990,6 +999,15 @@
       <dsig:DigestValue>yjcrBKZatt0EkrTbNmIH1gFd6+M1qoxkwP7M3slYr/U=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="System.Linq.Dynamic.Core.dll" size="242688">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>PovXo8QjiY3I5SOzd7jYa+7/j2gTLTv0ryhTwL7RECQ=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="System.Security.Cryptography.Pkcs.dll" size="264864">
     <hash>
       <dsig:Transforms>
@@ -1053,13 +1071,13 @@
       <dsig:DigestValue>h3P4JczN5h/nCJ5C4JH0TXgaZAx5BzMISeCPsYGcINI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Utilities.dll" size="37376">
+  <file name="Utilities.dll" size="38912">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>1RwPi5S/6tbrqkRmyFxsr7mIh8pOmnc1BbAyx5/I+Ms=</dsig:DigestValue>
+      <dsig:DigestValue>+wnpczPG3glpbvTji5qTPwe6X342XGZpXkRdcIZQxEU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="x64\pdfium.dll" size="13015040">
@@ -1080,22 +1098,22 @@
       <dsig:DigestValue>9RFHqCz0P2osq99SGbX+sn48spwYUh73dI7UVs8fZ7U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.deps.json" size="66526">
+  <file name="YektamakDesktop.deps.json" size="67718">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>iDeEO3Pyk/XGL8P6Y4rmlhmMIZHL3wWRPFVE11lEklc=</dsig:DigestValue>
+      <dsig:DigestValue>29jp2DCPhMMXsLUa0pWl8oK/mDBQoRB38Ti6mdbCxpg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.dll" size="1252864">
+  <file name="YektamakDesktop.dll" size="1316864">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>uOrSQBFnbSQR4pwpFG/mAYcuWKZIawfNBhzAjftBH+g=</dsig:DigestValue>
+      <dsig:DigestValue>gnA13sP0pdtpYMMielpOSUTOWVGJMsgYJ8gN8s0A/Fk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.dll.config" size="838">
@@ -1107,13 +1125,13 @@
       <dsig:DigestValue>KV8eAeWS1EisgFKs1Zl5gTo5hMan931y0J7AyXNQ6Bw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.exe" size="174592">
+  <file name="YektamakDesktop.exe" size="175104">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>C4KBq3OhLHcuY6qqWZGM5MMWGXS+AeumB80jInx2NhA=</dsig:DigestValue>
+      <dsig:DigestValue>QQA4OzhMclJZvnumDMfbaviYnoFPdwgfeYUfMdoljdU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.runtimeconfig.json" size="458">

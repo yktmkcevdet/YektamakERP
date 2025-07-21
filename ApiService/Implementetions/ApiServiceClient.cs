@@ -1,4 +1,5 @@
-﻿using ApiService.Interfaces;
+﻿using ApiService.Converters;
+using ApiService.Interfaces;
 using Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -17,7 +18,10 @@ namespace ApiService.Implementetions
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 DateFormatString = "yyyy-MM-dd HH:mm:ss",
-                Converters = new JsonConverter[] { new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" } }
+                Converters = new List<JsonConverter>
+                {
+                    new MultiFormatDateTimeConverter()
+                }
             };
         }
 

@@ -73,6 +73,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Diagnostics.EventLog.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Formats.Asn1.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.IO.Pipelines.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Linq.Dynamic.Core.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Security.Cryptography.Xml.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net7.0-windows7.0\System.Text.Encodings.Web.dll
@@ -137,6 +138,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.CustomTextBox.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.CustomTextBoxSayisal.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.CustomTextBoxTarih.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.FilterableComboBox.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.HeaderPanel.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.CustomControls.UniversalGrid.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.MainForm.resources
@@ -170,7 +172,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartGridForm.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartKayitFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.UserLogin.resources
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.AltMenuEkle.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.AltMenuEkleForm.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.EkranEkle.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.KullaniciKayitFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.Menuler.resources
@@ -188,3 +190,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\ref\YektamakDesktop.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net7.0-windows7.0\YektamakDesktop.Formlar.Loading.resources

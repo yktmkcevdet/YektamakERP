@@ -67,11 +67,11 @@ namespace Api.Controllers
         }
         
         [HttpPost, Route("api/GetExcelForm")]
-        public string GetExcelForm([FromBody] string excelForm)
+        public string GetExcelForm([FromBody] ExcelForm excelForm)
         {
             try
             {
-                return _dataAccessLayer.GetObject(JsonStringToModel<ExcelForm>(excelForm), "spGetExcelForm");
+                return _dataAccessLayer.GetObject(excelForm, "spGetExcelForm");
             }
             catch (Exception ex)
             {

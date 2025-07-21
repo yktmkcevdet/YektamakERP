@@ -21,7 +21,7 @@ namespace ApiService.Implementetions
             return await _apiService.PostAsync(satinalmaTeklifBaslik, "GetSatinalmaTeklif");
         }
 
-        public async Task<string> SaveSatinalmaTeklif(List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks)
+        public async Task<string> SaveSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBasliks)
         {
             return await _apiService.PostAsync(satinalmaTeklifBasliks, "SaveSatinalmaTeklif");
         }

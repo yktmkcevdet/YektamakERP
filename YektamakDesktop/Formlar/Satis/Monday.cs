@@ -9,16 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satis
 {
     public partial class Monday : Form, IForm
     {
         private static ISatisService _satisService;
-        
-        public Monday(ISatisService satisService)
+        private readonly ICache _cache;
+        public Monday(ISatisService satisService, ICache cache)
         {
             _satisService = satisService;
+            _cache = cache;
         }
         private Monday()
         {
@@ -51,7 +53,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void Monday_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings(this.Name);
+            universalGrid1.SaveSettings();
         }
         private async Task VerileriYukleAsync()
         {

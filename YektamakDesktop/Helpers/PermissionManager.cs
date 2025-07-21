@@ -3,12 +3,13 @@ using Models;
 using Models.DTO;
 using Models.Models;
 using Newtonsoft.Json;
+using NPOI.OpenXmlFormats.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Helpers
 {
@@ -33,19 +34,21 @@ namespace YektamakDesktop.Helpers
         {
             if (_alanYetki == null)
             {
+                _alanYetki = new();
                 alanYetki.kullaniciId=_cache.kullanici.Id;
                 string alanYetkiJson = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
                 Result result = _jsonConverter.DeserializeToModelList<Result>(alanYetkiJson)[0];
-                var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(result.result);
-                _alanYetki = _dataTableMapper.MapToEntityList<AlanYetkiDTO>(Common.ConvertHelper.ToDataTable(yetkiList));
-                //string alanYetkiJson = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
-                //_alanYetki = _jsonConverter.DeserializeToModelList<AlanYetki>(alanYetkiJson);
+                var yetkiList = _jsonConverter.ToModelList<AlanYetki>(result.result);
+                foreach(var yetki in yetkiList)
+                {
+                    _alanYetki.Add(ConvertHelper.ToDTO<AlanYetkiDTO>(yetki));
+                }
             }
             return _alanYetki;
         }
-        public async Task<bool> HasAccess(Kullanici kullanici, AlanYetkiDTO prop)
+        public async Task<bool> HasAccess(AlanYetkiDTO prop)
         {
-            var filteredYetki = (await roleColumns(prop)).Where(p => p.formAd == prop.formAd && p.alanAd == prop.alanAd);
+            var filteredYetki = (await roleColumns(prop)).Where(p => p.formAd == prop.formAd && p.alanAd == prop.alanAd && p.kullaniciId==prop.kullaniciId && p.yetki);
             return filteredYetki.Any();
         }
         

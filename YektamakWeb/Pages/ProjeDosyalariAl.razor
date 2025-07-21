@@ -163,12 +163,9 @@
                 IJsonConverter jsonConvertHelper = new JsonConverter();
                 malzemeGrup = _dataTableMapper.MapToEntity<MalzemeGrup>(jsonConvertHelper.DeserializeToDataSet(_stokService.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
                 stokKart.malzemeGrup.Id = malzemeGrup.Id;
-                stokKart.proje.Id = proje.Id;
                 stokKart.parcaKod = rowData.GetCell(1)?.ToString() ?? "";
                 stokKart.ad = rowData.GetCell(2)?.ToString() ?? "";
                 stokKart.parcaAdi = rowData.GetCell(2)?.ToString() ?? "";
-                stokKart.miktar = Convert.ToInt32(rowData.GetCell(3)?.ToString() ?? "");
-                stokKart.adet = Convert.ToInt32(rowData.GetCell(4)?.ToString() ?? "");
                 stokKart.fark = Convert.ToInt32(rowData.GetCell(5)?.ToString() ?? "");
                 stokKart.boyut = rowData.GetCell(6)?.ToString() ?? "";
                 resultMessage = rowData.GetCell(7)?.ToString() ?? "0";

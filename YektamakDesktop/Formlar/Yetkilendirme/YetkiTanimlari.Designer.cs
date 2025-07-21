@@ -35,11 +35,12 @@
             menuEkle = new System.Windows.Forms.ToolStripMenuItem();
             menuSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             cbxKullanici = new YektamakDesktop.CustomControls.CustomComboListBox();
             contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
             menuChangeAuth = new System.Windows.Forms.ToolStripMenuItem();
             alanEkleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            yetkileriSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1.SuspendLayout();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
@@ -62,6 +63,8 @@
             comboListBoxRol.Margin = new System.Windows.Forms.Padding(1);
             comboListBoxRol.Name = "comboListBoxRol";
             comboListBoxRol.Padding = new System.Windows.Forms.Padding(1);
+            comboListBoxRol.selectedDataRowId = null;
+            comboListBoxRol.selectedDataRowValue = null;
             comboListBoxRol.Size = new System.Drawing.Size(277, 36);
             comboListBoxRol.TabIndex = 52;
             comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
@@ -99,32 +102,25 @@
             headerPanel1.Size = new System.Drawing.Size(795, 32);
             headerPanel1.TabIndex = 53;
             // 
-            // universalGrid1
-            // 
-            universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(387, 121);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(332, 389);
-            universalGrid1.TabIndex = 54;
-            universalGrid1.Grid.MouseDown += universalGrid1_MouseDown;
-            // 
             // cbxKullanici
             // 
             cbxKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             cbxKullanici.ListBoxVisualSize = 5;
-            cbxKullanici.Location = new System.Drawing.Point(414, 81);
+            cbxKullanici.Location = new System.Drawing.Point(355, 81);
             cbxKullanici.Margin = new System.Windows.Forms.Padding(1);
             cbxKullanici.Name = "cbxKullanici";
             cbxKullanici.Padding = new System.Windows.Forms.Padding(1);
+            cbxKullanici.selectedDataRowId = null;
+            cbxKullanici.selectedDataRowValue = null;
             cbxKullanici.Size = new System.Drawing.Size(250, 36);
             cbxKullanici.TabIndex = 55;
             cbxKullanici.SelectedIndexChanged += cbxKullanici_SelectedIndexChanged;
             // 
             // contextMenuStrip2
             // 
-            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuChangeAuth, alanEkleToolStripMenuItem });
+            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuChangeAuth, alanEkleToolStripMenuItem, yetkileriSilToolStripMenuItem });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new System.Drawing.Size(143, 48);
+            contextMenuStrip2.Size = new System.Drawing.Size(143, 70);
             // 
             // menuChangeAuth
             // 
@@ -140,13 +136,28 @@
             alanEkleToolStripMenuItem.Text = "Alan Ekle";
             alanEkleToolStripMenuItem.Click += alanEkleToolStripMenuItem_Click;
             // 
+            // yetkileriSilToolStripMenuItem
+            // 
+            yetkileriSilToolStripMenuItem.Name = "yetkileriSilToolStripMenuItem";
+            yetkileriSilToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            yetkileriSilToolStripMenuItem.Text = "Yetkileri Sil";
+            yetkileriSilToolStripMenuItem.Click += yetkileriSilToolStripMenuItem_Click;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(355, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(428, 421);
+            universalGrid1.TabIndex = 56;
+            // 
             // YetkiTanimlari
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(795, 612);
-            Controls.Add(cbxKullanici);
             Controls.Add(universalGrid1);
+            Controls.Add(cbxKullanici);
             Controls.Add(headerPanel1);
             Controls.Add(comboListBoxRol);
             Controls.Add(treeView1);
@@ -154,6 +165,7 @@
             Name = "YetkiTanimlari";
             Text = "YetkiTanimlari";
             FormClosing += YetkiTanimlari_FormClosing;
+            Load += YetkiTanimlari_Load;
             contextMenuStrip1.ResumeLayout(false);
             contextMenuStrip2.ResumeLayout(false);
             ResumeLayout(false);
@@ -166,10 +178,11 @@
         private System.Windows.Forms.ToolStripMenuItem menuEkle;
         private System.Windows.Forms.ToolStripMenuItem menuSilToolStripMenuItem;
         private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.CustomComboListBox cbxKullanici;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem menuChangeAuth;
         private System.Windows.Forms.ToolStripMenuItem alanEkleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yetkileriSilToolStripMenuItem;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

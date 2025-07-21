@@ -109,8 +109,6 @@ else
                 {
                     <tr>
                         <td>@stokKart.Id</td>
-                        <td><input type="checkbox">@stokKart.sec</td>
-                        <td>@stokKart.proje.kod</td>
                         <td>@stokKart.kod</td>
                         <td>@stokKart.ad</td>
                         <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
@@ -145,8 +143,8 @@ else
     private int selectedStokGrupId;
     private int selectedMalzemeGrupId;
     private string parcaAdi=string.Empty;
-    Dictionary<int, string> stokGrup = new Dictionary<int, string>();
-    Dictionary<int, string> malzemeGrup = new Dictionary<int, string>();
+    Dictionary<int?, string> stokGrup = new Dictionary<int?, string>();
+    Dictionary<int?, string> malzemeGrup = new Dictionary<int?, string>();
     private DialogFragment? dialogFragment;
     private RenderFragment renderFragment() => __builder =>
     {
@@ -170,7 +168,6 @@ else
         {
             // API çağrısı yap
             StokKart stokKart = new StokKart();
-            stokKart.proje.Id = selectedProjeId;
             stokKart.stokGrup.Id = selectedStokGrupId;
             stokKart.ad = parcaAdi;
             stokKart.malzemeGrup.Id = selectedMalzemeGrupId;

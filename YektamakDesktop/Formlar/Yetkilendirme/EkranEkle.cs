@@ -1,31 +1,49 @@
-﻿using Models;
-
+﻿using ApiService.Interfaces;
 using FontAwesome.Sharp;
+using Models;
+using Models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ApiService;
-using ApiService.Interfaces;
+using Utilities.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
-    public partial class EkranEkle : Form, IForm
+    public partial class EkranEkle : Form
     {
-        private static IKullaniciYetkiService _kullaniciYetkiService;
-        public EkranEkle(IKullaniciYetkiService kullaniciYetkiService)
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly ICache _cache;    
+        public EkranEkle(IKullaniciYetkiService kullaniciYetkiService, IJsonConverter jsonConverter, ICache cache)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
+            _jsonConverter = jsonConverter;
+            _cache = cache;
+            InitializeComponent();
+            CustomComboLists_Load();
+            Binding();
         }
-        private static Menu _menu;
-        public static Menu menu
+
+        private void Binding()
+        {
+            ctbId.DataBindings.Clear();
+            clbFormAd.DataBindings.Clear();
+            clbIcon.DataBindings.Clear();
+            ctbDtoName.DataBindings.Clear();
+            ctbMenuAd.DataBindings.Clear();
+            ctbId.DataBindings.Add("TextCustom", menu, $"{nameof(menu.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbFormAd.DataBindings.Add("selectedDataRowValue", menu, $"{nameof(menu.formAd)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbIcon.DataBindings.Add("selectedDataRowId", menu, $"{nameof(menu.icon)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbDtoName.DataBindings.Add("TextCustom", menu, $"{nameof(menu.model)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbMenuAd.DataBindings.Add("TextCustom", menu, $"{nameof(menu.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        private Menu _menu;
+        public Menu menu
         {
             get
             {
@@ -38,57 +56,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             set
             {
                 _menu = value;
+                Binding();
             }
         }
-        private static EkranEkle _ekranEkle;
-        public static EkranEkle ekranEkle
-        {
-            get
-            {
-                if (_ekranEkle == null)
-                {
-                    _ekranEkle = new EkranEkle();
-                    GlobalData.Yetki(ref _ekranEkle);
-                }
-                return _ekranEkle;
-            }
-        }
-
-        public List<Control> controlsToDisable { get; set; }
-        public bool activeForm { get; set; }
-
-        private bool mouseDown;
-        private Point offset;
-        public EkranEkle()
-        {
-            InitializeComponent();
-            CustomComboLists_Load();
-            customComboListBoxFormlar.SelectDataRowValue(menu.formAd);
-            customComboListBoxIcon.SelectDataRowValue(menu.icon);
-            customTextBoxMenuAdi.TextCustom = menu.ad;
-        }
-        #region mouseDrag
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
         private void CustomComboLists_Load()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -97,41 +67,43 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 if (type.IsSubclassOf(typeof(Form))) // Form sınıfından miras alan türleri kontrol et
                 {
-                    customComboListBoxFormlar.AddDataRow(id, type.Name);
+                    clbFormAd.AddDataRow(id, type.Name);
                     id++;
                 }
             }
-            foreach (IconChar icon in Enum.GetValues(typeof(IconChar)))
+            foreach (var icon in Enum.GetValues(typeof(IconChar)))
             {
-                customComboListBoxIcon.AddDataRow(id, icon.ToString());
-                id++;
+                clbIcon.AddDataRow((int)icon, icon.ToString());
             }
         }
-
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void customComboListBoxIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GlobalData.CloseForm(ref _ekranEkle);
+            roundedIconButton1.IconChar = (IconChar)Enum.Parse(typeof(IconChar), clbIcon.selectedDataRowValue, true);
         }
 
         private async void rButtonKaydet_Click(object sender, EventArgs e)
         {
-            menu.ad = customTextBoxMenuAdi.TextCustom;
-            menu.formAd = customComboListBoxFormlar.selectedDataRowValue;
-            menu.icon = customComboListBoxIcon.selectedDataRowValue;
-            string result = await _kullaniciYetkiService.SaveMenu(menu);
-            if (!result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            string jsonResult = await _kullaniciYetkiService.SaveMenu(menu);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault(); ;
+            if (result?.result != null)
             {
-                MessageBox.Show("Kayıt başarılı");
+                menu = _jsonConverter.DeserializeToModelList<Menu>(result.result).FirstOrDefault();
+                _cache.menuList.Add(menu);
+                MessageBox.Show("Kayıt Başarılı");
             }
             else
             {
-                MessageBox.Show(result);
+                MessageBox.Show(result.result);
             }
         }
-
-        private void customComboListBoxIcon_SelectedIndexChanged(object sender, EventArgs e)
+        public void UpdateMode(Menu menuUpdate)
         {
-            roundedIconButton1.IconChar= (IconChar)Enum.Parse(typeof(IconChar), customComboListBoxIcon.selectedDataRowValue, true);
+            menu = menuUpdate;
+        }
+
+        private void rButtonKaydet_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace YektamakDesktop
+﻿using System.Drawing;
+
+namespace YektamakDesktop
 {
     partial class MainWindow
     {
@@ -56,13 +58,13 @@
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Controls.Add(panelHandle, 0, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.940594F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.0594F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(1149, 710);
+            tableLayoutPanel1.Size = new Size(1149, 710);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -77,12 +79,12 @@
             tableLayoutPanel2.Controls.Add(panelExit, 0, 1);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            tableLayoutPanel2.Location = new System.Drawing.Point(6, 50);
+            tableLayoutPanel2.Location = new Point(6, 50);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(1137, 654);
+            tableLayoutPanel2.Size = new Size(1137, 654);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // panelState
@@ -90,80 +92,80 @@
             panelState.Controls.Add(statusStrip1);
             panelState.Controls.Add(lblKullanici);
             panelState.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelState.Location = new System.Drawing.Point(172, 609);
+            panelState.Location = new Point(172, 609);
             panelState.Margin = new System.Windows.Forms.Padding(0);
             panelState.Name = "panelState";
-            panelState.Size = new System.Drawing.Size(965, 45);
+            panelState.Size = new Size(965, 45);
             panelState.TabIndex = 2;
             // 
             // statusStrip1
             // 
             statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblOturumSuresi });
-            statusStrip1.Location = new System.Drawing.Point(820, 20);
+            statusStrip1.Location = new Point(820, 20);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(144, 22);
+            statusStrip1.Size = new Size(144, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
             // lblOturumSuresi
             // 
-            lblOturumSuresi.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblOturumSuresi.ForeColor = System.Drawing.Color.IndianRed;
+            lblOturumSuresi.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOturumSuresi.ForeColor = Color.IndianRed;
             lblOturumSuresi.Name = "lblOturumSuresi";
-            lblOturumSuresi.Size = new System.Drawing.Size(127, 17);
+            lblOturumSuresi.Size = new Size(127, 17);
             lblOturumSuresi.Text = "toolStripStatusLabel1";
             // 
             // lblKullanici
             // 
-            lblKullanici.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblKullanici.ForeColor = System.Drawing.Color.IndianRed;
-            lblKullanici.Location = new System.Drawing.Point(820, 2);
+            lblKullanici.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblKullanici.ForeColor = Color.IndianRed;
+            lblKullanici.Location = new Point(820, 2);
             lblKullanici.Name = "lblKullanici";
-            lblKullanici.Size = new System.Drawing.Size(142, 15);
+            lblKullanici.Size = new Size(142, 15);
             lblKullanici.TabIndex = 2;
             lblKullanici.Text = "label1";
-            lblKullanici.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            lblKullanici.TextAlign = ContentAlignment.TopRight;
             lblKullanici.Click += lblKullanici_Click;
             // 
             // panelAnaMenu
             // 
             panelAnaMenu.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            panelAnaMenu.BackColor = System.Drawing.Color.Red;
-            panelAnaMenu.Location = new System.Drawing.Point(0, 0);
+            panelAnaMenu.BackColor = Color.SteelBlue;
+            panelAnaMenu.Location = new Point(0, 0);
             panelAnaMenu.Margin = new System.Windows.Forms.Padding(0);
             panelAnaMenu.Name = "panelAnaMenu";
-            panelAnaMenu.Size = new System.Drawing.Size(172, 609);
+            panelAnaMenu.Size = new Size(172, 609);
             panelAnaMenu.TabIndex = 0;
             // 
             // panelMenu
             // 
             panelMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelMenu.Location = new System.Drawing.Point(172, 0);
+            panelMenu.Location = new Point(172, 0);
             panelMenu.Margin = new System.Windows.Forms.Padding(0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new System.Drawing.Size(965, 609);
+            panelMenu.Size = new Size(965, 609);
             panelMenu.TabIndex = 1;
             // 
             // panelExit
             // 
-            panelExit.BackColor = System.Drawing.Color.Red;
+            panelExit.BackColor = Color.DodgerBlue;
             panelExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelExit.Location = new System.Drawing.Point(0, 609);
+            panelExit.Location = new Point(0, 609);
             panelExit.Margin = new System.Windows.Forms.Padding(0);
             panelExit.Name = "panelExit";
-            panelExit.Size = new System.Drawing.Size(172, 45);
+            panelExit.Size = new Size(172, 45);
             panelExit.TabIndex = 3;
             // 
             // panelHandle
             // 
-            panelHandle.BackColor = System.Drawing.Color.White;
+            panelHandle.BackColor = Color.White;
             panelHandle.Controls.Add(headerPanel1);
-            panelHandle.Location = new System.Drawing.Point(4, 4);
+            panelHandle.Location = new Point(4, 4);
             panelHandle.Margin = new System.Windows.Forms.Padding(1);
             panelHandle.Name = "panelHandle";
-            panelHandle.Size = new System.Drawing.Size(1141, 34);
+            panelHandle.Size = new Size(1141, 34);
             panelHandle.TabIndex = 1;
             panelHandle.MouseDown += panelHeader_MouseDown;
             panelHandle.MouseMove += panelHeader_MouseMove;
@@ -172,29 +174,29 @@
             // headerPanel1
             // 
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Baslik = "Caption";
-            headerPanel1.Location = new System.Drawing.Point(1, 1);
+            headerPanel1.BackColor = Color.Firebrick;
+            headerPanel1.Baslik = "Yektamak ERP Uygulaması";
+            headerPanel1.Location = new Point(1, 1);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1138, 32);
+            headerPanel1.Size = new Size(1138, 32);
             headerPanel1.TabIndex = 0;
             // 
             // MainWindow
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(1149, 710);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(1149, 710);
             ControlBox = false;
             Controls.Add(tableLayoutPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Name = "MainWindow";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Form2";
+            Text = "Ana Menü";
             Load += AnaSayfa_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);

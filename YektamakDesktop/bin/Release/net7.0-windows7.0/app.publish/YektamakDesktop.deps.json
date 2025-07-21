@@ -17,7 +17,9 @@
           "NPOI": "2.7.2",
           "Newtonsoft.Json": "13.0.3",
           "Pdfium.Net.SDK": "4.96.2704",
+          "RtfPipe": "2.0.7677.4303",
           "Spire.PDF": "11.4.10",
+          "System.Linq.Dynamic.Core": "1.6.6",
           "Utilities": "1.0.0",
           "netDxf": "2023.11.10"
         },
@@ -782,6 +784,14 @@
           }
         }
       },
+      "RtfPipe/2.0.7677.4303": {
+        "runtime": {
+          "lib/netstandard2.0/RtfPipe.dll": {
+            "assemblyVersion": "2.0.7677.4303",
+            "fileVersion": "2.0.7677.4303"
+          }
+        }
+      },
       "Serilog/4.3.0": {
         "runtime": {
           "lib/net6.0/Serilog.dll": {
@@ -921,6 +931,14 @@
           "lib/netstandard2.0/System.IO.Pipelines.dll": {
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "9.0.124.61010"
+          }
+        }
+      },
+      "System.Linq.Dynamic.Core/1.6.6": {
+        "runtime": {
+          "lib/net7.0/System.Linq.Dynamic.Core.dll": {
+            "assemblyVersion": "1.6.6.0",
+            "fileVersion": "1.6.6.0"
           }
         }
       },
@@ -1404,6 +1422,13 @@
       "path": "pdfium.net.sdk/4.96.2704",
       "hashPath": "pdfium.net.sdk.4.96.2704.nupkg.sha512"
     },
+    "RtfPipe/2.0.7677.4303": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ek6wuC69GYVJr0b/C5mcgbFUHPLL11iAbUFqQphdBaqSoEjOdSB/HWCID5nneA5exM88UZzOTCJCMpftDYnCZA==",
+      "path": "rtfpipe/2.0.7677.4303",
+      "hashPath": "rtfpipe.2.0.7677.4303.nupkg.sha512"
+    },
     "Serilog/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1515,6 +1540,13 @@
       "sha512": "sha512-uXf5o8eV/gtzDQY4lGROLFMWQvcViKcF8o4Q6KpIOjloAQXrnscQSu6gTxYJMHuNJnh7szIF9AzkaEq+zDLoEg==",
       "path": "system.io.pipelines/9.0.1",
       "hashPath": "system.io.pipelines.9.0.1.nupkg.sha512"
+    },
+    "System.Linq.Dynamic.Core/1.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DalpBR6IiZsT61Z9h3ujGxhOALmJUE6hrbeWjRUL24AxDIvhxzhxftSrRrF1G8vNggpadDfRiej6ImrpYS8sJA==",
+      "path": "system.linq.dynamic.core/1.6.6",
+      "hashPath": "system.linq.dynamic.core.1.6.6.nupkg.sha512"
     },
     "System.Memory/4.5.5": {
       "type": "package",

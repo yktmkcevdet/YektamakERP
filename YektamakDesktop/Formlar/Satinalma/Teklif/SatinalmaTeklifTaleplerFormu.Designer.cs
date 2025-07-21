@@ -37,27 +37,28 @@
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Baslik = "Caption";
+            headerPanel1.Baslik = "Teklif Talepleri";
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1289, 32);
+            headerPanel1.Size = new System.Drawing.Size(959, 32);
             headerPanel1.TabIndex = 0;
             // 
             // universalGrid1
             // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(21, 185);
+            universalGrid1.Location = new System.Drawing.Point(0, 164);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1244, 462);
+            universalGrid1.Size = new System.Drawing.Size(959, 509);
             universalGrid1.TabIndex = 1;
             // 
             // SatinalmaTeklifTaleplerFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1289, 674);
+            ClientSize = new System.Drawing.Size(959, 674);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

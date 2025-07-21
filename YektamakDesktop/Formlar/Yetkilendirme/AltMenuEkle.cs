@@ -1,134 +1,70 @@
-﻿using YektamakDesktop.Formlar.Ortak;
+﻿using ApiService.Interfaces;
 using Models;
-
+using Models.Models;
 using Newtonsoft.Json;
-using ApiService;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
-using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
-    public partial class AltMenuEkle : Form, IForm
+    public partial class AltMenuEkleForm : Form
     {
-        private static ICache _cache;
-        private static IKullaniciYetkiService _kullaniciYetkiService;
-        private static AltMenuEkle _altMenuekle;
-        public static AltMenuEkle altMenuekle
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly ICache _cache;
+        public AltMenuEkleForm(ICache cache, IKullaniciYetkiService kullaniciYetkiService)
         {
-            get
-            {
-                if (_altMenuekle == null)
-                {
-                    _altMenuekle = new AltMenuEkle();
-                    GlobalData.Yetki(ref _altMenuekle);
-                }
-                return _altMenuekle;
-            }
-        }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        public AltMenuEkle(ICache cache,IKullaniciYetkiService kullaniciYetkiService)
-        {
-            _cache = cache;
             _kullaniciYetkiService = kullaniciYetkiService;
-        }
-        public AltMenuEkle()
-        {
+            _cache = cache;
             InitializeComponent();
-            controlsToDisable = new List<Control>() { };
-        }
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
+            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbAnaMenu);
+            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbForm);
+            Binding();
         }
 
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
+        private void Binding()
         {
-            if (mouseDown)
+            clbAnaMenu.DataBindings.Clear();
+            clbForm.DataBindings.Clear();
+            clbAnaMenu.DataBindings.Add("selectedDataRowId", ekran, $"{nameof(ekran.menu)}.{nameof(ekran.menu.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbForm.DataBindings.Add("selectedDataRowId", ekran, $"{nameof(ekran.altMenuId)}", true, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        private Ekran _ekran;
+        private Ekran ekran
+        {
+            get {
+                if (_ekran == null)
+                {
+                    _ekran = new();
+                }
+                return _ekran;
+            }
+            set
             {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
+                _ekran = value;
             }
         }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
-
-        private void CloseForm()
-        {
-            this.Close();
-            _altMenuekle = null;
-            GlobalData.RemoveLastForm();
-        }
+       
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("* Menü adı girilmelidir", altMenuekle, ctbMenuAdi) ? result : false;
-            result = GlobalData.CheckField("* Ana menü seçimi yapılmalıdır.", altMenuekle, clbAnaMenu) ? result : false;
-            result = GlobalData.CheckField("* Form seçimi yapılmalıdır.", altMenuekle, clbForm) ? result : false;
+            result = GlobalData.CheckField("* Ana menü seçimi yapılmalıdır.", this, clbAnaMenu) ? result : false;
+            result = GlobalData.CheckField("* Form seçimi yapılmalıdır.", this, clbForm) ? result : false;
             return result;
         }
-
-        private void rButtonKapat_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-
         private async void rButtonKaydet_Click(object sender, EventArgs e)
-        {   
+        {
             if (!CheckFields()) return;
-            Ekran ekran = new Ekran();
-            ekran.menu.Id = clbAnaMenu.selectedDataRowId;
-            ekran.altMenuId = clbForm.selectedDataRowId;
-            ekran.ekranAdi = ctbMenuAdi.TextCustom;
-            ekran.formAd = clbForm.selectedDataRowValue;
-            string httpResult = await _kullaniciYetkiService.SaveEkran(ekran);
-
-            if (!httpResult.Contains("error"))
-            {
-                MessageBox.Show("Kayıt başarılı");
-                CloseForm();
-            }
-            else
-            {
-                MessageBox.Show(httpResult);
-            }
+            
+            string jsonResult = await _kullaniciYetkiService.SaveEkran(ekran);
+            Result result = JsonConvert.DeserializeObject<Result>(jsonResult);
+            MessageBox.Show(result.result);
         }
-        public void SaveMode(Menu menu)
+        public void UpdateMode(Menu menu)
         {
-            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbAnaMenu);
-            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbForm);
-            clbAnaMenu.SelectDataRowId(menu.Id);
-        }
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-
-        private void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState=FormWindowState.Minimized;
+            ekran.menu = menu;
         }
     }
 }

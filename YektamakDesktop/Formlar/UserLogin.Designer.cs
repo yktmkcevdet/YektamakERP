@@ -38,6 +38,7 @@ namespace YektamakDesktop.Formlar
             ctbKullaniciAdi = new CustomTextBox();
             ctbSifre = new CustomTextBox();
             headerPanel1 = new HeaderPanel();
+            btnSifreDegistir = new RoundedIconButton();
             SuspendLayout();
             // 
             // roundedButtonLogin
@@ -45,12 +46,18 @@ namespace YektamakDesktop.Formlar
             roundedButtonLogin.BackColor = Color.FromArgb(128, 64, 64);
             roundedButtonLogin.BackgroundColor = Color.FromArgb(128, 64, 64);
             roundedButtonLogin.BorderColor = SystemColors.InactiveBorder;
-            roundedButtonLogin.BorderRadius = 20;
             roundedButtonLogin.BorderSize = 3;
+            roundedButtonLogin.CornerRadius = 20;
             roundedButtonLogin.FlatAppearance.BorderSize = 0;
             roundedButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedButtonLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             roundedButtonLogin.ForeColor = Color.White;
+            roundedButtonLogin.GradientColor1 = Color.DodgerBlue;
+            roundedButtonLogin.GradientColor2 = Color.MidnightBlue;
+            roundedButtonLogin.HoverColor1 = Color.RoyalBlue;
+            roundedButtonLogin.HoverColor2 = Color.Navy;
+            roundedButtonLogin.Icon = null;
+            roundedButtonLogin.IconAlign = ContentAlignment.MiddleLeft;
             roundedButtonLogin.Location = new Point(131, 137);
             roundedButtonLogin.Name = "roundedButtonLogin";
             roundedButtonLogin.Size = new Size(135, 39);
@@ -145,12 +152,38 @@ namespace YektamakDesktop.Formlar
             headerPanel1.Size = new Size(421, 32);
             headerPanel1.TabIndex = 105;
             // 
+            // btnSifreDegistir
+            // 
+            btnSifreDegistir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnSifreDegistir.BackColor = Color.Transparent;
+            btnSifreDegistir.BorderColor = Color.Black;
+            btnSifreDegistir.BorderSize = 0;
+            btnSifreDegistir.CornerRadius = 20;
+            btnSifreDegistir.FlatAppearance.BorderSize = 0;
+            btnSifreDegistir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSifreDegistir.ForeColor = Color.White;
+            btnSifreDegistir.GradientColor1 = Color.DodgerBlue;
+            btnSifreDegistir.GradientColor2 = Color.MidnightBlue;
+            btnSifreDegistir.HoverColor1 = Color.RoyalBlue;
+            btnSifreDegistir.HoverColor2 = Color.Navy;
+            btnSifreDegistir.IconChar = FontAwesome.Sharp.IconChar.Key;
+            btnSifreDegistir.IconColor = Color.White;
+            btnSifreDegistir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSifreDegistir.IconSize = 36;
+            btnSifreDegistir.Location = new Point(5, 36);
+            btnSifreDegistir.Name = "btnSifreDegistir";
+            btnSifreDegistir.Size = new Size(40, 38);
+            btnSifreDegistir.TabIndex = 106;
+            btnSifreDegistir.UseVisualStyleBackColor = false;
+            btnSifreDegistir.Click += btnSifreDegistir_Click;
+            // 
             // UserLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = Color.LightGray;
             ClientSize = new Size(421, 202);
+            Controls.Add(btnSifreDegistir);
             Controls.Add(headerPanel1);
             Controls.Add(ctbSifre);
             Controls.Add(ctbKullaniciAdi);
@@ -214,6 +247,7 @@ namespace YektamakDesktop.Formlar
         private CustomTextBox ctbKullaniciAdi;
         private CustomTextBox ctbSifre;
         private HeaderPanel headerPanel1;
+        private RoundedIconButton btnSifreDegistir;
     }
     
 }

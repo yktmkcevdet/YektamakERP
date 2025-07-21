@@ -95,11 +95,12 @@ namespace YektamakDesktop.CustomControls
             }
             set
             {
-                textBox.Text = value;
+                textBox.Text = value.ToString();
                 SetPlaceHolder();
                 SayiFormati();
             }
         }
+
         private int _ondalikBasamak;
         public int OndalikBasamak
         {

@@ -1,4 +1,7 @@
-﻿namespace YektamakDesktop.Formlar.Proje
+﻿using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+
+namespace YektamakDesktop.Formlar.Proje
 {
     partial class ProjeDosyalari
     {
@@ -29,124 +32,34 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataGridViewStokKart = new System.Windows.Forms.DataGridView();
-            panelFilter = new System.Windows.Forms.Panel();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
             label2 = new System.Windows.Forms.Label();
-            projeKodu = new YektamakDesktop.CustomControls.CustomComboListBox();
-            panelHeader = new System.Windows.Forms.Panel();
-            roundedButton3 = new YektamakDesktop.CustomControls.RoundedButton();
-            labelHeader = new System.Windows.Forms.Label();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
-            roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
+            clbProjeKodu = new YektamakDesktop.CustomControls.CustomComboListBox();
             panelFooter = new System.Windows.Forms.Panel();
             roundedButton4 = new YektamakDesktop.CustomControls.RoundedButton();
             label1 = new System.Windows.Forms.Label();
-            cbxStokGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
-            cbxMalzemeGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbStokGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbMalzemeGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            textBoxParcaAdi = new YektamakDesktop.CustomControls.CustomTextBox();
+            ctbParcaAdi = new YektamakDesktop.CustomControls.CustomTextBox();
             chkSatinalma = new System.Windows.Forms.CheckBox();
             chkPdf = new System.Windows.Forms.CheckBox();
             chkDxf = new System.Windows.Forms.CheckBox();
             chkStep = new System.Windows.Forms.CheckBox();
-            chkSec = new System.Windows.Forms.CheckBox();
-            selectAll = new System.Windows.Forms.CheckBox();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             seçiliKalemlerİçinSaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            lblToplamKayitSayisi = new System.Windows.Forms.Label();
-            lblSecilmisKayitSayisi = new System.Windows.Forms.Label();
-            lblKayitSayisi = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            cbxMalzemeAltGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbMalzemeAltGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
             label6 = new System.Windows.Forms.Label();
-            cbxMalzemeAltGrup2 = new YektamakDesktop.CustomControls.CustomComboListBox();
-            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            hammaddeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            sec = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            projeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            projekod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaKod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaAdi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            boyut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            uzunluk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            aciklama = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            agirlik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            miktar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            isPdf = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            isDxf = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            isStep = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            stokGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            stokGrupad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeGrupAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeAltGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeAltGrupAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeAltGrup2Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeAltGrup2Ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            olcuBirimId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            boy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            en = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            yukseklik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            cap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            etKalinligi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            stokTipId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            logoKod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            malzemeStandartId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            profilTipId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            parcaGrupad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            isSatinalma = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            Pdf = new System.Windows.Forms.DataGridViewImageColumn();
-            Dxf = new System.Windows.Forms.DataGridViewImageColumn();
-            Step = new System.Windows.Forms.DataGridViewImageColumn();
-            guncelle = new System.Windows.Forms.DataGridViewImageColumn();
-            Sil = new System.Windows.Forms.DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewStokKart).BeginInit();
-            panelFilter.SuspendLayout();
-            panelHeader.SuspendLayout();
+            clbMalzemeAltGrup2 = new YektamakDesktop.CustomControls.CustomComboListBox();
+            roundedIconButton1 = new YektamakDesktop.CustomControls.RoundedIconButton();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            universalGrid1 = universalGrid1 = DIContainer.GetService<UniversalGrid>(); 
+            roundedIconButton2 = new YektamakDesktop.CustomControls.RoundedIconButton();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // dataGridViewStokKart
-            // 
-            dataGridViewStokKart.AllowUserToAddRows = false;
-            dataGridViewStokKart.AllowUserToDeleteRows = false;
-            dataGridViewStokKart.AllowUserToOrderColumns = true;
-            dataGridViewStokKart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewStokKart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, hammaddeId, sec, projeId, projekod, parcaKod, ad, parcaAdi, boyut, uzunluk, malzeme, aciklama, agirlik, miktar, isPdf, isDxf, isStep, stokGrupId, stokGrupad, malzemeGrupId, malzemeGrupAd, malzemeAltGrupId, malzemeAltGrupAd, malzemeAltGrup2Id, malzemeAltGrup2Ad, olcuBirimId, boy, en, yukseklik, cap, etKalinligi, stokTipId, logoKod, malzemeStandartId, profilTipId, parcaGrupad, isSatinalma, Pdf, Dxf, Step, guncelle, Sil });
-            dataGridViewStokKart.Location = new System.Drawing.Point(3, 3);
-            dataGridViewStokKart.Name = "dataGridViewStokKart";
-            dataGridViewStokKart.RowTemplate.Height = 25;
-            dataGridViewStokKart.ShowCellToolTips = false;
-            dataGridViewStokKart.Size = new System.Drawing.Size(1279, 466);
-            dataGridViewStokKart.TabIndex = 5;
-            dataGridViewStokKart.CellClick += dataGridView_CellClick;
-            dataGridViewStokKart.CellFormatting += dataGridViewStokKart_CellFormatting;
-            dataGridViewStokKart.CellMouseMove += dataGridViewStokKart_CellMouseMove;
-            dataGridViewStokKart.CellPainting += dataGridViewStokKart_CellPainting;
-            dataGridViewStokKart.CurrentCellDirtyStateChanged += dataGridViewStokKart_CurrentCellDirtyStateChanged;
-            dataGridViewStokKart.MouseDown += dataGridViewStokKart_MouseDown;
-            // 
-            // panelFilter
-            // 
-            panelFilter.Controls.Add(dataGridViewStokKart);
-            panelFilter.Location = new System.Drawing.Point(0, 315);
-            panelFilter.Name = "panelFilter";
-            panelFilter.Size = new System.Drawing.Size(1284, 423);
-            panelFilter.TabIndex = 6;
-            // 
-            // progressBar1
-            // 
-            progressBar1.Location = new System.Drawing.Point(3, 0);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(992, 19);
-            progressBar1.TabIndex = 1;
-            progressBar1.Visible = false;
             // 
             // label2
             // 
@@ -157,115 +70,23 @@
             label2.TabIndex = 26;
             label2.Text = "Proje Kodu";
             // 
-            // projeKodu
+            // clbProjeKodu
             // 
-            projeKodu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            projeKodu.ListBoxVisualSize = 5;
-            projeKodu.Location = new System.Drawing.Point(128, 45);
-            projeKodu.Margin = new System.Windows.Forms.Padding(1);
-            projeKodu.Name = "projeKodu";
-            projeKodu.Padding = new System.Windows.Forms.Padding(1);
-            projeKodu.Size = new System.Drawing.Size(251, 36);
-            projeKodu.TabIndex = 24;
-            projeKodu.SelectedIndexChanged += projeKod_SelectedIndexChanged;
-            // 
-            // panelHeader
-            // 
-            panelHeader.BackColor = System.Drawing.Color.Firebrick;
-            panelHeader.Controls.Add(roundedButton3);
-            panelHeader.Controls.Add(labelHeader);
-            panelHeader.Controls.Add(roundedButton1);
-            panelHeader.Controls.Add(roundedButton2);
-            panelHeader.Location = new System.Drawing.Point(0, 0);
-            panelHeader.Name = "panelHeader";
-            panelHeader.Size = new System.Drawing.Size(1287, 32);
-            panelHeader.TabIndex = 7;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
-            // 
-            // roundedButton3
-            // 
-            roundedButton3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            roundedButton3.BackColor = System.Drawing.Color.Firebrick;
-            roundedButton3.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton3.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton3.BorderRadius = 10;
-            roundedButton3.BorderSize = 2;
-            roundedButton3.FlatAppearance.BorderSize = 0;
-            roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton3.ForeColor = System.Drawing.Color.White;
-            roundedButton3.Location = new System.Drawing.Point(1249, 1);
-            roundedButton3.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton3.Name = "roundedButton3";
-            roundedButton3.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton3.Size = new System.Drawing.Size(29, 27);
-            roundedButton3.TabIndex = 100;
-            roundedButton3.Text = "X";
-            roundedButton3.TextColor = System.Drawing.Color.White;
-            roundedButton3.UseVisualStyleBackColor = false;
-            roundedButton3.Click += buttonClose_Click;
-            // 
-            // labelHeader
-            // 
-            labelHeader.AutoSize = true;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            labelHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            labelHeader.Location = new System.Drawing.Point(12, 6);
-            labelHeader.Name = "labelHeader";
-            labelHeader.Size = new System.Drawing.Size(102, 17);
-            labelHeader.TabIndex = 1;
-            labelHeader.Text = "Proje Dosyaları";
-            // 
-            // roundedButton1
-            // 
-            roundedButton1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            roundedButton1.BackColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderRadius = 10;
-            roundedButton1.BorderSize = 2;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.Location = new System.Drawing.Point(1209, 1);
-            roundedButton1.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton1.Size = new System.Drawing.Size(29, 27);
-            roundedButton1.TabIndex = 98;
-            roundedButton1.Text = "-";
-            roundedButton1.TextColor = System.Drawing.Color.White;
-            roundedButton1.UseVisualStyleBackColor = false;
-            // 
-            // roundedButton2
-            // 
-            roundedButton2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            roundedButton2.BackColor = System.Drawing.Color.Firebrick;
-            roundedButton2.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton2.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton2.BorderRadius = 10;
-            roundedButton2.BorderSize = 2;
-            roundedButton2.FlatAppearance.BorderSize = 0;
-            roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            roundedButton2.ForeColor = System.Drawing.Color.White;
-            roundedButton2.Location = new System.Drawing.Point(1170, 2);
-            roundedButton2.Margin = new System.Windows.Forms.Padding(0);
-            roundedButton2.Name = "roundedButton2";
-            roundedButton2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            roundedButton2.Size = new System.Drawing.Size(29, 27);
-            roundedButton2.TabIndex = 99;
-            roundedButton2.Text = "?";
-            roundedButton2.TextColor = System.Drawing.Color.White;
-            roundedButton2.UseVisualStyleBackColor = false;
+            clbProjeKodu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbProjeKodu.ListBoxVisualSize = 5;
+            clbProjeKodu.Location = new System.Drawing.Point(128, 45);
+            clbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
+            clbProjeKodu.Name = "clbProjeKodu";
+            clbProjeKodu.Padding = new System.Windows.Forms.Padding(1);
+            clbProjeKodu.selectedDataRowId = null;
+            clbProjeKodu.selectedDataRowValue = null;
+            clbProjeKodu.Size = new System.Drawing.Size(251, 36);
+            clbProjeKodu.TabIndex = 24;
+            clbProjeKodu.SelectedIndexChanged += projeKod_SelectedIndexChanged;
             // 
             // panelFooter
             // 
             panelFooter.Controls.Add(roundedButton4);
-            panelFooter.Controls.Add(progressBar1);
             panelFooter.Location = new System.Drawing.Point(0, 741);
             panelFooter.Margin = new System.Windows.Forms.Padding(0);
             panelFooter.Name = "panelFooter";
@@ -274,16 +95,23 @@
             // 
             // roundedButton4
             // 
-            roundedButton4.BackColor = System.Drawing.Color.OliveDrab;
-            roundedButton4.BackgroundColor = System.Drawing.Color.OliveDrab;
+            roundedButton4.BackColor = System.Drawing.Color.SteelBlue;
+            roundedButton4.BackgroundColor = System.Drawing.Color.DodgerBlue;
             roundedButton4.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            roundedButton4.BorderRadius = 40;
-            roundedButton4.BorderSize = 2;
+            roundedButton4.BorderSize = 0;
+            roundedButton4.CornerRadius = 20;
+            roundedButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton4.FlatAppearance.BorderSize = 0;
             roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedButton4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             roundedButton4.ForeColor = System.Drawing.Color.White;
-            roundedButton4.Location = new System.Drawing.Point(1026, 3);
+            roundedButton4.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedButton4.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedButton4.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedButton4.HoverColor2 = System.Drawing.Color.Navy;
+            roundedButton4.Icon = null;
+            roundedButton4.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            roundedButton4.Location = new System.Drawing.Point(1079, 2);
             roundedButton4.Name = "roundedButton4";
             roundedButton4.Size = new System.Drawing.Size(152, 59);
             roundedButton4.TabIndex = 2;
@@ -301,29 +129,33 @@
             label1.TabIndex = 103;
             label1.Text = "Stok Grubu";
             // 
-            // cbxStokGrup
+            // clbStokGrup
             // 
-            cbxStokGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxStokGrup.ListBoxVisualSize = 5;
-            cbxStokGrup.Location = new System.Drawing.Point(128, 75);
-            cbxStokGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxStokGrup.Name = "cbxStokGrup";
-            cbxStokGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxStokGrup.Size = new System.Drawing.Size(251, 36);
-            cbxStokGrup.TabIndex = 102;
-            cbxStokGrup.SelectedIndexChanged += parcaGrubu_SelectedIndexChanged;
+            clbStokGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbStokGrup.ListBoxVisualSize = 5;
+            clbStokGrup.Location = new System.Drawing.Point(128, 75);
+            clbStokGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbStokGrup.Name = "clbStokGrup";
+            clbStokGrup.Padding = new System.Windows.Forms.Padding(1);
+            clbStokGrup.selectedDataRowId = null;
+            clbStokGrup.selectedDataRowValue = null;
+            clbStokGrup.Size = new System.Drawing.Size(251, 36);
+            clbStokGrup.TabIndex = 102;
+            clbStokGrup.SelectedIndexChanged += parcaGrubu_SelectedIndexChanged;
             // 
-            // cbxMalzemeGrup
+            // clbMalzemeGrup
             // 
-            cbxMalzemeGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeGrup.ListBoxVisualSize = 5;
-            cbxMalzemeGrup.Location = new System.Drawing.Point(128, 107);
-            cbxMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrup.Name = "cbxMalzemeGrup";
-            cbxMalzemeGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrup.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeGrup.TabIndex = 104;
-            cbxMalzemeGrup.SelectedIndexChanged += parcaAltGrubu_SelectedIndexChanged;
+            clbMalzemeGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbMalzemeGrup.ListBoxVisualSize = 5;
+            clbMalzemeGrup.Location = new System.Drawing.Point(128, 107);
+            clbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrup.Name = "clbMalzemeGrup";
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrup.selectedDataRowId = null;
+            clbMalzemeGrup.selectedDataRowValue = null;
+            clbMalzemeGrup.Size = new System.Drawing.Size(251, 36);
+            clbMalzemeGrup.TabIndex = 104;
+            clbMalzemeGrup.SelectedIndexChanged += parcaAltGrubu_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -343,99 +175,88 @@
             label4.TabIndex = 107;
             label4.Text = "Parça Adı";
             // 
-            // textBoxParcaAdi
+            // ctbParcaAdi
             // 
-            textBoxParcaAdi.BackColor = System.Drawing.Color.White;
-            textBoxParcaAdi.BorderColor = System.Drawing.Color.Silver;
-            textBoxParcaAdi.BorderFocusColor = System.Drawing.Color.HotPink;
-            textBoxParcaAdi.BorderRadius = 5;
-            textBoxParcaAdi.BorderSize = 1;
-            textBoxParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBoxParcaAdi.ForeColor = System.Drawing.Color.Black;
-            textBoxParcaAdi.isPlaceHolder = false;
-            textBoxParcaAdi.Location = new System.Drawing.Point(128, 212);
-            textBoxParcaAdi.Multiline = false;
-            textBoxParcaAdi.Name = "textBoxParcaAdi";
-            textBoxParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            textBoxParcaAdi.PasswordChar = false;
-            textBoxParcaAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
-            textBoxParcaAdi.PlaceholderText = "";
-            textBoxParcaAdi.ReadOnly = false;
-            textBoxParcaAdi.SelectionStart = 0;
-            textBoxParcaAdi.Size = new System.Drawing.Size(250, 28);
-            textBoxParcaAdi.TabIndex = 108;
-            textBoxParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            textBoxParcaAdi.TextCustom = "";
-            textBoxParcaAdi.UnderlinedStyle = false;
-            textBoxParcaAdi.TextChanged += textBoxParcaAdi_TextChanged;
-            textBoxParcaAdi.KeyDown += parcaAdi_KeyDown;
+            ctbParcaAdi.BackColor = System.Drawing.Color.White;
+            ctbParcaAdi.BorderColor = System.Drawing.Color.Silver;
+            ctbParcaAdi.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbParcaAdi.BorderRadius = 5;
+            ctbParcaAdi.BorderSize = 1;
+            ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbParcaAdi.ForeColor = System.Drawing.Color.Black;
+            ctbParcaAdi.isPlaceHolder = false;
+            ctbParcaAdi.Location = new System.Drawing.Point(128, 212);
+            ctbParcaAdi.Multiline = false;
+            ctbParcaAdi.Name = "ctbParcaAdi";
+            ctbParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbParcaAdi.PasswordChar = false;
+            ctbParcaAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbParcaAdi.PlaceholderText = "";
+            ctbParcaAdi.ReadOnly = false;
+            ctbParcaAdi.SelectionStart = 0;
+            ctbParcaAdi.Size = new System.Drawing.Size(250, 28);
+            ctbParcaAdi.TabIndex = 108;
+            ctbParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbParcaAdi.TextCustom = "";
+            ctbParcaAdi.UnderlinedStyle = false;
+            ctbParcaAdi.TextChanged += textBoxParcaAdi_TextChanged;
+            ctbParcaAdi.KeyDown += parcaAdi_KeyDown;
             // 
             // chkSatinalma
             // 
             chkSatinalma.AutoSize = true;
-            chkSatinalma.Location = new System.Drawing.Point(542, 52);
+            chkSatinalma.Checked = true;
+            chkSatinalma.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            chkSatinalma.Location = new System.Drawing.Point(713, 218);
             chkSatinalma.Name = "chkSatinalma";
-            chkSatinalma.Size = new System.Drawing.Size(219, 19);
+            chkSatinalma.Size = new System.Drawing.Size(107, 19);
             chkSatinalma.TabIndex = 109;
-            chkSatinalma.Text = "Satınalma siparişi verilmemiş kayıtlar";
+            chkSatinalma.Text = "Satınalma talep";
+            chkSatinalma.ThreeState = true;
             chkSatinalma.UseVisualStyleBackColor = true;
             chkSatinalma.CheckedChanged += chkSatinalma_CheckedChanged;
             // 
             // chkPdf
             // 
             chkPdf.AutoSize = true;
-            chkPdf.Location = new System.Drawing.Point(542, 80);
+            chkPdf.Checked = true;
+            chkPdf.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            chkPdf.Location = new System.Drawing.Point(444, 217);
             chkPdf.Name = "chkPdf";
-            chkPdf.Size = new System.Drawing.Size(137, 19);
+            chkPdf.Size = new System.Drawing.Size(47, 19);
             chkPdf.TabIndex = 110;
-            chkPdf.Text = "PDF olmayan kayıtlar";
+            chkPdf.Text = "PDF";
+            chkPdf.ThreeState = true;
             chkPdf.UseVisualStyleBackColor = true;
-            chkPdf.CheckedChanged += chkPdf_CheckedChanged;
+            chkPdf.CheckStateChanged += chkPdf_CheckStateChanged;
             // 
             // chkDxf
             // 
             chkDxf.AutoSize = true;
-            chkDxf.Location = new System.Drawing.Point(542, 105);
+            chkDxf.Checked = true;
+            chkDxf.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            chkDxf.Location = new System.Drawing.Point(525, 218);
             chkDxf.Name = "chkDxf";
-            chkDxf.Size = new System.Drawing.Size(137, 19);
+            chkDxf.Size = new System.Drawing.Size(47, 19);
             chkDxf.TabIndex = 111;
-            chkDxf.Text = "DXF olmayan kayıtlar";
+            chkDxf.Text = "DXF";
+            chkDxf.ThreeState = true;
             chkDxf.UseVisualStyleBackColor = true;
-            chkDxf.CheckedChanged += chkDxf_CheckedChanged;
+            chkDxf.CheckStateChanged += chkDxf_CheckedChanged;
             // 
             // chkStep
             // 
             chkStep.AutoSize = true;
-            chkStep.Location = new System.Drawing.Point(542, 126);
+            chkStep.Checked = true;
+            chkStep.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            chkStep.Location = new System.Drawing.Point(612, 218);
             chkStep.Name = "chkStep";
-            chkStep.Size = new System.Drawing.Size(141, 19);
+            chkStep.Size = new System.Drawing.Size(51, 19);
             chkStep.TabIndex = 112;
-            chkStep.Text = "STEP olmayan kayıtlar";
+            chkStep.Text = "STEP";
+            chkStep.ThreeState = true;
             chkStep.UseVisualStyleBackColor = true;
             chkStep.CheckedChanged += chkStep_CheckedChanged;
-            // 
-            // chkSec
-            // 
-            chkSec.AutoSize = true;
-            chkSec.Location = new System.Drawing.Point(542, 151);
-            chkSec.Name = "chkSec";
-            chkSec.Size = new System.Drawing.Size(189, 19);
-            chkSec.TabIndex = 113;
-            chkSec.Text = "Seçilmiş ve Seçilmemiş Kayıtlar";
-            chkSec.ThreeState = true;
-            chkSec.UseVisualStyleBackColor = true;
-            chkSec.CheckStateChanged += chkSec_CheckStateChanged;
-            // 
-            // selectAll
-            // 
-            selectAll.AutoSize = true;
-            selectAll.Location = new System.Drawing.Point(35, 262);
-            selectAll.Name = "selectAll";
-            selectAll.Size = new System.Drawing.Size(92, 19);
-            selectAll.TabIndex = 114;
-            selectAll.Text = "Tümünü Seç";
-            selectAll.UseVisualStyleBackColor = true;
-            selectAll.CheckStateChanged += selectAll_CheckStateChanged;
             // 
             // contextMenuStrip1
             // 
@@ -457,33 +278,6 @@
             stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
             stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
             // 
-            // lblToplamKayitSayisi
-            // 
-            lblToplamKayitSayisi.AutoSize = true;
-            lblToplamKayitSayisi.Location = new System.Drawing.Point(1065, 45);
-            lblToplamKayitSayisi.Name = "lblToplamKayitSayisi";
-            lblToplamKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblToplamKayitSayisi.TabIndex = 117;
-            lblToplamKayitSayisi.Text = "0";
-            // 
-            // lblSecilmisKayitSayisi
-            // 
-            lblSecilmisKayitSayisi.AutoSize = true;
-            lblSecilmisKayitSayisi.Location = new System.Drawing.Point(1065, 87);
-            lblSecilmisKayitSayisi.Name = "lblSecilmisKayitSayisi";
-            lblSecilmisKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblSecilmisKayitSayisi.TabIndex = 116;
-            lblSecilmisKayitSayisi.Text = "0";
-            // 
-            // lblKayitSayisi
-            // 
-            lblKayitSayisi.AutoSize = true;
-            lblKayitSayisi.Location = new System.Drawing.Point(1065, 66);
-            lblKayitSayisi.Name = "lblKayitSayisi";
-            lblKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblKayitSayisi.TabIndex = 115;
-            lblKayitSayisi.Text = "0";
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -493,17 +287,19 @@
             label5.TabIndex = 119;
             label5.Text = "Malzeme Alt Grubu";
             // 
-            // cbxMalzemeAltGrup
+            // clbMalzemeAltGrup
             // 
-            cbxMalzemeAltGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup.Location = new System.Drawing.Point(127, 142);
-            cbxMalzemeAltGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup.Name = "cbxMalzemeAltGrup";
-            cbxMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeAltGrup.TabIndex = 118;
-            cbxMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
+            clbMalzemeAltGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbMalzemeAltGrup.ListBoxVisualSize = 5;
+            clbMalzemeAltGrup.Location = new System.Drawing.Point(127, 142);
+            clbMalzemeAltGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
+            clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrup.selectedDataRowId = null;
+            clbMalzemeAltGrup.selectedDataRowValue = null;
+            clbMalzemeAltGrup.Size = new System.Drawing.Size(251, 36);
+            clbMalzemeAltGrup.TabIndex = 118;
+            clbMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -514,336 +310,126 @@
             label6.TabIndex = 121;
             label6.Text = "Malzeme Alt Grubu 2";
             // 
-            // cbxMalzemeAltGrup2
-            // 
-            cbxMalzemeAltGrup2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup2.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup2.Location = new System.Drawing.Point(128, 180);
-            cbxMalzemeAltGrup2.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup2.Name = "cbxMalzemeAltGrup2";
-            cbxMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup2.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeAltGrup2.TabIndex = 120;
-            cbxMalzemeAltGrup2.SelectedIndexChanged += cbxMalzemeAltGrup2_SelectedIndexChanged;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "stokKartId";
-            Id.Name = "Id";
-            Id.Visible = false;
-            // 
-            // hammaddeId
-            // 
-            hammaddeId.HeaderText = "hammaddeId";
-            hammaddeId.Name = "hammaddeId";
-            hammaddeId.Visible = false;
-            // 
-            // sec
-            // 
-            sec.DataPropertyName = "filtre";
-            sec.HeaderText = "";
-            sec.Name = "sec";
-            sec.Width = 20;
-            // 
-            // projeId
-            // 
-            projeId.DataPropertyName = "filtre";
-            projeId.HeaderText = "Proje Id";
-            projeId.Name = "projeId";
-            projeId.Visible = false;
-            // 
-            // projekod
-            // 
-            projekod.HeaderText = "Proje Kodu";
-            projekod.Name = "projekod";
-            projekod.ReadOnly = true;
-            // 
-            // parcaKod
-            // 
-            parcaKod.DataPropertyName = "filtre";
-            parcaKod.HeaderText = "Parça Kodu";
-            parcaKod.Name = "parcaKod";
-            parcaKod.ReadOnly = true;
-            // 
-            // ad
-            // 
-            ad.DataPropertyName = "filtre";
-            ad.HeaderText = "Stok Adı";
-            ad.Name = "ad";
-            ad.ReadOnly = true;
-            // 
-            // parcaAdi
-            // 
-            parcaAdi.HeaderText = "parcaAdi";
-            parcaAdi.Name = "parcaAdi";
-            parcaAdi.Visible = false;
-            // 
-            // boyut
-            // 
-            boyut.HeaderText = "Boyut";
-            boyut.Name = "boyut";
-            boyut.ReadOnly = true;
-            // 
-            // uzunluk
-            // 
-            uzunluk.HeaderText = "Uzunluk";
-            uzunluk.Name = "uzunluk";
-            uzunluk.ReadOnly = true;
-            // 
-            // malzeme
-            // 
-            malzeme.HeaderText = "Malzeme";
-            malzeme.Name = "malzeme";
-            malzeme.ReadOnly = true;
-            // 
-            // aciklama
-            // 
-            aciklama.HeaderText = "Açıklama";
-            aciklama.Name = "aciklama";
-            aciklama.ReadOnly = true;
-            // 
-            // agirlik
-            // 
-            agirlik.HeaderText = "Ağırlık";
-            agirlik.Name = "agirlik";
-            agirlik.ReadOnly = true;
-            // 
-            // miktar
-            // 
-            miktar.HeaderText = "Miktar";
-            miktar.Name = "miktar";
-            miktar.ReadOnly = true;
-            // 
-            // isPdf
-            // 
-            isPdf.DataPropertyName = "filtre";
-            isPdf.HeaderText = "Pdf?";
-            isPdf.Name = "isPdf";
-            isPdf.ReadOnly = true;
-            isPdf.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            isPdf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            isPdf.Visible = false;
-            // 
-            // isDxf
-            // 
-            isDxf.DataPropertyName = "filtre";
-            isDxf.HeaderText = "Dxf?";
-            isDxf.Name = "isDxf";
-            isDxf.ReadOnly = true;
-            isDxf.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            isDxf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            isDxf.Visible = false;
-            // 
-            // isStep
-            // 
-            isStep.DataPropertyName = "filtre";
-            isStep.HeaderText = "Step?";
-            isStep.Name = "isStep";
-            isStep.ReadOnly = true;
-            isStep.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            isStep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            isStep.Visible = false;
-            // 
-            // stokGrupId
-            // 
-            stokGrupId.DataPropertyName = "filtre";
-            stokGrupId.HeaderText = "stokGrupId";
-            stokGrupId.Name = "stokGrupId";
-            stokGrupId.ReadOnly = true;
-            stokGrupId.Visible = false;
-            // 
-            // stokGrupad
-            // 
-            stokGrupad.HeaderText = "Stok Grup";
-            stokGrupad.Name = "stokGrupad";
-            stokGrupad.ReadOnly = true;
-            // 
-            // malzemeGrupId
-            // 
-            malzemeGrupId.DataPropertyName = "filtre";
-            malzemeGrupId.HeaderText = "malzemeGrupId";
-            malzemeGrupId.Name = "malzemeGrupId";
-            malzemeGrupId.ReadOnly = true;
-            malzemeGrupId.Visible = false;
-            // 
-            // malzemeGrupAd
-            // 
-            malzemeGrupAd.HeaderText = "Malzeme Grup";
-            malzemeGrupAd.Name = "malzemeGrupAd";
-            // 
-            // malzemeAltGrupId
-            // 
-            malzemeAltGrupId.HeaderText = "malzemeAltGrupId";
-            malzemeAltGrupId.Name = "malzemeAltGrupId";
-            malzemeAltGrupId.Visible = false;
-            // 
-            // malzemeAltGrupAd
-            // 
-            malzemeAltGrupAd.HeaderText = "Malzeme Alt Grup";
-            malzemeAltGrupAd.Name = "malzemeAltGrupAd";
-            // 
-            // malzemeAltGrup2Id
-            // 
-            malzemeAltGrup2Id.HeaderText = "malzemeAltGrup2Id";
-            malzemeAltGrup2Id.Name = "malzemeAltGrup2Id";
-            malzemeAltGrup2Id.Visible = false;
-            // 
-            // malzemeAltGrup2Ad
-            // 
-            malzemeAltGrup2Ad.HeaderText = "Malzeme Alt Grup2";
-            malzemeAltGrup2Ad.Name = "malzemeAltGrup2Ad";
-            // 
-            // olcuBirimId
-            // 
-            olcuBirimId.HeaderText = "olcuBirimId";
-            olcuBirimId.Name = "olcuBirimId";
-            olcuBirimId.Visible = false;
-            // 
-            // boy
-            // 
-            boy.HeaderText = "boy";
-            boy.Name = "boy";
-            boy.Visible = false;
-            // 
-            // en
-            // 
-            en.HeaderText = "en";
-            en.Name = "en";
-            en.Visible = false;
-            // 
-            // yukseklik
-            // 
-            yukseklik.HeaderText = "yukseklik";
-            yukseklik.Name = "yukseklik";
-            yukseklik.Visible = false;
-            // 
-            // cap
-            // 
-            cap.HeaderText = "cap";
-            cap.Name = "cap";
-            cap.Visible = false;
-            // 
-            // etKalinligi
-            // 
-            etKalinligi.HeaderText = "etKalinligi";
-            etKalinligi.Name = "etKalinligi";
-            etKalinligi.Visible = false;
-            // 
-            // stokTipId
-            // 
-            stokTipId.HeaderText = "stokTipId";
-            stokTipId.Name = "stokTipId";
-            stokTipId.Visible = false;
-            // 
-            // logoKod
-            // 
-            logoKod.HeaderText = "logoKod";
-            logoKod.Name = "logoKod";
-            logoKod.Visible = false;
-            // 
-            // malzemeStandartId
-            // 
-            malzemeStandartId.HeaderText = "malzemeStandartId";
-            malzemeStandartId.Name = "malzemeStandartId";
-            malzemeStandartId.Visible = false;
-            // 
-            // profilTipId
-            // 
-            profilTipId.HeaderText = "profilTipId";
-            profilTipId.Name = "profilTipId";
-            profilTipId.Visible = false;
-            // 
-            // parcaGrupad
-            // 
-            parcaGrupad.HeaderText = "Parça Grubu";
-            parcaGrupad.Name = "parcaGrupad";
-            parcaGrupad.ReadOnly = true;
-            // 
-            // isSatinalma
-            // 
-            isSatinalma.DataPropertyName = "filtre";
-            isSatinalma.HeaderText = "SatınalmaTalepAçıldı?";
-            isSatinalma.Name = "isSatinalma";
-            isSatinalma.ReadOnly = true;
-            isSatinalma.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            isSatinalma.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            isSatinalma.Visible = false;
-            // 
-            // Pdf
-            // 
-            Pdf.HeaderText = "Pdf";
-            Pdf.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Pdf.Name = "Pdf";
-            Pdf.Width = 50;
-            // 
-            // Dxf
-            // 
-            Dxf.HeaderText = "Dxf";
-            Dxf.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Dxf.Name = "Dxf";
-            Dxf.Width = 50;
-            // 
-            // Step
-            // 
-            Step.HeaderText = "Step";
-            Step.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Step.Name = "Step";
-            Step.Width = 50;
-            // 
-            // guncelle
-            // 
-            guncelle.HeaderText = "Güncelle";
-            guncelle.Image = Properties.Resources.data_update_icon;
-            guncelle.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            guncelle.Name = "guncelle";
-            guncelle.Visible = false;
-            // 
-            // Sil
-            // 
-            Sil.HeaderText = "Sil";
-            Sil.Image = Properties.Resources.sil1;
-            Sil.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Sil.Name = "Sil";
-            Sil.Visible = false;
+            // clbMalzemeAltGrup2
+            // 
+            clbMalzemeAltGrup2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            clbMalzemeAltGrup2.ListBoxVisualSize = 5;
+            clbMalzemeAltGrup2.Location = new System.Drawing.Point(128, 180);
+            clbMalzemeAltGrup2.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
+            clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(1);
+            clbMalzemeAltGrup2.selectedDataRowId = null;
+            clbMalzemeAltGrup2.selectedDataRowValue = null;
+            clbMalzemeAltGrup2.Size = new System.Drawing.Size(251, 36);
+            clbMalzemeAltGrup2.TabIndex = 120;
+            clbMalzemeAltGrup2.SelectedIndexChanged += cbxMalzemeAltGrup2_SelectedIndexChanged;
+            // 
+            // roundedIconButton1
+            // 
+            roundedIconButton1.BackColor = System.Drawing.Color.Cyan;
+            roundedIconButton1.BorderColor = System.Drawing.Color.Black;
+            roundedIconButton1.BorderSize = 0;
+            roundedIconButton1.CornerRadius = 10;
+            roundedIconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            roundedIconButton1.FlatAppearance.BorderSize = 0;
+            roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedIconButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            roundedIconButton1.ForeColor = System.Drawing.Color.Purple;
+            roundedIconButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedIconButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedIconButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedIconButton1.HoverColor2 = System.Drawing.Color.Navy;
+            roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
+            roundedIconButton1.IconColor = System.Drawing.Color.Purple;
+            roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            roundedIconButton1.IconSize = 24;
+            roundedIconButton1.Location = new System.Drawing.Point(1112, 54);
+            roundedIconButton1.Name = "roundedIconButton1";
+            roundedIconButton1.Size = new System.Drawing.Size(119, 35);
+            roundedIconButton1.TabIndex = 122;
+            roundedIconButton1.Text = "Excelden Al";
+            roundedIconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            roundedIconButton1.UseVisualStyleBackColor = false;
+            roundedIconButton1.Click += roundedIconButton1_Click;
+            // 
+            // headerPanel1
+            // 
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Proje Dosyaları";
+            headerPanel1.Location = new System.Drawing.Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new System.Drawing.Size(1287, 32);
+            headerPanel1.TabIndex = 123;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(8, 246);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1273, 498);
+            universalGrid1.TabIndex = 124;
+            // 
+            // roundedIconButton2
+            // 
+            roundedIconButton2.BackColor = System.Drawing.Color.DodgerBlue;
+            roundedIconButton2.BorderColor = System.Drawing.Color.Black;
+            roundedIconButton2.BorderSize = 0;
+            roundedIconButton2.CornerRadius = 5;
+            roundedIconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            roundedIconButton2.FlatAppearance.BorderSize = 0;
+            roundedIconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedIconButton2.ForeColor = System.Drawing.Color.White;
+            roundedIconButton2.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedIconButton2.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedIconButton2.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedIconButton2.HoverColor2 = System.Drawing.Color.Navy;
+            roundedIconButton2.IconChar = FontAwesome.Sharp.IconChar.Repeat;
+            roundedIconButton2.IconColor = System.Drawing.Color.White;
+            roundedIconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            roundedIconButton2.IconSize = 36;
+            roundedIconButton2.Location = new System.Drawing.Point(409, 49);
+            roundedIconButton2.Name = "roundedIconButton2";
+            roundedIconButton2.Size = new System.Drawing.Size(45, 32);
+            roundedIconButton2.TabIndex = 125;
+            roundedIconButton2.UseVisualStyleBackColor = false;
+            roundedIconButton2.Click += roundedIconButton2_Click;
             // 
             // ProjeDosyalari
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1287, 807);
+            Controls.Add(roundedIconButton2);
+            Controls.Add(headerPanel1);
+            Controls.Add(roundedIconButton1);
             Controls.Add(label6);
-            Controls.Add(cbxMalzemeAltGrup2);
+            Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(label5);
-            Controls.Add(cbxMalzemeAltGrup);
-            Controls.Add(lblToplamKayitSayisi);
-            Controls.Add(lblSecilmisKayitSayisi);
-            Controls.Add(lblKayitSayisi);
-            Controls.Add(selectAll);
-            Controls.Add(chkSec);
+            Controls.Add(clbMalzemeAltGrup);
             Controls.Add(chkStep);
             Controls.Add(chkDxf);
             Controls.Add(chkPdf);
             Controls.Add(chkSatinalma);
-            Controls.Add(textBoxParcaAdi);
+            Controls.Add(ctbParcaAdi);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(cbxMalzemeGrup);
+            Controls.Add(clbMalzemeGrup);
             Controls.Add(label1);
-            Controls.Add(cbxStokGrup);
+            Controls.Add(clbStokGrup);
             Controls.Add(label2);
             Controls.Add(panelFooter);
-            Controls.Add(projeKodu);
-            Controls.Add(panelHeader);
-            Controls.Add(panelFilter);
+            Controls.Add(clbProjeKodu);
+            Controls.Add(universalGrid1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "ProjeDosyalari";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "ProjeDosyalari";
+            FormClosing += ProjeDosyalari_FormClosing;
             Load += form_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewStokKart).EndInit();
-            panelFilter.ResumeLayout(false);
-            panelHeader.ResumeLayout(false);
-            panelHeader.PerformLayout();
             panelFooter.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
@@ -851,81 +437,30 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridViewStokKart;
-        private System.Windows.Forms.Panel panelFilter;
-        private System.Windows.Forms.Panel panelHeader;
-        private CustomControls.RoundedButton roundedButton3;
-        private CustomControls.RoundedButton roundedButton2;
-        private CustomControls.RoundedButton roundedButton1;
-        private System.Windows.Forms.Label labelHeader;
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.Label label2;
-        private CustomControls.CustomComboListBox projeKodu;
+        private CustomControls.CustomComboListBox clbProjeKodu;
         private System.Windows.Forms.Label label1;
-        private CustomControls.CustomComboListBox cbxStokGrup;
-        private CustomControls.CustomComboListBox cbxMalzemeGrup;
+        private CustomControls.CustomComboListBox clbStokGrup;
+        private CustomControls.CustomComboListBox clbMalzemeGrup;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private CustomControls.CustomTextBox textBoxParcaAdi;
+        private CustomControls.CustomTextBox ctbParcaAdi;
         private System.Windows.Forms.CheckBox chkSatinalma;
         private System.Windows.Forms.CheckBox chkPdf;
         private System.Windows.Forms.CheckBox chkDxf;
         private System.Windows.Forms.CheckBox chkStep;
-        private System.Windows.Forms.CheckBox chkSec;
         private CustomControls.RoundedButton roundedButton4;
-        private System.Windows.Forms.CheckBox selectAll;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem seçiliKalemlerİçinSaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;
-        private System.Windows.Forms.Label lblToplamKayitSayisi;
-        private System.Windows.Forms.Label lblSecilmisKayitSayisi;
-        private System.Windows.Forms.Label lblKayitSayisi;
         private System.Windows.Forms.Label label5;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup;
+        private CustomControls.CustomComboListBox clbMalzemeAltGrup;
         private System.Windows.Forms.Label label6;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup2;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hammaddeId;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn sec;
-        private System.Windows.Forms.DataGridViewTextBoxColumn projeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn projekod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaKod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaAdi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn boyut;
-        private System.Windows.Forms.DataGridViewTextBoxColumn uzunluk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzeme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aciklama;
-        private System.Windows.Forms.DataGridViewTextBoxColumn agirlik;
-        private System.Windows.Forms.DataGridViewTextBoxColumn miktar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isPdf;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isDxf;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stokGrupId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stokGrupad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeGrupId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeGrupAd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeAltGrupId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeAltGrupAd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeAltGrup2Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeAltGrup2Ad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn olcuBirimId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn boy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn en;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yukseklik;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn etKalinligi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stokTipId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn logoKod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malzemeStandartId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profilTipId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcaGrupad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isSatinalma;
-        private System.Windows.Forms.DataGridViewImageColumn Pdf;
-        private System.Windows.Forms.DataGridViewImageColumn Dxf;
-        private System.Windows.Forms.DataGridViewImageColumn Step;
-        private System.Windows.Forms.DataGridViewImageColumn guncelle;
-        private System.Windows.Forms.DataGridViewImageColumn Sil;
+        private CustomControls.CustomComboListBox clbMalzemeAltGrup2;
+        private CustomControls.RoundedIconButton roundedIconButton1;
+        private CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.UniversalGrid universalGrid1;
+        private CustomControls.RoundedIconButton roundedIconButton2;
     }
 }

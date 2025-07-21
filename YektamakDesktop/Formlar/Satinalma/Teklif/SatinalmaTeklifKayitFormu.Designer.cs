@@ -44,7 +44,7 @@
             clbDoviz = new YektamakDesktop.CustomControls.CustomComboListBox();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid(_cache);
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
             ctbTerminSuresi = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
             ctbTeklifGecerlilikSuresi = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();

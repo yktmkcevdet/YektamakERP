@@ -132,11 +132,10 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void buttonPersonelEkle_Click(object sender, EventArgs e)
         {
-            PersonelKayitFormu personelKayitFormu = PersonelKayitFormu.personelKayitFormu;
+            PersonelKayitFormu personelKayitFormu = FormFactory.CreateForm<PersonelKayitFormu>();
             if (personelKayitFormu != null)
             {
-                personelKayitFormu.SaveMode();
-                personelKayitFormu.Show();
+                personelKayitFormu.ShowDialog();
             }
         }
 
@@ -178,11 +177,10 @@ namespace YektamakDesktop.Formlar.Genel
 
         public void buttonEkle_Click(object sender, EventArgs e)
         {
-            PersonelKayitFormu personelKayitFormu = PersonelKayitFormu.personelKayitFormu;
+            PersonelKayitFormu personelKayitFormu = FormFactory.CreateForm<PersonelKayitFormu>();
             if (personelKayitFormu != null)
             {
-                personelKayitFormu.Show();
-                personelKayitFormu.SaveMode();
+                personelKayitFormu.ShowDialog();
             }
         }
 

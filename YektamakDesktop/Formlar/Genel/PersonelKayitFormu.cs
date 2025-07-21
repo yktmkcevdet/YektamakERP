@@ -1,130 +1,87 @@
-﻿using Models;
+﻿using ApiService.Interfaces;
+using Models;
+using Models.DTO;
 using Newtonsoft.Json;
-using ApiService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
-using Utilities.Implementations;
 using Utilities.Interfaces;
-using ApiService.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    public partial class PersonelKayitFormu : Form, IForm
+    public partial class PersonelKayitFormu : Form
     {
-        private static IPersonelService _personelService;
-        public PersonelKayitFormu(IPersonelService personelService)
+        private readonly IPersonelService _personelService;
+        private readonly ICache _cache;
+        private readonly IJsonConverter _jsonConverter;
+        public PersonelKayitFormu(IPersonelService personelService, ICache cache, IJsonConverter jsonConverter)
         {
             _personelService = personelService;
+            _cache = cache;
+            _jsonConverter = jsonConverter;
+            InitializeComponent();
+            ComboBoxListFill.GetLookupAd(_cache.pozisyonList, ref clbPozisyon);
+            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref clbFirma);
+            ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbYonetici);
+            universalGrid1.kullanici = _cache.kullanici;
+            universalGrid1.Grid.MouseClick += Grid_MouseClick;
+            Binding();
         }
-        private static PersonelKayitFormu _personelKayitFormu;
 
-        public static PersonelKayitFormu personelKayitFormu
+        private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
-            get
-            {
-                if (_personelKayitFormu == null)
-                {
-                    _personelKayitFormu = new PersonelKayitFormu();
-                    GlobalData.Yetki(ref _personelKayitFormu);
-                }
-                return _personelKayitFormu;
-            }
+            var personelDTO = (PersonelDTO)universalGrid1.binding.Current;
+            personel = ConvertHelper.ToEntity<Personel>(personelDTO);
         }
-        //Firma ekranından + butonuyla yeni eklenen personelin firma bilgisini tutması için
-        private Personel _personelToSave;
-        public Personel personelToSave { get { if (_personelToSave == null) { _personelToSave = new(); } return _personelToSave; } set { _personelToSave = value; } }
-        private Personel _personelToUpdate;
-        public Personel personelToUpdate { get { if (_personelToUpdate == null) { _personelToUpdate = new(); } return _personelToUpdate; } set { _personelToUpdate = value; } }
 
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
+        //Firma ekranından + butonuyla yeni eklenen personelin firma bilgisini tutması için
+
         private bool yeniResim = false;
         private byte[] yeniResimBytes;
         private string yeniResimFormat;
-        #region mouseMove
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        private Personel _personel;
+        public Personel personel
         {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
+            get { if (_personel == null) { _personel = new(); } return _personel; }
+            set
             {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
+                _personel = value;
+                Binding();
             }
         }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseMove
         private PersonelKayitFormu()
         {
             InitializeComponent();
-            controlsToDisable = new List<Control>
-            {
-                buttonKapat,
-                buttonPersonelKaydet,
-                buttonPersonelGuncelle,
-                buttonResimSec,
-                textBoxEmail,
-                clbFirma,
-                ctbIsim,
-                textBoxPozisyon,
-                ctbSoyisim,
-                textBoxTelefon
-            };
+            Binding();
         }
-        public void UpdateMode(Personel personel)
+        private void Binding()
         {
-            buttonPersonelGuncelle.Visible = true;
-            personelToUpdate=personel;
-            clbFirma.SelectDataRowId(personel.firma.Id??-1);
-            ctbIsim.TextCustom = personel.ad;
-            ctbSoyisim.TextCustom = personel.soyad;
-            textBoxTelefon.TextCustom = personel.telefon;
-            textBoxEmail.TextCustom = personel.mail;
-            textBoxPozisyon.TextCustom = personel.pozisyon;
-            ImageFormat ımageFormat = ImageWorks.GetImageFormatFromString(personel.personelResim.imageFormat);
-            pictureBoxPersonel.Image = ImageWorks.GetImageFromBytes(personel.personelResim.resimData, ımageFormat);
-            yeniResimBytes = personel.personelResim.resimData;
-            yeniResimFormat=personel.personelResim.imageFormat;
-            GetCurrentPersonel();
-            personelToUpdate = JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personelToSave));
+            ctbPersonelAd.DataBindings.Clear();
+            ctbPersonelSoyad.DataBindings.Clear();
+            ctbTelefon.DataBindings.Clear();
+            ctbMail.DataBindings.Clear();
+            clbPozisyon.DataBindings.Clear();
+            clbFirma.DataBindings.Clear();
+            clbYonetici.DataBindings.Clear();
+            pictureBoxPersonel.DataBindings.Clear();
+            ctbId.DataBindings.Clear();
+            ctbId.DataBindings.Add("TextCustom", personel , $"{nameof(personel.Id)}", true ,DataSourceUpdateMode.OnPropertyChanged);
+            ctbPersonelAd.DataBindings.Add("TextCustom", personel, $"{nameof(personel.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbPersonelSoyad.DataBindings.Add("TextCustom", personel, $"{nameof(personel.soyad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbTelefon.DataBindings.Add("TextCustom", personel, $"{nameof(personel.telefon)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbMail.DataBindings.Add("TextCustom", personel, $"{nameof(personel.mail)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbFirma.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.firma)}.{nameof(personel.firma.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbPozisyon.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.pozisyon)}.{nameof(personel.pozisyon.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbYonetici.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.yoneticiPersonelId)}", true, DataSourceUpdateMode.OnPropertyChanged);
         }
-        public void SaveMode()
+        public void UpdateMode(Personel personelUpdate)
         {
-            buttonPersonelGuncelle.Visible = false;
-            personelToUpdate.firma.Id = -1;
-            personelToUpdate.firma.Id= -1;
-        }
-
-        /// <summary>
-        /// Firma güncelleme penceresinden personel eklemek istenilirse kullanılacak
-        /// </summary>
-        /// <param name="firma"></param>
-        public void SaveMode(Personel personel)
-        {
-            buttonPersonelGuncelle.Visible = false;
-            personelToSave=JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            personelToUpdate= JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            clbFirma.SelectDataRowId(personel.firma.Id??-1);
-            clbFirma.Enabled= false;
+            personel = personelUpdate;
         }
         private void buttonResimSec_Click(object sender, EventArgs e)
         {
@@ -138,38 +95,21 @@ namespace YektamakDesktop.Formlar.Genel
                 if (loadedImage != null)
                 {
                     pictureBoxPersonel.Image = loadedImage;
-                    yeniResim = true;
                     ImageFormat format = ImageWorks.GetImageFileFormatFromPath(openFileDialogResim.FileName);
-                    yeniResimBytes = ImageWorks.GetBytesFromImage(loadedImage, format);
-                    yeniResimFormat = format.ToString();
+                    personel.personelResim.resimData = ImageWorks.GetBytesFromImage(loadedImage, format);
+                    personel.personelResim.imageFormat = format.ToString();
                 }
                 else
                 {
                     pictureBoxPersonel.Image = null;
-                    yeniResim = false;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                yeniResim = false;
+                MessageBox.Show(ex.Message);
             }
 
 
-        }
-        private Personel GetCurrentPersonel()
-        {
-            personelToSave.Id=personelToUpdate.Id;
-            personelToSave.firma.Id = clbFirma.selectedDataRowId;
-            personelToSave.firma.ad = clbFirma.selectedDataRowValue;
-            personelToSave.ad = string.IsNullOrEmpty(ctbIsim.TextCustom)?null: ctbIsim.TextCustom;
-            personelToSave.soyad = string.IsNullOrEmpty(ctbSoyisim.TextCustom)?null:ctbSoyisim.TextCustom;
-            personelToSave.telefon = string.IsNullOrEmpty(textBoxTelefon.TextCustom) ? null : textBoxTelefon.TextCustom;
-            personelToSave.mail = string.IsNullOrEmpty(textBoxEmail.TextCustom) ? null : textBoxEmail.TextCustom;
-            personelToSave.pozisyon = string.IsNullOrEmpty(textBoxPozisyon.TextCustom) ? null : textBoxPozisyon.TextCustom;
-            personelToSave.personelResim.resimData = yeniResimBytes;
-            personelToSave.personelResim.imageFormat = yeniResimFormat;
-
-            return personelToSave;
         }
         /// <summary>
         /// Bütün alanlardaki veriler doğru yazılmış mı onun kontrol yapılacak
@@ -178,8 +118,8 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, ctbIsim);
-            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, ctbSoyisim);
+            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, ctbPersonelAd);
+            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, ctbPersonelSoyad);
             result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, clbFirma);
             return result;
         }
@@ -187,79 +127,34 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                personelToSave = GetCurrentPersonel();
-                string result = await _personelService.SavePersonel(personelToSave);
-                this.Enabled = false;
-                if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
+                string jsonResult = await _personelService.SavePersonel(personel);
+                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+                if (result?.result != null)
                 {
-                    MessageBox.Show(result);
-                }
-                else
-                {
-                    IJsonConverter jsonConverter = new Utilities.Implementations.JsonConverter();
-                    DataSet datasetPersonel = jsonConverter.DeserializeToDataSet(result);
-                    int personelId = int.Parse(datasetPersonel.Tables[0].Rows[0][0].ToString());
-                    personelToSave.Id = personelId;
-                    if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(FirmaKayitFormu))//FirmaKayitFormu tarafından çağırılmışsa
-                    {
-                        FirmaKayitFormu.firmaKayitFormu.AddNewPersonel(personelToSave);
-                    }
-                    else if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(PersonelGridFormu))
-                    {
-                        PersonelGridFormu.personelGridFormu.UpdateRow(personelToSave);
-                    }
-                    //GlobalData.personelList.Remove(GlobalData.personelList.Find(x => x.Id == personelToUpdate.Id));
-                    //GlobalData.personelList.Add(personelToUpdate);
-                    personelToUpdate = personelToSave;
-                    MessageBox.Show("Kayıt başarılı");
-                }
-                this.Enabled = true;
-            }
-        }
-        private void buttonKapat_Click(object sender, EventArgs e)
-        {
-            CloseForm(sender, e);
-        }
-
-
-        private void CloseForm(object sender, EventArgs e)
-        {
-            GetCurrentPersonel();
-            if (!GlobalData.CompareClass(personelToSave,personelToUpdate))
-            {
-                DialogResult dialogResult = MessageBox.Show("Formda yapılan değişiklikler kaydedilsin mi","",MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    buttonPersonelKaydet_Click(sender, e);
-                }
-                else
-                {
-                    GlobalData.CloseForm(ref _personelKayitFormu);
+                    personel = _jsonConverter.ToModelList<Personel>(result.result).FirstOrDefault();
+                    _cache.personelList.Add(personel);
                 }
             }
-            else
-            {
-                GlobalData.CloseForm(ref _personelKayitFormu);
-            }
-        }
-
-
-        private void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm(sender, e);
         }
 
         private void PersonelKayitFormu_Load(object sender, EventArgs e)
         {
-            //foreach(Firma firma in GlobalData.firmaUnvanList)
-            //{
-            //    comboListBoxFirma.AddDataRow(firma.Id, firma.unvan);
-            //}
+            List<PersonelDTO> personelList = new();
+            foreach (var item in _cache.personelList)
+            {
+                personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
+            }
+            universalGrid1.SetData(personelList, this.Name);
+        }
+
+        private void PersonelKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveSettings();
+        }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            personel=new Personel();
         }
     }
 }

@@ -38,6 +38,9 @@
     <Compile Update="CustomControls\CustomTextBoxTarih.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="CustomControls\FilterableComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="CustomControls\HeaderPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +75,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Genel\PersonelKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\MainWindow.cs">

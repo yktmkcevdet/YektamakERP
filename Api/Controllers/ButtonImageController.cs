@@ -13,11 +13,5 @@ namespace Api.Controllers
             _dataAccesLayer = dataAccesLayer;
         }
 
-        [HttpPost, Route("api/GetButtonImage")]
-        public string GetButtonImage([FromBody] string restData)
-        {
-            string result = _dataAccesLayer.SaveObject(JsonStringToModel<ButtonImage>(restData), "spGetButtonImage");
-            return result;
-        }
     }
 }

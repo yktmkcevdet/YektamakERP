@@ -133,7 +133,7 @@ namespace YektamakDesktop
         /// <param name="dataTable"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static int IndexOfDataSet(DataTable dataTable, int id)
+        public static int IndexOfDataSet(DataTable dataTable, int? id)
         {
             int index = -1;
             if (dataTable != null)
@@ -151,30 +151,7 @@ namespace YektamakDesktop
             }
             return index;
         }
-        /// <summary>
-        /// Anantar sütunu verilen kaydın dataTable içindeki index'ini verir
-        /// </summary>
-        /// <param name="dataTable"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static int IndexOfDataSet(DataTable dataTable, long id)
-        {
-            int index = -1;
-            if (dataTable != null)
-            {
-                if (dataTable.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dataTable.Rows.Count; i++)
-                    {
-                        if (id == int.Parse(dataTable.Rows[i][0].ToString()))
-                        {
-                            return i;
-                        }
-                    }
-                }
-            }
-            return index;
-        }
+        
         /// <summary>
         /// Anantar sütunu verilen kaydın dataGridView içindeki index'ini verir
         /// </summary>

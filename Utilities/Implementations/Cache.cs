@@ -10,8 +10,7 @@ namespace Utilities.Implementations
 {
     public class Cache : ICache
     {
-        private readonly IJsonConverter JsonConverter;
-        private readonly IDataTableMapper DataTableConverter;
+        private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
         private readonly IKullaniciYetkiService _kullaniciYetki;
@@ -22,12 +21,11 @@ namespace Utilities.Implementations
         private readonly IMaliyetService _maliyetService;
         private readonly IAnaVeriService _anaVeriService;
         private readonly IVadeService _vadeService;
-        public Cache(IJsonConverter jsonConverter, IDataTableMapper dataTableConverter, IProjeService projeService, 
+        public Cache(IJsonConverter jsonConverter, IProjeService projeService, 
             IStokService stokService,IKullaniciYetkiService kullaniciYetki,IFirmaService firmaService,IPersonelService personelService,ISatisService satisService,
             IDovizCinsiService dovizCinsiService,IMaliyetService maliyetService,IAnaVeriService anaVeriService, IVadeService vadeService)
         {
-            JsonConverter = jsonConverter;
-            DataTableConverter = dataTableConverter;
+            _jsonConverter = jsonConverter;
             _projeService = projeService;
             _stokService = stokService;
             _kullaniciYetki = kullaniciYetki;
@@ -294,19 +292,22 @@ namespace Utilities.Implementations
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
             var jsonResult = fetchFunction.Invoke(t);
-            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+            List<T> list = _jsonConverter.ToModelList<T>(result.result);
             return list;
         }
         public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
         {
             var jsonResult = fetchFunction.Invoke();
-            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+            List<T> list = _jsonConverter.ToModelList<T>(result.result);
             return list;
         }
         public async Task<List<T>> GetModelListAsync<T>(Func<Task<string>> fetchFunction) where T : IEntity, new()
         {
             var jsonResult = await fetchFunction();
-            List<T> list = JsonConverter.DeserializeToModelList<T>(jsonResult);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+            List<T> list = _jsonConverter.ToModelList<T>(result.result);
             return list;
         }
         private List<Firma> _firmaList;
@@ -331,6 +332,18 @@ namespace Utilities.Implementations
                     _personelList = GetModelList(_personelService.GetPersonel, new Personel());
                 }
                 return _personelList;
+            }
+        }
+        private List<Pozisyon> _pozisyonList;
+        public List<Pozisyon> pozisyonList
+        {
+            get
+            {
+                if (_pozisyonList == null)
+                {
+                    _pozisyonList = GetModelList(_personelService.GetPozisyon, new Pozisyon());
+                }
+                return _pozisyonList;
             }
         }
         private List<Marka> _markaList;

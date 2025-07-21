@@ -19,7 +19,7 @@ namespace Utilities.Implementations
 
         public PasswordService(IOptions<PasswordHashingOptions> options, ILogger<PasswordService> logger = null)
         {
-            _options = options?.Value ?? new PasswordHashingOptions();
+            _options = new PasswordHashingOptions();
             _logger = logger;
         }
 
@@ -156,21 +156,21 @@ namespace Utilities.Implementations
             }
 
             // Character variety validation
-            var hasLower = password.Any(char.IsLower);
-            var hasUpper = password.Any(char.IsUpper);
-            var hasDigit = password.Any(char.IsDigit);
-            var hasSpecial = password.Any(c => !char.IsLetterOrDigit(c));
+            //var hasLower = password.Any(char.IsLower);
+            //var hasUpper = password.Any(char.IsUpper);
+            //var hasDigit = password.Any(char.IsDigit);
+            //var hasSpecial = password.Any(c => !char.IsLetterOrDigit(c));
 
-            if (!hasLower) result.Errors.Add("Password must contain at least one lowercase letter");
-            if (!hasUpper) result.Errors.Add("Password must contain at least one uppercase letter");
-            if (!hasDigit) result.Errors.Add("Password must contain at least one digit");
-            if (!hasSpecial) result.Errors.Add("Password must contain at least one special character");
+            //if (!hasLower) result.Errors.Add("Password must contain at least one lowercase letter");
+            //if (!hasUpper) result.Errors.Add("Password must contain at least one uppercase letter");
+            //if (!hasDigit) result.Errors.Add("Password must contain at least one digit");
+            //if (!hasSpecial) result.Errors.Add("Password must contain at least one special character");
 
-            // Common password checks
-            if (IsCommonPassword(password))
-            {
-                result.Errors.Add("Password is too common and easily guessable");
-            }
+            //// Common password checks
+            //if (IsCommonPassword(password))
+            //{
+            //    result.Errors.Add("Password is too common and easily guessable");
+            //}
 
             result.IsValid = result.Errors.Count == 0;
             result.Strength = CalculatePasswordStrength(password);

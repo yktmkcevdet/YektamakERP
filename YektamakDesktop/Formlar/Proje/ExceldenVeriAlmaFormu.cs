@@ -1,153 +1,135 @@
-﻿using YektamakDesktop.Formlar.Stok;
+﻿using ApiService.Interfaces;
 using Models;
+using Models.Models;
+using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using ApiService;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using Utilities.Interfaces;
-using Utilities.Implementations;
-using YektamakDesktop.Common;
-using ApiService.Interfaces;
-using Models.Models;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
-using Org.BouncyCastle.Asn1.X509;
+using System.Windows.Forms;
+using Utilities.Implementations;
+using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Proje
 {
     public partial class ExceldenVeriAlmaFormu : Form, IForm
     {
         private string[] files;
-        private static ICache _cache;
-        private static IProjeService _projeService;
-        private static IStokService _stokService;
-        private static IDataTableMapper _dataTableMapper;
-        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IDataTableMapper dataTableMapper)
+        private readonly ICache _cache;
+        private readonly IProjeService _projeService;
+        private readonly IStokService _stokService;
+        private readonly IDataTableMapper _dataTableMapper;
+        private readonly IJsonConverter _jsonConverter;
+        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IDataTableMapper dataTableMapper,IJsonConverter jsonConverter)
         {
             _cache = cache;
             _projeService = projeService;
             _stokService = stokService;
             _dataTableMapper = dataTableMapper;
-        }
-        public ExceldenVeriAlmaFormu()
-        {
+            _jsonConverter = jsonConverter;
             InitializeComponent();
-            ButtonImageLoad();
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref customComboListProjeKodu);
-        }
-        #region declarations
-        private ButtonImage buttonImageExcel = new ButtonImage();
-        private ButtonImage buttonImageClose = new ButtonImage();
-        private ButtonImage buttonImageLoad = new ButtonImage();
-        private static ExceldenVeriAlmaFormu _exceldenVeriAlmaFormu;
-        public static ExceldenVeriAlmaFormu exceldenVeriAlmaFormu
-        {
-            get
-            {
-                if (_exceldenVeriAlmaFormu == null)
-                {
-                    _exceldenVeriAlmaFormu = new ExceldenVeriAlmaFormu();
-                    GlobalData.Yetki(ref _exceldenVeriAlmaFormu);
-                }
-                return _exceldenVeriAlmaFormu;
-            }
-
+            clbProjeKodu.textBox.PlaceholderText = "Proje Kodu";
+            ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKodu);
+            controlsToDisable = new List<Control>();
         }
         private List<Control> _controlsToDisable;
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         private bool _activeForm;
-
         public bool activeForm { get => _activeForm; set => _activeForm = value; }
-
-        #endregion declarations
-        
-        private void verileriAktar_MouseHover(object sender, EventArgs e)
+        private List<ProjeStokKart> _projeStokKarts;
+        private List<ProjeStokKart> projeStokKarts
         {
-            verileriAktar.Image = Properties.Resources.aktar;
-            verileriAktar.Cursor = Cursors.Hand;
+            get { if (_projeStokKarts == null) { _projeStokKarts = new(); } return _projeStokKarts; }
+            set { _projeStokKarts = value; }
         }
+        private void dosyaSec_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\";
+                openFileDialog.Filter = "Excel Dosyaları (*.xls;*.xlsx)|*.xls;*.xlsx";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Seçilen dosya yolunu TextBox'a yükle
+                    ctbDosyaYolu.isPlaceHolder = false;
+                    ctbDosyaYolu.textBox.Text = openFileDialog.FileName;
+                    string filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                    files = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
+                }
+            }
+        }
+        private bool ValidateInputs()
+        {
+            bool isValid = true;
+            isValid = Validation.CheckField("Dosya seçilmelidir.", this, ctbDosyaYolu) && isValid;
+            isValid = Validation.CheckField("Proje kodu seçilmelidir.", this, clbProjeKodu) && isValid;
+            return isValid;
+        }
         private async void verileriAktar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validasyonları ayrı metoda çıkar
-                if (!ValidateInputs())
-                    return;
-
+                if (!ValidateInputs()) return;
                 await ProcessExcelFileAsync();
                 MessageBox.Show("Veri alma işlemi başarıyla tamamlandı", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Log the exception
-                // _logger.LogError(ex, "Excel veri aktarımında hata");
             }
         }
-
-        private bool ValidateInputs()
-        {
-            bool isValid = true;
-            // Tüm validasyonları çalıştır - short-circuit kullanma
-            isValid = Validation.CheckField("Dosya seçilmelidir.", this, customTextBoxDosyaYolu) && isValid;
-            isValid = Validation.CheckField("Proje kodu seçilmelidir.", this, customComboListProjeKodu) && isValid;
-
-            return isValid;
-        }
-
+        
         private async Task ProcessExcelFileAsync()
         {
-            string filePath = customTextBoxDosyaYolu.TextCustom;
-
-            // Progress reporting için UI thread'de güncelleme
+            string filePath = ctbDosyaYolu.TextCustom;
             UpdateProgressText("İşlem başlatılıyor...");
-
-            // Proje nesnesini oluştur
-            var proje = new Models.Proje { Id = customComboListProjeKodu.selectedDataRowId };
-
-            // Eski dosyaları sil
+            var proje = new Models.Proje { Id = clbProjeKodu.selectedDataRowId };
             UpdateProgressText("Eski dosyalar siliniyor...");
-            await _projeService.DeleteProjeDosya(proje);
-            UpdateProgressText("Eski dosyalar silindi");
-
-
-            // Excel dosyasını işle
+            string jsonResult=await _projeService.DeleteProjeDosya(proje);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
+            if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(result.result);
+                return;
+            }
+            UpdateProgressText($"{result.result} adet stok kartı silindi");
             using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             using var workbook = CreateWorkbook(fileStream, filePath);
-
             var sheet = workbook.GetSheetAt(0);
             int totalRows = sheet.LastRowNum;
-            UpdateProgressText($"Toplam {totalRows} satır bulundu");
+            //UpdateProgressText($"Toplam {totalRows} satır bulundu");
 
             // Batch processing için liste
             var stokKartList = new List<StokKart>();
-            const int batchSize = 169; // Her seferinde * kayıt işle
+            const int batchSize = 1; // Her seferinde * kayıt işle
             DateTime startTime = DateTime.Now;
             for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
             {
                 var rowData = sheet.GetRow(rowIndex);
                 if (rowData == null) continue;
 
-                var stokKart = CreateStokKartFromRow(rowData);
-                await AttachFilesToStokKart(stokKart);
+                var projeStokKart = CreateStokKartFromRow(rowData);
+                await AttachFilesToStokKart(projeStokKart);
 
-                stokKartList.Add(stokKart);
+                projeStokKarts.Add(projeStokKart);
 
                 // Batch size'a ulaştığında veya son satırda kaydet
-                if (stokKartList.Count >= batchSize || rowIndex == totalRows)
+                if (projeStokKarts.Count >= batchSize || rowIndex == totalRows)
                 {
-                    await SaveStokKartBatch(stokKartList);
+                    await SaveStokKartBatch();
                     UpdateProgressText($"{totalRows}");
                     UpdateTransferCount(rowIndex);
 
-                    stokKartList.Clear();
+                    projeStokKarts.Clear();
 
                     // UI'nin yanıt verebilmesi için kısa bir bekleme
                     Application.DoEvents();
@@ -157,14 +139,11 @@ namespace YektamakDesktop.Formlar.Proje
             TimeSpan duration = endTime - startTime;
             UpdateProgressText($"İşlem tamamlandı. Toplam süre: {duration.TotalSeconds} saniye");
         }
-
-
-        private static IWorkbook CreateWorkbook(FileStream fileStream, string filePath)
+        private IWorkbook CreateWorkbook(FileStream fileStream, string filePath)
         {
             using var memoryStream = new MemoryStream();
             fileStream.CopyTo(memoryStream);
             memoryStream.Position = 0;
-
             return Path.GetExtension(filePath).ToLowerInvariant() switch
             {
                 ".xls" => new HSSFWorkbook(memoryStream),
@@ -172,40 +151,81 @@ namespace YektamakDesktop.Formlar.Proje
                 _ => throw new NotSupportedException("Desteklenmeyen dosya formatı. Lütfen bir Excel dosyası (.xls veya .xlsx) yükleyiniz.")
             };
         }
-
-        private StokKart CreateStokKartFromRow(IRow rowData)
+        private ProjeStokKart CreateStokKartFromRow(IRow rowData)
         {
             var excelData = ExtractExcelData(rowData);
-
-            return new StokKart
+            SetGrupIds(excelData);
+            return new ProjeStokKart
             {
-                stokGrup = { Id = ExcelMalzemeGrup.stokGrup(excelData.aciklama, excelData.boyut, excelData.malzeme) },
-                malzemeGrup = { Id = ExcelMalzemeGrup.malzemeGrup(excelData.aciklama, excelData.boyut, excelData.malzeme) },
-                malzemeAltGrup = { Id = ExcelMalzemeGrup.malzemeAltGrup(excelData.aciklama, excelData.boyut, excelData.malzeme) },
-                malzemeAltGrup2 = { Id = ExcelMalzemeGrup.malzemeAltGrup2(excelData.aciklama, excelData.boyut, excelData.malzeme) },
-                proje = { Id = customComboListProjeKodu.selectedDataRowId },
-                kod = excelData.kod,
-                parcaKod = excelData.kod,
-                ad = excelData.parcaAdi,
-                parcaAdi = excelData.parcaAdi,
-                miktar = excelData.miktar,
+                proje = { Id = clbProjeKodu.selectedDataRowId },
                 adet = excelData.adet,
-                fark = excelData.fark,
-                boyut = ExcelMalzemeGrup.Boyut(excelData.boyut).boyutText,
-                uzunluk = (excelData.uzunluk==0) ? ExcelMalzemeGrup.Boyut(excelData.boyut).uzunluk:excelData.uzunluk,
-                malzeme = excelData.malzeme,
-                aciklama = excelData.aciklama,
-                agirlik = excelData.agirlik,
-                olcuBirim = { Id = 1 },
-                stokTip = { Id=1},
-                isFromExcel = true,
-                stokKartDosya = new List<StokKartDosya>()
+                miktar = excelData.miktar,
+                stokKart={
+                    stokGrup = { Id = excelData.stokGrup },
+                    malzemeGrup = { Id = excelData.malzemeGrup },
+                    malzemeAltGrup = { Id = excelData.malzemeAltGrup },
+                    malzemeAltGrup2 = { Id = excelData.malzemeAltGrup2 },
+                    malzemeStandart = { Id = excelData.malzemeStandart },
+                    kod = excelData.kod,
+                    parcaKod = excelData.kod,
+                    ad = excelData.parcaAdi,
+                    parcaAdi = excelData.parcaAdi,
+                    fark = excelData.fark,
+                    boyut = excelData.Boyut().boyutText,
+                    uzunluk = (excelData.uzunluk==0) ? excelData.Boyut().uzunluk:excelData.uzunluk,
+                    malzeme = excelData.malzeme,
+                    aciklama = excelData.aciklama,
+                    agirlik = excelData.agirlik,
+                    olcuBirim = { Id = 1 },
+                    stokTip = { Id=1},
+                    isFromExcel = true,
+                }
             };
         }
-
-        private static ExcelParcaListesi ExtractExcelData(IRow rowData)
+        private void SetGrupIds(ExcelFormat excelData)
         {
-            return new ExcelParcaListesi
+            string jsonresult = _stokService.GetExcelGrupParametre();
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonresult)[0];
+
+            if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(result.result);
+                return;
+            }
+
+            List<ExcelGrupParametre> grupParametreList = JsonConvert.DeserializeObject<List<ExcelGrupParametre>>(result.result);
+
+            foreach (var param in grupParametreList)
+            {
+                if (string.IsNullOrWhiteSpace(param.kosulMetni))
+                    continue;
+
+                try
+                {
+                    var matches = new List<ExcelFormat> { excelData }
+                        .AsQueryable()
+                        .Where(param.kosulMetni) // <-- string ifadeyi çalıştırır
+                        .ToList();
+
+                    if (matches.Any())
+                    {
+                        excelData.stokGrup = excelData.stokGrup==null? param.stokGrupId : excelData.stokGrup;
+                        excelData.malzemeGrup = excelData.malzemeGrup==null? param.malzemeGrupId : excelData.malzemeGrup;
+                        excelData.malzemeAltGrup = excelData.malzemeAltGrup==null? param.malzemeAltGrupId : excelData.malzemeAltGrup;
+                        excelData.malzemeAltGrup2 = excelData.malzemeAltGrup2==null? param.malzemeAltGrup2Id : excelData.malzemeAltGrup2;
+                        excelData.malzemeStandart = excelData.malzemeStandart==null? param.malzemeStandartId : excelData.malzemeStandart;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Koşul çalıştırılırken hata: {ex.Message}");
+                }
+            }
+        }
+
+        private ExcelFormat ExtractExcelData(IRow rowData)
+        {
+            return new ExcelFormat
             {
                 no = GetCellValueAsInt(rowData, 0),
                 kod = GetCellValueAsString(rowData, 1),
@@ -220,50 +240,44 @@ namespace YektamakDesktop.Formlar.Proje
                 agirlik = GetCellValueAsDouble(rowData, 10)
             };
         }
-
-        private static string GetCellValueAsString(IRow row, int columnIndex)
+        private string GetCellValueAsString(IRow row, int columnIndex)
         {
             return row.GetCell(columnIndex)?.ToString()?.Trim() ?? string.Empty;
         }
-
-        private static int GetCellValueAsInt(IRow row, int columnIndex)
+        private int GetCellValueAsInt(IRow row, int columnIndex)
         {
             var cellValue = GetCellValueAsString(row, columnIndex);
             return int.TryParse(cellValue, out int result) ? result : 0;
         }
-
-        private static double GetCellValueAsDouble(IRow row, int columnIndex)
+        private double GetCellValueAsDouble(IRow row, int columnIndex)
         {
             var cellValue = GetCellValueAsString(row, columnIndex);
             return double.TryParse(cellValue, out double result) ? result : 0.0;
         }
-
-        private async Task AttachFilesToStokKart(StokKart stokKart)
+        private async Task AttachFilesToStokKart(ProjeStokKart projeStokKart)
         {
+            
             // PDF dosyası ekle
-            var pdfDosya = await CreateStokKartDosya(stokKart.pdfFileName(), 1);
+            var pdfDosya = await CreateStokKartDosya(projeStokKart.pdfFileName(), 1);
             if (pdfDosya != null)
-                stokKart.stokKartDosya.Add(pdfDosya);
+                projeStokKart.stokKart.dosyaList.Add(pdfDosya);
 
             // DXF dosyası ekle
-            var dxfDosya = await CreateStokKartDosya(stokKart.dxfFileName(), 2);
+            var dxfDosya = await CreateStokKartDosya(projeStokKart.dxfFileName(), 2);
             if (dxfDosya != null)
-                stokKart.stokKartDosya.Add(dxfDosya);
+                projeStokKart.stokKart.dosyaList.Add(dxfDosya);
 
             // STEP dosyası ekle
-            var stepDosya = await CreateStokKartDosya(stokKart.stepFileName(), 3);
+            var stepDosya = await CreateStokKartDosya(projeStokKart.stepFileName(), 3);
             if (stepDosya != null)
-                stokKart.stokKartDosya.Add(stepDosya);
+                projeStokKart.stokKart.dosyaList.Add(stepDosya);
         }
-
         private async Task<StokKartDosya> CreateStokKartDosya(string fileName, int dosyaTipId)
         {
             var file = files.FirstOrDefault(f => f.Contains(fileName, StringComparison.OrdinalIgnoreCase));
             if (file == null) return null;
-
             var content = await ReadFileAsBinaryAsync(file);
             if (content == null) return null;
-
             return new StokKartDosya
             {
                 dosyaUzanti = Path.GetExtension(fileName).TrimStart('.'),
@@ -272,7 +286,6 @@ namespace YektamakDesktop.Formlar.Proje
                 dosyaTip = { Id = dosyaTipId }
             };
         }
-
         private async Task<byte[]> ReadFileAsBinaryAsync(string filePath)
         {
             try
@@ -281,29 +294,29 @@ namespace YektamakDesktop.Formlar.Proje
             }
             catch (Exception ex)
             {
-                // Log the exception
-                // _logger.LogWarning(ex, "Dosya okunamadı: {FilePath}", filePath);
                 return null;
             }
         }
-
-        private async Task SaveStokKartBatch(List<StokKart> stokKartList)
+        private async Task SaveStokKartBatch()
         {
-            // Tek tek kaydet
-            foreach (var stokKart in stokKartList)
+            foreach (var projeStokKart in projeStokKarts)
             {
-                var jsonConverter = new JsonConverter();
-                var row = jsonConverter.DeserializeToDataSet(
-                    await _stokService.SaveStokKart(stokKart)
-                ).Tables[0].Rows[0];
-                stokKart.Id=_dataTableMapper.MapToEntity<StokKart>(row).Id;
-                if (stokKart.stokTip.Id == 2)
+                string jsonResult= await _stokService.SaveStokKart(projeStokKart.stokKart);
+                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
+                if (result.result == null) return;
+                if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase)) 
                 {
-                    var sonuc=await _stokService.SaveStokKartHammadde(stokKart);
+                    MessageBox.Show(result.result);
+                    continue;
+                }
+                else 
+                {
+                    var pStokKart=JsonConvert.DeserializeObject<List<StokKart>>(result.result);
+                    projeStokKart.stokKart=pStokKart.FirstOrDefault();
+                    await _projeService.SaveProjeStokKart(projeStokKart);
                 }
             }
         }
-
         private void UpdateProgressText(string message)
         {
             if (totalCount.InvokeRequired)
@@ -315,7 +328,6 @@ namespace YektamakDesktop.Formlar.Proje
                 totalCount.Text = message;
             }
         }
-
         private void UpdateTransferCount(int count)
         {
             if (transferredCount.InvokeRequired)
@@ -327,70 +339,6 @@ namespace YektamakDesktop.Formlar.Proje
                 transferredCount.Text = count.ToString();
             }
         }
-        private void verileriAktar_MouseLeave(object sender, EventArgs e)
-        {
-            verileriAktar.Image = Properties.Resources.aktar2;
-        }
-
-        private void kapat_Click(object sender, EventArgs e)
-        {
-            GlobalData.CloseForm(ref _exceldenVeriAlmaFormu);
-        }
-
-        private void kapat_MouseHover(object sender, EventArgs e)
-        {
-            kapat.Cursor = Cursors.Hand;
-            kapat.Image = Properties.Resources.close2;
-
-        }
-
-        private void kapat_MouseLeave(object sender, EventArgs e)
-        {
-            kapat.Image = Properties.Resources.close;
-        }
-
-        private void dosyaSec_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                // OpenFileDialog ayarları
-                openFileDialog.InitialDirectory = "C:\\";
-                openFileDialog.Filter = "Excel Dosyaları (*.xls;*.xlsx)|*.xls;*.xlsx";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Seçilen dosya yolunu TextBox'a yükle
-                    customTextBoxDosyaYolu.TextCustom = openFileDialog.FileName;
-                    string filePath = Path.GetDirectoryName(openFileDialog.FileName);
-                    files = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
-                }
-            }
-        }
-
-        private void dosyaSec_MouseHover(object sender, EventArgs e)
-        {
-            dosyaSec.Cursor = Cursors.Hand;
-            //using (MemoryStream ms = new MemoryStream(buttonImageExcel.btnImage))
-            //{
-            //    Image image = Image.FromStream(ms);
-            //    dosyaSec.Image = image;
-            //}
-        }
-
-        private void dosyaSec_MouseLeave(object sender, EventArgs e)
-        {
-            dosyaSec.Image = Properties.Resources.fromExcelButton2;
-        }
-        private void ButtonImageLoad()
-        {
-            //buttonImageExcel.btnName = "btnExcelDosyaSec";
-            //buttonImageExcel = GlobalData.GetModelFromDatabase(WebMethods.GetButtonImage, buttonImageExcel);
-            //buttonImageClose.btnName = "btnClose";
-            //buttonImageClose = GlobalData.GetModelFromDatabase(WebMethods.GetButtonImage, buttonImageClose);
-            //buttonImageLoad.btnName = "btnDosyaAktar";
-            //buttonImageLoad = GlobalData.GetModelFromDatabase(WebMethods.GetButtonImage, buttonImageLoad);
-        }
+        
     }
 }

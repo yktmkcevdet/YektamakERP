@@ -22,6 +22,7 @@ namespace Models.DTO
         public string alanAd { get; set; }
         [GridDisplay(Header = "Yetki", Visible = true)]
         public bool yetki { get; set; }
+        [GridDisplay(Header = "Model", Visible = true)]
         public string model { get; set; }
 
     }

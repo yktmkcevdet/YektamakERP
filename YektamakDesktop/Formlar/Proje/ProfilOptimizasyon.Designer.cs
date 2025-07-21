@@ -68,7 +68,7 @@
             roundedButton3.BackColor = System.Drawing.Color.Firebrick;
             roundedButton3.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton3.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton3.BorderRadius = 0;
+            roundedButton3.CornerRadius = 0;
             roundedButton3.BorderSize = 2;
             roundedButton3.FlatAppearance.BorderSize = 0;
             roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -101,7 +101,7 @@
             roundedButton1.BackColor = System.Drawing.Color.Firebrick;
             roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton1.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderRadius = 0;
+            roundedButton1.CornerRadius = 0;
             roundedButton1.BorderSize = 2;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -123,7 +123,7 @@
             roundedButton2.BackColor = System.Drawing.Color.Firebrick;
             roundedButton2.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton2.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton2.BorderRadius = 0;
+            roundedButton2.CornerRadius = 0;
             roundedButton2.BorderSize = 2;
             roundedButton2.FlatAppearance.BorderSize = 0;
             roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -145,7 +145,7 @@
             roundedButton4.BackColor = System.Drawing.Color.Firebrick;
             roundedButton4.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton4.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton4.BorderRadius = 10;
+            roundedButton4.CornerRadius = 10;
             roundedButton4.BorderSize = 2;
             roundedButton4.FlatAppearance.BorderSize = 0;
             roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -167,7 +167,7 @@
             roundedButton5.BackColor = System.Drawing.Color.Firebrick;
             roundedButton5.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton5.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton5.BorderRadius = 10;
+            roundedButton5.CornerRadius = 10;
             roundedButton5.BorderSize = 2;
             roundedButton5.FlatAppearance.BorderSize = 0;
             roundedButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -189,7 +189,7 @@
             roundedButton6.BackColor = System.Drawing.Color.Firebrick;
             roundedButton6.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton6.BorderColor = System.Drawing.Color.Firebrick;
-            roundedButton6.BorderRadius = 10;
+            roundedButton6.CornerRadius = 10;
             roundedButton6.BorderSize = 2;
             roundedButton6.FlatAppearance.BorderSize = 0;
             roundedButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

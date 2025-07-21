@@ -43,7 +43,7 @@
             // 
             pnlHdr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             pnlHdr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            pnlHdr.BackColor = System.Drawing.Color.Firebrick;
+            pnlHdr.BackColor = System.Drawing.Color.SteelBlue;
             pnlHdr.Controls.Add(pictureBoxLogo);
             pnlHdr.Controls.Add(btnClose);
             pnlHdr.Controls.Add(btnMinimize);
@@ -72,16 +72,22 @@
             // btnClose
             // 
             btnClose.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnClose.BackColor = System.Drawing.Color.Firebrick;
-            btnClose.BackgroundColor = System.Drawing.Color.Firebrick;
-            btnClose.BorderColor = System.Drawing.Color.Firebrick;
-            btnClose.BorderRadius = 10;
-            btnClose.BorderSize = 2;
+            btnClose.BackColor = System.Drawing.Color.DodgerBlue;
+            btnClose.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            btnClose.BorderColor = System.Drawing.Color.DodgerBlue;
+            btnClose.BorderSize = 0;
+            btnClose.CornerRadius = 10;
             btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             btnClose.FlatAppearance.BorderSize = 0;
             btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnClose.ForeColor = System.Drawing.Color.White;
+            btnClose.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnClose.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnClose.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnClose.HoverColor2 = System.Drawing.Color.Navy;
+            btnClose.Icon = null;
+            btnClose.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnClose.Location = new System.Drawing.Point(361, 1);
             btnClose.Margin = new System.Windows.Forms.Padding(0);
             btnClose.Name = "btnClose";
@@ -96,16 +102,22 @@
             // btnMinimize
             // 
             btnMinimize.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnMinimize.BackColor = System.Drawing.Color.Firebrick;
-            btnMinimize.BackgroundColor = System.Drawing.Color.Firebrick;
-            btnMinimize.BorderColor = System.Drawing.Color.Firebrick;
-            btnMinimize.BorderRadius = 10;
-            btnMinimize.BorderSize = 2;
+            btnMinimize.BackColor = System.Drawing.Color.DodgerBlue;
+            btnMinimize.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            btnMinimize.BorderColor = System.Drawing.Color.DodgerBlue;
+            btnMinimize.BorderSize = 0;
+            btnMinimize.CornerRadius = 10;
             btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             btnMinimize.FlatAppearance.BorderSize = 0;
             btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnMinimize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnMinimize.ForeColor = System.Drawing.Color.White;
+            btnMinimize.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnMinimize.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnMinimize.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnMinimize.HoverColor2 = System.Drawing.Color.Navy;
+            btnMinimize.Icon = null;
+            btnMinimize.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnMinimize.Location = new System.Drawing.Point(321, 1);
             btnMinimize.Margin = new System.Windows.Forms.Padding(0);
             btnMinimize.Name = "btnMinimize";
@@ -121,16 +133,22 @@
             // 
             btnHelp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             btnHelp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnHelp.BackColor = System.Drawing.Color.Firebrick;
-            btnHelp.BackgroundColor = System.Drawing.Color.Firebrick;
-            btnHelp.BorderColor = System.Drawing.Color.Firebrick;
-            btnHelp.BorderRadius = 10;
-            btnHelp.BorderSize = 2;
+            btnHelp.BackColor = System.Drawing.Color.DodgerBlue;
+            btnHelp.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            btnHelp.BorderColor = System.Drawing.Color.DodgerBlue;
+            btnHelp.BorderSize = 0;
+            btnHelp.CornerRadius = 10;
             btnHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             btnHelp.FlatAppearance.BorderSize = 0;
             btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnHelp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnHelp.ForeColor = System.Drawing.Color.White;
+            btnHelp.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnHelp.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnHelp.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnHelp.HoverColor2 = System.Drawing.Color.Navy;
+            btnHelp.Icon = null;
+            btnHelp.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnHelp.Location = new System.Drawing.Point(282, 2);
             btnHelp.Margin = new System.Windows.Forms.Padding(0);
             btnHelp.Name = "btnHelp";
@@ -157,7 +175,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            BackColor = System.Drawing.Color.Firebrick;
+            BackColor = System.Drawing.Color.SteelBlue;
             Controls.Add(pnlHdr);
             Margin = new System.Windows.Forms.Padding(1);
             Name = "HeaderPanel";

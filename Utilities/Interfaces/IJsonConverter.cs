@@ -11,5 +11,6 @@ namespace Utilities.Interfaces
         string DecodeBase64JsonString(string result);
         string EncodeStringToBase64Json(string result);
         bool IsValidEncodedJson(string encodedJsonString);
+        public List<T> ToModelList<T>(string encodedJsonString) where T : IEntity, new();
     }
 }

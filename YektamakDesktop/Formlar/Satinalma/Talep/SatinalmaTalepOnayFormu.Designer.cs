@@ -30,10 +30,10 @@
         {
             components = new System.ComponentModel.Container();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             talebiOnaylaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             talebiReddetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,15 +49,6 @@
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
             headerPanel1.Size = new System.Drawing.Size(1094, 32);
             headerPanel1.TabIndex = 0;
-            // 
-            // universalGrid1
-            // 
-            universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(1, 152);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1092, 462);
-            universalGrid1.TabIndex = 1;
-            universalGrid1.Grid.MouseDown += universalGrid1_MouseDown;
             // 
             // contextMenuStrip1
             // 
@@ -78,6 +69,16 @@
             talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             talebiReddetToolStripMenuItem.Text = "Talebi Reddet";
             // 
+            // universalGrid1
+            // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.kullanici = null;
+            universalGrid1.Location = new System.Drawing.Point(0, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1094, 532);
+            universalGrid1.TabIndex = 1;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown;
+            // 
             // SatinalmaTalepOnayFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -88,8 +89,9 @@
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "SatinalmaTalepOnayFormu";
+            Text = "Onaylanacak Talepler";
             FormClosed += SatinalmaTalepOnayFormu_FormClosed;
             Load += SatinalmaTalepOnayFormu_Load;
             contextMenuStrip1.ResumeLayout(false);
@@ -99,9 +101,9 @@
         #endregion
 
         private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem talebiOnaylaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem talebiReddetToolStripMenuItem;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

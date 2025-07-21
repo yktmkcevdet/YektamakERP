@@ -7,7 +7,8 @@ namespace ApiService.Interfaces
     {
         public string GetAnaMenu(AnaMenuDTO anaMenu);
         public string GetMenu(Menu menu=null);
-        public string GetYetki(Yetki yetki); 
+        public string GetYetki(Yetki yetki);
+        public Task<string> DeleteAlanYetki(AlanYetki alanYetki);
         public Task<string> GetKullaniciAsync(Kullanici kullanici);
         public string GetKullanici(Kullanici kullanici);
         public string GetRol(Rol rol);

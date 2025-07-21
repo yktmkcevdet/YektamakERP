@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Api.Converters;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Npgsql;
@@ -16,7 +17,10 @@ namespace Api.DatabaseJobs
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             DateFormatString = "yyyy-MM-dd HH:mm:ss",
-            Converters = jsonConverters
+            Converters = new List<JsonConverter>
+                {
+                    new MultiFormatDateTimeConverter()
+                }
         };
 
         internal static SqlConnection GetConnection()
@@ -60,7 +64,7 @@ namespace Api.DatabaseJobs
         }
         internal static MySqlConnection MySqlConnectionYerel()
         {
-            MySqlConnection mySqlConnection = new MySqlConnection("Server=127.0.0.1;Database=yektamakdb;User ID=root;Password=Yektamak@dmin;");
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
             try
             {
                 mySqlConnection.Open();
@@ -78,8 +82,9 @@ namespace Api.DatabaseJobs
             try
             {
                 string firstSerialization = JsonConvert.SerializeObject(o);
-                byte[] data = System.Text.Encoding.UTF8.GetBytes(firstSerialization);
-                result = JsonConvert.SerializeObject(data);
+                //byte[] data = System.Text.Encoding.UTF8.GetBytes(firstSerialization);
+                //result = JsonConvert.SerializeObject(data);
+                result = firstSerialization;
             }
             catch (Exception ex)
             {

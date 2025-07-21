@@ -38,7 +38,7 @@
             // 
             listBox.FormattingEnabled = true;
             listBox.HorizontalScrollbar = true;
-            listBox.ItemHeight = 12;
+            listBox.ItemHeight = 15;
             listBox.Location = new System.Drawing.Point(1, 28);
             listBox.Name = "listBox";
             listBox.Size = new System.Drawing.Size(247, 199);
@@ -46,6 +46,7 @@
             listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
             listBox.Enter += listBox_Enter;
             listBox.Leave += listBox_Leave;
+            listBox.MouseDown += listBox_MouseDown;
             listBox.MouseLeave += listBox_MouseLeave;
             // 
             // panelDropDownButton

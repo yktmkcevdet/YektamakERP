@@ -5,6 +5,7 @@ using Newtonsoft.Json.Converters;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Utilities.Implementations.Converters;
 using Utilities.Interfaces;
 

@@ -1,52 +1,30 @@
 ﻿using Models;
+using Models.DTO;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Utilities.Interfaces;
 using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Proje
 {
-    public partial class SatinalmaTalepSatirDetayForm : Form, IForm
+    public partial class SatinalmaTalepSatirDetayForm : Form
     {
-        public static List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
-        public SatinalmaTalepSatirDetayForm(List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays)
+        private readonly ICache _cache;
+        public SatinalmaTalepSatirDetayForm(ICache cache)
         {
+            _cache = cache;
             InitializeComponent();
-            _satinalmaTalepSatirDetays = satinalmaTalepSatirDetays;
-             GlobalData.FillDataGrid(GetDataTable(), dataGridViewSatinalmaTalepSatirDetay, new SatinalmaTalepSatirDetay());
-            controlsToDisable=new List<Control>{this };
+            universalGrid1.kullanici = _cache.kullanici;
         }
-        private static SatinalmaTalepSatirDetayForm _satinalmaTalepSatirDetayForm;
-        public static SatinalmaTalepSatirDetayForm satinalmaTalepSatirDetayForm
+        public void UpdateMode(List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays)
         {
-            get
+            List<SatinalmaTalepSatirDetayDTO> satinalmaTalepSatirDetayDTOs = new();
+            foreach (var satinalmaTalepSatirDetay in satinalmaTalepSatirDetays) 
             {
-                if (_satinalmaTalepSatirDetayForm == null || _satinalmaTalepSatirDetayForm.IsDisposed)
-                {
-                    _satinalmaTalepSatirDetayForm = new SatinalmaTalepSatirDetayForm(_satinalmaTalepSatirDetays);
-                    GlobalData.Yetki(ref _satinalmaTalepSatirDetayForm);
-                }
-                return _satinalmaTalepSatirDetayForm;
+                satinalmaTalepSatirDetayDTOs.Add(ConvertHelper.ToDTO<SatinalmaTalepSatirDetayDTO>(satinalmaTalepSatirDetay));
             }
-        }
-
-        public List<Control> controlsToDisable { get; set; }
-        public bool activeForm { get; set; }
-
-        private DataTable _dataTable;
-        public DataTable GetDataTable()
-        {
-            if (_dataTable == null)
-            {
-                _dataTable = new DataTable();
-            }
-
-            if (_dataTable.Rows.Count == 0)
-            {
-                _dataTable = ConvertHelper.ToDataTable(_satinalmaTalepSatirDetays);
-            }
-
-            return _dataTable;
+            universalGrid1.SetData(satinalmaTalepSatirDetayDTOs,this.Name);
         }
 
     }

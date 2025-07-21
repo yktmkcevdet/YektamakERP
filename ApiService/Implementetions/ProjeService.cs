@@ -35,5 +35,15 @@ namespace ApiService.Implementetions
         {
             return  _apiService.Post(proje, $"GetProje");
         }
+
+        public async Task<string> GetProjeStokKart(ProjeStokKart projeStokKart)
+        {
+            return await _apiService.PostAsync(projeStokKart, $"GetProjeStokKart");
+        }
+
+        public async Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart)
+        {
+            return await _apiService.PostAsync(projeStokKart, $"SaveProjeStokKart");
+        }
     }
 }

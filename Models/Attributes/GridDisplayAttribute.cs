@@ -13,5 +13,8 @@ namespace Models.Attributes
         public bool Visible { get; set; } = true;
         public bool IsRequired { get; set; } = false;
         public int Order { get; set; } = 0;
+        public string Tip { get; set; }
+        public string ListVisibleColumnName { get; set; }
+        public string ListName { get; set; }
     }
 }

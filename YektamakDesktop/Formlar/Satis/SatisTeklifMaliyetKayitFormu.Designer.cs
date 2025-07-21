@@ -104,7 +104,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton4.BackColor = Color.Firebrick;
             roundedButton4.BackgroundColor = Color.Firebrick;
             roundedButton4.BorderColor = Color.Firebrick;
-            roundedButton4.BorderRadius = 10;
+            roundedButton4.CornerRadius = 10;
             roundedButton4.BorderSize = 2;
             roundedButton4.FlatAppearance.BorderSize = 0;
             roundedButton4.FlatStyle = FlatStyle.Flat;
@@ -127,7 +127,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton5.BackColor = Color.Firebrick;
             roundedButton5.BackgroundColor = Color.Firebrick;
             roundedButton5.BorderColor = Color.Firebrick;
-            roundedButton5.BorderRadius = 10;
+            roundedButton5.CornerRadius = 10;
             roundedButton5.BorderSize = 2;
             roundedButton5.FlatAppearance.BorderSize = 0;
             roundedButton5.FlatStyle = FlatStyle.Flat;
@@ -150,7 +150,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton6.BackColor = Color.Firebrick;
             roundedButton6.BackgroundColor = Color.Firebrick;
             roundedButton6.BorderColor = Color.Firebrick;
-            roundedButton6.BorderRadius = 10;
+            roundedButton6.CornerRadius = 10;
             roundedButton6.BorderSize = 2;
             roundedButton6.FlatAppearance.BorderSize = 0;
             roundedButton6.FlatStyle = FlatStyle.Flat;
@@ -172,7 +172,7 @@ namespace YektamakDesktop.Formlar.Satis
             buttonClose.BackColor = Color.Firebrick;
             buttonClose.BackgroundColor = Color.Firebrick;
             buttonClose.BorderColor = Color.Firebrick;
-            buttonClose.BorderRadius = 0;
+            buttonClose.CornerRadius = 0;
             buttonClose.BorderSize = 2;
             buttonClose.FlatAppearance.BorderSize = 0;
             buttonClose.FlatStyle = FlatStyle.Flat;
@@ -194,7 +194,7 @@ namespace YektamakDesktop.Formlar.Satis
             buttomMinimize.BackColor = Color.Firebrick;
             buttomMinimize.BackgroundColor = Color.Firebrick;
             buttomMinimize.BorderColor = Color.Firebrick;
-            buttomMinimize.BorderRadius = 0;
+            buttomMinimize.CornerRadius = 0;
             buttomMinimize.BorderSize = 2;
             buttomMinimize.FlatAppearance.BorderSize = 0;
             buttomMinimize.FlatStyle = FlatStyle.Flat;
@@ -216,7 +216,7 @@ namespace YektamakDesktop.Formlar.Satis
             buttonHelp.BackColor = Color.Firebrick;
             buttonHelp.BackgroundColor = Color.Firebrick;
             buttonHelp.BorderColor = Color.Firebrick;
-            buttonHelp.BorderRadius = 0;
+            buttonHelp.CornerRadius = 0;
             buttonHelp.BorderSize = 2;
             buttonHelp.FlatAppearance.BorderSize = 0;
             buttonHelp.FlatStyle = FlatStyle.Flat;
@@ -238,7 +238,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton3.BackColor = Color.Firebrick;
             roundedButton3.BackgroundColor = Color.Firebrick;
             roundedButton3.BorderColor = Color.Firebrick;
-            roundedButton3.BorderRadius = 0;
+            roundedButton3.CornerRadius = 0;
             roundedButton3.BorderSize = 2;
             roundedButton3.FlatAppearance.BorderSize = 0;
             roundedButton3.FlatStyle = FlatStyle.Flat;
@@ -271,7 +271,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton1.BackColor = Color.Firebrick;
             roundedButton1.BackgroundColor = Color.Firebrick;
             roundedButton1.BorderColor = Color.Firebrick;
-            roundedButton1.BorderRadius = 0;
+            roundedButton1.CornerRadius = 0;
             roundedButton1.BorderSize = 2;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = FlatStyle.Flat;
@@ -293,7 +293,7 @@ namespace YektamakDesktop.Formlar.Satis
             roundedButton2.BackColor = Color.Firebrick;
             roundedButton2.BackgroundColor = Color.Firebrick;
             roundedButton2.BorderColor = Color.Firebrick;
-            roundedButton2.BorderRadius = 0;
+            roundedButton2.CornerRadius = 0;
             roundedButton2.BorderSize = 2;
             roundedButton2.FlatAppearance.BorderSize = 0;
             roundedButton2.FlatStyle = FlatStyle.Flat;
