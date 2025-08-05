@@ -4,7 +4,8 @@ namespace ApiService.Interfaces
 {
     public interface IStokService
     {
-        public Task<string> GetStokKart(StokKart stokKart=null);
+        public Task<string> GetStokKartAsync(StokKart stokKart=null);
+        public string GetStokKart(StokKart stokKart = null);
         public Task<string> GetStokKartPdf(StokKart stokKart);
         public string GetStokGrup(StokGrup stokGrup);
         public string GetMalzemeGrup(MalzemeGrup malzemeGrup);
@@ -17,6 +18,7 @@ namespace ApiService.Interfaces
         public string GetMalzeme(Malzeme malzeme=null);
         public string GetMalzemeStandart(MalzemeStandart malzemeStandart);
         public Task<string> SaveStokKart(StokKart stokKart);
+        public Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart);
         public Task<string> SaveStokKartHammadde(StokKart stokKart);
         public Task<string> GetStokGrupKriter();
         public string GetExcelGrupParametre();

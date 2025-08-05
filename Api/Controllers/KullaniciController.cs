@@ -64,7 +64,7 @@ namespace Api.Controllers
             return result;
 		}
         [HttpPost, Route("api/SaveAlanYetki")]
-        public string SaveAlanYetki([FromBody] AlanYetkiDTO restData)
+        public string SaveAlanYetki([FromBody] AlanYetki restData)
         {
             string result = _dataAccessLayer.SaveObject(restData, "spSaveAlanYetki");
             return result;
@@ -112,7 +112,7 @@ namespace Api.Controllers
             return result;
         }
         [HttpPost, Route("api/GetAlanYetki")]
-        public string GetAlanYetki([FromBody] AlanYetkiDTO restData)
+        public string GetAlanYetki([FromBody] AlanYetki restData)
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetAlanYetki");
             return result;

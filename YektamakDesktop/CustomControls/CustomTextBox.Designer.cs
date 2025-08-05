@@ -38,7 +38,7 @@
             textBox.Location = new System.Drawing.Point(4, 3);
             textBox.Margin = new System.Windows.Forms.Padding(0);
             textBox.Name = "textBox";
-            textBox.Size = new System.Drawing.Size(251, 24);
+            textBox.Size = new System.Drawing.Size(251, 17);
             textBox.TabIndex = 0;
             textBox.Click += textBox_Click;
             textBox.TextChanged += textBox_TextChanged;

@@ -34,20 +34,23 @@ namespace YektamakDesktop
             Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DIContainer.ConfigureServices();
-            DIContainer.GetService<GlobalData>();
-            DIContainer.GetService<PermissionManager>();
-            DIContainer.GetService<DataControlMenu>();
-            GlobalData.Start();
+            
             while (true)
             {
-                
-                var loginForm = DIContainer.GetService<UserLogin>();
-                Application.Run(loginForm);
+                DIContainer.Reset();
+                DIContainer.ConfigureServices();
+                DIContainer.GetService<GlobalData>();
+                DIContainer.GetService<PermissionManager>();
+                DIContainer.GetService<DataControlMenu>();
+                GlobalData.Start();
 
+                UserLogin loginForm = FormFactory.CreateForm<UserLogin>();
+                Application.Run(loginForm);
+                
                 if (loginForm.loginStatus)
                 {
-                    var mainForm = DIContainer.GetService<MainWindow>();
+                    
+                    MainWindow mainForm = FormFactory.CreateForm<MainWindow>();
                     Application.Run(mainForm);
                     // mainForm kapanýnca döngü tekrar baþa dönecek
                 }

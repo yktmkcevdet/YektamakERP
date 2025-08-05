@@ -171,7 +171,7 @@ else
             stokKart.stokGrup.Id = selectedStokGrupId;
             stokKart.ad = parcaAdi;
             stokKart.malzemeGrup.Id = selectedMalzemeGrupId;
-            string serializeString = await stokService.GetStokKart(stokKart);
+            string serializeString = await stokService.GetStokKartAsync(stokKart);
             DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
             if (dataSet != null)
             {

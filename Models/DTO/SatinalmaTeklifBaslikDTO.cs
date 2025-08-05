@@ -4,24 +4,24 @@ namespace Models.DTO
 {
     public class SatinalmaTeklifBaslikDTO:IEntity
     {
-        [GridDisplay(Header = IdHdr,Visible =true)]public int? Id { get; set; }
-        [GridDisplay(Header = teklifNoHdr, Visible = true)]public string teklifNo { get; set; }
-        [GridDisplay(Header = projeIdHdr, Visible = true)]public int? projeId { get; set; }
-        [GridDisplay(Header = parcaGrupIdHdr, Visible = true)]public int? parcaGrupId { get; set; }
-        [GridDisplay(Header = teklifTalepTarihiHdr, Visible = true)]public DateTime? teklifTalepTarihi { get; set; }
-        [GridDisplay(Header = terminSuresiHdr, Visible = true)]public int? terminSuresi { get; set; }
-        [GridDisplay(Header = teklifTarihiHdr, Visible = true)]public DateTime? teklifTarihi { get; set; }
-        [GridDisplay(Header = firmaIdHdr, Visible = true)]public int? teklifFirmaId { get; set; }
-        [GridDisplay(Header = firmaadHdr, Visible = true)]public string? teklifFirmaad { get; set; }
-        [GridDisplay(Header = firmamailHdr, Visible = true)]public string? teklifFirmamail { get; set; }
-        [GridDisplay(Header = odemeVadeIdHdr, Visible = true)]public int? vadeId { get; set; }
-        [GridDisplay(Header = odemeVadeadHdr, Visible = true)]public string? vadead { get; set; }
-        [GridDisplay(Header = aciklamaHdr, Visible = true)]public string? aciklama { get; set; }
-        [GridDisplay(Header = tutarHdr, Visible = true)]public double? teklifTutartutar { get; set; }
-        [GridDisplay(Header = dovizCinsiIdHdr, Visible = true)]public int? teklifTutardovizCinsiId { get; set; }
-        [GridDisplay(Header = teklifGecerlilikSuresiHdr, Visible = true)]public int? teklifGecerlilikSuresi { get; set; }
-        [GridDisplay(Header = teklifDurumuIdHdr, Visible = true)]public int? teklifDurumuId { get; set; }
-        [GridDisplay(Header = satinalmaTeklifDetayListHdr, Visible = true)]public List<SatinalmaTeklifDetay> satinalmaTeklifDetayList { get; set; }
+        [GridDisplay(Header = IdHdr,Visible =false)]public int? Id { get; set; }
+        [GridDisplay(Header = teklifNoHdr)]public string teklifNo { get; set; }
+        [GridDisplay(Header = projeIdHdr)]public int? projeId { get; set; }
+        [GridDisplay(Header = parcaGrupIdHdr)]public int? parcaGrupId { get; set; }
+        [GridDisplay(Header = teklifTalepTarihiHdr)]public DateTime? teklifTalepTarihi { get; set; }
+        [GridDisplay(Header = terminSuresiHdr)]public int? terminSuresi { get; set; }
+        [GridDisplay(Header = teklifTarihiHdr)]public DateTime? teklifTarihi { get; set; }
+        [GridDisplay(Header = firmaIdHdr)]public int? teklifFirmaId { get; set; }
+        [GridDisplay(Header = firmaadHdr)]public string? teklifFirmaad { get; set; }
+        [GridDisplay(Header = firmamailHdr)]public string? teklifFirmamail { get; set; }
+        [GridDisplay(Header = odemeVadeIdHdr)]public int? vadeId { get; set; }
+        [GridDisplay(Header = odemeVadeadHdr)]public string? vadead { get; set; }
+        [GridDisplay(Header = aciklamaHdr)]public string? aciklama { get; set; }
+        [GridDisplay(Header = tutarHdr)]public double? teklifTutartutar { get; set; }
+        [GridDisplay(Header = dovizCinsiIdHdr)]public int? teklifTutardovizCinsiId { get; set; }
+        [GridDisplay(Header = teklifGecerlilikSuresiHdr)]public int? teklifGecerlilikSuresi { get; set; }
+        [GridDisplay(Header = teklifDurumuIdHdr)]public int? teklifDurumuId { get; set; }
+        [GridDisplay(Header = satinalmaTeklifDetayListHdr,Visible =false)]public List<SatinalmaTeklifDetay> satinalmaTeklifDetayList { get; set; }
     }
     public class  SatinalmaTeklifDTOHeader
     {

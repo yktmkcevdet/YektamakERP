@@ -16,5 +16,6 @@ namespace Models.Attributes
         public string Tip { get; set; }
         public string ListVisibleColumnName { get; set; }
         public string ListName { get; set; }
+        public bool readOnly { get; set; }=true;
     }
 }

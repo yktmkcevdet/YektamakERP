@@ -1,25 +1,14 @@
 ﻿using Models.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.DTO
 {
     public class StokKartDosyaDTO:IEntity
     {
-        [GridDisplay(Header = "Id", Visible = true)]
-        public int Id { get; set; }
-        [GridDisplay(Header = "Stok Kartı Id", Visible = true)]
-        public int stokKartId { get; set; }
-        [GridDisplay(Header = "Dosya Tipi", Visible = true, Tip = "Liste", ListVisibleColumnName = "ad", ListName = "dosyaTipList")]
-        public int? dosyaTipId { get; set; }
-        [GridDisplay(Header = "Dosya Adı", Visible = true)]
-        public string dosyaAd { get; set; }
-        [GridDisplay(Header = "Dosya Uzantısı", Visible = true)]
-        public string dosyaUzanti { get; set; }
-        [GridDisplay(Header = "Dosya", Visible = true)]
-        public byte[] dosya { get; set; }
+        [GridDisplay(Header = "Id")]public int Id { get; set; }
+        [GridDisplay(Header = "Stok Kartı Id")]public int stokKartId { get; set; }
+        [GridDisplay(Header = "Dosya Tipi", Tip = "Liste", ListVisibleColumnName = "ad", ListName = "dosyaTipList")]public int? dosyaTipId { get; set; }
+        [GridDisplay(Header = "Dosya Adı")]public string dosyaAd { get; set; }
+        [GridDisplay(Header = "Dosya Uzantısı")]public string dosyaUzanti { get; set; }
+        [GridDisplay(Header = "Dosya")]public byte[] dosya { get; set; }
     }
 }

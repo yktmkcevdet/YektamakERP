@@ -69,7 +69,7 @@
             // 
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Baslik = "Caption";
+            headerPanel1.Baslik = "Mail Gönder";
             headerPanel1.Location = new System.Drawing.Point(-2, -1);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
@@ -425,23 +425,23 @@
             // görüntüleToolStripMenuItem
             // 
             görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
-            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             görüntüleToolStripMenuItem.Text = "Görüntüle";
             görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
             // 
             // ekleToolStripMenuItem
             // 
             ekleToolStripMenuItem.Name = "ekleToolStripMenuItem";
-            ekleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            ekleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             ekleToolStripMenuItem.Text = "Ekle";
             // 
             // silToolStripMenuItem
             // 
             silToolStripMenuItem.Name = "silToolStripMenuItem";
-            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            silToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             silToolStripMenuItem.Text = "Sil";
             // 
-            // roundedIconButton1
+            // btnAttach
             // 
             btnAttach.BackColor = System.Drawing.Color.Transparent;
             btnAttach.BorderColor = System.Drawing.Color.Black;
@@ -460,7 +460,7 @@
             btnAttach.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAttach.IconSize = 24;
             btnAttach.Location = new System.Drawing.Point(5, 153);
-            btnAttach.Name = "roundedIconButton1";
+            btnAttach.Name = "btnAttach";
             btnAttach.Size = new System.Drawing.Size(28, 28);
             btnAttach.TabIndex = 22;
             btnAttach.UseVisualStyleBackColor = false;

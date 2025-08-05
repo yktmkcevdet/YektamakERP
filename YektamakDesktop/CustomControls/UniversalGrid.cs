@@ -1,6 +1,9 @@
 ﻿using Models;
 using Models.Attributes;
-using Models.DTO;
+using Newtonsoft.Json;
+using NPOI.OpenXmlFormats.Spreadsheet;
+using NPOI.POIFS.NIO;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -13,7 +16,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.Helpers;
@@ -22,18 +24,19 @@ namespace YektamakDesktop.CustomControls
 {
     public partial class UniversalGrid : UserControl
     {
-        public BindingSource binding=new BindingSource();
+        public BindingSource binding = new BindingSource();
         List<object> changedItems = new List<object>();
         string settingsFile = "grid.settings.json";
         [Browsable(true)]
         [Category("Behavior")]
         public event MouseEventHandler MouseDown1;
-        public Kullanici kullanici { get; set; }
         private readonly ICache _cache;
+        public Kullanici kullanici { get; set; }
         private readonly ConcurrentDictionary<Type, IEnumerable<PropertyAttributePair>> _propertyCache = new();
         private static readonly Bitmap _updateIcon = Properties.Resources.data_update_icon1;
         private static readonly Bitmap _deleteIcon = Properties.Resources.sil1;
         private HashSet<string> allowedFields;
+        private bool _isCheck = false;
         public sealed record PropertyAttributePair(
             PropertyInfo Property,
             GridDisplayAttribute Attribute
@@ -41,7 +44,7 @@ namespace YektamakDesktop.CustomControls
         public UniversalGrid(ICache cache)
         {
             InitializeComponent();
-            //dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoGenerateColumns = false;
             _cache = cache;
         }
         public UniversalGrid()
@@ -70,7 +73,7 @@ namespace YektamakDesktop.CustomControls
 
             foreach (var field in fieldNames)
             {
-                var permission = new AlanYetkiDTO { formAd = formName, alanAd = field, kullaniciId = kullanici.Id };
+                var permission = new AlanYetki { formAd = formName, alanAd = field, kullanici = kullanici };
                 if (await permissionManager.HasAccess(permission))
                 {
                     allowedFields.Add(field);
@@ -78,43 +81,34 @@ namespace YektamakDesktop.CustomControls
             }
             return allowedFields;
         }
-        private void AddCheckBoxColumn(bool isCheck)
+        private DataGridViewColumn AddCheckBoxColumn()
         {
-            dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn
+            return new DataGridViewCheckBoxColumn
             {
                 Name = "Sec",
                 HeaderText = "",
                 Width = 30,
                 DataPropertyName = "Sec",
-                Visible = isCheck,
-            });
+                Visible = _isCheck,
+                DisplayIndex = 0,
+                ReadOnly = false
+            };
         }
-        private void AddImageColumn(string name, string header, Bitmap image)
-        {
-            dataGridView1.Columns.Add(new DataGridViewImageColumn
-            {
-                Name = name,
-                HeaderText = header,
-                Image = image,
-                ImageLayout = DataGridViewImageCellLayout.Zoom,
-            });
-        }
-        private Type customComboBoxType;
+        //private Type customComboBoxType;
 
-        public void SetCustomComboBoxType(Type type)
+        //public void SetCustomComboBoxType(Type type)
+        //{
+        //    customComboBoxType = type;
+        //}
+        private async Task<List<DataGridViewColumn>> ConfigureColumns<T>(string formName, bool isCheck = false)
         {
-            customComboBoxType = type;
-        }
-
-        private async Task ConfigureColumns<T>(string formName, bool isGuncelle = false, bool isDelete = false, bool isCheck = false)
-        {
-            dataGridView1.Columns.Clear();
+            List<DataGridViewColumn> columns = new List<DataGridViewColumn>();
 
             IEnumerable<PropertyAttributePair> props = GetHeaderProperties<T>();
             var fieldNames = props.Select(x => x.Attribute.Header).ToList();
             allowedFields = await GetAllowedFields(formName, fieldNames);
 
-            AddCheckBoxColumn(isCheck);
+            if (isCheck) columns.Add(AddCheckBoxColumn());
 
             foreach (var pair in props)
             {
@@ -127,25 +121,29 @@ namespace YektamakDesktop.CustomControls
                 {
                     var listProperty = _cache.GetType().GetProperty(pair.Attribute.ListName);
                     var listValue = listProperty?.GetValue(_cache);
-                    
+
                     if (listValue is IEnumerable<object> rawList)
                     {
                         var dataSource = rawList.Select(x => new
                         {
                             Id = x.GetType().GetProperty("Id")?.GetValue(x),
-                            Ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
+                            ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
                         }).ToList();
                         var comboColumn = new FilterableComboBoxColumn
                         {
                             DataPropertyName = pair.Property.Name,
                             HeaderText = pair.Attribute.Header,
                             Name = pair.Attribute.Header,
-                            ReadOnly = pair.Attribute.IsRequired,
+                            ReadOnly = pair.Attribute.readOnly,
                             Visible = pair.Attribute.Visible,
+                            DefaultCellStyle = new DataGridViewCellStyle
+                            {
+                                Alignment = DataGridViewContentAlignment.MiddleLeft
+                            }
                         };
                         if (comboColumn.CellTemplate is FilterableComboBoxCell comboCell)
                         {
-                            comboCell.DisplayMember = "Ad";
+                            comboCell.DisplayMember = "ad";
                             comboCell.ValueMember = "Id";
                             comboCell.ItemsSource = dataSource.Cast<object>().ToList();
                         }
@@ -153,7 +151,15 @@ namespace YektamakDesktop.CustomControls
                     }
                     else
                     {
-                        col = new DataGridViewTextBoxColumn();
+                        col = new DataGridViewTextBoxColumn()
+                        {
+                            DataPropertyName = pair.Property.Name,
+                            HeaderText = pair.Attribute.Header,
+                            Name = pair.Attribute.Header,
+                            ReadOnly = pair.Attribute.readOnly,
+                            Visible = pair.Attribute.Visible,
+                        }
+                    ;
                     }
                 }
                 else
@@ -163,7 +169,7 @@ namespace YektamakDesktop.CustomControls
                         DataPropertyName = pair.Property.Name,
                         HeaderText = pair.Attribute.Header,
                         Name = pair.Attribute.Header,
-                        ReadOnly = pair.Attribute.IsRequired,
+                        ReadOnly = pair.Attribute.readOnly,
                         Visible = pair.Attribute.Visible,
                     };
                 }
@@ -191,30 +197,24 @@ namespace YektamakDesktop.CustomControls
                 {
                     col.DefaultCellStyle.Format = "dd.MM.yyyy";
                 }
-
-                dataGridView1.Columns.Add(col);
+                columns.Add(col);
             }
-
-            if (isGuncelle)
-                AddImageColumn("guncelle", "Güncelle", _updateIcon);
-            if (isDelete)
-                AddImageColumn("Sil", "Sil", _deleteIcon);
+            return columns;
         }
-
-
-
         private string _formName;
-        public async Task SetData<T>(List<T> list, string formName, bool isGuncelle = false, bool isDelete = false, bool isCheck = false) 
+        public async Task SetData<T>(List<T> list, string formName, bool isCheck = false)
         {
+            _isCheck = isCheck;
             _formName = formName;
-            await ConfigureColumns<T>(formName, isGuncelle, isDelete, isCheck);
+
             var liste = new SortableBindingList<T>(list);
             binding.DataSource = liste;
 
-            dataGridView1.DataSource = binding;
             list1 = list.Cast<object>().ToList();
-            LoadSettings(formName);
-            lblToplamKayitSayisi.Text=$"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
+            dataGridView1.DataSource = binding;
+            await LoadSettings<T>(formName, isCheck);
+
+            lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
         }
         public void AddRow<T>(List<T> list) where T : IEntity, new()
         {
@@ -223,7 +223,7 @@ namespace YektamakDesktop.CustomControls
         }
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.IsCurrentCellDirty)
+            if (dataGridView1.IsCurrentCellDirty && dataGridView1.CurrentCell.ColumnIndex== 0)
             {
                 dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
@@ -236,11 +236,15 @@ namespace YektamakDesktop.CustomControls
                     .Count(row => Convert.ToBoolean(row.Cells["Sec"].Value) == true)}";
             }
         }
-        private void LoadSettings(string key) => DIContainer.GetService<GridSettingsManager>().Load(kullanici.Id, key, dataGridView1);
-        public void SaveSettings() => DIContainer.GetService<GridSettingsManager>().Save(kullanici.Id, _formName, dataGridView1);
+        private async Task LoadSettings<T>(string key, bool isCheck)
+        {
+            var columns = await ConfigureColumns<T>(key, isCheck);
+            await DIContainer.GetService<GridSettingsManager>().Load(kullanici.Id, key, columns, dataGridView1);
+        }
+        public async Task SaveSettings() => await DIContainer.GetService<GridSettingsManager>().Save(kullanici.Id, _formName, dataGridView1);
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex == 0 )
+            if (e.RowIndex == -1 && e.ColumnIndex == 0 && _isCheck)
             {
                 e.PaintBackground(e.CellBounds, true);
                 Point pt = new Point
@@ -254,7 +258,6 @@ namespace YektamakDesktop.CustomControls
                 e.Handled = true;
             }
         }
-        
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == Grid.Rows[e.RowIndex].Cells["Sec"].ColumnIndex)
@@ -266,7 +269,7 @@ namespace YektamakDesktop.CustomControls
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
             var hit = dataGridView1.HitTest(e.X, e.Y);
-            if (e.Button == MouseButtons.Left && hit.Type == DataGridViewHitTestType.ColumnHeader && dataGridView1.Columns[0].Name=="Sec")
+            if (e.Button == MouseButtons.Left && hit.Type == DataGridViewHitTestType.ColumnHeader && dataGridView1.Columns[0].Name == "Sec")
             {
                 if (dataGridView1.Columns[hit.ColumnIndex].Name == "Sec")
                 {
@@ -281,7 +284,7 @@ namespace YektamakDesktop.CustomControls
 
                     dataGridView1.InvalidateCell(hit.ColumnIndex, -1); // Sadece tıklanan header'ı yeniden çiz
                 }
-                else if (dataGridView1.Columns[0].Name != "Güncelle" && dataGridView1.Columns[0].Name != "Sil" && dataGridView1.Columns[0].Name != "Sec")
+                else
                 {
                     // Varsayılan sıralama işlemi yap
                     string columnName = dataGridView1.Columns[hit.ColumnIndex].DataPropertyName;
@@ -307,7 +310,7 @@ namespace YektamakDesktop.CustomControls
                 {
                     // Gizlenebilir olması istenmeyen kolonları atla (örneğin checkbox kolonu)
                     //if (col.Name == "chk") continue;
-                    if (allowedFields.Contains(col.Name) || col.Name == "Sec")
+                    if (allowedFields.Contains(col.Name))
                     {
                         var item = new ToolStripMenuItem(col.HeaderText)
                         {
@@ -321,7 +324,7 @@ namespace YektamakDesktop.CustomControls
                             var mi = s as ToolStripMenuItem;
                             if (mi?.Tag is DataGridViewColumn column)
                                 column.Visible = mi.Checked;
-                            
+
                         };
 
                         columnMenu.Items.Add(item);
@@ -330,9 +333,15 @@ namespace YektamakDesktop.CustomControls
 
                 columnMenu.Show(dataGridView1, e.Location);
             }
-            else if(e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right)
             {
-                MouseDown1?.Invoke(this,e);
+                Grid.ClearSelection();
+                Grid.Rows[hit.RowIndex].Selected = true;
+                if(hit.ColumnIndex > -1)
+                {
+                    Grid.CurrentCell = Grid.Rows[hit.RowIndex].Cells[hit.ColumnIndex];
+                }
+                MouseDown1?.Invoke(this, e);
             }
 
         }
@@ -379,17 +388,28 @@ namespace YektamakDesktop.CustomControls
                 return true;
             });
         }
+        public void SetComboColumnData(string columnName, IEnumerable<object> dataSource, string displayMember, string valueMember)
+        {
+            if (this.Grid.Columns[columnName] is FilterableComboBoxColumn col)
+            {
+                if (col.CellTemplate is FilterableComboBoxCell comboCell)
+                {
+                    comboCell.ItemsSource = dataSource.Cast<object>().ToList();
+                }
+            }
+        }
         public static SortableBindingList<T> Filtrele<T>(SortableBindingList<T> list, T filter)
         {
-            var props = typeof(T).GetProperties()
-                                 .Where(p => p.GetValue(filter) != null);
+            IEnumerable<PropertyInfo> props = typeof(T).GetProperties().ToList();
+            props = props.Where(p => p.GetValue(filter) != null);
+            props = props.Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
 
             var filtered = list.Where(item =>
             {
                 foreach (var prop in props)
                 {
                     var filterValue = prop.GetValue(filter);
-                    if (filterValue == null || typeof(IEnumerable).IsAssignableFrom(prop.PropertyType)) continue;
+                    //if (filterValue == null || typeof(IEnumerable).IsAssignableFrom(prop.PropertyType)) continue;
 
                     var itemValue = prop.GetValue(item);
 
@@ -402,19 +422,19 @@ namespace YektamakDesktop.CustomControls
 
             return new SortableBindingList<T>(filtered);
         }
-        public void Filtrele<T>(T filtreNesnesi,string formName) where T : IEntity 
+        public async Task Filtrele<T>(T filtreNesnesi) where T : IEntity
         {
             var list = (SortableBindingList<T>)binding.DataSource;
             var filtreliListe = Filtrele(list, filtreNesnesi);
             dataGridView1.DataSource = filtreliListe;
-            LoadSettings(formName);
+            await LoadSettings<T>(_formName, _isCheck);
             lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {dataGridView1.Rows.Count.ToString()}";
         }
         private void mouseDown(MouseEventArgs e)
         {
             MouseDown1?.Invoke(this, e);
         }
-        protected override void OnMouseDown (MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
             mouseDown(e);
@@ -492,6 +512,7 @@ namespace YektamakDesktop.CustomControls
                 case Keys.Left:
                 case Keys.Right:
                 case Keys.Up:
+                    return true;
                 case Keys.Down:
                 case Keys.Home:
                 case Keys.End:
@@ -502,7 +523,7 @@ namespace YektamakDesktop.CustomControls
                     return !dataGridViewWantsInputKey;
             }
         }
-        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context) => SelectedValue;
+        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context) => JsonConvert.SerializeObject(SelectedValue);
 
         public void PrepareEditingControlForEdit(bool selectAll) { }
 
@@ -526,6 +547,10 @@ namespace YektamakDesktop.CustomControls
     }
     public class FilterableComboBoxCell : DataGridViewTextBoxCell
     {
+        public FilterableComboBoxCell()
+        {
+            this.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        }
         public List<object> ItemsSource { get; set; }
         public string ValueMember { get; set; }
         public string DisplayMember { get; set; }
@@ -575,9 +600,16 @@ namespace YektamakDesktop.CustomControls
                 var list = this.ItemsSource as IEnumerable<object>;
                 var item = list?.FirstOrDefault(x =>
                 {
-                    var prop = x.GetType().GetProperty(this.ValueMember);
-                    var val = prop?.GetValue(x);
-                    return val != null && val.Equals(value);
+                    try
+                    {
+                        dynamic dynItem = x;
+                        var val = GetPropValue(dynItem, this.ValueMember);
+                        return val != null && val.Equals(value);
+                    }
+                    catch
+                    {
+                        return false;
+                    }
                 });
 
                 if (item != null)
@@ -588,6 +620,13 @@ namespace YektamakDesktop.CustomControls
             }
 
             return base.GetFormattedValue(value, rowIndex, ref cellStyle, valueTypeConverter, formattedValueTypeConverter, context);
+        }
+        private object GetPropValue(dynamic obj, string propName)
+        {
+            if (obj is IDictionary<string, object> dict && dict.ContainsKey(propName))
+                return dict[propName];
+            else
+                return obj.GetType().GetProperty(propName)?.GetValue(obj);
         }
     }
     public class FilterableComboBoxColumn : DataGridViewColumn

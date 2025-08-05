@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Proje;
 
 namespace YektamakDesktop.Formlar.Satinalma
@@ -27,39 +28,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             _jsonConverter = jsonConverter;
             InitializeComponent();
             universalGrid1.kullanici = _cache.kullanici;
-            universalGrid1.Grid.CellClick += Grid_CellClick;
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrubu);
             ComboBoxListFill.GetLookupAd(_cache.kullaniciList, ref clbKullaniciId);
             ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKodu);
-        }
-
-        private void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex == -1) return;
-                universalGrid1.Grid.Rows[e.RowIndex].Selected = true;
-                if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex ||
-                    e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
-                {
-                    if (universalGrid1.Grid.Rows[e.RowIndex].Cells[1].Value == null)
-                        return;
-
-
-                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)//Update
-                    {
-                        var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                        SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
-                        SatinalmaTalepSatirDetayForm satinalmaTalepSatirDetayForm = FormFactory.CreateForm<SatinalmaTalepSatirDetayForm>();
-                        satinalmaTalepSatirDetayForm.UpdateMode(satinalmaTalepDetay.satinalmaTalepSatirDetays);
-                        satinalmaTalepSatirDetayForm.Show();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Hata: {ex.Message}");
-            }
+            FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
         }
 
         private SatinalmaTalep _satinalmaTalep;
@@ -76,7 +48,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             set
             {
                 _satinalmaTalep = value;
-                //Binding();
+                Binding();
             }
         }
 
@@ -90,20 +62,22 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTeslimTarihi.DataBindings.Clear();
             ctbAciklama.DataBindings.Clear();
             ctbSetAdet.DataBindings.Clear();
-            clbMalzemeGrubu.DataBindings.Add("selectedDataRowId", satinalmaTalep, "malzemeGrup.Id", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbProjeKodu.DataBindings.Add("selectedDataRowId", satinalmaTalep, "proje.Id", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbKullaniciId.DataBindings.Add("selectedDataRowId", satinalmaTalep, "talepEdenKullanici.Id", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbMalzemeGrubu.DataBindings.Add("SelectedValue", satinalmaTalep, "malzemeGrup.Id", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbProjeKodu.DataBindings.Add("SelectedValue", satinalmaTalep, "proje.Id", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbKullaniciId.DataBindings.Add("SelectedValue", satinalmaTalep, "talepEdenKullanici.Id", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbTalepTarihi.DataBindings.Add("TextCustom", satinalmaTalep, "talepTarihi", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbTeslimTarihi.DataBindings.Add("TextCustom", satinalmaTalep, "teslimTarihi", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbTalepNo.DataBindings.Add("TextCustom", satinalmaTalep, "satinalmaTalepNo", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbAciklama.DataBindings.Add("TextCustom", satinalmaTalep, "aciklama", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbSetAdet.DataBindings.Add("TextCustom", satinalmaTalep, "setAdet", true, DataSourceUpdateMode.OnPropertyChanged);
+            satinalmaTalep.talepTarihi = DateTime.Today;
+            satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = new();
             foreach (var std in _satinalmaTalep.satinalmaTalepDetays)
             {
                 satinalmaTalepDetayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDetayDTO>(std));
             }
-            await universalGrid1.SetData(satinalmaTalepDetayList, this.Name, true, true, false);
+            await universalGrid1.SetData(satinalmaTalepDetayList, this.Name, false);
         }
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
@@ -128,6 +102,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", this, ctbTeslimTarihi);
             isValid &= GlobalData.CheckField("Parça Grubu seçilmelidir", this, clbMalzemeGrubu);
             isValid &= GlobalData.CheckField("Set Adet girilmelidir", this, ctbSetAdet);
+            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", this, ctbTeslimTarihi);
+            isValid &= GlobalData.CheckField("Talep tarihi girilmelidir", this, ctbTalepTarihi);
+            isValid &= GlobalData.CheckField("Proje kodu seçilmelidir", this, clbProjeKodu);
+            isValid &= GlobalData.CheckField("Talep eden kullanıcı seçilmelidir", this, clbKullaniciId);
             return isValid;
         }
         private void CreateSatinalmaTalep()
@@ -159,14 +137,49 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaTalep = satinalmaTalepUpdate;
         }
 
-        private void SatinalmaTalepKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
+        private async Task SatinalmaTalepKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            await universalGrid1.SaveSettings();
         }
 
         private async void SatinalmaTalepKayitFormu_Load(object sender, EventArgs e)
         {
             await Binding();
+        }
+
+        private void clbMalzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var stokKart = new StokKart
+            {
+                malzemeGrup = new MalzemeGrup { Id = int.Parse(clbMalzemeGrubu.SelectedValue.ToString()) },
+            };
+            var yeniUrunListesi = _cache.stokKartList
+                .Where(x => x.malzemeGrup.Id == stokKart.malzemeGrup.Id)
+                .ToList();
+            universalGrid1.SetComboColumnData("Stok Kart Id", yeniUrunListesi, "ad", "Id");
+        }
+
+        private void yeniKayıtEkleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = universalGrid1.binding.OfType<SatinalmaTalepDetayDTO>().ToList();
+            universalGrid1.AddRow(satinalmaTalepDetayList);
+        }
+
+        private void universalGrid1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
+            }
+        }
+
+        private void görüntüleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
+            SatinalmaTalepSatirDetayForm satinalmaTalepSatirDetayForm = FormFactory.CreateForm<SatinalmaTalepSatirDetayForm>();
+            satinalmaTalepSatirDetayForm.UpdateMode(satinalmaTalepDetay.satinalmaTalepSatirDetays);
+            satinalmaTalepSatirDetayForm.Show();
         }
     }
 }

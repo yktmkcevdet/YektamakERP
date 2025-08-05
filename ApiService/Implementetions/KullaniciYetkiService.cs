@@ -22,7 +22,7 @@ namespace ApiService.Implementetions
             return await _apiService.PostAsync(menu,"DeleteMenu");
         }
 
-        public async Task<string> GetAlanYetki(AlanYetkiDTO alanYetki)
+        public async Task<string> GetAlanYetki(AlanYetki alanYetki)
         {
             return await _apiService.PostAsync(alanYetki, "GetAlanYetki");
         }
@@ -92,7 +92,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(yetki, "SaveYetki");
         }
-        public async Task<string> SaveAlanYetki(AlanYetkiDTO alanYetki)
+        public async Task<string> SaveAlanYetki(AlanYetki alanYetki)
         {
             return await _apiService.PostAsync(alanYetki, "SaveAlanYetki");
         }

@@ -53,12 +53,12 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             clbPersonel.DataBindings.Clear();
             clbRol.DataBindings.Clear();
             ctbId.DataBindings.Clear();
-            ctbId.DataBindings.Add("TextCustom",kullanici,$"{nameof(kullanici.Id)}",true,DataSourceUpdateMode.OnPropertyChanged);
-            ctbKullaniciAd.DataBindings.Add("TextCustom", kullanici, $"{nameof(kullanici.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbSifre.DataBindings.Add("TextCustom", kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbSifreTekrar.DataBindings.Add("TextCustom", kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbPersonel.DataBindings.Add("selectedDataRowId", kullanici.personel, $"{nameof(kullanici.personel.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbRol.DataBindings.Add("selectedDataRowId", kullanici.rol, $"{nameof(kullanici.rol.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbId.DataBindings.Add(nameof(ctbId.TextCustom),kullanici,$"{nameof(kullanici.Id)}",true,DataSourceUpdateMode.OnPropertyChanged);
+            ctbKullaniciAd.DataBindings.Add(nameof(ctbKullaniciAd.TextCustom), kullanici, $"{nameof(kullanici.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbSifre.DataBindings.Add(nameof(ctbSifre.TextCustom), kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbSifreTekrar.DataBindings.Add(nameof(ctbSifreTekrar.TextCustom), kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbPersonel.DataBindings.Add(nameof(clbPersonel.SelectedValue), kullanici.personel, $"{nameof(kullanici.personel.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbRol.DataBindings.Add(nameof(clbRol.SelectedValue), kullanici.rol, $"{nameof(kullanici.rol.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
         }
         private int? _kullaniciId { get; set; }
         private void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
@@ -67,7 +67,6 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             try
             {
                 string hashedPassword = _passwordService.HashPassword(kullanici.sifre).CombinedHash;
-                kullanici.Id = _kullaniciId;
                 kullanici.sifre = hashedPassword;
                 kullanici.isSifreDegisti = false;
                 string jsonResult = _kullaniciYetkiService.SaveKullanici(kullanici);
@@ -80,14 +79,18 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     }
                     else
                     {
-                        kullanici = JsonConvert.DeserializeObject<Kullanici>(result.result);
-                        _cache.kullaniciList.Add(kullanici);
+                        kullanici = JsonConvert.DeserializeObject<List<Kullanici>>(result.result).FirstOrDefault();
+                        if (!_cache.kullaniciList.Any(x => x.Id == kullanici.Id))
+                        { 
+                            _cache.kullaniciList.Add(kullanici); 
+                        }
                         IMailHandler mailHandler = new MailHandler();
                         mailHandler.SendMail(kullanici.personel.mail, "ERP şifreniz değiştirildi", "");
                         KullaniciKayitFormu_Load(sender, e);
                         MessageBox.Show("Kayıt başarılı");
                     }
                 }
+                kullanici.sifre = "";
             }
             catch (Exception ex)
             {

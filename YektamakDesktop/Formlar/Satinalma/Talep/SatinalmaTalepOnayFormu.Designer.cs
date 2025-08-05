@@ -68,6 +68,7 @@
             talebiReddetToolStripMenuItem.Name = "talebiReddetToolStripMenuItem";
             talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             talebiReddetToolStripMenuItem.Text = "Talebi Reddet";
+            talebiReddetToolStripMenuItem.Click += talebiReddetToolStripMenuItem_Click;
             // 
             // universalGrid1
             // 
@@ -92,7 +93,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "SatinalmaTalepOnayFormu";
             Text = "Onaylanacak Talepler";
-            FormClosed += SatinalmaTalepOnayFormu_FormClosed;
+            FormClosing += SatinalmaTalepOnayFormu_FormClosing;
             Load += SatinalmaTalepOnayFormu_Load;
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);

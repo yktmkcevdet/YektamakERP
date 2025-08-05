@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            teklifTalebiniSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            teklifTalebiniGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // headerPanel1
@@ -53,6 +58,27 @@
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(959, 509);
             universalGrid1.TabIndex = 1;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifTalebiniSilToolStripMenuItem, teklifTalebiniGörüntüleToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(201, 48);
+            // 
+            // teklifTalebiniSilToolStripMenuItem
+            // 
+            teklifTalebiniSilToolStripMenuItem.Name = "teklifTalebiniSilToolStripMenuItem";
+            teklifTalebiniSilToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            teklifTalebiniSilToolStripMenuItem.Text = "Teklif Talebini Sil";
+            teklifTalebiniSilToolStripMenuItem.Click += teklifTalebiniSilToolStripMenuItem_Click;
+            // 
+            // teklifTalebiniGörüntüleToolStripMenuItem
+            // 
+            teklifTalebiniGörüntüleToolStripMenuItem.Name = "teklifTalebiniGörüntüleToolStripMenuItem";
+            teklifTalebiniGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            teklifTalebiniGörüntüleToolStripMenuItem.Text = "Teklif Talebini Görüntüle";
+            teklifTalebiniGörüntüleToolStripMenuItem.Click += teklifTalebiniGörüntüleToolStripMenuItem_Click;
             // 
             // SatinalmaTeklifTaleplerFormu
             // 
@@ -66,6 +92,7 @@
             Text = "SatinalmaTeklifTaleplerFormu";
             FormClosing += SatinalmaTeklifTaleplerFormu_FormClosing;
             Load += SatinalmaTeklifTaleplerFormu_Load;
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -73,5 +100,8 @@
 
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem teklifTalebiniSilToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teklifTalebiniGörüntüleToolStripMenuItem;
     }
 }

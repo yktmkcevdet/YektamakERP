@@ -24,7 +24,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             _cache = cache;
             InitializeComponent();
             universalGrid1.kullanici = _cache.kullanici;
-            universalGrid1.Grid.CellClick += universalGrid1_CellClick;
         }
         private List<SatinalmaTeklifBaslikDTO> _satinalmaTeklifDTOs;
         public List<SatinalmaTeklifBaslikDTO> satinalmaTeklifDTOs
@@ -49,56 +48,47 @@ namespace YektamakDesktop.Formlar.Satinalma
                 var jsonResult = await _satinalmaTeklifService.GetSatinalmaTeklif(new SatinalmaTeklifBaslik());
                 Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
                 List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = _jsonConverter.ToModelList<SatinalmaTeklifBaslik>(result.result);
-                foreach (var item in satinalmaTeklifBasliks)
+                foreach (var item in satinalmaTeklifBasliks.Where(x => (Double.TryParse(x.teklifTutar.tutar?.ToString(), out Double result1) ? x.teklifTutar.tutar : 0) == 0))
                 {
                     satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
                 }
-                universalGrid1.SetData(satinalmaTeklifDTOs, this.Name,true,true);
+                universalGrid1.SetData(satinalmaTeklifDTOs, this.Name);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Hata: {ex.Message}");
             }
-        }
-        private async void universalGrid1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex == -1) return;
-                universalGrid1.Grid.Rows[e.RowIndex].Selected = true;
-                if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex || e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
-                {
-                    if (universalGrid1.Grid.Rows[e.RowIndex].Cells[1].Value == null)
-                        return;
-                    var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
-                    SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
-
-                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)//Update
-                    {
-                        
-                        SatinalmaTeklifKayitFormu satinalmaTeklifKayitFormu = FormFactory.CreateForm<SatinalmaTeklifKayitFormu>();
-                        satinalmaTeklifKayitFormu.UpdateMode(satinalmaTeklifBaslik);
-                        satinalmaTeklifKayitFormu.ShowDialog();
-                    }
-                    else if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)//Delete
-                    {
-                        string jsonResult = await _satinalmaTeklifService.DeleteSatinalmaTeklif(satinalmaTeklifBaslik);
-                        Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                        MessageBox.Show(result.result);
-                        universalGrid1.binding.RemoveAt(e.RowIndex);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Hata: {ex.Message}");
-            }
-
         }
         private void SatinalmaTeklifTaleplerFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveSettings();
         }
-        
+
+        private async void teklifTalebiniSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            string jsonResult = await _satinalmaTeklifService.DeleteSatinalmaTeklif(satinalmaTeklifBaslik);
+            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+            MessageBox.Show(result.result);
+            universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
+        }
+
+        private void teklifTalebiniGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            SatinalmaTeklifKayitFormu satinalmaTeklifKayitFormu = FormFactory.CreateForm<SatinalmaTeklifKayitFormu>();
+            satinalmaTeklifKayitFormu.UpdateMode(satinalmaTeklifBaslik);
+            satinalmaTeklifKayitFormu.ShowDialog();
+        }
+
+        private void universalGrid1_MouseDown1(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1, e.Location);
+            }
+        }
     }
 }

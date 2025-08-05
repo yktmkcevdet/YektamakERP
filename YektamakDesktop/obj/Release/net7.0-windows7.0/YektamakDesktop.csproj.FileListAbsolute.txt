@@ -190,6 +190,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.0-windows7.0\YektamakDesktop.Formlar.Satinalma.SatinalmaTeklifTaleplerFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.AltMenuEkleForm.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.0-windows7.0\YektamakDesktop.CustomControls.FilterableComboBox.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.0-windows7.0\YektamakDesktop.Formlar.Loading.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\YektamakDesktop.dll.manifest
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net7.0-windows7.0\YektamakDesktop.application
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net7.0-windows7.0\YektamakDesktop.dll.manifest

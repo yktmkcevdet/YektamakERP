@@ -33,11 +33,12 @@
             // 
             // textBox
             // 
+            textBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            textBox.Location = new System.Drawing.Point(10, 7);
+            textBox.Location = new System.Drawing.Point(4, 3);
+            textBox.Margin = new System.Windows.Forms.Padding(0);
             textBox.Name = "textBox";
-            textBox.Size = new System.Drawing.Size(230, 17);
+            textBox.Size = new System.Drawing.Size(251, 17);
             textBox.TabIndex = 0;
             textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             textBox.Click += textBox_Click;
@@ -57,8 +58,8 @@
             Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ForeColor = System.Drawing.Color.DimGray;
             Name = "CustomTextBoxSayisal";
-            Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            Size = new System.Drawing.Size(250, 30);
+            Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            Size = new System.Drawing.Size(262, 26);
             Enter += CustomTextBox_Enter;
             Leave += CustomTextBoxSayisal_Leave;
             ResumeLayout(false);

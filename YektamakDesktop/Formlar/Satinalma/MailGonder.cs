@@ -162,9 +162,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             try
             {
-                var loadingForm = new Loading(); // içi boş sadece dönen gif
-                loadingForm.StartPosition = FormStartPosition.CenterScreen;
-                loadingForm.Show();
+                this.Enabled = false;
                 mail.To = tbxMailTo.TextCustom;
                 mail.Subject = tbxKonu.TextCustom;
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // rtf'yi html'e döndürmek için gerekli
@@ -181,7 +179,6 @@ namespace YektamakDesktop.Formlar.Satinalma
                     MessageBox.Show("Mail başarıyla gönderildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                loadingForm.Close();
             }
             catch (Exception ex)
             {
@@ -269,55 +266,56 @@ namespace YektamakDesktop.Formlar.Satinalma
                 mail.attachmentData.Add(mailAttachment);
                 //dosyaAdControl.TextCustom = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 //dosyaUzantiControl.TextCustom = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+                var atch = new PictureBox();
+                atch.Image = Properties.Resources.icons8_attachment_24;
+                atch.Tag = mailAttachment.fileName;
+                atch.Text = mailAttachment.fileName;
+                atch.Cursor = Cursors.Hand;
+                atch.Size = new Size(25, 25);
+                atch.Location = new Point(10, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+
+                var lbl = new Label();
+                lbl.Text = mailAttachment.fileName;
+                lbl.Size = new Size(325, 25);
+                lbl.Location = new Point(40, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+                lbl.ForeColor = Color.Blue;
+                lbl.Cursor = Cursors.Hand;
+                lbl.Click += (s, e) =>
+                {
+                    var fileName = atch.Tag.ToString();
+                    var fileData = mailAttachment.fileData;
+                    using (MemoryStream ms = new MemoryStream(fileData))
+                    {
+                        using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                        {
+                            ms.WriteTo(fs);
+                        }
+                    }
+                    Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
+                };
+
+                var del = new PictureBox();
+                del.Image = Properties.Resources.sil;
+                del.SizeMode = PictureBoxSizeMode.StretchImage;
+                del.Width = atch.Width;
+                del.Height = atch.Height;
+                del.Tag = mailAttachment.fileName;
+                del.Text = mailAttachment.fileName;
+                del.Cursor = Cursors.Hand;
+                del.Location = new Point(lbl.Location.X + lbl.Width, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
+                del.Click += (s, e) =>
+                {
+                    mail.attachmentData.Remove(mailAttachment);
+                    this.Controls.Remove(atch);
+                    this.Controls.Remove(lbl);
+                    this.Controls.Remove(del);
+                };
+                this.Controls.Add(lbl);
+                this.Controls.Add(atch);
+                this.Controls.Add(del);
             }
 
-            var atch = new PictureBox();
-            atch.Image = Properties.Resources.icons8_attachment_24;
-            atch.Tag = mailAttachment.fileName;
-            atch.Text = mailAttachment.fileName;
-            atch.Cursor = Cursors.Hand;
-            atch.Size = new Size(25, 25);
-            atch.Location = new Point(10, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
             
-            var lbl = new Label();
-            lbl.Text = mailAttachment.fileName;
-            lbl.Size = new Size(325, 25);
-            lbl.Location = new Point(40, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
-            lbl.ForeColor = Color.Blue;
-            lbl.Cursor = Cursors.Hand;
-            lbl.Click += (s, e) =>
-            {
-                var fileName = atch.Tag.ToString();
-                var fileData = mailAttachment.fileData;
-                using (MemoryStream ms = new MemoryStream(fileData))
-                {
-                    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-                    {
-                        ms.WriteTo(fs);
-                    }
-                }
-                Process.Start(new ProcessStartInfo(fileName) { UseShellExecute = true });
-            };
-
-            var del = new PictureBox();
-            del.Image = Properties.Resources.sil;
-            del.SizeMode = PictureBoxSizeMode.StretchImage;
-            del.Width = atch.Width;
-            del.Height = atch.Height;
-            del.Tag = mailAttachment.fileName;
-            del.Text = mailAttachment.fileName;
-            del.Cursor = Cursors.Hand;
-            del.Location = new Point(lbl.Location.X + lbl.Width, 190 + (mail.attachmentData.IndexOf(mailAttachment) * 30));
-            del.Click += (s, e) =>
-            {
-                mail.attachmentData.Remove(mailAttachment);
-                this.Controls.Remove(atch);
-                this.Controls.Remove(lbl);
-                this.Controls.Remove(del);
-            };
-            this.Controls.Add(lbl);
-            this.Controls.Add(atch);
-            this.Controls.Add(del);
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Newtonsoft.Json;
+using NPOI.SS.Formula.Functions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 
@@ -19,7 +22,7 @@ namespace YektamakDesktop.Helpers
             _jsonConverter = jsonConverter;
         }
 
-        public void Save(int? kullaniciId, string key, DataGridView dgv)
+        public async Task Save(int? kullaniciId, string key, DataGridView dgv)
         {
             if (dgv == null || dgv.Columns.Count == 0 || string.IsNullOrEmpty(key))
                 return;
@@ -42,31 +45,34 @@ namespace YektamakDesktop.Helpers
             gridSettings.grid=key;
             gridSettings.ayar=updatedJson;
             gridSettings.kullaniciId = kullaniciId;
-            _configurationService.SaveGridSettings(gridSettings);
+            await _configurationService.SaveGridSettings(gridSettings);
         }
 
-        public async void Load(int? kullaniciId, string key, DataGridView dgv)
+        public async Task Load(int? kullaniciId, string key, List<DataGridViewColumn> dgv, DataGridView dataGridView)
         {
             GridSettings gridSettings = new GridSettings();
             gridSettings.grid=key;
             gridSettings.kullaniciId=kullaniciId;
             string jsonResult=await _configurationService.GetGridSettings(gridSettings);
             Result result=_jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            if (result?.result == null) return; 
+            dataGridView.Columns.Clear();
+            foreach (var col in dgv)
+            {
+                dataGridView.Columns.Add(col);
+            }
+            if (result?.result == null) return;
             gridSettings = _jsonConverter.ToModelList<GridSettings>(result.result).FirstOrDefault();
             var json = gridSettings.ayar;
-            var allGrids = JsonConvert.DeserializeObject<List<dynamic>>(json);
-
-            var columnSettings = allGrids;
-
-            foreach (var c in columnSettings)
+            var columnSettings = JsonConvert.DeserializeObject<List<dynamic>>(json);
+            
+            foreach (var setting in columnSettings)
             {
-                var col = dgv.Columns[c.Name.ToString()];
-                if (col != null)
+                var c = dataGridView.Columns[setting.Name.ToString()];
+                if (c != null)
                 {
-                    col.Width = (int)c.Width;
-                    col.DisplayIndex = (int)c.DisplayIndex>dgv.Columns.Count -1 ? dgv.Columns.Count-1: (int)c.DisplayIndex;
-                    col.Visible = (bool)c.Visible;
+                    c.Width = (int)setting.Width;
+                    c.DisplayIndex = (int)setting.DisplayIndex > dgv.Count - 1 ? dgv.Count - 1 : (int)setting.DisplayIndex;
+                    c.Visible = (bool)setting.Visible;
                 }
             }
         }

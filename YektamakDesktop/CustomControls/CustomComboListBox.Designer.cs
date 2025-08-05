@@ -39,13 +39,14 @@
             listBox.FormattingEnabled = true;
             listBox.HorizontalScrollbar = true;
             listBox.ItemHeight = 15;
-            listBox.Location = new System.Drawing.Point(1, 28);
+            listBox.Location = new System.Drawing.Point(0, 32);
             listBox.Name = "listBox";
-            listBox.Size = new System.Drawing.Size(247, 199);
+            listBox.Size = new System.Drawing.Size(243, 199);
             listBox.TabIndex = 2;
-            listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
+            //listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
             listBox.Enter += listBox_Enter;
             listBox.Leave += listBox_Leave;
+            listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
             listBox.MouseDown += listBox_MouseDown;
             listBox.MouseLeave += listBox_MouseLeave;
             // 
@@ -54,10 +55,10 @@
             panelDropDownButton.BackColor = System.Drawing.Color.Transparent;
             panelDropDownButton.BackgroundImage = (System.Drawing.Image)resources.GetObject("panelDropDownButton.BackgroundImage");
             panelDropDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            panelDropDownButton.Location = new System.Drawing.Point(190, 0);
+            panelDropDownButton.Location = new System.Drawing.Point(214, 1);
             panelDropDownButton.Name = "panelDropDownButton";
             panelDropDownButton.Padding = new System.Windows.Forms.Padding(2);
-            panelDropDownButton.Size = new System.Drawing.Size(25, 27);
+            panelDropDownButton.Size = new System.Drawing.Size(25, 26);
             panelDropDownButton.TabIndex = 3;
             panelDropDownButton.Click += panelDropDownButton_Click;
             panelDropDownButton.Enter += panelDropDownButton_Enter;
@@ -82,7 +83,7 @@
             textBox.PlaceholderText = "";
             textBox.ReadOnly = false;
             textBox.SelectionStart = 0;
-            textBox.Size = new System.Drawing.Size(246, 32);
+            textBox.Size = new System.Drawing.Size(244, 32);
             textBox.TabIndex = 4;
             textBox.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             textBox.TextCustom = "";
@@ -103,7 +104,7 @@
             Margin = new System.Windows.Forms.Padding(1);
             Name = "CustomComboListBox";
             Padding = new System.Windows.Forms.Padding(1);
-            Size = new System.Drawing.Size(250, 228);
+            Size = new System.Drawing.Size(243, 228);
             Load += CustomCheckedComboBox_Load;
             FontChanged += CustomCheckedComboBox_FontChanged;
             Leave += CustomCheckedComboBox_Leave;

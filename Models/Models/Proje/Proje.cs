@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Models
 {
-    public class Proje:IEntity
+    public class Proje: IEntity
     {
         [FilterAttribute]
         public int? Id { get; set; }

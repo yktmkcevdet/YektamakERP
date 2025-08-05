@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.Formlar
@@ -7,7 +8,7 @@ namespace YektamakDesktop.Formlar
     /// Projedeki bütün formlarda olmasını istediğimiz özellik ve metodları tanımlar.
     /// </summary>
     public interface IForm
-    {        
+    {
         /// <summary>
         /// GlobalData.ActiveFormStack listesindeki en son form ya da açılan en son form bu değilse (headerPanel vb sürekli aktif kalmasını istediğimiz kontroller dışındaki) 
         /// disable olmasını istediğimiz kontrolleri bu listeye ekleriz.

@@ -34,11 +34,14 @@
             // comboBox1
             // 
             comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(0, 0);
+            comboBox1.Location = new System.Drawing.Point(2, 3);
+            comboBox1.Margin = new System.Windows.Forms.Padding(0);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(121, 23);
+            comboBox1.Size = new System.Drawing.Size(115, 23);
             comboBox1.TabIndex = 0;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // FilterableComboBox
             // 
@@ -46,7 +49,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(comboBox1);
             Name = "FilterableComboBox";
-            Size = new System.Drawing.Size(121, 23);
+            Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            Size = new System.Drawing.Size(119, 29);
             ResumeLayout(false);
         }
 

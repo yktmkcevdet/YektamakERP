@@ -251,7 +251,7 @@ namespace Api.Business
                             string jsonList = ListToJson(list, itemType);
                             foreach (MySqlParameter parameter in cmd.Parameters)
                             {
-                                string parameterName = member.Name;
+                                string parameterName = parameterPrefix+member.Name;
                                 if (parameter.ParameterName.Equals($"{parameterName}", StringComparison.OrdinalIgnoreCase) || 
                                     parameter.ParameterName.Equals($"@{parameterName}", StringComparison.OrdinalIgnoreCase))
                                 {

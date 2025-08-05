@@ -24,7 +24,7 @@ namespace YektamakWeb.Pages
             {
                 // API çağrısı yap
                 StokKart stokKart = new StokKart();
-                string serializeString = _stokService.GetStokKart(stokKart).Result;
+                string serializeString = _stokService.GetStokKartAsync(stokKart).Result;
                 IJsonConverter jsonConvertHelper = new JsonConverter();
                 DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
                 if (dataSet != null)

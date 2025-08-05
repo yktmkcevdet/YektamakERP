@@ -1,7 +1,9 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Models;
 using Models.Configuration;
+using NPOI.SS.Formula.Functions;
 using System;
 using Utilities;
 using Utilities.Implementations;
@@ -12,6 +14,7 @@ using YektamakDesktop.Formlar;
 using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Proje;
 using YektamakDesktop.Formlar.Satinalma;
+using YektamakDesktop.Formlar.Satinalma.Talep;
 using YektamakDesktop.Formlar.Satinalma.Teklif;
 using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
@@ -37,6 +40,8 @@ namespace YektamakDesktop.Common
             services.AddTransient<DataControl>();
             services.AddTransient<DataControlFirma>();
             services.AddTransient<DataControlMenu>();
+            services.AddTransient<DataControlSatinalmaTalepDetay>();
+            services.AddTransient<DataControlStokKartDosya>();
             services.AddTransient<EkranEkle>();
             services.AddTransient<ExcelTanimlamaFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
@@ -53,11 +58,14 @@ namespace YektamakDesktop.Common
             services.AddTransient<ProjeDosyalari>();
             services.AddTransient<SatinalmaTalepKayitFormu>();
             services.AddTransient<SatinalmaTalepler>();
+            services.AddTransient<SatinalmaTalepOlusturmaAltForm>();
+            services.AddTransient<SatinalmaTalepOlusturmaFormu>();
             services.AddTransient<SatinalmaTalepOnayFormu>();
             services.AddTransient<SatinalmaTalepSatirDetayForm>();
             services.AddTransient<SatinalmaTalepTeklifFormu>();
             services.AddTransient<SatinalmaTeklifKayitFormu>();
             services.AddTransient<SatinalmaTeklifTaleplerFormu>();
+            services.AddTransient<SatinalmaTekliflerFormu>();
             services.AddTransient<SatisSiparisTeklifTalepGridForm>();
             services.AddTransient<SatisTeklifTalepKayitFormu>();
             services.AddTransient<SatisTeklifMaliyetKayitFormu>();
@@ -84,6 +92,17 @@ namespace YektamakDesktop.Common
         {
             return serviceProvider.GetRequiredService<T>();
         }
-        
+        public static void Reset()
+        {
+            if(serviceProvider != null)
+            {
+                var caches = serviceProvider.GetServices<ICache>();
+                foreach (var cache in caches)
+                {
+                    cache.Reset();
+                }
+            }
+        }
+
     }
 }

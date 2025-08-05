@@ -9,9 +9,10 @@ namespace Utilities.Interfaces
         public List<Kullanici> kullaniciList { get;  }
         public Task<List<Kullanici>> kullaniciListAsync();
         public List<Rol> rolList { get; }
-        public List<AnaMenuDTO> ananaMenuList { get; }
+        public List<AnaMenuDTO> anaMenuList { get; }
         public List<Menu> menuList { get; }
         public List<Yetki> yetkiList { get; }
+        public List<StokKart> stokKartList { get; }
         public List<StokGrup> stokGrups { get; }
         public List<MalzemeGrup> malzemeGrups { get; }
         public List<MalzemeAltGrup2> malzemeAltGrup2List { get; }
@@ -34,6 +35,6 @@ namespace Utilities.Interfaces
         public List<MaliyetUnsur> maliyetUnsurList { get; set; }
         public List<MaliyetTespitKanal> maliyetTespitKanalList { get; set; }
         public List<DosyaTip> dosyaTipList { get; set; }
-
+        void Reset();
     }
 }

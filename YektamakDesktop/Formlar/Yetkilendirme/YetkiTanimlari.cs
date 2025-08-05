@@ -259,7 +259,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private void alanEkleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             universalGrid1.AddRow(list);
-            universalGrid1.SetData(list, this.Name, false, true, true);
+            universalGrid1.SetData(list, this.Name, true);
         }
         private async void cbxKullanici_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -273,14 +273,14 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             if (cbxKullanici.selectedDataRowId == null) return false;
             if (selectedNode == null) return false;
-            AlanYetkiDTO alanYetki = new Models.DTO.AlanYetkiDTO();
-            alanYetki.kullaniciId = cbxKullanici.selectedDataRowId == null ? 0 : cbxKullanici.selectedDataRowId;
+            AlanYetki alanYetki = new AlanYetki();
+            alanYetki.kullanici.Id = cbxKullanici.selectedDataRowId == null ? 0 : cbxKullanici.selectedDataRowId;
             alanYetki.formAd = selectedNode.Text;
             string alanYetkiJson = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
             Result result = _jsonConverter.DeserializeToModelList<Result>(alanYetkiJson)[0];
             var yetkiListDTO = new List<AlanYetkiDTO>();
             GetFieldListFromAttribute();
-            if (result.result != null)
+            if (result.result != null && !result.result.Contains("error",StringComparison.OrdinalIgnoreCase))
             {
                 var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(result.result);
                 foreach (var yetki in yetkiList)
@@ -301,7 +301,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 }
             }
             list = yetkiListDTO;
-            universalGrid1.SetData(list, this.Name, false, true, false);
+            universalGrid1.SetData(list, this.Name, true);
             return true;
         }
         private static List<AlanYetkiDTO> _yetkiListDTOFromAtrr;
@@ -383,7 +383,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     await YetkiTanimla();
                 }
-                universalGrid1.SetData(list, this.Name, false, true, false);
+                universalGrid1.SetData(list, this.Name, true);
             }
             catch (Exception ex)
             {
@@ -397,7 +397,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             alanYetki.kullaniciId = cbxKullanici.selectedDataRowId;
             alanYetki.yetki = !alanYetki.yetki;
             alanYetki.formAd = selectedNode.Text;
-            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(alanYetki);
+            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(ConvertHelper.ToEntity<AlanYetki>(alanYetki));
             Result result = _jsonConverter.DeserializeToModelList<Result>(httpResult)[0];
             if (list.Find(y => y == alanYetki) is { } item)
             {
@@ -428,7 +428,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     }
                         
                 }
-                universalGrid1.SetData(list, this.Name, false, true, false);
+                universalGrid1.SetData(list, this.Name, true);
             }
             catch (Exception ex)
             {

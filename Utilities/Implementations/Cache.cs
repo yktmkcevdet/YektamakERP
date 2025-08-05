@@ -109,7 +109,7 @@ namespace Utilities.Implementations
             }
         }
         private List<AnaMenuDTO> _anaMenuList;
-        public List<AnaMenuDTO> ananaMenuList
+        public List<AnaMenuDTO> anaMenuList
         {
             get
             {
@@ -154,6 +154,18 @@ namespace Utilities.Implementations
                     _yetkiList = GetModelList(_kullaniciYetki.GetYetki, yetki);
                 }
                 return _yetkiList;
+            }
+        }
+        private List<StokKart> _stokKartList;
+        public List<StokKart> stokKartList
+        {
+            get
+            {
+                if (_stokKartList == null)
+                {
+                    _stokKartList = GetModelList(_stokService.GetStokKart, new StokKart());
+                }
+                return _stokKartList;
             }
         }
         private List<StokGrup> _stokGrups;
@@ -289,9 +301,10 @@ namespace Utilities.Implementations
                 return _sektorList;
             }
         }
+        
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
-            var jsonResult = fetchFunction.Invoke(t);
+            var jsonResult =  fetchFunction.Invoke(t);
             Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
             List<T> list = _jsonConverter.ToModelList<T>(result.result);
             return list;
@@ -453,6 +466,14 @@ namespace Utilities.Implementations
             {
                 _dosyaTipList = value;
             }
+        }
+        public void Reset()
+        {
+            _kullaniciList.Clear();
+            kullanici = new Kullanici();
+            if(_yetkiList!=null)_yetkiList.Clear();
+            if(_anaMenuList!=null) _anaMenuList.Clear();
+            if(_menuList!=null) _menuList.Clear();
         }
     }
 }

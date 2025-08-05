@@ -30,56 +30,59 @@ namespace YektamakDesktop.Formlar.Stok
         /// </summary>
         private void InitializeComponent()
         {
-            textBoxParcaAdi = new CustomTextBox();
+            components = new System.ComponentModel.Container();
+            ctbParcaAdi = new CustomTextBox();
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
-            cbxMalzemeAltGrup = new CustomComboListBox();
             label1 = new System.Windows.Forms.Label();
-            cbxMalzemeGrup = new CustomComboListBox();
             label2 = new System.Windows.Forms.Label();
-            projeKodu = new CustomComboListBox();
             buttonSatisSiparisTeklifTalepEkle = new System.Windows.Forms.Button();
-            lblToplamKayitSayisi = new System.Windows.Forms.Label();
-            lblSecilmisKayitSayisi = new System.Windows.Forms.Label();
-            lblKayitSayisi = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            cbxMalzemeAltGrup2 = new CustomComboListBox();
             label6 = new System.Windows.Forms.Label();
-            cbxStokGrup = new CustomComboListBox();
-            cbxStokTip = new CustomComboListBox();
             headerPanel1 = new HeaderPanel();
             universalGrid1 = new UniversalGrid();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            projeKodu = new FilterableComboBox();
+            clbStokGrup = new FilterableComboBox();
+            clbMalzemeGrup = new FilterableComboBox();
+            cbxMalzemeAltGrup = new FilterableComboBox();
+            clbMalzemeAltGrup2 = new FilterableComboBox();
+            cbxStokTip = new FilterableComboBox();
+            label7 = new System.Windows.Forms.Label();
+            stokKartınıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // textBoxParcaAdi
+            // ctbParcaAdi
             // 
-            textBoxParcaAdi.BackColor = System.Drawing.Color.White;
-            textBoxParcaAdi.BorderColor = System.Drawing.Color.Silver;
-            textBoxParcaAdi.BorderFocusColor = System.Drawing.Color.HotPink;
-            textBoxParcaAdi.BorderRadius = 5;
-            textBoxParcaAdi.BorderSize = 1;
-            textBoxParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBoxParcaAdi.ForeColor = System.Drawing.Color.Black;
-            textBoxParcaAdi.isPlaceHolder = false;
-            textBoxParcaAdi.Location = new System.Drawing.Point(143, 238);
-            textBoxParcaAdi.Multiline = false;
-            textBoxParcaAdi.Name = "textBoxParcaAdi";
-            textBoxParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            textBoxParcaAdi.PasswordChar = false;
-            textBoxParcaAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
-            textBoxParcaAdi.PlaceholderText = "";
-            textBoxParcaAdi.ReadOnly = false;
-            textBoxParcaAdi.SelectionStart = 0;
-            textBoxParcaAdi.Size = new System.Drawing.Size(250, 28);
-            textBoxParcaAdi.TabIndex = 116;
-            textBoxParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            textBoxParcaAdi.TextCustom = "";
-            textBoxParcaAdi.UnderlinedStyle = false;
+            ctbParcaAdi.BackColor = System.Drawing.Color.White;
+            ctbParcaAdi.BorderColor = System.Drawing.Color.Silver;
+            ctbParcaAdi.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbParcaAdi.BorderRadius = 5;
+            ctbParcaAdi.BorderSize = 1;
+            ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbParcaAdi.ForeColor = System.Drawing.Color.Black;
+            ctbParcaAdi.isPlaceHolder = false;
+            ctbParcaAdi.Location = new System.Drawing.Point(143, 165);
+            ctbParcaAdi.Multiline = false;
+            ctbParcaAdi.Name = "ctbParcaAdi";
+            ctbParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbParcaAdi.PasswordChar = false;
+            ctbParcaAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbParcaAdi.PlaceholderText = "";
+            ctbParcaAdi.ReadOnly = false;
+            ctbParcaAdi.SelectionStart = 0;
+            ctbParcaAdi.Size = new System.Drawing.Size(176, 28);
+            ctbParcaAdi.TabIndex = 116;
+            ctbParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbParcaAdi.TextCustom = "";
+            ctbParcaAdi.UnderlinedStyle = false;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(24, 244);
+            label4.Location = new System.Drawing.Point(24, 171);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(57, 15);
             label4.TabIndex = 115;
@@ -88,46 +91,20 @@ namespace YektamakDesktop.Formlar.Stok
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(24, 168);
+            label3.Location = new System.Drawing.Point(367, 98);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(109, 15);
             label3.TabIndex = 114;
             label3.Text = "Malzeme Alt Grubu";
             // 
-            // cbxMalzemeAltGrup
-            // 
-            cbxMalzemeAltGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup.Location = new System.Drawing.Point(143, 162);
-            cbxMalzemeAltGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup.Name = "cbxMalzemeAltGrup";
-            cbxMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup.selectedDataRowId = null;
-            cbxMalzemeAltGrup.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeAltGrup.TabIndex = 113;
-            cbxMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(24, 136);
+            label1.Location = new System.Drawing.Point(367, 66);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(91, 15);
             label1.TabIndex = 112;
             label1.Text = "Malzeme Grubu";
-            // 
-            // cbxMalzemeGrup
-            // 
-            cbxMalzemeGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeGrup.ListBoxVisualSize = 5;
-            cbxMalzemeGrup.Location = new System.Drawing.Point(143, 130);
-            cbxMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrup.Name = "cbxMalzemeGrup";
-            cbxMalzemeGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeGrup.selectedDataRowId = null;
-            cbxMalzemeGrup.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeGrup.TabIndex = 111;
-            cbxMalzemeGrup.SelectedIndexChanged += malzemeGrubu_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -137,19 +114,6 @@ namespace YektamakDesktop.Formlar.Stok
             label2.Size = new System.Drawing.Size(65, 15);
             label2.TabIndex = 110;
             label2.Text = "Proje Kodu";
-            // 
-            // projeKodu
-            // 
-            projeKodu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            projeKodu.ListBoxVisualSize = 5;
-            projeKodu.Location = new System.Drawing.Point(143, 60);
-            projeKodu.Margin = new System.Windows.Forms.Padding(1);
-            projeKodu.Name = "projeKodu";
-            projeKodu.Padding = new System.Windows.Forms.Padding(1);
-            projeKodu.selectedDataRowId = null;
-            projeKodu.Size = new System.Drawing.Size(251, 36);
-            projeKodu.TabIndex = 109;
-            projeKodu.SelectedIndexChanged += projeKodu_SelectedIndexChanged;
             // 
             // buttonSatisSiparisTeklifTalepEkle
             // 
@@ -161,99 +125,34 @@ namespace YektamakDesktop.Formlar.Stok
             buttonSatisSiparisTeklifTalepEkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonSatisSiparisTeklifTalepEkle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             buttonSatisSiparisTeklifTalepEkle.ForeColor = System.Drawing.SystemColors.Window;
-            buttonSatisSiparisTeklifTalepEkle.Location = new System.Drawing.Point(461, 233);
+            buttonSatisSiparisTeklifTalepEkle.Location = new System.Drawing.Point(620, 165);
             buttonSatisSiparisTeklifTalepEkle.Name = "buttonSatisSiparisTeklifTalepEkle";
             buttonSatisSiparisTeklifTalepEkle.Size = new System.Drawing.Size(42, 35);
             buttonSatisSiparisTeklifTalepEkle.TabIndex = 118;
             buttonSatisSiparisTeklifTalepEkle.UseVisualStyleBackColor = false;
             buttonSatisSiparisTeklifTalepEkle.Click += buttonEkle_Click;
             // 
-            // lblToplamKayitSayisi
-            // 
-            lblToplamKayitSayisi.AutoSize = true;
-            lblToplamKayitSayisi.Location = new System.Drawing.Point(891, 60);
-            lblToplamKayitSayisi.Name = "lblToplamKayitSayisi";
-            lblToplamKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblToplamKayitSayisi.TabIndex = 121;
-            lblToplamKayitSayisi.Text = "0";
-            // 
-            // lblSecilmisKayitSayisi
-            // 
-            lblSecilmisKayitSayisi.AutoSize = true;
-            lblSecilmisKayitSayisi.Location = new System.Drawing.Point(891, 102);
-            lblSecilmisKayitSayisi.Name = "lblSecilmisKayitSayisi";
-            lblSecilmisKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblSecilmisKayitSayisi.TabIndex = 120;
-            lblSecilmisKayitSayisi.Text = "0";
-            // 
-            // lblKayitSayisi
-            // 
-            lblKayitSayisi.AutoSize = true;
-            lblKayitSayisi.Location = new System.Drawing.Point(891, 81);
-            lblKayitSayisi.Name = "lblKayitSayisi";
-            lblKayitSayisi.Size = new System.Drawing.Size(13, 15);
-            lblKayitSayisi.TabIndex = 119;
-            lblKayitSayisi.Text = "0";
-            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(24, 208);
+            label5.Location = new System.Drawing.Point(367, 138);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(118, 15);
             label5.TabIndex = 124;
             label5.Text = "Malzeme Alt Grubu 2";
             // 
-            // cbxMalzemeAltGrup2
-            // 
-            cbxMalzemeAltGrup2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxMalzemeAltGrup2.ListBoxVisualSize = 5;
-            cbxMalzemeAltGrup2.Location = new System.Drawing.Point(143, 201);
-            cbxMalzemeAltGrup2.Margin = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup2.Name = "cbxMalzemeAltGrup2";
-            cbxMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(1);
-            cbxMalzemeAltGrup2.selectedDataRowId = null;
-            cbxMalzemeAltGrup2.Size = new System.Drawing.Size(251, 36);
-            cbxMalzemeAltGrup2.TabIndex = 123;
-            cbxMalzemeAltGrup2.DoubleClick += cbxMalzemeAltGrup2_DoubleClick;
-            // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(24, 102);
+            label6.Location = new System.Drawing.Point(24, 137);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(66, 15);
             label6.TabIndex = 126;
             label6.Text = "Stok Grubu";
             // 
-            // cbxStokGrup
-            // 
-            cbxStokGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxStokGrup.ListBoxVisualSize = 5;
-            cbxStokGrup.Location = new System.Drawing.Point(143, 96);
-            cbxStokGrup.Margin = new System.Windows.Forms.Padding(1);
-            cbxStokGrup.Name = "cbxStokGrup";
-            cbxStokGrup.Padding = new System.Windows.Forms.Padding(1);
-            cbxStokGrup.selectedDataRowId = null;
-            cbxStokGrup.Size = new System.Drawing.Size(251, 36);
-            cbxStokGrup.TabIndex = 125;
-            cbxStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
-            // 
-            // cbxStokTip
-            // 
-            cbxStokTip.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxStokTip.ListBoxVisualSize = 5;
-            cbxStokTip.Location = new System.Drawing.Point(514, 96);
-            cbxStokTip.Margin = new System.Windows.Forms.Padding(1);
-            cbxStokTip.Name = "cbxStokTip";
-            cbxStokTip.Padding = new System.Windows.Forms.Padding(1);
-            cbxStokTip.selectedDataRowId = null;
-            cbxStokTip.Size = new System.Drawing.Size(249, 36);
-            cbxStokTip.TabIndex = 127;
-            cbxStokTip.SelectedIndexChanged += cbxStokTip_SelectedIndexChanged;
-            // 
             // headerPanel1
             // 
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
             headerPanel1.Baslik = "Stok Kartları";
@@ -266,65 +165,208 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // universalGrid1
             // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(12, 289);
+            universalGrid1.Location = new System.Drawing.Point(12, 212);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1062, 503);
+            universalGrid1.Size = new System.Drawing.Size(1062, 580);
             universalGrid1.TabIndex = 129;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { stokKartınıGörüntüleToolStripMenuItem, stokKartınıSilToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(191, 70);
+            // 
+            // stokKartınıGörüntüleToolStripMenuItem
+            // 
+            stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
+            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
+            stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
+            // 
+            // projeKodu
+            // 
+            projeKodu.BorderColor = System.Drawing.Color.Silver;
+            projeKodu.BorderSize = 1;
+            projeKodu.DataSource = null;
+            projeKodu.DisplayMember = "kod";
+            projeKodu.Location = new System.Drawing.Point(143, 60);
+            projeKodu.Name = "projeKodu";
+            projeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            projeKodu.PlaceholderText = "Seçiniz...";
+            projeKodu.SelectedIndex = -1;
+            projeKodu.SelectedItem = null;
+            projeKodu.SelectedValue = null;
+            projeKodu.Size = new System.Drawing.Size(176, 29);
+            projeKodu.TabIndex = 130;
+            projeKodu.UnderlinedStyle = false;
+            projeKodu.ValueMember = "Id";
+            // 
+            // clbStokGrup
+            // 
+            clbStokGrup.BorderColor = System.Drawing.Color.Silver;
+            clbStokGrup.BorderSize = 1;
+            clbStokGrup.DataSource = null;
+            clbStokGrup.DisplayMember = "ad";
+            clbStokGrup.Location = new System.Drawing.Point(143, 130);
+            clbStokGrup.Name = "clbStokGrup";
+            clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.SelectedIndex = -1;
+            clbStokGrup.SelectedItem = null;
+            clbStokGrup.SelectedValue = null;
+            clbStokGrup.Size = new System.Drawing.Size(176, 29);
+            clbStokGrup.TabIndex = 131;
+            clbStokGrup.UnderlinedStyle = false;
+            clbStokGrup.ValueMember = "Id";
+            clbStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
+            // 
+            // clbMalzemeGrup
+            // 
+            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DataSource = null;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.Location = new System.Drawing.Point(486, 60);
+            clbMalzemeGrup.Name = "clbMalzemeGrup";
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.SelectedIndex = -1;
+            clbMalzemeGrup.SelectedItem = null;
+            clbMalzemeGrup.SelectedValue = null;
+            clbMalzemeGrup.Size = new System.Drawing.Size(176, 29);
+            clbMalzemeGrup.TabIndex = 132;
+            clbMalzemeGrup.UnderlinedStyle = false;
+            clbMalzemeGrup.ValueMember = "Id";
+            clbMalzemeGrup.SelectedIndexChanged += malzemeGrubu_SelectedIndexChanged;
+            // 
+            // cbxMalzemeAltGrup
+            // 
+            cbxMalzemeAltGrup.BorderColor = System.Drawing.Color.Silver;
+            cbxMalzemeAltGrup.BorderSize = 1;
+            cbxMalzemeAltGrup.DataSource = null;
+            cbxMalzemeAltGrup.DisplayMember = "ad";
+            cbxMalzemeAltGrup.Location = new System.Drawing.Point(486, 95);
+            cbxMalzemeAltGrup.Name = "cbxMalzemeAltGrup";
+            cbxMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            cbxMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            cbxMalzemeAltGrup.SelectedIndex = -1;
+            cbxMalzemeAltGrup.SelectedItem = null;
+            cbxMalzemeAltGrup.SelectedValue = null;
+            cbxMalzemeAltGrup.Size = new System.Drawing.Size(176, 29);
+            cbxMalzemeAltGrup.TabIndex = 133;
+            cbxMalzemeAltGrup.UnderlinedStyle = false;
+            cbxMalzemeAltGrup.ValueMember = "Id";
+            cbxMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
+            // 
+            // clbMalzemeAltGrup2
+            // 
+            clbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeAltGrup2.BorderSize = 1;
+            clbMalzemeAltGrup2.DataSource = null;
+            clbMalzemeAltGrup2.DisplayMember = "ad";
+            clbMalzemeAltGrup2.Location = new System.Drawing.Point(486, 130);
+            clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
+            clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.SelectedIndex = -1;
+            clbMalzemeAltGrup2.SelectedItem = null;
+            clbMalzemeAltGrup2.SelectedValue = null;
+            clbMalzemeAltGrup2.Size = new System.Drawing.Size(176, 29);
+            clbMalzemeAltGrup2.TabIndex = 134;
+            clbMalzemeAltGrup2.UnderlinedStyle = false;
+            clbMalzemeAltGrup2.ValueMember = "Id";
+            // 
+            // cbxStokTip
+            // 
+            cbxStokTip.BorderColor = System.Drawing.Color.Silver;
+            cbxStokTip.BorderSize = 1;
+            cbxStokTip.DataSource = null;
+            cbxStokTip.DisplayMember = "ad";
+            cbxStokTip.Location = new System.Drawing.Point(143, 95);
+            cbxStokTip.Name = "cbxStokTip";
+            cbxStokTip.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            cbxStokTip.PlaceholderText = "Seçiniz...";
+            cbxStokTip.SelectedIndex = -1;
+            cbxStokTip.SelectedItem = null;
+            cbxStokTip.SelectedValue = null;
+            cbxStokTip.Size = new System.Drawing.Size(176, 29);
+            cbxStokTip.TabIndex = 135;
+            cbxStokTip.UnderlinedStyle = false;
+            cbxStokTip.ValueMember = "Id";
+            cbxStokTip.SelectedIndexChanged += cbxStokTip_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(24, 100);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(52, 15);
+            label7.TabIndex = 136;
+            label7.Text = "Stok Tipi";
+            // 
+            // stokKartınıSilToolStripMenuItem
+            // 
+            stokKartınıSilToolStripMenuItem.Name = "stokKartınıSilToolStripMenuItem";
+            stokKartınıSilToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            stokKartınıSilToolStripMenuItem.Text = "Stok Kartını Sil";
+            stokKartınıSilToolStripMenuItem.Click += stokKartınıSilToolStripMenuItem_Click;
             // 
             // StokKartGridForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1086, 804);
+            Controls.Add(label7);
+            Controls.Add(cbxStokTip);
+            Controls.Add(clbMalzemeAltGrup2);
+            Controls.Add(cbxMalzemeAltGrup);
+            Controls.Add(clbMalzemeGrup);
+            Controls.Add(clbStokGrup);
+            Controls.Add(projeKodu);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
-            Controls.Add(cbxStokTip);
             Controls.Add(label6);
-            Controls.Add(cbxStokGrup);
             Controls.Add(label5);
-            Controls.Add(cbxMalzemeAltGrup2);
-            Controls.Add(lblToplamKayitSayisi);
-            Controls.Add(lblSecilmisKayitSayisi);
-            Controls.Add(lblKayitSayisi);
             Controls.Add(buttonSatisSiparisTeklifTalepEkle);
-            Controls.Add(textBoxParcaAdi);
+            Controls.Add(ctbParcaAdi);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(cbxMalzemeAltGrup);
             Controls.Add(label1);
-            Controls.Add(cbxMalzemeGrup);
             Controls.Add(label2);
-            Controls.Add(projeKodu);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "StokKartGridForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "SatinalmaTalepGridForm";
             FormClosing += StokKartGridForm_FormClosing;
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
 
         }
 
         #endregion
-        private CustomControls.CustomTextBox textBoxParcaAdi;
+        private CustomControls.CustomTextBox ctbParcaAdi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup;
         private System.Windows.Forms.Label label1;
-        private CustomControls.CustomComboListBox cbxMalzemeGrup;
         private System.Windows.Forms.Label label2;
-        private CustomControls.CustomComboListBox projeKodu;
         private System.Windows.Forms.Button buttonSatisSiparisTeklifTalepEkle;
-        private System.Windows.Forms.Label lblToplamKayitSayisi;
-        private System.Windows.Forms.Label lblSecilmisKayitSayisi;
-        private System.Windows.Forms.Label lblKayitSayisi;
         private System.Windows.Forms.Label label5;
-        private CustomControls.CustomComboListBox cbxMalzemeAltGrup2;
         private System.Windows.Forms.Label label6;
-        private CustomControls.CustomComboListBox cbxStokGrup;
-        private CustomControls.CustomComboListBox cbxStokTip;
         private CustomControls.HeaderPanel headerPanel1;
         private UniversalGrid universalGrid1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;
+        private FilterableComboBox projeKodu;
+        private FilterableComboBox clbStokGrup;
+        private FilterableComboBox clbMalzemeGrup;
+        private FilterableComboBox cbxMalzemeAltGrup;
+        private FilterableComboBox clbMalzemeAltGrup2;
+        private FilterableComboBox cbxStokTip;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolStripMenuItem stokKartınıSilToolStripMenuItem;
     }
 }

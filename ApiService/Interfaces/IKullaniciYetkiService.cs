@@ -20,7 +20,7 @@ namespace ApiService.Interfaces
         public Task<string> SaveMenu(Menu menu);
         public string GetKullaniciYetki(Kullanici kullanici);
         public Task<string> SaveYetki(Yetki yetki);
-        public Task<string> SaveAlanYetki(AlanYetkiDTO alanYetki);
-        public Task<string> GetAlanYetki(AlanYetkiDTO alanYetki);
+        public Task<string> SaveAlanYetki(AlanYetki alanYetki);
+        public Task<string> GetAlanYetki(AlanYetki alanYetki);
     }
 }

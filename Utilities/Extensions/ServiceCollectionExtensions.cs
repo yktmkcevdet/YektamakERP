@@ -30,7 +30,6 @@ namespace Utilities
             services.AddScoped<ILoginHelper, LoginHelper>();
             services.AddScoped<IMailHandler, MailHandler>();
             services.AddScoped<IConvertHelper, ConvertHelper>();
-
             return services;
         }
     }

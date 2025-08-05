@@ -45,5 +45,9 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(projeStokKart, $"SaveProjeStokKart");
         }
+        public async Task<string> DeleteProjeStokKart(ProjeStokKart projeStokKart)
+        {
+            return await _apiService.PostAsync(projeStokKart, $"DeleteProjeStokKart");
+        }
     }
 }

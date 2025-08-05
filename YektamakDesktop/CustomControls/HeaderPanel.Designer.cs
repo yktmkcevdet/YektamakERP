@@ -35,6 +35,7 @@
             btnMinimize = new RoundedButton();
             btnHelp = new RoundedButton();
             lblHdr = new System.Windows.Forms.Label();
+            btnFullScreen = new RoundedButton();
             pnlHdr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             SuspendLayout();
@@ -44,6 +45,7 @@
             pnlHdr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             pnlHdr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             pnlHdr.BackColor = System.Drawing.Color.SteelBlue;
+            pnlHdr.Controls.Add(btnFullScreen);
             pnlHdr.Controls.Add(pictureBoxLogo);
             pnlHdr.Controls.Add(btnClose);
             pnlHdr.Controls.Add(btnMinimize);
@@ -88,7 +90,7 @@
             btnClose.HoverColor2 = System.Drawing.Color.Navy;
             btnClose.Icon = null;
             btnClose.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnClose.Location = new System.Drawing.Point(361, 1);
+            btnClose.Location = new System.Drawing.Point(361, 2);
             btnClose.Margin = new System.Windows.Forms.Padding(0);
             btnClose.Name = "btnClose";
             btnClose.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
@@ -118,7 +120,7 @@
             btnMinimize.HoverColor2 = System.Drawing.Color.Navy;
             btnMinimize.Icon = null;
             btnMinimize.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnMinimize.Location = new System.Drawing.Point(321, 1);
+            btnMinimize.Location = new System.Drawing.Point(321, 2);
             btnMinimize.Margin = new System.Windows.Forms.Padding(0);
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
@@ -149,7 +151,7 @@
             btnHelp.HoverColor2 = System.Drawing.Color.Navy;
             btnHelp.Icon = null;
             btnHelp.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnHelp.Location = new System.Drawing.Point(282, 2);
+            btnHelp.Location = new System.Drawing.Point(252, 2);
             btnHelp.Margin = new System.Windows.Forms.Padding(0);
             btnHelp.Name = "btnHelp";
             btnHelp.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
@@ -169,6 +171,37 @@
             lblHdr.Size = new System.Drawing.Size(56, 17);
             lblHdr.TabIndex = 1;
             lblHdr.Text = "Caption";
+            // 
+            // btnFullScreen
+            // 
+            btnFullScreen.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnFullScreen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnFullScreen.BackColor = System.Drawing.Color.DodgerBlue;
+            btnFullScreen.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            btnFullScreen.BorderColor = System.Drawing.Color.DodgerBlue;
+            btnFullScreen.BorderSize = 0;
+            btnFullScreen.CornerRadius = 10;
+            btnFullScreen.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnFullScreen.FlatAppearance.BorderSize = 0;
+            btnFullScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnFullScreen.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnFullScreen.ForeColor = System.Drawing.Color.White;
+            btnFullScreen.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnFullScreen.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnFullScreen.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnFullScreen.HoverColor2 = System.Drawing.Color.Navy;
+            btnFullScreen.Icon = null;
+            btnFullScreen.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnFullScreen.Location = new System.Drawing.Point(287, 2);
+            btnFullScreen.Margin = new System.Windows.Forms.Padding(0);
+            btnFullScreen.Name = "btnFullScreen";
+            btnFullScreen.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            btnFullScreen.Size = new System.Drawing.Size(29, 27);
+            btnFullScreen.TabIndex = 105;
+            btnFullScreen.Text = "■";
+            btnFullScreen.TextColor = System.Drawing.Color.White;
+            btnFullScreen.UseVisualStyleBackColor = false;
+            btnFullScreen.Click += btnFullScreen_Click;
             // 
             // HeaderPanel
             // 
@@ -198,5 +231,6 @@
         private RoundedButton btnMinimize;
         private RoundedButton btnHelp;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private RoundedButton btnFullScreen;
     }
 }

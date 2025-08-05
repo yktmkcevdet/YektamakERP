@@ -44,7 +44,7 @@
             clbDoviz = new YektamakDesktop.CustomControls.CustomComboListBox();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid(_cache);
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
             ctbTerminSuresi = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
             ctbTeklifGecerlilikSuresi = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
@@ -99,7 +99,8 @@
             firmaId.Margin = new System.Windows.Forms.Padding(1);
             firmaId.Name = "firmaId";
             firmaId.Padding = new System.Windows.Forms.Padding(1);
-            firmaId.selectedDataRowId = -1;
+            firmaId.selectedDataRowId = null;
+            firmaId.selectedDataRowValue = null;
             firmaId.Size = new System.Drawing.Size(506, 36);
             firmaId.TabIndex = 2;
             // 
@@ -187,7 +188,8 @@
             clbVade.Margin = new System.Windows.Forms.Padding(1);
             clbVade.Name = "clbVade";
             clbVade.Padding = new System.Windows.Forms.Padding(1);
-            clbVade.selectedDataRowId = -1;
+            clbVade.selectedDataRowId = null;
+            clbVade.selectedDataRowValue = null;
             clbVade.Size = new System.Drawing.Size(207, 36);
             clbVade.TabIndex = 12;
             // 
@@ -224,7 +226,8 @@
             clbDoviz.Margin = new System.Windows.Forms.Padding(1);
             clbDoviz.Name = "clbDoviz";
             clbDoviz.Padding = new System.Windows.Forms.Padding(1);
-            clbDoviz.selectedDataRowId = -1;
+            clbDoviz.selectedDataRowId = null;
+            clbDoviz.selectedDataRowValue = null;
             clbDoviz.Size = new System.Drawing.Size(250, 36);
             clbDoviz.TabIndex = 14;
             // 
@@ -248,6 +251,7 @@
             // 
             // universalGrid1
             // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(54, 378);
             universalGrid1.Name = "universalGrid1";
@@ -256,6 +260,7 @@
             // 
             // customButtonSave1
             // 
+            customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
             customButtonSave1.Location = new System.Drawing.Point(772, 748);
             customButtonSave1.Name = "customButtonSave1";
@@ -324,13 +329,14 @@
             // 
             // ctbAciklama
             // 
-            ctbAciklama.BackColor = System.Drawing.SystemColors.Window;
+            ctbAciklama.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            ctbAciklama.BackColor = System.Drawing.Color.White;
             ctbAciklama.BorderColor = System.Drawing.Color.Silver;
             ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbAciklama.BorderRadius = 5;
             ctbAciklama.BorderSize = 1;
             ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ctbAciklama.ForeColor = System.Drawing.Color.DimGray;
+            ctbAciklama.ForeColor = System.Drawing.Color.Black;
             ctbAciklama.isPlaceHolder = false;
             ctbAciklama.Location = new System.Drawing.Point(529, 202);
             ctbAciklama.Multiline = true;

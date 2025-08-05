@@ -58,8 +58,8 @@ namespace YektamakDesktop.CustomControls
         }
         #endregion mouseDrag
 
-        
-        
+
+
         [Description("Üst başlık metni")]
         [Browsable(true)]
         public string Baslik
@@ -85,6 +85,14 @@ namespace YektamakDesktop.CustomControls
         {
             parentForm = this.FindForm();
             parentForm.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnFullScreen_Click(object sender, EventArgs e)
+        {
+            parentForm = this.FindForm();
+            parentForm.WindowState= parentForm.WindowState == FormWindowState.Maximized 
+                ? FormWindowState.Normal 
+                : FormWindowState.Maximized;
         }
     }
 }

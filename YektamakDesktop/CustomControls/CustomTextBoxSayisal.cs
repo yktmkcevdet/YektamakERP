@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -80,10 +76,10 @@ namespace YektamakDesktop.CustomControls
             {
                 base.Font = value;
                 textBox.Font = value;
-                if (this.DesignMode)
-                {
-                    UpdateControlHeight();
-                }
+                //if (this.DesignMode)
+                //{
+                //    UpdateControlHeight();
+                //}
             }
         }
         public string TextCustom
@@ -183,7 +179,8 @@ namespace YektamakDesktop.CustomControls
             {
                 isPlaceholder = false;
                 textBox.Text = "";
-                textBox.ForeColor = this.ForeColor;
+                textBox.BackColor = Color.White;
+                textBox.ForeColor = Color.Black;
                 if (isPasswordChar)
                     textBox.UseSystemPasswordChar = true;
             }
@@ -335,16 +332,16 @@ namespace YektamakDesktop.CustomControls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (this.DesignMode)
-            {
-                UpdateControlHeight();
-            }
+            //if (this.DesignMode)
+            //{
+            //    UpdateControlHeight();
+            //}
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            UpdateControlHeight();
+            //UpdateControlHeight();
         }
 
         protected override void OnTextChanged(EventArgs e)
@@ -384,9 +381,8 @@ namespace YektamakDesktop.CustomControls
             isFocused = false;
             this.Invalidate();
             SetPlaceHolder();
-
-            if (this.Leave != null)
-                this.Leave(this, e);
+            //if (this.Leave != null)
+            //    this.Leave(this, e);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -494,12 +490,12 @@ namespace YektamakDesktop.CustomControls
         }
         private void SayiFormati()
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-                textBox.Text = "0";
-            float sayi = float.TryParse(textBox.Text.ToString(), out sayi) ? sayi : 0;
-            string ondalik = "N" + OndalikBasamak.ToString();
-            textBox.Text = sayi.ToString(ondalik);
+            if (!string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                float sayi = float.TryParse(textBox.Text.ToString(), out sayi) ? sayi : 0;
+                string ondalik = "N" + OndalikBasamak.ToString();
+                textBox.Text = sayi.ToString(ondalik);
+            }
         }
-
     }
 }

@@ -50,13 +50,13 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(profilTip, "GetProfilTip");
         }
-        public async Task<string> GetStokKart(StokKart stokKart)
+        public async Task<string> GetStokKartAsync(StokKart stokKart)
         {
             return await _apiService.PostAsync(stokKart, "GetStokKart");
         }
-        public async Task<string> GetStokKartAsync(StokKart stokKart)
+        public string GetStokKart(StokKart stokKart)
         {
-            return await _apiService.PostAsync(stokKart, $"GetStokKart/");
+            return _apiService.Post(stokKart, $"GetStokKart/");
         }
 
         public async Task<string> GetStokKartPdf(StokKart stokKart)
@@ -98,6 +98,10 @@ namespace ApiService.Implementetions
         public string GetExcelGrupParametre()
         {
             return _apiService.Get("GetExcelGrupParametre");
+        }
+        public async Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart)
+        {
+            return await _apiService.PostAsync(projeStokKart, "SaveProjeStokKart");
         }
     }
 }

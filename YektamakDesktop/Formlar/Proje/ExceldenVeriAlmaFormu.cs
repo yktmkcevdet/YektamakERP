@@ -1,6 +1,5 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.Models;
 using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -12,7 +11,6 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 
@@ -74,6 +72,11 @@ namespace YektamakDesktop.Formlar.Proje
             isValid = Validation.CheckField("Proje kodu seçilmelidir.", this, clbProjeKodu) && isValid;
             return isValid;
         }
+        public class MyCustomEventArgs : EventArgs
+        {
+            public int? Veri { get; set; }
+        }
+        public event EventHandler<MyCustomEventArgs> FormClosedWithData;
         private async void verileriAktar_Click(object sender, EventArgs e)
         {
             try
@@ -81,6 +84,12 @@ namespace YektamakDesktop.Formlar.Proje
                 if (!ValidateInputs()) return;
                 await ProcessExcelFileAsync();
                 MessageBox.Show("Veri alma işlemi başarıyla tamamlandı", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var resultData = new MyCustomEventArgs { Veri = clbProjeKodu.selectedDataRowId };
+
+                // Form kapanmadan önce eventi tetikle
+                FormClosedWithData?.Invoke(this, resultData);
+
+                this.Close();
             }
             catch (Exception ex)
             {

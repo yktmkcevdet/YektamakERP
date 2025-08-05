@@ -10,6 +10,7 @@ namespace ApiService.Interfaces
         public string GetAllAssignedProjeKod();
         public Task<string> DeleteProjeDosya(Proje proje);
         public Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart);
+        public Task<string> DeleteProjeStokKart(ProjeStokKart projeStokKart);
         public Task<string> GetProjeStokKart(ProjeStokKart projeStokKart);
 
     }

@@ -30,12 +30,11 @@ namespace YektamakDesktop.Helpers
         
         
         private List<AlanYetkiDTO> _alanYetki;
-        private async Task<List<AlanYetkiDTO>> roleColumns(AlanYetkiDTO alanYetki) 
+        private async Task<List<AlanYetkiDTO>> roleColumns(AlanYetki alanYetki) 
         {
             if (_alanYetki == null)
             {
                 _alanYetki = new();
-                alanYetki.kullaniciId=_cache.kullanici.Id;
                 string alanYetkiJson = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
                 Result result = _jsonConverter.DeserializeToModelList<Result>(alanYetkiJson)[0];
                 var yetkiList = _jsonConverter.ToModelList<AlanYetki>(result.result);
@@ -46,9 +45,9 @@ namespace YektamakDesktop.Helpers
             }
             return _alanYetki;
         }
-        public async Task<bool> HasAccess(AlanYetkiDTO prop)
+        public async Task<bool> HasAccess(AlanYetki prop)
         {
-            var filteredYetki = (await roleColumns(prop)).Where(p => p.formAd == prop.formAd && p.alanAd == prop.alanAd && p.kullaniciId==prop.kullaniciId && p.yetki);
+            var filteredYetki = (await roleColumns(prop)).Where(p => p.formAd == prop.formAd && p.alanAd == prop.alanAd && p.kullaniciId==prop.kullanici.Id && p.yetki);
             return filteredYetki.Any();
         }
         

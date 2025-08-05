@@ -1,6 +1,8 @@
 ﻿using ApiService.Interfaces;
+using Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -9,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using Utilities.Interfaces;
+using YektamakDesktop.Abstracts;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar;
 
@@ -178,7 +181,21 @@ namespace YektamakDesktop
                 customTextBox.textBox.ForeColor = Color.Red;
                 customTextBox.textBox.BackColor = Color.LightPink;
                 customTextBox.PlaceholderText = mesaj;
-                //form.Controls.Add(WarningLabel(mesaj, customTextBox));
+                result = false;
+            }
+            return result;
+        }
+        public static bool CheckField(string mesaj, CustomTextBoxSayisal customTextBox)
+        {
+            bool result = true;
+
+            object value = customTextBox.TextCustom;
+
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                customTextBox.textBox.ForeColor = Color.Red;
+                customTextBox.textBox.BackColor = Color.LightPink;
+                customTextBox.PlaceholderText = mesaj;
                 result = false;
             }
             return result;
@@ -191,9 +208,39 @@ namespace YektamakDesktop
 
             if (customComboListBox.listBoxDataRows.Count>0 && (value == null || value.ToString()=="-1" || string.IsNullOrWhiteSpace(value.ToString())))
             {
-                customComboListBox.textBox.textBox.ForeColor = Color.Red;
+                customComboListBox.textBox.textBox.ForeColor = Color.LightPink;
                 customComboListBox.textBox.PlaceholderText = mesaj;
                 //form.Controls.Add(WarningLabel(mesaj, customComboListBox));
+                result = false;
+            }
+            return result;
+        }
+        public static bool CheckField<T>(string mesaj, T form, FilterableComboBox filterableComboBox) where T : Form
+        {
+            bool result = true;
+            int kayitSayisi = (filterableComboBox.DataSource as IList)?.Count ?? 0;
+            if (kayitSayisi == 0) return result;
+            object value = filterableComboBox.SelectedValue;
+
+            if (value == null || JsonConvert.SerializeObject(value) == "-1" || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                filterableComboBox.ComboBox.BackColor = Color.LightPink;
+                filterableComboBox.PlaceholderText = mesaj;
+                result = false;
+            }
+            return result;
+        }
+        public static bool CheckField(string mesaj, FilterableComboBox filterableComboBox)
+        {
+            bool result = true;
+            int kayitSayisi = (filterableComboBox.DataSource as IList)?.Count ?? 0;
+            if (kayitSayisi == 0) return result;
+            object value = filterableComboBox.SelectedValue;
+
+            if (value == null || JsonConvert.SerializeObject(value) == "-1" || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                filterableComboBox.ComboBox.BackColor = Color.LightPink;
+                filterableComboBox.PlaceholderText = mesaj;
                 result = false;
             }
             return result;
@@ -206,7 +253,7 @@ namespace YektamakDesktop
 
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                textBox.BackColor = Color.Red;
+                textBox.BackColor = Color.LightPink;
                 textBox.PlaceholderText = mesaj;
                 //form.Controls.Add(WarningLabel(mesaj, textBox));
                 result = false;
@@ -221,9 +268,22 @@ namespace YektamakDesktop
 
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                customTextBoxTarih.textBox.BackColor = Color.Red;
+                customTextBoxTarih.textBox.BackColor = Color.LightPink;
                 customTextBoxTarih.textBox.PlaceholderText = mesaj;
                 //form.Controls.Add(WarningLabel(mesaj, customTextBoxTarih));
+                result = false;
+            }
+            return result;
+        }
+        public static bool CheckField<T>(string mesaj, CustomDataGrid<T> customDataGrid) where T : DataControl,new()
+        {
+            bool result = true;
+
+            int value = customDataGrid.dataSource.Where(x => x.newRec == false).Count();
+
+            if (value == 0)
+            {
+               MessageBox.Show(mesaj, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 result = false;
             }
             return result;
@@ -236,7 +296,7 @@ namespace YektamakDesktop
 
             if (value == 0)
             {
-                customTextBoxSayisal.textBox.BackColor = Color.Red;
+                customTextBoxSayisal.textBox.BackColor = Color.LightPink;
                 customTextBoxSayisal.textBox.PlaceholderText = mesaj;
                 //Label label = WarningLabel(mesaj, customTextBoxSayisal);
                 //form.Controls.Add(label);
@@ -251,7 +311,7 @@ namespace YektamakDesktop
 
             if (customCheckedComboBox.checkedCount==0)
             {
-                customCheckedComboBox.BackColor = Color.Red;
+                customCheckedComboBox.BackColor = Color.LightPink;
                 form.Controls.Add(WarningLabel(mesaj, customCheckedComboBox));
                 result = false;
             }

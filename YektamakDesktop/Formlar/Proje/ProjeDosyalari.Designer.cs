@@ -33,15 +33,12 @@ namespace YektamakDesktop.Formlar.Proje
         {
             components = new System.ComponentModel.Container();
             label2 = new System.Windows.Forms.Label();
-            clbProjeKodu = new YektamakDesktop.CustomControls.CustomComboListBox();
             panelFooter = new System.Windows.Forms.Panel();
-            roundedButton4 = new YektamakDesktop.CustomControls.RoundedButton();
+            roundedButton4 = new RoundedButton();
             label1 = new System.Windows.Forms.Label();
-            clbStokGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
-            clbMalzemeGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            ctbParcaAdi = new YektamakDesktop.CustomControls.CustomTextBox();
+            ctbParcaAdi = new CustomTextBox();
             chkSatinalma = new System.Windows.Forms.CheckBox();
             chkPdf = new System.Windows.Forms.CheckBox();
             chkDxf = new System.Windows.Forms.CheckBox();
@@ -50,13 +47,16 @@ namespace YektamakDesktop.Formlar.Proje
             seçiliKalemlerİçinSaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             label5 = new System.Windows.Forms.Label();
-            clbMalzemeAltGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
             label6 = new System.Windows.Forms.Label();
-            clbMalzemeAltGrup2 = new YektamakDesktop.CustomControls.CustomComboListBox();
-            roundedIconButton1 = new YektamakDesktop.CustomControls.RoundedIconButton();
-            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = universalGrid1 = DIContainer.GetService<UniversalGrid>(); 
-            roundedIconButton2 = new YektamakDesktop.CustomControls.RoundedIconButton();
+            roundedIconButton1 = new RoundedIconButton();
+            headerPanel1 = new HeaderPanel();
+            universalGrid1 = new UniversalGrid();
+            roundedIconButton2 = new RoundedIconButton();
+            fcbProjeKod = new FilterableComboBox();
+            clbStokGrup = new FilterableComboBox();
+            clbMalzemeGrup = new FilterableComboBox();
+            clbMalzemeAltGrup = new FilterableComboBox();
+            clbMalzemeAltGrup2 = new FilterableComboBox();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -70,22 +70,9 @@ namespace YektamakDesktop.Formlar.Proje
             label2.TabIndex = 26;
             label2.Text = "Proje Kodu";
             // 
-            // clbProjeKodu
-            // 
-            clbProjeKodu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbProjeKodu.ListBoxVisualSize = 5;
-            clbProjeKodu.Location = new System.Drawing.Point(128, 45);
-            clbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
-            clbProjeKodu.Name = "clbProjeKodu";
-            clbProjeKodu.Padding = new System.Windows.Forms.Padding(1);
-            clbProjeKodu.selectedDataRowId = null;
-            clbProjeKodu.selectedDataRowValue = null;
-            clbProjeKodu.Size = new System.Drawing.Size(251, 36);
-            clbProjeKodu.TabIndex = 24;
-            clbProjeKodu.SelectedIndexChanged += projeKod_SelectedIndexChanged;
-            // 
             // panelFooter
             // 
+            panelFooter.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelFooter.Controls.Add(roundedButton4);
             panelFooter.Location = new System.Drawing.Point(0, 741);
             panelFooter.Margin = new System.Windows.Forms.Padding(0);
@@ -95,6 +82,7 @@ namespace YektamakDesktop.Formlar.Proje
             // 
             // roundedButton4
             // 
+            roundedButton4.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             roundedButton4.BackColor = System.Drawing.Color.SteelBlue;
             roundedButton4.BackgroundColor = System.Drawing.Color.DodgerBlue;
             roundedButton4.BorderColor = System.Drawing.Color.MediumSeaGreen;
@@ -129,34 +117,6 @@ namespace YektamakDesktop.Formlar.Proje
             label1.TabIndex = 103;
             label1.Text = "Stok Grubu";
             // 
-            // clbStokGrup
-            // 
-            clbStokGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbStokGrup.ListBoxVisualSize = 5;
-            clbStokGrup.Location = new System.Drawing.Point(128, 75);
-            clbStokGrup.Margin = new System.Windows.Forms.Padding(1);
-            clbStokGrup.Name = "clbStokGrup";
-            clbStokGrup.Padding = new System.Windows.Forms.Padding(1);
-            clbStokGrup.selectedDataRowId = null;
-            clbStokGrup.selectedDataRowValue = null;
-            clbStokGrup.Size = new System.Drawing.Size(251, 36);
-            clbStokGrup.TabIndex = 102;
-            clbStokGrup.SelectedIndexChanged += parcaGrubu_SelectedIndexChanged;
-            // 
-            // clbMalzemeGrup
-            // 
-            clbMalzemeGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbMalzemeGrup.ListBoxVisualSize = 5;
-            clbMalzemeGrup.Location = new System.Drawing.Point(128, 107);
-            clbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
-            clbMalzemeGrup.Name = "clbMalzemeGrup";
-            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(1);
-            clbMalzemeGrup.selectedDataRowId = null;
-            clbMalzemeGrup.selectedDataRowValue = null;
-            clbMalzemeGrup.Size = new System.Drawing.Size(251, 36);
-            clbMalzemeGrup.TabIndex = 104;
-            clbMalzemeGrup.SelectedIndexChanged += parcaAltGrubu_SelectedIndexChanged;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -169,7 +129,7 @@ namespace YektamakDesktop.Formlar.Proje
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(9, 218);
+            label4.Location = new System.Drawing.Point(9, 223);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(57, 15);
             label4.TabIndex = 107;
@@ -185,7 +145,7 @@ namespace YektamakDesktop.Formlar.Proje
             ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbParcaAdi.ForeColor = System.Drawing.Color.Black;
             ctbParcaAdi.isPlaceHolder = false;
-            ctbParcaAdi.Location = new System.Drawing.Point(128, 212);
+            ctbParcaAdi.Location = new System.Drawing.Point(128, 217);
             ctbParcaAdi.Multiline = false;
             ctbParcaAdi.Name = "ctbParcaAdi";
             ctbParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -199,8 +159,6 @@ namespace YektamakDesktop.Formlar.Proje
             ctbParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbParcaAdi.TextCustom = "";
             ctbParcaAdi.UnderlinedStyle = false;
-            ctbParcaAdi.TextChanged += textBoxParcaAdi_TextChanged;
-            ctbParcaAdi.KeyDown += parcaAdi_KeyDown;
             // 
             // chkSatinalma
             // 
@@ -214,7 +172,6 @@ namespace YektamakDesktop.Formlar.Proje
             chkSatinalma.Text = "Satınalma talep";
             chkSatinalma.ThreeState = true;
             chkSatinalma.UseVisualStyleBackColor = true;
-            chkSatinalma.CheckedChanged += chkSatinalma_CheckedChanged;
             // 
             // chkPdf
             // 
@@ -228,7 +185,6 @@ namespace YektamakDesktop.Formlar.Proje
             chkPdf.Text = "PDF";
             chkPdf.ThreeState = true;
             chkPdf.UseVisualStyleBackColor = true;
-            chkPdf.CheckStateChanged += chkPdf_CheckStateChanged;
             // 
             // chkDxf
             // 
@@ -242,7 +198,6 @@ namespace YektamakDesktop.Formlar.Proje
             chkDxf.Text = "DXF";
             chkDxf.ThreeState = true;
             chkDxf.UseVisualStyleBackColor = true;
-            chkDxf.CheckStateChanged += chkDxf_CheckedChanged;
             // 
             // chkStep
             // 
@@ -256,7 +211,6 @@ namespace YektamakDesktop.Formlar.Proje
             chkStep.Text = "STEP";
             chkStep.ThreeState = true;
             chkStep.UseVisualStyleBackColor = true;
-            chkStep.CheckedChanged += chkStep_CheckedChanged;
             // 
             // contextMenuStrip1
             // 
@@ -269,7 +223,7 @@ namespace YektamakDesktop.Formlar.Proje
             seçiliKalemlerİçinSaToolStripMenuItem.Name = "seçiliKalemlerİçinSaToolStripMenuItem";
             seçiliKalemlerİçinSaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             seçiliKalemlerİçinSaToolStripMenuItem.Text = "Seçili Kalemler İçin Satınalma Talebi Oluştur";
-            seçiliKalemlerİçinSaToolStripMenuItem.Click += CreateSatinalmaTalep;
+            seçiliKalemlerİçinSaToolStripMenuItem.Click += seçiliKalemlerİçinSaToolStripMenuItem_Click;
             // 
             // stokKartınıGörüntüleToolStripMenuItem
             // 
@@ -287,20 +241,6 @@ namespace YektamakDesktop.Formlar.Proje
             label5.TabIndex = 119;
             label5.Text = "Malzeme Alt Grubu";
             // 
-            // clbMalzemeAltGrup
-            // 
-            clbMalzemeAltGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbMalzemeAltGrup.ListBoxVisualSize = 5;
-            clbMalzemeAltGrup.Location = new System.Drawing.Point(127, 142);
-            clbMalzemeAltGrup.Margin = new System.Windows.Forms.Padding(1);
-            clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
-            clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(1);
-            clbMalzemeAltGrup.selectedDataRowId = null;
-            clbMalzemeAltGrup.selectedDataRowValue = null;
-            clbMalzemeAltGrup.Size = new System.Drawing.Size(251, 36);
-            clbMalzemeAltGrup.TabIndex = 118;
-            clbMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -309,20 +249,6 @@ namespace YektamakDesktop.Formlar.Proje
             label6.Size = new System.Drawing.Size(118, 15);
             label6.TabIndex = 121;
             label6.Text = "Malzeme Alt Grubu 2";
-            // 
-            // clbMalzemeAltGrup2
-            // 
-            clbMalzemeAltGrup2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbMalzemeAltGrup2.ListBoxVisualSize = 5;
-            clbMalzemeAltGrup2.Location = new System.Drawing.Point(128, 180);
-            clbMalzemeAltGrup2.Margin = new System.Windows.Forms.Padding(1);
-            clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
-            clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(1);
-            clbMalzemeAltGrup2.selectedDataRowId = null;
-            clbMalzemeAltGrup2.selectedDataRowValue = null;
-            clbMalzemeAltGrup2.Size = new System.Drawing.Size(251, 36);
-            clbMalzemeAltGrup2.TabIndex = 120;
-            clbMalzemeAltGrup2.SelectedIndexChanged += cbxMalzemeAltGrup2_SelectedIndexChanged;
             // 
             // roundedIconButton1
             // 
@@ -354,6 +280,7 @@ namespace YektamakDesktop.Formlar.Proje
             // 
             // headerPanel1
             // 
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
             headerPanel1.Baslik = "Proje Dosyaları";
@@ -368,10 +295,11 @@ namespace YektamakDesktop.Formlar.Proje
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.kullanici = null;
-            universalGrid1.Location = new System.Drawing.Point(8, 246);
+            universalGrid1.Location = new System.Drawing.Point(8, 270);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1273, 498);
+            universalGrid1.Size = new System.Drawing.Size(1273, 474);
             universalGrid1.TabIndex = 124;
+            universalGrid1.MouseDown1 += universalGrid1_MouseClick;
             // 
             // roundedIconButton2
             // 
@@ -396,20 +324,118 @@ namespace YektamakDesktop.Formlar.Proje
             roundedIconButton2.Size = new System.Drawing.Size(45, 32);
             roundedIconButton2.TabIndex = 125;
             roundedIconButton2.UseVisualStyleBackColor = false;
-            roundedIconButton2.Click += roundedIconButton2_Click;
+            // 
+            // fcbProjeKod
+            // 
+            fcbProjeKod.BorderColor = System.Drawing.Color.Silver;
+            fcbProjeKod.BorderSize = 1;
+            fcbProjeKod.DataSource = null;
+            fcbProjeKod.DisplayMember = "kod";
+            fcbProjeKod.ForeColor = System.Drawing.Color.Gray;
+            fcbProjeKod.Location = new System.Drawing.Point(128, 48);
+            fcbProjeKod.Name = "fcbProjeKod";
+            fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbProjeKod.PlaceholderText = "Seçiniz...";
+            fcbProjeKod.SelectedIndex = -1;
+            fcbProjeKod.SelectedItem = null;
+            fcbProjeKod.SelectedValue = null;
+            fcbProjeKod.Size = new System.Drawing.Size(189, 29);
+            fcbProjeKod.TabIndex = 126;
+            fcbProjeKod.UnderlinedStyle = false;
+            fcbProjeKod.ValueMember = "Id";
+            fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
+            // 
+            // clbStokGrup
+            // 
+            clbStokGrup.BorderColor = System.Drawing.Color.Silver;
+            clbStokGrup.BorderSize = 1;
+            clbStokGrup.DataSource = null;
+            clbStokGrup.DisplayMember = "ad";
+            clbStokGrup.ForeColor = System.Drawing.Color.Gray;
+            clbStokGrup.Location = new System.Drawing.Point(128, 80);
+            clbStokGrup.Name = "clbStokGrup";
+            clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.SelectedIndex = -1;
+            clbStokGrup.SelectedItem = null;
+            clbStokGrup.SelectedValue = null;
+            clbStokGrup.Size = new System.Drawing.Size(189, 29);
+            clbStokGrup.TabIndex = 127;
+            clbStokGrup.UnderlinedStyle = false;
+            clbStokGrup.ValueMember = "Id";
+            // 
+            // clbMalzemeGrup
+            // 
+            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DataSource = null;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.ForeColor = System.Drawing.Color.Gray;
+            clbMalzemeGrup.Location = new System.Drawing.Point(128, 113);
+            clbMalzemeGrup.Name = "clbMalzemeGrup";
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.SelectedIndex = -1;
+            clbMalzemeGrup.SelectedItem = null;
+            clbMalzemeGrup.SelectedValue = null;
+            clbMalzemeGrup.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeGrup.TabIndex = 128;
+            clbMalzemeGrup.UnderlinedStyle = false;
+            clbMalzemeGrup.ValueMember = "Id";
+            // 
+            // clbMalzemeAltGrup
+            // 
+            clbMalzemeAltGrup.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeAltGrup.BorderSize = 1;
+            clbMalzemeAltGrup.DataSource = null;
+            clbMalzemeAltGrup.DisplayMember = "ad";
+            clbMalzemeAltGrup.ForeColor = System.Drawing.Color.Gray;
+            clbMalzemeAltGrup.Location = new System.Drawing.Point(128, 148);
+            clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
+            clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.SelectedIndex = -1;
+            clbMalzemeAltGrup.SelectedItem = null;
+            clbMalzemeAltGrup.SelectedValue = null;
+            clbMalzemeAltGrup.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeAltGrup.TabIndex = 129;
+            clbMalzemeAltGrup.UnderlinedStyle = false;
+            clbMalzemeAltGrup.ValueMember = "Id";
+            // 
+            // clbMalzemeAltGrup2
+            // 
+            clbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeAltGrup2.BorderSize = 1;
+            clbMalzemeAltGrup2.DataSource = null;
+            clbMalzemeAltGrup2.DisplayMember = "ad";
+            clbMalzemeAltGrup2.ForeColor = System.Drawing.Color.Gray;
+            clbMalzemeAltGrup2.Location = new System.Drawing.Point(128, 184);
+            clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
+            clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.SelectedIndex = -1;
+            clbMalzemeAltGrup2.SelectedItem = null;
+            clbMalzemeAltGrup2.SelectedValue = null;
+            clbMalzemeAltGrup2.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeAltGrup2.TabIndex = 130;
+            clbMalzemeAltGrup2.UnderlinedStyle = false;
+            clbMalzemeAltGrup2.ValueMember = "Id";
             // 
             // ProjeDosyalari
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1287, 807);
+            Controls.Add(clbMalzemeAltGrup2);
+            Controls.Add(clbMalzemeAltGrup);
+            Controls.Add(clbMalzemeGrup);
+            Controls.Add(clbStokGrup);
+            Controls.Add(fcbProjeKod);
             Controls.Add(roundedIconButton2);
             Controls.Add(headerPanel1);
             Controls.Add(roundedIconButton1);
             Controls.Add(label6);
-            Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(label5);
-            Controls.Add(clbMalzemeAltGrup);
             Controls.Add(chkStep);
             Controls.Add(chkDxf);
             Controls.Add(chkPdf);
@@ -417,19 +443,14 @@ namespace YektamakDesktop.Formlar.Proje
             Controls.Add(ctbParcaAdi);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(clbMalzemeGrup);
             Controls.Add(label1);
-            Controls.Add(clbStokGrup);
             Controls.Add(label2);
             Controls.Add(panelFooter);
-            Controls.Add(clbProjeKodu);
             Controls.Add(universalGrid1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "ProjeDosyalari";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "ProjeDosyalari";
-            FormClosing += ProjeDosyalari_FormClosing;
-            Load += form_Load;
             panelFooter.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
@@ -439,10 +460,7 @@ namespace YektamakDesktop.Formlar.Proje
         #endregion
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.Label label2;
-        private CustomControls.CustomComboListBox clbProjeKodu;
         private System.Windows.Forms.Label label1;
-        private CustomControls.CustomComboListBox clbStokGrup;
-        private CustomControls.CustomComboListBox clbMalzemeGrup;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomTextBox ctbParcaAdi;
@@ -455,12 +473,15 @@ namespace YektamakDesktop.Formlar.Proje
         private System.Windows.Forms.ToolStripMenuItem seçiliKalemlerİçinSaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;
         private System.Windows.Forms.Label label5;
-        private CustomControls.CustomComboListBox clbMalzemeAltGrup;
         private System.Windows.Forms.Label label6;
-        private CustomControls.CustomComboListBox clbMalzemeAltGrup2;
         private CustomControls.RoundedIconButton roundedIconButton1;
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.RoundedIconButton roundedIconButton2;
+        private FilterableComboBox fcbProjeKod;
+        private FilterableComboBox clbStokGrup;
+        private FilterableComboBox clbMalzemeGrup;
+        private FilterableComboBox clbMalzemeAltGrup;
+        private FilterableComboBox clbMalzemeAltGrup2;
     }
 }

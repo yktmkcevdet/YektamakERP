@@ -13,11 +13,6 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-        public readonly IDataTableMapper _dataTableConverter;
-        public readonly IJsonConverter _jsonConverter;
-		public readonly ICache _cache;
-        public readonly IStokService _stokService;
-
         public bool newRec = true;
 		private RoundedIconButton _buttonSil;
 		public RoundedIconButton buttonSil
@@ -57,21 +52,14 @@ namespace YektamakDesktop.Abstracts
 			order=new Label();
 		}
 
-        public DataControl(IDataTableMapper dataTableConverter, IJsonConverter jsonConverter, ICache cache, IStokService stokService)
-        {
-            _dataTableConverter = dataTableConverter;
-            _jsonConverter = jsonConverter;
-			_cache = cache;
-			_stokService = stokService;
-        }
 
-        public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()
-		{
-			T filterData = new T();
-			string result = method(filterData);
-            List<T> listEntity = _jsonConverter.DeserializeToModelList<T>(result);
-			return listEntity;
-		}
+  //      public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()
+		//{
+		//	T filterData = new T();
+		//	string result = method(filterData);
+  //          List<T> listEntity = _jsonConverter.DeserializeToModelList<T>(result);
+		//	return listEntity;
+		//}
 		public virtual void FillComboBoxListFromDataSet(CustomComboListBox customComboListBox, DataSet dataSet)
 		{
 			if (dataSet != null)

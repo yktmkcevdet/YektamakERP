@@ -20,7 +20,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly ICache _cache;
         private readonly IDataTableMapper _dataTableMapper;
         private readonly IConvertHelper _convertHelper;
-        public SatinalmaTalepOnayFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, ICache cache, 
+        public SatinalmaTalepOnayFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, ICache cache,
             IDataTableMapper dataTableMapper, IConvertHelper convertHelper)
         {
             _jsonConverter = jsonConverter;
@@ -49,14 +49,14 @@ namespace YektamakDesktop.Formlar.Satinalma
                 _satinalmaTalepOnayDTO = value;
             }
         }
-        private SatinalmaTalepOnayDTO _satinalmaTalepFilter;
-        private SatinalmaTalepOnayDTO satinalmaTalepFilter
+        private SatinalmaTalepDTO _satinalmaTalepFilter;
+        private SatinalmaTalepDTO satinalmaTalepFilter
         {
             get
             {
                 if (_satinalmaTalepFilter == null)
                 {
-                    _satinalmaTalepFilter = new SatinalmaTalepOnayDTO();
+                    _satinalmaTalepFilter = new SatinalmaTalepDTO();
                 }
                 return _satinalmaTalepFilter;
             }
@@ -75,7 +75,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
             set { _satinalmaTalepOnayList = value; }
         }
-        private void SatinalmaTalepOnayFormu_FormClosed(object sender, FormClosedEventArgs e)
+        private void SatinalmaTalepOnayFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveSettings();
         }
@@ -87,7 +87,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 return;
             }
-            else if(result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            else if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show($"Satınalma talepleri alınırken hata oluştu: {result.result}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -95,36 +95,33 @@ namespace YektamakDesktop.Formlar.Satinalma
             else
             {
                 List<SatinalmaTalep> satinalmaTalep = _jsonConverter.ToModelList<SatinalmaTalep>(result.result);
-                foreach (var item in satinalmaTalep)
+                foreach (var item in satinalmaTalep.Where(t => t.onayDurum == false))
                 {
                     satinalmaTalepOnayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDTO>(item));
                 }
             }
-            
-            universalGrid1.SetData(satinalmaTalepOnayList, this.Name,true);
+
+            universalGrid1.SetData(satinalmaTalepOnayList, this.Name);
         }
-        private void universalGrid1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var source = universalGrid1.Grid.DataSource;
-            IEnumerable<SatinalmaTalepOnayDTO> list = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepOnayDTO>;
-            DataTable dataTable = ConvertHelper.ToDataTable(list);
-            GlobalData.DataGridViewCellClick<SatinalmaTalep>(ref dataTable, universalGrid1.Grid, e);
-        }
-       
+
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
-            satinalmaTalep.onayKullanici= _cache.kullanici;
+            satinalmaTalep.onayKullanici = _cache.kullanici;
             string result = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
             Result resultModel = _jsonConverter.DeserializeToModelList<Result>(result).FirstOrDefault();
             MessageBox.Show(resultModel.result);
+            if (resultModel != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
+            }
         }
 
         private void universalGrid1_MouseDown(object sender, MouseEventArgs e)
         {
             var hit = universalGrid1.Grid.HitTest(e.X, e.Y);
             int rowIndex = hit.RowIndex;
-            if (e.Button == MouseButtons.Right && rowIndex!=-1)
+            if (e.Button == MouseButtons.Right && rowIndex != -1)
             {
                 universalGrid1.Grid.ClearSelection();
                 universalGrid1.Grid.Rows[rowIndex].Selected = true;
@@ -159,6 +156,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 MessageBox.Show($"Hata: {ex.Message}");
             }
+        }
+
+        private void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
         }
     }
 }

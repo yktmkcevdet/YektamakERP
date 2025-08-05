@@ -1,37 +1,24 @@
 ﻿using Models.Attributes;
-
+using static Models.DTO.SatinalmaTalepDTOHeader;
 namespace Models.DTO
 {
     public class SatinalmaTalepDTO : IEntity
     {
-        [GridDisplay(Header = "Id", Visible = true)]
-        public int? Id { get; set; }
-        [GridDisplay(Header = "Talep No", Visible = true)]
-        public string satinalmaTalepNo { get; set; }
-        [GridDisplay(Header = "Proje Id ", Visible = true)]
-        public int? projeId { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.ProjeKoduHeader, Visible = true)]
-        public string projekod { get; set; }
-        [GridDisplay(Header = "Set Adet", Visible = true)]
-        public int? setAdet { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.StokGrupIdHeader, Visible = true)]
-        public int? stokGrupId { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.MalzemeGrupIdHeader, Visible = true)]
-        public int? malzemeGrupId { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.AciklamaHeader, Visible = true)]
-        public string aciklama { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.TalepTarihiHeader, Visible = true)]
-        public DateTime? talepTarihi { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.TeslimTarihiHeader, Visible = true)]
-        public DateTime? teslimTarihi { get; set; }
-        [GridDisplay(Header = "Onay Kullanici Id", Visible = true)]
-        public int? onayKullaniciId { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.OnaylayanHeader, Visible = true)]
-        public string onayKullanicipersonelad { get; set; }
-        [GridDisplay(Header = "Talep Kullanici Id", Visible = true)]
-        public int? talepEdenKullaniciId { get; set; }
-        [GridDisplay(Header = SatinalmaTalepDTOHeader.TalepEdenHeader, Visible = true)]
-        public string talepEdenKullanicipersonelad { get; set; }
+        [GridDisplay(Header = "Id")] public int? Id { get; set; }
+        [GridDisplay(Header = "Talep No")] public string satinalmaTalepNo { get; set; }
+        [GridDisplay(Header = "Proje Id")] public int? projeId { get; set; }
+        [GridDisplay(Header = ProjeKoduHeader)] public string projekod { get; set; }
+        [GridDisplay(Header = "Set Adet")] public int? setAdet { get; set; }
+        [GridDisplay(Header = StokGrupIdHeader)] public int? stokGrupId { get; set; }
+        [GridDisplay(Header = MalzemeGrupIdHeader)] public int? malzemeGrupId { get; set; }
+        [GridDisplay(Header = AciklamaHeader)] public string aciklama { get; set; }
+        [GridDisplay(Header = TalepTarihiHeader)] public DateTime? talepTarihi { get; set; }
+        [GridDisplay(Header = TeslimTarihiHeader)] public DateTime? teslimTarihi { get; set; }
+        [GridDisplay(Header = "Onay Kullanici Id")] public int? onayKullaniciId { get; set; }
+        [GridDisplay(Header = OnaylayanHeader)] public string onayKullanicipersonelad { get; set; }
+        [GridDisplay(Header = "Talep Kullanici Id")] public int? talepEdenKullaniciId { get; set; }
+        [GridDisplay(Header = TalepEdenHeader)] public string talepEdenKullanicipersonelad { get; set; }
+
         private List<SatinalmaTalepDetay> _satinalmaTalepDetays;
         [GridDisplay(Header = "Talep Detay Listesi", Visible = false)]
         public virtual List<SatinalmaTalepDetay> satinalmaTalepDetays
@@ -58,6 +45,9 @@ namespace Models.DTO
         public const string MalzemeGrupIdHeader = "Malzeme Grup Id";
         public const string MalzemeAltGrupIdHeader = "Malzeme Alt Grup Id";
         public const string StokGrupIdHeader = "Grup Id";
-        public const string ProjeKoduHeader = "Stok Grubu Adı";
+        public const string ProjeKoduHeader = "Proje Kodu";
+        public const string GuncelleHeader = "Güncelle";
+        public const string SilHeader = "Sil";
+        public const string CheckHeader ="Seç";
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace YektamakDesktop.Formlar.Satinalma
+﻿using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+
+namespace YektamakDesktop.Formlar.Satinalma
 {
     partial class SatinalmaTalepler
     {
@@ -32,29 +35,38 @@
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             talebiOnaylaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             talebiReddetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            görüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            headerPanel1 = new HeaderPanel();
+            universalGrid1 = new UniversalGrid();
+            silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { talebiOnaylaToolStripMenuItem, talebiReddetToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { talebiOnaylaToolStripMenuItem, talebiReddetToolStripMenuItem, görüntüleToolStripMenuItem, silToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(145, 48);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
             // 
             // talebiOnaylaToolStripMenuItem
             // 
             talebiOnaylaToolStripMenuItem.Name = "talebiOnaylaToolStripMenuItem";
-            talebiOnaylaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            talebiOnaylaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             talebiOnaylaToolStripMenuItem.Text = "Talebi Onayla";
             talebiOnaylaToolStripMenuItem.Click += talebiOnaylaToolStripMenuItem_Click;
             // 
             // talebiReddetToolStripMenuItem
             // 
             talebiReddetToolStripMenuItem.Name = "talebiReddetToolStripMenuItem";
-            talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             talebiReddetToolStripMenuItem.Text = "Talebi Reddet";
+            // 
+            // görüntüleToolStripMenuItem
+            // 
+            görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
+            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            görüntüleToolStripMenuItem.Text = "Görüntüle";
+            görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
             // 
             // headerPanel1
             // 
@@ -71,12 +83,21 @@
             // 
             // universalGrid1
             // 
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(0, 164);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(1138, 424);
             universalGrid1.TabIndex = 13;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            // 
+            // silToolStripMenuItem
+            // 
+            silToolStripMenuItem.Name = "silToolStripMenuItem";
+            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            silToolStripMenuItem.Text = "Sil";
+            silToolStripMenuItem.Click += silToolStripMenuItem_Click;
             // 
             // SatinalmaTalepler
             // 
@@ -100,5 +121,7 @@
         private System.Windows.Forms.ToolStripMenuItem talebiReddetToolStripMenuItem;
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
+        private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
     }
 }

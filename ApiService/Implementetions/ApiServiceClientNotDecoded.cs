@@ -80,7 +80,8 @@ namespace ApiService.Implementetions
             try
             {
                 // Tek serileştirme yeterli
-                string jsonContent = JsonConvert.SerializeObject(entity,_jsonSerializerSettings);
+                string jsonContent = JsonConvert.SerializeObject(entity,Formatting.Indented,_jsonSerializerSettings);
+
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 
                 var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);

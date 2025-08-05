@@ -51,13 +51,13 @@ namespace YektamakDesktop
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.CausesValidation = false;
             tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Controls.Add(panelHandle, 0, 0);
-            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
@@ -69,6 +69,7 @@ namespace YektamakDesktop
             // 
             // tableLayoutPanel2
             // 
+            tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.1356077F));
@@ -77,7 +78,6 @@ namespace YektamakDesktop
             tableLayoutPanel2.Controls.Add(panelAnaMenu, 0, 0);
             tableLayoutPanel2.Controls.Add(panelMenu, 1, 0);
             tableLayoutPanel2.Controls.Add(panelExit, 0, 1);
-            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             tableLayoutPanel2.Location = new Point(6, 50);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -89,9 +89,9 @@ namespace YektamakDesktop
             // 
             // panelState
             // 
+            panelState.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelState.Controls.Add(statusStrip1);
             panelState.Controls.Add(lblKullanici);
-            panelState.Dock = System.Windows.Forms.DockStyle.Fill;
             panelState.Location = new Point(172, 609);
             panelState.Margin = new System.Windows.Forms.Padding(0);
             panelState.Name = "panelState";
@@ -140,8 +140,8 @@ namespace YektamakDesktop
             // 
             // panelMenu
             // 
+            panelMenu.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             panelMenu.Location = new Point(172, 0);
             panelMenu.Margin = new System.Windows.Forms.Padding(0);
             panelMenu.Name = "panelMenu";
@@ -150,8 +150,8 @@ namespace YektamakDesktop
             // 
             // panelExit
             // 
+            panelExit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelExit.BackColor = Color.DodgerBlue;
-            panelExit.Dock = System.Windows.Forms.DockStyle.Fill;
             panelExit.Location = new Point(0, 609);
             panelExit.Margin = new System.Windows.Forms.Padding(0);
             panelExit.Name = "panelExit";
@@ -160,12 +160,13 @@ namespace YektamakDesktop
             // 
             // panelHandle
             // 
+            panelHandle.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelHandle.BackColor = Color.White;
             panelHandle.Controls.Add(headerPanel1);
             panelHandle.Location = new Point(4, 4);
             panelHandle.Margin = new System.Windows.Forms.Padding(1);
             panelHandle.Name = "panelHandle";
-            panelHandle.Size = new Size(1141, 34);
+            panelHandle.Size = new Size(1141, 39);
             panelHandle.TabIndex = 1;
             panelHandle.MouseDown += panelHeader_MouseDown;
             panelHandle.MouseMove += panelHeader_MouseMove;
@@ -173,6 +174,7 @@ namespace YektamakDesktop
             // 
             // headerPanel1
             // 
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = Color.Firebrick;
             headerPanel1.Baslik = "Yektamak ERP Uygulaması";

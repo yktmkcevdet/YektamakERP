@@ -53,9 +53,9 @@ namespace YektamakDesktop.CustomControls
             dataGridView1.Size = new System.Drawing.Size(819, 453);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellPainting += dataGridView1_CellPainting;
-            dataGridView1.MouseClick += dataGridView1_MouseClick;
-            dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
+            dataGridView1.MouseClick += dataGridView1_MouseClick;
             // 
             // columnMenu
             // 

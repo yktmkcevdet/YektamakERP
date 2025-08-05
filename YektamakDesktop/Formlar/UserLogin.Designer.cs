@@ -43,6 +43,7 @@ namespace YektamakDesktop.Formlar
             // 
             // roundedButtonLogin
             // 
+            roundedButtonLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
             roundedButtonLogin.BackColor = Color.FromArgb(128, 64, 64);
             roundedButtonLogin.BackgroundColor = Color.FromArgb(128, 64, 64);
             roundedButtonLogin.BorderColor = SystemColors.InactiveBorder;
@@ -89,6 +90,7 @@ namespace YektamakDesktop.Formlar
             // 
             // ctbKullaniciAdi
             // 
+            ctbKullaniciAdi.Anchor = System.Windows.Forms.AnchorStyles.None;
             ctbKullaniciAdi.BackColor = Color.White;
             ctbKullaniciAdi.BorderColor = Color.Silver;
             ctbKullaniciAdi.BorderFocusColor = Color.HotPink;
@@ -115,6 +117,7 @@ namespace YektamakDesktop.Formlar
             // 
             // ctbSifre
             // 
+            ctbSifre.Anchor = System.Windows.Forms.AnchorStyles.None;
             ctbSifre.BackColor = Color.White;
             ctbSifre.BorderColor = Color.Silver;
             ctbSifre.BorderFocusColor = Color.HotPink;
@@ -154,6 +157,7 @@ namespace YektamakDesktop.Formlar
             // 
             // btnSifreDegistir
             // 
+            btnSifreDegistir.Anchor = System.Windows.Forms.AnchorStyles.None;
             btnSifreDegistir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnSifreDegistir.BackColor = Color.Transparent;
             btnSifreDegistir.BorderColor = Color.Black;

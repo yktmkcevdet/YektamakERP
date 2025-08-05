@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,8 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using YektamakDesktop.Abstracts;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -14,7 +17,7 @@ namespace YektamakDesktop.CustomControls
     /// User controlleri içerebilen datagrid şeklinde bir görünüm oluşturur.
     /// Form üzerinde oluşturulan bir panel üzerine yerleştirilir.
     /// </summary>
-    public partial class CustomDataGrid<T> : UserControl where T : Abstracts.DataControl,new()
+    public partial class CustomDataGrid<T>  where T : DataControl,new()
     {
         int orderNr = 1;
         List<Control> listControl = new List<Control>();
@@ -50,7 +53,7 @@ namespace YektamakDesktop.CustomControls
 					_detailPanel.Size = _detailSize;
 					_detailPanel.AutoScroll = true;
 					_detailPanel.Scroll += DetailPanel_Scroll;
-					//AddDataRow(new T());
+					AddDataRow(DIContainer.GetService<T>());
 				}
 				return _detailPanel;
 			}
@@ -84,12 +87,9 @@ namespace YektamakDesktop.CustomControls
             _headerLocation = headerLocation;
             _detailSize = detailSize;
         }
-
         public CustomDataGrid()
         {
-            InitializeComponent();
         }
-
         private void DetailPanel_Scroll(object sender, ScrollEventArgs e)
         {
             headerPanel.Location = new Point(_headerLocation.X - detailPanel.HorizontalScroll.Value, _headerLocation.Y);
@@ -119,7 +119,7 @@ namespace YektamakDesktop.CustomControls
             if (newRecProperty == null || !(bool)newRecProperty.GetValue(dataControl))
                 return;
 
-            if(AddDataRow(new T()))
+            if(AddDataRow(DIContainer.GetService<T>()))
             {
                 newRecProperty.SetValue(dataControl, false);
             }
@@ -134,11 +134,21 @@ namespace YektamakDesktop.CustomControls
             foreach (T dataRow in dataSource)
             {
                 ControlList(dataRow);
-                SetControlEvents();
                 PlaceControls();
+                SetControlEvents();
                 dataRow.newRec = false;
             }
-            AddDataRow(new T());
+            AddDataRow(DIContainer.GetService<T>());
+        }
+        public void UstFormBagla(IUstForm ustForm)
+        {
+            foreach (var dataControl in dataSource)
+            {
+                if (dataControl is IAltForm altForm)
+                {
+                    altForm.UstFormuBagla(ustForm);
+                }
+            }
         }
         private void RePlaceControls(T dataControl)
         {
@@ -216,14 +226,36 @@ namespace YektamakDesktop.CustomControls
 				}
 			}
         }
+        private IUstForm _ustForm;
+
+        public void SetUstForm(IUstForm ustForm)
+        {
+            _ustForm = ustForm;
+            AltFormlaraBagla(); // daha önce eklenmiş data row’lar varsa onlara da bağla
+        }
+
+        private void AltFormlaraBagla()
+        {
+            foreach (var dataControl in dataSource)
+            {
+                if (dataControl is IAltForm altForm)
+                {
+                    altForm.UstFormuBagla(_ustForm);
+                }
+            }
+        }
         public bool AddDataRow(T dataRow)
         {
             if (CheckFields())
             {
                 ControlList(dataRow);
                 CreateLabels();
-                SetControlEvents();
                 PlaceControls();
+                SetControlEvents();
+                if (dataRow is IAltForm altForm && _ustForm != null)
+                {
+                    altForm.UstFormuBagla(_ustForm);
+                }
                 dataSource.Add(dataRow);
                 return true;
             }
@@ -299,9 +331,9 @@ namespace YektamakDesktop.CustomControls
             {
                 var s = control.Name;
 				Type type = control.GetType();
-				SetControlEventHandler(control, type, nameof(TextChanged), nameof(ControlValueChange));
+				SetControlEventHandler(control, type, nameof(control.TextChanged), nameof(ControlValueChange));
                 SetControlEventHandler(control, type, "SelectedIndexChanged", nameof(ControlValueChange));
-                if (type.GetProperty(nameof(Tag)).GetValue(control).ToString().Contains("Sil")) SetControlEventHandler(control, type, nameof(Click), nameof(DeleteRow));
+                if (type.GetProperty(nameof(control.Tag)).GetValue(control).ToString().Contains("Sil")) SetControlEventHandler(control, type, nameof(control.Click), nameof(DeleteRow));
             }
         }
         public void SetControlEventHandler(object obj, Type fieldType, string eventName, string methodName)

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            clbRol = new YektamakDesktop.CustomControls.CustomComboListBox();
-            clbPersonel = new YektamakDesktop.CustomControls.CustomComboListBox();
             labelUyariKulllaniciAdi = new System.Windows.Forms.Label();
             labelUyariSifre = new System.Windows.Forms.Label();
             labelUyariSifreTekrar = new System.Windows.Forms.Label();
@@ -49,33 +47,9 @@
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             label4 = new System.Windows.Forms.Label();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
+            clbPersonel = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbRol = new YektamakDesktop.CustomControls.FilterableComboBox();
             SuspendLayout();
-            // 
-            // clbRol
-            // 
-            clbRol.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbRol.ListBoxVisualSize = 5;
-            clbRol.Location = new System.Drawing.Point(124, 226);
-            clbRol.Margin = new System.Windows.Forms.Padding(1);
-            clbRol.Name = "clbRol";
-            clbRol.Padding = new System.Windows.Forms.Padding(1);
-            clbRol.selectedDataRowId = null;
-            clbRol.selectedDataRowValue = null;
-            clbRol.Size = new System.Drawing.Size(204, 36);
-            clbRol.TabIndex = 51;
-            // 
-            // clbPersonel
-            // 
-            clbPersonel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbPersonel.ListBoxVisualSize = 5;
-            clbPersonel.Location = new System.Drawing.Point(124, 188);
-            clbPersonel.Margin = new System.Windows.Forms.Padding(1);
-            clbPersonel.Name = "clbPersonel";
-            clbPersonel.Padding = new System.Windows.Forms.Padding(1);
-            clbPersonel.selectedDataRowId = null;
-            clbPersonel.selectedDataRowValue = null;
-            clbPersonel.Size = new System.Drawing.Size(378, 36);
-            clbPersonel.TabIndex = 54;
             // 
             // labelUyariKulllaniciAdi
             // 
@@ -147,6 +121,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(106, 46);
             btnSave.TabIndex = 98;
+            btnSave.SaveButtonClick += rButtonKullaniciKaydet_Click;
             btnSave.Click += rButtonKullaniciKaydet_Click;
             // 
             // ctbKullaniciAd
@@ -188,7 +163,7 @@
             ctbSifre.Multiline = false;
             ctbSifre.Name = "ctbSifre";
             ctbSifre.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbSifre.PasswordChar = false;
+            ctbSifre.PasswordChar = true;
             ctbSifre.PlaceholderColor = System.Drawing.Color.DarkGray;
             ctbSifre.PlaceholderText = "";
             ctbSifre.ReadOnly = false;
@@ -213,7 +188,7 @@
             ctbSifreTekrar.Multiline = false;
             ctbSifreTekrar.Name = "ctbSifreTekrar";
             ctbSifreTekrar.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbSifreTekrar.PasswordChar = false;
+            ctbSifreTekrar.PasswordChar = true;
             ctbSifreTekrar.PlaceholderColor = System.Drawing.Color.DarkGray;
             ctbSifreTekrar.PlaceholderText = "";
             ctbSifreTekrar.ReadOnly = false;
@@ -337,11 +312,49 @@
             ctbId.TextCustom = "";
             ctbId.UnderlinedStyle = false;
             // 
+            // clbPersonel
+            // 
+            clbPersonel.BorderColor = System.Drawing.Color.Silver;
+            clbPersonel.BorderSize = 1;
+            clbPersonel.DataSource = null;
+            clbPersonel.DisplayMember = "adSoyad";
+            clbPersonel.Location = new System.Drawing.Point(124, 189);
+            clbPersonel.Name = "clbPersonel";
+            clbPersonel.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbPersonel.PlaceholderText = "Seçiniz...";
+            clbPersonel.SelectedIndex = -1;
+            clbPersonel.SelectedItem = null;
+            clbPersonel.SelectedValue = null;
+            clbPersonel.Size = new System.Drawing.Size(231, 29);
+            clbPersonel.TabIndex = 111;
+            clbPersonel.UnderlinedStyle = false;
+            clbPersonel.ValueMember = "Id";
+            // 
+            // clbRol
+            // 
+            clbRol.BorderColor = System.Drawing.Color.Silver;
+            clbRol.BorderSize = 1;
+            clbRol.DataSource = null;
+            clbRol.DisplayMember = "ad";
+            clbRol.Location = new System.Drawing.Point(124, 224);
+            clbRol.Name = "clbRol";
+            clbRol.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbRol.PlaceholderText = "Seçiniz...";
+            clbRol.SelectedIndex = -1;
+            clbRol.SelectedItem = null;
+            clbRol.SelectedValue = null;
+            clbRol.Size = new System.Drawing.Size(179, 29);
+            clbRol.TabIndex = 112;
+            clbRol.UnderlinedStyle = false;
+            clbRol.ValueMember = "Id";
+            // 
             // KullaniciKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(693, 673);
+            Controls.Add(clbRol);
+            Controls.Add(clbPersonel);
             Controls.Add(label4);
             Controls.Add(ctbId);
             Controls.Add(roundedButton1);
@@ -361,8 +374,6 @@
             Controls.Add(labelUyariSifreTekrar);
             Controls.Add(labelUyariSifre);
             Controls.Add(labelUyariKulllaniciAdi);
-            Controls.Add(clbPersonel);
-            Controls.Add(clbRol);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "KullaniciKayitFormu";
             Text = "KullaniciKayitFormu";
@@ -373,8 +384,6 @@
         }
 
         #endregion
-        private CustomControls.CustomComboListBox clbRol;
-        private CustomControls.CustomComboListBox clbPersonel;
         private System.Windows.Forms.Label labelUyariKulllaniciAdi;
         private System.Windows.Forms.Label labelUyariSifre;
         private System.Windows.Forms.Label labelUyariSifreTekrar;
@@ -394,5 +403,7 @@
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomTextBox ctbId;
+        private CustomControls.FilterableComboBox clbPersonel;
+        private CustomControls.FilterableComboBox clbRol;
     }
 }

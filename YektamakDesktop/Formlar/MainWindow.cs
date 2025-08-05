@@ -86,7 +86,7 @@ namespace YektamakDesktop
             this.Enabled = true;
 
             int y = 6; //Menu butonlarının ana menu panelindeki y koordinatını gösterir..
-            foreach (AnaMenuDTO anaMenu in _cache.ananaMenuList)
+            foreach (AnaMenuDTO anaMenu in _cache.anaMenuList)
             {
                 MenuButtonOlustur(anaMenu.ad, anaMenu.icon, 6, y); //Girişi yapan kullanıcının yetkisi dahilinde olan menü öğelerinin butonlarını oluşturur.
                 y += 51;

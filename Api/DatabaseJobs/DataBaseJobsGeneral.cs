@@ -38,7 +38,7 @@ namespace Api.DatabaseJobs
         }
         internal static NpgsqlConnection PostgreSqlConnection()
         {
-            NpgsqlConnection npgsqlConnection = new NpgsqlConnection("Host=127.0.0.1;Username=postgres;Password=1;Database=yktmkdb");
+            NpgsqlConnection npgsqlConnection = new NpgsqlConnection("Host=localhost;Username=postgres;Password=1;Database=yktmkdb");
             try
             {
                 npgsqlConnection.Open();
@@ -64,7 +64,8 @@ namespace Api.DatabaseJobs
         }
         internal static MySqlConnection MySqlConnectionYerel()
         {
-            MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            //MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=127.0.0.1;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
             try
             {
                 mySqlConnection.Open();

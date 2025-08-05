@@ -1,9 +1,6 @@
 ﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Newtonsoft.Json;
-using Org.BouncyCastle.Ocsp;
-using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
 {
@@ -37,6 +34,12 @@ namespace Api.Controllers
         public string GetProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {
             string result = _dataAccessLayer.GetObject(projeStokKart, "spGetProjeStokKart");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteProjeStokKart")]
+        public string DeleteProjeStokKart([FromBody] ProjeStokKart projeStokKart)
+        {
+            string result = _dataAccessLayer.DeleteObject(projeStokKart, "spDeleteProjeStokKart");
             return result;
         }
     }

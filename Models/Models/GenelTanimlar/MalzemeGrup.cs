@@ -9,9 +9,9 @@ namespace Models
     public class MalzemeGrup : IEntity
     {
         public int? Id { get; set; }
-        private StokGrup _stokGrup;
-        public StokGrup stokGrup { get { if (_stokGrup == null) { _stokGrup = new StokGrup(); } return _stokGrup; } set { _stokGrup = value; } }
         public string kod { get; set; }
         public string ad { get; set; }
+        private StokGrup _stokGrup;
+        public StokGrup stokGrup { get { if (_stokGrup == null) { _stokGrup = new StokGrup(); } return _stokGrup; } set { _stokGrup = value; } }
     }
 }
