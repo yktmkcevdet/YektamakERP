@@ -43,6 +43,7 @@ namespace YektamakDesktop.Formlar.Stok
             universalGrid1 = new UniversalGrid();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stokKartınıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             projeKodu = new FilterableComboBox();
             clbStokGrup = new FilterableComboBox();
             clbMalzemeGrup = new FilterableComboBox();
@@ -50,7 +51,6 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2 = new FilterableComboBox();
             cbxStokTip = new FilterableComboBox();
             label7 = new System.Windows.Forms.Label();
-            stokKartınıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -166,7 +166,6 @@ namespace YektamakDesktop.Formlar.Stok
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(12, 212);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(1062, 580);
@@ -177,14 +176,21 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { stokKartınıGörüntüleToolStripMenuItem, stokKartınıSilToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(191, 70);
+            contextMenuStrip1.Size = new System.Drawing.Size(229, 48);
             // 
             // stokKartınıGörüntüleToolStripMenuItem
             // 
             stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
-            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
+            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartı Görüntüle & Düzenle";
             stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
+            // 
+            // stokKartınıSilToolStripMenuItem
+            // 
+            stokKartınıSilToolStripMenuItem.Name = "stokKartınıSilToolStripMenuItem";
+            stokKartınıSilToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            stokKartınıSilToolStripMenuItem.Text = "Seçili Stok Kartlarını Sil";
+            stokKartınıSilToolStripMenuItem.Click += stokKartınıSilToolStripMenuItem_Click;
             // 
             // projeKodu
             // 
@@ -278,6 +284,8 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2.TabIndex = 134;
             clbMalzemeAltGrup2.UnderlinedStyle = false;
             clbMalzemeAltGrup2.ValueMember = "Id";
+            clbMalzemeAltGrup2.DoubleClick1 += cbxMalzemeAltGrup2_DoubleClick;
+            clbMalzemeAltGrup2.DoubleClick += cbxMalzemeAltGrup2_DoubleClick;
             // 
             // cbxStokTip
             // 
@@ -306,13 +314,6 @@ namespace YektamakDesktop.Formlar.Stok
             label7.Size = new System.Drawing.Size(52, 15);
             label7.TabIndex = 136;
             label7.Text = "Stok Tipi";
-            // 
-            // stokKartınıSilToolStripMenuItem
-            // 
-            stokKartınıSilToolStripMenuItem.Name = "stokKartınıSilToolStripMenuItem";
-            stokKartınıSilToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            stokKartınıSilToolStripMenuItem.Text = "Stok Kartını Sil";
-            stokKartınıSilToolStripMenuItem.Click += stokKartınıSilToolStripMenuItem_Click;
             // 
             // StokKartGridForm
             // 

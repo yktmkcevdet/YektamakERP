@@ -171,11 +171,11 @@ namespace YektamakDesktop.Formlar.Satinalma
                 Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
                 if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result.result);
+                    MessageBox.Show("Teklif kaydedilirken hata oluştu. "+ result.result);
                 }
                 else
                 {
-                    MailHelper.SendMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                    MailHelper.SendSystemMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
                     MessageBox.Show("Mail başarıyla gönderildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }

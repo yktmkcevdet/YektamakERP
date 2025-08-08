@@ -2,7 +2,6 @@
 using Models.Interface;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -11,32 +10,21 @@ using Utilities.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    public partial class AnaVeriTanimlamaFormu<T> : Form, IForm where T : class,IBaseEntity, new()
+    public partial class AnaVeriTanimlamaFormu<T> : Form where T : class,IBaseEntity, new()
     {
         private T _entity;
         DataGridView dataGridView;
-        private static ICache _cache;
-        private static IAnaVeriService _anaVeriService;
+        private readonly ICache _cache;
+        private readonly IAnaVeriService _anaVeriService;
         public AnaVeriTanimlamaFormu(ICache cache, IAnaVeriService anaVeriService)
         {
             _cache = cache;
             _anaVeriService = anaVeriService;
+            InitializeComponent();
+            CreateDynamicControls();
         }
 
-        private static AnaVeriTanimlamaFormu<T> _anaVeriTanimlamaFormu;
-        public static AnaVeriTanimlamaFormu<T> anaVeriTanimlamaFormu
-        {
-            get
-            {
-                if (_anaVeriTanimlamaFormu == null)
-                {
-                    _anaVeriTanimlamaFormu = new AnaVeriTanimlamaFormu<T>();
-                    GlobalData.Yetki(ref _anaVeriTanimlamaFormu);
-                }
-                return _anaVeriTanimlamaFormu;
-            }
-        }
-
+        
         private List<Control> _controlsToDisable;
         public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
         private bool _activeForm;
@@ -54,36 +42,6 @@ namespace YektamakDesktop.Formlar.Genel
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            if (!GlobalData.CompareClass(_entity, currentData))
-            {
-                DialogResult dialogResult = MessageBox.Show("Formda yapılan değişiklikler kaydedilsin mi", "", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    rButtonKaydet_Click(sender, e);
-                }
-                else
-                {
-                    CloseForm();
-                }
-            }
-            else
-            {
-                CloseForm();
-            }
-        }
-        private void CloseForm()
-        {
-            GlobalData.CloseForm(ref _anaVeriTanimlamaFormu);
-        }
-        private T currentData { 
-            get 
-            {
-                T entity = new T();
-                return entity;
-            } 
-        }
         private void rButtonKaydet_Click(object sender, EventArgs e)
         {
             _entity = new T();

@@ -10,7 +10,13 @@ namespace Models
         public DateTime? talepTarihi { get; set; }
         public DateTime? teslimTarihi { get; set; }
         public bool? onayDurum { get; set; }
-		private StokTip _stokTip;
+		private TalepNeden _talepNeden;
+		public TalepNeden talepNeden
+        {
+            get { if (_talepNeden == null) _talepNeden = new(); return _talepNeden; }
+            set { _talepNeden = value; }
+        }
+        private StokTip _stokTip;
 		public StokTip stokTip
 		{
             get { if (_stokTip == null) _stokTip = new(); return _stokTip; }
@@ -77,6 +83,9 @@ namespace Models
 		public string satinalmaTalepNo { get; set; }
 		private Proje _proje;
 		public Proje proje { get { if (_proje == null) _proje = new Proje(); return _proje; } set { _proje = value; } }
+
+        private TalepNeden _talepNeden;
+        public TalepNeden talepNeden { get { if (_talepNeden == null) _talepNeden = new(); return _talepNeden; } set { _talepNeden = value; } }
         private StokKart _stokKart;
 		public StokKart stokKart{
 			get
@@ -100,6 +109,7 @@ namespace Models
         public string onayPersonelad { get; set; }
 		public string talepEdenPersonelad { get; set; }
 		public bool onayDurum { get; set; }
+		public bool? isTeklif { get; set; }
         private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
         {

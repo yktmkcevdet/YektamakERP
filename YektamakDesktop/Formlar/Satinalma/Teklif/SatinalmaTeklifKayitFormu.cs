@@ -25,12 +25,22 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             _cache = cache;
             _dataTableMapper = dataTableMapper;
             InitializeComponent();
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(54, 378);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(824, 364);
+            universalGrid1.TabIndex = 17;
+            Controls.Add(universalGrid1);
             ComboBoxListFill.GetLookupAd(_cache.firmaList, ref firmaId);
             ComboBoxListFill.GetLookupAd(_cache.dovizCinsiList, ref clbDoviz);
             ComboBoxListFill.GetLookupAd(_cache.vadeList, ref clbVade);
-            universalGrid1.kullanici = _cache.kullanici;
         }
-        
         private SatinalmaTeklifBaslik _satinalmaTeklifBaslik;
         public SatinalmaTeklifBaslik satinalmaTeklifBaslik
         {

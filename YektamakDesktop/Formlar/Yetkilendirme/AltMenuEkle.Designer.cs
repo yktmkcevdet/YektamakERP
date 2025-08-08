@@ -32,11 +32,11 @@
             labelUyariFormAdi = new System.Windows.Forms.Label();
             labelUyariMenuAdi = new System.Windows.Forms.Label();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            clbAnaMenu = new YektamakDesktop.CustomControls.CustomComboListBox();
             label2 = new System.Windows.Forms.Label();
-            clbForm = new YektamakDesktop.CustomControls.CustomComboListBox();
             label1 = new System.Windows.Forms.Label();
             rButtonKaydet = new YektamakDesktop.CustomControls.CustomButtonSave();
+            clbForm = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbAnaMenu = new YektamakDesktop.CustomControls.FilterableComboBox();
             SuspendLayout();
             // 
             // labelUyariAnaMenu
@@ -82,19 +82,6 @@
             headerPanel1.Size = new System.Drawing.Size(412, 32);
             headerPanel1.TabIndex = 94;
             // 
-            // clbAnaMenu
-            // 
-            clbAnaMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbAnaMenu.ListBoxVisualSize = 5;
-            clbAnaMenu.Location = new System.Drawing.Point(114, 68);
-            clbAnaMenu.Margin = new System.Windows.Forms.Padding(1);
-            clbAnaMenu.Name = "clbAnaMenu";
-            clbAnaMenu.Padding = new System.Windows.Forms.Padding(1);
-            clbAnaMenu.selectedDataRowId = null;
-            clbAnaMenu.selectedDataRowValue = null;
-            clbAnaMenu.Size = new System.Drawing.Size(250, 36);
-            clbAnaMenu.TabIndex = 95;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -103,19 +90,6 @@
             label2.Size = new System.Drawing.Size(58, 15);
             label2.TabIndex = 96;
             label2.Text = "Üst Menü";
-            // 
-            // clbForm
-            // 
-            clbForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbForm.ListBoxVisualSize = 5;
-            clbForm.Location = new System.Drawing.Point(114, 108);
-            clbForm.Margin = new System.Windows.Forms.Padding(1);
-            clbForm.Name = "clbForm";
-            clbForm.Padding = new System.Windows.Forms.Padding(1);
-            clbForm.selectedDataRowId = null;
-            clbForm.selectedDataRowValue = null;
-            clbForm.Size = new System.Drawing.Size(250, 36);
-            clbForm.TabIndex = 97;
             // 
             // label1
             // 
@@ -135,16 +109,52 @@
             rButtonKaydet.TabIndex = 101;
             rButtonKaydet.SaveButtonClick += rButtonKaydet_Click;
             // 
+            // clbForm
+            // 
+            clbForm.BorderColor = System.Drawing.Color.Silver;
+            clbForm.BorderSize = 1;
+            clbForm.DataSource = null;
+            clbForm.DisplayMember = "ad";
+            clbForm.Location = new System.Drawing.Point(114, 113);
+            clbForm.Name = "clbForm";
+            clbForm.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbForm.PlaceholderText = "Seçiniz...";
+            clbForm.SelectedIndex = -1;
+            clbForm.SelectedItem = null;
+            clbForm.SelectedValue = null;
+            clbForm.Size = new System.Drawing.Size(172, 29);
+            clbForm.TabIndex = 102;
+            clbForm.UnderlinedStyle = false;
+            clbForm.ValueMember = "Id";
+            // 
+            // clbAnaMenu
+            // 
+            clbAnaMenu.BorderColor = System.Drawing.Color.Silver;
+            clbAnaMenu.BorderSize = 1;
+            clbAnaMenu.DataSource = null;
+            clbAnaMenu.DisplayMember = "ad";
+            clbAnaMenu.Location = new System.Drawing.Point(114, 68);
+            clbAnaMenu.Name = "clbAnaMenu";
+            clbAnaMenu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbAnaMenu.PlaceholderText = "Seçiniz...";
+            clbAnaMenu.SelectedIndex = -1;
+            clbAnaMenu.SelectedItem = null;
+            clbAnaMenu.SelectedValue = null;
+            clbAnaMenu.Size = new System.Drawing.Size(172, 29);
+            clbAnaMenu.TabIndex = 103;
+            clbAnaMenu.UnderlinedStyle = false;
+            clbAnaMenu.ValueMember = "Id";
+            // 
             // AltMenuEkleForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(412, 250);
+            Controls.Add(clbAnaMenu);
+            Controls.Add(clbForm);
             Controls.Add(rButtonKaydet);
             Controls.Add(label1);
-            Controls.Add(clbForm);
             Controls.Add(label2);
-            Controls.Add(clbAnaMenu);
             Controls.Add(headerPanel1);
             Controls.Add(labelUyariMenuAdi);
             Controls.Add(labelUyariFormAdi);
@@ -161,10 +171,10 @@
         private System.Windows.Forms.Label labelUyariFormAdi;
         private System.Windows.Forms.Label labelUyariMenuAdi;
         private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.CustomComboListBox clbAnaMenu;
         private System.Windows.Forms.Label label2;
-        private CustomControls.CustomComboListBox clbForm;
         private System.Windows.Forms.Label label1;
         private CustomControls.CustomButtonSave rButtonKaydet;
+        private CustomControls.FilterableComboBox clbForm;
+        private CustomControls.FilterableComboBox clbAnaMenu;
     }
 }

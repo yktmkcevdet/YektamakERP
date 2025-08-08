@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using FastReport.Data;
+using Models;
 using Models.Attributes;
 using Newtonsoft.Json;
 using NPOI.OpenXmlFormats.Spreadsheet;
@@ -31,7 +32,6 @@ namespace YektamakDesktop.CustomControls
         [Category("Behavior")]
         public event MouseEventHandler MouseDown1;
         private readonly ICache _cache;
-        public Kullanici kullanici { get; set; }
         private readonly ConcurrentDictionary<Type, IEnumerable<PropertyAttributePair>> _propertyCache = new();
         private static readonly Bitmap _updateIcon = Properties.Resources.data_update_icon1;
         private static readonly Bitmap _deleteIcon = Properties.Resources.sil1;
@@ -73,7 +73,7 @@ namespace YektamakDesktop.CustomControls
 
             foreach (var field in fieldNames)
             {
-                var permission = new AlanYetki { formAd = formName, alanAd = field, kullanici = kullanici };
+                var permission = new AlanYetki { formAd = formName, alanAd = field, kullanici = _cache.kullanici };
                 if (await permissionManager.HasAccess(permission))
                 {
                     allowedFields.Add(field);
@@ -206,12 +206,12 @@ namespace YektamakDesktop.CustomControls
         {
             _isCheck = isCheck;
             _formName = formName;
-
+            headerCheckBoxState = false;
             var liste = new SortableBindingList<T>(list);
             binding.DataSource = liste;
 
             list1 = list.Cast<object>().ToList();
-            dataGridView1.DataSource = binding;
+            dataGridView1.DataSource = liste;
             await LoadSettings<T>(formName, isCheck);
 
             lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
@@ -239,9 +239,9 @@ namespace YektamakDesktop.CustomControls
         private async Task LoadSettings<T>(string key, bool isCheck)
         {
             var columns = await ConfigureColumns<T>(key, isCheck);
-            await DIContainer.GetService<GridSettingsManager>().Load(kullanici.Id, key, columns, dataGridView1);
+            await DIContainer.GetService<GridSettingsManager>().Load(_cache.kullanici.Id, key, columns, dataGridView1);
         }
-        public async Task SaveSettings() => await DIContainer.GetService<GridSettingsManager>().Save(kullanici.Id, _formName, dataGridView1);
+        public async Task SaveSettings() => await DIContainer.GetService<GridSettingsManager>().Save(_cache.kullanici.Id, _formName, dataGridView1);
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1 && e.ColumnIndex == 0 && _isCheck)
@@ -286,21 +286,24 @@ namespace YektamakDesktop.CustomControls
                 }
                 else
                 {
-                    // Varsayılan sıralama işlemi yap
                     string columnName = dataGridView1.Columns[hit.ColumnIndex].DataPropertyName;
-                    ListSortDirection direction = ListSortDirection.Ascending;
-
-                    // Eğer zaten sıralandıysa yönü tersine çevir
-                    if (dataGridView1.SortedColumn == dataGridView1.Columns[hit.ColumnIndex] &&
-                        dataGridView1.SortOrder == SortOrder.Ascending)
+                    
+                    if (dataGridView1.Columns[hit.ColumnIndex].SortMode != DataGridViewColumnSortMode.Programmatic)
                     {
-                        direction = ListSortDirection.Descending;
+                        dataGridView1.Columns[hit.ColumnIndex].SortMode = DataGridViewColumnSortMode.Programmatic;
+                        dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
                     }
-                    dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], direction);
-                    // Sıralama sonrası headerCheckBoxState'i sıfırla
-                    headerCheckBoxState = false;
-                    // Tüm satırların checkbox'larını güncelle
-
+                    else 
+                    {
+                        if (dataGridView1.SortOrder == SortOrder.Descending)
+                        {
+                            dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Ascending);
+                        }
+                        else
+                        {
+                            dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
+                        }
+                    }
                 }
             }
             else if (e.Button == MouseButtons.Right && hit.Type == DataGridViewHitTestType.ColumnHeader)
@@ -409,13 +412,16 @@ namespace YektamakDesktop.CustomControls
                 foreach (var prop in props)
                 {
                     var filterValue = prop.GetValue(filter);
-                    //if (filterValue == null || typeof(IEnumerable).IsAssignableFrom(prop.PropertyType)) continue;
-
                     var itemValue = prop.GetValue(item);
-
                     // Null eşleşmiyorsa filtreyi geçemez
-                    if (itemValue == null || !itemValue.Equals(filterValue))
-                        return false;
+                    if (prop.PropertyType== typeof(string))
+                    {
+                        if (itemValue == null || !itemValue.ToString().Contains(filterValue.ToString(),StringComparison.OrdinalIgnoreCase)) return false;
+                    }
+                    else
+                    {
+                        if (itemValue == null || !itemValue.Equals(filterValue)) return false;
+                    }
                 }
                 return true;
             }).ToList();
@@ -428,6 +434,8 @@ namespace YektamakDesktop.CustomControls
             var filtreliListe = Filtrele(list, filtreNesnesi);
             dataGridView1.DataSource = filtreliListe;
             await LoadSettings<T>(_formName, _isCheck);
+            headerCheckBoxState = false;
+            lblSecilenKayitSayisi.Text = $"Seçilen kayıt sayısı : 0";
             lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {dataGridView1.Rows.Count.ToString()}";
         }
         private void mouseDown(MouseEventArgs e)

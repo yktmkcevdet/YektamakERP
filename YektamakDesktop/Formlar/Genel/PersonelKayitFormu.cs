@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Genel
 {
@@ -25,14 +26,24 @@ namespace YektamakDesktop.Formlar.Genel
             _cache = cache;
             _jsonConverter = jsonConverter;
             InitializeComponent();
+            Initialize();
+            Binding();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 354);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(992, 352);
+            universalGrid1.TabIndex = 55;
+            universalGrid1.Grid.MouseClick += Grid_MouseClick;
+            Controls.Add(universalGrid1);
             ComboBoxListFill.GetLookupAd(_cache.pozisyonList, ref clbPozisyon);
             ComboBoxListFill.GetLookupAd(_cache.firmaList, ref clbFirma);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbYonetici);
-            universalGrid1.kullanici = _cache.kullanici;
-            universalGrid1.Grid.MouseClick += Grid_MouseClick;
-            Binding();
         }
-
         private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
             var personelDTO = (PersonelDTO)universalGrid1.binding.Current;
@@ -77,7 +88,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMail.DataBindings.Add("TextCustom", personel, $"{nameof(personel.mail)}", true, DataSourceUpdateMode.OnPropertyChanged);
             clbFirma.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.firma)}.{nameof(personel.firma.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
             clbPozisyon.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.pozisyon)}.{nameof(personel.pozisyon.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbYonetici.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.yoneticiPersonelId)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbYonetici.DataBindings.Add("SelectedValue", personel, $"{nameof(personel.yoneticiPersonelId)}", true, DataSourceUpdateMode.OnPropertyChanged);
         }
         public void UpdateMode(Personel personelUpdate)
         {
@@ -118,9 +129,9 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, ctbPersonelAd);
-            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, ctbPersonelSoyad);
-            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, clbFirma);
+            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!",  ctbPersonelAd);
+            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!",  ctbPersonelSoyad);
+            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!",  clbFirma);
             return result;
         }
         private async void buttonPersonelKaydet_Click(object sender, EventArgs e)
@@ -132,7 +143,24 @@ namespace YektamakDesktop.Formlar.Genel
                 if (result?.result != null)
                 {
                     personel = _jsonConverter.ToModelList<Personel>(result.result).FirstOrDefault();
-                    _cache.personelList.Add(personel);
+                    if (!_cache.personelList.Any(p=>p.Id==personel.Id))
+                    {
+                        _cache.personelList.Add(personel);
+                    }
+                    else
+                    {
+                        var index = _cache.personelList.FindIndex(p => p.Id == personel.Id);
+                        if (index != -1)
+                        {
+                            _cache.personelList[index] = personel;
+                        }
+                    }
+                    List<PersonelDTO> personelList = new();
+                    foreach (var item in _cache.personelList)
+                    {
+                        personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
+                    }
+                    universalGrid1.SetData(personelList, this.Name);
                 }
             }
         }

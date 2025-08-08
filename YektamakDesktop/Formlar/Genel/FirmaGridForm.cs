@@ -12,47 +12,18 @@ using ApiService.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    public partial class FirmaGridForm : Form, IForm,IGridForm<Firma>
+    public partial class FirmaGridForm : Form
     {
-        private static IDataGridHelper _dataGridHelper; 
-        private static IFirmaService _firmaService;
+        private readonly IDataGridHelper _dataGridHelper; 
+        private readonly IFirmaService _firmaService;
         public FirmaGridForm(IDataGridHelper dataGridHelper, IFirmaService firmaService)
         {
             _dataGridHelper = dataGridHelper;
             _firmaService = firmaService;
-        }
-        public FirmaGridForm()
-        {
             InitializeComponent();
             SetToolTips();
-            controlsToDisable = new List<Control>
-            {
-                buttonFiltre,
-                buttonFirmaEkle,
-                buttonTumKayitlariGetir,
-                dataGridView,
-                rButtonCikis
-            };
-
         }
-        private static FirmaGridForm _firmaGridForm;
-
-        public static FirmaGridForm firmaGridForm
-        {
-            get
-            {
-                if (_firmaGridForm == null)
-                {
-                    _firmaGridForm = new FirmaGridForm();
-                    GlobalData.Yetki(ref _firmaGridForm);
-                }
-                return _firmaGridForm;
-            }
-        }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
+        
         private DataTable _dataTable;
 
         public DataTable dataTable
@@ -207,34 +178,6 @@ namespace YektamakDesktop.Formlar.Genel
                 return GlobalData.GridFilter<Firma>(panelFilter);
             }
         }
-        public void CloseForm()
-        {
-            GlobalData.CloseForm(ref _firmaGridForm);
-        }
-
-        public void form_Load(object sender, EventArgs e)
-        {
-            GlobalData.PlaceFilterFields(dataGridView,panelFilter);
-        }
-
-        public void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        public void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-
-        public void dataGridView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            GlobalData.ResizeFilterFields(dataGridView, panelFilter);
-        }
-        int oldScrollOffset = 0;
-        public void dataGridView_Scroll(object sender, ScrollEventArgs e)
-        {
-            GlobalData.AdjustControlsOnScroll(dataGridView, panelFilter, e, ref oldScrollOffset);
-        }
+        
     }
 }

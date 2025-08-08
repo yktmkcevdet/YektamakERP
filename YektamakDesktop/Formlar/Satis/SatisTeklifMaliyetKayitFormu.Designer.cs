@@ -723,7 +723,7 @@ namespace YektamakDesktop.Formlar.Satis
             private void TeklifTalepMaliyetTespitKanalId_DoubleClick(object sender, EventArgs e)
             {
                 DIContainer.GetService<AnaVeriTanimlamaFormu<MaliyetTespitKanal>>();
-                AnaVeriTanimlamaFormu<MaliyetTespitKanal> anaVeriTanimlamaFormu = AnaVeriTanimlamaFormu<MaliyetTespitKanal>.anaVeriTanimlamaFormu;
+                AnaVeriTanimlamaFormu<MaliyetTespitKanal> anaVeriTanimlamaFormu = FormFactory.CreateForm<AnaVeriTanimlamaFormu<MaliyetTespitKanal>>();
                 if (anaVeriTanimlamaFormu != null) anaVeriTanimlamaFormu.Show();
             }
 
@@ -747,8 +747,8 @@ namespace YektamakDesktop.Formlar.Satis
             private void teklifTalepMaliyetUnsurId_DoubleClick(object sender, EventArgs e)
             {
                 DIContainer.GetService<AnaVeriTanimlamaFormu<MaliyetUnsur>>();
-                AnaVeriTanimlamaFormu<MaliyetUnsur> anaVeriTanimlamaFormu = AnaVeriTanimlamaFormu<MaliyetUnsur>.anaVeriTanimlamaFormu;
-                if(anaVeriTanimlamaFormu!=null)anaVeriTanimlamaFormu.Show();
+                AnaVeriTanimlamaFormu<MaliyetUnsur> anaVeriTanimlamaFormu = FormFactory.CreateForm<AnaVeriTanimlamaFormu<MaliyetUnsur>>();
+                if (anaVeriTanimlamaFormu!=null)anaVeriTanimlamaFormu.Show();
             }
         }
         private System.Windows.Forms.Panel panelHeader;

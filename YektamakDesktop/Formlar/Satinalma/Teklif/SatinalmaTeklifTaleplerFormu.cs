@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Satinalma.Teklif;
 
 namespace YektamakDesktop.Formlar.Satinalma
@@ -23,7 +24,19 @@ namespace YektamakDesktop.Formlar.Satinalma
             _jsonConverter = jsonConverter;
             _cache = cache;
             InitializeComponent();
-            universalGrid1.kullanici = _cache.kullanici;
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 164);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(959, 509);
+            universalGrid1.TabIndex = 1;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            Controls.Add(universalGrid1);
         }
         private List<SatinalmaTeklifBaslikDTO> _satinalmaTeklifDTOs;
         public List<SatinalmaTeklifBaslikDTO> satinalmaTeklifDTOs

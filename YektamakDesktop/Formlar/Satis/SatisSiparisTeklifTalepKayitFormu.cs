@@ -137,13 +137,13 @@ namespace YektamakDesktop.Formlar.Satis
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*Talep tarihi girilmelidir!", this, textBoxTeklifTalepTarihi) && result;
-            result = GlobalData.CheckField("*Müşteri seçilmelidir!", this, comboListBoxMusteri) && result;
-            result = GlobalData.CheckField("*Teklif konusu yazılmalıdır!", this, textBoxTeklifKonusu) && result;
-            result = GlobalData.CheckField("*Marka seçilmelidir!", this, comboListBoxMarka) && result;
-            result = GlobalData.CheckField("*Alt grup seçilmelidir!", this, comboListBoxAltGrup) && result;
-            result = GlobalData.CheckField("*Referans kaynağı seçimi yapılmalıdır!", this, comboListBoxReferansKaynagi) && result;
-            result = GlobalData.CheckField("*Satış sorumlusu seçilmelidir!", this, comboListBoxSatisSorumlusu) && result;
+            result = GlobalData.CheckField("*Talep tarihi girilmelidir!", textBoxTeklifTalepTarihi) && result;
+            result = GlobalData.CheckField("*Müşteri seçilmelidir!", comboListBoxMusteri) && result;
+            result = GlobalData.CheckField("*Teklif konusu yazılmalıdır!", textBoxTeklifKonusu) && result;
+            result = GlobalData.CheckField("*Marka seçilmelidir!", comboListBoxMarka) && result;
+            result = GlobalData.CheckField("*Alt grup seçilmelidir!", comboListBoxAltGrup) && result;
+            result = GlobalData.CheckField("*Referans kaynağı seçimi yapılmalıdır!", comboListBoxReferansKaynagi) && result;
+            result = GlobalData.CheckField("*Satış sorumlusu seçilmelidir!", comboListBoxSatisSorumlusu) && result;
             return result;
         }
         /// <summary>

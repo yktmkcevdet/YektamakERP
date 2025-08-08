@@ -86,7 +86,6 @@ namespace YektamakDesktop.Formlar.Genel
             buttonClose.Text = "X";
             buttonClose.TextColor = System.Drawing.Color.White;
             buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
             // 
             // buttomMinimize
             // 

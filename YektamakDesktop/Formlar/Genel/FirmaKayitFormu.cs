@@ -78,15 +78,14 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-
             GlobalData.ClearWarningLabels(this);
-            result = GlobalData.CheckField("*Firma ünvanı boş bırakılamaz", this, textBoxFirmaUnvan) && result;
-            result = GlobalData.CheckField("*Vergi Dairesi boş bırakılamaz", this, textBoxVergiDairesi) && result;
-            result = GlobalData.CheckField("*Vergi Numarası boş bırakılamaz", this, textBoxVergiNumarasi) && result;
-            result = GlobalData.CheckField("*En az 1 faaliyet alanı seçilmelidir", this, customCheckedComboBoxSektorler) && result;
-            result = GlobalData.CheckField("*Adres alanı boş bırakılamaz", this, textBoxAdres) && result;
-            result = GlobalData.CheckField("*Ülke alanı boş bırakılamaz", this, textBoxUlke) && result;
-            result = GlobalData.CheckField("*Şehir alanı boş bırakılamaz", this, textBoxSehir) && result;
+            result = GlobalData.CheckField("*Firma ünvanı boş bırakılamaz", textBoxFirmaUnvan) && result;
+            result = GlobalData.CheckField("*Vergi Dairesi boş bırakılamaz", textBoxVergiDairesi) && result;
+            result = GlobalData.CheckField("*Vergi Numarası boş bırakılamaz", textBoxVergiNumarasi) && result;
+            result = GlobalData.CheckField("*En az 1 faaliyet alanı seçilmelidir", this,customCheckedComboBoxSektorler) && result;
+            result = GlobalData.CheckField("*Adres alanı boş bırakılamaz", textBoxAdres) && result;
+            result = GlobalData.CheckField("*Ülke alanı boş bırakılamaz", textBoxUlke) && result;
+            result = GlobalData.CheckField("*Şehir alanı boş bırakılamaz", textBoxSehir) && result;
             return result;
         }
         private void GetCurrentFirma()

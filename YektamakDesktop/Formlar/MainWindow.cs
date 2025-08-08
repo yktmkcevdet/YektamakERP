@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using Models.DTO;
 using Utilities.Interfaces;
 using Patagames.Pdf.Net.Controls.WinForms;
-using YektamakDesktop.Formlar.Proje;
+using YektamakDesktop.Formlar.ProjeModul;
 
 namespace YektamakDesktop
 {

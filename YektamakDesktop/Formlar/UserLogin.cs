@@ -84,10 +84,17 @@ namespace YektamakDesktop.Formlar
                 if (!CheckFields()) return;
                 this.Enabled = false;
                 string password = ctbSifre.TextCustom;
+                user =new Kullanici();
                 user.ad = ctbKullaniciAdi.TextCustom;
                 user.sifre= ctbSifre.TextCustom;
                 string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
                 Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+                if(result == null || result.result == null || !result.result.Any())
+                {
+                    MessageBox.Show("Kullanıcı bulunamadı");
+                    this.Enabled = true;
+                    return;
+                }
                 user = _jsonConverter.ToModelList<Kullanici>(result.result).FirstOrDefault();
                 if (_passwordService.VerifyPassword(password, user.sifre))
                 {
@@ -136,8 +143,8 @@ namespace YektamakDesktop.Formlar
         private bool CheckFields()
         {
             bool result = true;
-            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", this, ctbKullaniciAdi);
-            result &= GlobalData.CheckField("* Şifre girilmelidir!", this, ctbSifre);
+            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", ctbKullaniciAdi);
+            result &= GlobalData.CheckField("* Şifre girilmelidir!", ctbSifre);
 
             if (newPasswordMode)
             {
@@ -237,6 +244,9 @@ namespace YektamakDesktop.Formlar
         {
             if (!CheckFields()) return;
             string password = ctbSifre.TextCustom;
+            user = new Kullanici();
+            user.ad = ctbKullaniciAdi.TextCustom;
+            user.sifre = ctbSifre.TextCustom;
             string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
             Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
             user = _jsonConverter.ToModelList<Kullanici>(result.result).FirstOrDefault();

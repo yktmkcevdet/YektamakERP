@@ -23,7 +23,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             _jsonConverter = jsonConverter;
             _cache = cache;
             InitializeComponent();
-            universalGrid1.kullanici = _cache.kullanici;
             Binding();
         }
 
@@ -84,8 +83,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
             satinalmaTalepFilter = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+            satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
             string result = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
             Result resultModel = _jsonConverter.DeserializeToModelList<Result>(result).FirstOrDefault();
             MessageBox.Show(resultModel.result);
@@ -153,6 +152,11 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
+            if(satinalmaTalep.talepEdenKullanici.Id != _cache.kullanici.Id)
+            {
+                MessageBox.Show("Bu talebi sadece talep eden silebilir.");
+                return;
+            }
             var onay = MessageBox.Show("Talebi silmek istediğinizden emin misiniz", "Talep Silme Onay", MessageBoxButtons.YesNo);
             if (onay == DialogResult.Yes)
             {

@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            clbFormAd = new YektamakDesktop.CustomControls.CustomComboListBox();
             ctbMenuAd = new YektamakDesktop.CustomControls.CustomTextBox();
-            clbIcon = new YektamakDesktop.CustomControls.CustomComboListBox();
             roundedIconButton1 = new YektamakDesktop.CustomControls.RoundedIconButton();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             rButtonKaydet = new YektamakDesktop.CustomControls.CustomButtonSave();
@@ -41,20 +39,9 @@
             ctbDtoName = new YektamakDesktop.CustomControls.CustomTextBox();
             ID = new System.Windows.Forms.Label();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
+            clbFormAd = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbIcon = new YektamakDesktop.CustomControls.FilterableComboBox();
             SuspendLayout();
-            // 
-            // clbFormAd
-            // 
-            clbFormAd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbFormAd.ListBoxVisualSize = 5;
-            clbFormAd.Location = new System.Drawing.Point(126, 89);
-            clbFormAd.Margin = new System.Windows.Forms.Padding(1);
-            clbFormAd.Name = "clbFormAd";
-            clbFormAd.Padding = new System.Windows.Forms.Padding(1);
-            clbFormAd.selectedDataRowId = null;
-            clbFormAd.selectedDataRowValue = null;
-            clbFormAd.Size = new System.Drawing.Size(251, 36);
-            clbFormAd.TabIndex = 4;
             // 
             // ctbMenuAd
             // 
@@ -81,20 +68,6 @@
             ctbMenuAd.TextCustom = "";
             ctbMenuAd.UnderlinedStyle = false;
             // 
-            // clbIcon
-            // 
-            clbIcon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbIcon.ListBoxVisualSize = 5;
-            clbIcon.Location = new System.Drawing.Point(127, 167);
-            clbIcon.Margin = new System.Windows.Forms.Padding(1);
-            clbIcon.Name = "clbIcon";
-            clbIcon.Padding = new System.Windows.Forms.Padding(1);
-            clbIcon.selectedDataRowId = null;
-            clbIcon.selectedDataRowValue = null;
-            clbIcon.Size = new System.Drawing.Size(251, 36);
-            clbIcon.TabIndex = 23;
-            clbIcon.SelectedIndexChanged += customComboListBoxIcon_SelectedIndexChanged;
-            // 
             // roundedIconButton1
             // 
             roundedIconButton1.BackColor = System.Drawing.Color.Transparent;
@@ -112,7 +85,7 @@
             roundedIconButton1.IconColor = System.Drawing.Color.Black;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             roundedIconButton1.IconSize = 24;
-            roundedIconButton1.Location = new System.Drawing.Point(128, 245);
+            roundedIconButton1.Location = new System.Drawing.Point(321, 161);
             roundedIconButton1.Name = "roundedIconButton1";
             roundedIconButton1.Size = new System.Drawing.Size(75, 40);
             roundedIconButton1.TabIndex = 25;
@@ -235,11 +208,52 @@
             ctbId.TextCustom = "";
             ctbId.UnderlinedStyle = false;
             // 
+            // clbFormAd
+            // 
+            clbFormAd.BorderColor = System.Drawing.Color.Silver;
+            clbFormAd.BorderSize = 1;
+            clbFormAd.DataSource = null;
+            clbFormAd.DisplayMember = "ad";
+            clbFormAd.Location = new System.Drawing.Point(127, 91);
+            clbFormAd.Name = "clbFormAd";
+            clbFormAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbFormAd.PlaceholderText = "Seçiniz...";
+            clbFormAd.SelectedDisplayValue = "Seçiniz...";
+            clbFormAd.SelectedIndex = -1;
+            clbFormAd.SelectedItem = null;
+            clbFormAd.SelectedValue = null;
+            clbFormAd.Size = new System.Drawing.Size(188, 29);
+            clbFormAd.TabIndex = 35;
+            clbFormAd.UnderlinedStyle = false;
+            clbFormAd.ValueMember = "Id";
+            // 
+            // clbIcon
+            // 
+            clbIcon.BorderColor = System.Drawing.Color.Silver;
+            clbIcon.BorderSize = 1;
+            clbIcon.DataSource = null;
+            clbIcon.DisplayMember = "ad";
+            clbIcon.Location = new System.Drawing.Point(128, 169);
+            clbIcon.Name = "clbIcon";
+            clbIcon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbIcon.PlaceholderText = "Seçiniz...";
+            clbIcon.SelectedDisplayValue = "Seçiniz...";
+            clbIcon.SelectedIndex = -1;
+            clbIcon.SelectedItem = null;
+            clbIcon.SelectedValue = null;
+            clbIcon.Size = new System.Drawing.Size(187, 29);
+            clbIcon.TabIndex = 36;
+            clbIcon.UnderlinedStyle = false;
+            clbIcon.ValueMember = "Id";
+            clbIcon.SelectedIndexChanged += customComboListBoxIcon_SelectedIndexChanged;
+            // 
             // EkranEkle
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(422, 319);
+            Controls.Add(clbIcon);
+            Controls.Add(clbFormAd);
             Controls.Add(ID);
             Controls.Add(ctbId);
             Controls.Add(label4);
@@ -250,9 +264,7 @@
             Controls.Add(rButtonKaydet);
             Controls.Add(headerPanel1);
             Controls.Add(roundedIconButton1);
-            Controls.Add(clbIcon);
             Controls.Add(ctbMenuAd);
-            Controls.Add(clbFormAd);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "EkranEkle";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -262,9 +274,7 @@
         }
 
         #endregion
-        private CustomControls.CustomComboListBox clbFormAd;
         private CustomControls.CustomTextBox ctbMenuAd;
-        private CustomControls.CustomComboListBox clbIcon;
         private CustomControls.RoundedIconButton roundedIconButton1;
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomButtonSave rButtonKaydet;
@@ -275,5 +285,7 @@
         private CustomControls.CustomTextBox ctbDtoName;
         private System.Windows.Forms.Label ID;
         private CustomControls.CustomTextBox ctbId;
+        private CustomControls.FilterableComboBox clbFormAd;
+        private CustomControls.FilterableComboBox clbIcon;
     }
 }

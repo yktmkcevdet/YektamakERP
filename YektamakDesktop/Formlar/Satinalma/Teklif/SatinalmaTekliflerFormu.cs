@@ -24,7 +24,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             _jsonConverter = jsonConverter;
             _cache = cache;
             InitializeComponent();
-            universalGrid1.kullanici = _cache.kullanici;
             universalGrid1.Grid.CellClick += universalGrid1_CellClick;
             ComboBoxListFill.GetLookupKod(_cache.projes, ref clbPorjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Models
 {
-    public class StokKart : IEntity
+    public record StokKart : IEntity
     {
         public int? Id { get; set; }
         private Hammadde _hammadde;
@@ -32,10 +32,6 @@ namespace Models
                 {
                     _stokTip = new StokTip();
                     
-                }
-                else if(stokGrup.Id == 1)
-                {
-                    _stokTip.Id = 2; //Eğer stok grubu metal ise stok tipi yarı mamül olarak ayarlanır.
                 }
                 return _stokTip; 
             } 
@@ -86,6 +82,7 @@ namespace Models
         public byte[] pdf { get; set; }
         public byte[] step { get; set; }
         public byte[] dxf { get; set; }
+        
     }
     public class  Hammadde: IEntity
     {

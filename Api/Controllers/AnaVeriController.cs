@@ -61,22 +61,25 @@ namespace Api.Controllers
             return _dataAccessLayer.GetObject("spGetDosyaTip");
         }
         [HttpPost, Route("api/SaveExcelForm")]
-        public string SaveExcelForm([FromBody] string restData)
+        public string SaveExcelForm([FromBody] ExcelForm restData)
         {
-            return _dataAccessLayer.SaveObject(JsonStringToModel<ExcelForm>(restData), "spSaveExcelForm");
+            return _dataAccessLayer.SaveObject(restData, "spSaveExcelForm");
         }
         
         [HttpPost, Route("api/GetExcelForm")]
         public string GetExcelForm([FromBody] ExcelForm excelForm)
         {
-            try
-            {
-                return _dataAccessLayer.GetObject(excelForm, "spGetExcelForm");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Excel formu alınırken hata oluştu: {ex.Message}");
-            }
+            return _dataAccessLayer.GetObject(excelForm, "spGetExcelForm");
+        }
+        [HttpGet, Route("api/GetTalepNeden")]
+        public string GetTalepNeden()
+        {
+            return _dataAccessLayer.GetObject("spGetTalepNeden");
+        }
+        [HttpGet, Route("api/GetProjeTip")]
+        public string GetProjeTip()
+        {
+           return _dataAccessLayer.GetObject("spGetProjeTip");
         }
     }
 }

@@ -107,6 +107,8 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeGrup = new FilterableComboBox();
             clbMalzemeAltGrup = new FilterableComboBox();
             clbMalzemeAltGrup2 = new FilterableComboBox();
+            ctbProjeAdet = new CustomTextBoxSayisal();
+            label3 = new Label();
             SuspendLayout();
             // 
             // ctbId
@@ -913,11 +915,48 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2.UnderlinedStyle = false;
             clbMalzemeAltGrup2.ValueMember = "Id";
             // 
+            // ctbProjeAdet
+            // 
+            ctbProjeAdet.BackColor = SystemColors.Window;
+            ctbProjeAdet.BorderColor = Color.Silver;
+            ctbProjeAdet.BorderFocusColor = Color.HotPink;
+            ctbProjeAdet.BorderRadius = 5;
+            ctbProjeAdet.BorderSize = 1;
+            ctbProjeAdet.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            ctbProjeAdet.ForeColor = Color.DimGray;
+            ctbProjeAdet.Location = new Point(570, 98);
+            ctbProjeAdet.Multiline = false;
+            ctbProjeAdet.Name = "ctbProjeAdet";
+            ctbProjeAdet.OndalikBasamak = 0;
+            ctbProjeAdet.Padding = new Padding(7, 5, 7, 5);
+            ctbProjeAdet.PasswordChar = false;
+            ctbProjeAdet.PlaceholderColor = Color.DarkGray;
+            ctbProjeAdet.PlaceholderText = "";
+            ctbProjeAdet.ReadOnly = false;
+            ctbProjeAdet.SelectionStart = 0;
+            ctbProjeAdet.Size = new Size(92, 26);
+            ctbProjeAdet.TabIndex = 85;
+            ctbProjeAdet.TextAlignment = HorizontalAlignment.Right;
+            ctbProjeAdet.TextCustom = "0";
+            ctbProjeAdet.UnderlinedStyle = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(433, 101);
+            label3.Name = "label3";
+            label3.Size = new Size(66, 15);
+            label3.TabIndex = 86;
+            label3.Text = "Proje Adet";
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1040, 822);
+            Controls.Add(label3);
+            Controls.Add(ctbProjeAdet);
             Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(clbMalzemeAltGrup);
             Controls.Add(clbMalzemeGrup);
@@ -1150,6 +1189,14 @@ namespace YektamakDesktop.Formlar.Stok
                     MessageBox.Show("Dosya bulunamadı.");
                 }
             }
+            public bool Validate() 
+            {
+                bool isValid = true;
+                isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", dosyaTipControl);
+                isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", dosyaAdControl);
+                isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", dosyaUzantiControl);
+                return isValid;
+            }
         }
 
         private System.Windows.Forms.Panel panel1;
@@ -1179,5 +1226,7 @@ namespace YektamakDesktop.Formlar.Stok
         private FilterableComboBox clbMalzemeGrup;
         private FilterableComboBox clbMalzemeAltGrup;
         private FilterableComboBox clbMalzemeAltGrup2;
+        private CustomTextBoxSayisal ctbProjeAdet;
+        private Label label3;
     }
 }

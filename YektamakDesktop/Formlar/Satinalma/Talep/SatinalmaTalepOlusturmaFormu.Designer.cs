@@ -41,7 +41,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             label4 = new Label();
             label5 = new Label();
             panel1 = new Panel();
-            customButtonSave1 = new CustomButtonSave();
             ctbAciklama = new CustomTextBox();
             label6 = new Label();
             ctbTalepNo = new CustomTextBox();
@@ -52,6 +51,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrup = new FilterableComboBox();
             clbStokTip = new FilterableComboBox();
             clbStokGrup = new FilterableComboBox();
+            fcbTalepNeden = new FilterableComboBox();
+            label8 = new Label();
+            customButtonSave1 = new RoundedButton();
             SuspendLayout();
             // 
             // headerPanel1
@@ -70,7 +72,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(46, 134);
+            label2.Location = new System.Drawing.Point(41, 144);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(65, 15);
             label2.TabIndex = 4;
@@ -79,7 +81,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(45, 172);
+            label3.Location = new System.Drawing.Point(40, 182);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(52, 15);
             label3.TabIndex = 6;
@@ -88,7 +90,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(46, 212);
+            label4.Location = new System.Drawing.Point(41, 222);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(66, 15);
             label4.TabIndex = 9;
@@ -97,7 +99,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(46, 250);
+            label5.Location = new System.Drawing.Point(41, 260);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(91, 15);
             label5.TabIndex = 10;
@@ -106,20 +108,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Location = new System.Drawing.Point(45, 292);
+            panel1.Location = new System.Drawing.Point(45, 290);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(991, 263);
+            panel1.Size = new System.Drawing.Size(991, 265);
             panel1.TabIndex = 15;
-            // 
-            // customButtonSave1
-            // 
-            customButtonSave1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(930, 561);
-            customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new System.Drawing.Size(106, 46);
-            customButtonSave1.TabIndex = 16;
-            customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
             // 
             // ctbAciklama
             // 
@@ -131,7 +123,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
             ctbAciklama.isPlaceHolder = false;
-            ctbAciklama.Location = new System.Drawing.Point(577, 176);
+            ctbAciklama.Location = new System.Drawing.Point(540, 186);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new Padding(7, 5, 7, 5);
@@ -149,7 +141,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(453, 181);
+            label6.Location = new System.Drawing.Point(464, 191);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(56, 15);
             label6.TabIndex = 18;
@@ -165,7 +157,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTalepNo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbTalepNo.ForeColor = System.Drawing.Color.Black;
             ctbTalepNo.isPlaceHolder = false;
-            ctbTalepNo.Location = new System.Drawing.Point(165, 45);
+            ctbTalepNo.Location = new System.Drawing.Point(160, 36);
             ctbTalepNo.Multiline = false;
             ctbTalepNo.Name = "ctbTalepNo";
             ctbTalepNo.Padding = new Padding(7, 5, 7, 5);
@@ -183,7 +175,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctbTeslimTarihi
             // 
             ctbTeslimTarihi.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ctbTeslimTarihi.Location = new System.Drawing.Point(165, 81);
+            ctbTeslimTarihi.Location = new System.Drawing.Point(160, 103);
             ctbTeslimTarihi.Margin = new Padding(1);
             ctbTeslimTarihi.Name = "ctbTeslimTarihi";
             ctbTeslimTarihi.Padding = new Padding(1);
@@ -194,7 +186,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(46, 50);
+            label1.Location = new System.Drawing.Point(41, 40);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(53, 15);
             label1.TabIndex = 21;
@@ -203,7 +195,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(46, 90);
+            label7.Location = new System.Drawing.Point(41, 110);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(73, 15);
             label7.TabIndex = 22;
@@ -215,7 +207,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbProjeKod.BorderSize = 1;
             fcbProjeKod.DataSource = null;
             fcbProjeKod.DisplayMember = "kod";
-            fcbProjeKod.Location = new System.Drawing.Point(165, 129);
+            fcbProjeKod.Location = new System.Drawing.Point(160, 139);
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new Padding(7, 5, 7, 5);
             fcbProjeKod.PlaceholderText = "Seçiniz...";
@@ -234,7 +226,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrup.BorderSize = 1;
             clbMalzemeGrup.DataSource = null;
             clbMalzemeGrup.DisplayMember = "ad";
-            clbMalzemeGrup.Location = new System.Drawing.Point(165, 245);
+            clbMalzemeGrup.Location = new System.Drawing.Point(160, 255);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
             clbMalzemeGrup.PlaceholderText = "Seçiniz...";
@@ -253,7 +245,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbStokTip.BorderSize = 1;
             clbStokTip.DataSource = null;
             clbStokTip.DisplayMember = "ad";
-            clbStokTip.Location = new System.Drawing.Point(165, 170);
+            clbStokTip.Location = new System.Drawing.Point(160, 180);
             clbStokTip.Name = "clbStokTip";
             clbStokTip.Padding = new Padding(7, 5, 7, 5);
             clbStokTip.PlaceholderText = "Seçiniz...";
@@ -272,7 +264,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbStokGrup.BorderSize = 1;
             clbStokGrup.DataSource = null;
             clbStokGrup.DisplayMember = "ad";
-            clbStokGrup.Location = new System.Drawing.Point(165, 210);
+            clbStokGrup.Location = new System.Drawing.Point(160, 220);
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new Padding(7, 5, 7, 5);
             clbStokGrup.PlaceholderText = "Seçiniz...";
@@ -285,11 +277,68 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbStokGrup.ValueMember = "Id";
             clbStokGrup.SelectedIndexChanged += clbStokGrup_SelectedIndexChanged;
             // 
+            // fcbTalepNeden
+            // 
+            fcbTalepNeden.BorderColor = System.Drawing.Color.Silver;
+            fcbTalepNeden.BorderSize = 1;
+            fcbTalepNeden.DataSource = null;
+            fcbTalepNeden.DisplayMember = "ad";
+            fcbTalepNeden.Location = new System.Drawing.Point(160, 70);
+            fcbTalepNeden.Name = "fcbTalepNeden";
+            fcbTalepNeden.Padding = new Padding(7, 5, 7, 5);
+            fcbTalepNeden.PlaceholderText = "Seçiniz...";
+            fcbTalepNeden.SelectedIndex = -1;
+            fcbTalepNeden.SelectedItem = null;
+            fcbTalepNeden.SelectedValue = null;
+            fcbTalepNeden.Size = new System.Drawing.Size(203, 29);
+            fcbTalepNeden.TabIndex = 27;
+            fcbTalepNeden.UnderlinedStyle = false;
+            fcbTalepNeden.ValueMember = "Id";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(41, 75);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(75, 15);
+            label8.TabIndex = 28;
+            label8.Text = "Talep Nedeni";
+            // 
+            // customButtonSave1
+            // 
+            customButtonSave1.BackgroundColor = System.Drawing.Color.Firebrick;
+            customButtonSave1.BorderColor = System.Drawing.Color.Black;
+            customButtonSave1.BorderSize = 0;
+            customButtonSave1.CornerRadius = 20;
+            customButtonSave1.FlatAppearance.BorderSize = 0;
+            customButtonSave1.FlatStyle = FlatStyle.Flat;
+            customButtonSave1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            customButtonSave1.ForeColor = System.Drawing.Color.White;
+            customButtonSave1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonSave1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonSave1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonSave1.HoverColor2 = System.Drawing.Color.Navy;
+            customButtonSave1.Icon = null;
+            customButtonSave1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customButtonSave1.Location = new System.Drawing.Point(907, 575);
+            customButtonSave1.Name = "customButtonSave1";
+            customButtonSave1.Size = new System.Drawing.Size(129, 40);
+            customButtonSave1.TabIndex = 29;
+            customButtonSave1.Text = "TALEP OLUŞTUR";
+            customButtonSave1.TextColor = System.Drawing.Color.White;
+            customButtonSave1.UseVisualStyleBackColor = true;
+            customButtonSave1.Click += this.customButtonSave1_SaveButtonClick;
+            // 
             // SatinalmaTalepOlusturmaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1059, 627);
+            Controls.Add(customButtonSave1);
+            Controls.Add(ctbAciklama);
+            Controls.Add(label6);
+            Controls.Add(label8);
+            Controls.Add(fcbTalepNeden);
             Controls.Add(clbStokGrup);
             Controls.Add(clbStokTip);
             Controls.Add(clbMalzemeGrup);
@@ -298,9 +347,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(label1);
             Controls.Add(ctbTeslimTarihi);
             Controls.Add(ctbTalepNo);
-            Controls.Add(label6);
-            Controls.Add(ctbAciklama);
-            Controls.Add(customButtonSave1);
             Controls.Add(panel1);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -322,7 +368,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private Panel panel1;
-        private CustomButtonSave customButtonSave1;
         private CustomTextBox ctbAciklama;
         private Label label6;
         private CustomTextBox ctbTalepNo;
@@ -333,5 +378,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         private FilterableComboBox clbMalzemeGrup;
         private FilterableComboBox clbStokTip;
         private FilterableComboBox clbStokGrup;
+        private FilterableComboBox fcbTalepNeden;
+        private Label label8;
+        private RoundedButton customButtonSave1;
     }
 }

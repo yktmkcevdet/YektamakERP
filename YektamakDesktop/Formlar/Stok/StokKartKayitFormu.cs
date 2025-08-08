@@ -48,12 +48,12 @@ namespace YektamakDesktop.Formlar.Stok
             ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
             ComboBoxListFill.GetLookupAd(_cache.olcuBirims, ref clbOlcuBirim);
             ComboBoxListFill.GetLookupAd(_cache.malzemeStandarts, ref clbMalzemeStandart);
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKod);
+            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref clbProjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups, ref clbMalzemeAltGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List, ref clbMalzemeAltGrup2);
-            projeStokKart = new ProjeStokKart();
+            Binding();
         }
 
         public void UpdateMode(ProjeStokKart stokKartToUpdate)
@@ -65,12 +65,12 @@ namespace YektamakDesktop.Formlar.Stok
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", this, ctbStokAd) && result;
-            result = GlobalData.CheckField("*", this, clbStokTip) && result;
-            result = GlobalData.CheckField("*", this, clbStokGrup) && result;
-            result = GlobalData.CheckField("*", this, clbMalzemeGrup) && result;
-            result = GlobalData.CheckField("*", this, clbMalzemeAltGrup2) && result;
-            result = GlobalData.CheckField("*", this, clbMalzemeAltGrup) && result;
+            result = GlobalData.CheckField("*", ctbStokAd) && result;
+            result = GlobalData.CheckField("*", clbStokTip) && result;
+            result = GlobalData.CheckField("*", clbStokGrup) && result;
+            result = GlobalData.CheckField("*", clbMalzemeGrup) && result;
+            result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
+            result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
             return result;
         }
         private async void rButtonKaydet_Click(object sender, EventArgs e)
@@ -80,11 +80,17 @@ namespace YektamakDesktop.Formlar.Stok
                 MessageBox.Show("Lütfen zorunlu alanları doldurunuz.");
                 return;
             }
+            if(!_cache.projes.Any(p=>p.personel.Id==_cache.kullanici.personel.Id && p.Id == projeStokKart.proje.Id))
+            {
+                MessageBox.Show("Bu stok kartı için seçilen proje, kullanıcının projeleri arasında bulunmamaktadır. Lütfen geçerli bir proje seçiniz.");
+                return;
+            }
             var data = customDataGrid.dataSource;
             projeStokKart.stokKart.dosyaList.Clear();
-            foreach(var item in data.Where(s=>s.newRec==false))
+            foreach(var dataControlStokKartDosya in data.Where(s=>s.newRec==false))
             {
-                projeStokKart.stokKart.dosyaList.Add(item.stokKartDosya);
+                if(!dataControlStokKartDosya.Validate())return;
+                projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
             Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
@@ -126,7 +132,8 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeGrup.DataBindings.Clear();
             clbMalzemeAltGrup.DataBindings.Clear();
             clbMalzemeAltGrup2.DataBindings.Clear();
-            ctbId.DataBindings.Add(nameof(ctbId.TextCustom), projeStokKart, nameof(projeStokKart.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbProjeAdet.DataBindings.Clear();
+            ctbId.DataBindings.Add(nameof(ctbId.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.Id), true, DataSourceUpdateMode.OnPropertyChanged);
             clbProjeKod.DataBindings.Add(nameof(clbProjeKod.SelectedValue), projeStokKart.proje, $"{nameof(projeStokKart.proje.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbKod.DataBindings.Add(nameof(ctbKod.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod), true, DataSourceUpdateMode.OnPropertyChanged);
             ctbStokAd.DataBindings.Add(nameof(ctbStokAd.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -151,16 +158,11 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup.DataBindings.Add(nameof(clbMalzemeAltGrup.SelectedValue), projeStokKart.stokKart.malzemeAltGrup, $"{nameof(projeStokKart.stokKart.malzemeAltGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
             clbMalzemeGrup.DataBindings.Add(nameof(clbMalzemeGrup.SelectedValue), projeStokKart.stokKart.malzemeGrup, $"{nameof(projeStokKart.stokKart.malzemeGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
             clbStokGrup.DataBindings.Add(nameof(clbStokGrup.SelectedValue), projeStokKart.stokKart.stokGrup, $"{nameof(projeStokKart.stokKart.stokGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            ctbProjeAdet.DataBindings.Add(nameof(ctbProjeAdet.TextCustom), projeStokKart, nameof(projeStokKart.adet), true, DataSourceUpdateMode.OnPropertyChanged);
             List<DataControlStokKartDosya> dataControlStokKartDosyaList = new List<DataControlStokKartDosya>();
             for (int i = 0; i < projeStokKart.stokKart.dosyaList.Count; i++)
             {
                 DataControlStokKartDosya dataControlStokKartDosya = DIContainer.GetService<DataControlStokKartDosya>();
-                //dataControlStokKartDosya.newRec = false;
-                //dataControlStokKartDosya.dosyaAdControl.TextCustom= projeStokKart.stokKart.dosyaList[i].dosyaAd;
-                //dataControlStokKartDosya.IdControl.TextCustom = projeStokKart.stokKart.dosyaList[i].Id.ToString();
-                //dataControlStokKartDosya.dosyaTipControl.SelectedValue = projeStokKart.stokKart.dosyaList[i].dosyaTip?.Id;
-                //dataControlStokKartDosya.dosyaUzantiControl.TextCustom = projeStokKart.stokKart.dosyaList[i].dosyaUzanti;
-                //dataControlStokKartDosya.stokKartIdControl.TextCustom = projeStokKart.stokKart.dosyaList[i].stokKartId.ToString();
                 dataControlStokKartDosya.stokKartDosya = projeStokKart.stokKart.dosyaList[i];
                 dataControlStokKartDosyaList.Add(dataControlStokKartDosya);
             }

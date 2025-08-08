@@ -98,7 +98,6 @@
             buttonClose.Text = "x";
             buttonClose.TextColor = System.Drawing.Color.White;
             buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
             // 
             // buttonHelp
             // 
@@ -141,7 +140,6 @@
             buttomMinimize.Text = "-";
             buttomMinimize.TextColor = System.Drawing.Color.White;
             buttomMinimize.UseVisualStyleBackColor = false;
-            buttomMinimize.Click += buttomMinimize_Click;
             // 
             // labelHeader
             // 
@@ -243,8 +241,6 @@
             dataGridView.Size = new System.Drawing.Size(1216, 533);
             dataGridView.TabIndex = 3;
             dataGridView.CellClick += dataGridView_CellClick;
-            dataGridView.ColumnWidthChanged += dataGridView_ColumnWidthChanged;
-            dataGridView.Scroll += dataGridView_Scroll;
             // 
             // panelFooter
             // 
@@ -274,7 +270,6 @@
             rButtonCikis.Text = "KAPAT";
             rButtonCikis.TextColor = System.Drawing.Color.White;
             rButtonCikis.UseVisualStyleBackColor = false;
-            rButtonCikis.Click += buttonClose_Click;
             // 
             // Id
             // 
@@ -394,7 +389,6 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "FirmaGridForm";
             Text = "PersonelGrid";
-            Load += form_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             panelFilter.ResumeLayout(false);

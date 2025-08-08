@@ -2,6 +2,7 @@
 using FontAwesome.Sharp;
 using Models;
 using Models.Models;
+using Models.Models.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -36,8 +38,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             ctbDtoName.DataBindings.Clear();
             ctbMenuAd.DataBindings.Clear();
             ctbId.DataBindings.Add("TextCustom", menu, $"{nameof(menu.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbFormAd.DataBindings.Add("selectedDataRowValue", menu, $"{nameof(menu.formAd)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbIcon.DataBindings.Add("selectedDataRowId", menu, $"{nameof(menu.icon)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbFormAd.DataBindings.Add("SelectedDisplayValue", menu, $"{nameof(menu.formAd)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            clbIcon.DataBindings.Add("SelectedDisplayValue", menu, $"{nameof(menu.icon)}", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbDtoName.DataBindings.Add("TextCustom", menu, $"{nameof(menu.model)}", true, DataSourceUpdateMode.OnPropertyChanged);
             ctbMenuAd.DataBindings.Add("TextCustom", menu, $"{nameof(menu.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
         }
@@ -62,23 +64,16 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private void CustomComboLists_Load()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            int id = 0;
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (type.IsSubclassOf(typeof(Form))) // Form sınıfından miras alan türleri kontrol et
-                {
-                    clbFormAd.AddDataRow(id, type.Name);
-                    id++;
-                }
-            }
-            foreach (var icon in Enum.GetValues(typeof(IconChar)))
-            {
-                clbIcon.AddDataRow((int)icon, icon.ToString());
-            }
+            List<FontAwesomeIcon> icons = Enum.GetValues(typeof(IconChar))
+                .Cast<IconChar>()
+                .Select(icon => new FontAwesomeIcon { Id = (int)icon, ad = icon.ToString() })
+                .ToList();
+            clbFormAd.SetDataSource(assembly.GetTypes().Where(t=> t.IsSubclassOf(typeof(Form))).Select(t=> new MenuForm{ Id=t.GUID,ad=t.Name}).ToList());
+            clbIcon.SetDataSource(icons);
         }
         private void customComboListBoxIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            roundedIconButton1.IconChar = (IconChar)Enum.Parse(typeof(IconChar), clbIcon.selectedDataRowValue, true);
+            if(((FontAwesomeIcon)clbIcon.SelectedItem).ad!="")roundedIconButton1.IconChar = (IconChar)Enum.Parse(typeof(IconChar), ((FontAwesomeIcon)clbIcon.SelectedItem).ad, true);
         }
 
         private async void rButtonKaydet_Click(object sender, EventArgs e)

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Satinalma;
 using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
 
@@ -31,11 +32,20 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             _jsonConverter = jsonConverter;
             _dataTableMapper = dataTableMapper;
             InitializeComponent();
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Location = new System.Drawing.Point(355, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(428, 421);
+            universalGrid1.TabIndex = 56;
+            Controls.Add(universalGrid1);
             this.Shown += YetkiTanimlari_Shown;
             universalGrid1.Grid.MouseDown += universalGrid1_MouseDown;
-            universalGrid1.Grid.CellClick += Grid_CellClick;
         }
-
         private async void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -408,7 +418,6 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private void YetkiTanimlari_Load(object sender, EventArgs e)
         {
             ComboBoxListFill.GetLookupAd(_cache.rolList, ref comboListBoxRol);
-            universalGrid1.kullanici = _cache.kullanici;
         }
 
         private async void yetkileriSilToolStripMenuItem_Click(object sender, EventArgs e)

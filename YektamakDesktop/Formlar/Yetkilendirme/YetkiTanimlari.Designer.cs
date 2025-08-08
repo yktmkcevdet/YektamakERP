@@ -145,7 +145,6 @@
             // 
             // universalGrid1
             // 
-            universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(355, 125);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(428, 421);

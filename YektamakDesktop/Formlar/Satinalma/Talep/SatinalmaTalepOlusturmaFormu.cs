@@ -1,11 +1,11 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
@@ -34,6 +34,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
+            ComboBoxListFill.GetLookupAd(_cache.talepNedenList, ref fcbTalepNeden);
             satinalmaTalep.talepEdenKullanici.Id = _cache.kullanici.Id;
             BindData();
         }
@@ -56,9 +57,9 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void BindData()
         {
             clbMalzemeGrup.DataBindings.Clear();
-            clbMalzemeGrup.DataBindings.Add("SelectedValue", satinalmaTalep.malzemeGrup, nameof(satinalmaTalep.malzemeGrup.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            clbMalzemeGrup.DataBindings.Add("SelectedItem", satinalmaTalep, nameof(satinalmaTalep.malzemeGrup), true, DataSourceUpdateMode.OnPropertyChanged);
             clbStokTip.DataBindings.Clear();
-            clbStokTip.DataBindings.Add("SelectedValue", satinalmaTalep.stokTip, nameof(satinalmaTalep.stokTip.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            clbStokTip.DataBindings.Add("SelectedItem", satinalmaTalep, nameof(satinalmaTalep.stokTip), true, DataSourceUpdateMode.OnPropertyChanged);
             ctbAciklama.DataBindings.Clear();
             ctbAciklama.DataBindings.Add("TextCustom", satinalmaTalep, nameof(satinalmaTalep.aciklama), true, DataSourceUpdateMode.OnPropertyChanged);
             ctbTalepNo.DataBindings.Clear();
@@ -66,7 +67,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTeslimTarihi.DataBindings.Clear();
             ctbTeslimTarihi.DataBindings.Add("TextCustom", satinalmaTalep, nameof(satinalmaTalep.teslimTarihi), true, DataSourceUpdateMode.OnPropertyChanged);
             fcbProjeKod.DataBindings.Clear();
-            fcbProjeKod.DataBindings.Add("SelectedValue", satinalmaTalep.proje, nameof(satinalmaTalep.proje.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            fcbProjeKod.DataBindings.Add("SelectedItem", satinalmaTalep, nameof(satinalmaTalep.proje), true, DataSourceUpdateMode.OnPropertyChanged);
+            fcbTalepNeden.DataBindings.Clear();
+            fcbTalepNeden.DataBindings.Add("SelectedItem", satinalmaTalep, nameof(satinalmaTalep.talepNeden), true, DataSourceUpdateMode.OnPropertyChanged);
             satinalmaTalep.talepTarihi = DateTime.Today;
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             List<DataControlSatinalmaTalepDetay> dataControlSatinalmaTalepDetays = new();
@@ -98,11 +101,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
             bool isValid = true;
-            isValid &= GlobalData.CheckField("Proje kodu seçilmelidir", this, fcbProjeKod);
-            isValid &= GlobalData.CheckField("Stok grubu seçilmelidir", this, clbStokGrup);
-            isValid &= GlobalData.CheckField("Malzeme grubu seçilmelidir", this, clbMalzemeGrup);
-            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", this, ctbTeslimTarihi);
+            isValid &= GlobalData.CheckField("Proje kodu seçilmelidir", fcbProjeKod);
+            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
             isValid &= GlobalData.CheckField("Talep detayı girilmelidir", customDataGrid);
+            isValid &= GlobalData.CheckField("Talep nedeni seçilmelidir", fcbTalepNeden);
             if (!isValid) return;
             satinalmaTalep.satinalmaTalepDetays.Clear();
             foreach (var dataControlSatinalmaTalepDetay in customDataGrid.dataSource.Where(x => x.newRec == false))
@@ -113,19 +115,79 @@ namespace YektamakDesktop.Formlar.Satinalma
                 satinalmaTalep.satinalmaTalepDetays.Add(satinalmaTalepDetay);
             }
             satinalmaTalep.talepTarihi = DateTime.Today;
-            string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
-            Result resultModel = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            if (resultModel.result != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            //string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
+            //Result resultModel = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
+            //if (resultModel.result != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    satinalmaTalep = _jsonConverter.ToModelList<SatinalmaTalep>(resultModel.result).FirstOrDefault();
+            //    MessageBox.Show("Satınalma talebi başarıyla kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Satınalma talebi kaydedilemedi. " + resultModel.result, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            CreateSatinalmaTalep();
+        }
+        private void CreateSatinalmaTalep()
+        {
+            List<ProjeStokKartDTO> talepList = new();
+            foreach (var satinalmaTalepDetay in satinalmaTalep.satinalmaTalepDetays)
             {
-                satinalmaTalep = _jsonConverter.ToModelList<SatinalmaTalep>(resultModel.result).FirstOrDefault();
-                MessageBox.Show("Satınalma talebi başarıyla kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ProjeStokKart projeStokKart = new ProjeStokKart();
+                projeStokKart.proje = satinalmaTalep.proje;
+                projeStokKart.miktar = satinalmaTalepDetay.miktar;
+                projeStokKart.stokKart = satinalmaTalepDetay.stokKart;
+                talepList.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>(projeStokKart));
             }
-            else
+            if (Validate())
             {
-                MessageBox.Show("Satınalma talebi kaydedilemedi. " + resultModel.result, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                List<SatinalmaTalepDetay> satinalmaTalepDetayList = new List<SatinalmaTalepDetay>();
+                foreach (var item in talepList)
+                {
+                    item.Id = null; //projestokKartId satinalmaTalepDetayId olarak aktarılmaması için null yapılıyor
+                    SatinalmaTalepDetay satinalmaTalepdetay = new();
+                    SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetayDTO();
+                    // Eğer stok kartının hammaddeId'si varsa, satınalma talep detay listesine hammadde olarak ekle
+                    if (item.stokKarthammaddeId != null)
+                    {
+                        //Hammadde ise listeye daha önce eklenmiş mi kontrol et, eklenmişse miktarını güncelle
+                        if (satinalmaTalepDetayList.Any(x => x.stokKart.Id == item.stokKarthammaddeId))
+                        {
+                            satinalmaTalepdetay = satinalmaTalepDetayList.FirstOrDefault(x => x.stokKart.Id == item.stokKarthammaddeId);
+                            satinalmaTalepdetay.miktar += item.miktar;
+                            satinalmaTalepdetay.agirlik += item.miktar * item.stokKartagirlik;
+                            satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(
+                                ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
+                        }
+                        // Eğer hammadde olarak eklenmemişse, yeni bir hammadde olarak ekle
+                        else
+                        {
+                            satinalmaTalepdetay.miktar = item.miktar;
+                            satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
+                            satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
+                            satinalmaTalepdetay.stokKart.Id = item.stokKarthammaddeId;
+                            satinalmaTalepdetay.stokKart.kod = item.stokKarthammaddekod;
+                            satinalmaTalepdetay.stokKart.ad = item.stokKarthammaddead;
+                            satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                        }
+                    }
+                    // Eğer stok kartının hammaddeId'si yoksa, satınalma talep detay listesine normal stok kartı olarak ekle
+                    else
+                    {
+                        satinalmaTalepdetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(item);
+                        satinalmaTalepdetay.miktar = item.miktar;
+                        satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
+                        satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                    }
+                }
+                satinalmaTalep.satinalmaTalepDetays = satinalmaTalepDetayList;
+
+                SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
+                satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
+                this.Close();
+                satinalmaTalepKayitFormu.ShowDialog();
             }
         }
-
         private void fcbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
         {
             VeriDegisti?.Invoke(this, satinalmaTalep);
@@ -173,7 +235,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(result.result);
                 
             }
-            ComboBoxListFill.GetLookupAd(stokKarts.Select(x => new StokKart{ Id=x.stokKart.Id, ad=$"{x.stokKart.kod} - {x.stokKart.ad} - {x.stokKart.boyut}",olcuBirim=x.stokKart.olcuBirim}).ToList(), ref _stokKartId);
+            ComboBoxListFill.GetLookupAd(stokKarts.Select(item => item.stokKart with {ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList(), ref _stokKartId);
         }
         public DataControlSatinalmaTalepDetay(IJsonConverter jsonConverter, IStokService stokService, IProjeService projeService)
         {
@@ -186,6 +248,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             var selected = stokKartId.SelectedItem as StokKart;
             olcuBirimi.TextCustom = selected.olcuBirim.ad;
+            satinalmaTalepDetay.stokKart = selected;
         }
         private static SatinalmaTalep _satinalmaTalep;
         public static SatinalmaTalep satinalmaTalep
@@ -215,7 +278,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 if (_stokKartId == null)
                 {
                     _stokKartId = new() { TabIndex = 2, Width = 300, Visible = true, Tag = "Stok Kartı", DisplayMember = "ad", ValueMember="Id" };
-                    _stokKartId.SetDataSource(stokKarts.Select(x => new StokKart { Id = x.stokKart.Id, ad = $"{x.stokKart.kod} - {x.stokKart.ad} - {x.stokKart.boyut}" }).ToList());
+                    _stokKartId.SetDataSource(stokKarts.Select(item => item.stokKart with { Id = item.stokKart.Id, ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList());
                 }
                 return _stokKartId;
             }
@@ -236,7 +299,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Id.DataBindings.Add(nameof(Id.TextCustom), satinalmaTalepDetay, nameof(satinalmaTalepDetay.Id), true, DataSourceUpdateMode.OnPropertyChanged);
             miktar.DataBindings.Add(nameof(miktar.TextCustom), satinalmaTalepDetay, nameof(satinalmaTalepDetay.miktar), true, DataSourceUpdateMode.OnPropertyChanged);
             olcuBirimi.DataBindings.Add(nameof(olcuBirimi.TextCustom), satinalmaTalepDetay.stokKart.olcuBirim, nameof(satinalmaTalepDetay.stokKart.olcuBirim.ad), true, DataSourceUpdateMode.OnPropertyChanged);
-            stokKartId.DataBindings.Add(nameof(stokKartId.SelectedValue), satinalmaTalepDetay.stokKart, nameof(satinalmaTalepDetay.stokKart.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            stokKartId.DataBindings.Add(nameof(stokKartId.SelectedItem), satinalmaTalepDetay, nameof(satinalmaTalepDetay.stokKart), true, DataSourceUpdateMode.OnPropertyChanged);
             aciklama.DataBindings.Add(nameof(aciklama.TextCustom), satinalmaTalepDetay, nameof(satinalmaTalepDetay.aciklama), true, DataSourceUpdateMode.OnPropertyChanged);
         }
         public bool ValidateFields()

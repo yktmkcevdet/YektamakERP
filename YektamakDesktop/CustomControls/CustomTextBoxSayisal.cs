@@ -87,7 +87,15 @@ namespace YektamakDesktop.CustomControls
             get
             {
                 if (isPlaceholder) return "";
-                else return textBox.Text;
+                else
+                if (textBox.Text == "")
+                {
+                    return "0";
+                }
+                else
+                {
+                    return textBox.Text;
+                }
             }
             set
             {
@@ -381,8 +389,8 @@ namespace YektamakDesktop.CustomControls
             isFocused = false;
             this.Invalidate();
             SetPlaceHolder();
-            //if (this.Leave != null)
-            //    this.Leave(this, e);
+            if (this.Leave != null)
+                this.Leave(this, e);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -449,7 +457,7 @@ namespace YektamakDesktop.CustomControls
         private void CustomTextBox_Leave(object sender, EventArgs e)
         {
             isFocused = false;
-            this.Invalidate();
+            //this.Invalidate();
             SetPlaceHolder();
 
             if (this.CustomLeave != null)

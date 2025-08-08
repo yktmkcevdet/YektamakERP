@@ -8,37 +8,16 @@ using Utilities.Interfaces;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    public partial class ExcelTanimlamaFormu : Form, IForm
+    public partial class ExcelTanimlamaFormu : Form
     {
-        private static IAnaVeriService _anaVeriService;
-        private static IJsonConverter _jsonConverter;
+        private IAnaVeriService _anaVeriService;
+        private IJsonConverter _jsonConverter;
         public ExcelTanimlamaFormu(IAnaVeriService anaVeriService,IJsonConverter jsonConverter)
         {
             _anaVeriService = anaVeriService;
             _jsonConverter = jsonConverter;
-        }
-        private ExcelTanimlamaFormu()
-        {
             InitializeComponent();
-            controlsToDisable = new List<Control>();
         }
-        private static ExcelTanimlamaFormu _excelTanimlamaFormu;
-        public static ExcelTanimlamaFormu excelTanimlamaFormu
-        {
-            get
-            {
-                if (_excelTanimlamaFormu == null || _excelTanimlamaFormu.IsDisposed)
-                {
-                    _excelTanimlamaFormu = new ExcelTanimlamaFormu();
-                    GlobalData.Yetki(ref _excelTanimlamaFormu);
-                }
-                return _excelTanimlamaFormu;
-            }
-        }
-
-        public List<Control> controlsToDisable { get; set; }
-        public bool activeForm { get; set; }
-
         private void btnDosyaSec_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog

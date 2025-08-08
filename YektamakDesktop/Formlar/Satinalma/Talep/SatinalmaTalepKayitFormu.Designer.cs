@@ -36,7 +36,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTeslimTarihi = new CustomTextBoxTarih();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
             ctbAciklama = new CustomTextBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -54,14 +53,15 @@ namespace YektamakDesktop.Formlar.Satinalma
             görüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             clbProjeKodu = new FilterableComboBox();
             clbKullaniciId = new FilterableComboBox();
-            clbMalzemeGrubu = new FilterableComboBox();
+            fcbTalepNeden = new FilterableComboBox();
+            label3 = new System.Windows.Forms.Label();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // ctbTeslimTarihi
             // 
             ctbTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbTeslimTarihi.Location = new System.Drawing.Point(150, 107);
+            ctbTeslimTarihi.Location = new System.Drawing.Point(150, 139);
             ctbTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeslimTarihi.Name = "ctbTeslimTarihi";
             ctbTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -72,29 +72,20 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(35, 114);
+            label1.Location = new System.Drawing.Point(35, 149);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(71, 15);
+            label1.Size = new System.Drawing.Size(73, 15);
             label1.TabIndex = 15;
-            label1.Text = "Teslim Tarihi";
+            label1.Text = "İhtiyaç Tarihi";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(35, 149);
+            label2.Location = new System.Drawing.Point(35, 184);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(65, 15);
             label2.TabIndex = 16;
             label2.Text = "Proje Kodu";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(35, 184);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(91, 15);
-            label3.TabIndex = 17;
-            label3.Text = "Malzeme Grubu";
             // 
             // ctbAciklama
             // 
@@ -195,9 +186,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // universalGrid1
             // 
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(12, 264);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(1262, 487);
@@ -287,7 +276,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKodu.BorderSize = 1;
             clbProjeKodu.DataSource = null;
             clbProjeKodu.DisplayMember = "kod";
-            clbProjeKodu.Location = new System.Drawing.Point(150, 143);
+            clbProjeKodu.Location = new System.Drawing.Point(150, 175);
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKodu.PlaceholderText = "Seçiniz...";
@@ -305,7 +294,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.BorderSize = 1;
             clbKullaniciId.DataSource = null;
             clbKullaniciId.DisplayMember = "ad";
-            clbKullaniciId.Location = new System.Drawing.Point(150, 213);
+            clbKullaniciId.Location = new System.Drawing.Point(150, 210);
             clbKullaniciId.Name = "clbKullaniciId";
             clbKullaniciId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbKullaniciId.PlaceholderText = "Seçiniz...";
@@ -317,24 +306,32 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.UnderlinedStyle = false;
             clbKullaniciId.ValueMember = "Id";
             // 
-            // clbMalzemeGrubu
+            // fcbTalepNeden
             // 
-            clbMalzemeGrubu.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeGrubu.BorderSize = 1;
-            clbMalzemeGrubu.DataSource = null;
-            clbMalzemeGrubu.DisplayMember = "ad";
-            clbMalzemeGrubu.Location = new System.Drawing.Point(150, 178);
-            clbMalzemeGrubu.Name = "clbMalzemeGrubu";
-            clbMalzemeGrubu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeGrubu.PlaceholderText = "Seçiniz...";
-            clbMalzemeGrubu.SelectedIndex = -1;
-            clbMalzemeGrubu.SelectedItem = null;
-            clbMalzemeGrubu.SelectedValue = null;
-            clbMalzemeGrubu.Size = new System.Drawing.Size(119, 29);
-            clbMalzemeGrubu.TabIndex = 37;
-            clbMalzemeGrubu.UnderlinedStyle = false;
-            clbMalzemeGrubu.ValueMember = "Id";
-            clbMalzemeGrubu.SelectedIndexChanged += clbMalzemeGrubu_SelectedIndexChanged;
+            fcbTalepNeden.BorderColor = System.Drawing.Color.Silver;
+            fcbTalepNeden.BorderSize = 1;
+            fcbTalepNeden.DataSource = null;
+            fcbTalepNeden.DisplayMember = "ad";
+            fcbTalepNeden.Location = new System.Drawing.Point(150, 106);
+            fcbTalepNeden.Name = "fcbTalepNeden";
+            fcbTalepNeden.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbTalepNeden.PlaceholderText = "Seçiniz...";
+            fcbTalepNeden.SelectedIndex = -1;
+            fcbTalepNeden.SelectedItem = null;
+            fcbTalepNeden.SelectedValue = null;
+            fcbTalepNeden.Size = new System.Drawing.Size(119, 29);
+            fcbTalepNeden.TabIndex = 37;
+            fcbTalepNeden.UnderlinedStyle = false;
+            fcbTalepNeden.ValueMember = "Id";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(35, 110);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(75, 15);
+            label3.TabIndex = 38;
+            label3.Text = "Talep Nedeni";
             // 
             // SatinalmaTalepKayitFormu
             // 
@@ -343,7 +340,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             AutoSize = true;
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ClientSize = new System.Drawing.Size(1286, 838);
-            Controls.Add(clbMalzemeGrubu);
+            Controls.Add(label3);
+            Controls.Add(fcbTalepNeden);
             Controls.Add(clbKullaniciId);
             Controls.Add(clbProjeKodu);
             Controls.Add(customButtonSave1);
@@ -358,7 +356,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(ctbAciklama);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(ctbTeslimTarihi);
@@ -376,7 +373,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private CustomControls.CustomTextBoxTarih ctbTeslimTarihi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private CustomControls.CustomTextBox ctbAciklama;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -395,6 +391,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
         private FilterableComboBox clbProjeKodu;
         private FilterableComboBox filterableComboBox2;
-        private FilterableComboBox clbMalzemeGrubu;
+        private FilterableComboBox fcbTalepNeden;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -277,6 +277,18 @@ namespace Utilities.Implementations
                 return _projes;
             }
         }
+        private List<ProjeTip> _projeTipList;
+        public List<ProjeTip> projeTipList
+        {
+            get
+            {
+                if (_projeTipList == null)
+                {
+                    _projeTipList = GetModelList<ProjeTip>(_projeService.GetProjeTip);
+                }
+                return _projeTipList;
+            }
+        }
         private List<Proje> _unAssignedProjeList;
         public List<Proje> unAssignedProjeList
         {
@@ -383,6 +395,18 @@ namespace Utilities.Implementations
                 return _markaAltGrupList;
             }
         }
+        private List<MarkaAltGrupKategori> _markaAltGrupKategori;
+        public List<MarkaAltGrupKategori> markaAltGrupKategori
+        {
+            get
+            {
+                if (_markaAltGrupKategori == null)
+                {
+                    _markaAltGrupKategori = GetModelList<MarkaAltGrupKategori>(_projeService.GetMarkaAltGrupKategori);
+                }
+                return _markaAltGrupKategori;
+            }
+        }
         private List<ReferansKaynak> _referansKaynakList;
         public List<ReferansKaynak> referansKaynakList
         {
@@ -465,6 +489,22 @@ namespace Utilities.Implementations
             set
             {
                 _dosyaTipList = value;
+            }
+        }
+        private List<TalepNeden> _talepNedenList;
+        public List<TalepNeden> talepNedenList
+        {
+            get
+            {
+                if (_talepNedenList == null)
+                {
+                    _talepNedenList = GetModelList<TalepNeden>(_anaVeriService.GetTalepNeden);
+                }
+                return _talepNedenList;
+            }
+            set
+            {
+                _talepNedenList = value;
             }
         }
         public void Reset()

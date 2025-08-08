@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
@@ -29,11 +30,36 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             _jsonConverter = jsonConverter;
             _dataTableMapper = dataTableMapper;
             InitializeComponent();
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 319);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(693, 353);
+            universalGrid1.TabIndex = 107;
+            universalGrid1.MouseDown1 += universalGrid1_CellClick;
+            Controls.Add(universalGrid1);
             ComboBoxListFill.GetLookupAd(_cache.rolList, ref clbRol);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbPersonel);
-            universalGrid1.kullanici = _cache.kullanici;
-            universalGrid1.Grid.CellClick += universalGrid1_CellClick;
         }
+
+        private void universalGrid1_CellClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                KullaniciDTO kullaniciDTO = (KullaniciDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+                kullanici = ConvertHelper.ToEntity<Kullanici>(kullaniciDTO);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private Kullanici _kullanici;
         public Kullanici kullanici
         {
@@ -102,11 +128,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             bool isValid = true;
 
             // Tüm validasyonları çalıştır, kısa devre yapmadan
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", this, ctbKullaniciAd);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", this, clbPersonel);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", this, ctbSifre);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", this, ctbSifreTekrar);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", this, clbRol);
+            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbKullaniciAd);
+            isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbPersonel);
+            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifre);
+            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifreTekrar);
+            isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbRol);
             return isValid;
         }
         private async void KullaniciKayitFormu_Load(object sender, EventArgs e)
@@ -121,19 +147,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             await universalGrid1.SetData(kullaniciKayit, this.Name);
         }
 
-        private void universalGrid1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                KullaniciDTO kullaniciDTO = (KullaniciDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                kullanici=ConvertHelper.ToEntity<Kullanici>(kullaniciDTO);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-        }
+        
 
         private void KullaniciKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {

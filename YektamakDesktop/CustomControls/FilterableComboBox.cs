@@ -38,18 +38,19 @@ namespace YektamakDesktop.CustomControls
         private int borderSize = 1;
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
-        
+        private string _displayMember = "ad"; // Default display member
         [Browsable(true)]
         public string DisplayMember
         {
-            get => comboBox1.DisplayMember;
-            set => comboBox1.DisplayMember = value;
+            get => _displayMember;  
+            set { _displayMember = value; this.comboBox1.DisplayMember = value; }
         }
+        private string _valueMember = "Id"; // Default value member
         [Browsable(true)]
         public string ValueMember
         {
-            get => comboBox1.ValueMember;
-            set => comboBox1.ValueMember = value;
+            get => _valueMember;
+            set { _valueMember = value; this.comboBox1.ValueMember = value; }
         }
         [Browsable(false)]
         public object DataSource
@@ -71,7 +72,7 @@ namespace YektamakDesktop.CustomControls
 
         private void SetPlaceholder()
         {
-            if (string.IsNullOrWhiteSpace(comboBox1.Text) && comboBox1.SelectedIndex == -1)
+            if (comboBox1.SelectedIndex == -1)
             {
                 comboBox1.ForeColor = Color.Gray;
                 comboBox1.Text = _placeholder;
@@ -83,6 +84,7 @@ namespace YektamakDesktop.CustomControls
             {
                 suppressEvents = true;
                 comboBox1.Text = "";
+                comboBox1.BackColor = Color.White;
                 comboBox1.ForeColor = Color.Black;
                 suppressEvents = false;
             }
@@ -104,6 +106,7 @@ namespace YektamakDesktop.CustomControls
                 this.Text = "";
                 this.ForeColor = Color.Black;
             }
+            this.Invalidate();
         }
 
         protected override void OnLeave(EventArgs e)
@@ -114,6 +117,7 @@ namespace YektamakDesktop.CustomControls
             {
                 SetPlaceholder();
             }
+            this.Invalidate();
         }
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -137,7 +141,7 @@ namespace YektamakDesktop.CustomControls
                 //Draw border
                 graph.DrawPath(penBorder, pathBorder);
             }
-            
+
         }
         private GraphicsPath GetFigurePath(RectangleF rect, float radius)
         {
@@ -163,6 +167,12 @@ namespace YektamakDesktop.CustomControls
         {
             get => comboBox1.SelectedValue;
             set { if (value != null && value.ToString() != "") comboBox1.SelectedValue = value; }
+        }
+        [Browsable(false)]
+        public object SelectedDisplayValue
+        {
+            get => comboBox1.Text;
+            set { if (value != null && value.ToString() != "") comboBox1.Text = value.ToString(); }
         }
         [Browsable(false)]
         public int SelectedIndex
@@ -203,7 +213,7 @@ namespace YektamakDesktop.CustomControls
             {
                 comboBox1.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
             }
-            else 
+            else
             {
                 comboBox1.SelectedValue = value; // Seçili öğe varsa onu ayarla
             }
@@ -222,7 +232,18 @@ namespace YektamakDesktop.CustomControls
 
         private void ComboBox1_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Escape)
+            {
+                if (comboBox1.DroppedDown)
+                {
+                    comboBox1.SelectionStart = comboBox1.Text.Length;
+                    comboBox1.SelectionLength = 0;
+                }
+                return;
+            }
+            suppressEvents = true;
             string searchText = comboBox1.Text;
+
             if (string.IsNullOrEmpty(DisplayMember)) return;
 
             var filtered = allItems
@@ -239,8 +260,15 @@ namespace YektamakDesktop.CustomControls
                 .ToList();
 
             RefreshData(filtered);
+            suppressEvents = false;
+            if (searchText == "")
+            {
+                comboBox1.DroppedDown = false;
+                comboBox1.SelectedIndex = -1;
+                return;
+            }
             comboBox1.Text = searchText;
-            comboBox1.SelectionStart = comboBox1.Text.Length;
+            comboBox1.SelectionStart = searchText.Length;
             comboBox1.SelectionLength = 0;
         }
 
@@ -252,10 +280,19 @@ namespace YektamakDesktop.CustomControls
             comboBox1.ForeColor = Color.Black;
             SelectedIndexChanged?.Invoke(this, e);
         }
-        
+
         private void FilterableComboBox_Load(object sender, EventArgs e)
         {
         }
+
+        private void FilterableComboBox_DoubleClick(object sender, EventArgs e)
+        {
+            DoubleClick1?.Invoke(this, e);
+        }
+
+        [Browsable(true)]
+        public event EventHandler DoubleClick1;
+
 
         public override Color BackColor
         {

@@ -1,11 +1,5 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiService.Implementetions
 {
@@ -52,6 +46,11 @@ namespace ApiService.Implementetions
             {
                 throw new Exception($"Excel formu alınırken hata oluştu: {ex.Message}");
             }
+        }
+
+        public string GetTalepNeden()
+        {
+            return _apiService.Get("GetTalepNeden");
         }
     }
 }

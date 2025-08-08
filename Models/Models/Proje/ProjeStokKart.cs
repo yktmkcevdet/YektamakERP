@@ -20,7 +20,8 @@ namespace Models
         public string pdfFileName() { return stokKart.parcaKod + ".pdf"; }
         public string dxfFileName()
         {
-            string dxfAd = $"{stokKart.parcaKod}_{stokKart.malzeme}_{dxfAddition()}mm_{adet}adet.dxf";
+            string dxfAd = $@"{Regex.Escape(stokKart.parcaKod)}.*{Regex.Escape(stokKart.malzeme)}_{dxfAddition()}mm.*{adet}adet.*\.dxf$";
+            //string dxfAd = $"{stokKart.parcaKod}*{stokKart.malzeme}_{dxfAddition()}mm*.dxf";
             return dxfAd;
         }
         public string stepFileName() { return stokKart.parcaKod + ".step"; }

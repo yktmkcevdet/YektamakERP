@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    public class Personel:IEntity
+    public record Personel:IEntity
     {
         public int? Id { get; set; }
         public string ad { get; set; }
@@ -11,6 +11,7 @@ namespace Models
         public string kod { get; set; }
         public string telefon { get; set; }//Daha sonra property içinde formatlama kuralları yazılacak +xx(xxx)xxxxxxx gibi
         public string mail { get; set; }//Daha sonra property içinde formatlama kuralları yazılacak ****@***.com** gibi
+        public string mailPassword { get; set; } //Mail şifresi
         private Pozisyon _pozisyon;
         public Pozisyon pozisyon { 
             get { if (_pozisyon == null) { _pozisyon = new(); } return _pozisyon; } 

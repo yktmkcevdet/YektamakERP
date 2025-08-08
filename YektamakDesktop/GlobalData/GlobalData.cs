@@ -170,7 +170,7 @@ namespace YektamakDesktop
             warningLabel.BringToFront();
             return warningLabel;
         }
-        public static bool CheckField<T>(string mesaj, T form, CustomTextBox customTextBox) where T : Form
+        public static bool CheckField(string mesaj, CustomTextBox customTextBox)
         {
             bool result = true;
 
@@ -185,22 +185,8 @@ namespace YektamakDesktop
             }
             return result;
         }
-        public static bool CheckField(string mesaj, CustomTextBoxSayisal customTextBox)
-        {
-            bool result = true;
-
-            object value = customTextBox.TextCustom;
-
-            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
-            {
-                customTextBox.textBox.ForeColor = Color.Red;
-                customTextBox.textBox.BackColor = Color.LightPink;
-                customTextBox.PlaceholderText = mesaj;
-                result = false;
-            }
-            return result;
-        }
-        public static bool CheckField<T>(string mesaj, T form, CustomComboListBox customComboListBox) where T : Form
+        
+        public static bool CheckField(string mesaj, CustomComboListBox customComboListBox) 
         {
             bool result = true;
 
@@ -210,12 +196,11 @@ namespace YektamakDesktop
             {
                 customComboListBox.textBox.textBox.ForeColor = Color.LightPink;
                 customComboListBox.textBox.PlaceholderText = mesaj;
-                //form.Controls.Add(WarningLabel(mesaj, customComboListBox));
                 result = false;
             }
             return result;
         }
-        public static bool CheckField<T>(string mesaj, T form, FilterableComboBox filterableComboBox) where T : Form
+        public static bool CheckField(string mesaj,  FilterableComboBox filterableComboBox)
         {
             bool result = true;
             int kayitSayisi = (filterableComboBox.DataSource as IList)?.Count ?? 0;
@@ -230,22 +215,8 @@ namespace YektamakDesktop
             }
             return result;
         }
-        public static bool CheckField(string mesaj, FilterableComboBox filterableComboBox)
-        {
-            bool result = true;
-            int kayitSayisi = (filterableComboBox.DataSource as IList)?.Count ?? 0;
-            if (kayitSayisi == 0) return result;
-            object value = filterableComboBox.SelectedValue;
-
-            if (value == null || JsonConvert.SerializeObject(value) == "-1" || string.IsNullOrWhiteSpace(value.ToString()))
-            {
-                filterableComboBox.ComboBox.BackColor = Color.LightPink;
-                filterableComboBox.PlaceholderText = mesaj;
-                result = false;
-            }
-            return result;
-        }
-        public static bool CheckField<T>(string mesaj, T form, TextBox textBox) where T : Form
+        
+        public static bool CheckField(string mesaj,  TextBox textBox)
         {
             bool result = true;
 
@@ -255,12 +226,11 @@ namespace YektamakDesktop
             {
                 textBox.BackColor = Color.LightPink;
                 textBox.PlaceholderText = mesaj;
-                //form.Controls.Add(WarningLabel(mesaj, textBox));
                 result = false;
             }
             return result;
         }
-        public static bool CheckField<T>(string mesaj, T form, CustomTextBoxTarih customTextBoxTarih) where T : Form
+        public static bool CheckField(string mesaj, CustomTextBoxTarih customTextBoxTarih)
         {
             bool result = true;
 
@@ -270,7 +240,6 @@ namespace YektamakDesktop
             {
                 customTextBoxTarih.textBox.BackColor = Color.LightPink;
                 customTextBoxTarih.textBox.PlaceholderText = mesaj;
-                //form.Controls.Add(WarningLabel(mesaj, customTextBoxTarih));
                 result = false;
             }
             return result;
@@ -288,7 +257,7 @@ namespace YektamakDesktop
             }
             return result;
         }
-        public static bool CheckField<T>(string mesaj, T form, CustomTextBoxSayisal customTextBoxSayisal) where T : Form
+        public static bool CheckField(string mesaj, CustomTextBoxSayisal customTextBoxSayisal) 
         {
             bool result = true;
 
@@ -298,9 +267,6 @@ namespace YektamakDesktop
             {
                 customTextBoxSayisal.textBox.BackColor = Color.LightPink;
                 customTextBoxSayisal.textBox.PlaceholderText = mesaj;
-                //Label label = WarningLabel(mesaj, customTextBoxSayisal);
-                //form.Controls.Add(label);
-                //label.BringToFront();
                 result = false;
             }
             return result;

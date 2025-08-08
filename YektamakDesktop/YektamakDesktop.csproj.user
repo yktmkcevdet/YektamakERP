@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\Properties\PublishProfiles\ClickOnceProfile1.pubxml</_LastSelectedProfileId>
     <ActiveDebugProfile>FinansalTakipDesktop</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -83,13 +83,13 @@
     <Compile Update="Formlar\Ortak\DxfViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Proje\ExceldenVeriAlmaFormu.cs">
+    <Compile Update="Formlar\Projemodul\ExceldenVeriAlmaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Proje\ProfilOptimizasyon.cs">
+    <Compile Update="Formlar\Projemodul\ProfilOptimizasyon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Proje\ProjeDosyalari.cs">
+    <Compile Update="Formlar\Projemodul\ProjeDosyalari.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\MailGonder.cs">
@@ -123,6 +123,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satis\Monday.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satis\ProjeTanimlamaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satis\SatisTeklifMaliyetKayitFormu.cs">
@@ -205,7 +208,7 @@
     <EmbeddedResource Update="Formlar\Ortak\DxfViewer.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Proje\ExceldenVeriAlmaFormu.resx">
+    <EmbeddedResource Update="Formlar\Projemodul\ExceldenVeriAlmaFormu.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\Satinalma\MailGonder.resx">

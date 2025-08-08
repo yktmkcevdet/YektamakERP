@@ -47,11 +47,11 @@
             btnSave = new YektamakDesktop.CustomControls.CustomButtonSave();
             clbFirma = new YektamakDesktop.CustomControls.CustomComboListBox();
             clbPozisyon = new YektamakDesktop.CustomControls.CustomComboListBox();
-            clbYonetici = new YektamakDesktop.CustomControls.CustomComboListBox();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             label8 = new System.Windows.Forms.Label();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
+            clbYonetici = new YektamakDesktop.CustomControls.FilterableComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPersonel).BeginInit();
             SuspendLayout();
             // 
@@ -291,23 +291,9 @@
             clbPozisyon.Size = new System.Drawing.Size(200, 36);
             clbPozisyon.TabIndex = 53;
             // 
-            // clbYonetici
-            // 
-            clbYonetici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbYonetici.ListBoxVisualSize = 5;
-            clbYonetici.Location = new System.Drawing.Point(325, 290);
-            clbYonetici.Margin = new System.Windows.Forms.Padding(1);
-            clbYonetici.Name = "clbYonetici";
-            clbYonetici.Padding = new System.Windows.Forms.Padding(1);
-            clbYonetici.selectedDataRowId = null;
-            clbYonetici.selectedDataRowValue = null;
-            clbYonetici.Size = new System.Drawing.Size(240, 36);
-            clbYonetici.TabIndex = 54;
-            // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(0, 354);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(992, 352);
@@ -371,17 +357,35 @@
             ctbId.TextCustom = "";
             ctbId.UnderlinedStyle = false;
             // 
+            // clbYonetici
+            // 
+            clbYonetici.BorderColor = System.Drawing.Color.Silver;
+            clbYonetici.BorderSize = 1;
+            clbYonetici.DataSource = null;
+            clbYonetici.DisplayMember = "adSoyad";
+            clbYonetici.Location = new System.Drawing.Point(325, 291);
+            clbYonetici.Name = "clbYonetici";
+            clbYonetici.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbYonetici.PlaceholderText = "Seçiniz...";
+            clbYonetici.SelectedIndex = -1;
+            clbYonetici.SelectedItem = null;
+            clbYonetici.SelectedValue = null;
+            clbYonetici.Size = new System.Drawing.Size(200, 29);
+            clbYonetici.TabIndex = 59;
+            clbYonetici.UnderlinedStyle = false;
+            clbYonetici.ValueMember = "Id";
+            // 
             // PersonelKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new System.Drawing.Size(992, 707);
+            Controls.Add(clbYonetici);
             Controls.Add(label8);
             Controls.Add(ctbId);
             Controls.Add(roundedButton1);
             Controls.Add(universalGrid1);
-            Controls.Add(clbYonetici);
             Controls.Add(clbPozisyon);
             Controls.Add(clbFirma);
             Controls.Add(btnSave);
@@ -431,10 +435,10 @@
         private CustomControls.CustomButtonSave btnSave;
         private CustomControls.CustomComboListBox clbFirma;
         private CustomControls.CustomComboListBox clbPozisyon;
-        private CustomControls.CustomComboListBox clbYonetici;
         private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Label label8;
         private CustomControls.CustomTextBox ctbId;
+        private CustomControls.FilterableComboBox clbYonetici;
     }
 }

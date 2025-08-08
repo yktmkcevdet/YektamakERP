@@ -1,18 +1,9 @@
 using System;
 using System.Globalization;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using YektamakDesktop.Common;
-using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar;
-using YektamakDesktop.Formlar.Genel;
-using YektamakDesktop.Formlar.Proje;
-using YektamakDesktop.Formlar.Satinalma;
-using YektamakDesktop.Formlar.Satinalma.Teklif;
-using YektamakDesktop.Formlar.Satis;
-using YektamakDesktop.Formlar.Stok;
-using YektamakDesktop.Formlar.Yetkilendirme;
 using YektamakDesktop.Helpers;
 using static YektamakDesktop.Formlar.Yetkilendirme.Menuler;
 

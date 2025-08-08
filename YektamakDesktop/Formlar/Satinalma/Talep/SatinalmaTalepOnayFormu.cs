@@ -1,7 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
-using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
-using YektamakDesktop.Formlar.Proje;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
@@ -18,19 +17,25 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IJsonConverter _jsonConverter;
         private readonly ISatinalmaTalepService _satinalmaService;
         private readonly ICache _cache;
-        private readonly IDataTableMapper _dataTableMapper;
-        private readonly IConvertHelper _convertHelper;
-        public SatinalmaTalepOnayFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, ICache cache,
-            IDataTableMapper dataTableMapper, IConvertHelper convertHelper)
+        public SatinalmaTalepOnayFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, ICache cache)
         {
             _jsonConverter = jsonConverter;
             _satinalmaService = satinalmaService;
             _cache = cache;
-            _dataTableMapper = dataTableMapper;
-            _convertHelper = convertHelper;
             InitializeComponent();
-            universalGrid1.kullanici = _cache.kullanici;
-            universalGrid1.Grid.CellClick += Grid_CellClick;
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1=DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1094, 532);
+            universalGrid1.TabIndex = 1;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown;
+            Controls.Add(universalGrid1);
         }
 
         private SatinalmaTalepDTO _satinalmaTalepOnayDTO;
@@ -161,6 +166,15 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
+        }
+
+        private void talebiGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
+            SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
+            satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
+            satinalmaTalepKayitFormu.Show();
         }
     }
 }

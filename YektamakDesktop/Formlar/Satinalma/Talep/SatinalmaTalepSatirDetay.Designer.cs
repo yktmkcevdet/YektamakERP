@@ -1,4 +1,4 @@
-﻿namespace YektamakDesktop.Formlar.Proje
+﻿namespace YektamakDesktop.Formlar.Satinalma
 {
     partial class SatinalmaTalepSatirDetayForm
     {
@@ -48,7 +48,6 @@
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.kullanici = null;
             universalGrid1.Location = new System.Drawing.Point(2, 36);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(736, 392);
