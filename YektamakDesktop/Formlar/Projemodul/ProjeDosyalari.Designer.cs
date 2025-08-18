@@ -46,6 +46,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             seçiliKalemlerİçinSaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            seçilenKayıtlarıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             roundedIconButton1 = new RoundedIconButton();
@@ -57,7 +58,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbMalzemeGrup = new FilterableComboBox();
             clbMalzemeAltGrup = new FilterableComboBox();
             clbMalzemeAltGrup2 = new FilterableComboBox();
-            seçilenKayıtlarıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -233,6 +233,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
             stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
             stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
             // 
+            // seçilenKayıtlarıSilToolStripMenuItem
+            // 
+            seçilenKayıtlarıSilToolStripMenuItem.Name = "seçilenKayıtlarıSilToolStripMenuItem";
+            seçilenKayıtlarıSilToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            seçilenKayıtlarıSilToolStripMenuItem.Text = "Seçilen Kayıtları Sil";
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -336,6 +342,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbProjeKod.PlaceholderText = "Seçiniz...";
+            fcbProjeKod.SelectedDisplayValue = "Seçiniz...";
             fcbProjeKod.SelectedIndex = -1;
             fcbProjeKod.SelectedItem = null;
             fcbProjeKod.SelectedValue = null;
@@ -356,6 +363,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.SelectedDisplayValue = "Seçiniz...";
             clbStokGrup.SelectedIndex = -1;
             clbStokGrup.SelectedItem = null;
             clbStokGrup.SelectedValue = null;
@@ -375,6 +383,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeGrup.SelectedIndex = -1;
             clbMalzemeGrup.SelectedItem = null;
             clbMalzemeGrup.SelectedValue = null;
@@ -394,6 +403,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
             clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeAltGrup.SelectedIndex = -1;
             clbMalzemeAltGrup.SelectedItem = null;
             clbMalzemeAltGrup.SelectedValue = null;
@@ -413,6 +423,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
             clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeAltGrup2.SelectedIndex = -1;
             clbMalzemeAltGrup2.SelectedItem = null;
             clbMalzemeAltGrup2.SelectedValue = null;
@@ -420,12 +431,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             clbMalzemeAltGrup2.TabIndex = 130;
             clbMalzemeAltGrup2.UnderlinedStyle = false;
             clbMalzemeAltGrup2.ValueMember = "Id";
-            // 
-            // seçilenKayıtlarıSilToolStripMenuItem
-            // 
-            seçilenKayıtlarıSilToolStripMenuItem.Name = "seçilenKayıtlarıSilToolStripMenuItem";
-            seçilenKayıtlarıSilToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            seçilenKayıtlarıSilToolStripMenuItem.Text = "Seçilen Kayıtları Sil";
             // 
             // ProjeDosyalari
             // 

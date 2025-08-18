@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
@@ -45,14 +46,15 @@ namespace YektamakDesktop.Formlar.Stok
             _stokService = stokService;
             _projeService = projeService;
             InitializeComponent();
-            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
-            ComboBoxListFill.GetLookupAd(_cache.olcuBirims, ref clbOlcuBirim);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeStandarts, ref clbMalzemeStandart);
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref clbProjeKod);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups, ref clbMalzemeAltGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List, ref clbMalzemeAltGrup2);
+            clbStokTip.SetDataSource(_cache.stokTips);
+            clbOlcuBirim.SetDataSource(_cache.olcuBirims);
+            clbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
+            clbProjeKod.SetDataSource(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList());
+            clbStokGrup.SetDataSource(_cache.stokGrups);
+            clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
+            clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
+            clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
+            fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
         }
 
@@ -71,6 +73,14 @@ namespace YektamakDesktop.Formlar.Stok
             result = GlobalData.CheckField("*", clbMalzemeGrup) && result;
             result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
             result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
+            if (_cache.kullanici.Id != 1)
+            {
+                if (!_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == projeStokKart.proje.Id))
+                {
+                    MessageBox.Show("Bu stok kartı için seçilen proje, kullanıcının projeleri arasında bulunmamaktadır. Lütfen geçerli bir proje seçiniz.");
+                    result = false;
+                }
+            }
             return result;
         }
         private async void rButtonKaydet_Click(object sender, EventArgs e)
@@ -80,11 +90,7 @@ namespace YektamakDesktop.Formlar.Stok
                 MessageBox.Show("Lütfen zorunlu alanları doldurunuz.");
                 return;
             }
-            if(!_cache.projes.Any(p=>p.personel.Id==_cache.kullanici.personel.Id && p.Id == projeStokKart.proje.Id))
-            {
-                MessageBox.Show("Bu stok kartı için seçilen proje, kullanıcının projeleri arasında bulunmamaktadır. Lütfen geçerli bir proje seçiniz.");
-                return;
-            }
+            
             var data = customDataGrid.dataSource;
             projeStokKart.stokKart.dosyaList.Clear();
             foreach(var dataControlStokKartDosya in data.Where(s=>s.newRec==false))
@@ -93,72 +99,50 @@ namespace YektamakDesktop.Formlar.Stok
                 projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            if (result?.result==null || result.result.Contains("error",StringComparison.OrdinalIgnoreCase)) 
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Stok kart kaydı sırasında bir hata oluştu: " + result?.result);
+                MessageBox.Show("Stok kart kaydı sırasında bir hata oluştu: " + jsonResult);
             }
             else
             {
-                ProjeStokKart savedProjeStokKart = JsonConvert.DeserializeObject<List<ProjeStokKart>>(result.result).FirstOrDefault();
+                ProjeStokKart savedProjeStokKart = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult).FirstOrDefault();
                 projeStokKart = savedProjeStokKart;
                 MessageBox.Show("Stok Kartı Kayıt Edildi");
             }
         }
         private void Binding()
         {
-            ctbId.DataBindings.Clear();
-            clbProjeKod.DataBindings.Clear();
-            ctbKod.DataBindings.Clear();
-            ctbStokAd.DataBindings.Clear();
-            ctbBoyut.DataBindings.Clear();
-            ctbUzunluk.DataBindings.Clear();
-            ctbAciklama.DataBindings.Clear();
-            ctbAgirlik.DataBindings.Clear();
-            ctbBoy.DataBindings.Clear();
-            ctbEn.DataBindings.Clear();
-            ctbYukseklik.DataBindings.Clear();
-            ctbCap.DataBindings.Clear();
-            ctbEtKalinlik.DataBindings.Clear();
-            checkBoxIsSatinalma.DataBindings.Clear();
-            checkBoxIsPdf.DataBindings.Clear();
-            checkBoxIsFromExcel.DataBindings.Clear();
-            checkBoxIsStep.DataBindings.Clear();
-            checkBoxIsDxf.DataBindings.Clear();
-            clbStokTip.DataBindings.Clear();
-            clbOlcuBirim.DataBindings.Clear();
-            clbMalzemeStandart.DataBindings.Clear();
-            clbStokGrup.DataBindings.Clear();
-            clbMalzemeGrup.DataBindings.Clear();
-            clbMalzemeAltGrup.DataBindings.Clear();
-            clbMalzemeAltGrup2.DataBindings.Clear();
-            ctbProjeAdet.DataBindings.Clear();
-            ctbId.DataBindings.Add(nameof(ctbId.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.Id), true, DataSourceUpdateMode.OnPropertyChanged);
-            clbProjeKod.DataBindings.Add(nameof(clbProjeKod.SelectedValue), projeStokKart.proje, $"{nameof(projeStokKart.proje.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbKod.DataBindings.Add(nameof(ctbKod.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbStokAd.DataBindings.Add(nameof(ctbStokAd.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbBoyut.DataBindings.Add(nameof(ctbBoyut.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.boyut), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbUzunluk.DataBindings.Add(nameof(ctbUzunluk.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.uzunluk), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbAciklama.DataBindings.Add(nameof(ctbAciklama.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.aciklama), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbAgirlik.DataBindings.Add(nameof(ctbAgirlik.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.agirlik), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbBoy.DataBindings.Add(nameof(ctbBoy.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.boy), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbEn.DataBindings.Add(nameof(ctbEn.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.en), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbYukseklik.DataBindings.Add(nameof(ctbYukseklik.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.yukseklik), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbCap.DataBindings.Add(nameof(ctbCap.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.cap), true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbEtKalinlik.DataBindings.Add(nameof(ctbEtKalinlik.TextCustom), projeStokKart.stokKart, nameof(projeStokKart.stokKart.etKalinligi), true, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxIsSatinalma.DataBindings.Add(nameof(checkBoxIsSatinalma.Checked), projeStokKart.stokKart, nameof(projeStokKart.stokKart.isSatinalma), true, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxIsPdf.DataBindings.Add(nameof(checkBoxIsPdf.Checked), projeStokKart.stokKart, nameof(projeStokKart.stokKart.isPdf), true, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxIsFromExcel.DataBindings.Add(nameof(checkBoxIsFromExcel.Checked), projeStokKart.stokKart, nameof(projeStokKart.stokKart.isFromExcel), true, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxIsStep.DataBindings.Add(nameof(checkBoxIsStep.Checked), projeStokKart.stokKart, nameof(projeStokKart.stokKart.isStep), true, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxIsDxf.DataBindings.Add(nameof(checkBoxIsDxf.Checked), projeStokKart.stokKart, nameof(projeStokKart.stokKart.isDxf), true, DataSourceUpdateMode.OnPropertyChanged);
-            clbStokTip.DataBindings.Add(nameof(clbStokTip.SelectedValue), projeStokKart.stokKart.stokTip, $"{nameof(projeStokKart.stokKart.stokTip.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbOlcuBirim.DataBindings.Add(nameof(clbOlcuBirim.SelectedValue), projeStokKart.stokKart.olcuBirim, $"{nameof(projeStokKart.stokKart.olcuBirim.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeStandart.DataBindings.Add(nameof(clbMalzemeStandart.SelectedValue), projeStokKart.stokKart.malzemeStandart, $"{nameof(projeStokKart.stokKart.malzemeStandart.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeAltGrup2.DataBindings.Add(nameof(clbMalzemeAltGrup2.SelectedValue), projeStokKart.stokKart.malzemeAltGrup2, $"{nameof(projeStokKart.stokKart.malzemeAltGrup2.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeAltGrup.DataBindings.Add(nameof(clbMalzemeAltGrup.SelectedValue), projeStokKart.stokKart.malzemeAltGrup, $"{nameof(projeStokKart.stokKart.malzemeAltGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeGrup.DataBindings.Add(nameof(clbMalzemeGrup.SelectedValue), projeStokKart.stokKart.malzemeGrup, $"{nameof(projeStokKart.stokKart.malzemeGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbStokGrup.DataBindings.Add(nameof(clbStokGrup.SelectedValue), projeStokKart.stokKart.stokGrup, $"{nameof(projeStokKart.stokKart.stokGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbProjeAdet.DataBindings.Add(nameof(ctbProjeAdet.TextCustom), projeStokKart, nameof(projeStokKart.adet), true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbId,projeStokKart,nameof(projeStokKart.Id));
+            BindHelper.BindData(clbProjeKod, projeStokKart.proje, nameof(projeStokKart.proje.Id));
+            BindHelper.BindData(ctbKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod));
+            BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
+            BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
+            BindHelper.BindData(ctbBoyut, projeStokKart.stokKart, nameof(projeStokKart.stokKart.boyut));
+            BindHelper.BindData(ctbUzunluk, projeStokKart.stokKart, nameof(projeStokKart.stokKart.uzunluk));
+            BindHelper.BindData(ctbUzunluk, projeStokKart.stokKart, nameof(projeStokKart.stokKart.uzunluk));
+            BindHelper.BindData(ctbAciklama, projeStokKart.stokKart, nameof(projeStokKart.stokKart.aciklama));
+            BindHelper.BindData(ctbAgirlik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.agirlik));
+            BindHelper.BindData(ctbAgirlik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.agirlik));
+            BindHelper.BindData(ctbBoy, projeStokKart.stokKart, nameof(projeStokKart.stokKart.boy));
+            BindHelper.BindData(ctbEn, projeStokKart.stokKart, nameof(projeStokKart.stokKart.en));
+            BindHelper.BindData(ctbYukseklik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.yukseklik));
+            BindHelper.BindData(ctbCap, projeStokKart.stokKart, nameof(projeStokKart.stokKart.cap));
+            BindHelper.BindData(ctbEtKalinlik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.etKalinligi));
+            BindHelper.BindData(checkBoxIsSatinalma, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isSatinalma));
+            BindHelper.BindData(checkBoxIsPdf, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isPdf));
+            BindHelper.BindData(checkBoxIsFromExcel, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isFromExcel));
+            BindHelper.BindData(checkBoxIsStep, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isStep));
+            BindHelper.BindData(checkBoxIsDxf, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isDxf));
+            BindHelper.BindData(clbStokTip, projeStokKart.stokKart.stokTip, nameof(projeStokKart.stokKart.stokTip.Id));
+            BindHelper.BindData(clbOlcuBirim, projeStokKart.stokKart.olcuBirim, nameof(projeStokKart.stokKart.olcuBirim.Id));
+            BindHelper.BindData(clbOlcuBirim, projeStokKart.stokKart.olcuBirim, nameof(projeStokKart.stokKart.olcuBirim.Id));
+            BindHelper.BindData(clbMalzemeStandart, projeStokKart.stokKart.malzemeStandart, nameof(projeStokKart.stokKart.malzemeStandart.Id));
+            BindHelper.BindData(clbMalzemeAltGrup2, projeStokKart.stokKart.malzemeAltGrup2, nameof(projeStokKart.stokKart.malzemeAltGrup2.Id));
+            BindHelper.BindData(clbMalzemeAltGrup, projeStokKart.stokKart.malzemeAltGrup, nameof(projeStokKart.stokKart.malzemeAltGrup.Id));
+            BindHelper.BindData(clbMalzemeGrup, projeStokKart.stokKart.malzemeGrup, nameof(projeStokKart.stokKart.malzemeGrup.Id));
+            BindHelper.BindData(clbStokGrup, projeStokKart.stokKart.stokGrup, nameof(projeStokKart.stokKart.stokGrup.Id));
+            BindHelper.BindData(ctbProjeAdet, projeStokKart, nameof(projeStokKart.adet));
+            BindHelper.BindData(fcbBoyut,projeStokKart.stokKart.boyutTanim,nameof(projeStokKart.stokKart.boyutTanim.Id));
             List<DataControlStokKartDosya> dataControlStokKartDosyaList = new List<DataControlStokKartDosya>();
             for (int i = 0; i < projeStokKart.stokKart.dosyaList.Count; i++)
             {

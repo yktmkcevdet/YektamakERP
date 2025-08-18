@@ -1,6 +1,7 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -87,20 +88,14 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void SatinalmaTalepOnayFormu_Load(object sender, EventArgs e)
         {
             var jsonResult = await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep());
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            if (result?.result == null)
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                return;
-            }
-            else if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show($"Satınalma talepleri alınırken hata oluştu: {result.result}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                List<SatinalmaTalep> satinalmaTalep = _jsonConverter.ToModelList<SatinalmaTalep>(result.result);
-                foreach (var item in satinalmaTalep.Where(t => t.onayDurum == false))
+                List<SatinalmaTalep> satinalmaTalep = _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
+                foreach (var item in satinalmaTalep.Where(t => t.onayDurum == null))
                 {
                     satinalmaTalepOnayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDTO>(item));
                 }
@@ -113,10 +108,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
             satinalmaTalep.onayKullanici = _cache.kullanici;
-            string result = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
-            Result resultModel = _jsonConverter.DeserializeToModelList<Result>(result).FirstOrDefault();
-            MessageBox.Show(resultModel.result);
-            if (resultModel != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            satinalmaTalep.onayDurum = true;
+            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
+            MessageBox.Show(jsonResult);
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
@@ -130,42 +125,23 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 universalGrid1.Grid.ClearSelection();
                 universalGrid1.Grid.Rows[rowIndex].Selected = true;
-                //satinalmaTalepOnayList = (List<SatinalmaTalepDTO>)universalGrid1.binding.DataSource;
                 satinalmaTalepOnayDTO = satinalmaTalepOnayList[rowIndex];
                 contextMenuStrip1.Show(universalGrid1, e.Location);
             }
         }
-        private void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private async void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
+            satinalmaTalep.onayKullanici = _cache.kullanici;
+            satinalmaTalep.onayDurum = false;
+            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
+            MessageBox.Show(jsonResult);
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                if (e.RowIndex == -1) return;
-                universalGrid1.Grid.Rows[e.RowIndex].Selected = true;
-                if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)
-                {
-                    if (universalGrid1.Grid.Rows[e.RowIndex].Cells[1].Value == null)
-                        return;
-
-
-                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)//Update
-                    {
-                        var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                        SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
-                        SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
-                        satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
-                        satinalmaTalepKayitFormu.ShowDialog();
-                    }
-                }
+                universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Hata: {ex.Message}");
-            }
-        }
-
-        private void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
         }
 
         private void talebiGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)

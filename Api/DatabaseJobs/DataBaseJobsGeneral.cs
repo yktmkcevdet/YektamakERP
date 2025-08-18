@@ -65,7 +65,7 @@ namespace Api.DatabaseJobs
         internal static MySqlConnection MySqlConnectionYerel()
         {
             MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
-            //MySqlConnection mySqlConnection = new MySqlConnection("Server=127.0.0.1;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
+            //MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
             try
             {
                 mySqlConnection.Open();

@@ -1,6 +1,7 @@
 ﻿using ApiService.Interfaces;
 using Microsoft.VisualBasic.ApplicationServices;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,14 +89,12 @@ namespace YektamakDesktop.Formlar
                 user.ad = ctbKullaniciAdi.TextCustom;
                 user.sifre= ctbSifre.TextCustom;
                 string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                if(result == null || result.result == null || !result.result.Any())
+                if(String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show("Kullanıcı bulunamadı");
-                    this.Enabled = true;
+                    MessageBox.Show(jsonResult,"Kullanıcı Bilgisi Alırken Hata");
                     return;
                 }
-                user = _jsonConverter.ToModelList<Kullanici>(result.result).FirstOrDefault();
+                user = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
                 if (_passwordService.VerifyPassword(password, user.sifre))
                 {
                     if (user.isSifreDegisti == false && newPasswordMode == false)
@@ -201,7 +200,7 @@ namespace YektamakDesktop.Formlar
         /// <param name="kullanici"></param>
         private void CreateNewPassword(Kullanici kullanici)
         {
-            GlobalData.HandleException(async () =>
+            try
             {
                 string password = customTextBoxYeniSifre.TextCustom;
                 string salt = _passwordService.HashPassword(password).Hash;
@@ -222,8 +221,11 @@ namespace YektamakDesktop.Formlar
                     mailHandler.SendMail(kullanici.personel.mail, "Şifre Değişimi", "Şifreniz değiştirilmiştir.");
                     this.Close();
                 }
-
-            });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         /// <summary>
         /// Form yüklenirken eğer daha önce kullanıcı adı ile giriş yapılmışsa daha önce girilmiş kullanıcı adını getirir.
@@ -248,8 +250,7 @@ namespace YektamakDesktop.Formlar
             user.ad = ctbKullaniciAdi.TextCustom;
             user.sifre = ctbSifre.TextCustom;
             string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            user = _jsonConverter.ToModelList<Kullanici>(result.result).FirstOrDefault();
+            user = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
             if (_passwordService.VerifyPassword(password, user.sifre))
             {
                 InitializeComponentsNewPassword();

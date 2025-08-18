@@ -22,17 +22,49 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(stokGrup, "GetStokGrup");
         }
+        public string SaveStokGrup(StokGrup stokGrup)
+        {
+            return _apiService.Post(stokGrup, "SaveStokGrup");
+        }
+        public string DeleteStokGrup(StokGrup stokGrup)
+        {
+            return _apiService.Post(stokGrup, "DeleteStokGrup");
+        }
         public string GetMalzemeGrup(MalzemeGrup malzemeGrup)
         {
             return _apiService.Post(malzemeGrup, "GetMalzemeGrup");
+        }
+        public string SaveMalzemeGrup(MalzemeGrup malzemeGrup)
+        {
+            return _apiService.Post(malzemeGrup, "SaveMalzemeGrup");
+        }
+        public string DeleteMalzemeGrup(MalzemeGrup malzemeGrup)
+        {
+            return _apiService.Post(malzemeGrup, "DeleteMalzemeGrup");
         }
         public string GetMalzemeAltGrup(MalzemeAltGrup malzemeAltGrup)
         {
             return _apiService.Post(malzemeAltGrup, "GetMalzemeAltGrup");
         }
+        public string SaveMalzemeAltGrup(MalzemeAltGrup malzemeAltGrup)
+        {
+            return _apiService.Post(malzemeAltGrup, "SaveMalzemeAltGrup");
+        }
+        public string DeleteMalzemeAltGrup(MalzemeAltGrup malzemeAltGrup)
+        {
+            return _apiService.Post(malzemeAltGrup, "DeleteMalzemeAltGrup");
+        }
         public string GetMalzemeAltGrup2(MalzemeAltGrup2 malzemeAltGrup2)
         {
             return _apiService.Post(malzemeAltGrup2, "GetMalzemeAltGrup2");
+        }
+        public string SaveMalzemeAltGrup2(MalzemeAltGrup2 malzemeAltGrup2)
+        {
+            return _apiService.Post(malzemeAltGrup2, "SaveMalzemeAltGrup2");
+        }
+        public string DeleteMalzemeAltGrup2(MalzemeAltGrup2 malzemeAltGrup2)
+        {
+            return _apiService.Post(malzemeAltGrup2, "DeleteMalzemeAltGrup2");
         }
         public async Task<string> GetMalzemeAltGrup2Async(MalzemeAltGrup2 malzemeAltGrup2)
         {
@@ -95,9 +127,17 @@ namespace ApiService.Implementetions
         {
             return await _apiService.GetAsync("StokGrupKriter");
         }
-        public string GetExcelGrupParametre()
+        public string GetExcelGrupParametre(ExcelGrupParametre excelGrupParametre)
         {
-            return _apiService.Get("GetExcelGrupParametre");
+            return _apiService.Post(excelGrupParametre,"GetExcelGrupParametre");
+        }
+        public string SaveExcelGrupParametre(ExcelGrupParametre excelGrupParametre)
+        {
+            return _apiService.Post(excelGrupParametre, "SaveExcelGrupParametre");
+        }
+        public string DeleteExcelGrupParametre(ExcelGrupParametre excelGrupParametre)
+        {
+            return _apiService.Post(excelGrupParametre, "DeleteExcelGrupParametre");
         }
         public async Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart)
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class ProjeStokKart:IEntity
+    public record ProjeStokKart:IEntity
     {
         public int? Id { get; set; }
         private Proje _proje;

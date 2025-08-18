@@ -66,10 +66,34 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(restData, "spGetStokGrup");
             return result;
         }
+        [HttpPost, Route("api/SaveStokGrup")]
+        public string SaveStokGrup([FromBody] StokGrup restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveStokGrup");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteStokGrup")]
+        public string DeleteStokGrup([FromBody] StokGrup restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteStokGrup");
+            return result;
+        }
         [HttpPost, Route("api/GetMalzemeGrup")]
         public string GetMalzemeGrup([FromBody] MalzemeGrup restData)
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetMalzemeGrup");
+            return result;
+        }
+        [HttpPost, Route("api/SaveMalzemeGrup")]
+        public string SaveMalzemeGrup([FromBody] MalzemeGrup restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMalzemeGrup");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteMalzemeGrup")]
+        public string DeleteMalzemeGrup([FromBody] MalzemeGrup restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteMalzemeGrup");
             return result;
         }
         [HttpPost, Route("api/GetMalzemeAltGrup2")]
@@ -78,10 +102,34 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(restData, "spGetMalzemeAltGrup2");
             return result;
         }
+        [HttpPost, Route("api/SaveMalzemeAltGrup2")]
+        public string SaveMalzemeAltGrup2([FromBody] MalzemeAltGrup2 restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMalzemeAltGrup2");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteMalzemeAltGrup2")]
+        public string DeleteMalzemeAltGrup2([FromBody] MalzemeAltGrup2 restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteMalzemeAltGrup2");
+            return result;
+        }
         [HttpPost, Route("api/GetMalzemeAltGrup")]
         public string GetMalzemeAltGrup([FromBody] MalzemeAltGrup restData)
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetMalzemeAltGrup");
+            return result;
+        }
+        [HttpPost, Route("api/SaveMalzemeAltGrup")]
+        public string SaveMalzemeAltGrup([FromBody] MalzemeAltGrup restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMalzemeAltGrup");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteMalzemeAltGrup")]
+        public string DeleteMalzemeAltGrup([FromBody] MalzemeAltGrup restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteMalzemeAltGrup");
             return result;
         }
         [HttpPost, Route("api/DeleteProjeDosya")]
@@ -121,10 +169,22 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject("spGetStokGrupKriter");
             return result;
         }
-        [HttpGet, Route("api/GetExcelGrupParametre")]
-        public string GetExcelGrupParametre()
+        [HttpPost, Route("api/GetExcelGrupParametre")]
+        public string GetExcelGrupParametre([FromBody] ExcelGrupParametre excelGrupParametre)
         {
-            string result = _dataAccessLayer.GetObject("spGetExcelGrupParametre");
+            string result = _dataAccessLayer.GetObject(excelGrupParametre,"spGetExcelGrupParametre");
+            return result;
+        }
+        [HttpPost, Route("api/SaveExcelGrupParametre")]
+        public string SaveExcelGrupParametre([FromBody] ExcelGrupParametre excelGrupParametre)
+        {
+            string result = _dataAccessLayer.SaveObject(excelGrupParametre,"spSaveExcelGrupParametre");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteExcelGrupParametre")]
+        public string DeleteExcelGrupParametre([FromBody] ExcelGrupParametre excelGrupParametre)
+        {
+            string result = _dataAccessLayer.DeleteObject(excelGrupParametre, "spDeleteExcelGrupParametre");
             return result;
         }
     }

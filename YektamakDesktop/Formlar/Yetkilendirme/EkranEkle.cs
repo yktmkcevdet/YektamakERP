@@ -79,16 +79,15 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private async void rButtonKaydet_Click(object sender, EventArgs e)
         {
             string jsonResult = await _kullaniciYetkiService.SaveMenu(menu);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault(); ;
-            if (result?.result != null)
+            if(String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                menu = _jsonConverter.DeserializeToModelList<Menu>(result.result).FirstOrDefault();
-                _cache.menuList.Add(menu);
-                MessageBox.Show("Kayıt Başarılı");
+                MessageBox.Show(jsonResult);
             }
             else
             {
-                MessageBox.Show(result.result);
+                menu = JsonConvert.DeserializeObject<List<Menu>>(jsonResult).FirstOrDefault();
+                _cache.menuList.Add(menu);
+                MessageBox.Show("Kayıt Başarılı");
             }
         }
         public void UpdateMode(Menu menuUpdate)

@@ -81,12 +81,11 @@ namespace YektamakDesktop
         {
             this.Enabled = false;
             
-            GlobalData.AddNewForm(this);
             lblKullanici.Text = _cache.kullanici.personel.ad;
             this.Enabled = true;
 
             int y = 6; //Menu butonlarının ana menu panelindeki y koordinatını gösterir..
-            foreach (AnaMenuDTO anaMenu in _cache.anaMenuList)
+            foreach (AnaMenuDTO anaMenu in _cache.anaMenuList.OrderBy(a=>a.siraNo))
             {
                 MenuButtonOlustur(anaMenu.ad, anaMenu.icon, 6, y); //Girişi yapan kullanıcının yetkisi dahilinde olan menü öğelerinin butonlarını oluşturur.
                 y += 51;
@@ -158,7 +157,7 @@ namespace YektamakDesktop
         private void ButtonOlustur(string text, int x, int y)
         {
             this.panelMenu.Controls.Clear();
-            foreach (Yetki yetki in _cache.yetkiList)
+            foreach (Yetki yetki in _cache.yetkiList.OrderBy(y=>y.ekran.Id))
             {
                 IconChar iconChar = (IconChar)Enum.Parse(typeof(IconChar), yetki.menu.icon);
                 if (yetki.menu.ad.ToString() == text)

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
@@ -23,6 +24,20 @@ namespace YektamakDesktop.Formlar.Satinalma
             _jsonConverter = jsonConverter;
             _cache = cache;
             InitializeComponent();
+            InitializeUniversalGrid();
+        }
+
+        private void InitializeUniversalGrid()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 164);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1138, 424);
+            universalGrid1.TabIndex = 13;
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            Controls.Add(universalGrid1);
             Binding();
         }
 
@@ -68,11 +83,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void SatinalmaTalepler_Load(object sender, EventArgs e)
         {
-            string jsonresult = await _satinalmaService.GetSatinalmaTalep(satinalmaTalepFilter);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonresult)[0];
-            if (result.result != null)
+            string jsonResult = await _satinalmaService.GetSatinalmaTalep(satinalmaTalepFilter);
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                List<SatinalmaTalep> satinalmaTaleps = _jsonConverter.ToModelList<SatinalmaTalep>(result.result);
+                List<SatinalmaTalep> satinalmaTaleps = _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
                 List<SatinalmaTalepDTO> satinalmaTalepDTOs = new List<SatinalmaTalepDTO>();
                 foreach (var item in satinalmaTaleps)
                 {
@@ -85,46 +99,11 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             satinalmaTalepFilter = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
             satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
-            string result = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
-            Result resultModel = _jsonConverter.DeserializeToModelList<Result>(result).FirstOrDefault();
+            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
+            Result resultModel = JsonConvert.DeserializeObject<List<Result>>(jsonResult).FirstOrDefault();
             MessageBox.Show(resultModel.result);
         }
-        private async void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex == -1) return;
-                if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex || e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
-                {
-                    if (universalGrid1.Grid.Rows[e.RowIndex].Cells[1].Value == null)
-                        return;
-                    var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                    //var aaa = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
-                    SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
-                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)//Update
-                    {
-                        SatinalmaTalepOlusturmaFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepOlusturmaFormu>();
-                        satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
-                        satinalmaTalepKayitFormu.Show();
-                    }
-                    if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)//Sil
-                    {
-                        var onay = MessageBox.Show("Talebi silmek istediğinizden emin misiniz", "Talep Silme Onay", MessageBoxButtons.YesNo);
-                        if (onay == DialogResult.Yes)
-                        {
-                            string jsonResult = await _satinalmaService.DeleteSatinalmaTalep(satinalmaTalep);
-                            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                            MessageBox.Show(result.result);
-                            universalGrid1.binding.RemoveAt(e.RowIndex);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Hata: {ex.Message}");
-            }
-        }
+        
 
         private void SatinalmaTalepler_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -152,7 +131,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
-            if(satinalmaTalep.talepEdenKullanici.Id != _cache.kullanici.Id)
+            if (satinalmaTalep.talepEdenKullanici.Id != _cache.kullanici.Id)
             {
                 MessageBox.Show("Bu talebi sadece talep eden silebilir.");
                 return;
@@ -161,16 +140,29 @@ namespace YektamakDesktop.Formlar.Satinalma
             if (onay == DialogResult.Yes)
             {
                 string jsonResult = await _satinalmaService.DeleteSatinalmaTalep(satinalmaTalep);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                if (result?.result!=null && result.result.Contains(satinalmaTalep.satinalmaTalepNo, StringComparison.OrdinalIgnoreCase))
+                if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result.result);
+                    MessageBox.Show(jsonResult);
                     universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
                 }
                 else
                 {
-                    MessageBox.Show("Silme işlemi başarısız"+result.result);
+                    MessageBox.Show("Silme işlemi başarısız" + jsonResult);
                 }
+            }
+        }
+
+        private async void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+            satinalmaTalep.onayKullanici = _cache.kullanici;
+            satinalmaTalep.onayDurum = false;
+            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
+            Result resultModel = JsonConvert.DeserializeObject<List<Result>>(jsonResult).FirstOrDefault();
+            MessageBox.Show(resultModel.result);
+            if (resultModel != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
         }
     }

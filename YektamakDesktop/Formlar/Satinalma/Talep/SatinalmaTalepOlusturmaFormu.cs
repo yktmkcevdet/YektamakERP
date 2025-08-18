@@ -30,7 +30,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             customDataGrid.SetUstForm(this);
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref fcbProjeKod);
+            ComboBoxListFill.GetLookupKod(_cache.projes.Where(p=>p.personel.Id==_cache.kullanici.personel.Id).ToList(), ref fcbProjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
@@ -229,10 +229,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             projeStokKart.stokKart.malzemeGrup.Id = satinalmaTalep.malzemeGrup.Id;
             projeStokKart.stokKart.stokTip.Id = satinalmaTalep.stokTip.Id;
             string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            if (result?.result != null)
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(result.result);
+                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
                 
             }
             ComboBoxListFill.GetLookupAd(stokKarts.Select(item => item.stokKart with {ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList(), ref _stokKartId);

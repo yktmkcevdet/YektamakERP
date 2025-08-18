@@ -109,6 +109,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2 = new FilterableComboBox();
             ctbProjeAdet = new CustomTextBoxSayisal();
             label3 = new Label();
+            fcbBoyut = new FilterableComboBox();
             SuspendLayout();
             // 
             // ctbId
@@ -680,7 +681,7 @@ namespace YektamakDesktop.Formlar.Stok
             ctbBoyut.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             ctbBoyut.ForeColor = Color.Black;
             ctbBoyut.isPlaceHolder = false;
-            ctbBoyut.Location = new Point(186, 321);
+            ctbBoyut.Location = new Point(364, 316);
             ctbBoyut.Multiline = false;
             ctbBoyut.Name = "ctbBoyut";
             ctbBoyut.Padding = new Padding(7, 5, 7, 5);
@@ -689,7 +690,7 @@ namespace YektamakDesktop.Formlar.Stok
             ctbBoyut.PlaceholderText = "";
             ctbBoyut.ReadOnly = false;
             ctbBoyut.SelectionStart = 0;
-            ctbBoyut.Size = new Size(259, 28);
+            ctbBoyut.Size = new Size(163, 28);
             ctbBoyut.TabIndex = 68;
             ctbBoyut.TextAlignment = HorizontalAlignment.Left;
             ctbBoyut.TextCustom = "";
@@ -778,6 +779,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new Padding(7, 5, 7, 5);
             clbProjeKod.PlaceholderText = "Seçiniz...";
+            clbProjeKod.SelectedDisplayValue = "Seçiniz...";
             clbProjeKod.SelectedIndex = -1;
             clbProjeKod.SelectedItem = null;
             clbProjeKod.SelectedValue = null;
@@ -796,6 +798,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbStokTip.Name = "clbStokTip";
             clbStokTip.Padding = new Padding(7, 5, 7, 5);
             clbStokTip.PlaceholderText = "Seçiniz...";
+            clbStokTip.SelectedDisplayValue = "Seçiniz...";
             clbStokTip.SelectedIndex = -1;
             clbStokTip.SelectedItem = null;
             clbStokTip.SelectedValue = null;
@@ -814,6 +817,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbOlcuBirim.Name = "clbOlcuBirim";
             clbOlcuBirim.Padding = new Padding(7, 5, 7, 5);
             clbOlcuBirim.PlaceholderText = "Seçiniz...";
+            clbOlcuBirim.SelectedDisplayValue = "Seçiniz...";
             clbOlcuBirim.SelectedIndex = -1;
             clbOlcuBirim.SelectedItem = null;
             clbOlcuBirim.SelectedValue = null;
@@ -832,6 +836,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeStandart.Name = "clbMalzemeStandart";
             clbMalzemeStandart.Padding = new Padding(7, 5, 7, 5);
             clbMalzemeStandart.PlaceholderText = "Seçiniz...";
+            clbMalzemeStandart.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeStandart.SelectedIndex = -1;
             clbMalzemeStandart.SelectedItem = null;
             clbMalzemeStandart.SelectedValue = null;
@@ -850,6 +855,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new Padding(7, 5, 7, 5);
             clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.SelectedDisplayValue = "Seçiniz...";
             clbStokGrup.SelectedIndex = -1;
             clbStokGrup.SelectedItem = null;
             clbStokGrup.SelectedValue = null;
@@ -869,6 +875,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
             clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeGrup.SelectedIndex = -1;
             clbMalzemeGrup.SelectedItem = null;
             clbMalzemeGrup.SelectedValue = null;
@@ -888,6 +895,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
             clbMalzemeAltGrup.Padding = new Padding(7, 5, 7, 5);
             clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeAltGrup.SelectedIndex = -1;
             clbMalzemeAltGrup.SelectedItem = null;
             clbMalzemeAltGrup.SelectedValue = null;
@@ -907,6 +915,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
             clbMalzemeAltGrup2.Padding = new Padding(7, 5, 7, 5);
             clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.SelectedDisplayValue = "Seçiniz...";
             clbMalzemeAltGrup2.SelectedIndex = -1;
             clbMalzemeAltGrup2.SelectedItem = null;
             clbMalzemeAltGrup2.SelectedValue = null;
@@ -917,13 +926,13 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // ctbProjeAdet
             // 
-            ctbProjeAdet.BackColor = SystemColors.Window;
+            ctbProjeAdet.BackColor = Color.White;
             ctbProjeAdet.BorderColor = Color.Silver;
             ctbProjeAdet.BorderFocusColor = Color.HotPink;
             ctbProjeAdet.BorderRadius = 5;
             ctbProjeAdet.BorderSize = 1;
             ctbProjeAdet.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            ctbProjeAdet.ForeColor = Color.DimGray;
+            ctbProjeAdet.ForeColor = Color.Black;
             ctbProjeAdet.Location = new Point(570, 98);
             ctbProjeAdet.Multiline = false;
             ctbProjeAdet.Name = "ctbProjeAdet";
@@ -950,11 +959,31 @@ namespace YektamakDesktop.Formlar.Stok
             label3.TabIndex = 86;
             label3.Text = "Proje Adet";
             // 
+            // fcbBoyut
+            // 
+            fcbBoyut.BorderColor = Color.Silver;
+            fcbBoyut.BorderSize = 1;
+            fcbBoyut.DataSource = null;
+            fcbBoyut.DisplayMember = "ad";
+            fcbBoyut.Location = new Point(188, 315);
+            fcbBoyut.Name = "fcbBoyut";
+            fcbBoyut.Padding = new Padding(7, 5, 7, 5);
+            fcbBoyut.PlaceholderText = "Seçiniz...";
+            fcbBoyut.SelectedDisplayValue = "Seçiniz...";
+            fcbBoyut.SelectedIndex = -1;
+            fcbBoyut.SelectedItem = null;
+            fcbBoyut.SelectedValue = null;
+            fcbBoyut.Size = new Size(170, 29);
+            fcbBoyut.TabIndex = 87;
+            fcbBoyut.UnderlinedStyle = false;
+            fcbBoyut.ValueMember = "Id";
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1040, 822);
+            Controls.Add(fcbBoyut);
             Controls.Add(label3);
             Controls.Add(ctbProjeAdet);
             Controls.Add(clbMalzemeAltGrup2);
@@ -1157,10 +1186,9 @@ namespace YektamakDesktop.Formlar.Stok
                 StokKartDosya stokKartDosya = new();
                 if (IdControl.TextCustom != "") stokKartDosya.Id = Convert.ToInt32(IdControl.TextCustom.Replace(".", ""));
                 string jsonResult = await _stokService.DeleteStokKartDosya(stokKartDosya);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                if (result?.result != null)
+                if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result.result);
+                    MessageBox.Show(jsonResult);
                 }
             }
             private async void ButtonDosyaGoruntule_Click(object sender, EventArgs e)
@@ -1169,10 +1197,9 @@ namespace YektamakDesktop.Formlar.Stok
                     return;
                 StokKart stokKart = new StokKart() { Id = int.Parse(stokKartIdControl.TextCustom) };
                 string jsonResult = await _stokService.GetStokKartPdf(stokKart);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                if (result.result != null)
+                if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    stokKart = JsonConvert.DeserializeObject<List<StokKart>>(result.result)[0];
+                    stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
                 }
                 dosyaVeri = stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosya;
                 string tempFilePath = Path.GetTempFileName() + "." + dosyaUzantiControl.TextCustom;
@@ -1228,5 +1255,6 @@ namespace YektamakDesktop.Formlar.Stok
         private FilterableComboBox clbMalzemeAltGrup2;
         private CustomTextBoxSayisal ctbProjeAdet;
         private Label label3;
+        private FilterableComboBox fcbBoyut;
     }
 }

@@ -2,6 +2,7 @@
 using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using Newtonsoft.Json;
 using System.Data;
 using System.Threading.Tasks;
 using Utilities.Interfaces;
@@ -314,27 +315,6 @@ namespace Utilities.Implementations
             }
         }
         
-        public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
-        {
-            var jsonResult =  fetchFunction.Invoke(t);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            List<T> list = _jsonConverter.ToModelList<T>(result.result);
-            return list;
-        }
-        public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
-        {
-            var jsonResult = fetchFunction.Invoke();
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            List<T> list = _jsonConverter.ToModelList<T>(result.result);
-            return list;
-        }
-        public async Task<List<T>> GetModelListAsync<T>(Func<Task<string>> fetchFunction) where T : IEntity, new()
-        {
-            var jsonResult = await fetchFunction();
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-            List<T> list = _jsonConverter.ToModelList<T>(result.result);
-            return list;
-        }
         private List<Firma> _firmaList;
         public List<Firma> firmaList
         {
@@ -506,6 +486,41 @@ namespace Utilities.Implementations
             {
                 _talepNedenList = value;
             }
+        }
+        private List<Boyut> _boyutList;
+        public List<Boyut> boyutList
+        {
+            get
+            {
+                if (_boyutList == null)
+                {
+                    _boyutList = GetModelList<Boyut>(_anaVeriService.GetBoyut);
+                }
+                return _boyutList;
+            }
+            set
+            {
+                _boyutList = value;
+            }
+        }
+
+        public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
+        {
+            var jsonResult = fetchFunction.Invoke(t);
+            List<T> list = JsonConvert.DeserializeObject<List<T>>(jsonResult);
+            return list;
+        }
+        public List<T> GetModelList<T>(Func<string> fetchFunction) where T : IEntity, new()
+        {
+            var jsonResult = fetchFunction.Invoke();
+            List<T> list = JsonConvert.DeserializeObject<List<T>>(jsonResult);
+            return list;
+        }
+        public async Task<List<T>> GetModelListAsync<T>(Func<Task<string>> fetchFunction) where T : IEntity, new()
+        {
+            var jsonResult = await fetchFunction();
+            List<T> list = JsonConvert.DeserializeObject<List<T>>(jsonResult);
+            return list;
         }
         public void Reset()
         {

@@ -60,8 +60,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             if (!CheckFields()) return;
             
             string jsonResult = await _kullaniciYetkiService.SaveEkran(ekran);
-            Result result = JsonConvert.DeserializeObject<List<Result>>(jsonResult)[0];
-            MessageBox.Show(result.result);
+            MessageBox.Show(jsonResult);
         }
         public void UpdateMode(Menu menu)
         {

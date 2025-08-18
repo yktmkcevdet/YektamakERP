@@ -38,6 +38,7 @@ namespace Utilities.Interfaces
         public List<MaliyetTespitKanal> maliyetTespitKanalList { get; set; }
         public List<DosyaTip> dosyaTipList { get; set; }
         public List<TalepNeden> talepNedenList { get; set; }
+        public List<Boyut> boyutList { get; set; }
         void Reset();
     }
 }

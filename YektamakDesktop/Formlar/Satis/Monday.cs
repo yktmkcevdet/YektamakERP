@@ -35,7 +35,6 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_monday == null || _monday.IsDisposed)
                 {
                     _monday = new Monday();
-                    GlobalData.Yetki(ref _monday);
                 }
                 return _monday;
             }

@@ -20,6 +20,7 @@
         public int? altMenuId { get; set; }
         public string ekranAdi { get; set; }
         public string formAd { get; set; }
+        public int? siraNo { get; set; }
     }
     public class Menu:IEntity
     {

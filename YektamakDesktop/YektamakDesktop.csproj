@@ -52,13 +52,16 @@
     <Compile Update="CustomControls\CustomTextBoxSayisal.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\MalzemeAltGrup2TanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\MalzemeAltGrupTanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\MalzemeGrupTanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\MainWindow.cs" />
-    <Compile Update="Formlar\Genel\FirmaKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Genel\FirmaGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Formlar\Satinalma\Teklif\SatinalmaTekliflerFormu.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -25,7 +25,7 @@ namespace Api.Controllers
         [HttpGet, Route("api/GetMarkaAltGrup/")]
         public string GetMarkaAltGrup()
         {
-            string result = _dataAccessLayer.GetObject("spGetMarka");
+            string result = _dataAccessLayer.GetObject("spGetMarkaAltGrup");
             return result;
         }
         [HttpGet, Route("api/GetMarkaAltGrupKategori/")]

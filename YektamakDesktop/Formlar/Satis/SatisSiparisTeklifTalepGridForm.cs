@@ -43,7 +43,6 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_satisSiparisTeklifTalepGridForm == null)
                 {
                     _satisSiparisTeklifTalepGridForm = new SatisSiparisTeklifTalepGridForm();
-                    GlobalData.Yetki(ref _satisSiparisTeklifTalepGridForm);
                 }
                 return _satisSiparisTeklifTalepGridForm;
             }
@@ -65,7 +64,6 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_dataTable == null)
                 {
                     _dataTable = new DataTable();
-                    _dataTable = GlobalData.FillDataTable(_satisService.GetSatisTeklifTalep, satisSiparisTeklifTalepFilter);
                     _dataTable.RowDeleted += dataTableRowChanged;
                     _dataTable.RowChanged += dataTableRowChanged;
                 }
@@ -75,14 +73,10 @@ namespace YektamakDesktop.Formlar.Satis
         }
         private void dataTableRowChanged(object sender, DataRowChangeEventArgs e)
         {
-            GlobalData.FillDataGrid(dataTable, dataGridView, satisSiparisTeklifTalepFilter);
         }
         private SatisTeklifTalep satisSiparisTeklifTalepFilter
         {
-            get
-            {
-                return GlobalData.GridFilter<SatisTeklifTalep>(panelFilter);
-            }
+            get;set;
         }
         ToolTip buttonFiltreToolTip;
         private SatisSiparisTeklifTalepGridForm()
@@ -139,7 +133,6 @@ namespace YektamakDesktop.Formlar.Satis
         /// <param name="e"></param>
         public void buttonTumKayitlariGetir_Click(object sender, EventArgs e)
         {
-            GlobalData.FillDataGrid(dataTable, dataGridView, satisSiparisTeklifTalepFilter);
         }
         /// <summary>
         /// Kullanıcıya silme işlemi için onay sorusu gösterir ve işlemi gerçekleştirir.
@@ -162,8 +155,6 @@ namespace YektamakDesktop.Formlar.Satis
                 else
                 {
                     MessageBox.Show("Silme İşlemi Başarılı");
-                    int i = GlobalData.IndexOfDataSet(dataTable, satisTeklifTalep.Id);
-                    dataTable.Rows[i].Delete();
                 }
                 this.Enabled = true;
             }
@@ -204,9 +195,6 @@ namespace YektamakDesktop.Formlar.Satis
             SatisTeklifTalep satisSiparisTeklifTalep = new SatisTeklifTalep();
             int teklifTalepId = int.Parse(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
             satisSiparisTeklifTalep.Id = teklifTalepId;
-            int i = GlobalData.IndexOfDataSet(dataTable, teklifTalepId);
-            //satisSiparisTeklifTalep = ConvertHelper.DataRowToModel<SatisSiparisTeklifTalep>(dataTable.Rows[i]);
-            satisSiparisTeklifTalep = _dataTableHelper.MapToEntity<SatisTeklifTalep>(_jsonConvertHelper.DeserializeToDataSet(_satisService.GetSatisTeklifTalep(satisSiparisTeklifTalep)).Tables[0].Rows[0]);
             return satisSiparisTeklifTalep;
         }
         /// <summary>
@@ -224,7 +212,6 @@ namespace YektamakDesktop.Formlar.Satis
         }
         private void buttonFiltre_Click(object sender, EventArgs e)
         {
-            GlobalData.FillDataGrid(dataTable, dataGridView, satisSiparisTeklifTalepFilter);
         }
         /// <summary>
         /// Yeni bir satış siparişi eklemek için satisSiparisTeklifTalepKayitFormu'nu açar.
@@ -241,7 +228,6 @@ namespace YektamakDesktop.Formlar.Satis
         }
         private void CloseForm()
         {
-            GlobalData.CloseForm(ref _satisSiparisTeklifTalepGridForm);
         }
         private void buttomMinimize_Click(object sender, EventArgs e)
         {
@@ -255,19 +241,9 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void SatisSiparisTeklifTalepGridForm_Load(object sender, EventArgs e)
         {
-            GlobalData.PlaceFilterFields(dataGridView, panelFilter);
         }
         public void UpdateRow(SatisTeklifTalep satisSiparisTeklifTalep)
         {
-            int i = GlobalData.IndexOfDataSet(dataTable, satisSiparisTeklifTalep.Id);
-            if (i == -1)
-            {
-                AddNewRow(satisSiparisTeklifTalep);
-            }
-            else
-            {
-                GlobalData.UpdateDataRow(ref _dataTable, satisSiparisTeklifTalep, i);
-            }
         }
         private void AddNewRow(SatisTeklifTalep satisSiparisTeklifTalep)
         {
@@ -279,11 +255,9 @@ namespace YektamakDesktop.Formlar.Satis
         int oldScrollOffset = 0;
         private void dataGridViewSatisSiparisTeklifTalep_Scroll(object sender, ScrollEventArgs e)
         {
-            GlobalData.AdjustControlsOnScroll(dataGridView, panelFilter, e, ref oldScrollOffset);
         }
         private void dataGridViewSatisSiparisTeklifTalep_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            GlobalData.ResizeFilterFields(dataGridView, panelFilter);
         }
 
         private async void maliyetTalep_Click(object sender, EventArgs e)

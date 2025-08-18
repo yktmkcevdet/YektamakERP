@@ -36,9 +36,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             talebiOnaylaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             talebiReddetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             görüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             headerPanel1 = new HeaderPanel();
             universalGrid1 = new UniversalGrid();
-            silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,6 +60,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             talebiReddetToolStripMenuItem.Name = "talebiReddetToolStripMenuItem";
             talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             talebiReddetToolStripMenuItem.Text = "Talebi Reddet";
+            talebiReddetToolStripMenuItem.Click += talebiReddetToolStripMenuItem_Click;
             // 
             // görüntüleToolStripMenuItem
             // 
@@ -67,6 +68,13 @@ namespace YektamakDesktop.Formlar.Satinalma
             görüntüleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             görüntüleToolStripMenuItem.Text = "Görüntüle";
             görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
+            // 
+            // silToolStripMenuItem
+            // 
+            silToolStripMenuItem.Name = "silToolStripMenuItem";
+            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            silToolStripMenuItem.Text = "Sil";
+            silToolStripMenuItem.Click += silToolStripMenuItem_Click;
             // 
             // headerPanel1
             // 
@@ -83,20 +91,12 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // universalGrid1
             // 
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.Location = new System.Drawing.Point(0, 164);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(1138, 424);
             universalGrid1.TabIndex = 13;
             universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
-            // 
-            // silToolStripMenuItem
-            // 
-            silToolStripMenuItem.Name = "silToolStripMenuItem";
-            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            silToolStripMenuItem.Text = "Sil";
-            silToolStripMenuItem.Click += silToolStripMenuItem_Click;
             // 
             // SatinalmaTalepler
             // 

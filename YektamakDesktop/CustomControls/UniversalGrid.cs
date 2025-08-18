@@ -62,7 +62,7 @@ namespace YektamakDesktop.CustomControls
                                     Property: p,
                                     Attribute: p.GetCustomAttribute<GridDisplayAttribute>()
                                 ))
-                                //.Where(x => x.Attribute?.Visible == true)
+                                .Where(x => x.Attribute != null)
                                 .ToList()
                         );
         }
@@ -204,6 +204,7 @@ namespace YektamakDesktop.CustomControls
         private string _formName;
         public async Task SetData<T>(List<T> list, string formName, bool isCheck = false)
         {
+            lblSecilenKayitSayisi.Text = "";
             _isCheck = isCheck;
             _formName = formName;
             headerCheckBoxState = false;
@@ -411,9 +412,10 @@ namespace YektamakDesktop.CustomControls
             {
                 foreach (var prop in props)
                 {
-                    var filterValue = prop.GetValue(filter);
-                    var itemValue = prop.GetValue(item);
+                    var filterValue = JsonConvert.SerializeObject(prop.GetValue(filter));
+                    var itemValue = JsonConvert.SerializeObject(prop.GetValue(item));
                     // Null eşleşmiyorsa filtreyi geçemez
+                    if (filterValue == null) return true;
                     if (prop.PropertyType== typeof(string))
                     {
                         if (itemValue == null || !itemValue.ToString().Contains(filterValue.ToString(),StringComparison.OrdinalIgnoreCase)) return false;

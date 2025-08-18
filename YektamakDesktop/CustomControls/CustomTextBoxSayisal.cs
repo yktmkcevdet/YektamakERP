@@ -457,7 +457,7 @@ namespace YektamakDesktop.CustomControls
         private void CustomTextBox_Leave(object sender, EventArgs e)
         {
             isFocused = false;
-            //this.Invalidate();
+            this.Invalidate();
             SetPlaceHolder();
 
             if (this.CustomLeave != null)

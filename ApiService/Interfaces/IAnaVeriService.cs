@@ -18,5 +18,6 @@ namespace ApiService.Interfaces
         public Task<string> SaveExcelForm(ExcelForm excelForm);
         public Task<string> GetExcelForm(ExcelForm excelForm);
         public string GetTalepNeden();
+        public string GetBoyut();
     }
 }

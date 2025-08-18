@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using Models.Attributes;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace Models
 {
@@ -15,11 +17,13 @@ namespace Models
         public string malzeme { get; set; }
         public string aciklama { get; set; }
         public double agirlik { get; set; }
+        public int? stokTip { get; set; }
         public int? stokGrup { get; set; }
         public int? malzemeGrup { get; set; }
         public int? malzemeAltGrup { get; set; }
         public int? malzemeAltGrup2 { get; set; }
         public int? malzemeStandart { get; set; }
+        public bool? isTalasli {  get; set; }
         public (double uzunluk, string boyutText) Boyut()
         {
             Match match = Regex.Match(boyut, @"L:\s*(\d+)");
@@ -42,26 +46,29 @@ namespace Models
             }
         }
     }
-    public class ExcelGrupParametre
+    public class ExcelGrupParametre:IEntity
     {
-        public string sutunAdi { get; set; }
-        public string kosulMetni { get; set; }
-        public int? stokGrupId {  get; set; }
-        public int? malzemeGrupId { get; set; }
-        public int? malzemeAltGrupId { get; set; }
-        public int? malzemeAltGrup2Id { get; set; }
-        public int? malzemeStandartId { get; set; }
-        public string karsilastirmaKelimesi { get; set; }
-        public KarsilastirmaOperatoru karsilastirmaOperatoru { get; set; }
-
+        [GridDisplay(Header = "Id")] public int? Id { get; set; }
+        [GridDisplay(Header = "Excel Sütun Adı")]public string sutunAdi { get; set; }
+        [GridDisplay(Header = "Koşul Metni")] public string kosulMetni { get; set; }
+        [GridDisplay(Header = "Stok Tipi",Tip ="Liste",ListName ="stokTips",ListVisibleColumnName ="ad")] public int? stokTipId { get; set; }
+        [GridDisplay(Header = "Stok Grup", Tip = "Liste", ListName = "stokGrups", ListVisibleColumnName = "ad")] public int? stokGrupId {  get; set; }
+        [GridDisplay(Header = "Malzeme Grup", Tip = "Liste", ListName = "malzemeGrups", ListVisibleColumnName = "ad")] public int? malzemeGrupId { get; set; }
+        [GridDisplay(Header = "Malzeme Alt Grup", Tip = "Liste", ListName = "malzemeAltGrups", ListVisibleColumnName = "ad")] public int? malzemeAltGrupId { get; set; }
+        [GridDisplay(Header = "Malzeme Alt Grup 2", Tip = "Liste", ListName = "malzemeAltGrup2List", ListVisibleColumnName = "ad")] public int? malzemeAltGrup2Id { get; set; }
+        [GridDisplay(Header = "Malzeme Standart", Tip = "Liste", ListName = "malzemeStandarts", ListVisibleColumnName = "ad")] public int? malzemeStandartId { get; set; }
+        [GridDisplay(Header = "Talaşlı?")] public bool? isTalasli {  get; set; }
+        [GridDisplay(Header = "Anahtar Kelime")] public string karsilastirmaKelimesi { get; set; }
+        [GridDisplay(Header = "Karşılaştırma Op")] public KarsilastirmaOperatoru? karsilastirmaOperatoru { get; set; }
+        
     }
     public enum KarsilastirmaOperatoru
     {
-        Contains,
-        Equals,
-        StartsWith,
-        EndsWith,
-        Count
+        Contains=0,
+        Equals=1,
+        StartsWith=2,
+        EndsWith=3,
+        Count=4
     }
 }
     

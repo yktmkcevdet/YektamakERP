@@ -6,6 +6,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -96,31 +97,41 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 MessageBox.Show($"Hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+        string logDosyasi;
+        string klasor;
         private async Task ProcessExcelFileAsync()
         {
             string filePath = ctbDosyaYolu.TextCustom;
             UpdateProgressText("İşlem başlatılıyor...");
-            var proje = new Models.Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) };
-            UpdateProgressText("Eski dosyalar siliniyor...");
-            string jsonResult=await _projeService.DeleteProjeDosya(proje);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-            if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            var proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) };
+            if (chkProjeDosyaSil.Checked == true)
             {
-                MessageBox.Show(result.result);
-                return;
+                UpdateProgressText("Eski dosyalar siliniyor...");
+                string jsonResult = await _projeService.DeleteProjeDosya(proje);
+                if (jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show(jsonResult);
+                    return;
+                }
+                UpdateProgressText($"{jsonResult} adet stok kartı silindi");
             }
-            UpdateProgressText($"{result.result} adet stok kartı silindi");
             using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             using var workbook = CreateWorkbook(fileStream, filePath);
             var sheet = workbook.GetSheetAt(0);
             int totalRows = sheet.LastRowNum;
+            
             //UpdateProgressText($"Toplam {totalRows} satır bulundu");
 
             // Batch processing için liste
             var stokKartList = new List<StokKart>();
             const int batchSize = 1; // Her seferinde * kayıt işle
             DateTime startTime = DateTime.Now;
+            _cache.stokKartList.Clear();
+            logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates),@"\Logs\app.log");
+            klasor = Path.GetDirectoryName(logDosyasi);
+            if (!Directory.Exists(klasor))
+                Directory.CreateDirectory(klasor);
+            File.WriteAllText(logDosyasi, "Eklenemeyen dosyalar");
             for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
             {
                 var rowData = sheet.GetRow(rowIndex);
@@ -130,10 +141,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 await AttachFilesToStokKart(projeStokKart);
 
                 projeStokKarts.Add(projeStokKart);
-
+                _cache.stokKartList.Add(projeStokKart.stokKart);
                 // Batch size'a ulaştığında veya son satırda kaydet
+                
                 if (projeStokKarts.Count >= batchSize || rowIndex == totalRows)
                 {
+                    
                     await SaveStokKartBatch();
                     UpdateProgressText($"{totalRows}");
                     UpdateTransferCount(rowIndex);
@@ -147,6 +160,11 @@ namespace YektamakDesktop.Formlar.ProjeModul
             DateTime endTime = DateTime.Now;
             TimeSpan duration = endTime - startTime;
             UpdateProgressText($"İşlem tamamlandı. Toplam süre: {duration.TotalSeconds} saniye");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = logDosyasi,
+                UseShellExecute = true // Varsayılan uygulama ile açar
+            });
         }
         private IWorkbook CreateWorkbook(FileStream fileStream, string filePath)
         {
@@ -164,17 +182,20 @@ namespace YektamakDesktop.Formlar.ProjeModul
         {
             var excelData = ExtractExcelData(rowData);
             SetGrupIds(excelData);
+            
             return new ProjeStokKart
             {
                 proje = { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) },
                 adet = excelData.adet,
                 miktar = excelData.miktar,
                 stokKart={
+                    stokTip = { Id=excelData.stokTip },
                     stokGrup = { Id = excelData.stokGrup },
                     malzemeGrup = { Id = excelData.malzemeGrup },
                     malzemeAltGrup = { Id = excelData.malzemeAltGrup },
                     malzemeAltGrup2 = { Id = excelData.malzemeAltGrup2 },
                     malzemeStandart = { Id = excelData.malzemeStandart },
+                    isTalasli = excelData.isTalasli,
                     kod = excelData.kod,
                     parcaKod = excelData.kod,
                     ad = excelData.parcaAdi,
@@ -186,23 +207,21 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     aciklama = excelData.aciklama,
                     agirlik = excelData.agirlik,
                     olcuBirim = { Id = 1 },
-                    stokTip = { Id=1},
                     isFromExcel = true,
                 }
             };
         }
         private void SetGrupIds(ExcelFormat excelData)
         {
-            string jsonresult = _stokService.GetExcelGrupParametre();
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonresult)[0];
+            string jsonResult = _stokService.GetExcelGrupParametre(new ExcelGrupParametre());
 
-            if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show(result.result);
+                MessageBox.Show(jsonResult);
                 return;
             }
 
-            List<ExcelGrupParametre> grupParametreList = JsonConvert.DeserializeObject<List<ExcelGrupParametre>>(result.result);
+            List<ExcelGrupParametre> grupParametreList = JsonConvert.DeserializeObject<List<ExcelGrupParametre>>(jsonResult);
 
             foreach (var param in grupParametreList)
             {
@@ -218,11 +237,13 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
                     if (matches.Any())
                     {
+                        excelData.stokTip = excelData.stokTip == null ? param.stokTipId : excelData.stokTip;
                         excelData.stokGrup = excelData.stokGrup==null? param.stokGrupId : excelData.stokGrup;
                         excelData.malzemeGrup = excelData.malzemeGrup==null? param.malzemeGrupId : excelData.malzemeGrup;
                         excelData.malzemeAltGrup = excelData.malzemeAltGrup==null? param.malzemeAltGrupId : excelData.malzemeAltGrup;
                         excelData.malzemeAltGrup2 = excelData.malzemeAltGrup2==null? param.malzemeAltGrup2Id : excelData.malzemeAltGrup2;
                         excelData.malzemeStandart = excelData.malzemeStandart==null? param.malzemeStandartId : excelData.malzemeStandart;
+                        excelData.isTalasli = excelData.isTalasli == null ? param.isTalasli: excelData.isTalasli;
                     }
                 }
                 catch (Exception ex)
@@ -289,8 +310,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (content == null) return null;
             return new StokKartDosya
             {
-                dosyaUzanti = Path.GetExtension(fileName).TrimStart('.'),
-                dosyaAd = Path.GetFileNameWithoutExtension(fileName),
+                dosyaUzanti = Path.GetExtension(file).TrimStart('.'),
+                dosyaAd = Path.GetFileNameWithoutExtension(file),
                 dosya = content,
                 dosyaTip = { Id = dosyaTipId }
             };
@@ -310,19 +331,23 @@ namespace YektamakDesktop.Formlar.ProjeModul
         {
             foreach (var projeStokKart in projeStokKarts)
             {
-                string jsonResult= await _stokService.SaveStokKart(projeStokKart.stokKart);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                if (result.result == null) return;
-                if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase)) 
+                string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
+                if (jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result.result);
-                    continue;
+                    using (var sw = new StreamWriter(logDosyasi, append: true))
+                    {
+                        sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad} {Environment.NewLine} {jsonResult}");
+                    }
                 }
-                else 
+                else
                 {
-                    var pStokKart=JsonConvert.DeserializeObject<List<StokKart>>(result.result);
-                    projeStokKart.stokKart=pStokKart.FirstOrDefault();
-                    await _projeService.SaveProjeStokKart(projeStokKart);
+                    if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using (var sw = new StreamWriter(logDosyasi, append: true))
+                        {
+                            sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad}");
+                        }
+                    }
                 }
             }
         }

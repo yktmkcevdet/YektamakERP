@@ -40,14 +40,15 @@ namespace YektamakDesktop.Formlar.Genel
             universalGrid1.TabIndex = 55;
             universalGrid1.Grid.MouseClick += Grid_MouseClick;
             Controls.Add(universalGrid1);
-            ComboBoxListFill.GetLookupAd(_cache.pozisyonList, ref clbPozisyon);
-            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref clbFirma);
-            ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbYonetici);
+            clbFirma.SetDataSource(_cache.firmaList);
+            clbPozisyon.SetDataSource(_cache.pozisyonList);
+            clbYonetici.SetDataSource(_cache.personelList);
         }
+
         private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
-            var personelDTO = (PersonelDTO)universalGrid1.binding.Current;
-            personel = ConvertHelper.ToEntity<Personel>(personelDTO);
+            personel = (Personel)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            //personel = ConvertHelper.ToEntity<Personel>(personelDTO);
         }
 
         //Firma ekranından + butonuyla yeni eklenen personelin firma bilgisini tutması için
@@ -72,23 +73,14 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void Binding()
         {
-            ctbPersonelAd.DataBindings.Clear();
-            ctbPersonelSoyad.DataBindings.Clear();
-            ctbTelefon.DataBindings.Clear();
-            ctbMail.DataBindings.Clear();
-            clbPozisyon.DataBindings.Clear();
-            clbFirma.DataBindings.Clear();
-            clbYonetici.DataBindings.Clear();
-            pictureBoxPersonel.DataBindings.Clear();
-            ctbId.DataBindings.Clear();
-            ctbId.DataBindings.Add("TextCustom", personel , $"{nameof(personel.Id)}", true ,DataSourceUpdateMode.OnPropertyChanged);
-            ctbPersonelAd.DataBindings.Add("TextCustom", personel, $"{nameof(personel.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbPersonelSoyad.DataBindings.Add("TextCustom", personel, $"{nameof(personel.soyad)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTelefon.DataBindings.Add("TextCustom", personel, $"{nameof(personel.telefon)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbMail.DataBindings.Add("TextCustom", personel, $"{nameof(personel.mail)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbFirma.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.firma)}.{nameof(personel.firma.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbPozisyon.DataBindings.Add("selectedDataRowId", personel, $"{nameof(personel.pozisyon)}.{nameof(personel.pozisyon.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbYonetici.DataBindings.Add("SelectedValue", personel, $"{nameof(personel.yoneticiPersonelId)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbId, personel, "Id");
+            BindHelper.BindData(ctbPersonelAd, personel, "ad");
+            BindHelper.BindData(ctbPersonelSoyad, personel, "soyad");
+            BindHelper.BindData(ctbTelefon, personel, "telefon");
+            BindHelper.BindData(ctbMail, personel, "mail");
+            BindHelper.BindData(clbFirma, personel.firma, "Id");
+            BindHelper.BindData(clbPozisyon, personel.pozisyon, "Id");
+            BindHelper.BindData(clbYonetici, personel, "yoneticiPersonelId");
         }
         public void UpdateMode(Personel personelUpdate)
         {
@@ -139,11 +131,14 @@ namespace YektamakDesktop.Formlar.Genel
             if (CheckFields())
             {
                 string jsonResult = await _personelService.SavePersonel(personel);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                if (result?.result != null)
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    personel = _jsonConverter.ToModelList<Personel>(result.result).FirstOrDefault();
-                    if (!_cache.personelList.Any(p=>p.Id==personel.Id))
+                    MessageBox.Show(jsonResult,"Personel kaydederken hata");
+                }
+                else
+                {
+                    personel = JsonConvert.DeserializeObject<List<Personel>>(jsonResult).FirstOrDefault();
+                    if (!_cache.personelList.Any(p => p.Id == personel.Id))
                     {
                         _cache.personelList.Add(personel);
                     }
@@ -167,12 +162,12 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void PersonelKayitFormu_Load(object sender, EventArgs e)
         {
-            List<PersonelDTO> personelList = new();
-            foreach (var item in _cache.personelList)
-            {
-                personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
-            }
-            universalGrid1.SetData(personelList, this.Name);
+            List<Personel> personelList = new();
+            //foreach (var item in _cache.personelList)
+            //{
+            //    personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
+            //}
+            universalGrid1.SetData(_cache.personelList, this.Name);
         }
 
         private void PersonelKayitFormu_FormClosing(object sender, FormClosingEventArgs e)

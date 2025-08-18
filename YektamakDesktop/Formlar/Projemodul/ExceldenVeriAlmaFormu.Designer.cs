@@ -36,6 +36,7 @@
             totalCount = new System.Windows.Forms.Label();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             clbProjeKodu = new YektamakDesktop.CustomControls.FilterableComboBox();
+            chkProjeDosyaSil = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)verileriAktar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dosyaSec).BeginInit();
             SuspendLayout();
@@ -50,7 +51,7 @@
             ctbDosyaYolu.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbDosyaYolu.ForeColor = System.Drawing.Color.Black;
             ctbDosyaYolu.isPlaceHolder = true;
-            ctbDosyaYolu.Location = new System.Drawing.Point(145, 142);
+            ctbDosyaYolu.Location = new System.Drawing.Point(143, 135);
             ctbDosyaYolu.Multiline = false;
             ctbDosyaYolu.Name = "ctbDosyaYolu";
             ctbDosyaYolu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -69,7 +70,7 @@
             // 
             verileriAktar.Cursor = System.Windows.Forms.Cursors.Hand;
             verileriAktar.Image = Properties.Resources.aktar2;
-            verileriAktar.Location = new System.Drawing.Point(255, 194);
+            verileriAktar.Location = new System.Drawing.Point(261, 194);
             verileriAktar.Name = "verileriAktar";
             verileriAktar.Size = new System.Drawing.Size(35, 33);
             verileriAktar.TabIndex = 5;
@@ -80,7 +81,7 @@
             // 
             dosyaSec.Cursor = System.Windows.Forms.Cursors.Hand;
             dosyaSec.Image = Properties.Resources.fromExcelButton2;
-            dosyaSec.Location = new System.Drawing.Point(539, 142);
+            dosyaSec.Location = new System.Drawing.Point(537, 135);
             dosyaSec.Name = "dosyaSec";
             dosyaSec.Size = new System.Drawing.Size(35, 33);
             dosyaSec.TabIndex = 102;
@@ -131,10 +132,11 @@
             clbProjeKodu.BorderSize = 1;
             clbProjeKodu.DataSource = null;
             clbProjeKodu.DisplayMember = "kod";
-            clbProjeKodu.Location = new System.Drawing.Point(145, 107);
+            clbProjeKodu.Location = new System.Drawing.Point(143, 100);
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKodu.PlaceholderText = "Proje Kodu";
+            clbProjeKodu.SelectedDisplayValue = "Proje Kodu";
             clbProjeKodu.SelectedIndex = -1;
             clbProjeKodu.SelectedItem = null;
             clbProjeKodu.SelectedValue = null;
@@ -143,12 +145,23 @@
             clbProjeKodu.UnderlinedStyle = false;
             clbProjeKodu.ValueMember = "Id";
             // 
+            // chkProjeDosyaSil
+            // 
+            chkProjeDosyaSil.AutoSize = true;
+            chkProjeDosyaSil.Location = new System.Drawing.Point(145, 169);
+            chkProjeDosyaSil.Name = "chkProjeDosyaSil";
+            chkProjeDosyaSil.Size = new System.Drawing.Size(210, 19);
+            chkProjeDosyaSil.TabIndex = 106;
+            chkProjeDosyaSil.Text = "Projeye ait mevcut dosyalar silinsin";
+            chkProjeDosyaSil.UseVisualStyleBackColor = true;
+            // 
             // ExceldenVeriAlmaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(687, 266);
+            Controls.Add(chkProjeDosyaSil);
             Controls.Add(clbProjeKodu);
             Controls.Add(headerPanel1);
             Controls.Add(totalCount);
@@ -178,5 +191,6 @@
         private System.Windows.Forms.Label totalCount;
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.FilterableComboBox clbProjeKodu;
+        private System.Windows.Forms.CheckBox chkProjeDosyaSil;
     }
 }

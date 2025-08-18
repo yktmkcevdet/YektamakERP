@@ -57,9 +57,15 @@ namespace Models
         public MalzemeAltGrup malzemeAltGrup { get { if (_malzemeAltGrup == null) { _malzemeAltGrup = new MalzemeAltGrup(); } return _malzemeAltGrup; } set { _malzemeAltGrup = value; } }
         private MalzemeAltGrup2 _malzemeAltGrup2;
         public MalzemeAltGrup2 malzemeAltGrup2 { get { if (_malzemeAltGrup2 == null) { _malzemeAltGrup2 = new MalzemeAltGrup2(); } return _malzemeAltGrup2; } set { _malzemeAltGrup2 = value; } }
+        private Boyut _boyutTanim;
+        public Boyut boyutTanim
+        {
+            get { if (_boyutTanim == null) { _boyutTanim = new(); } return _boyutTanim; }
+            set { _boyutTanim = value; }
+        }
         private MalzemeStandart _malzemeStandart;
         public MalzemeStandart malzemeStandart { get { if (_malzemeStandart == null) { _malzemeStandart = new MalzemeStandart(); } return _malzemeStandart; } set { _malzemeStandart = value; } }
-
+        public bool? isTalasli { get; set; }
         private List<StokKartDosya> _dosyaList;
         public List<StokKartDosya> dosyaList
         {

@@ -30,7 +30,6 @@
         {
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             ctbTeklifNo = new YektamakDesktop.CustomControls.CustomTextBox();
-            firmaId = new YektamakDesktop.CustomControls.CustomComboListBox();
             ctbTeklifTalepTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
             ctbTeklifTarihi = new YektamakDesktop.CustomControls.CustomTextBoxTarih();
             label1 = new System.Windows.Forms.Label();
@@ -39,9 +38,7 @@
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
-            clbVade = new YektamakDesktop.CustomControls.CustomComboListBox();
             ctbTutar = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
-            clbDoviz = new YektamakDesktop.CustomControls.CustomComboListBox();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
@@ -51,6 +48,9 @@
             label9 = new System.Windows.Forms.Label();
             ctbAciklama = new YektamakDesktop.CustomControls.CustomTextBox();
             label10 = new System.Windows.Forms.Label();
+            firmaId = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbVade = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbDoviz = new YektamakDesktop.CustomControls.FilterableComboBox();
             SuspendLayout();
             // 
             // headerPanel1
@@ -76,7 +76,7 @@
             ctbTeklifNo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbTeklifNo.ForeColor = System.Drawing.Color.Black;
             ctbTeklifNo.isPlaceHolder = false;
-            ctbTeklifNo.Location = new System.Drawing.Point(151, 53);
+            ctbTeklifNo.Location = new System.Drawing.Point(151, 49);
             ctbTeklifNo.Multiline = false;
             ctbTeklifNo.Name = "ctbTeklifNo";
             ctbTeklifNo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -90,19 +90,6 @@
             ctbTeklifNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbTeklifNo.TextCustom = "";
             ctbTeklifNo.UnderlinedStyle = false;
-            // 
-            // firmaId
-            // 
-            firmaId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            firmaId.ListBoxVisualSize = 5;
-            firmaId.Location = new System.Drawing.Point(151, 85);
-            firmaId.Margin = new System.Windows.Forms.Padding(1);
-            firmaId.Name = "firmaId";
-            firmaId.Padding = new System.Windows.Forms.Padding(1);
-            firmaId.selectedDataRowId = null;
-            firmaId.selectedDataRowValue = null;
-            firmaId.Size = new System.Drawing.Size(506, 36);
-            firmaId.TabIndex = 2;
             // 
             // ctbTeklifTalepTarihi
             // 
@@ -165,7 +152,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(54, 116);
+            label5.Location = new System.Drawing.Point(54, 125);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(95, 15);
             label5.TabIndex = 10;
@@ -174,24 +161,11 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(54, 85);
+            label6.Location = new System.Drawing.Point(54, 92);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(37, 15);
             label6.TabIndex = 11;
             label6.Text = "Firma";
-            // 
-            // clbVade
-            // 
-            clbVade.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbVade.ListBoxVisualSize = 5;
-            clbVade.Location = new System.Drawing.Point(151, 218);
-            clbVade.Margin = new System.Windows.Forms.Padding(1);
-            clbVade.Name = "clbVade";
-            clbVade.Padding = new System.Windows.Forms.Padding(1);
-            clbVade.selectedDataRowId = null;
-            clbVade.selectedDataRowValue = null;
-            clbVade.Size = new System.Drawing.Size(207, 36);
-            clbVade.TabIndex = 12;
             // 
             // ctbTutar
             // 
@@ -218,19 +192,6 @@
             ctbTutar.TextCustom = "0";
             ctbTutar.UnderlinedStyle = false;
             // 
-            // clbDoviz
-            // 
-            clbDoviz.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbDoviz.ListBoxVisualSize = 5;
-            clbDoviz.Location = new System.Drawing.Point(151, 286);
-            clbDoviz.Margin = new System.Windows.Forms.Padding(1);
-            clbDoviz.Name = "clbDoviz";
-            clbDoviz.Padding = new System.Windows.Forms.Padding(1);
-            clbDoviz.selectedDataRowId = null;
-            clbDoviz.selectedDataRowValue = null;
-            clbDoviz.Size = new System.Drawing.Size(250, 36);
-            clbDoviz.TabIndex = 14;
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -243,7 +204,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(54, 286);
+            label8.Location = new System.Drawing.Point(54, 292);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(65, 15);
             label8.TabIndex = 16;
@@ -301,7 +262,7 @@
             ctbTeklifGecerlilikSuresi.BorderSize = 1;
             ctbTeklifGecerlilikSuresi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbTeklifGecerlilikSuresi.ForeColor = System.Drawing.Color.Black;
-            ctbTeklifGecerlilikSuresi.Location = new System.Drawing.Point(151, 317);
+            ctbTeklifGecerlilikSuresi.Location = new System.Drawing.Point(151, 323);
             ctbTeklifGecerlilikSuresi.Multiline = false;
             ctbTeklifGecerlilikSuresi.Name = "ctbTeklifGecerlilikSuresi";
             ctbTeklifGecerlilikSuresi.OndalikBasamak = 0;
@@ -320,7 +281,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(54, 317);
+            label9.Location = new System.Drawing.Point(54, 332);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(89, 15);
             label9.TabIndex = 21;
@@ -337,7 +298,7 @@
             ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
             ctbAciklama.isPlaceHolder = false;
-            ctbAciklama.Location = new System.Drawing.Point(529, 202);
+            ctbAciklama.Location = new System.Drawing.Point(520, 208);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -355,17 +316,77 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(529, 184);
+            label10.Location = new System.Drawing.Point(520, 190);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(56, 15);
             label10.TabIndex = 23;
             label10.Text = "Açıklama";
+            // 
+            // firmaId
+            // 
+            firmaId.BorderColor = System.Drawing.Color.Silver;
+            firmaId.BorderSize = 1;
+            firmaId.DataSource = null;
+            firmaId.DisplayMember = "ad";
+            firmaId.Location = new System.Drawing.Point(151, 83);
+            firmaId.Name = "firmaId";
+            firmaId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            firmaId.PlaceholderText = "Seçiniz...";
+            firmaId.SelectedDisplayValue = "Seçiniz...";
+            firmaId.SelectedIndex = -1;
+            firmaId.SelectedItem = null;
+            firmaId.SelectedValue = null;
+            firmaId.Size = new System.Drawing.Size(119, 29);
+            firmaId.TabIndex = 24;
+            firmaId.UnderlinedStyle = false;
+            firmaId.ValueMember = "Id";
+            // 
+            // clbVade
+            // 
+            clbVade.BorderColor = System.Drawing.Color.Silver;
+            clbVade.BorderSize = 1;
+            clbVade.DataSource = null;
+            clbVade.DisplayMember = "ad";
+            clbVade.Location = new System.Drawing.Point(151, 218);
+            clbVade.Name = "clbVade";
+            clbVade.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbVade.PlaceholderText = "Seçiniz...";
+            clbVade.SelectedDisplayValue = "Seçiniz...";
+            clbVade.SelectedIndex = -1;
+            clbVade.SelectedItem = null;
+            clbVade.SelectedValue = null;
+            clbVade.Size = new System.Drawing.Size(119, 29);
+            clbVade.TabIndex = 25;
+            clbVade.UnderlinedStyle = false;
+            clbVade.ValueMember = "Id";
+            // 
+            // clbDoviz
+            // 
+            clbDoviz.BorderColor = System.Drawing.Color.Silver;
+            clbDoviz.BorderSize = 1;
+            clbDoviz.DataSource = null;
+            clbDoviz.DisplayMember = "ad";
+            clbDoviz.Location = new System.Drawing.Point(151, 288);
+            clbDoviz.Name = "clbDoviz";
+            clbDoviz.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbDoviz.PlaceholderText = "Seçiniz...";
+            clbDoviz.SelectedDisplayValue = "Seçiniz...";
+            clbDoviz.SelectedIndex = -1;
+            clbDoviz.SelectedItem = null;
+            clbDoviz.SelectedValue = null;
+            clbDoviz.Size = new System.Drawing.Size(119, 29);
+            clbDoviz.TabIndex = 26;
+            clbDoviz.UnderlinedStyle = false;
+            clbDoviz.ValueMember = "Id";
             // 
             // SatinalmaTeklifKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(928, 806);
+            Controls.Add(clbDoviz);
+            Controls.Add(clbVade);
+            Controls.Add(firmaId);
             Controls.Add(label10);
             Controls.Add(ctbAciklama);
             Controls.Add(label9);
@@ -375,9 +396,7 @@
             Controls.Add(universalGrid1);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(clbDoviz);
             Controls.Add(ctbTutar);
-            Controls.Add(clbVade);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -386,7 +405,6 @@
             Controls.Add(label1);
             Controls.Add(ctbTeklifTarihi);
             Controls.Add(ctbTeklifTalepTarihi);
-            Controls.Add(firmaId);
             Controls.Add(ctbTeklifNo);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -401,7 +419,6 @@
 
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBox ctbTeklifNo;
-        private CustomControls.CustomComboListBox firmaId;
         private CustomControls.CustomTextBoxTarih ctbTeklifTalepTarihi;
         private CustomControls.CustomTextBoxTarih ctbTeklifTarihi;
         private System.Windows.Forms.Label label1;
@@ -410,9 +427,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private CustomControls.CustomComboListBox clbVade;
         private CustomControls.CustomTextBoxSayisal ctbTutar;
-        private CustomControls.CustomComboListBox clbDoviz;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private CustomControls.UniversalGrid universalGrid1;
@@ -422,5 +437,9 @@
         private System.Windows.Forms.Label label9;
         private CustomControls.CustomTextBox ctbAciklama;
         private System.Windows.Forms.Label label10;
+        private CustomControls.FilterableComboBox filterableComboBox1;
+        private CustomControls.FilterableComboBox firmaId;
+        private CustomControls.FilterableComboBox clbVade;
+        private CustomControls.FilterableComboBox clbDoviz;
     }
 }

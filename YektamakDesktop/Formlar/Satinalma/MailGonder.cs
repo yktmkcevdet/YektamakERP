@@ -1,6 +1,8 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -168,10 +170,9 @@ namespace YektamakDesktop.Formlar.Satinalma
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // rtf'yi html'e döndürmek için gerekli
                 mail.Body = RtfPipe.Rtf.ToHtml(rtbBody.Rtf);
                 string jsonResult =await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show("Teklif kaydedilirken hata oluştu. "+ result.result);
+                    MessageBox.Show("Teklif kaydedilirken hata oluştu. "+ jsonResult);
                 }
                 else
                 {

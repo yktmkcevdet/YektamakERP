@@ -48,7 +48,6 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_satisTeklifMaliyetKayitFormu == null)
                 {
                     _satisTeklifMaliyetKayitFormu = new SatisTeklifMaliyetKayitFormu();
-                    GlobalData.Yetki(ref _satisTeklifMaliyetKayitFormu);
                 }
                 return _satisTeklifMaliyetKayitFormu;
             }
@@ -83,7 +82,6 @@ namespace YektamakDesktop.Formlar.Satis
         }
         public void CloseForm()
         {
-            GlobalData.CloseForm(ref _satisTeklifMaliyetKayitFormu);
         }
 
         private void roundedButton5_Click(object sender, EventArgs e)
@@ -128,7 +126,6 @@ namespace YektamakDesktop.Formlar.Satis
             }
             else
             {
-                _satisTeklifTalep = _dataTableHelper.MapToEntity<SatisTeklifTalep>(_jsonConvertHelper.DeserializeToDataSet(result).Tables[0].Rows[0]);
                 teklifTalepId.TextCustom = satisTeklifTalep.Id.ToString();
                 _satisTeklifTalep = currentData;
                 byte[] msg = JsonConvert.DeserializeObject<byte[]>(result);
@@ -149,7 +146,6 @@ namespace YektamakDesktop.Formlar.Satis
 
                 satisTeklifTalep.Id = Convert.ToInt32(teklifTalepId.TextCustom);
                 string s = _satisService.GetSatisTeklifTalep(satisTeklifTalep);
-                satisTeklifTalep.belgeList = _dataTableHelper.MapToEntity<SatisTeklifTalep>(_jsonConvertHelper.DeserializeToDataSet(s).Tables[0].Rows[0]).belgeList;
                 satisTeklifTalep.teklifTalepTarihi = Convert.ToDateTime(teklifTalepTarihi.TextCustom);
                 satisTeklifTalep.musteri.Id = musteriId.selectedDataRowId;
                 satisTeklifTalep.teklifKonusu = teklifKonusu.TextCustom;

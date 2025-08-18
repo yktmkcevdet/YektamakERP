@@ -41,7 +41,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(693, 353);
             universalGrid1.TabIndex = 107;
-            universalGrid1.MouseDown1 += universalGrid1_CellClick;
+            universalGrid1.Grid.MouseClick += universalGrid1_CellClick;
             Controls.Add(universalGrid1);
             ComboBoxListFill.GetLookupAd(_cache.rolList, ref clbRol);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbPersonel);
@@ -96,27 +96,25 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 kullanici.sifre = hashedPassword;
                 kullanici.isSifreDegisti = false;
                 string jsonResult = _kullaniciYetkiService.SaveKullanici(kullanici);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                if (result?.result != null)
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
-                    {
-                        MessageBox.Show(result.result);
-                    }
-                    else
-                    {
-                        kullanici = JsonConvert.DeserializeObject<List<Kullanici>>(result.result).FirstOrDefault();
-                        if (!_cache.kullaniciList.Any(x => x.Id == kullanici.Id))
-                        { 
-                            _cache.kullaniciList.Add(kullanici); 
-                        }
-                        IMailHandler mailHandler = new MailHandler();
-                        mailHandler.SendMail(kullanici.personel.mail, "ERP şifreniz değiştirildi", "");
-                        KullaniciKayitFormu_Load(sender, e);
-                        MessageBox.Show("Kayıt başarılı");
-                    }
+                    MessageBox.Show(jsonResult);
+                        
+                    
                 }
-                kullanici.sifre = "";
+                else
+                {
+                    kullanici = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
+                    if (!_cache.kullaniciList.Any(x => x.Id == kullanici.Id))
+                    {
+                        _cache.kullaniciList.Add(kullanici);
+                    }
+                    IMailHandler mailHandler = new MailHandler();
+                    mailHandler.SendMail(kullanici.personel.mail, "ERP şifreniz değiştirildi", "");
+                    KullaniciKayitFormu_Load(sender, e);
+                    MessageBox.Show("Kayıt başarılı");
+                }
+                    kullanici.sifre = "";
             }
             catch (Exception ex)
             {

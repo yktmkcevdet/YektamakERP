@@ -190,7 +190,6 @@ namespace YektamakDesktop.Formlar.Stok
             stokKartınıSilToolStripMenuItem.Name = "stokKartınıSilToolStripMenuItem";
             stokKartınıSilToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             stokKartınıSilToolStripMenuItem.Text = "Seçili Stok Kartlarını Sil";
-            stokKartınıSilToolStripMenuItem.Click += stokKartınıSilToolStripMenuItem_Click;
             // 
             // projeKodu
             // 

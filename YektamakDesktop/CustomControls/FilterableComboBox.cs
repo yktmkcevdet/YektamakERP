@@ -166,7 +166,7 @@ namespace YektamakDesktop.CustomControls
         public object SelectedValue
         {
             get => comboBox1.SelectedValue;
-            set { if (value != null && value.ToString() != "") comboBox1.SelectedValue = value; }
+            set { if (value != null && value.ToString() != "") { comboBox1.SelectedValue = value; } else { SelectedIndex = -1; } }
         }
         [Browsable(false)]
         public object SelectedDisplayValue

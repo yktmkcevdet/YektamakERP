@@ -51,6 +51,8 @@ namespace YektamakDesktop.Formlar.Stok
             Binding();
             Load += async (s, e) => await StokKartGridForm_Load(s, e);
             projeKodu.SelectedIndexChanged += async (s, e) => await projeKodu_SelectedIndexChanged(s, e);
+            stokKartınıSilToolStripMenuItem.Click += async (s, e) => await stokKartınıSilToolStripMenuItem_Click(s,e);
+
             ctbParcaAdi.TextChanged += ctbParcaAdi_TextChanged;
         }
 
@@ -124,10 +126,9 @@ namespace YektamakDesktop.Formlar.Stok
             this.Enabled = false;
             stokKarts.Clear();
             string jsonResult = await _projeService.GetProjeStokKart(stokKartFilter);
-            Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-            if (result.result != null)
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(result.result);
+                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
                 List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
                 foreach (var sk in stokKarts)
                 {
@@ -232,7 +233,7 @@ namespace YektamakDesktop.Formlar.Stok
             }
         }
 
-        private async void stokKartınıSilToolStripMenuItem_Click(object sender, EventArgs e)
+        private async Task stokKartınıSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show($"Seçilen kayıtlar silinecektir. Onaylıyor musunuz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
@@ -241,17 +242,16 @@ namespace YektamakDesktop.Formlar.Stok
                 for (int i = 0; i < projeStokKartDTOs.Count; i++)
                 {
                     var item = projeStokKartDTOs[i];
-                    if (_cache.projes.Any(p=>p.personel.Id==_cache.kullanici.personel.Id && p.Id == item.Id))
+                    if (_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == item.Id))
                     {
                         MessageBox.Show($"{item.projekod} koduna ait stok kartını silemezsiniz");
                     }
                     else
                     {
                         string jsonResult = await _projeService.DeleteProjeStokKart(ConvertHelper.ToEntity<ProjeStokKart>(item));
-                        Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                        if (result?.result == null || result.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+                        if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                         {
-                            MessageBox.Show($"{item.stokKartkod} silinirken hata oluştu: {result.result}");
+                            MessageBox.Show($"{item.stokKartkod} silinirken hata oluştu: {jsonResult}");
                             return;
                         }
                         else

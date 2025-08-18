@@ -52,7 +52,6 @@
             treeView1.Name = "treeView1";
             treeView1.Size = new System.Drawing.Size(277, 381);
             treeView1.TabIndex = 1;
-            treeView1.AfterCheck += treeView1_AfterCheck;
             treeView1.MouseClick += treeView1_MouseClick;
             // 
             // comboListBoxRol
@@ -67,7 +66,6 @@
             comboListBoxRol.selectedDataRowValue = null;
             comboListBoxRol.Size = new System.Drawing.Size(277, 36);
             comboListBoxRol.TabIndex = 52;
-            comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
             // 
             // contextMenuStrip1
             // 

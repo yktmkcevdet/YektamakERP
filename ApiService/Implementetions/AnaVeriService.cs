@@ -52,5 +52,9 @@ namespace ApiService.Implementetions
         {
             return _apiService.Get("GetTalepNeden");
         }
+        public string GetBoyut()
+        {
+            return _apiService.Get("GetBoyut");
+        }
     }
 }

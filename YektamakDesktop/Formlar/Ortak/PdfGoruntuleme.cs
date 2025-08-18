@@ -57,13 +57,11 @@ namespace YektamakDesktop.Formlar.Ortak
         private void CloseForm()
         {
             Close();
-            GlobalData.RemoveLastForm();
             _pdfGoruntuleme = null;
         }
 
         private void PdfGoruntuleme_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GlobalData.RemoveLastForm();
             _pdfGoruntuleme = null;
         }
 

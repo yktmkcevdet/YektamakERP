@@ -59,5 +59,9 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(proje, $"SaveProje");
         }
+        public string DeleteProje(Proje proje)
+        {
+            return _apiService.Post(proje, $"DeleteProje");
+        }
     }
 }

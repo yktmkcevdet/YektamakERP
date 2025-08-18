@@ -81,5 +81,10 @@ namespace Api.Controllers
         {
            return _dataAccessLayer.GetObject("spGetProjeTip");
         }
+        [HttpGet, Route("api/GetBoyut")]
+        public string GetBoyut()
+        {
+            return _dataAccessLayer.GetObject("spGetBoyut");
+        }
     }
 }

@@ -116,4 +116,8 @@ namespace YektamakDesktop
             return temp;
         }
     }
+    public enum IbanPrefix
+    {
+        TR = 0
+    }
 }

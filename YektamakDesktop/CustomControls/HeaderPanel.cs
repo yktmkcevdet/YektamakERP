@@ -77,7 +77,9 @@ namespace YektamakDesktop.CustomControls
             parentForm = this.FindForm();
             if (parentForm is Form form)
             {
-                GlobalData.CloseForm(ref form);
+                form.Close();
+                form.Dispose();
+                form = null;
             }
         }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonelKayitFormu));
+            ctbId = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
             buttonResimSec = new System.Windows.Forms.Button();
             pictureBoxPersonel = new System.Windows.Forms.PictureBox();
             openFileDialogResim = new System.Windows.Forms.OpenFileDialog();
@@ -45,13 +46,12 @@
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             btnSave = new YektamakDesktop.CustomControls.CustomButtonSave();
-            clbFirma = new YektamakDesktop.CustomControls.CustomComboListBox();
-            clbPozisyon = new YektamakDesktop.CustomControls.CustomComboListBox();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             label8 = new System.Windows.Forms.Label();
-            ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             clbYonetici = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbFirma = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbPozisyon = new YektamakDesktop.CustomControls.FilterableComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPersonel).BeginInit();
             SuspendLayout();
             // 
@@ -265,32 +265,6 @@
             btnSave.TabIndex = 51;
             btnSave.SaveButtonClick += buttonPersonelKaydet_Click;
             // 
-            // clbFirma
-            // 
-            clbFirma.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbFirma.ListBoxVisualSize = 5;
-            clbFirma.Location = new System.Drawing.Point(325, 216);
-            clbFirma.Margin = new System.Windows.Forms.Padding(1);
-            clbFirma.Name = "clbFirma";
-            clbFirma.Padding = new System.Windows.Forms.Padding(1);
-            clbFirma.selectedDataRowId = null;
-            clbFirma.selectedDataRowValue = null;
-            clbFirma.Size = new System.Drawing.Size(400, 36);
-            clbFirma.TabIndex = 52;
-            // 
-            // clbPozisyon
-            // 
-            clbPozisyon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbPozisyon.ListBoxVisualSize = 5;
-            clbPozisyon.Location = new System.Drawing.Point(325, 251);
-            clbPozisyon.Margin = new System.Windows.Forms.Padding(1);
-            clbPozisyon.Name = "clbPozisyon";
-            clbPozisyon.Padding = new System.Windows.Forms.Padding(1);
-            clbPozisyon.selectedDataRowId = null;
-            clbPozisyon.selectedDataRowValue = null;
-            clbPozisyon.Size = new System.Drawing.Size(200, 36);
-            clbPozisyon.TabIndex = 53;
-            // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
@@ -332,31 +306,6 @@
             label8.TabIndex = 58;
             label8.Text = "Id";
             // 
-            // ctbId
-            // 
-            ctbId.BackColor = System.Drawing.Color.White;
-            ctbId.BorderColor = System.Drawing.Color.Silver;
-            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbId.BorderRadius = 5;
-            ctbId.BorderSize = 1;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ctbId.ForeColor = System.Drawing.Color.Black;
-            ctbId.isPlaceHolder = false;
-            ctbId.Location = new System.Drawing.Point(325, 48);
-            ctbId.Multiline = false;
-            ctbId.Name = "ctbId";
-            ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbId.PasswordChar = false;
-            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbId.PlaceholderText = "";
-            ctbId.ReadOnly = false;
-            ctbId.SelectionStart = 0;
-            ctbId.Size = new System.Drawing.Size(64, 28);
-            ctbId.TabIndex = 57;
-            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbId.TextCustom = "";
-            ctbId.UnderlinedStyle = false;
-            // 
             // clbYonetici
             // 
             clbYonetici.BorderColor = System.Drawing.Color.Silver;
@@ -367,6 +316,7 @@
             clbYonetici.Name = "clbYonetici";
             clbYonetici.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbYonetici.PlaceholderText = "Seçiniz...";
+            clbYonetici.SelectedDisplayValue = "Seçiniz...";
             clbYonetici.SelectedIndex = -1;
             clbYonetici.SelectedItem = null;
             clbYonetici.SelectedValue = null;
@@ -375,19 +325,82 @@
             clbYonetici.UnderlinedStyle = false;
             clbYonetici.ValueMember = "Id";
             // 
+            // clbFirma
+            // 
+            clbFirma.BorderColor = System.Drawing.Color.Silver;
+            clbFirma.BorderSize = 1;
+            clbFirma.DataSource = null;
+            clbFirma.DisplayMember = "ad";
+            clbFirma.Location = new System.Drawing.Point(325, 218);
+            clbFirma.Name = "clbFirma";
+            clbFirma.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbFirma.PlaceholderText = "Seçiniz...";
+            clbFirma.SelectedDisplayValue = "Seçiniz...";
+            clbFirma.SelectedIndex = -1;
+            clbFirma.SelectedItem = null;
+            clbFirma.SelectedValue = null;
+            clbFirma.Size = new System.Drawing.Size(364, 29);
+            clbFirma.TabIndex = 60;
+            clbFirma.UnderlinedStyle = false;
+            clbFirma.ValueMember = "Id";
+            // 
+            // clbPozisyon
+            // 
+            clbPozisyon.BorderColor = System.Drawing.Color.Silver;
+            clbPozisyon.BorderSize = 1;
+            clbPozisyon.DataSource = null;
+            clbPozisyon.DisplayMember = "ad";
+            clbPozisyon.Location = new System.Drawing.Point(325, 253);
+            clbPozisyon.Name = "clbPozisyon";
+            clbPozisyon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbPozisyon.PlaceholderText = "Seçiniz...";
+            clbPozisyon.SelectedDisplayValue = "Seçiniz...";
+            clbPozisyon.SelectedIndex = -1;
+            clbPozisyon.SelectedItem = null;
+            clbPozisyon.SelectedValue = null;
+            clbPozisyon.Size = new System.Drawing.Size(200, 29);
+            clbPozisyon.TabIndex = 61;
+            clbPozisyon.UnderlinedStyle = false;
+            clbPozisyon.ValueMember = "Id";
+            // 
+            // ctbId
+            // 
+            ctbId.BackColor = System.Drawing.SystemColors.Window;
+            ctbId.BorderColor = System.Drawing.Color.Silver;
+            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbId.BorderRadius = 5;
+            ctbId.BorderSize = 1;
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbId.ForeColor = System.Drawing.Color.DimGray;
+            ctbId.Location = new System.Drawing.Point(325, 50);
+            ctbId.Multiline = false;
+            ctbId.Name = "ctbId";
+            ctbId.OndalikBasamak = 0;
+            ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbId.PasswordChar = false;
+            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbId.PlaceholderText = "";
+            ctbId.ReadOnly = false;
+            ctbId.SelectionStart = 0;
+            ctbId.Size = new System.Drawing.Size(69, 26);
+            ctbId.TabIndex = 62;
+            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Right;
+            ctbId.TextCustom = "0";
+            ctbId.UnderlinedStyle = false;
+            // 
             // PersonelKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new System.Drawing.Size(992, 707);
-            Controls.Add(clbYonetici);
-            Controls.Add(label8);
             Controls.Add(ctbId);
-            Controls.Add(roundedButton1);
-            Controls.Add(universalGrid1);
             Controls.Add(clbPozisyon);
             Controls.Add(clbFirma);
+            Controls.Add(clbYonetici);
+            Controls.Add(label8);
+            Controls.Add(roundedButton1);
+            Controls.Add(universalGrid1);
             Controls.Add(btnSave);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -408,7 +421,7 @@
             Name = "PersonelKayitFormu";
             ShowIcon = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "PersonelKayit";
+            Text = "PersonelKayitFormu";
             FormClosing += PersonelKayitFormu_FormClosing;
             Load += PersonelKayitFormu_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxPersonel).EndInit();
@@ -433,12 +446,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private CustomControls.CustomButtonSave btnSave;
-        private CustomControls.CustomComboListBox clbFirma;
-        private CustomControls.CustomComboListBox clbPozisyon;
         private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Label label8;
-        private CustomControls.CustomTextBox ctbId;
+        private CustomControls.CustomTextBoxSayisal ctbId;
         private CustomControls.FilterableComboBox clbYonetici;
+        private CustomControls.FilterableComboBox clbFirma;
+        private CustomControls.FilterableComboBox clbPozisyon;
     }
 }

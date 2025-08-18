@@ -31,11 +31,22 @@ namespace Api.Business
 
                         // Eğer sadece sonuç döndürüyorsa DataAdapter kullanma, ExecuteReader yeterli olabilir.
                         // Ancak eski yapıyı koruyalım:
-                        MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
-                        DataSet dataSet = new DataSet();
-                        sqlDataAdapter.Fill(dataSet);
-                        string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
-                        return returnValue;
+                        //MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                        //DataSet dataSet = new DataSet();
+                        //sqlDataAdapter.Fill(dataSet);
+                        //string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                        //return returnValue;
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader["result"]?.ToString();
+                            }
+                            else
+                            {
+                                return "Veritabanından alınırken hata";
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -61,11 +72,22 @@ namespace Api.Business
             {
                 AddParameters(model, cmd, "");
 
-                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sqlDataAdapter.Fill(dataSet);
-                string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
-                return returnValue;
+                //MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                //DataSet dataSet = new DataSet();
+                //sqlDataAdapter.Fill(dataSet);
+                //string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                //return returnValue;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader["result"]?.ToString();
+                    }
+                    else
+                    {
+                        return "Veritabanından alınırken hata";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -86,11 +108,22 @@ namespace Api.Business
             {
                 AddParameters(parameter, cmd);
 
-                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sqlDataAdapter.Fill(dataSet);
-                string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
-                return returnValue;
+                //MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                //DataSet dataSet = new DataSet();
+                //sqlDataAdapter.Fill(dataSet);
+                //string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                //return returnValue;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader["result"]?.ToString();
+                    }
+                    else
+                    {
+                        return "Veritabanından alınırken hata";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -113,12 +146,23 @@ namespace Api.Business
             cmd.CommandType = CommandType.StoredProcedure;
             try
             {
-                GetStoredProcedureParameters(cmd);
-                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sqlDataAdapter.Fill(dataSet);
-                string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
-                return returnValue;
+                //GetStoredProcedureParameters(cmd);
+                //MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                //DataSet dataSet = new DataSet();
+                //sqlDataAdapter.Fill(dataSet);
+                //string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                //return returnValue;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader["result"]?.ToString();
+                    }
+                    else
+                    {
+                        return "Veritabanından alınırken hata";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -138,11 +182,22 @@ namespace Api.Business
             {
                 AddParameters(model, cmd, "");
 
-                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sqlDataAdapter.Fill(dataSet);
-                string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
-                return returnValue;
+                //MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                //DataSet dataSet = new DataSet();
+                //sqlDataAdapter.Fill(dataSet);
+                //string returnValue = DataBaseJobsGeneral.SerializeObject(dataSet);
+                //return returnValue;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader["result"]?.ToString();
+                    }
+                    else
+                    {
+                        return "Veritabanından alınırken hata";
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -33,7 +33,6 @@ namespace YektamakDesktop
                 DIContainer.GetService<GlobalData>();
                 DIContainer.GetService<PermissionManager>();
                 DIContainer.GetService<DataControlMenu>();
-                GlobalData.Start();
 
                 UserLogin loginForm = FormFactory.CreateForm<UserLogin>();
                 Application.Run(loginForm);

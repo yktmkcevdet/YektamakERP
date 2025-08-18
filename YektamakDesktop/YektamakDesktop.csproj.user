@@ -20,12 +20,6 @@
     <Compile Update="CustomControls\CustomComboListBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="CustomControls\CustomDataGridView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="CustomControls\CustomDataGridViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="CustomControls\CustomRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -33,6 +27,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="CustomControls\CustomTextBoxTarih.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\FilterableCheckedComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="CustomControls\FilterableComboBox.cs">
@@ -65,13 +62,19 @@
     <Compile Update="Formlar\Genel\DovizKurlari.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\ExcelGrupParametreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Genel\ExcelTanimlamaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Genel\PersonelGridFormu.cs">
+    <Compile Update="Formlar\Genel\PersonelKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Genel\PersonelKayitFormu.cs">
+    <Compile Update="Formlar\Genel\StokGrupTanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\StokGrupTanimlari.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Loading.cs">
@@ -166,9 +169,6 @@
     <EmbeddedResource Update="CustomControls\CustomComboListBox.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="CustomControls\CustomDataGridView.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Update="CustomControls\CustomRadioButton.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -194,12 +194,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\Genel\ExcelTanimlamaFormu.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Genel\FirmaGridForm.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Genel\FirmaKayitFormu.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\MainWindow.resx">

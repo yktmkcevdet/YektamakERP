@@ -49,8 +49,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             label8 = new System.Windows.Forms.Label();
             customButtonSave1 = new CustomButtonSave();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            yeniKayıtEkleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             görüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stokKartıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            seçilenKayıtlarıBirleştirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             clbProjeKodu = new FilterableComboBox();
             clbKullaniciId = new FilterableComboBox();
             fcbTalepNeden = new FilterableComboBox();
@@ -243,6 +244,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // customButtonSave1
             // 
+            customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
             customButtonSave1.Location = new System.Drawing.Point(1116, 766);
             customButtonSave1.Name = "customButtonSave1";
@@ -252,23 +254,30 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { yeniKayıtEkleToolStripMenuItem, görüntüleToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { görüntüleToolStripMenuItem, stokKartıGörüntüleToolStripMenuItem, seçilenKayıtlarıBirleştirToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(150, 48);
-            // 
-            // yeniKayıtEkleToolStripMenuItem
-            // 
-            yeniKayıtEkleToolStripMenuItem.Name = "yeniKayıtEkleToolStripMenuItem";
-            yeniKayıtEkleToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            yeniKayıtEkleToolStripMenuItem.Text = "Yeni Kayıt Ekle";
-            yeniKayıtEkleToolStripMenuItem.Click += yeniKayıtEkleToolStripMenuItem_Click;
+            contextMenuStrip1.Size = new System.Drawing.Size(199, 70);
             // 
             // görüntüleToolStripMenuItem
             // 
             görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
-            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            görüntüleToolStripMenuItem.Text = "Görüntüle";
+            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            görüntüleToolStripMenuItem.Text = "Parça Listesi Görüntüle";
             görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
+            // 
+            // stokKartıGörüntüleToolStripMenuItem
+            // 
+            stokKartıGörüntüleToolStripMenuItem.Name = "stokKartıGörüntüleToolStripMenuItem";
+            stokKartıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            stokKartıGörüntüleToolStripMenuItem.Text = "Stok Kartı Görüntüle";
+            stokKartıGörüntüleToolStripMenuItem.Click += stokKartıGörüntüleToolStripMenuItem_Click;
+            // 
+            // seçilenKayıtlarıBirleştirToolStripMenuItem
+            // 
+            seçilenKayıtlarıBirleştirToolStripMenuItem.Name = "seçilenKayıtlarıBirleştirToolStripMenuItem";
+            seçilenKayıtlarıBirleştirToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            seçilenKayıtlarıBirleştirToolStripMenuItem.Text = "Seçilen Kayıtları Birleştir";
+            seçilenKayıtlarıBirleştirToolStripMenuItem.Click += seçilenKayıtlarıBirleştirToolStripMenuItem_Click;
             // 
             // clbProjeKodu
             // 
@@ -280,6 +289,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKodu.PlaceholderText = "Seçiniz...";
+            clbProjeKodu.SelectedDisplayValue = "Seçiniz...";
             clbProjeKodu.SelectedIndex = -1;
             clbProjeKodu.SelectedItem = null;
             clbProjeKodu.SelectedValue = null;
@@ -287,6 +297,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKodu.TabIndex = 35;
             clbProjeKodu.UnderlinedStyle = false;
             clbProjeKodu.ValueMember = "Id";
+            clbProjeKodu.SelectedIndexChanged += clbProjeKodu_SelectedIndexChanged;
             // 
             // clbKullaniciId
             // 
@@ -298,6 +309,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.Name = "clbKullaniciId";
             clbKullaniciId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbKullaniciId.PlaceholderText = "Seçiniz...";
+            clbKullaniciId.SelectedDisplayValue = "Seçiniz...";
             clbKullaniciId.SelectedIndex = -1;
             clbKullaniciId.SelectedItem = null;
             clbKullaniciId.SelectedValue = null;
@@ -316,6 +328,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbTalepNeden.Name = "fcbTalepNeden";
             fcbTalepNeden.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbTalepNeden.PlaceholderText = "Seçiniz...";
+            fcbTalepNeden.SelectedDisplayValue = "Seçiniz...";
             fcbTalepNeden.SelectedIndex = -1;
             fcbTalepNeden.SelectedItem = null;
             fcbTalepNeden.SelectedValue = null;
@@ -387,11 +400,12 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.Label label8;
         private CustomControls.CustomButtonSave customButtonSave1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem yeniKayıtEkleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
         private FilterableComboBox clbProjeKodu;
         private FilterableComboBox filterableComboBox2;
         private FilterableComboBox fcbTalepNeden;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem stokKartıGörüntüleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem seçilenKayıtlarıBirleştirToolStripMenuItem;
     }
 }

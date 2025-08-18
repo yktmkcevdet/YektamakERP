@@ -18,6 +18,7 @@ namespace ApiService.Implementetions
         public ApiServiceClientNotDecoded(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.Timeout = TimeSpan.FromSeconds(200);
             _jsonSerializerSettings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
@@ -55,17 +56,13 @@ namespace ApiService.Implementetions
         {
             try
             {
-                string jsonContent = JsonConvert.SerializeObject(entity);
+                string jsonContent = JsonConvert.SerializeObject(entity,_jsonSerializerSettings);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var response =  _httpClient.PostAsync($"/api/{apiAdres}", content);
 
                 string result = response.Result.Content.ReadAsStringAsync().Result;
-                if (string.IsNullOrWhiteSpace(result) ||
-                    result.Contains("error", StringComparison.OrdinalIgnoreCase))
-                {
-                    return "0";
-                }
+
 
                 return result;
             }
@@ -87,10 +84,10 @@ namespace ApiService.Implementetions
                 var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);
 
                 // HTTP status kontrolü
-                if (!response.IsSuccessStatusCode)
-                {
-                    return "0";
-                }
+                //if (!response.IsSuccessStatusCode)
+                //{
+                //    return "0";
+                //}
                 string result = await response.Content.ReadAsStringAsync();
                 return result;
             }

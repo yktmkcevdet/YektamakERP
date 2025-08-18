@@ -43,14 +43,17 @@ namespace YektamakDesktop.Common
             services.AddTransient<DataControlSatinalmaTalepDetay>();
             services.AddTransient<DataControlStokKartDosya>();
             services.AddTransient<EkranEkle>();
+            services.AddTransient<ExcelGrupParametreForm>();
             services.AddTransient<ExcelTanimlamaFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
-            services.AddTransient<FirmaGridForm>();
             services.AddTransient<GlobalData>();
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<KullaniciKayitFormu>();
             services.AddTransient<MailGonder>();
             services.AddTransient<MainWindow>();
+            services.AddTransient<MalzemeAltGrupTanimFormu>();
+            services.AddTransient<MalzemeAltGrup2TanimFormu>();
+            services.AddTransient<MalzemeGrupTanimFormu>();
             services.AddTransient<Menuler>();
             services.AddTransient<Monday>();
             services.AddTransient<PermissionManager>();
@@ -70,12 +73,13 @@ namespace YektamakDesktop.Common
             services.AddTransient<SatisSiparisTeklifTalepGridForm>();
             services.AddTransient<SatisTeklifTalepKayitFormu>();
             services.AddTransient<SatisTeklifMaliyetKayitFormu>();
+            services.AddTransient<StokGrupTanimFormu>();
+            services.AddTransient<StokGrupTanimlari>();
             services.AddTransient<StokKartKayitFormu>();
             services.AddTransient<StokKartGridForm>();
             services.AddTransient<UniversalGrid>();
             services.AddTransient<UserLogin>();
             services.AddTransient<YetkiTanimlari>();
-            services.AddTransient<IDataGridHelper, DataGridHelper>();
             services.Configure<PasswordHashingOptions>(options =>
             {
                 options.Iterations = 120000; // Higher for more security

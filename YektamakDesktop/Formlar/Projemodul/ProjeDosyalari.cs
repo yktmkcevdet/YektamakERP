@@ -19,15 +19,44 @@ namespace YektamakDesktop.Formlar.ProjeModul
     public partial class ProjeDosyalari : Form
     {
         private readonly ICache _cache;
-        private readonly IJsonConverter _jsonConvertHelper;
+        private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         public ProjeDosyalari(ICache cache, IJsonConverter jsonConvertHelper, IProjeService projeService)
         {
             _cache = cache;
-            _jsonConvertHelper = jsonConvertHelper;
+            _jsonConverter = jsonConvertHelper;
             _projeService = projeService;
             InitializeComponent();
-            InitialUniversalGrid();
+            Initialize();
+        }
+        private void Initialize()
+        {
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(8, 270);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(1273, 474);
+            universalGrid1.TabIndex = 124;
+            universalGrid1.MouseDown1 += universalGrid1_MouseClick;
+            Controls.Add(universalGrid1);
+
+            Load += async (s, e) => await form_Load(s, e);
+            clbStokGrup.SelectedIndexChanged += async (s, e) => await parcaGrubu_SelectedIndexChanged(s, e);
+            clbMalzemeGrup.SelectedIndexChanged += async (s, e) => await parcaAltGrubu_SelectedIndexChanged(s, e);
+            ctbParcaAdi.TextChanged += async (s, e) => await textBoxParcaAdi_TextChanged(s, e);
+            ctbParcaAdi.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
+            chkSatinalma.CheckedChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
+            chkPdf.CheckStateChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
+            chkDxf.CheckStateChanged += async (s, e) => await chkDxf_CheckedChanged(s, e);
+            chkStep.CheckStateChanged += async (s, e) => await chkStep_CheckedChanged(s, e);
+            chkSatinalma.CheckStateChanged += async (s, e) => await chkSatinalma_CheckedChanged(s, e);
+            clbMalzemeAltGrup.SelectedIndexChanged += async (s, e) => await cbxMalzemeAltGrup_SelectedIndexChanged(s, e);
+            clbMalzemeAltGrup2.SelectedIndexChanged += async (s, e) => await cbxMalzemeAltGrup2_SelectedIndexChanged(s, e);
+            roundedIconButton2.Click += async (s, e) => await roundedIconButton2_Click(s, e);
+            FormClosing += async (s, e) => await ProjeDosyalari_FormClosing(s, e);
+            seçilenKayıtlarıSilToolStripMenuItem.Click += async (s, e) => await seçilenKayıtlarıSilToolStripMenuItem_Click(s, e);
+
         }
         private ProjeStokKart _projeStokKartFilter;
         private ProjeStokKart projeStokKartFilter
@@ -71,44 +100,35 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         private async Task Binding()
         {
-            fcbProjeKod.DataBindings.Clear();
-            clbStokGrup.DataBindings.Clear();
-            clbMalzemeGrup.DataBindings.Clear();
-            clbMalzemeAltGrup.DataBindings.Clear();
-            clbMalzemeAltGrup2.DataBindings.Clear();
-            chkPdf.DataBindings.Clear();
-            chkDxf.DataBindings.Clear();
-            chkSatinalma.DataBindings.Clear();
-            fcbProjeKod.DataBindings.Add("SelectedValue", projeStokKartFilter.proje, $"{nameof(projeStokKartFilter.proje.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeGrup.DataBindings.Add("SelectedValue", projeStokKartFilter.stokKart.malzemeGrup, $"{nameof(projeStokKartFilter.stokKart.malzemeGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbStokGrup.DataBindings.Add("SelectedValue", projeStokKartFilter.stokKart.stokGrup, "Id", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeAltGrup.DataBindings.Add("SelectedValue", projeStokKartFilter.stokKart.malzemeAltGrup, $"{nameof(projeStokKartFilter.stokKart.malzemeAltGrup.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbMalzemeAltGrup2.DataBindings.Add("SelectedValue", projeStokKartFilter.stokKart.malzemeAltGrup2, $"{nameof(projeStokKartFilter.stokKart.malzemeAltGrup2.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            chkPdf.DataBindings.Add("CheckState", projeStokKartFilter.stokKart, $"{nameof(projeStokKartFilter.stokKart.isPdf)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            chkDxf.DataBindings.Add("CheckState", projeStokKartFilter.stokKart, $"{nameof(projeStokKartFilter.stokKart.isDxf)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            chkSatinalma.DataBindings.Add("CheckState", projeStokKartFilter.stokKart, $"{nameof(projeStokKartFilter.stokKart.isSatinalma)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(fcbProjeKod, projeStokKartFilter.proje, nameof(projeStokKartFilter.proje.Id));
+            BindHelper.BindData(clbMalzemeGrup, projeStokKartFilter.stokKart.malzemeGrup, nameof(projeStokKartFilter.stokKart.malzemeGrup.Id));
+            BindHelper.BindData(clbStokGrup, projeStokKartFilter.stokKart.stokGrup, nameof(projeStokKartFilter.stokKart.stokGrup.Id));
+            BindHelper.BindData(clbMalzemeAltGrup, projeStokKartFilter.stokKart.malzemeAltGrup, nameof(projeStokKartFilter.stokKart.malzemeAltGrup.Id));
+            BindHelper.BindData(chkPdf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isPdf));
+            BindHelper.BindData(chkDxf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isDxf));
+            BindHelper.BindData(chkStep, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isStep));
+            BindHelper.BindData(chkSatinalma, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isSatinalma));
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
         }
 
         private async Task GridDoldur()
         {
             this.Enabled = false;
+            _cache.stokKartList.Clear();
             projeStokKartDTOs.Clear();
             string jsonResult = await _projeService.GetProjeStokKart(projeStokKartFilter);
-            Result result = _jsonConvertHelper.DeserializeToModelList<Result>(jsonResult)[0];
-            if (result.result != null)
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(result.result);
-                List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
-                foreach (var psk in projeStokKarts)
-                {
-                    pskDTOs.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>(psk));
-                }
-                projeStokKartDTOs = pskDTOs;
+                projeStokKartDTOs = null;
             }
             else
             {
-                projeStokKartDTOs = null;
+                List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
+                foreach (var psk in projeStokKarts)
+                {
+                    _cache.stokKartList.Add(psk.stokKart);
+                    projeStokKartDTOs.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>(psk));
+                }
             }
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
             this.Enabled = true;
@@ -157,6 +177,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private async Task chkSatinalma_CheckedChanged(object sender, EventArgs e)
         {
+            chkSatinalma.DataBindings["CheckState"].WriteValue();
             await GridYenile();
         }
         private async Task chkPdf_CheckStateChanged(object sender, EventArgs e)
@@ -178,13 +199,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private async Task chkStep_CheckedChanged(object sender, EventArgs e)
         {
+            chkStep.DataBindings["CheckState"].WriteValue();
             await GridYenile();
         }
         private void roundedButton4_Click(object sender, EventArgs e)
         {
             bool result = true;
-            result = GlobalData.CheckField("Stok grubu seçilmelidir", clbStokGrup) && result;
-            result = GlobalData.CheckField("Malzeme grubu seçilmelidir", clbMalzemeGrup) && result;
             if (result) CreateSatinalmaTalep(sender, e);
         }
         private void CreateSatinalmaTalep(object sender, EventArgs e)
@@ -196,29 +216,46 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 foreach (var item in talepList)
                 {
                     item.Id = null; //projestokKartId satinalmaTalepDetayId olarak aktarılmaması için null yapılıyor
-                    SatinalmaTalepDetay satinalmaTalepdetay = new();
+                    SatinalmaTalepDetay satinalmaTalepdetay = new SatinalmaTalepDetay { proje = { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int proje) ? proje : null } };
                     SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetayDTO();
-                    // Eğer stok kartının hammaddeId'si varsa, satınalma talep detay listesine hammadde olarak ekle
-                    if (item.stokKarthammaddeId != null)
+                    // Eğer stok kartının hammaddeId'si varsa, ve lazer grubuna ait parça değilse satınalma talep detay listesine hammadde olarak ekle
+                    if (item.stokKarthammaddeId != null && item.stokKartmalzemeGrupId!=28)
                     {
-                        //Hammadde ise listeye daha önce eklenmiş mi kontrol et, eklenmişse miktarını güncelle
+                        //Hammadde ise ve listeye daha önce eklenmiş mi kontrol et, eklenmişse miktarını güncelle
                         if (satinalmaTalepDetayList.Any(x => x.stokKart.Id == item.stokKarthammaddeId))
                         {
                             satinalmaTalepdetay = satinalmaTalepDetayList.FirstOrDefault(x => x.stokKart.Id == item.stokKarthammaddeId);
-                            satinalmaTalepdetay.miktar += item.miktar;
+                            if (item.stokKarthammaddeolcuBirimId == 2)
+                            {
+                                satinalmaTalepdetay.miktar += item.miktar * item.stokKartagirlik;
+                            }
+                            else
+                            {
+                                satinalmaTalepdetay.miktar += item.miktar;
+                            }
                             satinalmaTalepdetay.agirlik += item.miktar * item.stokKartagirlik;
+                            
                             satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(
                                 ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
                         }
                         // Eğer hammadde olarak eklenmemişse, yeni bir hammadde olarak ekle
                         else
                         {
-                            satinalmaTalepdetay.miktar = item.miktar;
+                            if (satinalmaTalepdetay.stokKart.hammadde.olcuBirim.Id == 2)
+                            {
+                                satinalmaTalepdetay.miktar = item.miktar * item.stokKartagirlik;
+                            }
+                            else
+                            {
+                                satinalmaTalepdetay.miktar = item.miktar;
+                            }
                             satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
                             satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
-                            satinalmaTalepdetay.stokKart.Id = item.stokKarthammaddeId;
-                            satinalmaTalepdetay.stokKart.kod = item.stokKarthammaddekod;
-                            satinalmaTalepdetay.stokKart.ad = item.stokKarthammaddead;
+                            satinalmaTalepdetay.stokKart = JsonConvert.DeserializeObject<StokKart>(
+                                JsonConvert.SerializeObject(ConvertHelper.ToEntity<ProjeStokKart>(item).stokKart.hammadde));
+                            //satinalmaTalepdetay.stokKart.Id = item.stokKarthammaddeId;
+                            //satinalmaTalepdetay.stokKart.kod = item.stokKarthammaddekod;
+                            //satinalmaTalepdetay.stokKart.ad = item.stokKarthammaddead;
                             satinalmaTalepDetayList.Add(satinalmaTalepdetay);
                         }
                     }
@@ -234,7 +271,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 SatinalmaTalep satinalmaTalep = new SatinalmaTalep
                 {
                     proje = { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null },
-                    malzemeGrup = new MalzemeGrup { Id = int.TryParse(clbMalzemeGrup.SelectedValue.ToString(), out int malzemegrupId) ? malzemegrupId : null },
+                    //malzemeGrup = new MalzemeGrup { Id = int.TryParse(clbMalzemeGrup.SelectedValue.ToString(), out int malzemegrupId) ? malzemegrupId : null },
                     talepTarihi = DateTime.Today,
                     teslimTarihi = null,
                     aciklama = "Otomatik oluşturulan satınalma talebi",
@@ -263,6 +300,14 @@ namespace YektamakDesktop.Formlar.ProjeModul
             {
                 MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
                 return false;
+            }
+            if (stokKarts.Any(x => x.stokKartisStep == false))
+            {
+                DialogResult dialogResult = MessageBox.Show("STEP dosyası olmayan kayıtlar var devam edilsin mi?", "STEP Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return false;
+                }
             }
             if (stokKarts.Any(x => x.stokKartisSatinalma == true))
             {
@@ -370,34 +415,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             result = GlobalData.CheckField("Malzeme grubu seçilmelidir", clbMalzemeGrup) && result;
             if (result) CreateSatinalmaTalep(sender, e);
         }
-        private void InitialUniversalGrid()
-        {
-            Controls.Remove(universalGrid1);
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(8, 270);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1273, 474);
-            universalGrid1.TabIndex = 124;
-            universalGrid1.MouseDown1 += universalGrid1_MouseClick;
-            Controls.Add(universalGrid1);
-
-            Load += async (s, e) => await form_Load(s, e);
-            clbStokGrup.SelectedIndexChanged += async (s, e) => await parcaGrubu_SelectedIndexChanged(s, e);
-            clbMalzemeGrup.SelectedIndexChanged += async (s, e) => await parcaAltGrubu_SelectedIndexChanged(s, e);
-            ctbParcaAdi.TextChanged += async (s, e) => await textBoxParcaAdi_TextChanged(s, e);
-            ctbParcaAdi.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
-            chkSatinalma.CheckedChanged += async (s, e) => await chkSatinalma_CheckedChanged(s, e);
-            chkPdf.CheckStateChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
-            chkDxf.CheckStateChanged += async (s, e) => await chkDxf_CheckedChanged(s, e);
-            chkStep.CheckedChanged += async (s, e) => await chkStep_CheckedChanged(s, e);
-            clbMalzemeAltGrup.SelectedIndexChanged += async (s, e) => await cbxMalzemeAltGrup_SelectedIndexChanged(s, e);
-            clbMalzemeAltGrup2.SelectedIndexChanged += async (s, e) => await cbxMalzemeAltGrup2_SelectedIndexChanged(s, e);
-            roundedIconButton2.Click += async (s, e) => await roundedIconButton2_Click(s, e);
-            FormClosing += async (s, e) => await ProjeDosyalari_FormClosing(s, e);
-            seçilenKayıtlarıSilToolStripMenuItem.Click += async (s, e) => await seçilenKayıtlarıSilToolStripMenuItem_Click(s,e);
-
-        }
+        
 
         private async Task seçilenKayıtlarıSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -411,10 +429,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     if (item.Id != null)
                     {
                         string jsonResult=await _projeService.DeleteProjeStokKart(ConvertHelper.ToEntity<ProjeStokKart>(item));
-                        Result result = _jsonConvertHelper.DeserializeToModelList<Result>(jsonResult)[0];
-                        if (result?.result == null || result.result.Contains("error",StringComparison.OrdinalIgnoreCase))
+                        if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                         {
-                            MessageBox.Show($"{item.stokKartkod} silinirken hata oluştu: {result.result}");
+                            MessageBox.Show($"{item.stokKartkod} silinirken hata oluştu: {jsonResult}");
                             return;
                         }
                         else

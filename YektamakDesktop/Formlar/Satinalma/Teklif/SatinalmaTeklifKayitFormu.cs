@@ -37,9 +37,9 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             universalGrid1.Size = new System.Drawing.Size(824, 364);
             universalGrid1.TabIndex = 17;
             Controls.Add(universalGrid1);
-            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref firmaId);
-            ComboBoxListFill.GetLookupAd(_cache.dovizCinsiList, ref clbDoviz);
-            ComboBoxListFill.GetLookupAd(_cache.vadeList, ref clbVade);
+            firmaId.SetDataSource(_cache.firmaList);
+            clbDoviz.SetDataSource(_cache.dovizCinsiList);
+            clbVade.SetDataSource(_cache.vadeList);
         }
         private SatinalmaTeklifBaslik _satinalmaTeklifBaslik;
         public SatinalmaTeklifBaslik satinalmaTeklifBaslik
@@ -69,14 +69,13 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
                     satinalmaTeklifBaslik.satinalmaTeklifDetayList.Add(ConvertHelper.ToEntity<SatinalmaTeklifDetay>(item));
                 }
                 string jsonResult = await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                if (result.result.Contains("error",StringComparison.OrdinalIgnoreCase)) 
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result.result);
+                    MessageBox.Show(jsonResult);
                 }
                 else
                 {
-                    var nentity = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(result.result);
+                    var nentity = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
                     MessageBox.Show("Kayıt Başarılı");
                 }
 
@@ -101,26 +100,17 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
 
         private async void Binding()
         {
-            ctbTeklifTalepTarihi.DataBindings.Clear();
-            ctbTeklifNo.DataBindings.Clear();
-            ctbTeklifTarihi.DataBindings.Clear();
-            ctbTeklifGecerlilikSuresi.DataBindings.Clear();
-            ctbTerminSuresi.DataBindings.Clear();
-            ctbTutar.DataBindings.Clear();
-            ctbAciklama.DataBindings.Clear();
-            firmaId.DataBindings.Clear();
-            clbVade.DataBindings.Clear();
-            clbDoviz.DataBindings.Clear();
-            ctbTeklifTalepTarihi.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "teklifTalepTarihi", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTeklifNo.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "teklifNo", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTeklifTarihi.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "teklifTarihi", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTeklifGecerlilikSuresi.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "teklifGecerlilikSuresi", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTerminSuresi.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "terminSuresi", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbTutar.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "teklifTutar.tutar", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbAciklama.DataBindings.Add("TextCustom", satinalmaTeklifBaslik, "aciklama", true, DataSourceUpdateMode.OnPropertyChanged);
-            firmaId.DataBindings.Add("selectedDataRowId", satinalmaTeklifBaslik, "teklifFirma.Id", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbVade.DataBindings.Add("selectedDataRowId", satinalmaTeklifBaslik, "vade.Id", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbDoviz.DataBindings.Add("selectedDataRowId", satinalmaTeklifBaslik, "teklifTutar.dovizCinsi.Id", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbTeklifNo, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifNo));
+            BindHelper.BindData(firmaId, satinalmaTeklifBaslik.teklifFirma, nameof(satinalmaTeklifBaslik.teklifFirma.Id));
+            BindHelper.BindData(ctbTeklifTalepTarihi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifTalepTarihi));
+            BindHelper.BindData(ctbTerminSuresi, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.terminSuresi));
+            BindHelper.BindData(ctbTeklifTarihi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifTarihi));
+            BindHelper.BindData(clbVade, satinalmaTeklifBaslik.vade, nameof(satinalmaTeklifBaslik.vade.Id));
+            BindHelper.BindData(ctbTutar, satinalmaTeklifBaslik.teklifTutar, nameof(satinalmaTeklifBaslik.teklifTutar.tutar));
+            BindHelper.BindData(clbDoviz, satinalmaTeklifBaslik.teklifTutar.dovizCinsi, nameof(satinalmaTeklifBaslik.teklifTutar.dovizCinsi.Id));
+            BindHelper.BindData(ctbTeklifGecerlilikSuresi, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.teklifGecerlilikSuresi));
+            BindHelper.BindData(ctbAciklama, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.aciklama));
+
             List<SatinalmaTeklifDetayDTO> satinalmaTeklifDetayDTOs = new();
             foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
             {

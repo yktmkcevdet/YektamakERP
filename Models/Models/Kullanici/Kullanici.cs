@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    public class Kullanici:IEntity
+    public record Kullanici:IEntity
     {
         public int? Id { get; set; }
         public string kod { get; set; }

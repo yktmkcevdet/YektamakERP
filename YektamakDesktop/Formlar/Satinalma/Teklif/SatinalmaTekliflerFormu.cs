@@ -2,6 +2,7 @@
 using Models;
 using Models.DTO;
 using Models.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,8 +54,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 SatinalmaTeklifBaslik satinalmaTeklifBaslik = new SatinalmaTeklifBaslik();
                 var jsonResult = await _satinalmaTeklifService.GetSatinalmaTeklif(new SatinalmaTeklifBaslik());
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = _jsonConverter.ToModelList<SatinalmaTeklifBaslik>(result.result);
+                List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
                 foreach (var item in satinalmaTeklifBasliks.Where(x=>x.teklifTutar.tutar>0))
                 {
                     satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
@@ -89,8 +89,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     else if (e.ColumnIndex == universalGrid1.Grid.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)//Delete
                     {
                         string jsonResult = await _satinalmaTeklifService.DeleteSatinalmaTeklif(satinalmaTeklifBaslik);
-                        Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
-                        MessageBox.Show(result.result);
+                        MessageBox.Show(jsonResult);
                         universalGrid1.binding.RemoveAt(e.RowIndex);
                     }
                 }

@@ -2,6 +2,7 @@
 using Models;
 using Newtonsoft.Json;
 using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -54,14 +55,13 @@ namespace YektamakDesktop.Helpers
             gridSettings.grid=key;
             gridSettings.kullaniciId=kullaniciId;
             string jsonResult=await _configurationService.GetGridSettings(gridSettings);
-            Result result=_jsonConverter.DeserializeToModelList<Result>(jsonResult).FirstOrDefault();
             dataGridView.Columns.Clear();
             foreach (var col in dgv)
             {
                 dataGridView.Columns.Add(col);
             }
-            if (result?.result == null) return;
-            gridSettings = _jsonConverter.ToModelList<GridSettings>(result.result).FirstOrDefault();
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase)) return;
+            gridSettings = JsonConvert.DeserializeObject<List<GridSettings>>(jsonResult).FirstOrDefault();
             var json = gridSettings.ayar;
             var columnSettings = JsonConvert.DeserializeObject<List<dynamic>>(json);
             

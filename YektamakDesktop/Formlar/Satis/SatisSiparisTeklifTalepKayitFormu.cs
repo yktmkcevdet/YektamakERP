@@ -30,7 +30,6 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_satisTeklifTalepKayitFormu == null)
                 {
                     _satisTeklifTalepKayitFormu = new SatisTeklifTalepKayitFormu();
-                    GlobalData.Yetki(ref _satisTeklifTalepKayitFormu);
                 }
                 return _satisTeklifTalepKayitFormu;
             }
@@ -119,14 +118,7 @@ namespace YektamakDesktop.Formlar.Satis
         #endregion mouseDrag
         private void CloseForm()
         {
-            if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(SatisSiparisTeklifTalepGridForm))
-            {
-                if (satisSiparisTeklifTalepToUpdate != null && satisSiparisTeklifTalepToUpdate.Id != 0)
-                {
-                    SatisSiparisTeklifTalepGridForm.satisSiparisTeklifTalepGridForm.UpdateRow(satisSiparisTeklifTalepToUpdate);
-                }
-            }
-            GlobalData.CloseForm(ref _satisTeklifTalepKayitFormu);
+            
         }
 
 

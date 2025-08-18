@@ -1,7 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -50,8 +49,7 @@ namespace YektamakDesktop.Formlar.Genel
                     excel = Convert.ToBase64String(dosyaIcerigi),
                 };
                 string jsonResult=await _anaVeriService.SaveExcelForm(excelForm);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(jsonResult)[0];
-                MessageBox.Show(result.result);
+                MessageBox.Show(jsonResult);
             }
             catch (Exception ex)
             {

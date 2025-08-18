@@ -48,6 +48,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrupId = new FilterableComboBox();
             clbMalzemeAltGrupId = new FilterableComboBox();
             clbProjeKod = new FilterableComboBox();
+            fcbMalzemeAltGrup2 = new FilterableComboBox();
+            fcbBoyut = new FilterableCheckedComboBox();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,7 +63,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1009, 32);
+            headerPanel1.Size = new System.Drawing.Size(1097, 32);
             headerPanel1.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -89,7 +91,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             btnTeklif.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnTeklif.IconSize = 24;
             btnTeklif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnTeklif.Location = new System.Drawing.Point(846, 289);
+            btnTeklif.Location = new System.Drawing.Point(799, 289);
             btnTeklif.Name = "btnTeklif";
             btnTeklif.Size = new System.Drawing.Size(149, 34);
             btnTeklif.TabIndex = 4;
@@ -100,7 +102,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctxBeginTeslimTarihi
             // 
             ctxBeginTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(37, 265);
+            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(787, 158);
             ctxBeginTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxBeginTeslimTarihi.Name = "ctxBeginTeslimTarihi";
             ctxBeginTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -112,7 +114,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctxEndTeslimTarihi
             // 
             ctxEndTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxEndTeslimTarihi.Location = new System.Drawing.Point(184, 265);
+            ctxEndTeslimTarihi.Location = new System.Drawing.Point(934, 158);
             ctxEndTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxEndTeslimTarihi.Name = "ctxEndTeslimTarihi";
             ctxEndTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -137,7 +139,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctbBeginTalepTarihi
             // 
             ctbBeginTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbBeginTalepTarihi.Location = new System.Drawing.Point(37, 226);
+            ctbBeginTalepTarihi.Location = new System.Drawing.Point(787, 119);
             ctbBeginTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbBeginTalepTarihi.Name = "ctbBeginTalepTarihi";
             ctbBeginTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -149,7 +151,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctbEndTalepTarihi
             // 
             ctbEndTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbEndTalepTarihi.Location = new System.Drawing.Point(184, 226);
+            ctbEndTalepTarihi.Location = new System.Drawing.Point(934, 119);
             ctbEndTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbEndTalepTarihi.Name = "ctbEndTalepTarihi";
             ctbEndTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -162,25 +164,25 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.AutoScroll = true;
-            panel1.Location = new System.Drawing.Point(369, 68);
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Location = new System.Drawing.Point(306, 68);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(471, 255);
+            panel1.Size = new System.Drawing.Size(453, 255);
             panel1.TabIndex = 14;
             // 
             // universalGrid1
             // 
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             universalGrid1.Location = new System.Drawing.Point(-2, 329);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1009, 418);
+            universalGrid1.Size = new System.Drawing.Size(1097, 418);
             universalGrid1.TabIndex = 15;
             universalGrid1.MouseDown1 += universalGrid1_MouseDown;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(369, 38);
+            label1.Location = new System.Drawing.Point(306, 50);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(132, 15);
             label1.TabIndex = 16;
@@ -196,6 +198,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbStokGrupId.Name = "clbStokGrupId";
             clbStokGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbStokGrupId.PlaceholderText = "Stok Grubu";
+            clbStokGrupId.SelectedDisplayValue = "Stok Grubu";
             clbStokGrupId.SelectedIndex = -1;
             clbStokGrupId.SelectedItem = null;
             clbStokGrupId.SelectedValue = null;
@@ -215,6 +218,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrupId.Name = "clbMalzemeGrupId";
             clbMalzemeGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeGrupId.PlaceholderText = "Malzeme Grubu";
+            clbMalzemeGrupId.SelectedDisplayValue = "Malzeme Grubu";
             clbMalzemeGrupId.SelectedIndex = -1;
             clbMalzemeGrupId.SelectedItem = null;
             clbMalzemeGrupId.SelectedValue = null;
@@ -234,6 +238,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeAltGrupId.Name = "clbMalzemeAltGrupId";
             clbMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeAltGrupId.PlaceholderText = "Malzeme Alt Grubu";
+            clbMalzemeAltGrupId.SelectedDisplayValue = "Malzeme Alt Grubu";
             clbMalzemeAltGrupId.SelectedIndex = -1;
             clbMalzemeAltGrupId.SelectedItem = null;
             clbMalzemeAltGrupId.SelectedValue = null;
@@ -253,6 +258,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKod.PlaceholderText = "Proje Kodu";
+            clbProjeKod.SelectedDisplayValue = "Proje Kodu";
             clbProjeKod.SelectedIndex = -1;
             clbProjeKod.SelectedItem = null;
             clbProjeKod.SelectedValue = null;
@@ -262,11 +268,47 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKod.ValueMember = "Id";
             clbProjeKod.SelectedIndexChanged += clbProjeKod_SelectedIndexChanged;
             // 
+            // fcbMalzemeAltGrup2
+            // 
+            fcbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
+            fcbMalzemeAltGrup2.BorderSize = 1;
+            fcbMalzemeAltGrup2.DataSource = null;
+            fcbMalzemeAltGrup2.DisplayMember = "ad";
+            fcbMalzemeAltGrup2.Location = new System.Drawing.Point(37, 213);
+            fcbMalzemeAltGrup2.Name = "fcbMalzemeAltGrup2";
+            fcbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbMalzemeAltGrup2.PlaceholderText = "Malzeme Alt Grubu 2";
+            fcbMalzemeAltGrup2.SelectedDisplayValue = "Malzeme Alt Grubu 2";
+            fcbMalzemeAltGrup2.SelectedIndex = -1;
+            fcbMalzemeAltGrup2.SelectedItem = null;
+            fcbMalzemeAltGrup2.SelectedValue = null;
+            fcbMalzemeAltGrup2.Size = new System.Drawing.Size(250, 29);
+            fcbMalzemeAltGrup2.TabIndex = 21;
+            fcbMalzemeAltGrup2.UnderlinedStyle = false;
+            fcbMalzemeAltGrup2.ValueMember = "Id";
+            fcbMalzemeAltGrup2.SelectedIndexChanged += fcbMalzemeAltGrup2_SelectedIndexChanged;
+            // 
+            // fcbBoyut
+            // 
+            fcbBoyut.BorderColor = System.Drawing.Color.Silver;
+            fcbBoyut.BorderSize = 1;
+            fcbBoyut.DisplayMember = "ad";
+            fcbBoyut.Location = new System.Drawing.Point(793, 208);
+            fcbBoyut.Name = "fcbBoyut";
+            fcbBoyut.Padding = new System.Windows.Forms.Padding(5);
+            fcbBoyut.PlaceholderText = "Seçiniz...";
+            fcbBoyut.Size = new System.Drawing.Size(200, 30);
+            fcbBoyut.TabIndex = 23;
+            fcbBoyut.ValueMember = "Id";
+            fcbBoyut.BindingContextChanged += fcbBoyut_SelectedIndexChanged;
+            // 
             // SatinalmaTalepTeklifFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1007, 745);
+            ClientSize = new System.Drawing.Size(1095, 745);
+            Controls.Add(fcbBoyut);
+            Controls.Add(fcbMalzemeAltGrup2);
             Controls.Add(clbProjeKod);
             Controls.Add(clbMalzemeAltGrupId);
             Controls.Add(clbMalzemeGrupId);
@@ -289,11 +331,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             PerformLayout();
         }
 
-        private void UniversalGrid1_MouseDown1(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         #endregion
 
         private CustomControls.HeaderPanel headerPanel1;
@@ -312,5 +349,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private FilterableComboBox clbMalzemeGrupId;
         private FilterableComboBox clbMalzemeAltGrupId;
         private FilterableComboBox clbProjeKod;
+        private FilterableComboBox fcbMalzemeAltGrup2;
+        private FilterableCheckedComboBox fcbBoyut;
     }
 }

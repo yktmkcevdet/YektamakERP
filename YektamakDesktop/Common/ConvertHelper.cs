@@ -260,7 +260,7 @@ namespace YektamakDesktop.Common
                 {
                     var propertyName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{member.Name}";
                     PropertyInfo propertyInfo = dto.GetType().GetProperty(propertyName);
-                    if (propertyInfo != null) propertyInfo.SetValue(dto, value);
+                    if (propertyInfo != null && propertyInfo.SetMethod!=null) propertyInfo.SetValue(dto, value);
                 }
             }
             return (T)dto;

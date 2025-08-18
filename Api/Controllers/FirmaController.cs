@@ -13,15 +13,15 @@ namespace Api.Controllers
             _dataAccessLayer = dataAccessLayer;
         }
         [HttpPost, Route("api/SaveFirma")]
-        public string SaveFirma([FromBody] string firma)
+        public string SaveFirma([FromBody] Firma firma)
         {
-            string result = _dataAccessLayer.SaveObject(JsonStringToModel<Firma>(firma), "spSaveFirma");
+            string result = _dataAccessLayer.SaveObject(firma, "spSaveFirma");
             return result;
         }
         [HttpPost, Route("api/GetFirma")]
-        public string GetFirma([FromBody] string firma)
+        public string GetFirma([FromBody] Firma firma)
         {
-            string result = _dataAccessLayer.GetObject(JsonStringToModel<Firma>(firma), "spGetFirma");
+            string result = _dataAccessLayer.GetObject(firma, "spGetFirma");
             return result;
         }
         [HttpGet, Route("api/GetFirma")]

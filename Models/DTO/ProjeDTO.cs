@@ -14,7 +14,7 @@ namespace Models.DTO
         [GridDisplay(Header ="Kod")]
         public string kod { get; set; }
         [GridDisplay(Header ="Proje No")]
-        public int? no { get; set; }
+        public int? projeNo { get; set; }
         [GridDisplay(Header = "Ver.", Tip = "TextBox")]
         public string versiyon { get; set; }
         [GridDisplay(Header = "Ad")]

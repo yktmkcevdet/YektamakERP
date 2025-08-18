@@ -102,13 +102,14 @@ namespace Models
 			}
 		}
 		public double? miktar { get; set; }
-		public double? agirlik { get; set; }
+        public double? onaylananMiktar { get; set; }
+        public double? agirlik { get; set; }
         public string aciklama { get; set; }
         public DateTime? talepTarihi { get; set; }
         public DateTime? teslimTarihi { get; set; }
         public string onayPersonelad { get; set; }
 		public string talepEdenPersonelad { get; set; }
-		public bool onayDurum { get; set; }
+		public bool? onayDurum { get; set; }
 		public bool? isTeklif { get; set; }
         private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays

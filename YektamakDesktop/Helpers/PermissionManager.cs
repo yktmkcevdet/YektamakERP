@@ -36,8 +36,7 @@ namespace YektamakDesktop.Helpers
             {
                 _alanYetki = new();
                 string alanYetkiJson = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
-                Result result = _jsonConverter.DeserializeToModelList<Result>(alanYetkiJson)[0];
-                var yetkiList = _jsonConverter.ToModelList<AlanYetki>(result.result);
+                var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(alanYetkiJson);
                 foreach(var yetki in yetkiList)
                 {
                     _alanYetki.Add(ConvertHelper.ToDTO<AlanYetkiDTO>(yetki));
