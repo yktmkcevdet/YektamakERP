@@ -27,11 +27,17 @@ namespace YektamakDesktop.CustomControls
         private Button btnIcon;
 
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Color BackColor { get => backColor; set { backColor = value; lblText.BackColor = backColor;btnIcon.BackColor = backColor; } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color IconColor { get => iconColor; set { iconColor = value; btnIcon.Invalidate();/*Redraw icon*/ } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color ListBackColor { get => listBackColor; set { listBackColor = value;cmbList.BackColor = listBackColor; } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color ListTextColor { get => listTextColor; set { listTextColor = value; cmbList.ForeColor = listTextColor; } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get => borderColor; set { borderColor = value; base.BackColor = borderColor; } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get => borderSize; 
             set 
             { 
@@ -61,11 +67,13 @@ namespace YektamakDesktop.CustomControls
                 //İstenirse bu iki alt kontrolün font özellikleri ayrı ayrı da ayarlanabilirdi
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Texts
         {
             get { return lblText.Text; }
             set { lblText.Text = value; }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ComboBoxStyle DropDownStyle
         {
             get { return cmbList.DropDownStyle; }

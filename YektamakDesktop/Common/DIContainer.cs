@@ -12,6 +12,7 @@ using YektamakDesktop.Abstracts;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar;
 using YektamakDesktop.Formlar.Genel;
+using YektamakDesktop.Formlar.Projemodul;
 using YektamakDesktop.Formlar.ProjeModul;
 using YektamakDesktop.Formlar.Satinalma;
 using YektamakDesktop.Formlar.Satinalma.Talep;
@@ -59,6 +60,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<PermissionManager>();
             services.AddTransient<PersonelKayitFormu>();
             services.AddTransient<ProjeDosyalari>();
+            services.AddTransient<ProjeSorumlusuAtamaFormu>();
             services.AddTransient<ProjeTanimlamaFormu>();
             services.AddTransient<SatinalmaTalepKayitFormu>();
             services.AddTransient<SatinalmaTalepler>();

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using NPOI.OpenXmlFormats.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
@@ -14,6 +16,10 @@ namespace YektamakDesktop.CustomControls
         /// Check statüsü filter metodu içinde değişirse ItemCheck olayı etkisiz olsun diye bir parametre
         /// </summary>
         private bool filterMode=false;
+        /// <summary>
+        /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         /// <summary>
         /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
         /// </summary>
@@ -65,11 +71,58 @@ namespace YektamakDesktop.CustomControls
             _listBoxDataRows = new List<CheckedListBoxDataRow>();
             ClearListBox();
         }
-        public void AddDataRow(int id, string name)
+        public void AddDataRow(int? id, string name)
         {
             checkedListBox.Items.Add(name, false);
             _listBoxDataRows.Add(new CheckedListBoxDataRow { id = id, value = name, isChecked = false });                       
             listBoxTexts.Add(name);//Filtreleme için kullanılacak
+        }
+        private string _displayMember = "ad"; // Default display member
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DisplayMember
+        {
+            get => _displayMember;
+            set { _displayMember = value; this.checkedListBox.DisplayMember = value; }
+        }
+        private string _valueMember = "Id"; // Default value member
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string ValueMember
+        {
+            get => _valueMember;
+            set { _valueMember = value; this.checkedListBox.ValueMember = value; }
+        }
+        private bool suppressEvents = false;
+        private List<object> allItems = new List<object>();
+        public void SetDataSource<T>(List<T> items)
+        {
+            suppressEvents = true;
+            allItems = items.Cast<object>().ToList();
+
+            checkedListBox.DisplayMember = DisplayMember; // bu değer yukarıdan alınmalı
+            checkedListBox.ValueMember = ValueMember;
+            object value = checkedListBox.SelectedValue; // Seçili indeksi sakla
+            checkedListBox.DataSource = items;
+            if (value == null)
+            {
+                checkedListBox.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
+            }
+            else
+            {
+                checkedListBox.SelectedValue = value; // Seçili öğe varsa onu ayarla
+            }
+            SetPlaceholder();
+            suppressEvents = false;
+        }
+        private string _placeholder = "Seçiniz...";
+        private void SetPlaceholder()
+        {
+            if (checkedListBox.SelectedIndex == -1)
+            {
+                checkedListBox.ForeColor = Color.Gray;
+                checkedListBox.Text = _placeholder;
+            }
         }
         /// <summary>
         /// listBoxDataRows listesindeki duruma göre listBox'ı günceller
@@ -314,7 +367,7 @@ namespace YektamakDesktop.CustomControls
     /// </summary>
     public class CheckedListBoxDataRow
     {
-        public int id;
+        public int? id;
         public string value;
         public bool isChecked;
     }

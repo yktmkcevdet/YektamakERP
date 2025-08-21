@@ -340,9 +340,6 @@ namespace YektamakDesktop.Formlar.Satis
             panelHeader.Name = "panelHeader";
             panelHeader.Size = new Size(788, 32);
             panelHeader.TabIndex = 96;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
             // 
             // buttonClose
             // 

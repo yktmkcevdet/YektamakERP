@@ -5,6 +5,7 @@ using Models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,6 +34,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             FormClosing += async (s, e) => await SatinalmaTeklifTaleplerFormu_FormClosing(s,e);
         }
         private List<SatinalmaTeklifBaslikDTO> _satinalmaTeklifDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<SatinalmaTeklifBaslikDTO> satinalmaTeklifDTOs
         {
             get

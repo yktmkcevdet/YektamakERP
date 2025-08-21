@@ -41,7 +41,7 @@
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             ctbAciklama = new YektamakDesktop.CustomControls.CustomTextBox();
-            ctbMarkaAltGrupKategori = new YektamakDesktop.CustomControls.FilterableComboBox();
+            fcbMarkaAltGrupKategori = new YektamakDesktop.CustomControls.FilterableComboBox();
             fcbMirasProje = new YektamakDesktop.CustomControls.FilterableComboBox();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
@@ -52,6 +52,7 @@
             label8 = new System.Windows.Forms.Label();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             projeSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,7 +61,6 @@
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.SteelBlue;
-            headerPanel1.Baslik = "Proje Tanımlama";
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
@@ -71,84 +71,37 @@
             // ctbId
             // 
             ctbId.BackColor = System.Drawing.Color.White;
-            ctbId.BorderColor = System.Drawing.Color.Silver;
-            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbId.BorderRadius = 5;
-            ctbId.BorderSize = 1;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbId.ForeColor = System.Drawing.Color.Black;
-            ctbId.isPlaceHolder = false;
             ctbId.Location = new System.Drawing.Point(150, 60);
-            ctbId.Multiline = false;
             ctbId.Name = "ctbId";
             ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbId.PasswordChar = false;
-            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbId.PlaceholderText = "";
-            ctbId.ReadOnly = false;
-            ctbId.SelectionStart = 0;
             ctbId.Size = new System.Drawing.Size(112, 28);
             ctbId.TabIndex = 1;
-            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbId.TextCustom = "";
-            ctbId.UnderlinedStyle = false;
             // 
             // fcbProjeTip
             // 
-            fcbProjeTip.BorderColor = System.Drawing.Color.Silver;
-            fcbProjeTip.BorderSize = 1;
-            fcbProjeTip.DataSource = null;
-            fcbProjeTip.DisplayMember = "ad";
             fcbProjeTip.Location = new System.Drawing.Point(150, 94);
             fcbProjeTip.Name = "fcbProjeTip";
             fcbProjeTip.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbProjeTip.PlaceholderText = "Seçiniz...";
-            fcbProjeTip.SelectedDisplayValue = "Seçiniz...";
-            fcbProjeTip.SelectedIndex = -1;
-            fcbProjeTip.SelectedItem = null;
-            fcbProjeTip.SelectedValue = null;
             fcbProjeTip.Size = new System.Drawing.Size(163, 29);
             fcbProjeTip.TabIndex = 2;
-            fcbProjeTip.UnderlinedStyle = false;
-            fcbProjeTip.ValueMember = "Id";
             // 
             // fcbMarka
             // 
-            fcbMarka.BorderColor = System.Drawing.Color.Silver;
-            fcbMarka.BorderSize = 1;
-            fcbMarka.DataSource = null;
-            fcbMarka.DisplayMember = "ad";
             fcbMarka.Location = new System.Drawing.Point(150, 129);
             fcbMarka.Name = "fcbMarka";
             fcbMarka.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMarka.PlaceholderText = "Seçiniz...";
-            fcbMarka.SelectedDisplayValue = "Seçiniz...";
-            fcbMarka.SelectedIndex = -1;
-            fcbMarka.SelectedItem = null;
-            fcbMarka.SelectedValue = null;
             fcbMarka.Size = new System.Drawing.Size(163, 29);
             fcbMarka.TabIndex = 3;
-            fcbMarka.UnderlinedStyle = false;
-            fcbMarka.ValueMember = "Id";
             // 
             // fcbMarkaAltGrup
             // 
-            fcbMarkaAltGrup.BorderColor = System.Drawing.Color.Silver;
-            fcbMarkaAltGrup.BorderSize = 1;
-            fcbMarkaAltGrup.DataSource = null;
-            fcbMarkaAltGrup.DisplayMember = "ad";
             fcbMarkaAltGrup.Location = new System.Drawing.Point(150, 198);
             fcbMarkaAltGrup.Name = "fcbMarkaAltGrup";
             fcbMarkaAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMarkaAltGrup.PlaceholderText = "Seçiniz...";
-            fcbMarkaAltGrup.SelectedDisplayValue = "Seçiniz...";
-            fcbMarkaAltGrup.SelectedIndex = -1;
-            fcbMarkaAltGrup.SelectedItem = null;
-            fcbMarkaAltGrup.SelectedValue = null;
             fcbMarkaAltGrup.Size = new System.Drawing.Size(163, 29);
             fcbMarkaAltGrup.TabIndex = 5;
-            fcbMarkaAltGrup.UnderlinedStyle = false;
-            fcbMarkaAltGrup.ValueMember = "Id";
             // 
             // Id
             // 
@@ -162,27 +115,13 @@
             // ctbAd
             // 
             ctbAd.BackColor = System.Drawing.Color.White;
-            ctbAd.BorderColor = System.Drawing.Color.Silver;
-            ctbAd.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbAd.BorderRadius = 5;
-            ctbAd.BorderSize = 1;
-            ctbAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbAd.ForeColor = System.Drawing.Color.Black;
-            ctbAd.isPlaceHolder = false;
             ctbAd.Location = new System.Drawing.Point(458, 129);
-            ctbAd.Multiline = false;
             ctbAd.Name = "ctbAd";
             ctbAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbAd.PasswordChar = false;
-            ctbAd.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbAd.PlaceholderText = "";
-            ctbAd.ReadOnly = false;
-            ctbAd.SelectionStart = 0;
             ctbAd.Size = new System.Drawing.Size(428, 28);
             ctbAd.TabIndex = 7;
-            ctbAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbAd.TextCustom = "";
-            ctbAd.UnderlinedStyle = false;
             // 
             // label1
             // 
@@ -223,65 +162,29 @@
             // ctbAciklama
             // 
             ctbAciklama.BackColor = System.Drawing.Color.White;
-            ctbAciklama.BorderColor = System.Drawing.Color.Silver;
-            ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbAciklama.BorderRadius = 5;
-            ctbAciklama.BorderSize = 1;
-            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
-            ctbAciklama.isPlaceHolder = false;
             ctbAciklama.Location = new System.Drawing.Point(458, 163);
-            ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbAciklama.PasswordChar = false;
-            ctbAciklama.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbAciklama.PlaceholderText = "";
-            ctbAciklama.ReadOnly = false;
-            ctbAciklama.SelectionStart = 0;
-            ctbAciklama.Size = new System.Drawing.Size(428, 82);
+            ctbAciklama.Size = new System.Drawing.Size(428, 28);
             ctbAciklama.TabIndex = 8;
-            ctbAciklama.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbAciklama.TextCustom = "";
-            ctbAciklama.UnderlinedStyle = false;
             // 
-            // ctbMarkaAltGrupKategori
+            // fcbMarkaAltGrupKategori
             // 
-            ctbMarkaAltGrupKategori.BorderColor = System.Drawing.Color.Silver;
-            ctbMarkaAltGrupKategori.BorderSize = 1;
-            ctbMarkaAltGrupKategori.DataSource = null;
-            ctbMarkaAltGrupKategori.DisplayMember = "ad";
-            ctbMarkaAltGrupKategori.Location = new System.Drawing.Point(458, 94);
-            ctbMarkaAltGrupKategori.Name = "ctbMarkaAltGrupKategori";
-            ctbMarkaAltGrupKategori.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbMarkaAltGrupKategori.PlaceholderText = "Seçiniz...";
-            ctbMarkaAltGrupKategori.SelectedDisplayValue = "Seçiniz...";
-            ctbMarkaAltGrupKategori.SelectedIndex = -1;
-            ctbMarkaAltGrupKategori.SelectedItem = null;
-            ctbMarkaAltGrupKategori.SelectedValue = null;
-            ctbMarkaAltGrupKategori.Size = new System.Drawing.Size(119, 29);
-            ctbMarkaAltGrupKategori.TabIndex = 6;
-            ctbMarkaAltGrupKategori.UnderlinedStyle = false;
-            ctbMarkaAltGrupKategori.ValueMember = "Id";
+            fcbMarkaAltGrupKategori.Location = new System.Drawing.Point(458, 94);
+            fcbMarkaAltGrupKategori.Name = "fcbMarkaAltGrupKategori";
+            fcbMarkaAltGrupKategori.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbMarkaAltGrupKategori.Size = new System.Drawing.Size(119, 29);
+            fcbMarkaAltGrupKategori.TabIndex = 6;
             // 
             // fcbMirasProje
             // 
-            fcbMirasProje.BorderColor = System.Drawing.Color.Silver;
-            fcbMirasProje.BorderSize = 1;
-            fcbMirasProje.DataSource = null;
-            fcbMirasProje.DisplayMember = "kod";
             fcbMirasProje.Location = new System.Drawing.Point(150, 163);
             fcbMirasProje.Name = "fcbMirasProje";
             fcbMirasProje.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMirasProje.PlaceholderText = "Seçiniz...";
-            fcbMirasProje.SelectedDisplayValue = "Seçiniz...";
-            fcbMirasProje.SelectedIndex = -1;
-            fcbMirasProje.SelectedItem = null;
-            fcbMirasProje.SelectedValue = null;
             fcbMirasProje.Size = new System.Drawing.Size(119, 29);
             fcbMirasProje.TabIndex = 4;
-            fcbMirasProje.UnderlinedStyle = false;
-            fcbMirasProje.ValueMember = "Id";
             // 
             // label5
             // 
@@ -314,7 +217,7 @@
             // 
             customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(844, 580);
+            customButtonSave1.Location = new System.Drawing.Point(780, 231);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(106, 46);
             customButtonSave1.TabIndex = 17;
@@ -331,27 +234,13 @@
             // ctbProjeNo
             // 
             ctbProjeNo.BackColor = System.Drawing.Color.White;
-            ctbProjeNo.BorderColor = System.Drawing.Color.Silver;
-            ctbProjeNo.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbProjeNo.BorderRadius = 5;
-            ctbProjeNo.BorderSize = 1;
-            ctbProjeNo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbProjeNo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbProjeNo.ForeColor = System.Drawing.Color.Black;
-            ctbProjeNo.isPlaceHolder = false;
             ctbProjeNo.Location = new System.Drawing.Point(458, 60);
-            ctbProjeNo.Multiline = false;
             ctbProjeNo.Name = "ctbProjeNo";
             ctbProjeNo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbProjeNo.PasswordChar = false;
-            ctbProjeNo.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbProjeNo.PlaceholderText = "";
-            ctbProjeNo.ReadOnly = false;
-            ctbProjeNo.SelectionStart = 0;
             ctbProjeNo.Size = new System.Drawing.Size(262, 28);
             ctbProjeNo.TabIndex = 19;
-            ctbProjeNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbProjeNo.TextCustom = "";
-            ctbProjeNo.UnderlinedStyle = false;
             // 
             // label8
             // 
@@ -366,20 +255,34 @@
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { projeSilToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            contextMenuStrip1.Size = new System.Drawing.Size(117, 26);
             // 
             // projeSilToolStripMenuItem
             // 
             projeSilToolStripMenuItem.Name = "projeSilToolStripMenuItem";
-            projeSilToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            projeSilToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             projeSilToolStripMenuItem.Text = "Proje Sil";
             projeSilToolStripMenuItem.Click += projeSilToolStripMenuItem_Click;
+            // 
+            // roundedButton1
+            // 
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedButton1.ForeColor = System.Drawing.Color.White;
+            roundedButton1.Location = new System.Drawing.Point(37, 237);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Size = new System.Drawing.Size(84, 40);
+            roundedButton1.TabIndex = 21;
+            roundedButton1.Text = "YENİ KAYIT";
+            roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Click += roundedButton1_Click;
             // 
             // ProjeTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(962, 642);
+            Controls.Add(roundedButton1);
             Controls.Add(label8);
             Controls.Add(ctbProjeNo);
             Controls.Add(universalGrid1);
@@ -388,7 +291,7 @@
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(fcbMirasProje);
-            Controls.Add(ctbMarkaAltGrupKategori);
+            Controls.Add(fcbMarkaAltGrupKategori);
             Controls.Add(ctbAciklama);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -404,7 +307,6 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "ProjeTanimlamaFormu";
             Text = "ProjeTanimlamaFormu";
-            Load += ProjeTanimlamaFormu_Load;
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -424,7 +326,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomTextBox ctbAciklama;
-        private CustomControls.FilterableComboBox ctbMarkaAltGrupKategori;
+        private CustomControls.FilterableComboBox fcbMarkaAltGrupKategori;
         private CustomControls.FilterableComboBox fcbMirasProje;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -435,5 +337,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem projeSilToolStripMenuItem;
+        private CustomControls.RoundedButton roundedButton1;
     }
 }

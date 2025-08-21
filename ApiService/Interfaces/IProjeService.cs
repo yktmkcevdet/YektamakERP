@@ -5,6 +5,8 @@ namespace ApiService.Interfaces
     public interface IProjeService
     {
         public string GetProje(Proje proje);
+        public Task<string> GetProjeSorumlu(ProjeSorumlu projeSorumlu);
+        public Task<string> SaveProjeSorumlu(ProjeSorumlu projeSorumlu);
         public string GetProjeTip();
         public string GetMarka();
         public string GetMarkaAltGrup();

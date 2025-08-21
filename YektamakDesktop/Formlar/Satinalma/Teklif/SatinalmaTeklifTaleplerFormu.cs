@@ -4,6 +4,7 @@ using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -39,6 +40,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
         }
         private List<SatinalmaTeklifBaslikDTO> _satinalmaTeklifDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<SatinalmaTeklifBaslikDTO> satinalmaTeklifDTOs
         {
             get

@@ -48,7 +48,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Malzeme Alt Grup Id")]public int? stokKartmalzemeAltGrupId { get; set; }
         [GridDisplay(Header = "Malzeme Alt Grup Kodu")]public string stokKartmalzemeAltGrupkod { get; set; }
         [GridDisplay(Header = "Malzeme Alt Grup Adı")]public string stokKartmalzemeAltGrupad { get; set; }
-        [GridDisplay(Header = "Malzeme Alt Grup2 Id")]public int? stokKartmalzemeAltGrup2Id { get; set; }
+        [GridDisplay(Header = "Malzeme Alt Grup2 Id",Tip ="Liste",ListName ="malzemeAltGrup2List",ListVisibleColumnName ="ad")]public int? stokKartmalzemeAltGrup2Id { get; set; }
         [GridDisplay(Header = "Malzeme Alt Grup2 Kodu")]public string stokKartmalzemeAltGrup2kod { get; set; }
         [GridDisplay(Header = "Malzeme Alt Grup2 Adı")]public string stokKartmalzemeAltGrup2ad { get; set; }
         [GridDisplay(Header = "Boyut Id", Tip ="Liste",ListName ="boyutList",ListVisibleColumnName ="ad")] public int? stokKartboyutTanimId { get; set; }

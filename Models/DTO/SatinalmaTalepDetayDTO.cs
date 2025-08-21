@@ -18,7 +18,7 @@ namespace Models.DTO
         [GridDisplay(Header = MalzemeStandartdHeader, Tip = "Liste", ListName = "malzemeStandarts", ListVisibleColumnName = "ad")] public int? stokKartmalzemeStandart { get; set; }
         [GridDisplay(Header = MalzemeGrupIdHeader, Tip = "Liste", ListName = "malzemeGrups", ListVisibleColumnName = "ad")] public int? stokKartmalzemeGrupId { get; set; }
         [GridDisplay(Header = MalzemeAltGrupIdHeader, Tip = "Liste", ListName = "malzemeAltGrups", ListVisibleColumnName = "ad")]public int? stokKartmalzemeAltGrupId { get; set; }
-        [GridDisplay(Header = MalzemeAltGrup2IdHeader, Tip = "Liste", ListName = "malzemeAltGrup2s", ListVisibleColumnName = "ad")]public int? stokKartmalzemeAltGrup2Id { get; set; }
+        [GridDisplay(Header = MalzemeAltGrup2IdHeader, Tip = "Liste", ListName = "malzemeAltGrup2List", ListVisibleColumnName = "ad")]public int? stokKartmalzemeAltGrup2Id { get; set; }
         [GridDisplay(Header = StokKartIdHeader, Tip = "Liste", ListName = "stokKartList", ListVisibleColumnName = "ad")]public int? stokKartId { get; set; }
         [GridDisplay(Header = OlcuBirimIdHeader, Tip = "Liste", ListName = "olcuBirims", ListVisibleColumnName = "ad")] public int? stokKartolcuBirimId { get; set; }
         [GridDisplay(Header = BoyutTanimIdHeader, Tip = "Liste", ListName = "boyutList", ListVisibleColumnName = "ad")] public int? stokKartboyutTanimId { get; set; }

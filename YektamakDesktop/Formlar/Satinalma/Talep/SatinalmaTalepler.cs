@@ -5,6 +5,7 @@ using Models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -13,7 +14,7 @@ using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
-    public partial class SatinalmaTalepler : Form, IForm
+    public partial class SatinalmaTalepler : Form
     {
         private static ISatinalmaTalepService _satinalmaService;
         private static IJsonConverter _jsonConverter;
@@ -47,6 +48,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
 
         private List<SatinalmaTalepDetayDTO> _satinalmaTalepDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<SatinalmaTalepDetayDTO> satinalmaTalepDTOs
         {
             get
@@ -63,10 +65,6 @@ namespace YektamakDesktop.Formlar.Satinalma
                 _satinalmaTalepDTOs = value;
             }
         }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
 
         private SatinalmaTalep _satinalmaTalepFilter;
         private SatinalmaTalep satinalmaTalepFilter

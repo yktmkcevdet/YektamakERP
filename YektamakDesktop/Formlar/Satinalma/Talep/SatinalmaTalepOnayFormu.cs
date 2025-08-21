@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
@@ -40,6 +41,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
 
         private SatinalmaTalepDTO _satinalmaTalepOnayDTO;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTalepDTO satinalmaTalepOnayDTO
         {
             get
@@ -69,6 +71,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             set { _satinalmaTalepFilter = value; }
         }
         private List<SatinalmaTalepDTO> _satinalmaTalepOnayList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<SatinalmaTalepDTO> satinalmaTalepOnayList
         {
             get

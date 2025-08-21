@@ -15,10 +15,12 @@ namespace YektamakDesktop.CustomControls
 {
     public partial class FilterableComboBox : UserControl
     {
+        
         [Browsable(false)]
         public ComboBox ComboBox => comboBox1;
-        private List<object> allItems = new List<object>();
+        public List<object> allItems = new List<object>();
         private bool underlinedStyle = false;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool UnderlinedStyle { get => underlinedStyle; set { underlinedStyle = value; this.Invalidate(); } }
         public FilterableComboBox()
         {
@@ -36,23 +38,28 @@ namespace YektamakDesktop.CustomControls
         private int borderRadius = 5;
         private Color borderColor = Color.Silver;
         private int borderSize = 1;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
         private string _displayMember = "ad"; // Default display member
         [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string DisplayMember
         {
-            get => _displayMember;  
+            get => _displayMember;
             set { _displayMember = value; this.comboBox1.DisplayMember = value; }
         }
         private string _valueMember = "Id"; // Default value member
         [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ValueMember
         {
             get => _valueMember;
             set { _valueMember = value; this.comboBox1.ValueMember = value; }
         }
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object DataSource
         {
             get => comboBox1.DataSource;
@@ -60,6 +67,7 @@ namespace YektamakDesktop.CustomControls
         }
         private string _placeholder = "Seçiniz...";
         [Category("Behavior")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PlaceholderText
         {
             get => _placeholder;
@@ -156,6 +164,7 @@ namespace YektamakDesktop.CustomControls
             return path;
         }
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object SelectedItem
         {
             get => comboBox1.SelectedItem;
@@ -163,18 +172,21 @@ namespace YektamakDesktop.CustomControls
         }
 
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object SelectedValue
         {
             get => comboBox1.SelectedValue;
             set { if (value != null && value.ToString() != "") { comboBox1.SelectedValue = value; } else { SelectedIndex = -1; } }
         }
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object SelectedDisplayValue
         {
             get => comboBox1.Text;
             set { if (value != null && value.ToString() != "") comboBox1.Text = value.ToString(); }
         }
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectedIndex
         {
             get => comboBox1.SelectedIndex;
@@ -182,11 +194,12 @@ namespace YektamakDesktop.CustomControls
         }
 
         [Browsable(false)]
-        public object SelectedObject;
-        //{
-        //    get { return comboBox1.SelectedItem; }
-        //    set { comboBox1.SelectedItem = value; }
-        //}
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object SelectedObject
+        {
+            get { return comboBox1.SelectedItem; }
+            set { comboBox1.SelectedItem = value; }
+        }
 
         public event EventHandler SelectedIndexChanged;
         //{
@@ -198,17 +211,27 @@ namespace YektamakDesktop.CustomControls
             add { comboBox1.SelectedValueChanged += value; }
             remove { comboBox1.SelectedValueChanged -= value; }
         }
+        //public event EventHandler SelectedItemChanged
+        //{
+        //    add { comboBox1.SelectionChangeCommitted += value; }
+        //    remove { comboBox1.SelectionChangeCommitted -= value; }
+        //}
 
         private bool suppressEvents = false;
         public void SetDataSource<T>(List<T> items)
         {
             suppressEvents = true;
-            allItems = items.Cast<object>().ToList();
+            //allItems = items.Cast<object>().ToList();
 
             comboBox1.DisplayMember = DisplayMember; // bu değer yukarıdan alınmalı
             comboBox1.ValueMember = ValueMember;
-            object value = comboBox1.SelectedValue; // Seçili indeksi sakla
-            comboBox1.DataSource = items;
+            object value = null;
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                value = comboBox1.SelectedValue;
+            } // Seçili indeksi sakla
+
+            comboBox1.DataSource = items.ToList();
             if (value == null)
             {
                 comboBox1.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
@@ -280,19 +303,6 @@ namespace YektamakDesktop.CustomControls
             comboBox1.ForeColor = Color.Black;
             SelectedIndexChanged?.Invoke(this, e);
         }
-
-        private void FilterableComboBox_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void FilterableComboBox_DoubleClick(object sender, EventArgs e)
-        {
-            DoubleClick1?.Invoke(this, e);
-        }
-
-        [Browsable(true)]
-        public event EventHandler DoubleClick1;
-
 
         public override Color BackColor
         {

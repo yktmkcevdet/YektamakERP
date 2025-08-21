@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -45,6 +46,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
 
         private Menu _menu;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Menu menu
         {
             get
@@ -73,7 +75,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         private void customComboListBoxIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(((FontAwesomeIcon)clbIcon.SelectedItem).ad!="")roundedIconButton1.IconChar = (IconChar)Enum.Parse(typeof(IconChar), ((FontAwesomeIcon)clbIcon.SelectedItem).ad, true);
+            if(!string.IsNullOrEmpty(((FontAwesomeIcon)clbIcon.SelectedItem)?.ad))roundedIconButton1.IconChar = (IconChar)Enum.Parse(typeof(IconChar), ((FontAwesomeIcon)clbIcon.SelectedItem).ad, true);
         }
 
         private async void rButtonKaydet_Click(object sender, EventArgs e)

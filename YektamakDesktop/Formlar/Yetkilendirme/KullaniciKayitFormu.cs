@@ -12,6 +12,7 @@ using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -61,6 +62,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
 
         private Kullanici _kullanici;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Kullanici kullanici
         {
             get { if (_kullanici == null) { _kullanici = new Kullanici(); } return _kullanici; }

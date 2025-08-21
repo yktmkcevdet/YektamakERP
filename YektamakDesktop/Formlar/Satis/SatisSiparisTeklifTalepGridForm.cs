@@ -20,7 +20,7 @@ namespace YektamakDesktop.Formlar.Satis
     /// <summary>
     /// FirmaGridFormunun kopyasıdır. DataGrid pencereleri için bir template gibi değiştirilerek kullanılması için oluşturulmuştur.
     /// </summary>
-    public partial class SatisSiparisTeklifTalepGridForm : Form, IForm
+    public partial class SatisSiparisTeklifTalepGridForm : Form
     {
         private static ICache _cache;
         private static IJsonConverter _jsonConvertHelper;
@@ -47,11 +47,8 @@ namespace YektamakDesktop.Formlar.Satis
                 return _satisSiparisTeklifTalepGridForm;
             }
         }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
+        
         public static List<SatisTeklifTalep> satisSiparisTeklifTalepList = new List<SatisTeklifTalep>();
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
         /// <summary>
         /// dataSet ve grid içeriği aynı olmalı
         /// </summary>
@@ -83,13 +80,6 @@ namespace YektamakDesktop.Formlar.Satis
         {
             InitializeComponent();
             SetToolTips();
-            controlsToDisable = new List<Control>
-            {
-                buttonSatisSiparisTeklifTalepEkle,
-                buttonTumKayitlariGetir,
-                dataGridView,
-            };
-
         }
         /// <summary>
         /// Form kontrollerinin ToolTip ayarlarını yapar

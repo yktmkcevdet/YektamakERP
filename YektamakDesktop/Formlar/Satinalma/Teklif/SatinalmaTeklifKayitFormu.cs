@@ -4,6 +4,7 @@ using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -42,6 +43,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             clbVade.SetDataSource(_cache.vadeList);
         }
         private SatinalmaTeklifBaslik _satinalmaTeklifBaslik;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTeklifBaslik satinalmaTeklifBaslik
         {
             get

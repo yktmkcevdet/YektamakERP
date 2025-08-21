@@ -17,7 +17,7 @@ using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satis
 {
-    public partial class SatisTeklifMaliyetKayitFormu : Form, IForm
+    public partial class SatisTeklifMaliyetKayitFormu : Form
     {
         private static ICache _cache;
         private static ISatisService _satisService;
@@ -31,6 +31,7 @@ namespace YektamakDesktop.Formlar.Satis
             _dataTableHelper = dataTableHelper;
         }
         private SatisTeklifTalep _satisTeklifTalep;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatisTeklifTalep satisTeklifTalep
         {
             get
@@ -56,12 +57,6 @@ namespace YektamakDesktop.Formlar.Satis
                 _satisTeklifMaliyetKayitFormu = value;
             }
         }
-
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
-
         private SatisTeklifMaliyetKayitFormu()
         {
             InitializeComponent();
@@ -73,7 +68,6 @@ namespace YektamakDesktop.Formlar.Satis
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref satisSorumlusuId);
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
-            controlsToDisable = new List<Control>();
         }
 
         private void roundedButton4_Click(object sender, EventArgs e)

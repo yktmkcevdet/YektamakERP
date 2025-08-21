@@ -1,12 +1,16 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Genel
 {
@@ -18,46 +22,71 @@ namespace YektamakDesktop.Formlar.Genel
         {
             _cache = cache;
             _stokService = stokService;
+            InitializeComponent();
             Initialize();
         }
         public event EventHandler<object> AfterSave;
         private void Initialize()
         {
-            InitializeComponent();
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(-1, 256);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(469, 351);
+            universalGrid1.TabIndex = 13;
+            Controls.Add(universalGrid1);
+            headerPanel1.Baslik = "Malzeme Grup Tanımlama";
+            this.Load += async (s, e) => await MalzemeGrupTanimFormu_Load(s, e);
+            universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
             fcbStokGrup.SetDataSource(_cache.stokGrups);
-            Load += async (s, e) => await MalzemeGrupTanimFormu_Load(s, e);
             Binding();
         }
+
+        private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
+        {
+            malzemeGrupDTO = (MalzemeGrupDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1, e.Location);
+            }
+        }
+
         private void Binding()
         {
-            BindHelper.BindData(ctbMalzemeGrupId, malzemeGrup, "Id");
-            BindHelper.BindData(ctbMalzemeGrupKod, malzemeGrup, "kod");
-            BindHelper.BindData(ctbMalzemeGrupAd, malzemeGrup, "ad");
-            BindHelper.BindData(fcbStokGrup, malzemeGrup.stokGrup, "Id");
+            BindHelper.BindData(ctbMalzemeGrupId, malzemeGrupDTO, nameof(malzemeGrupDTO.Id));
+            BindHelper.BindData(ctbMalzemeGrupKod, malzemeGrupDTO, nameof(malzemeGrupDTO.kod));
+            BindHelper.BindData(ctbMalzemeGrupAd, malzemeGrupDTO, nameof(malzemeGrupDTO.ad));
+            BindHelper.BindData(fcbStokGrup, malzemeGrupDTO,nameof(malzemeGrupDTO.stokGrupId));
         }
-        private MalzemeGrup _malzemeGrup;
-        public MalzemeGrup malzemeGrup
+        private MalzemeGrupDTO _malzemeGrupDTO;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public MalzemeGrupDTO malzemeGrupDTO
         {
-            get { if (_malzemeGrup == null) { _malzemeGrup = new(); } return _malzemeGrup; }
-            set { _malzemeGrup = value; Binding(); }
+            get { if (_malzemeGrupDTO == null) { _malzemeGrupDTO = new(); } return _malzemeGrupDTO; }
+            set { _malzemeGrupDTO = value; Binding(); }
         }
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
             if (CheckFields())
             {
-                string jsonResult =  _stokService.SaveMalzemeGrup(malzemeGrup);
+                var malzemeGrup = ConvertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO);
+                string jsonResult = _stokService.SaveMalzemeGrup(malzemeGrup);
                 malzemeGrup = JsonConvert.DeserializeObject<List<MalzemeGrup>>(jsonResult)[0];
+                malzemeGrupDTO = ConvertHelper.ToDTO<MalzemeGrupDTO>(malzemeGrup);
+                universalGrid1.binding.Add(malzemeGrupDTO);
                 _cache.malzemeGrups.Add(malzemeGrup);
-                AfterSave?.Invoke(this, malzemeGrup);
+                AfterSave?.Invoke(this, malzemeGrupDTO);
             }
         }
 
         private async Task MalzemeGrupTanimFormu_Load(object sender, EventArgs e)
         {
+            await universalGrid1.SetData(_cache.malzemeGrups.CastToDTO<MalzemeGrupDTO>().ToList(), this.Name);
         }
-        public void UpdateMode(MalzemeGrup malzemeGrup)
+        public void UpdateMode(MalzemeGrupDTO malzemeGrup)
         {
-            this.malzemeGrup=malzemeGrup;
+            this.malzemeGrupDTO = malzemeGrup;
         }
         private bool CheckFields()
         {
@@ -66,6 +95,42 @@ namespace YektamakDesktop.Formlar.Genel
             result = GlobalData.CheckField("*", ctbMalzemeGrupKod) && result;
             result = GlobalData.CheckField("*", fcbStokGrup) && result;
             return result;
+        }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            malzemeGrupDTO = new();
+        }
+
+        private void MalzemeGrupTanimFormu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveSettings();
+            AfterSave?.Invoke(this, e);
+        }
+
+        private void malzemeGrubunuSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show($"\"{malzemeGrupDTO.ad}\" grubunu silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult != DialogResult.Yes)
+            {
+                return;
+            }
+            string jsonResult = _stokService.DeleteMalzemeGrup(ConvertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO));
+            if (string.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(jsonResult, "Silme işleminde hata oluştu.");
+            }
+            else
+            {
+                _cache.malzemeGrups.Remove(_cache.malzemeGrups.FirstOrDefault(m => m.Id == malzemeGrupDTO.Id));
+                universalGrid1.binding.Remove(malzemeGrupDTO);
+                AfterSave?.Invoke(this, malzemeGrupDTO);
+            }
+        }
+
+        private void fcbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            universalGrid1.Filtrele(malzemeGrupDTO);
         }
     }
 }

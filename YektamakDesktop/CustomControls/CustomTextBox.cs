@@ -19,6 +19,7 @@ namespace YektamakDesktop.CustomControls
         private Color placeholderColor = Color.DarkGray;
         private string placeholderText = string.Empty;
         private bool _isPlaceholder = false;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool isPlaceHolder { get => _isPlaceholder; set => _isPlaceholder = value; }
         private bool isPasswordChar = false;
         private string watermarkText = string.Empty;
@@ -40,10 +41,14 @@ namespace YektamakDesktop.CustomControls
             base.OnTextChanged(e);
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool UnderlinedStyle { get => underlinedStyle; set { underlinedStyle = value; this.Invalidate(); } }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ReadOnly
         {
             get => textBox.ReadOnly;
@@ -62,6 +67,7 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool PasswordChar
         {
             get { return isPasswordChar; }
@@ -72,6 +78,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Multiline
         {
             get { return textBox.Multiline; }
@@ -100,6 +107,7 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TextCustom
         {
             get
@@ -115,6 +123,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public HorizontalAlignment TextAlignment
         {
             get => textBox.TextAlign;
@@ -152,7 +161,9 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderFocusColor { get => borderFocusColor; set => borderFocusColor = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderRadius
         {
             get => borderRadius;
@@ -166,6 +177,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color PlaceholderColor
         {
             get => placeholderColor;
@@ -178,6 +190,7 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PlaceholderText
         {
             get => placeholderText;
@@ -188,6 +201,7 @@ namespace YektamakDesktop.CustomControls
                 SetPlaceHolder();
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectionStart
         {
             get => textBox.SelectionStart;

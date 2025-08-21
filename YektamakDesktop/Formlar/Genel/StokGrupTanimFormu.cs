@@ -4,7 +4,9 @@ using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -34,12 +36,14 @@ namespace YektamakDesktop.Formlar.Genel
             universalGrid1.Size = new Size(800, 232);
             universalGrid1.TabIndex = 3;
             Controls.Add(universalGrid1);
+            headerPanel1.Baslik = "Stok Grup Tanımlama";
             Load += async (s, e) => await StokGrupTanimFormu_Load(s, e);
-            universalGrid1.Grid.MouseClick += UniversalGrid1_MouseDown1;
+            universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
             Binding();
         }
         public event EventHandler<object> AfterSave;
         private StokGrup _stokGrup;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public StokGrup stokGrup
         {
             get { if (_stokGrup == null) { _stokGrup = new(); } return _stokGrup; }
@@ -47,16 +51,17 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void Binding()
         {
-            BindHelper.BindData(ctbStokGrupId, stokGrup, "Id");
-            BindHelper.BindData(ctbStokGrupAd, stokGrup, "ad");
-            BindHelper.BindData(ctbStokGrupKod, stokGrup, "kod");
+            BindHelper.BindData(ctbStokGrupId, stokGrup, nameof(stokGrup.Id));
+            BindHelper.BindData(ctbStokGrupAd, stokGrup, nameof(stokGrup.ad));
+            BindHelper.BindData(ctbStokGrupKod, stokGrup, nameof(stokGrup.kod));
         }
 
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            stokGrup = (StokGrup)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (e.Button == MouseButtons.Right)
             {
-                stokGrup = (StokGrup)universalGrid1.Grid.CurrentRow.DataBoundItem;
+                ctxMenu.Show(universalGrid1, e.Location);
             }
         }
 
@@ -71,7 +76,8 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 string jsonResult = _stokService.SaveStokGrup(stokGrup);
                 stokGrup = JsonConvert.DeserializeObject<List<StokGrup>>(jsonResult)[0];
-                AfterSave?.Invoke(sender, stokGrup);
+                universalGrid1.binding.Add(stokGrup);
+                AfterSave?.Invoke(sender, e);
             }
         }
         public void UpdateMode(StokGrup stokGrup)
@@ -84,6 +90,36 @@ namespace YektamakDesktop.Formlar.Genel
             result = GlobalData.CheckField("*", ctbStokGrupAd) && result;
             result = GlobalData.CheckField("*", ctbStokGrupKod) && result;
             return result;
+        }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            stokGrup = new();
+        }
+
+        private void stokGrubunuSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show($"\"{stokGrup.ad}\" grubunu silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult != DialogResult.Yes)
+            {
+                return;
+            }
+            string jsonResult = _stokService.DeleteStokGrup(stokGrup);
+            if (string.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Silme işleminde hata oluştu");
+            }
+            else
+            {
+                MessageBox.Show(jsonResult);
+                universalGrid1.binding.Remove(_cache.stokGrups.FirstOrDefault(s => s.Id == stokGrup.Id));
+                AfterSave?.Invoke(sender, stokGrup);
+            }
+        }
+
+        private void StokGrupTanimFormu_FormClosing(object sender, FormClosedEventArgs e)
+        {
+            universalGrid1.SaveSettings();
         }
     }
 }

@@ -13,7 +13,7 @@ using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satis
 {
-    public partial class SatisTeklifTalepKayitFormu : Form, IForm
+    public partial class SatisTeklifTalepKayitFormu : Form
     {
         private static ICache _cache;
         private static ISatisService _satisService;
@@ -36,6 +36,7 @@ namespace YektamakDesktop.Formlar.Satis
         }
         CustomDataGrid<DataControlTeklifTalepDosya> customDataGrid;
         private SatisTeklifTalep _satisSiparisTeklifTalep;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatisTeklifTalep satisSiparisTeklifTalep
         {
             get {
@@ -45,27 +46,15 @@ namespace YektamakDesktop.Formlar.Satis
             set => _satisSiparisTeklifTalep = value;
         }
         public SatisTeklifTalep _satisSiparisTeklifTalepToUpdate;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatisTeklifTalep satisSiparisTeklifTalepToUpdate { get => _satisSiparisTeklifTalepToUpdate; set => _satisSiparisTeklifTalepToUpdate = value; }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-
         private Models.Proje _selectedProjeKod;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Models.Proje selectedProjeKod { get { if (_selectedProjeKod == null) _selectedProjeKod = new Models.Proje(); return _selectedProjeKod; } set => _selectedProjeKod = value; }
         private Firma _musteriFirma;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Firma musteriFirma { get { if (_musteriFirma == null) _musteriFirma = new Firma(); return _musteriFirma; } set { _musteriFirma = value; } }
-        private bool _activeForm;
-        public bool activeForm
-        {
-            get => _activeForm;
-            set
-            {
-                if (value)
-                {
-
-                }
-                _activeForm = value;
-            }
-        }
+        
         private int? _teklifTalepId;
         
         private SatisTeklifTalepKayitFormu()
@@ -80,42 +69,8 @@ namespace YektamakDesktop.Formlar.Satis
             ComboBoxListFill.GetLookupAd(_cache.referansKaynakList, ref comboListBoxReferansKaynagi);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref comboListBoxSatisSorumlusu);
             comboListBoxSatisSorumlusu.SelectDataRowId(_cache.kullanici.personel.Id);
-            controlsToDisable = new List<Control>
-            {
-
-            };
-
         }
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private void rButtonKapat_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-        #endregion mouseDrag
+        
         private void CloseForm()
         {
             

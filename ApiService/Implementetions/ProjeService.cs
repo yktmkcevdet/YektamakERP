@@ -38,6 +38,14 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(proje, $"GetProje");
         }
+        public async Task<string> GetProjeSorumlu(ProjeSorumlu projeSorumlu)
+        {
+            return await _apiService.PostAsync(projeSorumlu, $"GetProjeSorumlu");
+        }
+        public async Task<string> SaveProjeSorumlu(ProjeSorumlu projeSorumlu)
+        {
+            return await _apiService.PostAsync(projeSorumlu, $"SaveProjeSorumlu");
+        }
         public string GetProjeTip()
         {
             return _apiService.Get($"GetProjeTip");

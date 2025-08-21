@@ -18,7 +18,7 @@ using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.ProjeModul
 {
-    public partial class ExceldenVeriAlmaFormu : Form, IForm
+    public partial class ExceldenVeriAlmaFormu : Form
     {
         private string[] files;
         private readonly ICache _cache;
@@ -35,12 +35,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _jsonConverter = jsonConverter;
             InitializeComponent();
             ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref clbProjeKodu);
-            controlsToDisable = new List<Control>();
         }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
         private List<ProjeStokKart> _projeStokKarts;
         private List<ProjeStokKart> projeStokKarts
         {

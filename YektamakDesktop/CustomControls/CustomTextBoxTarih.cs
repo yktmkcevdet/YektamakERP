@@ -67,6 +67,7 @@ namespace YektamakDesktop.CustomControls
                 textBox.ForeColor = placeholderColor;
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime? TextCustom
         {
             get

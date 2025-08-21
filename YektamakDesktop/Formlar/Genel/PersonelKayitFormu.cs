@@ -33,12 +33,12 @@ namespace YektamakDesktop.Formlar.Genel
         {
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(0, 354);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new Point(0, 354);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(992, 352);
+            universalGrid1.Size = new Size(992, 352);
             universalGrid1.TabIndex = 55;
-            universalGrid1.Grid.MouseClick += Grid_MouseClick;
+            universalGrid1.MouseDown1 += Grid_MouseClick;
             Controls.Add(universalGrid1);
             clbFirma.SetDataSource(_cache.firmaList);
             clbPozisyon.SetDataSource(_cache.pozisyonList);
@@ -57,6 +57,7 @@ namespace YektamakDesktop.Formlar.Genel
         private byte[] yeniResimBytes;
         private string yeniResimFormat;
         private Personel _personel;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Personel personel
         {
             get { if (_personel == null) { _personel = new(); } return _personel; }

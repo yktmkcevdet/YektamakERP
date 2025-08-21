@@ -6,21 +6,25 @@
         public string ad { get; set; }
         public string kod { get; set; }
         public string prefix { get; set; }
-        private MarkaAltGrup _markaAltGrup;
-        public MarkaAltGrup markaAltGrup { get { if (_markaAltGrup == null) { _markaAltGrup = new(); } return _markaAltGrup; } set { _markaAltGrup = value; } }
     }
     public class MarkaAltGrup : IEntity
     {
         public int? Id { get; set; }
         public string ad { get; set; }
         public string kod { get; set; }
-        public int? markaId { get; set; }
+        public Marka _marka;
+        public Marka markaAltGrupKategori
+        {
+            get { if (_marka == null) { _marka = new(); } return _marka; }
+            set { _marka= value; }
+        }
     }
     public class MarkaAltGrupKategori : IEntity
     {
         public int? Id { get; set; }
         public string ad { get; set; }
         public string kod { get; set; }
-        public int? markaAltGrupId { get; set; }
+        private MarkaAltGrup _markaAltGrup;
+        public MarkaAltGrup markaAltGrup { get { if (_markaAltGrup == null) { _markaAltGrup = new(); } return _markaAltGrup; } set { _markaAltGrup = value; } }
     }
 }

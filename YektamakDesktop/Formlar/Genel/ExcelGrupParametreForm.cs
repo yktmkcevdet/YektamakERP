@@ -73,6 +73,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
 
         private ExcelGrupParametre _excelGrupParametre;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ExcelGrupParametre excelGrupParametre
         {
             get { if (_excelGrupParametre == null) { _excelGrupParametre = new(); } return _excelGrupParametre; }

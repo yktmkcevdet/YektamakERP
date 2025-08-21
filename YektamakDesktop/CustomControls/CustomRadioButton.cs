@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.ComponentModel;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -13,7 +14,9 @@ namespace YektamakDesktop.CustomControls
         private Color checkedColor = Color.MediumSlateBlue;
         private Color unCheckedColor = Color.Gray;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color CheckedColor { get => checkedColor; set { checkedColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color UnCheckedColor { get => unCheckedColor; set { unCheckedColor = value; this.Invalidate(); } }
         public CustomRadioButton()
         {

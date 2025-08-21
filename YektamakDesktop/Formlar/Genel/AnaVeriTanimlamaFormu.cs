@@ -25,16 +25,11 @@ namespace YektamakDesktop.Formlar.Genel
         }
 
         
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
 
         public AnaVeriTanimlamaFormu()
         {
             InitializeComponent();
             CreateDynamicControls();
-            controlsToDisable = new List<Control>();
         }
 
         private void buttomMinimize_Click(object sender, EventArgs e)

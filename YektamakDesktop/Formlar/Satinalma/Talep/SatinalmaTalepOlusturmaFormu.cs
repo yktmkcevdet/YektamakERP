@@ -4,6 +4,7 @@ using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -41,6 +42,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         public event EventHandler<object> VeriDegisti;
         CustomDataGrid<DataControlSatinalmaTalepDetay> customDataGrid;
         SatinalmaTalep _satinalmaTalep;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTalep satinalmaTalep
         {
             get { if (_satinalmaTalep == null) { _satinalmaTalep = new(); } return _satinalmaTalep; }
@@ -229,12 +231,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             projeStokKart.stokKart.malzemeGrup.Id = satinalmaTalep.malzemeGrup.Id;
             projeStokKart.stokKart.stokTip.Id = satinalmaTalep.stokTip.Id;
             string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                
+                ComboBoxListFill.GetLookupAd(stokKarts.Select(item => item.stokKart with {ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList(), ref _stokKartId);
             }
-            ComboBoxListFill.GetLookupAd(stokKarts.Select(item => item.stokKart with {ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList(), ref _stokKartId);
         }
         public DataControlSatinalmaTalepDetay(IJsonConverter jsonConverter, IStokService stokService, IProjeService projeService)
         {

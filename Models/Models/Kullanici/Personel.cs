@@ -13,7 +13,7 @@ namespace Models
         [GridDisplay(Header = "mail")] public string mail { get; set; }//Daha sonra property içinde formatlama kuralları yazılacak ****@***.com** gibi
         public string mailPassword { get; set; } //Mail şifresi
         private Pozisyon _pozisyon;
-        [GridDisplay(Header = "pozisyonId")]
+        [GridDisplay(Header = "pozisyonId",Tip ="Liste",ListName ="pozisyonList",ListVisibleColumnName ="ad",readOnly =false)]
         public Pozisyon pozisyon { 
             get { if (_pozisyon == null) { _pozisyon = new(); } return _pozisyon; } 
             set { _pozisyon = value; }

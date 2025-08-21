@@ -25,6 +25,7 @@ namespace YektamakDesktop.CustomControls
         private string _placeholder = "Seçiniz...";
 
         [Category("Custom")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PlaceholderText
         {
             get => _placeholder;
@@ -32,41 +33,70 @@ namespace YektamakDesktop.CustomControls
         }
 
         [Category("Custom")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string DisplayMember { get; set; } = "ad";
 
         [Category("Custom")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ValueMember { get; set; } = "Id";
 
         [Category("Custom")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
 
         [Category("Custom")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
 
         public FilterableCheckedComboBox()
         {
             InitializeComponent();
+            InitializeDropDown();
             InitializeCustom();
         }
-
-
+        private Label infoLabel;
         private void InitializeCustom()
         {
+            
             textBox.Click += (s, e) => ShowDropDown();
             textBox.Enter += (s, e) => { isFocused = true; Invalidate(); RemovePlaceholder(); };
             textBox.Leave += (s, e) => { isFocused = false; Invalidate(); if (string.IsNullOrEmpty(textBox.Text)) SetPlaceholder(); };
             textBox.KeyUp += TextBox_KeyUp;
+            infoLabel = new Label
+            {
+                Dock = DockStyle.Bottom,
+                Height = 20,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Text = "0 kayıt seçildi"
+            };
 
+            this.Controls.Add(infoLabel);
             checkedListBox.ItemCheck += CheckedListBox_ItemCheck;
-
             SetPlaceholder();
+        }
+        private void InitializeDropDown()
+        {
+            ToolStripControlHost host = new ToolStripControlHost(checkedListBox)
+            {
+                AutoSize = false,
+                Margin = Padding.Empty,
+                Padding = Padding.Empty,
+                Size = checkedListBox.Size
+            };
+            host.Size = new Size(this.Width, 200);
+            dropDown = new ToolStripDropDown
+            {
+                Padding = Padding.Empty
+            };
+            dropDown.Items.Add(host);
+            //dropDown.Items.Add(infoLabel.Text);
         }
 
         private void ShowDropDown()
         {
-            
-            checkedListBox.Height = Math.Min(200, checkedListBox.PreferredHeight);
-            checkedListBox.Width = this.Width;
+            if (dropDown == null)
+                InitializeDropDown();
+
             dropDown.Show(this, 0, this.Height);
         }
 
@@ -76,19 +106,25 @@ namespace YektamakDesktop.CustomControls
             RefreshList(allItems);
             SetPlaceholder();
         }
-
+        public event EventHandler ItemsChanged;
         private void RefreshList(List<object> items)
         {
             checkedListBox.DataSource = null;
             checkedListBox.Items.Clear();
-            checkedListBox.DataSource = items;
             checkedListBox.DisplayMember = DisplayMember;
             checkedListBox.ValueMember = ValueMember;
+            foreach (var item in items)
+                checkedListBox.Items.Add(item, false);
         }
 
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate { UpdateText(); });
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                UpdateText();
+                ItemsChanged?.Invoke(this, e);
+                infoLabel.Text = $"{checkedListBox.CheckedItems.Count} kayıt seçildi";
+            });
         }
 
         private void UpdateText()
@@ -149,30 +185,13 @@ namespace YektamakDesktop.CustomControls
             ShowDropDown();
         }
 
-        public List<object> SelectedValues
-        {
-            get
+        public List<object> SelectedValues =>
+            checkedListBox.CheckedItems.Cast<object>()
+            .Select(item =>
             {
-                return checkedListBox.CheckedItems.Cast<object>().ToList();
-            }
-            set
-            {
-                // Önce tüm işaretleri kaldır
-                for (int i = 0; i < checkedListBox.Items.Count; i++)
-                    checkedListBox.SetItemChecked(i, false);
-
-                if (value == null) return;
-
-                // Gelen listedeki değerleri işaretle
-                foreach (var val in value)
-                {
-                    int index = checkedListBox.Items.IndexOf(val);
-                    if (index >= 0)
-                        checkedListBox.SetItemChecked(index, true);
-                }
-            }
-        }
-
+                var prop = TypeDescriptor.GetProperties(item)[ValueMember];
+                return prop?.GetValue(item);
+            }).ToList();
 
         public List<object> SelectedItems =>
             checkedListBox.CheckedItems.Cast<object>().ToList();
@@ -209,19 +228,6 @@ namespace YektamakDesktop.CustomControls
             path.AddArc(rect.X, rect.Height - radius, radius, radius, 90, 90);
             path.CloseFigure();
             return path;
-        }
-    }
-    public class CustomDropDown : ToolStripDropDown
-    {
-        public Padding InnerPadding { get; set; } = Padding.Empty;
-
-        protected override void OnLayout(LayoutEventArgs e)
-        {
-            base.OnLayout(e);
-            foreach (ToolStripItem item in Items)
-            {
-                item.Margin = InnerPadding;
-            }
         }
     }
 }

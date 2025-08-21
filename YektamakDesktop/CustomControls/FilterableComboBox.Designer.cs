@@ -51,7 +51,6 @@
             Name = "FilterableComboBox";
             Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             Size = new System.Drawing.Size(119, 29);
-            comboBox1.DoubleClick += FilterableComboBox_DoubleClick;
             ResumeLayout(false);
         }
 

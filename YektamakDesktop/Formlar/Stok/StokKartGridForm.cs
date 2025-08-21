@@ -5,6 +5,7 @@ using Models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,6 +75,7 @@ namespace YektamakDesktop.Formlar.Stok
         }
 
         private List<ProjeStokKartDTO> _stokKartDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ProjeStokKartDTO> stokKartDTOs
         {
             get

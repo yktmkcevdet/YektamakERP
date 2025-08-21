@@ -13,6 +13,7 @@ using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Satinalma;
 using YektamakDesktop.Formlar.Stok;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.ProjeModul
 {
@@ -76,6 +77,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
 
         private List<ProjeStokKartDTO> _projeStokKartDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ProjeStokKartDTO> projeStokKartDTOs
         {
             get
@@ -94,16 +96,17 @@ namespace YektamakDesktop.Formlar.ProjeModul
         public async Task form_Load(object sender, EventArgs e)
         {
             ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref fcbProjeKod);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
+            //ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
+            clbStokGrup.SetDataSource(_cache.stokGrups);
             await Binding();
         }
 
         private async Task Binding()
         {
-            BindHelper.BindData(fcbProjeKod, projeStokKartFilter.proje, nameof(projeStokKartFilter.proje.Id));
-            BindHelper.BindData(clbMalzemeGrup, projeStokKartFilter.stokKart.malzemeGrup, nameof(projeStokKartFilter.stokKart.malzemeGrup.Id));
-            BindHelper.BindData(clbStokGrup, projeStokKartFilter.stokKart.stokGrup, nameof(projeStokKartFilter.stokKart.stokGrup.Id));
-            BindHelper.BindData(clbMalzemeAltGrup, projeStokKartFilter.stokKart.malzemeAltGrup, nameof(projeStokKartFilter.stokKart.malzemeAltGrup.Id));
+            BindHelper.BindData(fcbProjeKod, projeStokKartFilter,e=>e.proje);
+            BindHelper.BindData(clbMalzemeGrup, projeStokKartFilter.stokKart,e=>e.malzemeGrup);
+            BindHelper.BindData(clbStokGrup, projeStokKartFilter.stokKart,e=>e.stokGrup);
+            BindHelper.BindData(clbMalzemeAltGrup, projeStokKartFilter.stokKart,e=>e.malzemeAltGrup);
             BindHelper.BindData(chkPdf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isPdf));
             BindHelper.BindData(chkDxf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isDxf));
             BindHelper.BindData(chkStep, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isStep));
@@ -113,6 +116,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         private async Task GridDoldur()
         {
+            if (projeStokKartFilter.proje.Id == null || projeStokKartFilter.proje.Id==-1) return;
             this.Enabled = false;
             _cache.stokKartList.Clear();
             projeStokKartDTOs.Clear();

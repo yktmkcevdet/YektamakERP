@@ -24,6 +24,18 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(proje, "spGetProje");
             return result;
         }
+        [HttpPost, Route("api/GetProjeSorumlu")]
+        public string GetProjeSorumlu([FromBody] ProjeSorumlu projeSorumlu)
+        {
+            string result = _dataAccessLayer.GetObject(projeSorumlu, "spGetProjeSorumlu");
+            return result;
+        }
+        [HttpPost, Route("api/SaveProjeSorumlu")]
+        public string SaveProjeSorumlu([FromBody] ProjeSorumlu projeSorumlu)
+        {
+            string result = _dataAccessLayer.SaveObject(projeSorumlu, "spSaveProjeSorumlu");
+            return result;
+        }
         [HttpPost, Route("api/DeleteProje")]
         public string DeleteProje([FromBody] Proje proje)
         {

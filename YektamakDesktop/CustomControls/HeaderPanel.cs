@@ -62,6 +62,7 @@ namespace YektamakDesktop.CustomControls
 
         [Description("Üst başlık metni")]
         [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Baslik
         {
             get => lblHdr.Text;

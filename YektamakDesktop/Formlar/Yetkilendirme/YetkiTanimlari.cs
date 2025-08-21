@@ -28,7 +28,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             InitializeComponent();
             Initialize();
             treeView1.AfterCheck += async(s,e)=> await treeView1_AfterCheck(s,e);
-            comboListBoxRol.SelectedIndexChanged += async (s, e) => await comboListBoxRol_SelectedIndexChanged(s,e);
+            comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
         }
         private void Initialize()
         {
@@ -41,18 +41,18 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             Controls.Add(universalGrid1);
             universalGrid1.Grid.MouseDown += universalGrid1_MouseDown;
         }
-        private async Task comboListBoxRol_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboListBoxRol_SelectedIndexChanged(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
             Kullanici kullanici = new Kullanici();
             kullanici.rol.Id = comboListBoxRol.selectedDataRowId;
             string jsonResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
             List<KullaniciYetki> kullaniciYetkiList = JsonConvert.DeserializeObject<List<KullaniciYetki>>(jsonResult);
-            await TreeNodes(kullaniciYetkiList);
+            TreeNodes(kullaniciYetkiList);
             ComboBoxListFill.GetLookupAd(_cache.kullaniciList.Where(k => k.rol.Id == comboListBoxRol.selectedDataRowId).ToList(), ref cbxKullanici);
         }
         bool isLoading=false;
-        private async Task TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
+        private void TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
         {
             isLoading = true;
             
@@ -69,17 +69,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     }
                     nodes[0].Nodes.Add(node);
                 }
-                else if(yetki.rol.Id==null)
+                else if(kullaniciYetkiList.Any(k => k.altMenu.Id == yetki.menu.Id))
                 {
-                    TreeNode node = new TreeNode(yetki.menu.ad);
-                    node.Name = yetki.menu.Id.ToString() ;
-                    
-                    treeView1.Nodes.Add(node);
-                }
-                else
-                {
-                    var ytk = kullaniciYetkiList.FirstOrDefault(k=>k.altMenu.Id==yetki.menu.Id);
-                    if(ytk != null)
+                    var ytk = kullaniciYetkiList.FirstOrDefault(k => k.altMenu.Id == yetki.menu.Id);
+                    if (ytk != null)
                     {
                         TreeNode node = new TreeNode(ytk.menu.ad);
                         node.Name = ytk.menu.Id.ToString();
@@ -89,6 +82,14 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                         treeView1.Nodes.Add(node);
                     }
                 }
+                else 
+                {
+                    TreeNode node = new TreeNode(yetki.menu.ad);
+                    node.Name = yetki.menu.Id.ToString() ;
+                    
+                    treeView1.Nodes.Add(node);
+                }
+                
             }
             isLoading = false;
         }
@@ -173,7 +174,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 MessageBox.Show("Menu başarı ile silindi!");
             }
-            await comboListBoxRol_SelectedIndexChanged(sender, e);
+            comboListBoxRol_SelectedIndexChanged(sender, e);
         }
         private void YetkiTanimlari_FormClosing(object sender, FormClosingEventArgs e)
         {

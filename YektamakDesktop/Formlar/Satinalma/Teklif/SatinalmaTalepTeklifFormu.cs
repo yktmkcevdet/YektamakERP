@@ -12,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -45,6 +46,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbEndTalepTarihi.textBox.PlaceholderText = "Bitiş Talep Tarihi";
             ctxBeginTeslimTarihi.textBox.PlaceholderText = "Başlangıç Teslim Tarihi";
             ctxEndTeslimTarihi.textBox.PlaceholderText = "Bitiş Teslim Tarihi";
+            fcbBoyut.PlaceholderText = "Boyut Seçimleri...";
             clbStokGrupId.SetDataSource(_cache.stokGrups);
             clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups);
             clbMalzemeAltGrupId.SetDataSource(_cache.malzemeAltGrup2List);
@@ -490,31 +492,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             customComboListBox.SelectedIndexChanged += cbxFirma_SelectedIndexChanged;
             this.Controls.Add(customComboListBox);
         }
-        public class DataControlFirma : DataControl, IEntity
-        {
-            private readonly ICache _cache;
-            private FilterableComboBox _Id;
-            public FilterableComboBox Id { get { if (_Id == null) { _Id = new(); } return _Id; } set { _Id = value; } }
-            private string _mail;
-            public string mail { get { return _mail; } set { _mail = value; } }
-            public DataControlFirma(ICache cache)
-            {
-                Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id" };
-                Id.PlaceholderText = "Firma Seçiniz";
-
-                Id.SelectedIndexChanged += Id_SelectedIndexChanged;
-                _cache = cache;
-                ComboBoxListFill.GetLookupAd(_cache.firmaList, ref _Id);
-            }
-            public DataControlFirma() { }
-
-            private void Id_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                mail = _cache.firmaList.First(f => f.Id == int.Parse(Id.SelectedValue.ToString())).mail;
-                newRec = false; // Yeni kayıt değil, var olan bir firma seçildiğinde
-            }
-        }
-
         private void clbMalzemeAltGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
             universalGrid1.Filtrele(filter);
@@ -537,7 +514,40 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void fcbBoyut_SelectedIndexChanged(object sender, EventArgs e)
         {
-            universalGrid1.Filtrele(filter);
+            var seciliBoyutlar = fcbBoyut.SelectedValues.Cast<int>().ToList();
+            var list = (List<SatinalmaTalepDetayDTO>)universalGrid1.binding.DataSource;
+            if(seciliBoyutlar.Count > 0)
+            {
+                list = list.Where(x => seciliBoyutlar.Contains(x.stokKartboyutTanimId ?? 0)).ToList();
+            }
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = list;
+            universalGrid1.Grid.DataSource = list;
+            universalGrid1.lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {list.Count.ToString()}";
+        }
+        public class DataControlFirma : DataControl, IEntity
+        {
+            private readonly ICache _cache;
+            private FilterableComboBox _Id;
+            public FilterableComboBox Id { get { if (_Id == null) { _Id = new(); } return _Id; } set { _Id = value; } }
+            private string _mail;
+            public string mail { get { return _mail; } set { _mail = value; } }
+            public DataControlFirma(ICache cache)
+            {
+                Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id" };
+                Id.PlaceholderText = "Firma Seçiniz";
+
+                Id.SelectedIndexChanged += Id_SelectedIndexChanged;
+                _cache = cache;
+                ComboBoxListFill.GetLookupAd(_cache.firmaList, ref _Id);
+            }
+            public DataControlFirma() { }
+
+            private void Id_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                mail = _cache.firmaList.First(f => f.Id == int.Parse(Id.SelectedValue.ToString())).mail;
+                //newRec = false; // Yeni kayıt değil, var olan bir firma seçildiğinde
+            }
         }
     }
 

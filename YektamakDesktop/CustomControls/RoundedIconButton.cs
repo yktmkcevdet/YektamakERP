@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -8,14 +9,19 @@ namespace YektamakDesktop.CustomControls
 {
     public class RoundedIconButton : FontAwesome.Sharp.IconButton
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int CornerRadius { get; set; } = 20;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get; set; } = Color.Black;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get; set; } = 0;
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color GradientColor1 { get; set; } = Color.DodgerBlue;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color GradientColor2 { get; set; } = Color.MidnightBlue;
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color HoverColor1 { get; set; } = Color.RoyalBlue;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color HoverColor2 { get; set; } = Color.Navy;
 
         private bool _mouseOver = false;

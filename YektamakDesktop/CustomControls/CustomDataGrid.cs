@@ -106,7 +106,7 @@ namespace YektamakDesktop.CustomControls
 
             if (propertyValue == null)
             {
-                propertyValue = senderType.GetProperty("selectedDataRowId")?.GetValue(control);
+                propertyValue = senderType.GetProperty("SelectedIndex")?.GetValue(control);
             }
             if (propertyValue == null) return;
 
@@ -332,13 +332,14 @@ namespace YektamakDesktop.CustomControls
                 var s = control.Name;
 				Type type = control.GetType();
 				SetControlEventHandler(control, type, nameof(control.TextChanged), nameof(ControlValueChange));
-                SetControlEventHandler(control, type, "SelectedIndexChanged", nameof(ControlValueChange));
+                SetControlEventHandler(control, type, nameof(FilterableComboBox.SelectedIndexChanged), nameof(ControlValueChange));
                 if (type.GetProperty(nameof(control.Tag)).GetValue(control).ToString().Contains("Sil")) SetControlEventHandler(control, type, nameof(control.Click), nameof(DeleteRow));
             }
         }
         public void SetControlEventHandler(object obj, Type fieldType, string eventName, string methodName)
         {
             EventInfo eventInfo = fieldType.GetEvent(eventName);
+            if (eventInfo == null) return;
             if (eventName == "TextChanged")
             {
                 EventHandler handler = GetEventHandler(methodName);
@@ -360,6 +361,11 @@ namespace YektamakDesktop.CustomControls
                 if (handler != null) eventInfo.AddEventHandler(obj, handler);
             }
             if (eventName == "CheckedChanged")
+            {
+                EventHandler handler = GetEventHandler(methodName);
+                if (handler != null) eventInfo.AddEventHandler(obj, handler);
+            }
+            if (eventName == "SelectedIndexChanged")
             {
                 EventHandler handler = GetEventHandler(methodName);
                 if (handler != null) eventInfo.AddEventHandler(obj, handler);

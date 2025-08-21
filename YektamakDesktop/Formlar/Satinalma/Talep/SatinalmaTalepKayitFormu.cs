@@ -7,6 +7,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -55,6 +56,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
         }
         private SatinalmaTalep _satinalmaTalep;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTalep satinalmaTalep
         {
             get

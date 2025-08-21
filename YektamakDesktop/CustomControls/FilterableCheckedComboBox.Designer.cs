@@ -7,7 +7,7 @@ namespace YektamakDesktop.CustomControls
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.CheckedListBox checkedListBox;
-        private CustomDropDown dropDown;
+        private System.Windows.Forms.ToolStripDropDown dropDown;
 
         protected override void Dispose(bool disposing)
         {
@@ -19,9 +19,8 @@ namespace YektamakDesktop.CustomControls
         private void InitializeComponent()
         {
             textBox = new TextBox();
-            host = new CheckedListBox();
-            dropDown = new CustomDropDown();
-            dropDown.SuspendLayout();
+            checkedListBox = new CheckedListBox();
+            dropDown = new ToolStripDropDown();
             SuspendLayout();
             // 
             // textBox
@@ -33,28 +32,22 @@ namespace YektamakDesktop.CustomControls
             textBox.Size = new System.Drawing.Size(190, 16);
             textBox.TabIndex = 1;
             // 
-            // host
+            // checkedListBox
             // 
-            host.AccessibleName = "host";
-            host.BorderStyle = BorderStyle.None;
-            host.CheckOnClick = true;
-            host.Location = new System.Drawing.Point(0, 0);
-            host.Name = "host";
-            host.Size = new System.Drawing.Size(120, 96);
-            host.TabIndex = 0;
+            checkedListBox.AllowDrop = true;
+            checkedListBox.BorderStyle = BorderStyle.None;
+            checkedListBox.CheckOnClick = true;
+            checkedListBox.Location = new System.Drawing.Point(0, 0);
+            checkedListBox.Name = "checkedListBox";
+            checkedListBox.Size = new System.Drawing.Size(120, 96);
+            checkedListBox.TabIndex = 0;
             // 
             // dropDown
             // 
-            dropDown.InnerPadding = new Padding(4);
-            dropDown.Items.AddRange(new ToolStripItem[] { host });
             dropDown.LayoutStyle = ToolStripLayoutStyle.Flow;
             dropDown.Name = "dropDown";
-            dropDown.Size = new System.Drawing.Size(2, 4);
-            // 
-            // host
-            // 
-            host.Name = "host";
-            host.Size = new System.Drawing.Size(120, 96);
+            dropDown.Padding = new Padding(0);
+            dropDown.Size = new System.Drawing.Size(0, 0);
             // 
             // FilterableCheckedComboBox
             // 
@@ -62,11 +55,8 @@ namespace YektamakDesktop.CustomControls
             Name = "FilterableCheckedComboBox";
             Padding = new Padding(5);
             Size = new System.Drawing.Size(200, 30);
-            dropDown.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
-        private CheckedListBox host;
-        private ToolStripControlHost host;
     }
 }

@@ -9,10 +9,10 @@ namespace Models
 {
     public class MalzemeAltGrup : IEntity
     {
-        [GridDisplay(Header ="Id")] public int? Id { get; set; }
+        public int? Id { get; set; }
         private MalzemeGrup _malzemeGrup;
-        [GridDisplay(Header = "malzemeGrup",Tip ="Liste",ListName ="malzemeGrups",ListVisibleColumnName ="ad")] public MalzemeGrup malzemeGrup { get { if (_malzemeGrup == null) { _malzemeGrup = new MalzemeGrup(); } return _malzemeGrup; } set { _malzemeGrup = value; } }
-        [GridDisplay(Header = "kod")] public string kod { get; set; }
-        [GridDisplay(Header = "ad")] public string ad { get; set; }
+        public MalzemeGrup malzemeGrup { get { if (_malzemeGrup == null) { _malzemeGrup = new MalzemeGrup(); } return _malzemeGrup; } set { _malzemeGrup = value; } }
+        public string kod { get; set; }
+        public string ad { get; set; }
     }
 }

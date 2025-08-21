@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Helpers;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
@@ -27,6 +28,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             InitializeComponent();
         }
         private SatinalmaTeklifBaslik _satinalmaTeklifBaslik;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTeklifBaslik satinalmaTeklifBaslik
         {
             get
@@ -76,6 +78,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             rtbBody.SelectionFont = new Font(currentFont.FontFamily, newSize, currentFont.Style);
         }
         private Mail _mail;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Mail mail
         {
             get

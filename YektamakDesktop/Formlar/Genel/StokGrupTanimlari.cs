@@ -1,9 +1,11 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 using System;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 using YektamakDesktop.Formlar.Stok;
 
 namespace YektamakDesktop.Formlar.Genel
@@ -81,7 +83,7 @@ namespace YektamakDesktop.Formlar.Genel
                         }
                     case 1:
                         {
-                            MalzemeGrup malzemeGrup = _cache.malzemeGrups.FirstOrDefault(m=>m.Id==int.Parse(node.Name));
+                            MalzemeGrupDTO malzemeGrup = _cache.malzemeGrups.Cast<MalzemeGrupDTO>().ToList().FirstOrDefault(m=>m.Id==int.Parse(node.Name));
                             var malzemeGrupTanimFormu = FormFactory.CreateForm<MalzemeGrupTanimFormu>();
                             malzemeGrupTanimFormu.UpdateMode(malzemeGrup);
                             malzemeGrupTanimFormu.TopLevel = false;
@@ -104,7 +106,7 @@ namespace YektamakDesktop.Formlar.Genel
                         {
                             MalzemeAltGrup malzemeAltGrup = _cache.malzemeAltGrups.FirstOrDefault(m => m.Id == int.Parse(node.Name));
                             var malzemeAltGrupTanimFormu = FormFactory.CreateForm<MalzemeAltGrupTanimFormu>();
-                            malzemeAltGrupTanimFormu.UpdateMode(malzemeAltGrup);
+                            malzemeAltGrupTanimFormu.UpdateMode(ConvertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup));
                             malzemeAltGrupTanimFormu.TopLevel = false;
                             malzemeAltGrupTanimFormu.Dock = DockStyle.Fill;
                             panel1.Controls.Clear();
@@ -201,7 +203,7 @@ namespace YektamakDesktop.Formlar.Genel
                 {
                     case 0:
                         {
-                            MalzemeGrup malzemeGrup = new MalzemeGrup { stokGrup = { Id = int.Parse(node.Name) } };
+                            MalzemeGrupDTO malzemeGrup = new MalzemeGrupDTO { stokGrupId = int.Parse(node.Name)  };
                             var malzemeGrupTanimFormu= FormFactory.CreateForm<MalzemeGrupTanimFormu>();
                             malzemeGrupTanimFormu.UpdateMode(malzemeGrup);
                             malzemeGrupTanimFormu.TopLevel = false;
@@ -216,7 +218,7 @@ namespace YektamakDesktop.Formlar.Genel
                         {
                             MalzemeAltGrup malzemeAltGrup = new MalzemeAltGrup { malzemeGrup = { Id = int.Parse(node.Name), stokGrup = { Id=int.Parse(node.Parent.Name) } } };
                             var malzemeAltGrupTanimFormu = FormFactory.CreateForm<MalzemeAltGrupTanimFormu>();
-                            malzemeAltGrupTanimFormu.UpdateMode(malzemeAltGrup);
+                            malzemeAltGrupTanimFormu.UpdateMode(ConvertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup));
                             malzemeAltGrupTanimFormu.TopLevel = false;
                             malzemeAltGrupTanimFormu.Dock = DockStyle.Fill;
                             malzemeAltGrupTanimFormu.AfterSave += MalzemeAltGrupTanimFormu_AfterSave;

@@ -116,6 +116,6 @@ namespace YektamakDesktop.CustomControls
         private System.Windows.Forms.ContextMenuStrip columnMenu;
         private System.Windows.Forms.Label lblToplamKayitSayisi;
         private System.Windows.Forms.Label lblSecilenKayitSayisi;
-        private System.Windows.Forms.Label lblGosterilenKayitSayisi;
+        public System.Windows.Forms.Label lblGosterilenKayitSayisi;
     }
 }

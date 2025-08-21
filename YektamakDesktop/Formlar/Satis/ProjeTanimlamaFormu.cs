@@ -1,6 +1,5 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,20 +28,16 @@ namespace YektamakDesktop.Formlar.Satis
         {
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             universalGrid1.Location = new System.Drawing.Point(37, 283);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(913, 291);
             universalGrid1.TabIndex = 18;
             universalGrid1.Grid.MouseClick += universalGrid1_CellClick;
             universalGrid1.MouseDown1 += Grid_MouseDown1Click;
-
             Controls.Add(universalGrid1);
-            foreach (var proje in _cache.projes)
-            {
-                projeDTOs.Add(ConvertHelper.ToDTO<ProjeDTO>(proje));
-            }
-            universalGrid1.SetData(projeDTOs, this.Name);
+
+            universalGrid1.SetData(_cache.projes, this.Name);
             fcbProjeTip.SetDataSource(_cache.projeTipList);
             fcbMarka.SetDataSource(_cache.markaList);
             fcbMarkaAltGrup.SetDataSource(_cache.markaAltGrupList);
@@ -53,24 +48,6 @@ namespace YektamakDesktop.Formlar.Satis
         private void Grid_MouseDown1Click(object sender, MouseEventArgs e)
         {
             contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
-        }
-
-        private List<ProjeDTO> _projeDTOs;
-        public List<ProjeDTO> projeDTOs
-        {
-            get
-            {
-                if (_projeDTOs == null)
-                {
-                    _projeDTOs = new List<ProjeDTO>();
-                }
-                return _projeDTOs;
-            }
-            set
-            {
-                _projeDTOs = value;
-                Binding();
-            }
         }
         private Proje _proje;
         private Proje proje
@@ -91,17 +68,16 @@ namespace YektamakDesktop.Formlar.Satis
         }
         private void Binding()
         {
-            BindHelper.BindData(ctbId, proje, "Id");
-            BindHelper.BindData(fcbProjeTip, proje.projeTip, "Id");
-            BindHelper.BindData(fcbMarka, proje.marka, "Id");
-            BindHelper.BindData(ctbProjeNo, proje, "projeNo");
+            BindHelper.BindData(ctbId, proje, nameof(proje.Id));
+            BindHelper.BindData(fcbProjeTip, proje.projeTip, nameof(proje.projeTip.Id));
+            BindHelper.BindData(fcbMarka, proje.marka, nameof(proje.marka.Id));
+            BindHelper.BindData(ctbProjeNo, proje, nameof(proje.projeNo));
+            BindHelper.BindData(fcbMirasProje, proje, nameof(proje.mirasProjeId));
+            BindHelper.BindData(fcbMarkaAltGrup, proje.markaAltGrup, nameof(proje.markaAltGrup.Id));
+            BindHelper.BindData(fcbMarkaAltGrupKategori, proje.markaAltGrupKategori, nameof(proje.markaAltGrupKategori.Id));
+            BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
+            BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
         }
-        private void ProjeTanimlamaFormu_Load(object sender, EventArgs e)
-        {
-
-        }
-        
-
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
             string jsonResult = _projeService.SaveProje(proje);
@@ -111,21 +87,26 @@ namespace YektamakDesktop.Formlar.Satis
             }
             else
             {
-                proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
-                projeDTOs.Add(ConvertHelper.ToDTO<ProjeDTO>(proje));
+                if (proje.Id == null)
+                {
+                    proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
+                    _cache.projes.Add(proje);
+                    universalGrid1.binding.Add(proje);
+                }
+                else
+                {
+                    proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
+                    _cache.projes.Where(p => p.Id == proje.Id).ToList().ForEach(p => p = proje);
+                    universalGrid1.binding.Remove(universalGrid1.Grid.CurrentRow.DataBoundItem);
+                    universalGrid1.binding.Add(proje);
+                }
             }
-        }
-
-        private void universalGrid1_MouseDown1(object sender, MouseEventArgs e)
-        {
-
         }
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
             try
             {
-                ProjeDTO projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                proje = ConvertHelper.ToEntity<Proje>(projeDTO);
+                proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
             }
             catch (Exception ex)
             {
@@ -135,8 +116,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void projeSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjeDTO projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            proje = ConvertHelper.ToEntity<Proje>(projeDTO);
+            Proje proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
             string jsonResult = _projeService.DeleteProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -145,8 +125,12 @@ namespace YektamakDesktop.Formlar.Satis
             else
             {
                 _cache.projes.Remove(proje);
-                projeDTOs.Remove(projeDTO);
             }
+        }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            proje = new();
         }
     }
 }

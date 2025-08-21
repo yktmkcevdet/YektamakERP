@@ -283,8 +283,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2.TabIndex = 134;
             clbMalzemeAltGrup2.UnderlinedStyle = false;
             clbMalzemeAltGrup2.ValueMember = "Id";
-            clbMalzemeAltGrup2.DoubleClick1 += cbxMalzemeAltGrup2_DoubleClick;
-            clbMalzemeAltGrup2.DoubleClick += cbxMalzemeAltGrup2_DoubleClick;
+            clbMalzemeAltGrup2.MouseDoubleClick += cbxMalzemeAltGrup2_DoubleClick;
             // 
             // cbxStokTip
             // 

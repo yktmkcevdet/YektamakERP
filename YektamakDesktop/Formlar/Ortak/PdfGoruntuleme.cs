@@ -2,12 +2,14 @@
 using System.Windows.Forms;
 using Microsoft.Win32;
 using Spire.Pdf;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Ortak
 {
     public partial class PdfGoruntuleme : Form
     {
         private string _pdfFilePath;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string pdfFilePath 
         { 
             get { return _pdfFilePath; } 

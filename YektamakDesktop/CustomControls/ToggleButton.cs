@@ -14,10 +14,13 @@ namespace YektamakDesktop.CustomControls
         private Color onToggleColor = Color.WhiteSmoke;
         private Color offBackColor = Color.Gray;
         private Color offToggleColor = Color.Gainsboro;
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color OnBackColor { get => onBackColor; set { onBackColor = value;this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color OnToggleColor { get => onToggleColor; set { onToggleColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color OffBackColor { get => offBackColor; set { offBackColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color OffToggleColor { get => offToggleColor; set { offToggleColor = value; this.Invalidate(); } }
 
         public ToggleButton()

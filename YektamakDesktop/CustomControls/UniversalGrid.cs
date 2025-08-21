@@ -1,10 +1,6 @@
-﻿using FastReport.Data;
-using Models;
+﻿using Models;
 using Models.Attributes;
 using Newtonsoft.Json;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.POIFS.NIO;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -143,11 +139,12 @@ namespace YektamakDesktop.CustomControls
                         };
                         if (comboColumn.CellTemplate is FilterableComboBoxCell comboCell)
                         {
-                            comboCell.DisplayMember = "ad";
+                            comboCell.DisplayMember = pair.Attribute.ListVisibleColumnName;
                             comboCell.ValueMember = "Id";
                             comboCell.ItemsSource = dataSource.Cast<object>().ToList();
                         }
                         col = comboColumn;
+
                     }
                     else
                     {
@@ -212,7 +209,7 @@ namespace YektamakDesktop.CustomControls
             binding.DataSource = liste;
 
             list1 = list.Cast<object>().ToList();
-            dataGridView1.DataSource = liste;
+            dataGridView1.DataSource = binding;
             await LoadSettings<T>(formName, isCheck);
 
             lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
@@ -347,6 +344,10 @@ namespace YektamakDesktop.CustomControls
                 }
                 MouseDown1?.Invoke(this, e);
             }
+            else
+            {
+                MouseDown1?.Invoke(this, e);
+            }
 
         }
         public List<T> GetCheckedRows<T>() where T : IEntity
@@ -406,24 +407,26 @@ namespace YektamakDesktop.CustomControls
         {
             IEnumerable<PropertyInfo> props = typeof(T).GetProperties().ToList();
             props = props.Where(p => p.GetValue(filter) != null);
-            props = props.Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
+            props = props.Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) );
 
             var filtered = list.Where(item =>
             {
-                foreach (var prop in props)
-                {
-                    var filterValue = JsonConvert.SerializeObject(prop.GetValue(filter));
-                    var itemValue = JsonConvert.SerializeObject(prop.GetValue(item));
+            foreach (var prop in props)
+            {
+                var filterValue = JsonConvert.SerializeObject(prop.GetValue(filter));
+                var itemValue = JsonConvert.SerializeObject(prop.GetValue(item));
                     // Null eşleşmiyorsa filtreyi geçemez
-                    if (filterValue == null) return true;
-                    if (prop.PropertyType== typeof(string))
-                    {
-                        if (itemValue == null || !itemValue.ToString().Contains(filterValue.ToString(),StringComparison.OrdinalIgnoreCase)) return false;
-                    }
-                    else
-                    {
-                        if (itemValue == null || !itemValue.Equals(filterValue)) return false;
-                    }
+                    Type type = prop.PropertyType;
+                var nullProperty = Activator.CreateInstance(type);
+                if (filterValue == JsonConvert.SerializeObject(nullProperty)) return true;
+                if (prop.PropertyType == typeof(string))
+                {
+                    if (itemValue == null || !itemValue.ToString().Contains(filterValue.ToString(), StringComparison.OrdinalIgnoreCase)) return false;
+                }
+                else
+                {
+                    if (itemValue == null || !itemValue.Equals(filterValue)) return false;
+                }
                 }
                 return true;
             }).ToList();
@@ -434,7 +437,7 @@ namespace YektamakDesktop.CustomControls
         {
             var list = (SortableBindingList<T>)binding.DataSource;
             var filtreliListe = Filtrele(list, filtreNesnesi);
-            dataGridView1.DataSource = filtreliListe;
+            binding.DataSource = filtreliListe;
             await LoadSettings<T>(_formName, _isCheck);
             headerCheckBoxState = false;
             lblSecilenKayitSayisi.Text = $"Seçilen kayıt sayısı : 0";
@@ -489,7 +492,9 @@ namespace YektamakDesktop.CustomControls
     }
     public class FilterableComboBoxEditingControl : FilterableComboBox, IDataGridViewEditingControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataGridView EditingControlDataGridView { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object EditingControlFormattedValue
         {
             get
@@ -502,8 +507,9 @@ namespace YektamakDesktop.CustomControls
                     this.Text = s;
             }
         }
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int EditingControlRowIndex { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool EditingControlValueChanged { get; set; }
 
         public bool RepositionEditingControlOnValueChange => false;
@@ -513,8 +519,6 @@ namespace YektamakDesktop.CustomControls
         {
             this.Font = dataGridViewCellStyle.Font;
         }
-
-        //public bool EditingControlWantsInputKey(Keys keyData, bool dataGridViewWantsInputKey) => true;
         public bool EditingControlWantsInputKey(Keys keyData, bool dataGridViewWantsInputKey)
         {
             switch (keyData & Keys.KeyCode)
@@ -533,7 +537,10 @@ namespace YektamakDesktop.CustomControls
                     return !dataGridViewWantsInputKey;
             }
         }
-        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context) => JsonConvert.SerializeObject(SelectedValue);
+        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        {
+            return JsonConvert.SerializeObject(SelectedValue);
+        }
 
         public void PrepareEditingControlForEdit(bool selectAll) { }
 
@@ -561,6 +568,7 @@ namespace YektamakDesktop.CustomControls
         {
             this.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
+        
         public List<object> ItemsSource { get; set; }
         public string ValueMember { get; set; }
         public string DisplayMember { get; set; }
@@ -579,6 +587,7 @@ namespace YektamakDesktop.CustomControls
                 clone.ItemsSource = this.ItemsSource;
                 clone.DisplayMember = this.DisplayMember;
                 clone.ValueMember = this.ValueMember;
+                clone.ValueType = this.ValueType;
             }
             return clone;
         }
@@ -596,7 +605,14 @@ namespace YektamakDesktop.CustomControls
                 ctl.DisplayMember = this.DisplayMember;
                 ctl.ValueMember = this.ValueMember;
                 ctl.SetDataSource(ItemsSource);
-                ctl.SelectedValue = this.Value; // Eğer hücrede bir değer varsa, göster
+                if (this.Value.GetType().IsClass)
+                {
+                    ctl.SelectedItem = ItemsSource.FirstOrDefault(x => JsonConvert.SerializeObject(x) == JsonConvert.SerializeObject(this.Value)); //this.Value.GetType().GetProperty("Id").GetValue(this.Value); // Eğer hücrede bir değer varsa, göster
+                }
+                else
+                {
+                    ctl.SelectedValue = this.Value; // Eğer hücrede bir değer varsa, göster
+                }
             }
         }
         protected override object GetFormattedValue(object value,
@@ -605,6 +621,7 @@ namespace YektamakDesktop.CustomControls
         TypeConverter formattedValueTypeConverter,
         DataGridViewDataErrorContexts context)
         {
+            var serializedValue = JsonConvert.SerializeObject(value);
             if (this.ItemsSource != null && !string.IsNullOrEmpty(this.DisplayMember) && !string.IsNullOrEmpty(this.ValueMember))
             {
                 var list = this.ItemsSource as IEnumerable<object>;
@@ -613,8 +630,9 @@ namespace YektamakDesktop.CustomControls
                     try
                     {
                         dynamic dynItem = x;
-                        var val = GetPropValue(dynItem, this.ValueMember);
-                        return val != null && val.Equals(value);
+                        var val = dynItem;//GetPropValue(dynItem, this.ValueMember);
+                        //return val != null && val.Equals(value);
+                        return val != null && JsonConvert.SerializeObject(val) == serializedValue || GetPropValue(dynItem, this.ValueMember).Equals(value);
                     }
                     catch
                     {

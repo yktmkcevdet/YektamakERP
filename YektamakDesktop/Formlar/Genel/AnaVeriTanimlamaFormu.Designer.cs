@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    partial class AnaVeriTanimlamaFormu<T> : Form, IForm where T : class, IBaseEntity, new()
+    partial class AnaVeriTanimlamaFormu<T> : Form where T : class, IBaseEntity, new()
     {
         /// <summary>
         /// Required designer variable.

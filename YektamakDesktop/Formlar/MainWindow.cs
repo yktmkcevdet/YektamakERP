@@ -13,6 +13,7 @@ using Models.DTO;
 using Utilities.Interfaces;
 using Patagames.Pdf.Net.Controls.WinForms;
 using YektamakDesktop.Formlar.ProjeModul;
+using System.ComponentModel;
 
 namespace YektamakDesktop
 {
@@ -22,6 +23,7 @@ namespace YektamakDesktop
         private ToolTip buttonFiltreToolTip;
         private DateTime _oturumBaslangicZamani;
         private DataSet _dataSet;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataSet dataSet
         {
             get => _dataSet ??= new DataSet();

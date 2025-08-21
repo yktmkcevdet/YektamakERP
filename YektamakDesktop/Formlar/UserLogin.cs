@@ -4,6 +4,7 @@ using Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,11 +34,12 @@ namespace YektamakDesktop.Formlar
             ToolTip toolTip1 = new ToolTip();
             toolTip1.SetToolTip(btnSifreDegistir, "Şifre Değiştir");
         }
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool loginStatus { get; set; }
 
         private bool newPasswordMode = false;
         private Kullanici _user;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Kullanici user
         {
             get { if (_user == null) { _user = new(); } return _user; }

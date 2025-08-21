@@ -13,7 +13,7 @@ using Utilities.Interfaces;
 
 namespace YektamakDesktop.Formlar.Satis
 {
-    public partial class Monday : Form, IForm
+    public partial class Monday : Form
     {
         private static ISatisService _satisService;
         private readonly ICache _cache;
@@ -39,8 +39,6 @@ namespace YektamakDesktop.Formlar.Satis
                 return _monday;
             }
         }
-        public List<Control> controlsToDisable { get; set; }
-        public bool activeForm { get; set; }
 
         private async void Monday_Load(object sender, EventArgs e)
         {
