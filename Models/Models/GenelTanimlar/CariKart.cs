@@ -6,8 +6,9 @@
         public string cariAdi;
         private Cari _cari;
         public Cari cari { get { if (_cari == null) { _cari = new(); } return _cari; } set { _cari = value; } }
-        private Tutar _guncelCari;
-        public Tutar guncelCari { get { if (_guncelCari == null) { _guncelCari = new(); } return _guncelCari; } set { _guncelCari = value; } }
+        public double? guncelCari { get; set; }
+        private DovizCinsi _dovizCinsi;
+        public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi = value; } }
     }
     public enum CariTuru
     {

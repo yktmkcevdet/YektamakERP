@@ -11,9 +11,9 @@
         /// </summary>
         public string cekNumarasi;
         public CekDurumu cekDurumu;
-        private Tutar _tutar;
-        public Tutar tutar { get { if (_tutar == null) { _tutar = new(); } return _tutar; } set { _tutar = value; } }
-        public Tutar tutarFirst;
+        public double? tutar { get; set; }
+        private DovizCinsi _dovizCinsi;
+        public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi = value; } }
         public DateTime vadeTarihi;
         public DateTime vadeTarihiFirst;
         private Firma _cekiVerenFirma;

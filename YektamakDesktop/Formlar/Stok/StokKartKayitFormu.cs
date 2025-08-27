@@ -41,6 +41,7 @@ namespace YektamakDesktop.Formlar.Stok
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
         }
+        public event EventHandler<object> AfterSave;
         private ProjeStokKart _projeStokKart;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ProjeStokKart projeStokKart
@@ -69,8 +70,10 @@ namespace YektamakDesktop.Formlar.Stok
             result = GlobalData.CheckField("*", clbStokTip) && result;
             result = GlobalData.CheckField("*", clbStokGrup) && result;
             result = GlobalData.CheckField("*", clbMalzemeGrup) && result;
-            result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
-            result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
+            if(clbMalzemeGrup.SelectedIndex!=-1) result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
+            if (clbMalzemeAltGrup.SelectedIndex != -1) result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
+            result = GlobalData.CheckField("*", clbOlcuBirim) && result;
+            result = GlobalData.CheckField("*", clbProjeKod) && result;
             if (_cache.kullanici.Id != 1)
             {
                 if (!_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == projeStokKart.proje.Id))
@@ -105,14 +108,17 @@ namespace YektamakDesktop.Formlar.Stok
             {
                 ProjeStokKart savedProjeStokKart = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult).FirstOrDefault();
                 projeStokKart = savedProjeStokKart;
+                AfterSave?.Invoke(this, savedProjeStokKart);
                 MessageBox.Show("Stok Kartı Kayıt Edildi");
             }
         }
         private void Binding()
         {
             BindHelper.BindData(ctbId, projeStokKart, nameof(projeStokKart.Id));
-            BindHelper.BindData(clbProjeKod, projeStokKart, e => e.proje);
+            BindHelper.BindData(ctbStokKartId, projeStokKart.stokKart, nameof(projeStokKart.stokKart.Id));
+            BindHelper.BindData(clbProjeKod, projeStokKart.proje, nameof(projeStokKart.proje.Id));
             BindHelper.BindData(ctbKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod));
+            BindHelper.BindData(ctbTedarikciKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.tedarikciKod));
             BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
             BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
             BindHelper.BindData(ctbBoyut, projeStokKart.stokKart, nameof(projeStokKart.stokKart.boyut));
@@ -166,6 +172,7 @@ namespace YektamakDesktop.Formlar.Stok
         private void cbxMalzemeGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == projeStokKart.stokKart.malzemeGrup.Id).ToList());
+            clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == projeStokKart.stokKart.malzemeAltGrup.Id).ToList());
             if (_cache.malzemeAltGrups.Count(x => x.malzemeGrup.Id == projeStokKart.stokKart.malzemeGrup.Id) == 0)
             {
                 clbMalzemeAltGrup.Enabled = false;
@@ -260,6 +267,25 @@ namespace YektamakDesktop.Formlar.Stok
         private void MalzemeAltGrup2GrupTanimFormu_AfterSave(object sender, object e)
         {
             clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == projeStokKart.stokKart.malzemeAltGrup.Id).ToList());
+        }
+
+        private void clbStokTip_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (clbStokTip.SelectedItem!=null && ((StokTip)clbStokTip.SelectedItem).ad.Contains("SARF",StringComparison.OrdinalIgnoreCase))
+            {
+                clbStokGrup.SelectedValue = 7;// Sarf
+                ctbKod.Enabled = false;
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

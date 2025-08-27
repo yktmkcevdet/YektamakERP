@@ -58,31 +58,31 @@ namespace YektamakDesktop.Formlar.Stok
             label2 = new Label();
             label4 = new Label();
             ctbStokAd = new CustomTextBox();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
+            lblStokGrup = new Label();
+            lblMalzemeStandart = new Label();
+            lblMalzemeGrup = new Label();
             label8 = new Label();
             label9 = new Label();
-            label14 = new Label();
+            lblBoy = new Label();
             ctbBoy = new CustomTextBoxSayisal();
             ctbEn = new CustomTextBoxSayisal();
-            label15 = new Label();
+            lblEn = new Label();
             ctbYukseklik = new CustomTextBoxSayisal();
-            label16 = new Label();
+            lblYukseklik = new Label();
             ctbCap = new CustomTextBoxSayisal();
-            label17 = new Label();
+            lblCap = new Label();
             ctbUzunluk = new CustomTextBoxSayisal();
-            label18 = new Label();
+            lblUzunluk = new Label();
             ctbEtKalinlik = new CustomTextBoxSayisal();
-            label19 = new Label();
+            lblEtKalinlik = new Label();
             label20 = new Label();
             ctbAciklama = new CustomTextBox();
             label21 = new Label();
-            label23 = new Label();
-            label24 = new Label();
+            lblMalzemeAltGrup = new Label();
+            lblMalzemeAltGrup2 = new Label();
             panel1 = new Panel();
             ctbAgirlik = new CustomTextBoxSayisal();
-            label10 = new Label();
+            lblAgirlik = new Label();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
@@ -91,7 +91,7 @@ namespace YektamakDesktop.Formlar.Stok
             label26 = new Label();
             label27 = new Label();
             label28 = new Label();
-            label29 = new Label();
+            lblBoyut = new Label();
             ctbBoyut = new CustomTextBox();
             checkBoxIsSatinalma = new CheckBox();
             checkBoxIsPdf = new CheckBox();
@@ -109,15 +109,19 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup = new FilterableComboBox();
             clbMalzemeAltGrup2 = new FilterableComboBox();
             ctbProjeAdet = new CustomTextBoxSayisal();
-            label3 = new Label();
+            lblProjeAdet = new Label();
             fcbBoyut = new FilterableComboBox();
             roundedButton1 = new RoundedButton();
             ctxSagClickMenu = new ContextMenuStrip(components);
-            malzemeGrupTanımlarıToolStripMenuItem = new ToolStripMenuItem();
             stokGrupTanımlamaToolStripMenuItem = new ToolStripMenuItem();
+            malzemeGrupTanımlarıToolStripMenuItem = new ToolStripMenuItem();
             malzemeAltGrupTanımlamaToolStripMenuItem = new ToolStripMenuItem();
             malzemeAltGrup2TanımlamaToolStripMenuItem = new ToolStripMenuItem();
             ctxMalzeme = new ContextMenuStrip(components);
+            ctbTedarikciKod = new CustomTextBox();
+            label30 = new Label();
+            label31 = new Label();
+            ctbStokKartId = new CustomTextBox();
             ctxSagClickMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -127,7 +131,8 @@ namespace YektamakDesktop.Formlar.Stok
             ctbId.Enabled = false;
             ctbId.Font = new Font("Segoe UI", 9.5F);
             ctbId.ForeColor = Color.Black;
-            ctbId.Location = new Point(186, 61);
+            ctbId.Location = new Point(113, 55);
+            ctbId.Multiline = false;
             ctbId.Name = "ctbId";
             ctbId.Padding = new Padding(7, 5, 7, 5);
             ctbId.Size = new Size(94, 28);
@@ -138,27 +143,28 @@ namespace YektamakDesktop.Formlar.Stok
             ctbKod.BackColor = Color.White;
             ctbKod.Font = new Font("Segoe UI", 9.5F);
             ctbKod.ForeColor = Color.Black;
-            ctbKod.Location = new Point(186, 172);
+            ctbKod.Location = new Point(113, 193);
+            ctbKod.Multiline = false;
             ctbKod.Name = "ctbKod";
             ctbKod.Padding = new Padding(7, 5, 7, 5);
             ctbKod.Size = new Size(259, 28);
-            ctbKod.TabIndex = 1;
+            ctbKod.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.Location = new Point(56, 67);
+            label1.Location = new Point(20, 63);
             label1.Name = "label1";
-            label1.Size = new Size(74, 15);
+            label1.Size = new Size(18, 15);
             label1.TabIndex = 9;
-            label1.Text = "Stok Kart Id";
+            label1.Text = "Id";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(56, 179);
+            label2.Location = new Point(20, 200);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 10;
@@ -168,7 +174,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.Location = new Point(56, 215);
+            label4.Location = new Point(20, 233);
             label4.Name = "label4";
             label4.Size = new Size(54, 15);
             label4.TabIndex = 14;
@@ -179,47 +185,49 @@ namespace YektamakDesktop.Formlar.Stok
             ctbStokAd.BackColor = Color.White;
             ctbStokAd.Font = new Font("Segoe UI", 9.5F);
             ctbStokAd.ForeColor = Color.Black;
-            ctbStokAd.Location = new Point(186, 208);
+            ctbStokAd.Location = new Point(113, 227);
+            ctbStokAd.Multiline = false;
             ctbStokAd.Name = "ctbStokAd";
             ctbStokAd.Padding = new Padding(7, 5, 7, 5);
-            ctbStokAd.Size = new Size(575, 28);
-            ctbStokAd.TabIndex = 13;
+            ctbStokAd.Size = new Size(362, 28);
+            ctbStokAd.TabIndex = 4;
             // 
-            // label5
+            // lblStokGrup
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(56, 366);
-            label5.Name = "label5";
-            label5.Size = new Size(71, 15);
-            label5.TabIndex = 16;
-            label5.Text = "Stok Grubu";
+            lblStokGrup.AutoSize = true;
+            lblStokGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblStokGrup.Location = new Point(526, 68);
+            lblStokGrup.Name = "lblStokGrup";
+            lblStokGrup.Size = new Size(71, 15);
+            lblStokGrup.TabIndex = 16;
+            lblStokGrup.Text = "Stok Grubu";
+            lblStokGrup.Click += label5_Click;
             // 
-            // label6
+            // lblMalzemeStandart
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label6.Location = new Point(56, 283);
-            label6.Name = "label6";
-            label6.Size = new Size(76, 15);
-            label6.TabIndex = 18;
-            label6.Text = "Malzme Std.";
+            lblMalzemeStandart.AutoSize = true;
+            lblMalzemeStandart.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblMalzemeStandart.Location = new Point(526, 326);
+            lblMalzemeStandart.Name = "lblMalzemeStandart";
+            lblMalzemeStandart.Size = new Size(76, 15);
+            lblMalzemeStandart.TabIndex = 18;
+            lblMalzemeStandart.Text = "Malzme Std.";
             // 
-            // label7
+            // lblMalzemeGrup
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label7.Location = new Point(262, 366);
-            label7.Name = "label7";
-            label7.Size = new Size(96, 15);
-            label7.TabIndex = 20;
-            label7.Text = "Malzeme Grubu";
+            lblMalzemeGrup.AutoSize = true;
+            lblMalzemeGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblMalzemeGrup.Location = new Point(526, 121);
+            lblMalzemeGrup.Name = "lblMalzemeGrup";
+            lblMalzemeGrup.Size = new Size(96, 15);
+            lblMalzemeGrup.TabIndex = 20;
+            lblMalzemeGrup.Text = "Malzeme Grubu";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label8.Location = new Point(54, 248);
+            label8.Location = new Point(20, 304);
             label8.Name = "label8";
             label8.Size = new Size(68, 15);
             label8.TabIndex = 22;
@@ -229,143 +237,155 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label9.Location = new Point(54, 101);
+            label9.Location = new Point(20, 165);
             label9.Name = "label9";
             label9.Size = new Size(68, 15);
             label9.TabIndex = 24;
             label9.Text = "Proje Kodu";
             // 
-            // label14
+            // lblBoy
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label14.Location = new Point(166, 424);
-            label14.Name = "label14";
-            label14.Size = new Size(28, 15);
-            label14.TabIndex = 34;
-            label14.Text = "Boy";
+            lblBoy.AutoSize = true;
+            lblBoy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblBoy.Location = new Point(774, 115);
+            lblBoy.Name = "lblBoy";
+            lblBoy.Size = new Size(28, 15);
+            lblBoy.TabIndex = 34;
+            lblBoy.Text = "Boy";
             // 
             // ctbBoy
             // 
             ctbBoy.BackColor = Color.White;
             ctbBoy.Font = new Font("Segoe UI", 9.5F);
             ctbBoy.ForeColor = Color.Black;
-            ctbBoy.Location = new Point(166, 442);
+            ctbBoy.Location = new Point(774, 133);
             ctbBoy.Name = "ctbBoy";
+            ctbBoy.OndalikBasamak = 0;
             ctbBoy.Padding = new Padding(10, 7, 10, 7);
-            ctbBoy.Size = new Size(75, 32);
-            ctbBoy.TabIndex = 35;
+            ctbBoy.Size = new Size(71, 32);
+            ctbBoy.TabIndex = 16;
+            ctbBoy.TextCustom = "0";
             // 
             // ctbEn
             // 
             ctbEn.BackColor = Color.White;
             ctbEn.Font = new Font("Segoe UI", 9.5F);
             ctbEn.ForeColor = Color.Black;
-            ctbEn.Location = new Point(287, 442);
+            ctbEn.Location = new Point(774, 186);
             ctbEn.Name = "ctbEn";
+            ctbEn.OndalikBasamak = 0;
             ctbEn.Padding = new Padding(10, 7, 10, 7);
             ctbEn.Size = new Size(71, 32);
-            ctbEn.TabIndex = 37;
+            ctbEn.TabIndex = 17;
+            ctbEn.TextCustom = "0";
             // 
-            // label15
+            // lblEn
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label15.Location = new Point(287, 424);
-            label15.Name = "label15";
-            label15.Size = new Size(20, 15);
-            label15.TabIndex = 36;
-            label15.Text = "En";
+            lblEn.AutoSize = true;
+            lblEn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblEn.Location = new Point(774, 168);
+            lblEn.Name = "lblEn";
+            lblEn.Size = new Size(20, 15);
+            lblEn.TabIndex = 36;
+            lblEn.Text = "En";
             // 
             // ctbYukseklik
             // 
             ctbYukseklik.BackColor = Color.White;
             ctbYukseklik.Font = new Font("Segoe UI", 9.5F);
             ctbYukseklik.ForeColor = Color.Black;
-            ctbYukseklik.Location = new Point(404, 442);
+            ctbYukseklik.Location = new Point(774, 241);
             ctbYukseklik.Name = "ctbYukseklik";
+            ctbYukseklik.OndalikBasamak = 0;
             ctbYukseklik.Padding = new Padding(10, 7, 10, 7);
-            ctbYukseklik.Size = new Size(67, 32);
-            ctbYukseklik.TabIndex = 39;
+            ctbYukseklik.Size = new Size(71, 32);
+            ctbYukseklik.TabIndex = 18;
+            ctbYukseklik.TextCustom = "0";
             // 
-            // label16
+            // lblYukseklik
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label16.Location = new Point(404, 424);
-            label16.Name = "label16";
-            label16.Size = new Size(59, 15);
-            label16.TabIndex = 38;
-            label16.Text = "Yükseklik";
+            lblYukseklik.AutoSize = true;
+            lblYukseklik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblYukseklik.Location = new Point(774, 223);
+            lblYukseklik.Name = "lblYukseklik";
+            lblYukseklik.Size = new Size(59, 15);
+            lblYukseklik.TabIndex = 38;
+            lblYukseklik.Text = "Yükseklik";
             // 
             // ctbCap
             // 
             ctbCap.BackColor = Color.White;
             ctbCap.Font = new Font("Segoe UI", 9.5F);
             ctbCap.ForeColor = Color.Black;
-            ctbCap.Location = new Point(521, 442);
+            ctbCap.Location = new Point(774, 293);
             ctbCap.Name = "ctbCap";
+            ctbCap.OndalikBasamak = 0;
             ctbCap.Padding = new Padding(10, 7, 10, 7);
-            ctbCap.Size = new Size(73, 32);
-            ctbCap.TabIndex = 41;
+            ctbCap.Size = new Size(71, 32);
+            ctbCap.TabIndex = 19;
+            ctbCap.TextCustom = "0";
             // 
-            // label17
+            // lblCap
             // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label17.Location = new Point(521, 424);
-            label17.Name = "label17";
-            label17.Size = new Size(27, 15);
-            label17.TabIndex = 40;
-            label17.Text = "Çap";
+            lblCap.AutoSize = true;
+            lblCap.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblCap.Location = new Point(774, 275);
+            lblCap.Name = "lblCap";
+            lblCap.Size = new Size(27, 15);
+            lblCap.TabIndex = 40;
+            lblCap.Text = "Çap";
             // 
             // ctbUzunluk
             // 
             ctbUzunluk.BackColor = Color.White;
             ctbUzunluk.Font = new Font("Segoe UI", 9.5F);
             ctbUzunluk.ForeColor = Color.Black;
-            ctbUzunluk.Location = new Point(644, 442);
+            ctbUzunluk.Location = new Point(774, 353);
             ctbUzunluk.Name = "ctbUzunluk";
+            ctbUzunluk.OndalikBasamak = 0;
             ctbUzunluk.Padding = new Padding(10, 7, 10, 7);
-            ctbUzunluk.Size = new Size(67, 32);
-            ctbUzunluk.TabIndex = 43;
+            ctbUzunluk.Size = new Size(71, 32);
+            ctbUzunluk.TabIndex = 20;
+            ctbUzunluk.TextCustom = "0";
             // 
-            // label18
+            // lblUzunluk
             // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label18.Location = new Point(644, 424);
-            label18.Name = "label18";
-            label18.Size = new Size(53, 15);
-            label18.TabIndex = 42;
-            label18.Text = "Uzunluk";
+            lblUzunluk.AutoSize = true;
+            lblUzunluk.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblUzunluk.Location = new Point(774, 335);
+            lblUzunluk.Name = "lblUzunluk";
+            lblUzunluk.Size = new Size(53, 15);
+            lblUzunluk.TabIndex = 42;
+            lblUzunluk.Text = "Uzunluk";
             // 
             // ctbEtKalinlik
             // 
             ctbEtKalinlik.BackColor = Color.White;
             ctbEtKalinlik.Font = new Font("Segoe UI", 9.5F);
             ctbEtKalinlik.ForeColor = Color.Black;
-            ctbEtKalinlik.Location = new Point(769, 442);
+            ctbEtKalinlik.Location = new Point(774, 413);
             ctbEtKalinlik.Name = "ctbEtKalinlik";
+            ctbEtKalinlik.OndalikBasamak = 0;
             ctbEtKalinlik.Padding = new Padding(10, 7, 10, 7);
-            ctbEtKalinlik.Size = new Size(72, 32);
-            ctbEtKalinlik.TabIndex = 45;
+            ctbEtKalinlik.Size = new Size(71, 32);
+            ctbEtKalinlik.TabIndex = 21;
+            ctbEtKalinlik.TextCustom = "0";
             // 
-            // label19
+            // lblEtKalinlik
             // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label19.Location = new Point(769, 424);
-            label19.Name = "label19";
-            label19.Size = new Size(64, 15);
-            label19.TabIndex = 44;
-            label19.Text = "Et Kalınlığı";
+            lblEtKalinlik.AutoSize = true;
+            lblEtKalinlik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblEtKalinlik.Location = new Point(774, 395);
+            lblEtKalinlik.Name = "lblEtKalinlik";
+            lblEtKalinlik.Size = new Size(64, 15);
+            lblEtKalinlik.TabIndex = 44;
+            lblEtKalinlik.Text = "Et Kalınlığı";
             // 
             // label20
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label20.Location = new Point(56, 498);
+            label20.Location = new Point(22, 338);
             label20.Name = "label20";
             label20.Size = new Size(57, 15);
             label20.TabIndex = 47;
@@ -376,50 +396,51 @@ namespace YektamakDesktop.Formlar.Stok
             ctbAciklama.BackColor = Color.White;
             ctbAciklama.Font = new Font("Segoe UI", 9.5F);
             ctbAciklama.ForeColor = Color.Black;
-            ctbAciklama.Location = new Point(186, 491);
+            ctbAciklama.Location = new Point(113, 330);
+            ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new Padding(7, 5, 7, 5);
-            ctbAciklama.Size = new Size(845, 28);
-            ctbAciklama.TabIndex = 46;
+            ctbAciklama.Size = new Size(362, 60);
+            ctbAciklama.TabIndex = 7;
             // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label21.Location = new Point(56, 136);
+            label21.Location = new Point(20, 130);
             label21.Name = "label21";
             label21.Size = new Size(56, 15);
             label21.TabIndex = 49;
             label21.Text = "Stok Tipi";
             // 
-            // label23
+            // lblMalzemeAltGrup
             // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label23.Location = new Point(519, 366);
-            label23.Name = "label23";
-            label23.Size = new Size(115, 15);
-            label23.TabIndex = 54;
-            label23.Text = "Malzeme Alt Grubu";
+            lblMalzemeAltGrup.AutoSize = true;
+            lblMalzemeAltGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblMalzemeAltGrup.Location = new Point(526, 173);
+            lblMalzemeAltGrup.Name = "lblMalzemeAltGrup";
+            lblMalzemeAltGrup.Size = new Size(115, 15);
+            lblMalzemeAltGrup.TabIndex = 54;
+            lblMalzemeAltGrup.Text = "Malzeme Alt Grubu";
             // 
-            // label24
+            // lblMalzemeAltGrup2
             // 
-            label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label24.Location = new Point(766, 366);
-            label24.Name = "label24";
-            label24.Size = new Size(125, 15);
-            label24.TabIndex = 56;
-            label24.Text = "Malzeme Alt Grubu 2";
+            lblMalzemeAltGrup2.AutoSize = true;
+            lblMalzemeAltGrup2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblMalzemeAltGrup2.Location = new Point(526, 225);
+            lblMalzemeAltGrup2.Name = "lblMalzemeAltGrup2";
+            lblMalzemeAltGrup2.Size = new Size(125, 15);
+            lblMalzemeAltGrup2.TabIndex = 56;
+            lblMalzemeAltGrup2.Text = "Malzeme Alt Grubu 2";
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Location = new Point(56, 576);
+            panel1.Location = new Point(20, 462);
             panel1.Name = "panel1";
-            panel1.Size = new Size(826, 191);
+            panel1.Size = new Size(785, 207);
             panel1.TabIndex = 57;
             // 
             // ctbAgirlik
@@ -427,27 +448,29 @@ namespace YektamakDesktop.Formlar.Stok
             ctbAgirlik.BackColor = Color.White;
             ctbAgirlik.Font = new Font("Segoe UI", 9.5F);
             ctbAgirlik.ForeColor = Color.Black;
-            ctbAgirlik.Location = new Point(56, 442);
+            ctbAgirlik.Location = new Point(774, 83);
             ctbAgirlik.Name = "ctbAgirlik";
+            ctbAgirlik.OndalikBasamak = 0;
             ctbAgirlik.Padding = new Padding(10, 7, 10, 7);
-            ctbAgirlik.Size = new Size(69, 32);
-            ctbAgirlik.TabIndex = 59;
+            ctbAgirlik.Size = new Size(71, 32);
+            ctbAgirlik.TabIndex = 15;
+            ctbAgirlik.TextCustom = "0";
             // 
-            // label10
+            // lblAgirlik
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label10.Location = new Point(56, 424);
-            label10.Name = "label10";
-            label10.Size = new Size(43, 15);
-            label10.TabIndex = 58;
-            label10.Text = "Ağırlık";
+            lblAgirlik.AutoSize = true;
+            lblAgirlik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblAgirlik.Location = new Point(774, 65);
+            lblAgirlik.Name = "lblAgirlik";
+            lblAgirlik.Size = new Size(43, 15);
+            lblAgirlik.TabIndex = 58;
+            lblAgirlik.Text = "Ağırlık";
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label11.Location = new Point(56, 558);
+            label11.Location = new Point(20, 444);
             label11.Name = "label11";
             label11.Size = new Size(54, 15);
             label11.TabIndex = 60;
@@ -456,7 +479,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(126, 454);
+            label12.Location = new Point(849, 94);
             label12.Name = "label12";
             label12.Size = new Size(20, 15);
             label12.TabIndex = 61;
@@ -465,7 +488,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(241, 454);
+            label13.Location = new Point(849, 136);
             label13.Name = "label13";
             label13.Size = new Size(29, 15);
             label13.TabIndex = 62;
@@ -474,7 +497,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(359, 454);
+            label22.Location = new Point(849, 198);
             label22.Name = "label22";
             label22.Size = new Size(29, 15);
             label22.TabIndex = 63;
@@ -483,7 +506,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(472, 454);
+            label25.Location = new Point(849, 253);
             label25.Name = "label25";
             label25.Size = new Size(29, 15);
             label25.TabIndex = 64;
@@ -492,7 +515,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new Point(595, 454);
+            label26.Location = new Point(849, 305);
             label26.Name = "label26";
             label26.Size = new Size(29, 15);
             label26.TabIndex = 65;
@@ -501,7 +524,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new Point(712, 454);
+            label27.Location = new Point(849, 365);
             label27.Name = "label27";
             label27.Size = new Size(29, 15);
             label27.TabIndex = 66;
@@ -510,37 +533,39 @@ namespace YektamakDesktop.Formlar.Stok
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new Point(841, 454);
+            label28.Location = new Point(849, 425);
             label28.Name = "label28";
             label28.Size = new Size(29, 15);
             label28.TabIndex = 67;
             label28.Text = "mm";
             // 
-            // label29
+            // lblBoyut
             // 
-            label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label29.Location = new Point(56, 328);
-            label29.Name = "label29";
-            label29.Size = new Size(40, 15);
-            label29.TabIndex = 69;
-            label29.Text = "Boyut";
+            lblBoyut.AutoSize = true;
+            lblBoyut.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblBoyut.Location = new Point(526, 376);
+            lblBoyut.Name = "lblBoyut";
+            lblBoyut.Size = new Size(40, 15);
+            lblBoyut.TabIndex = 69;
+            lblBoyut.Text = "Boyut";
             // 
             // ctbBoyut
             // 
             ctbBoyut.BackColor = Color.White;
+            ctbBoyut.Enabled = false;
             ctbBoyut.Font = new Font("Segoe UI", 9.5F);
             ctbBoyut.ForeColor = Color.Black;
-            ctbBoyut.Location = new Point(364, 316);
+            ctbBoyut.Location = new Point(526, 428);
+            ctbBoyut.Multiline = false;
             ctbBoyut.Name = "ctbBoyut";
             ctbBoyut.Padding = new Padding(7, 5, 7, 5);
-            ctbBoyut.Size = new Size(163, 28);
-            ctbBoyut.TabIndex = 68;
+            ctbBoyut.Size = new Size(185, 28);
+            ctbBoyut.TabIndex = 22;
             // 
             // checkBoxIsSatinalma
             // 
             checkBoxIsSatinalma.AutoSize = true;
-            checkBoxIsSatinalma.Location = new Point(665, 281);
+            checkBoxIsSatinalma.Location = new Point(12, 36);
             checkBoxIsSatinalma.Name = "checkBoxIsSatinalma";
             checkBoxIsSatinalma.Size = new Size(15, 14);
             checkBoxIsSatinalma.TabIndex = 70;
@@ -550,7 +575,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsPdf
             // 
             checkBoxIsPdf.AutoSize = true;
-            checkBoxIsPdf.Location = new Point(686, 281);
+            checkBoxIsPdf.Location = new Point(33, 36);
             checkBoxIsPdf.Name = "checkBoxIsPdf";
             checkBoxIsPdf.Size = new Size(15, 14);
             checkBoxIsPdf.TabIndex = 71;
@@ -560,7 +585,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsFromExcel
             // 
             checkBoxIsFromExcel.AutoSize = true;
-            checkBoxIsFromExcel.Location = new Point(707, 281);
+            checkBoxIsFromExcel.Location = new Point(54, 36);
             checkBoxIsFromExcel.Name = "checkBoxIsFromExcel";
             checkBoxIsFromExcel.Size = new Size(15, 14);
             checkBoxIsFromExcel.TabIndex = 72;
@@ -570,7 +595,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsStep
             // 
             checkBoxIsStep.AutoSize = true;
-            checkBoxIsStep.Location = new Point(728, 281);
+            checkBoxIsStep.Location = new Point(75, 36);
             checkBoxIsStep.Name = "checkBoxIsStep";
             checkBoxIsStep.Size = new Size(15, 14);
             checkBoxIsStep.TabIndex = 73;
@@ -580,7 +605,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsDxf
             // 
             checkBoxIsDxf.AutoSize = true;
-            checkBoxIsDxf.Location = new Point(755, 281);
+            checkBoxIsDxf.Location = new Point(102, 36);
             checkBoxIsDxf.Name = "checkBoxIsDxf";
             checkBoxIsDxf.Size = new Size(15, 14);
             checkBoxIsDxf.TabIndex = 74;
@@ -592,18 +617,19 @@ namespace YektamakDesktop.Formlar.Stok
             headerPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             headerPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = Color.Firebrick;
+            headerPanel1.Baslik = "Stok Kart Tanımı";
             headerPanel1.Location = new Point(0, 0);
             headerPanel1.Margin = new Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new Padding(1);
-            headerPanel1.Size = new Size(1040, 32);
+            headerPanel1.Size = new Size(946, 32);
             headerPanel1.TabIndex = 75;
             // 
             // rButtonKaydet
             // 
             rButtonKaydet.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             rButtonKaydet.BackColor = Color.Transparent;
-            rButtonKaydet.Location = new Point(922, 721);
+            rButtonKaydet.Location = new Point(811, 623);
             rButtonKaydet.Name = "rButtonKaydet";
             rButtonKaydet.Size = new Size(106, 46);
             rButtonKaydet.TabIndex = 76;
@@ -611,107 +637,157 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // clbProjeKod
             // 
-            clbProjeKod.Location = new Point(186, 95);
+            clbProjeKod.BorderColor = Color.Silver;
+            clbProjeKod.BorderSize = 1;
+            clbProjeKod.DisplayMember = "kod";
+            clbProjeKod.Location = new Point(113, 158);
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new Padding(7, 5, 7, 5);
+            clbProjeKod.PlaceholderText = "Seçiniz...";
             clbProjeKod.Size = new Size(161, 29);
-            clbProjeKod.TabIndex = 77;
+            clbProjeKod.TabIndex = 2;
+            clbProjeKod.ValueMember = "Id";
+            clbProjeKod.SelectedIndexChanged += clbProjeKod_SelectedIndexChanged;
             // 
             // clbStokTip
             // 
-            clbStokTip.Location = new Point(186, 130);
+            clbStokTip.BorderColor = Color.Silver;
+            clbStokTip.BorderSize = 1;
+            clbStokTip.DisplayMember = "ad";
+            clbStokTip.Location = new Point(113, 123);
             clbStokTip.Name = "clbStokTip";
             clbStokTip.Padding = new Padding(7, 5, 7, 5);
+            clbStokTip.PlaceholderText = "Seçiniz...";
             clbStokTip.Size = new Size(161, 29);
-            clbStokTip.TabIndex = 78;
+            clbStokTip.TabIndex = 1;
+            clbStokTip.ValueMember = "Id";
+            clbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
             // 
             // clbOlcuBirim
             // 
-            clbOlcuBirim.Location = new Point(188, 242);
+            clbOlcuBirim.BorderColor = Color.Silver;
+            clbOlcuBirim.BorderSize = 1;
+            clbOlcuBirim.DisplayMember = "ad";
+            clbOlcuBirim.Location = new Point(113, 295);
             clbOlcuBirim.Name = "clbOlcuBirim";
             clbOlcuBirim.Padding = new Padding(7, 5, 7, 5);
+            clbOlcuBirim.PlaceholderText = "Seçiniz...";
             clbOlcuBirim.Size = new Size(119, 29);
-            clbOlcuBirim.TabIndex = 79;
+            clbOlcuBirim.TabIndex = 6;
+            clbOlcuBirim.ValueMember = "Id";
             // 
             // clbMalzemeStandart
             // 
-            clbMalzemeStandart.Location = new Point(188, 277);
+            clbMalzemeStandart.BorderColor = Color.Silver;
+            clbMalzemeStandart.BorderSize = 1;
+            clbMalzemeStandart.DisplayMember = "ad";
+            clbMalzemeStandart.Location = new Point(526, 344);
             clbMalzemeStandart.Name = "clbMalzemeStandart";
             clbMalzemeStandart.Padding = new Padding(7, 5, 7, 5);
-            clbMalzemeStandart.Size = new Size(200, 29);
-            clbMalzemeStandart.TabIndex = 80;
+            clbMalzemeStandart.PlaceholderText = "Seçiniz...";
+            clbMalzemeStandart.Size = new Size(185, 29);
+            clbMalzemeStandart.TabIndex = 13;
+            clbMalzemeStandart.ValueMember = "Id";
             // 
             // clbStokGrup
             // 
-            clbStokGrup.Location = new Point(56, 390);
+            clbStokGrup.BorderColor = Color.Silver;
+            clbStokGrup.BorderSize = 1;
+            clbStokGrup.DisplayMember = "ad";
+            clbStokGrup.Location = new Point(526, 86);
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new Padding(7, 5, 7, 5);
+            clbStokGrup.PlaceholderText = "Seçiniz...";
             clbStokGrup.Size = new Size(185, 29);
-            clbStokGrup.TabIndex = 81;
+            clbStokGrup.TabIndex = 8;
+            clbStokGrup.ValueMember = "Id";
             clbStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
             // 
             // clbMalzemeGrup
             // 
-            clbMalzemeGrup.Location = new Point(262, 390);
+            clbMalzemeGrup.BorderColor = Color.Silver;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.Location = new Point(526, 139);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
-            clbMalzemeGrup.Size = new Size(209, 29);
-            clbMalzemeGrup.TabIndex = 82;
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.Size = new Size(185, 29);
+            clbMalzemeGrup.TabIndex = 9;
+            clbMalzemeGrup.ValueMember = "Id";
             clbMalzemeGrup.SelectedIndexChanged += cbxMalzemeGrup_SelectedIndexChanged;
             clbMalzemeGrup.MouseClick += clbMalzemeGrup_MouseClick;
             // 
             // clbMalzemeAltGrup
             // 
-            clbMalzemeAltGrup.Location = new Point(519, 390);
+            clbMalzemeAltGrup.BorderColor = Color.Silver;
+            clbMalzemeAltGrup.BorderSize = 1;
+            clbMalzemeAltGrup.DisplayMember = "ad";
+            clbMalzemeAltGrup.Location = new Point(526, 191);
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
             clbMalzemeAltGrup.Padding = new Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup.Size = new Size(222, 29);
-            clbMalzemeAltGrup.TabIndex = 83;
+            clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.Size = new Size(185, 29);
+            clbMalzemeAltGrup.TabIndex = 10;
+            clbMalzemeAltGrup.ValueMember = "Id";
             clbMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
             // 
             // clbMalzemeAltGrup2
             // 
-            clbMalzemeAltGrup2.Location = new Point(766, 390);
+            clbMalzemeAltGrup2.BorderColor = Color.Silver;
+            clbMalzemeAltGrup2.BorderSize = 1;
+            clbMalzemeAltGrup2.DisplayMember = "ad";
+            clbMalzemeAltGrup2.Location = new Point(526, 243);
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
             clbMalzemeAltGrup2.Padding = new Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup2.Size = new Size(245, 29);
-            clbMalzemeAltGrup2.TabIndex = 84;
+            clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.Size = new Size(185, 29);
+            clbMalzemeAltGrup2.TabIndex = 11;
+            clbMalzemeAltGrup2.ValueMember = "Id";
             // 
             // ctbProjeAdet
             // 
             ctbProjeAdet.BackColor = Color.White;
             ctbProjeAdet.Font = new Font("Segoe UI", 9.5F);
             ctbProjeAdet.ForeColor = Color.Black;
-            ctbProjeAdet.Location = new Point(570, 98);
+            ctbProjeAdet.Location = new Point(526, 297);
             ctbProjeAdet.Name = "ctbProjeAdet";
+            ctbProjeAdet.OndalikBasamak = 0;
             ctbProjeAdet.Padding = new Padding(7, 5, 7, 5);
             ctbProjeAdet.Size = new Size(92, 26);
-            ctbProjeAdet.TabIndex = 85;
+            ctbProjeAdet.TabIndex = 12;
+            ctbProjeAdet.TextCustom = "0";
             // 
-            // label3
+            // lblProjeAdet
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(433, 101);
-            label3.Name = "label3";
-            label3.Size = new Size(66, 15);
-            label3.TabIndex = 86;
-            label3.Text = "Proje Adet";
+            lblProjeAdet.AutoSize = true;
+            lblProjeAdet.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblProjeAdet.Location = new Point(526, 279);
+            lblProjeAdet.Name = "lblProjeAdet";
+            lblProjeAdet.Size = new Size(95, 15);
+            lblProjeAdet.TabIndex = 86;
+            lblProjeAdet.Text = "Proje 1Set Adet";
             // 
             // fcbBoyut
             // 
-            fcbBoyut.Location = new Point(188, 315);
+            fcbBoyut.BorderColor = Color.Silver;
+            fcbBoyut.BorderSize = 1;
+            fcbBoyut.DisplayMember = "ad";
+            fcbBoyut.Location = new Point(526, 394);
             fcbBoyut.Name = "fcbBoyut";
             fcbBoyut.Padding = new Padding(7, 5, 7, 5);
-            fcbBoyut.Size = new Size(170, 29);
-            fcbBoyut.TabIndex = 87;
+            fcbBoyut.PlaceholderText = "Seçiniz...";
+            fcbBoyut.Size = new Size(185, 29);
+            fcbBoyut.TabIndex = 14;
+            fcbBoyut.ValueMember = "Id";
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = FlatStyle.Flat;
             roundedButton1.ForeColor = Color.White;
-            roundedButton1.Location = new Point(881, 36);
+            roundedButton1.Location = new Point(811, 484);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new Size(117, 40);
             roundedButton1.TabIndex = 88;
@@ -723,21 +799,21 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             ctxSagClickMenu.Items.AddRange(new ToolStripItem[] { stokGrupTanımlamaToolStripMenuItem, malzemeGrupTanımlarıToolStripMenuItem, malzemeAltGrupTanımlamaToolStripMenuItem, malzemeAltGrup2TanımlamaToolStripMenuItem });
             ctxSagClickMenu.Name = "contextMenuStrip1";
-            ctxSagClickMenu.Size = new Size(227, 114);
-            // 
-            // malzemeGrupTanımlarıToolStripMenuItem
-            // 
-            malzemeGrupTanımlarıToolStripMenuItem.Name = "malzemeGrupTanımlarıToolStripMenuItem";
-            malzemeGrupTanımlarıToolStripMenuItem.Size = new Size(236, 22);
-            malzemeGrupTanımlarıToolStripMenuItem.Text = "Malzeme Grup Tanımları";
-            malzemeGrupTanımlarıToolStripMenuItem.Click += malzemeGrupTanımlarıToolStripMenuItem_Click;
+            ctxSagClickMenu.Size = new Size(227, 92);
             // 
             // stokGrupTanımlamaToolStripMenuItem
             // 
             stokGrupTanımlamaToolStripMenuItem.Name = "stokGrupTanımlamaToolStripMenuItem";
-            stokGrupTanımlamaToolStripMenuItem.Size = new Size(236, 22);
+            stokGrupTanımlamaToolStripMenuItem.Size = new Size(226, 22);
             stokGrupTanımlamaToolStripMenuItem.Text = "Stok Grup Tanımları";
             stokGrupTanımlamaToolStripMenuItem.Click += stokGrupTanımlamaToolStripMenuItem_Click;
+            // 
+            // malzemeGrupTanımlarıToolStripMenuItem
+            // 
+            malzemeGrupTanımlarıToolStripMenuItem.Name = "malzemeGrupTanımlarıToolStripMenuItem";
+            malzemeGrupTanımlarıToolStripMenuItem.Size = new Size(226, 22);
+            malzemeGrupTanımlarıToolStripMenuItem.Text = "Malzeme Grup Tanımları";
+            malzemeGrupTanımlarıToolStripMenuItem.Click += malzemeGrupTanımlarıToolStripMenuItem_Click;
             // 
             // malzemeAltGrupTanımlamaToolStripMenuItem
             // 
@@ -758,14 +834,63 @@ namespace YektamakDesktop.Formlar.Stok
             ctxMalzeme.Name = "ctxMalzeme";
             ctxMalzeme.Size = new Size(61, 4);
             // 
+            // ctbTedarikciKod
+            // 
+            ctbTedarikciKod.BackColor = SystemColors.Window;
+            ctbTedarikciKod.Font = new Font("Segoe UI", 9.5F);
+            ctbTedarikciKod.ForeColor = Color.DimGray;
+            ctbTedarikciKod.Location = new Point(113, 261);
+            ctbTedarikciKod.Multiline = false;
+            ctbTedarikciKod.Name = "ctbTedarikciKod";
+            ctbTedarikciKod.Padding = new Padding(7, 5, 7, 5);
+            ctbTedarikciKod.Size = new Size(262, 28);
+            ctbTedarikciKod.TabIndex = 5;
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label30.Location = new Point(20, 268);
+            label30.Name = "label30";
+            label30.Size = new Size(89, 15);
+            label30.TabIndex = 90;
+            label30.Text = "Tedarikçi Kodu";
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label31.Location = new Point(20, 97);
+            label31.Name = "label31";
+            label31.Size = new Size(74, 15);
+            label31.TabIndex = 92;
+            label31.Text = "Stok Kart Id";
+            // 
+            // ctbStokKartId
+            // 
+            ctbStokKartId.BackColor = Color.White;
+            ctbStokKartId.Enabled = false;
+            ctbStokKartId.Font = new Font("Segoe UI", 9.5F);
+            ctbStokKartId.ForeColor = Color.Black;
+            ctbStokKartId.Location = new Point(113, 89);
+            ctbStokKartId.Multiline = false;
+            ctbStokKartId.Name = "ctbStokKartId";
+            ctbStokKartId.Padding = new Padding(7, 5, 7, 5);
+            ctbStokKartId.Size = new Size(94, 28);
+            ctbStokKartId.TabIndex = 91;
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1040, 822);
+            ClientSize = new Size(946, 681);
+            Controls.Add(label31);
+            Controls.Add(ctbStokKartId);
+            Controls.Add(label30);
+            Controls.Add(ctbTedarikciKod);
             Controls.Add(roundedButton1);
             Controls.Add(fcbBoyut);
-            Controls.Add(label3);
+            Controls.Add(lblProjeAdet);
             Controls.Add(ctbProjeAdet);
             Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(clbMalzemeAltGrup);
@@ -782,7 +907,7 @@ namespace YektamakDesktop.Formlar.Stok
             Controls.Add(checkBoxIsFromExcel);
             Controls.Add(checkBoxIsPdf);
             Controls.Add(checkBoxIsSatinalma);
-            Controls.Add(label29);
+            Controls.Add(lblBoyut);
             Controls.Add(ctbBoyut);
             Controls.Add(label28);
             Controls.Add(label27);
@@ -793,30 +918,30 @@ namespace YektamakDesktop.Formlar.Stok
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(ctbAgirlik);
-            Controls.Add(label10);
+            Controls.Add(lblAgirlik);
             Controls.Add(panel1);
-            Controls.Add(label24);
-            Controls.Add(label23);
+            Controls.Add(lblMalzemeAltGrup2);
+            Controls.Add(lblMalzemeAltGrup);
             Controls.Add(label21);
             Controls.Add(label20);
             Controls.Add(ctbAciklama);
             Controls.Add(ctbEtKalinlik);
-            Controls.Add(label19);
+            Controls.Add(lblEtKalinlik);
             Controls.Add(ctbUzunluk);
-            Controls.Add(label18);
+            Controls.Add(lblUzunluk);
             Controls.Add(ctbCap);
-            Controls.Add(label17);
+            Controls.Add(lblCap);
             Controls.Add(ctbYukseklik);
-            Controls.Add(label16);
+            Controls.Add(lblYukseklik);
             Controls.Add(ctbEn);
-            Controls.Add(label15);
+            Controls.Add(lblEn);
             Controls.Add(ctbBoy);
-            Controls.Add(label14);
+            Controls.Add(lblBoy);
             Controls.Add(label9);
             Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
+            Controls.Add(lblMalzemeGrup);
+            Controls.Add(lblMalzemeStandart);
+            Controls.Add(lblStokGrup);
             Controls.Add(label4);
             Controls.Add(ctbStokAd);
             Controls.Add(label2);
@@ -842,29 +967,29 @@ namespace YektamakDesktop.Formlar.Stok
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomTextBox ctbStokAd;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblStokGrup;
+        private System.Windows.Forms.Label lblMalzemeStandart;
+        private System.Windows.Forms.Label lblMalzemeGrup;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblBoy;
         private CustomControls.CustomTextBoxSayisal ctbBoy;
         private CustomControls.CustomTextBoxSayisal ctbEn;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblEn;
         private CustomControls.CustomTextBoxSayisal ctbYukseklik;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblYukseklik;
         private CustomControls.CustomTextBoxSayisal ctbCap;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblCap;
         private CustomControls.CustomTextBoxSayisal ctbUzunluk;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblUzunluk;
         private CustomControls.CustomTextBoxSayisal ctbEtKalinlik;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblEtKalinlik;
         private System.Windows.Forms.Label label20;
         private CustomControls.CustomTextBox ctbAciklama;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblMalzemeAltGrup;
+        private System.Windows.Forms.Label lblMalzemeAltGrup2;
         CustomDataGrid<DataControlStokKartDosya> customDataGrid;
         public class DataControlStokKartDosya : DataControl, IEntity
         {
@@ -1011,7 +1136,7 @@ namespace YektamakDesktop.Formlar.Stok
 
         private System.Windows.Forms.Panel panel1;
         private CustomTextBoxSayisal ctbAgirlik;
-        private Label label10;
+        private Label lblAgirlik;
         private Label label12;
         private Label label13;
         private Label label22;
@@ -1019,7 +1144,7 @@ namespace YektamakDesktop.Formlar.Stok
         private Label label26;
         private Label label27;
         private Label label28;
-        private Label label29;
+        private Label lblBoyut;
         private CustomTextBox ctbBoyut;
         private CheckBox checkBoxIsSatinalma;
         private CheckBox checkBoxIsPdf;
@@ -1037,7 +1162,7 @@ namespace YektamakDesktop.Formlar.Stok
         private FilterableComboBox clbMalzemeAltGrup;
         private FilterableComboBox clbMalzemeAltGrup2;
         private CustomTextBoxSayisal ctbProjeAdet;
-        private Label label3;
+        private Label lblProjeAdet;
         private FilterableComboBox fcbBoyut;
         private RoundedButton roundedButton1;
         private ContextMenuStrip ctxSagClickMenu;
@@ -1046,5 +1171,9 @@ namespace YektamakDesktop.Formlar.Stok
         private ToolStripMenuItem stokGrupTanımlamaToolStripMenuItem;
         private ToolStripMenuItem malzemeAltGrupTanımlamaToolStripMenuItem;
         private ToolStripMenuItem malzemeAltGrup2TanımlamaToolStripMenuItem;
+        private CustomTextBox ctbTedarikciKod;
+        private Label label30;
+        private Label label31;
+        private CustomTextBox ctbStokKartId;
     }
 }

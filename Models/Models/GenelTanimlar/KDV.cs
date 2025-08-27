@@ -3,7 +3,9 @@
     [Serializable]
     public class KDV:IEntity
     {
-        public int kdvId;
-        public int kdvOrani;
+        public int? Id { get; set; }
+        public string kod { get; set; }
+        public string ad { get; set; }
+        public double? oran { get; set; }
     }
 }

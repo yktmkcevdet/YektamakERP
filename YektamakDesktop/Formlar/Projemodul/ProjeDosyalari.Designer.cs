@@ -85,27 +85,16 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             roundedButton4.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             roundedButton4.BackColor = System.Drawing.Color.SteelBlue;
-            roundedButton4.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            roundedButton4.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            roundedButton4.BorderSize = 0;
-            roundedButton4.CornerRadius = 20;
             roundedButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedButton4.FlatAppearance.BorderSize = 0;
             roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            roundedButton4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             roundedButton4.ForeColor = System.Drawing.Color.White;
-            roundedButton4.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedButton4.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedButton4.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedButton4.HoverColor2 = System.Drawing.Color.Navy;
-            roundedButton4.Icon = null;
-            roundedButton4.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             roundedButton4.Location = new System.Drawing.Point(1079, 2);
             roundedButton4.Name = "roundedButton4";
             roundedButton4.Size = new System.Drawing.Size(152, 59);
             roundedButton4.TabIndex = 2;
             roundedButton4.Text = "Satınalma Talebi Oluştur =>";
-            roundedButton4.TextColor = System.Drawing.Color.White;
             roundedButton4.UseVisualStyleBackColor = false;
             roundedButton4.Click += roundedButton4_Click;
             // 
@@ -139,27 +128,13 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // ctbParcaAdi
             // 
             ctbParcaAdi.BackColor = System.Drawing.Color.White;
-            ctbParcaAdi.BorderColor = System.Drawing.Color.Silver;
-            ctbParcaAdi.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbParcaAdi.BorderRadius = 5;
-            ctbParcaAdi.BorderSize = 1;
-            ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbParcaAdi.ForeColor = System.Drawing.Color.Black;
-            ctbParcaAdi.isPlaceHolder = false;
             ctbParcaAdi.Location = new System.Drawing.Point(128, 217);
-            ctbParcaAdi.Multiline = false;
             ctbParcaAdi.Name = "ctbParcaAdi";
             ctbParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbParcaAdi.PasswordChar = false;
-            ctbParcaAdi.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbParcaAdi.PlaceholderText = "";
-            ctbParcaAdi.ReadOnly = false;
-            ctbParcaAdi.SelectionStart = 0;
             ctbParcaAdi.Size = new System.Drawing.Size(250, 28);
             ctbParcaAdi.TabIndex = 108;
-            ctbParcaAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            ctbParcaAdi.TextCustom = "";
-            ctbParcaAdi.UnderlinedStyle = false;
             // 
             // chkSatinalma
             // 
@@ -260,18 +235,11 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // roundedIconButton1
             // 
             roundedIconButton1.BackColor = System.Drawing.Color.Cyan;
-            roundedIconButton1.BorderColor = System.Drawing.Color.Black;
-            roundedIconButton1.BorderSize = 0;
-            roundedIconButton1.CornerRadius = 10;
             roundedIconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedIconButton1.FlatAppearance.BorderSize = 0;
             roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedIconButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            roundedIconButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             roundedIconButton1.ForeColor = System.Drawing.Color.Purple;
-            roundedIconButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedIconButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedIconButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedIconButton1.HoverColor2 = System.Drawing.Color.Navy;
             roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             roundedIconButton1.IconColor = System.Drawing.Color.Purple;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -290,7 +258,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Baslik = "Proje Dosyaları";
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
@@ -310,17 +277,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // roundedIconButton2
             // 
             roundedIconButton2.BackColor = System.Drawing.Color.DodgerBlue;
-            roundedIconButton2.BorderColor = System.Drawing.Color.Black;
-            roundedIconButton2.BorderSize = 0;
-            roundedIconButton2.CornerRadius = 5;
             roundedIconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             roundedIconButton2.FlatAppearance.BorderSize = 0;
             roundedIconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedIconButton2.ForeColor = System.Drawing.Color.White;
-            roundedIconButton2.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedIconButton2.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedIconButton2.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedIconButton2.HoverColor2 = System.Drawing.Color.Navy;
             roundedIconButton2.IconChar = FontAwesome.Sharp.IconChar.Repeat;
             roundedIconButton2.IconColor = System.Drawing.Color.White;
             roundedIconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -333,104 +293,49 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             // fcbProjeKod
             // 
-            fcbProjeKod.BorderColor = System.Drawing.Color.Silver;
-            fcbProjeKod.BorderSize = 1;
-            fcbProjeKod.DataSource = null;
-            fcbProjeKod.DisplayMember = "kod";
             fcbProjeKod.ForeColor = System.Drawing.Color.Gray;
             fcbProjeKod.Location = new System.Drawing.Point(128, 48);
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbProjeKod.PlaceholderText = "Seçiniz...";
-            fcbProjeKod.SelectedDisplayValue = "Seçiniz...";
-            fcbProjeKod.SelectedIndex = -1;
-            fcbProjeKod.SelectedItem = null;
-            fcbProjeKod.SelectedValue = null;
             fcbProjeKod.Size = new System.Drawing.Size(189, 29);
             fcbProjeKod.TabIndex = 126;
-            fcbProjeKod.UnderlinedStyle = false;
-            fcbProjeKod.ValueMember = "Id";
             fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
             // 
             // clbStokGrup
             // 
-            clbStokGrup.BorderColor = System.Drawing.Color.Silver;
-            clbStokGrup.BorderSize = 1;
-            clbStokGrup.DataSource = null;
-            clbStokGrup.DisplayMember = "ad";
             clbStokGrup.ForeColor = System.Drawing.Color.Gray;
             clbStokGrup.Location = new System.Drawing.Point(128, 80);
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbStokGrup.PlaceholderText = "Seçiniz...";
-            clbStokGrup.SelectedDisplayValue = "Seçiniz...";
-            clbStokGrup.SelectedIndex = -1;
-            clbStokGrup.SelectedItem = null;
-            clbStokGrup.SelectedValue = null;
             clbStokGrup.Size = new System.Drawing.Size(189, 29);
             clbStokGrup.TabIndex = 127;
-            clbStokGrup.UnderlinedStyle = false;
-            clbStokGrup.ValueMember = "Id";
             // 
             // clbMalzemeGrup
             // 
-            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeGrup.BorderSize = 1;
-            clbMalzemeGrup.DataSource = null;
-            clbMalzemeGrup.DisplayMember = "ad";
             clbMalzemeGrup.ForeColor = System.Drawing.Color.Gray;
             clbMalzemeGrup.Location = new System.Drawing.Point(128, 113);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
-            clbMalzemeGrup.SelectedDisplayValue = "Seçiniz...";
-            clbMalzemeGrup.SelectedIndex = -1;
-            clbMalzemeGrup.SelectedItem = null;
-            clbMalzemeGrup.SelectedValue = null;
             clbMalzemeGrup.Size = new System.Drawing.Size(189, 29);
             clbMalzemeGrup.TabIndex = 128;
-            clbMalzemeGrup.UnderlinedStyle = false;
-            clbMalzemeGrup.ValueMember = "Id";
             // 
             // clbMalzemeAltGrup
             // 
-            clbMalzemeAltGrup.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeAltGrup.BorderSize = 1;
-            clbMalzemeAltGrup.DataSource = null;
-            clbMalzemeAltGrup.DisplayMember = "ad";
             clbMalzemeAltGrup.ForeColor = System.Drawing.Color.Gray;
             clbMalzemeAltGrup.Location = new System.Drawing.Point(128, 148);
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
             clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
-            clbMalzemeAltGrup.SelectedDisplayValue = "Seçiniz...";
-            clbMalzemeAltGrup.SelectedIndex = -1;
-            clbMalzemeAltGrup.SelectedItem = null;
-            clbMalzemeAltGrup.SelectedValue = null;
             clbMalzemeAltGrup.Size = new System.Drawing.Size(189, 29);
             clbMalzemeAltGrup.TabIndex = 129;
-            clbMalzemeAltGrup.UnderlinedStyle = false;
-            clbMalzemeAltGrup.ValueMember = "Id";
             // 
             // clbMalzemeAltGrup2
             // 
-            clbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeAltGrup2.BorderSize = 1;
-            clbMalzemeAltGrup2.DataSource = null;
-            clbMalzemeAltGrup2.DisplayMember = "ad";
             clbMalzemeAltGrup2.ForeColor = System.Drawing.Color.Gray;
             clbMalzemeAltGrup2.Location = new System.Drawing.Point(128, 184);
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
             clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
-            clbMalzemeAltGrup2.SelectedDisplayValue = "Seçiniz...";
-            clbMalzemeAltGrup2.SelectedIndex = -1;
-            clbMalzemeAltGrup2.SelectedItem = null;
-            clbMalzemeAltGrup2.SelectedValue = null;
             clbMalzemeAltGrup2.Size = new System.Drawing.Size(189, 29);
             clbMalzemeAltGrup2.TabIndex = 130;
-            clbMalzemeAltGrup2.UnderlinedStyle = false;
-            clbMalzemeAltGrup2.ValueMember = "Id";
             // 
             // ProjeDosyalari
             // 

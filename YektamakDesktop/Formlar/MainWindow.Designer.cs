@@ -36,6 +36,7 @@ namespace YektamakDesktop
             panelState = new System.Windows.Forms.Panel();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             lblOturumSuresi = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             lblKullanici = new System.Windows.Forms.Label();
             panelAnaMenu = new System.Windows.Forms.Panel();
             panelMenu = new System.Windows.Forms.Panel();
@@ -100,25 +101,33 @@ namespace YektamakDesktop
             // 
             // statusStrip1
             // 
+            statusStrip1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblOturumSuresi });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblOturumSuresi, toolStripStatusLabel1 });
             statusStrip1.Location = new Point(820, 20);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(144, 22);
+            statusStrip1.Size = new Size(293, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
             // lblOturumSuresi
             // 
-            lblOturumSuresi.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOturumSuresi.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblOturumSuresi.ForeColor = Color.IndianRed;
             lblOturumSuresi.Name = "lblOturumSuresi";
             lblOturumSuresi.Size = new Size(127, 17);
             lblOturumSuresi.Text = "toolStripStatusLabel1";
             // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(118, 17);
+            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
             // lblKullanici
             // 
-            lblKullanici.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblKullanici.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            lblKullanici.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblKullanici.ForeColor = Color.IndianRed;
             lblKullanici.Location = new Point(820, 2);
             lblKullanici.Name = "lblKullanici";
@@ -223,5 +232,6 @@ namespace YektamakDesktop
         private System.Windows.Forms.Label lblKullanici;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblOturumSuresi;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

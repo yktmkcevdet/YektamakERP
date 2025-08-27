@@ -12,5 +12,6 @@ namespace ApiService.Interfaces
         public Task<string> SaveSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBasliks);
         public Task<string> GetSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBaslik);
         public Task<string> DeleteSatinalmaTeklif(SatinalmaTeklifBaslik satinalmaTeklifBaslik);
+        public Task<string> SaveSatinalmaSiparis(SatinalmaTeklifBaslik satinalmaTeklifBaslik);
     }
 }

@@ -136,7 +136,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 await AttachFilesToStokKart(projeStokKart);
 
                 projeStokKarts.Add(projeStokKart);
-                _cache.stokKartList.Add(projeStokKart.stokKart);
                 // Batch size'a ulaştığında veya son satırda kaydet
                 
                 if (projeStokKarts.Count >= batchSize || rowIndex == totalRows)
@@ -327,6 +326,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             foreach (var projeStokKart in projeStokKarts)
             {
                 string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
+                    _cache.stokKartList.Add(JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult)[0].stokKart);
                 if (jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
                 {
                     using (var sw = new StreamWriter(logDosyasi, append: true))

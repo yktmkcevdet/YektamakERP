@@ -40,7 +40,7 @@ namespace Models.DTO
                 OnPropertyChanged(nameof(agirlik));
             }
         }
-        [GridDisplay(Header = AgirlikHeader)]public double? agirlik { get { return stokKartagirlik * miktar; } }
+        [GridDisplay(Header = AgirlikHeader)]public double? agirlik { get { return stokKartagirlik * onaylananMiktar; } }
         [GridDisplay(Header = AciklamaHeader,readOnly =false)]public string aciklama { get; set; }
         [GridDisplay(Header = TalepTarihiHeader)]public DateTime? talepTarihi { get; set; }
         [GridDisplay(Header = TeslimTarihiHeader)]public DateTime? teslimTarihi { get; set; }

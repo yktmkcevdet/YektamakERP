@@ -1,10 +1,12 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -46,54 +48,54 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
-           projeSorumlu = (ProjeSorumlu)universalGrid1.Grid.CurrentRow.DataBoundItem;
+           projeSorumluDTO = (ProjeSorumluDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
         }
 
         private async Task ProjeSorumlusuAtama_Load(object sender, EventArgs e)
         {
-            string jsonResult = await _projeService.GetProjeSorumlu(projeSorumlu);
+            string jsonResult = await _projeService.GetProjeSorumlu(ConvertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
             List<ProjeSorumlu> projeSorumluList = JsonConvert.DeserializeObject<List<ProjeSorumlu>>(jsonResult);
-            await universalGrid1.SetData(projeSorumluList, this.Name);
+            await universalGrid1.SetData(projeSorumluList.CastToDTO<ProjeSorumluDTO>().ToList(), this.Name);
         }
 
-        private ProjeSorumlu _projeSorumlu;
+        private ProjeSorumluDTO _projeSorumluDTO;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ProjeSorumlu projeSorumlu
+        public ProjeSorumluDTO projeSorumluDTO
         {
             get
             {
-                if (_projeSorumlu == null) { _projeSorumlu = new ProjeSorumlu(); }
-                return _projeSorumlu;
+                if (_projeSorumluDTO == null) { _projeSorumluDTO = new(); }
+                return _projeSorumluDTO;
             }
             set
             {
-                _projeSorumlu = value;
+                _projeSorumluDTO = value;
                 Binding();
             }
         }
 
         private void Binding()
         {
-            BindHelper.BindData(ctbId, projeSorumlu, nameof(projeSorumlu.Id));
-            BindHelper.BindData(fcbProje, projeSorumlu.proje, nameof(projeSorumlu.proje.Id));
-            BindHelper.BindData(fcbPersonel, projeSorumlu.personel, nameof(projeSorumlu.personel.Id));
+            BindHelper.BindData(ctbId, projeSorumluDTO, nameof(projeSorumluDTO.Id));
+            BindHelper.BindData(fcbProje, projeSorumluDTO, nameof(projeSorumluDTO.projeId));
+            BindHelper.BindData(fcbPersonel, projeSorumluDTO, nameof(projeSorumluDTO.personelId));
         }
 
         private async Task customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            var jsonResult=await _projeService.SaveProjeSorumlu(projeSorumlu);
+            var jsonResult=await _projeService.SaveProjeSorumlu(ConvertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
             if (jsonResult == null || jsonResult.Contains("erro", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(jsonResult, "Hata");
             }
             else
             {
-                projeSorumlu=JsonConvert.DeserializeObject<List<ProjeSorumlu>>(jsonResult)[0];
+                projeSorumluDTO=JsonConvert.DeserializeObject<List<ProjeSorumluDTO>>(jsonResult)[0];
             }
         }
         private void RoundedButton1_Click(object sender, System.EventArgs e)
         {
-            projeSorumlu = new();
+            projeSorumluDTO = new();
         }
     }
 }

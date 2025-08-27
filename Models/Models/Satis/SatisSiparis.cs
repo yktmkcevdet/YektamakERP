@@ -17,11 +17,12 @@
         /// Gün sayısı olarak siparişten itibaren teslim süresi
         /// </summary>
         public int teslimVadesi;
-        private Tutar _satisTutari;
-        public Tutar satisTutari { get { if (_satisTutari == null) { _satisTutari = new(); } return _satisTutari; } set { _satisTutari = value; } }
-
-        private Tutar _ongoruMaliyeti;
-        public Tutar ongoruMaliyeti { get { if (_ongoruMaliyeti == null) { _ongoruMaliyeti = new(); } return _ongoruMaliyeti; } set { _ongoruMaliyeti = value; } }
+        public double? satisTutari { get; set; }
+        private DovizCinsi _tutarDovizCinsi;
+        public DovizCinsi tutarDovizCinsi { get { if (_tutarDovizCinsi == null) { _tutarDovizCinsi = new(); } return _tutarDovizCinsi; } set { _tutarDovizCinsi = value; } }
+        public double? ongoruMaliyeti;
+        private DovizCinsi _maliyetDovizCinsi;
+        public DovizCinsi maliyetDovizCinsi { get { if (_maliyetDovizCinsi == null) { _maliyetDovizCinsi = new(); } return _maliyetDovizCinsi; } set { _maliyetDovizCinsi = value; } }
         /// <summary>
         /// 0,1,8,18 değerleri alabilir
         /// </summary>

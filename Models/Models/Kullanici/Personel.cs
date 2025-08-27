@@ -29,10 +29,10 @@ namespace Models
     }
     public class PersonelResim:IEntity
     {
-        public int id;
-        public int personelId;
-        public byte[] resimData;
-        public string imageFormat;
+        public int? id;
+        public int? personelId;
+        public string data;
+        public string format;
     }
     public class Pozisyon: IEntity
     {

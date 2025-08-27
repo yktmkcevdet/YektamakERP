@@ -7,17 +7,18 @@ namespace Models
 {
     public record StokKart : IEntity
     {
-        public int? Id { get; set; }
+        [GridDisplay(Header = "Stok Kart Id", Visible = false)] public int? Id { get; set; }
         private Hammadde _hammadde;
         public Hammadde hammadde { get { if (_hammadde == null) { _hammadde = new(); } return _hammadde; } set { _hammadde = value; } }
         public string parcaKod { get; set; }
-        public string kod { get; set; }
+        [GridDisplay(Header = "Stok Kodu", Visible = false)] public string kod { get; set; }
         public string logoKod { get; set; }
-        public string ad { get; set; }
-        public string boyut { get; set; }
-        public double? uzunluk { get; set; }
-        public string aciklama { get; set; }
-        public double? agirlik { get; set; }
+        public string tedarikciKod { get; set; }
+        [GridDisplay(Header = "Stok Adı")] public string ad { get; set; }
+        [GridDisplay(Header = "Boyut")] public string boyut { get; set; }
+        [GridDisplay(Header = "Uzunluk")] public double? uzunluk { get; set; }
+        [GridDisplay(Header = "Açıklama")] public string aciklama { get; set; }
+        [GridDisplay(Header = "Ağırlık")] public double? agirlik { get; set; }
         public string malzeme { get; set; }
         public string parcaAdi { get; set; }
         public int fark { get; set; }
@@ -41,13 +42,13 @@ namespace Models
             } 
         }
         public int profilTipId { get; set; }
-        public bool? isSatinalma { get; set; }
+        [GridDisplay(Header = "isSatinalma", Visible = false)] public bool? isSatinalma { get; set; }
         public bool? isFromExcel { get; set; }
-        public double? etKalinligi { get; set; }
-        public double? en { get; set; }
-        public double? boy { get; set; }
-        public double? cap { get; set; }
-        public double? yukseklik { get; set; }
+        [GridDisplay(Header = "Et Kalınlığı")] public double? etKalinligi { get; set; }
+        [GridDisplay(Header = "En")] public double? en { get; set; }
+        [GridDisplay(Header = "Boy")] public double? boy { get; set; }
+        [GridDisplay(Header = "Çap")] public double? cap { get; set; }
+        [GridDisplay(Header = "Yükseklik")] public double? yukseklik { get; set; }
         private OlcuBirim _olcuBirim;
         public OlcuBirim olcuBirim { get { if (_olcuBirim == null) { _olcuBirim = new OlcuBirim(); } return _olcuBirim; } set { _olcuBirim = value; } }
         
@@ -67,6 +68,7 @@ namespace Models
         public MalzemeStandart malzemeStandart { get { if (_malzemeStandart == null) { _malzemeStandart = new MalzemeStandart(); } return _malzemeStandart; } set { _malzemeStandart = value; } }
         public bool? isTalasli { get; set; }
         private List<StokKartDosya> _dosyaList;
+        [GridDisplay(Header = "Stok Kart Dosyaları", Visible = false)]
         public List<StokKartDosya> dosyaList
         {
             get
@@ -82,8 +84,8 @@ namespace Models
                 _dosyaList = value;
             }
         }
-        public bool? isPdf { get; set; }
-        public bool? isDxf { get; set; }
+        [GridDisplay(Header = "isPdf", Visible = false)] public bool? isPdf { get; set; }
+        [GridDisplay(Header = "isDxf", Visible = false)] public bool? isDxf { get; set; }
         public bool? isStep { get; set; }
         public byte[] pdf { get; set; }
         public byte[] step { get; set; }
@@ -92,10 +94,11 @@ namespace Models
     }
     public class  Hammadde: IEntity
     {
-        public int? Id { get; set; }
+        [GridDisplay(Header = "Stok Kart Id", Visible = false)] public int? Id { get; set; }
         public string parcaKod { get; set; }
         public string kod { get; set; }
         public string logoKod { get; set; }
+        public string tedarikciKod { get; set; }
         public string ad { get; set; }
         public string boyut { get; set; }
         public double? uzunluk { get; set; }

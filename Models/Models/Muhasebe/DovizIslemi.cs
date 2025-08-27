@@ -5,13 +5,17 @@
     /// </summary>
     public class DovizIslemi:IEntity
     {
-        public int dovizIslemId;
+        public int? dovizIslemId;
         public DateTime islemTarihi;
-        private Tutar _satilanTutar;
-        public Tutar satilanTutar { get { if (_satilanTutar==null) { _satilanTutar = new(); } return _satilanTutar; } set { _satilanTutar = value; } }
-        private Tutar _alinanTutar;
-        public Tutar alinanTutar { get { if (_alinanTutar == null) { _alinanTutar = new(); } return _alinanTutar; } set { _alinanTutar = value; } }
-        public IKasa cekilenKasa;
-        public IKasa yatirilanKasa;
+        public double? satilanTutar { get; set; }
+        private DovizCinsi _satilanTutarDovizCinsi;
+        public DovizCinsi satilanTutarDovizCinsi { get { if (_satilanTutarDovizCinsi == null) { _satilanTutarDovizCinsi = new(); } return _satilanTutarDovizCinsi; } set { _satilanTutarDovizCinsi = value; } }
+        public double? alinanTutar{ get; set; }
+        private DovizCinsi _alinanTutarDovizCinsi;
+        public DovizCinsi alinanTutarDovizCinsi { get { if (_alinanTutarDovizCinsi == null) { _alinanTutarDovizCinsi = new(); } return _alinanTutarDovizCinsi; } set { _alinanTutarDovizCinsi = value; } }
+        private Kasa _cekilenKasa;
+        public Kasa cekilenKasa { get { if (_cekilenKasa == null) _cekilenKasa = new Kasa(); return _cekilenKasa; } set { _cekilenKasa = value; } }
+        private Kasa _yatirilanKasa;
+        public Kasa yatirilanKasa { get { if (_yatirilanKasa == null) _yatirilanKasa = new Kasa(); return _yatirilanKasa; } set { _yatirilanKasa = value; } }
     }
 }

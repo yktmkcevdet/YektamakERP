@@ -86,5 +86,10 @@ namespace Api.Controllers
         {
             return _dataAccessLayer.GetObject("spGetBoyut");
         }
+        [HttpGet, Route("api/GetKdv")]
+        public string GetKdv()
+        {
+            return _dataAccessLayer.GetObject("spGetKdv");
+        }
     }
 }

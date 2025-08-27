@@ -34,6 +34,7 @@ namespace ApiService
             services.AddScoped<IAnaVeriService, AnaVeriService>();
             services.AddScoped<IVadeService, VadeService>();
             services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<ISatinalmaSiparisService, SatinalmaSiparisService>();
             return services;
         }
     }

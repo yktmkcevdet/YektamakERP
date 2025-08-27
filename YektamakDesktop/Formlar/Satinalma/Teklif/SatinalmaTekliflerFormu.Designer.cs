@@ -33,12 +33,13 @@
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             teklifiSiparişeDönüştürToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            clbPorjeKod = new YektamakDesktop.CustomControls.CustomComboListBox();
-            clbStokGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
-            clbMalzemeGrup = new YektamakDesktop.CustomControls.CustomComboListBox();
+            clbProjeKod = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbStokGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbMalzemeGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
+            teklifiGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -47,7 +48,6 @@
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Baslik = "Teklif Talepleri";
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
@@ -65,9 +65,9 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifiSiparişeDönüştürToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifiSiparişeDönüştürToolStripMenuItem, teklifiGörüntüleToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(200, 26);
+            contextMenuStrip1.Size = new System.Drawing.Size(200, 70);
             // 
             // teklifiSiparişeDönüştürToolStripMenuItem
             // 
@@ -75,36 +75,10 @@
             teklifiSiparişeDönüştürToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             teklifiSiparişeDönüştürToolStripMenuItem.Text = "Teklifi Siparişe Dönüştür";
             // 
-            // clbPorjeKod
-            // 
-            clbPorjeKod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbPorjeKod.ListBoxVisualSize = 5;
-            clbPorjeKod.Location = new System.Drawing.Point(145, 44);
-            clbPorjeKod.Margin = new System.Windows.Forms.Padding(1);
-            clbPorjeKod.Name = "clbPorjeKod";
-            clbPorjeKod.Padding = new System.Windows.Forms.Padding(1);
-            clbPorjeKod.selectedDataRowId = null;
-            clbPorjeKod.selectedDataRowValue = null;
-            clbPorjeKod.Size = new System.Drawing.Size(243, 38);
-            clbPorjeKod.TabIndex = 3;
-            // 
-            // clbStokGrup
-            // 
-            clbStokGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbStokGrup.ListBoxVisualSize = 5;
-            clbStokGrup.Location = new System.Drawing.Point(145, 84);
-            clbStokGrup.Margin = new System.Windows.Forms.Padding(1);
-            clbStokGrup.Name = "clbStokGrup";
-            clbStokGrup.Padding = new System.Windows.Forms.Padding(1);
-            clbStokGrup.selectedDataRowId = null;
-            clbStokGrup.selectedDataRowValue = null;
-            clbStokGrup.Size = new System.Drawing.Size(243, 38);
-            clbStokGrup.TabIndex = 4;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(48, 53);
+            label1.Location = new System.Drawing.Point(48, 55);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(65, 15);
             label1.TabIndex = 5;
@@ -122,36 +96,54 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(48, 131);
+            label3.Location = new System.Drawing.Point(48, 127);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(91, 15);
             label3.TabIndex = 8;
             label3.Text = "Malzeme Grubu";
             // 
+            // clbProjeKod
+            // 
+            clbProjeKod.Location = new System.Drawing.Point(145, 51);
+            clbProjeKod.Name = "clbProjeKod";
+            clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbProjeKod.Size = new System.Drawing.Size(175, 29);
+            clbProjeKod.TabIndex = 9;
+            // 
+            // clbStokGrup
+            // 
+            clbStokGrup.Location = new System.Drawing.Point(145, 86);
+            clbStokGrup.Name = "clbStokGrup";
+            clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbStokGrup.Size = new System.Drawing.Size(175, 29);
+            clbStokGrup.TabIndex = 10;
+            // 
             // clbMalzemeGrup
             // 
-            clbMalzemeGrup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            clbMalzemeGrup.ListBoxVisualSize = 5;
-            clbMalzemeGrup.Location = new System.Drawing.Point(145, 124);
-            clbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrup.Location = new System.Drawing.Point(145, 121);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
-            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(1);
-            clbMalzemeGrup.selectedDataRowId = null;
-            clbMalzemeGrup.selectedDataRowValue = null;
-            clbMalzemeGrup.Size = new System.Drawing.Size(243, 36);
-            clbMalzemeGrup.TabIndex = 7;
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeGrup.Size = new System.Drawing.Size(175, 29);
+            clbMalzemeGrup.TabIndex = 11;
+            // 
+            // teklifiGörüntüleToolStripMenuItem
+            // 
+            teklifiGörüntüleToolStripMenuItem.Name = "teklifiGörüntüleToolStripMenuItem";
+            teklifiGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            teklifiGörüntüleToolStripMenuItem.Text = "Teklifi Görüntüle";
+            teklifiGörüntüleToolStripMenuItem.Click += teklifiGörüntüleToolStripMenuItem_Click;
             // 
             // SatinalmaTekliflerFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(959, 674);
-            Controls.Add(label3);
             Controls.Add(clbMalzemeGrup);
+            Controls.Add(clbStokGrup);
+            Controls.Add(clbProjeKod);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(clbStokGrup);
-            Controls.Add(clbPorjeKod);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -168,11 +160,12 @@
         private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem teklifiSiparişeDönüştürToolStripMenuItem;
-        private CustomControls.CustomComboListBox clbPorjeKod;
-        private CustomControls.CustomComboListBox clbStokGrup;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private CustomControls.CustomComboListBox clbMalzemeGrup;
+        private CustomControls.FilterableComboBox clbProjeKod;
+        private CustomControls.FilterableComboBox clbStokGrup;
+        private CustomControls.FilterableComboBox clbMalzemeGrup;
+        private System.Windows.Forms.ToolStripMenuItem teklifiGörüntüleToolStripMenuItem;
     }
 }

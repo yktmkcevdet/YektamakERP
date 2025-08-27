@@ -168,8 +168,8 @@ namespace YektamakDesktop.Formlar.Satinalma
                             satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
                             satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
                             satinalmaTalepdetay.stokKart.Id = item.stokKarthammaddeId;
-                            satinalmaTalepdetay.stokKart.kod = item.stokKarthammaddekod;
-                            satinalmaTalepdetay.stokKart.ad = item.stokKarthammaddead;
+                            //satinalmaTalepdetay.stokKart.kod = item.hammaddeKod;
+                            //satinalmaTalepdetay.stokKart.ad = item.hammaddeAd;
                             satinalmaTalepDetayList.Add(satinalmaTalepdetay);
                         }
                     }

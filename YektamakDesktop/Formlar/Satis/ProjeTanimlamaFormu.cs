@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,11 @@ namespace YektamakDesktop.Formlar.Satis
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(913, 291);
             universalGrid1.TabIndex = 18;
-            universalGrid1.Grid.MouseClick += universalGrid1_CellClick;
+            universalGrid1.MouseDown1 += universalGrid1_CellClick;
             universalGrid1.MouseDown1 += Grid_MouseDown1Click;
             Controls.Add(universalGrid1);
 
-            universalGrid1.SetData(_cache.projes, this.Name);
+            universalGrid1.SetData(_cache.projes.CastToDTO<ProjeDTO>().ToList(), this.Name);
             fcbProjeTip.SetDataSource(_cache.projeTipList);
             fcbMarka.SetDataSource(_cache.markaList);
             fcbMarkaAltGrup.SetDataSource(_cache.markaAltGrupList);
@@ -47,76 +48,74 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void Grid_MouseDown1Click(object sender, MouseEventArgs e)
         {
-            contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
+            
         }
-        private Proje _proje;
-        private Proje proje
+        private ProjeDTO _projeDTO;
+        private ProjeDTO projeDTO
         {
             get
             {
-                if (_proje == null)
+                if (_projeDTO == null)
                 {
-                    _proje = new Proje();
+                    _projeDTO = new();
                 }
-                return _proje;
+                return _projeDTO;
             }
             set
             {
-                _proje = value;
+                _projeDTO = value;
                 Binding();
             }
         }
         private void Binding()
         {
-            BindHelper.BindData(ctbId, proje, nameof(proje.Id));
-            BindHelper.BindData(fcbProjeTip, proje.projeTip, nameof(proje.projeTip.Id));
-            BindHelper.BindData(fcbMarka, proje.marka, nameof(proje.marka.Id));
-            BindHelper.BindData(ctbProjeNo, proje, nameof(proje.projeNo));
-            BindHelper.BindData(fcbMirasProje, proje, nameof(proje.mirasProjeId));
-            BindHelper.BindData(fcbMarkaAltGrup, proje.markaAltGrup, nameof(proje.markaAltGrup.Id));
-            BindHelper.BindData(fcbMarkaAltGrupKategori, proje.markaAltGrupKategori, nameof(proje.markaAltGrupKategori.Id));
-            BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
-            BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
+            BindHelper.BindData(ctbId, projeDTO, nameof(projeDTO.Id));
+            BindHelper.BindData(fcbProjeTip, projeDTO, nameof(projeDTO.projeTipId));
+            BindHelper.BindData(fcbMarka, projeDTO, nameof(projeDTO.markaId));
+            BindHelper.BindData(ctbProjeNo, projeDTO, nameof(projeDTO.projeNo));
+            BindHelper.BindData(fcbMirasProje, projeDTO, nameof(projeDTO.mirasProjeId));
+            BindHelper.BindData(fcbMarkaAltGrup, projeDTO, nameof(projeDTO.markaAltGrupId));
+            BindHelper.BindData(fcbMarkaAltGrupKategori, projeDTO, nameof(projeDTO.markaAltGrupKategoriId));
+            BindHelper.BindData(ctbAd, projeDTO, nameof(projeDTO.ad));
+            BindHelper.BindData(ctbAciklama, projeDTO, nameof(projeDTO.aciklama));
         }
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            string jsonResult = _projeService.SaveProje(proje);
+            string jsonResult = _projeService.SaveProje(ConvertHelper.ToEntity<Proje>(projeDTO));
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show($"Kaydederken hata: {jsonResult}");
             }
             else
             {
-                if (proje.Id == null)
+                if (projeDTO.Id == null)
                 {
-                    proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
+                    var proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
                     _cache.projes.Add(proje);
-                    universalGrid1.binding.Add(proje);
+                    universalGrid1.binding.Add(ConvertHelper.ToDTO<ProjeDTO>(proje));
                 }
                 else
                 {
-                    proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
+                    var proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
                     _cache.projes.Where(p => p.Id == proje.Id).ToList().ForEach(p => p = proje);
                     universalGrid1.binding.Remove(universalGrid1.Grid.CurrentRow.DataBoundItem);
-                    universalGrid1.binding.Add(proje);
+                    universalGrid1.binding.Add(projeDTO);
                 }
             }
         }
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
-            try
+            projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (e.Button == MouseButtons.Right)
             {
-                proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
+                contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
             }
         }
 
         private void projeSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Proje proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            var proje = ConvertHelper.ToEntity<Proje>(projeDTO);
             string jsonResult = _projeService.DeleteProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -124,13 +123,13 @@ namespace YektamakDesktop.Formlar.Satis
             }
             else
             {
-                _cache.projes.Remove(proje);
+                _cache.projes.Remove(_cache.projes.FirstOrDefault(p=>p.Id==proje.Id));
             }
         }
 
         private void roundedButton1_Click(object sender, EventArgs e)
         {
-            proje = new();
+            projeDTO = new();
         }
     }
 }

@@ -15,6 +15,7 @@ using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Projemodul;
 using YektamakDesktop.Formlar.ProjeModul;
 using YektamakDesktop.Formlar.Satinalma;
+using YektamakDesktop.Formlar.Satinalma.Siparis;
 using YektamakDesktop.Formlar.Satinalma.Talep;
 using YektamakDesktop.Formlar.Satinalma.Teklif;
 using YektamakDesktop.Formlar.Satis;
@@ -62,6 +63,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ProjeDosyalari>();
             services.AddTransient<ProjeSorumlusuAtamaFormu>();
             services.AddTransient<ProjeTanimlamaFormu>();
+            services.AddTransient<SatinalmaSiparisKayitFormu>();
             services.AddTransient<SatinalmaTalepKayitFormu>();
             services.AddTransient<SatinalmaTalepler>();
             services.AddTransient<SatinalmaTalepOlusturmaAltForm>();

@@ -1,27 +1,20 @@
 ﻿using Models.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.DTO
 {
     public record ProjeDTO:IEntity
     {
-        [GridDisplay(Header ="Id")]
-        public int? Id { get; set; }
-        [GridDisplay(Header ="Kod")]
-        public string kod { get; set; }
-        [GridDisplay(Header ="Proje No")]
-        public int? projeNo { get; set; }
-        [GridDisplay(Header = "Ver.", Tip = "TextBox")]
-        public string versiyon { get; set; }
-        [GridDisplay(Header = "Ad")]
-        public string ad { get; set; }
-        [GridDisplay(Header = "Proje Tipi",  Tip = "Liste", ListName ="projeTipList",ListVisibleColumnName ="ad")]
-        public int? projeTipId { get; set; }
-        [GridDisplay(Header = "Marka",  Tip = "Liste", ListName ="markaList",ListVisibleColumnName ="ad")]
-        public int? markaId { get; set; }
+        [GridDisplay(Header = "Id")] public int? Id { get; set; }
+        [GridDisplay(Header = "Proje No")] public int? projeNo { get; set; }
+        [GridDisplay(Header = "Ver.")] public string? versiyon { get; set; }
+        [GridDisplay(Header = "Kod")] public string kod { get; set; }
+        [GridDisplay(Header = "Marka", Tip = "Liste", ListName = "markaList", ListVisibleColumnName = "ad", readOnly = false)] public int? markaId { get; set; }
+        [GridDisplay(Header = "Marka Alt Grup", Tip = "Liste", ListName = "markaAltGrupList", ListVisibleColumnName = "ad", readOnly = false)] public int? markaAltGrupId { get; set; }
+        [GridDisplay(Header = "Marka Alt Grup Kategori", Tip = "Liste", ListName = "markaAltGrupKategori", ListVisibleColumnName = "ad", readOnly = false)] public int? markaAltGrupKategoriId { get; set; }
+        [GridDisplay(Header = "Ad")] public string ad { get; set; }
+        [GridDisplay(Header = "Açıklama")] public string aciklama { get; set; }
+        [GridDisplay(Header = "Proje Tipi", Tip = "Liste", ListName = "projeTipList", ListVisibleColumnName = "ad", readOnly = false)] public int? projeTipId { get; set; }
+        [GridDisplay(Header ="Sipariş No")]public int? satisSiparisId { get; set; }
+        [GridDisplay(Header ="Miras Alına Proje", Tip ="Liste", ListName = "projes", ListVisibleColumnName ="kod")]public int? mirasProjeId { get; set; }
     }
 }

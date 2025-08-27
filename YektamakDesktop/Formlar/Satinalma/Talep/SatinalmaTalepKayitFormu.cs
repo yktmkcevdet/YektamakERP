@@ -54,7 +54,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
             ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKodu);
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
+            satinalmaTalep.talepEdenKullanici = _cache.kullanici;
+            satinalmaTalep.talepTarihi = DateTime.Today;
         }
+        public event EventHandler<SatinalmaTalepDTO> TalepOnaylandi;
         private SatinalmaTalep _satinalmaTalep;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SatinalmaTalep satinalmaTalep
@@ -84,8 +87,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             BindHelper.BindData(ctbTalepNo, satinalmaTalep, "satinalmaTalepNo");
             BindHelper.BindData(ctbAciklama, satinalmaTalep, "aciklama");
             BindHelper.BindData(ctbSetAdet, satinalmaTalep, "setAdet");
-            satinalmaTalep.talepTarihi = DateTime.Today;
-            satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             _cache.stokKartList.Clear();
             List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = new();
             foreach (var std in _satinalmaTalep.satinalmaTalepDetays)
@@ -98,6 +99,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
             try
             {
                 if (!ValidateInputs())
@@ -105,12 +107,30 @@ namespace YektamakDesktop.Formlar.Satinalma
 
                 CreateSatinalmaTalep();
                 string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
-                HandleSaveResult(jsonResult);
+                if(satinalmaTalep.onayKullanici.Id == _cache.kullanici.Id)
+                {
+                    satinalmaTalep.onayDurum = true;
+                    string jsonResultOnay = await _satinalmaTalepService.SatinalmaTalepOnay(satinalmaTalep);
+                    if (jsonResultOnay.Contains("error", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show($"Onaylama işlemi başarısız oldu. {jsonResultOnay}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        TalepOnaylandi?.Invoke(this, ConvertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
+                    }
+                }
+                await HandleSaveResult(jsonResult);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Beklenmeyen bir hata oluştu: {ex.Message}", "Hata",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.Enabled = true;
             }
         }
         private bool ValidateInputs()
@@ -200,7 +220,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             var cell = row.GetCell(cellIndex) ?? row.CreateCell(cellIndex);
             cell.SetCellValue(value ?? string.Empty);
         }
-        private async void HandleSaveResult(string jsonResult)
+        private async Task HandleSaveResult(string jsonResult)
         {
             var selectedRows = universalGrid1.binding.OfType<SatinalmaTalepDetayDTO>();
             int? satirSayisi = selectedRows.Count() > 25 ? selectedRows.Count() : 25;

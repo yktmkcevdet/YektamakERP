@@ -26,6 +26,7 @@ namespace Utilities.Interfaces
         public List<Proje> unAssignedProjeList { get; }
         public List<Sektor> sektorList { get; }
         public List<Firma> firmaList { get; }
+        public List<KDV> kdvList { get; }
         public List<Personel> personelList { get; }
         public List<Pozisyon> pozisyonList { get; }
         public List<Marka> markaList { get; }

@@ -101,6 +101,9 @@
     <Compile Update="Formlar\Satinalma\MailGonder.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Satinalma\Siparis\SatinalmaSiparisKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Satinalma\Talep\SatinalmaTalepOlusturmaAltForm.cs">
       <SubType>Form</SubType>
     </Compile>

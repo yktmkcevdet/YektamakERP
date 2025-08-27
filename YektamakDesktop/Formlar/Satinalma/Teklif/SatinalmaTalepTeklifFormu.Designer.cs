@@ -50,6 +50,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKod = new FilterableComboBox();
             fcbMalzemeAltGrup2 = new FilterableComboBox();
             fcbBoyut = new FilterableCheckedComboBox();
+            stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,6 +59,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Teklif Oluşturma Formu";
             headerPanel1.Location = new System.Drawing.Point(-2, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
@@ -115,14 +117,14 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // contextMenuStrip2
             // 
-            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { parçaListesiniGösterToolStripMenuItem });
+            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { parçaListesiniGösterToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new System.Drawing.Size(186, 26);
+            contextMenuStrip2.Size = new System.Drawing.Size(191, 70);
             // 
             // parçaListesiniGösterToolStripMenuItem
             // 
             parçaListesiniGösterToolStripMenuItem.Name = "parçaListesiniGösterToolStripMenuItem";
-            parçaListesiniGösterToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            parçaListesiniGösterToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             parçaListesiniGösterToolStripMenuItem.Text = "Parça Listesini Göster";
             parçaListesiniGösterToolStripMenuItem.Click += parçaListesiniGösterToolStripMenuItem_Click;
             // 
@@ -177,47 +179,72 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // clbStokGrupId
             // 
+            clbStokGrupId.BorderColor = System.Drawing.Color.Silver;
+            clbStokGrupId.BorderSize = 1;
+            clbStokGrupId.DisplayMember = "ad";
             clbStokGrupId.Location = new System.Drawing.Point(37, 108);
             clbStokGrupId.Name = "clbStokGrupId";
             clbStokGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbStokGrupId.PlaceholderText = "Seçiniz...";
             clbStokGrupId.Size = new System.Drawing.Size(250, 29);
             clbStokGrupId.TabIndex = 17;
+            clbStokGrupId.ValueMember = "Id";
             clbStokGrupId.SelectedIndexChanged += cbxStokGrupId_SelectedIndexChanged;
             // 
             // clbMalzemeGrupId
             // 
+            clbMalzemeGrupId.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrupId.BorderSize = 1;
+            clbMalzemeGrupId.DisplayMember = "ad";
             clbMalzemeGrupId.Location = new System.Drawing.Point(37, 143);
             clbMalzemeGrupId.Name = "clbMalzemeGrupId";
             clbMalzemeGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeGrupId.PlaceholderText = "Seçiniz...";
             clbMalzemeGrupId.Size = new System.Drawing.Size(250, 29);
             clbMalzemeGrupId.TabIndex = 18;
+            clbMalzemeGrupId.ValueMember = "Id";
             clbMalzemeGrupId.SelectedIndexChanged += cbxMalzemeGrupId_SelectedIndexChanged;
             // 
             // clbMalzemeAltGrupId
             // 
+            clbMalzemeAltGrupId.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeAltGrupId.BorderSize = 1;
+            clbMalzemeAltGrupId.DisplayMember = "ad";
             clbMalzemeAltGrupId.Location = new System.Drawing.Point(37, 178);
             clbMalzemeAltGrupId.Name = "clbMalzemeAltGrupId";
             clbMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeAltGrupId.PlaceholderText = "Seçiniz...";
             clbMalzemeAltGrupId.Size = new System.Drawing.Size(250, 29);
             clbMalzemeAltGrupId.TabIndex = 19;
+            clbMalzemeAltGrupId.ValueMember = "Id";
             clbMalzemeAltGrupId.SelectedIndexChanged += clbMalzemeAltGrupId_SelectedIndexChanged;
             // 
             // clbProjeKod
             // 
+            clbProjeKod.BorderColor = System.Drawing.Color.Silver;
+            clbProjeKod.BorderSize = 1;
+            clbProjeKod.DisplayMember = "kod";
             clbProjeKod.Location = new System.Drawing.Point(37, 73);
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbProjeKod.PlaceholderText = "Seçiniz...";
             clbProjeKod.Size = new System.Drawing.Size(250, 29);
             clbProjeKod.TabIndex = 20;
+            clbProjeKod.ValueMember = "Id";
             clbProjeKod.SelectedIndexChanged += clbProjeKod_SelectedIndexChanged;
             // 
             // fcbMalzemeAltGrup2
             // 
+            fcbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
+            fcbMalzemeAltGrup2.BorderSize = 1;
+            fcbMalzemeAltGrup2.DisplayMember = "ad";
             fcbMalzemeAltGrup2.Location = new System.Drawing.Point(37, 213);
             fcbMalzemeAltGrup2.Name = "fcbMalzemeAltGrup2";
             fcbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
             fcbMalzemeAltGrup2.Size = new System.Drawing.Size(250, 29);
             fcbMalzemeAltGrup2.TabIndex = 21;
+            fcbMalzemeAltGrup2.ValueMember = "Id";
             fcbMalzemeAltGrup2.SelectedIndexChanged += fcbMalzemeAltGrup2_SelectedIndexChanged;
             // 
             // fcbBoyut
@@ -225,9 +252,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbBoyut.Location = new System.Drawing.Point(37, 248);
             fcbBoyut.Name = "fcbBoyut";
             fcbBoyut.Padding = new System.Windows.Forms.Padding(5);
-            fcbBoyut.Size = new System.Drawing.Size(250, 30);
+            fcbBoyut.Size = new System.Drawing.Size(250, 46);
             fcbBoyut.TabIndex = 23;
             fcbBoyut.ItemsChanged += fcbBoyut_SelectedIndexChanged;
+            // 
+            // stokKartınıGörüntüleToolStripMenuItem
+            // 
+            stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
+            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
+            stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
             // 
             // SatinalmaTalepTeklifFormu
             // 
@@ -278,5 +312,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private FilterableComboBox clbProjeKod;
         private FilterableComboBox fcbMalzemeAltGrup2;
         private FilterableCheckedComboBox fcbBoyut;
+        private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;
     }
 }

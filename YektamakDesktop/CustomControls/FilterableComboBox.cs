@@ -15,10 +15,9 @@ namespace YektamakDesktop.CustomControls
 {
     public partial class FilterableComboBox : UserControl
     {
-        
         [Browsable(false)]
         public ComboBox ComboBox => comboBox1;
-        public List<object> allItems = new List<object>();
+        private List<object> allItems = new List<object>();
         private bool underlinedStyle = false;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool UnderlinedStyle { get => underlinedStyle; set { underlinedStyle = value; this.Invalidate(); } }
@@ -38,13 +37,13 @@ namespace YektamakDesktop.CustomControls
         private int borderRadius = 5;
         private Color borderColor = Color.Silver;
         private int borderSize = 1;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
         private string _displayMember = "ad"; // Default display member
         [Browsable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string DisplayMember
         {
             get => _displayMember;
@@ -52,7 +51,7 @@ namespace YektamakDesktop.CustomControls
         }
         private string _valueMember = "Id"; // Default value member
         [Browsable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string ValueMember
         {
             get => _valueMember;
@@ -67,7 +66,7 @@ namespace YektamakDesktop.CustomControls
         }
         private string _placeholder = "Seçiniz...";
         [Category("Behavior")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string PlaceholderText
         {
             get => _placeholder;
@@ -194,12 +193,11 @@ namespace YektamakDesktop.CustomControls
         }
 
         [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public object SelectedObject
-        {
-            get { return comboBox1.SelectedItem; }
-            set { comboBox1.SelectedItem = value; }
-        }
+        public object SelectedObject;
+        //{
+        //    get { return comboBox1.SelectedItem; }
+        //    set { comboBox1.SelectedItem = value; }
+        //}
 
         public event EventHandler SelectedIndexChanged;
         //{
@@ -211,27 +209,26 @@ namespace YektamakDesktop.CustomControls
             add { comboBox1.SelectedValueChanged += value; }
             remove { comboBox1.SelectedValueChanged -= value; }
         }
-        //public event EventHandler SelectedItemChanged
-        //{
-        //    add { comboBox1.SelectionChangeCommitted += value; }
-        //    remove { comboBox1.SelectionChangeCommitted -= value; }
-        //}
 
         private bool suppressEvents = false;
         public void SetDataSource<T>(List<T> items)
         {
             suppressEvents = true;
-            //allItems = items.Cast<object>().ToList();
+            allItems = items.Cast<object>().ToList();
 
             comboBox1.DisplayMember = DisplayMember; // bu değer yukarıdan alınmalı
             comboBox1.ValueMember = ValueMember;
-            object value = null;
-            if (comboBox1.SelectedIndex >= 0)
+            object value = comboBox1.SelectedValue; // Seçili indeksi sakla
+            var prop = typeof(T).GetProperty(DisplayMember);
+            if(prop == null)
             {
-                value = comboBox1.SelectedValue;
-            } // Seçili indeksi sakla
-
-            comboBox1.DataSource = items.ToList();
+                comboBox1.DataSource = items;
+            }
+            else
+            {
+                comboBox1.DataSource = items.OrderBy(x => prop.GetValue(x, null)).ToList();
+            }
+                
             if (value == null)
             {
                 comboBox1.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
@@ -303,6 +300,19 @@ namespace YektamakDesktop.CustomControls
             comboBox1.ForeColor = Color.Black;
             SelectedIndexChanged?.Invoke(this, e);
         }
+
+        private void FilterableComboBox_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void FilterableComboBox_DoubleClick(object sender, EventArgs e)
+        {
+            DoubleClick1?.Invoke(this, e);
+        }
+
+        [Browsable(true)]
+        public event EventHandler DoubleClick1;
+
 
         public override Color BackColor
         {

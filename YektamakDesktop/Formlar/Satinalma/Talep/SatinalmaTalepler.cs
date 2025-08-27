@@ -98,8 +98,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaTalepFilter = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
             satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
-            Result resultModel = JsonConvert.DeserializeObject<List<Result>>(jsonResult).FirstOrDefault();
-            MessageBox.Show(resultModel.result);
+            MessageBox.Show(jsonResult);
         }
         
 
@@ -156,12 +155,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaTalep.onayKullanici = _cache.kullanici;
             satinalmaTalep.onayDurum = false;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
-            Result resultModel = JsonConvert.DeserializeObject<List<Result>>(jsonResult).FirstOrDefault();
-            MessageBox.Show(resultModel.result);
-            if (resultModel != null && !resultModel.result.Contains("error", StringComparison.OrdinalIgnoreCase))
+            if (jsonResult != null && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
+            MessageBox.Show(jsonResult);
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Formlar.Satinalma.Siparis;
 
 namespace YektamakDesktop.Formlar.Satinalma.Teklif
 {
@@ -19,7 +20,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         private readonly IJsonConverter _jsonConverter;
         private readonly ICache _cache;
         private readonly IDataTableMapper _dataTableMapper;
-        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService, IJsonConverter jsonConverter, ICache cache, IDataTableMapper dataTableMapper)
+        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService,  IJsonConverter jsonConverter, ICache cache, IDataTableMapper dataTableMapper)
         {
             _satinalmaTeklifService = satinalmaTeklifService;
             _jsonConverter = jsonConverter;
@@ -38,7 +39,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             universalGrid1.Size = new System.Drawing.Size(824, 364);
             universalGrid1.TabIndex = 17;
             Controls.Add(universalGrid1);
-            firmaId.SetDataSource(_cache.firmaList);
+            fcbFirma.SetDataSource(_cache.firmaList);
             clbDoviz.SetDataSource(_cache.dovizCinsiList);
             clbVade.SetDataSource(_cache.vadeList);
         }
@@ -62,6 +63,10 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         }
         private async void customButtonSave1_Click(object sender, EventArgs e)
         {
+            if(!ValidateForm())
+            {
+                return;
+            }
             try
             {
                 SortableBindingList<SatinalmaTeklifDetayDTO> detay = (SortableBindingList<SatinalmaTeklifDetayDTO>)universalGrid1.binding.DataSource;
@@ -82,11 +87,24 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
                 }
 
             }
-            catch(Exception  ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
+        }
+        private bool ValidateForm()
+        {
+            bool result = true;
+            result &= GlobalData.CheckField("Firma Seçiniz",fcbFirma);
+            result &= GlobalData.CheckField("Teklif Tarihi Giriniz", ctbTeklifTarihi);
+            result &= GlobalData.CheckField("Teklif Talep Tarihi Giriniz", ctbTeklifTalepTarihi);
+            result &= GlobalData.CheckField("*", clbDoviz);
+            result &= GlobalData.CheckField("Teklif Tutarı Giriniz", ctbTutar);
+            result &= GlobalData.CheckField("Teklif Geçerlilik Süresi Giriniz", ctbTeklifGecerlilikSuresi);
+            result &= GlobalData.CheckField("Termin Süresi Giriniz", ctbTerminSuresi);
+            result &= GlobalData.CheckField("*", clbVade);
+            return result;
         }
         public void UpdateMode(SatinalmaTeklifBaslik satinalmaTeklifBaslik)
         {
@@ -103,15 +121,15 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         private async void Binding()
         {
             BindHelper.BindData(ctbTeklifNo, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifNo));
-            BindHelper.BindData(firmaId, satinalmaTeklifBaslik.teklifFirma, nameof(satinalmaTeklifBaslik.teklifFirma.Id));
+            BindHelper.BindData(fcbFirma, satinalmaTeklifBaslik.teklifFirma, nameof(satinalmaTeklifBaslik.teklifFirma.Id));
             BindHelper.BindData(ctbTeklifTalepTarihi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifTalepTarihi));
-            BindHelper.BindData(ctbTerminSuresi, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.terminSuresi));
+            BindHelper.BindData(ctbTerminSuresi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.terminSuresi));
             BindHelper.BindData(ctbTeklifTarihi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifTarihi));
             BindHelper.BindData(clbVade, satinalmaTeklifBaslik.vade, nameof(satinalmaTeklifBaslik.vade.Id));
-            BindHelper.BindData(ctbTutar, satinalmaTeklifBaslik.teklifTutar, nameof(satinalmaTeklifBaslik.teklifTutar.tutar));
-            BindHelper.BindData(clbDoviz, satinalmaTeklifBaslik.teklifTutar.dovizCinsi, nameof(satinalmaTeklifBaslik.teklifTutar.dovizCinsi.Id));
-            BindHelper.BindData(ctbTeklifGecerlilikSuresi, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.teklifGecerlilikSuresi));
-            BindHelper.BindData(ctbAciklama, satinalmaTeklifBaslik,nameof(satinalmaTeklifBaslik.aciklama));
+            BindHelper.BindData(ctbTutar, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifTutar));
+            BindHelper.BindData(clbDoviz, satinalmaTeklifBaslik.dovizCinsi, nameof(satinalmaTeklifBaslik.dovizCinsi.Id));
+            BindHelper.BindData(ctbTeklifGecerlilikSuresi, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.teklifGecerlilikSuresi));
+            BindHelper.BindData(ctbAciklama, satinalmaTeklifBaslik, nameof(satinalmaTeklifBaslik.aciklama));
 
             List<SatinalmaTeklifDetayDTO> satinalmaTeklifDetayDTOs = new();
             foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
@@ -121,9 +139,38 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             await universalGrid1.SetData(satinalmaTeklifDetayDTOs, this.Name);
         }
 
-        private void SatinalmaTeklifKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
+        private async void SatinalmaTeklifKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            await universalGrid1.SaveSettings();
+        }
+
+        private async void btnSipariseDonustur_Click(object sender, EventArgs e)
+        {
+            if(!ValidateForm())
+            {
+                return;
+            }
+            SatinalmaSiparis satinalmaSiparis = new SatinalmaSiparis();
+            satinalmaSiparis.siparisTarihi = DateTime.Today;
+            satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
+            satinalmaSiparis.firma = satinalmaTeklifBaslik.teklifFirma;
+            satinalmaSiparis.aciklama = satinalmaTeklifBaslik.aciklama;
+            satinalmaSiparis.vade = satinalmaTeklifBaslik.vade;
+            satinalmaSiparis.satinalmaTeklif.Id = satinalmaTeklifBaslik.Id;
+            satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
+            satinalmaSiparis.dovizCinsi = satinalmaTeklifBaslik.dovizCinsi;
+            foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
+            {
+                SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();
+                satinalmaSiparisDetay.miktar = item.satinalmaTalepDetay.miktar;
+                satinalmaSiparisDetay.aciklama = item.satinalmaTalepDetay.aciklama;
+                satinalmaSiparisDetay.birimFiyat = item.birimFiyat;
+                satinalmaSiparisDetay.stokKartId = item.satinalmaTalepDetay.stokKart.Id;
+                satinalmaSiparis.satinalmaSiparisDetayList.Add( satinalmaSiparisDetay );
+            }
+            var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
+            satinalmaSiparisKayitFormu.UpdateMode(satinalmaSiparis);
+            satinalmaSiparisKayitFormu.ShowDialog();
         }
     }
 }

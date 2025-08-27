@@ -22,22 +22,9 @@
             }
         }
         public DateTime? teklifTarihi { get; set; }
-        private Tutar _teklifTutar;
-        public Tutar teklifTutar
-        {
-            get
-            {
-                if(_teklifTutar == null)
-                {
-                    _teklifTutar=new Tutar();
-                }
-                return _teklifTutar;
-            }
-            set
-            {
-                _teklifTutar = value;
-            }
-        }
+        public double? teklifTutar { get; set; }
+        private DovizCinsi _dovizCinsi;
+        public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi = value; } }
         public int teklifGecerlilikSuresi { get; set; }
         public int? terminSuresi { get; set; }
         private Vade _vade;
@@ -74,18 +61,10 @@
         private SatinalmaTalepDetay _satinalmaTalepDetay;
         public SatinalmaTalepDetay satinalmaTalepDetay 
         {
-            get { if (_satinalmaTalepDetay == null) { _satinalmaTalepDetay = new(); } return _satinalmaTalepDetay; } set { _satinalmaTalepDetay = value; } } 
-        private Tutar _birimFiyat;
-        public Tutar birimFiyat
-        {
-            get
-            {
-                if (_birimFiyat == null) { _birimFiyat = new(); } return _birimFiyat;
-            }
-            set
-            {
-                _birimFiyat = value;
-            }
-        }
+            get { if (_satinalmaTalepDetay == null) { _satinalmaTalepDetay = new(); } return _satinalmaTalepDetay; } set { _satinalmaTalepDetay = value; } 
+        } 
+        public double? birimFiyat { get; set; }
+        private DovizCinsi _dovizCinsi;
+        public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi = value; } }
     }
 }

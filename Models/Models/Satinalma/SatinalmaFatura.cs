@@ -8,15 +8,9 @@
         public List<SatinalmaSiparis> siparisIdList { get { if (_siparisIdList == null) { _siparisIdList = new List<SatinalmaSiparis>(); } return _siparisIdList; } set { _siparisIdList = value; } }//Veritabanında json olarak tutulacak        
         public DateTime faturaTarihi; 
         public DateTime faturaTarihiFirst;
-        private Tutar _tutar;
-        /// <summary>
-        /// siparisNo property'si atandığında otomatik gelmeli. Farklı bir tutar girilirse fark sebebi de istenmeli (arayüzde ayarlanacak)
-        /// </summary>
-        public Tutar tutar
-        {
-            get { if (_tutar == null) _tutar = new Tutar(); return _tutar; }
-            set { _tutar = value; }
-        }
+        public double? tutar { get; set; }
+        private DovizCinsi _dovizCinsi;
+        public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi = value; } }
         private KDV _kdv;
         public KDV kdv
         {

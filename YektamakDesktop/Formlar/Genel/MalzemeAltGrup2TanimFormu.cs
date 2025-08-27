@@ -43,6 +43,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             Binding();
+            universalGrid1.SetData(_cache.malzemeAltGrup2List.CastToDTO<MalzemeAltGrup2DTO>().ToList(), this.Name);
         }
 
         private void MalzemeAltGrup2TanimFormu_Load(object sender, EventArgs e)
@@ -67,7 +68,6 @@ namespace YektamakDesktop.Formlar.Genel
             BindHelper.BindData(fcbStokGrup, malzemeAltGrup2.malzemeAltGrup.malzemeGrup.stokGrup, nameof(malzemeAltGrup2.malzemeAltGrup.malzemeGrup.stokGrup.Id));
             BindHelper.BindData(fcbMalzemeGrup, malzemeAltGrup2.malzemeAltGrup.malzemeGrup, nameof(malzemeAltGrup2.malzemeAltGrup.malzemeGrup.Id));
             BindHelper.BindData(fcbMalzemeAltGrup, malzemeAltGrup2.malzemeAltGrup, nameof(malzemeAltGrup2.malzemeAltGrup.Id));
-            universalGrid1.SetData(_cache.malzemeAltGrup2List, this.Name);
         }
         public event EventHandler<object> AfterSave;
         private MalzemeAltGrup2 _malzemeAltGrup2;

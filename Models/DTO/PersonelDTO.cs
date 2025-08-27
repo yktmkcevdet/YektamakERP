@@ -1,5 +1,5 @@
 ﻿using Models.Attributes;
-
+using System.Drawing;
 namespace Models.DTO
 {
     public class PersonelDTO: IEntity
@@ -13,6 +13,9 @@ namespace Models.DTO
         [GridDisplay(Header = "firmaId")] public int? firmaId { get; set; }
         [GridDisplay(Header = "pozisyonId")] public int? pozisyonId { get; set; }
         [GridDisplay(Header = "yoneticiId")] public int? yoneticiPersonelId { get; set; }
-
+        public int? personelResimId { get; set; }
+        public byte[] personelResimdata { get; set; }
+        
+        public string personelResimformat { get; set; }
     }
 }

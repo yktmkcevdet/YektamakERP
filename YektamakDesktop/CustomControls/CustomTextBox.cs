@@ -78,7 +78,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool Multiline
         {
             get { return textBox.Multiline; }

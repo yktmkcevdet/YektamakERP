@@ -2,6 +2,7 @@
 using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.Configuration;
 
 namespace Api.Controllers
 {
@@ -22,6 +23,11 @@ namespace Api.Controllers
         public string GetGridSettings([FromBody] GridSettings restData)
         {
             return _dataAccessLayer.SaveObject(restData, "spGetGridSettings");
+        }
+        [HttpPost, Route("api/GetDosyalamaYapisi")]
+        public string GetDosyalamaYapisi([FromBody] DosyalamaYapisi restData)
+        {
+            return _dataAccessLayer.GetObject(restData, "spGetDosyalamaYapisi");
         }
     }
 }

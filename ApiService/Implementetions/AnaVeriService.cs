@@ -56,5 +56,9 @@ namespace ApiService.Implementetions
         {
             return _apiService.Get("GetBoyut");
         }
+        public string GetKdv()
+        {
+            return _apiService.Get("GetKdv");
+        }
     }
 }

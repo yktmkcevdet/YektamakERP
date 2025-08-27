@@ -146,14 +146,20 @@ namespace YektamakDesktop.Formlar.Satinalma
                 universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
         }
-
+        
         private void talebiGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
             SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
             satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
+            satinalmaTalepKayitFormu.TalepOnaylandi += SatinalmaTalepKayitFormu_TalepOnaylandi;
             satinalmaTalepKayitFormu.Show();
+        }
+
+        private void SatinalmaTalepKayitFormu_TalepOnaylandi(object sender, SatinalmaTalepDTO e)
+        {
+            universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.Configuration;
 
 namespace ApiService.Implementetions
 {
@@ -9,6 +10,11 @@ namespace ApiService.Implementetions
         public ConfigurationService(IApiService apiService)
         {
             _apiService = apiService;
+        }
+
+        public async Task<string> GetDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi)
+        {
+            return await _apiService.PostAsync(dosyalamaYapisi, "GetDosyalamaYapisi");
         }
 
         public async Task<string> GetGridSettings(GridSettings gridSettings)

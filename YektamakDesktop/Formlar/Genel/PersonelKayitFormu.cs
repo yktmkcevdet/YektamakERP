@@ -2,11 +2,13 @@
 using Models;
 using Models.DTO;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -43,29 +45,31 @@ namespace YektamakDesktop.Formlar.Genel
             clbFirma.SetDataSource(_cache.firmaList);
             clbPozisyon.SetDataSource(_cache.pozisyonList);
             clbYonetici.SetDataSource(_cache.personelList);
+            //pictureBoxPersonel.DataBindings["Image"].Format += (s, e) =>
+            //{
+            //    if (e.DesiredType == typeof(Image) && e.Value is byte[] bytes && bytes.Length > 0)
+            //    {
+            //        using (var ms = new MemoryStream(bytes))
+            //        {
+            //            e.Value = Image.FromStream(ms);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        e.Value = null; // resim yoksa boş bırak
+            //    }
+            //};
         }
-
         private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
-            personel = (Personel)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            //personel = ConvertHelper.ToEntity<Personel>(personelDTO);
+            personelDTO = (PersonelDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
         }
-
-        //Firma ekranından + butonuyla yeni eklenen personelin firma bilgisini tutması için
-
-        private bool yeniResim = false;
-        private byte[] yeniResimBytes;
-        private string yeniResimFormat;
-        private Personel _personel;
+        private PersonelDTO _personelDTO;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Personel personel
+        public PersonelDTO personelDTO
         {
-            get { if (_personel == null) { _personel = new(); } return _personel; }
-            set
-            {
-                _personel = value;
-                Binding();
-            }
+            get { if (_personelDTO == null) { _personelDTO = new(); } return _personelDTO; }
+            set{ _personelDTO = value; Binding(); }
         }
         private PersonelKayitFormu()
         {
@@ -74,18 +78,20 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void Binding()
         {
-            BindHelper.BindData(ctbId, personel, "Id");
-            BindHelper.BindData(ctbPersonelAd, personel, "ad");
-            BindHelper.BindData(ctbPersonelSoyad, personel, "soyad");
-            BindHelper.BindData(ctbTelefon, personel, "telefon");
-            BindHelper.BindData(ctbMail, personel, "mail");
-            BindHelper.BindData(clbFirma, personel.firma, "Id");
-            BindHelper.BindData(clbPozisyon, personel.pozisyon, "Id");
-            BindHelper.BindData(clbYonetici, personel, "yoneticiPersonelId");
+            BindHelper.BindData(ctbId, personelDTO, nameof(personelDTO.Id));
+            BindHelper.BindData(ctbPersonelAd, personelDTO, nameof(personelDTO.ad));
+            BindHelper.BindData(ctbPersonelSoyad, personelDTO, nameof(personelDTO.soyad));
+            BindHelper.BindData(ctbTelefon, personelDTO, nameof(personelDTO.telefon));
+            BindHelper.BindData(ctbMail, personelDTO, nameof(personelDTO.mail));
+            BindHelper.BindData(clbFirma, personelDTO, nameof(personelDTO.firmaId));
+            BindHelper.BindData(clbPozisyon, personelDTO, nameof(personelDTO.pozisyonId));
+            BindHelper.BindData(clbYonetici, personelDTO, nameof(personelDTO.yoneticiPersonelId));
+            pictureBoxPersonel.DataBindings.Clear();
+            pictureBoxPersonel.DataBindings.Add("Image", personelDTO, nameof(personelDTO.personelResimdata), true, DataSourceUpdateMode.OnPropertyChanged);
         }
-        public void UpdateMode(Personel personelUpdate)
+        public void UpdateMode(PersonelDTO personelUpdate)
         {
-            personel = personelUpdate;
+            personelDTO = personelUpdate;
         }
         private void buttonResimSec_Click(object sender, EventArgs e)
         {
@@ -100,8 +106,8 @@ namespace YektamakDesktop.Formlar.Genel
                 {
                     pictureBoxPersonel.Image = loadedImage;
                     ImageFormat format = ImageWorks.GetImageFileFormatFromPath(openFileDialogResim.FileName);
-                    personel.personelResim.resimData = ImageWorks.GetBytesFromImage(loadedImage, format);
-                    personel.personelResim.imageFormat = format.ToString();
+                    personelDTO.personelResimdata = ImageWorks.GetBytesFromImage(loadedImage, format);
+                    personelDTO.personelResimformat = format.ToString();
                 }
                 else
                 {
@@ -112,8 +118,6 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
         /// <summary>
         /// Bütün alanlardaki veriler doğru yazılmış mı onun kontrol yapılacak
@@ -131,14 +135,14 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                string jsonResult = await _personelService.SavePersonel(personel);
+                string jsonResult = await _personelService.SavePersonel(ConvertHelper.ToEntity<Personel>(personelDTO));
                 if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(jsonResult,"Personel kaydederken hata");
                 }
                 else
                 {
-                    personel = JsonConvert.DeserializeObject<List<Personel>>(jsonResult).FirstOrDefault();
+                    var personel = JsonConvert.DeserializeObject<List<Personel>>(jsonResult).FirstOrDefault();
                     if (!_cache.personelList.Any(p => p.Id == personel.Id))
                     {
                         _cache.personelList.Add(personel);
@@ -164,11 +168,7 @@ namespace YektamakDesktop.Formlar.Genel
         private void PersonelKayitFormu_Load(object sender, EventArgs e)
         {
             List<Personel> personelList = new();
-            //foreach (var item in _cache.personelList)
-            //{
-            //    personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
-            //}
-            universalGrid1.SetData(_cache.personelList, this.Name);
+            universalGrid1.SetData(_cache.personelList.CastToDTO<PersonelDTO>().ToList(), this.Name);
         }
 
         private void PersonelKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
@@ -178,7 +178,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void roundedButton1_Click(object sender, EventArgs e)
         {
-            personel=new Personel();
+            personelDTO=new PersonelDTO();
         }
     }
 }

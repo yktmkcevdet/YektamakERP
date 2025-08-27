@@ -8,9 +8,8 @@
         "DebugTarget": "IIS Express"
       },
       {
-        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
-        "Action": "Start",
-        "DebugTarget": "FinansalTakipDesktop"
+        "Path": "YektamakWeb\\YektamakWeb.csproj",
+        "Action": "Start"
       }
     ]
   }

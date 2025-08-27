@@ -88,7 +88,7 @@ namespace YektamakDesktop.CustomControls
                 //}
             }
         }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string TextCustom
         {
             get
@@ -113,7 +113,7 @@ namespace YektamakDesktop.CustomControls
         }
 
         private int _ondalikBasamak;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int OndalikBasamak
         {
             get { return _ondalikBasamak; }

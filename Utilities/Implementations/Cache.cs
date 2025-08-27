@@ -165,6 +165,10 @@ namespace Utilities.Implementations
                 if (_stokKartList == null)
                 {
                     _stokKartList = GetModelList(_stokService.GetStokKart, new StokKart());
+                    if(_stokKartList == null)
+                    {
+                        _stokKartList = new List<StokKart>();
+                    }
                 }
                 return _stokKartList;
             }
@@ -322,9 +326,21 @@ namespace Utilities.Implementations
             {
                 if (_firmaList == null)
                 {
-                    _firmaList = GetModelList<Firma>(_firmaService.GetFirma,new Firma());
+                    _firmaList = GetModelList(_firmaService.GetFirma,new Firma());
                 }
                 return _firmaList;
+            }
+        }
+        private List<KDV> _kdv;
+        public List<KDV> kdv
+        {
+            get
+            {
+                if (_kdv == null)
+                {
+                    _kdv = GetModelList<KDV>(_anaVeriService.GetKdv);
+                }
+                return _kdv;
             }
         }
         private List<Personel> _personelList;
@@ -501,6 +517,18 @@ namespace Utilities.Implementations
             set
             {
                 _boyutList = value;
+            }
+        }
+        private List<KDV> _kdvList;
+        public List<KDV> kdvList
+        {
+            get
+            {
+                if (_kdvList == null)
+                {
+                    _kdvList = GetModelList<KDV>(_anaVeriService.GetKdv);
+                }
+                return _kdvList;
             }
         }
 

@@ -83,7 +83,7 @@ namespace YektamakDesktop.Formlar.Genel
                         }
                     case 1:
                         {
-                            MalzemeGrupDTO malzemeGrup = _cache.malzemeGrups.Cast<MalzemeGrupDTO>().ToList().FirstOrDefault(m=>m.Id==int.Parse(node.Name));
+                            MalzemeGrupDTO malzemeGrup = _cache.malzemeGrups.CastToDTO<MalzemeGrupDTO>().ToList().FirstOrDefault(m=>m.Id==int.Parse(node.Name));
                             var malzemeGrupTanimFormu = FormFactory.CreateForm<MalzemeGrupTanimFormu>();
                             malzemeGrupTanimFormu.UpdateMode(malzemeGrup);
                             malzemeGrupTanimFormu.TopLevel = false;
@@ -245,7 +245,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void MalzemeGrupTanimFormu_AfterSave(object sender, object e)
         {
-            var malzemeGrup = (MalzemeGrup)e;
+            var malzemeGrup = (MalzemeGrupDTO)e;
             foreach(var existNode in treeView1.Nodes.Find(malzemeGrup.Id.ToString(), true))
             {
                 if (existNode.Level == 1)
