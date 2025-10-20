@@ -71,5 +71,9 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(proje, $"DeleteProje");
         }
+        public async Task<string> GetProjeBomList(ProjeBom projeBomList)
+        {
+            return await _apiService.PostAsync(projeBomList, $"GetProjeBomList");
+        }
     }
 }

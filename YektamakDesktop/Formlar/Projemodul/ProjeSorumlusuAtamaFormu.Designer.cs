@@ -45,28 +45,45 @@
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.SteelBlue;
+            headerPanel1.Baslik = "Proje Sorumlusu Tanımlama";
             headerPanel1.Location = new System.Drawing.Point(-1, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(485, 32);
+            headerPanel1.Size = new System.Drawing.Size(485, 25);
             headerPanel1.TabIndex = 0;
             // 
             // fcbProje
             // 
+            fcbProje.BorderColor = System.Drawing.Color.Silver;
+            fcbProje.BorderRadius = 8;
+            fcbProje.BorderSize = 1;
+            fcbProje.DisplayMember = "ad";
+            fcbProje.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbProje.Location = new System.Drawing.Point(135, 100);
+            fcbProje.Margin = new System.Windows.Forms.Padding(1);
             fcbProje.Name = "fcbProje";
             fcbProje.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbProje.Size = new System.Drawing.Size(204, 29);
+            fcbProje.PlaceholderText = "Seçiniz...";
+            fcbProje.Size = new System.Drawing.Size(204, 25);
             fcbProje.TabIndex = 1;
+            fcbProje.ValueMember = "Id";
             // 
             // fcbPersonel
             // 
+            fcbPersonel.BorderColor = System.Drawing.Color.Silver;
+            fcbPersonel.BorderRadius = 8;
+            fcbPersonel.BorderSize = 1;
+            fcbPersonel.DisplayMember = "ad";
+            fcbPersonel.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbPersonel.Location = new System.Drawing.Point(135, 135);
+            fcbPersonel.Margin = new System.Windows.Forms.Padding(1);
             fcbPersonel.Name = "fcbPersonel";
             fcbPersonel.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbPersonel.Size = new System.Drawing.Size(204, 29);
+            fcbPersonel.PlaceholderText = "Seçiniz...";
+            fcbPersonel.Size = new System.Drawing.Size(204, 25);
             fcbPersonel.TabIndex = 2;
+            fcbPersonel.ValueMember = "Id";
             // 
             // label1
             // 
@@ -105,14 +122,27 @@
             // 
             // ctbId
             // 
-            ctbId.BackColor = System.Drawing.SystemColors.Window;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            ctbId.ForeColor = System.Drawing.Color.DimGray;
+            ctbId.BackColor = System.Drawing.Color.White;
+            ctbId.BorderColor = System.Drawing.Color.Silver;
+            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbId.BorderSize = 1;
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbId.ForeColor = System.Drawing.Color.Black;
             ctbId.Location = new System.Drawing.Point(135, 66);
+            ctbId.Margin = new System.Windows.Forms.Padding(1);
+            ctbId.Multiline = false;
             ctbId.Name = "ctbId";
             ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbId.Size = new System.Drawing.Size(110, 28);
+            ctbId.PasswordChar = false;
+            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbId.PlaceholderText = "";
+            ctbId.ReadOnly = false;
+            ctbId.SelectionStart = 0;
+            ctbId.Size = new System.Drawing.Size(110, 29);
             ctbId.TabIndex = 7;
+            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbId.TextCustom = "";
+            ctbId.UnderlinedStyle = false;
             // 
             // label3
             // 
@@ -125,14 +155,25 @@
             // 
             // roundedButton1
             // 
+            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
+            roundedButton1.BorderColor = System.Drawing.Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedButton1.ForeColor = System.Drawing.Color.White;
+            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             roundedButton1.Location = new System.Drawing.Point(23, 191);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(84, 40);
             roundedButton1.TabIndex = 9;
             roundedButton1.Text = "YENİ KAYIT";
+            roundedButton1.TextColor = System.Drawing.Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += RoundedButton1_Click;
             // 

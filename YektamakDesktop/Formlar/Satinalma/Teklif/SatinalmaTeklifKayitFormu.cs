@@ -31,14 +31,19 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         }
         private void Initialize()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(54, 378);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(824, 364);
-            universalGrid1.TabIndex = 17;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<SatinalmaTeklifDetayDTO>(), this.Name);
             fcbFirma.SetDataSource(_cache.firmaList);
             clbDoviz.SetDataSource(_cache.dovizCinsiList);
             clbVade.SetDataSource(_cache.vadeList);
@@ -165,7 +170,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
                 satinalmaSiparisDetay.miktar = item.satinalmaTalepDetay.miktar;
                 satinalmaSiparisDetay.aciklama = item.satinalmaTalepDetay.aciklama;
                 satinalmaSiparisDetay.birimFiyat = item.birimFiyat;
-                satinalmaSiparisDetay.stokKartId = item.satinalmaTalepDetay.stokKart.Id;
+                satinalmaSiparisDetay.stokKartId = item.satinalmaTalepDetay.projeStokKart.Id;
                 satinalmaSiparis.satinalmaSiparisDetayList.Add( satinalmaSiparisDetay );
             }
             var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();

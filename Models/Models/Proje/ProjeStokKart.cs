@@ -15,14 +15,19 @@ namespace Models
         public Proje proje { get { if (_proje == null) { _proje = new(); } return _proje; } set{ _proje = value; } }
         private StokKart _stokKart;
         public StokKart stokKart { get { if (_stokKart == null) { _stokKart = new(); } return _stokKart; } set { _stokKart = value; } }
+        public string no { get; set; }
         public int? adet { get; set; }
         public double? miktar { get; set; }
         public string pdfFileName() { return stokKart.parcaKod + ".pdf"; }
         public string dxfFileName()
         {
-            string dxfAd = $@"{Regex.Escape(stokKart.parcaKod)}.*{Regex.Escape(stokKart.malzeme)}_{dxfAddition()}mm.*{adet}adet.*\.dxf$";
-            //string dxfAd = $"{stokKart.parcaKod}*{stokKart.malzeme}_{dxfAddition()}mm*.dxf";
-            return dxfAd;
+            if (this.stokKart.malzemeGrup.Id == 28)
+            {
+                string dxfAd = $@"{Regex.Escape(stokKart.parcaKod)}.*\.dxf$"; //.*{Regex.Escape(stokKart.malzeme)}_{dxfAddition()}mm.*{adet}adet
+                                                                              //string dxfAd = $"{stokKart.parcaKod}*{stokKart.malzeme}_{dxfAddition()}mm*.dxf";
+                return dxfAd;
+            }
+            return null;
         }
         public string stepFileName() { return stokKart.parcaKod + ".step"; }
         public string dxfAddition()

@@ -28,19 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBox1.Location = new System.Drawing.Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(948, 678);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // PdfGoruntuleme
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(948, 678);
+            Controls.Add(pictureBox1);
             Name = "PdfGoruntuleme";
             Text = "PdfGoruntuleme";
-            FormClosing += PdfGoruntuleme_FormClosing;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private static System.Windows.Forms.PictureBox pictureBox1;
     }
 }

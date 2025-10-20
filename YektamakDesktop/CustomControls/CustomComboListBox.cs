@@ -58,7 +58,7 @@ namespace YektamakDesktop.CustomControls
         /// <summary>
         /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
         /// </summary>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         /// <summary>
         /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
         /// </summary>
@@ -89,11 +89,11 @@ namespace YektamakDesktop.CustomControls
 
 
         public int? _selectedDataRowId = null;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int? selectedDataRowId { get => _selectedDataRowId; set { SelectDataRowId(value); OnPropertyChanged(); } }
         
         private string _selectedDataRowValue;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string selectedDataRowValue { get => _selectedDataRowValue; set { SelectDataRowValue(value);  } }
 
 

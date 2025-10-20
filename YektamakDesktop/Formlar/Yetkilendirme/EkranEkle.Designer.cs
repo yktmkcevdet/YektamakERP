@@ -48,12 +48,11 @@
             ctbMenuAd.BackColor = System.Drawing.Color.White;
             ctbMenuAd.BorderColor = System.Drawing.Color.Silver;
             ctbMenuAd.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbMenuAd.BorderRadius = 5;
             ctbMenuAd.BorderSize = 2;
-            ctbMenuAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbMenuAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbMenuAd.ForeColor = System.Drawing.Color.Black;
-            ctbMenuAd.isPlaceHolder = false;
             ctbMenuAd.Location = new System.Drawing.Point(127, 131);
+            ctbMenuAd.Margin = new System.Windows.Forms.Padding(1);
             ctbMenuAd.Multiline = false;
             ctbMenuAd.Name = "ctbMenuAd";
             ctbMenuAd.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
@@ -62,7 +61,7 @@
             ctbMenuAd.PlaceholderText = "";
             ctbMenuAd.ReadOnly = false;
             ctbMenuAd.SelectionStart = 0;
-            ctbMenuAd.Size = new System.Drawing.Size(250, 32);
+            ctbMenuAd.Size = new System.Drawing.Size(250, 37);
             ctbMenuAd.TabIndex = 5;
             ctbMenuAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbMenuAd.TextCustom = "";
@@ -71,16 +70,9 @@
             // roundedIconButton1
             // 
             roundedIconButton1.BackColor = System.Drawing.Color.Transparent;
-            roundedIconButton1.BorderColor = System.Drawing.Color.Black;
-            roundedIconButton1.BorderSize = 0;
-            roundedIconButton1.CornerRadius = 10;
             roundedIconButton1.FlatAppearance.BorderSize = 0;
             roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedIconButton1.ForeColor = System.Drawing.Color.White;
-            roundedIconButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedIconButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedIconButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedIconButton1.HoverColor2 = System.Drawing.Color.Navy;
             roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
             roundedIconButton1.IconColor = System.Drawing.Color.Black;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -101,7 +93,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(422, 32);
+            headerPanel1.Size = new System.Drawing.Size(422, 25);
             headerPanel1.TabIndex = 26;
             // 
             // rButtonKaydet
@@ -154,12 +146,11 @@
             ctbDtoName.BackColor = System.Drawing.Color.White;
             ctbDtoName.BorderColor = System.Drawing.Color.Silver;
             ctbDtoName.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbDtoName.BorderRadius = 5;
             ctbDtoName.BorderSize = 2;
-            ctbDtoName.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbDtoName.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbDtoName.ForeColor = System.Drawing.Color.Black;
-            ctbDtoName.isPlaceHolder = false;
             ctbDtoName.Location = new System.Drawing.Point(128, 207);
+            ctbDtoName.Margin = new System.Windows.Forms.Padding(1);
             ctbDtoName.Multiline = false;
             ctbDtoName.Name = "ctbDtoName";
             ctbDtoName.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
@@ -168,7 +159,7 @@
             ctbDtoName.PlaceholderText = "";
             ctbDtoName.ReadOnly = false;
             ctbDtoName.SelectionStart = 0;
-            ctbDtoName.Size = new System.Drawing.Size(250, 32);
+            ctbDtoName.Size = new System.Drawing.Size(250, 37);
             ctbDtoName.TabIndex = 31;
             ctbDtoName.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbDtoName.TextCustom = "";
@@ -188,12 +179,11 @@
             ctbId.BackColor = System.Drawing.Color.White;
             ctbId.BorderColor = System.Drawing.Color.Silver;
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbId.BorderRadius = 5;
             ctbId.BorderSize = 2;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbId.ForeColor = System.Drawing.Color.Black;
-            ctbId.isPlaceHolder = false;
             ctbId.Location = new System.Drawing.Point(128, 53);
+            ctbId.Margin = new System.Windows.Forms.Padding(1);
             ctbId.Multiline = false;
             ctbId.Name = "ctbId";
             ctbId.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
@@ -202,7 +192,7 @@
             ctbId.PlaceholderText = "";
             ctbId.ReadOnly = false;
             ctbId.SelectionStart = 0;
-            ctbId.Size = new System.Drawing.Size(59, 32);
+            ctbId.Size = new System.Drawing.Size(59, 37);
             ctbId.TabIndex = 33;
             ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbId.TextCustom = "";
@@ -211,39 +201,33 @@
             // clbFormAd
             // 
             clbFormAd.BorderColor = System.Drawing.Color.Silver;
+            clbFormAd.BorderRadius = 8;
             clbFormAd.BorderSize = 1;
-            clbFormAd.DataSource = null;
             clbFormAd.DisplayMember = "ad";
+            clbFormAd.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbFormAd.Location = new System.Drawing.Point(127, 91);
+            clbFormAd.Margin = new System.Windows.Forms.Padding(1);
             clbFormAd.Name = "clbFormAd";
             clbFormAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbFormAd.PlaceholderText = "Seçiniz...";
-            clbFormAd.SelectedDisplayValue = "Seçiniz...";
-            clbFormAd.SelectedIndex = -1;
-            clbFormAd.SelectedItem = null;
-            clbFormAd.SelectedValue = null;
             clbFormAd.Size = new System.Drawing.Size(188, 29);
             clbFormAd.TabIndex = 35;
-            clbFormAd.UnderlinedStyle = false;
             clbFormAd.ValueMember = "Id";
             // 
             // clbIcon
             // 
             clbIcon.BorderColor = System.Drawing.Color.Silver;
+            clbIcon.BorderRadius = 8;
             clbIcon.BorderSize = 1;
-            clbIcon.DataSource = null;
             clbIcon.DisplayMember = "ad";
+            clbIcon.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbIcon.Location = new System.Drawing.Point(128, 169);
+            clbIcon.Margin = new System.Windows.Forms.Padding(1);
             clbIcon.Name = "clbIcon";
             clbIcon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbIcon.PlaceholderText = "Seçiniz...";
-            clbIcon.SelectedDisplayValue = "Seçiniz...";
-            clbIcon.SelectedIndex = -1;
-            clbIcon.SelectedItem = null;
-            clbIcon.SelectedValue = null;
             clbIcon.Size = new System.Drawing.Size(187, 29);
             clbIcon.TabIndex = 36;
-            clbIcon.UnderlinedStyle = false;
             clbIcon.ValueMember = "Id";
             clbIcon.SelectedIndexChanged += customComboListBoxIcon_SelectedIndexChanged;
             // 

@@ -93,7 +93,7 @@ namespace YektamakDesktop.Formlar
                 string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
                 if(String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(jsonResult,"Kullanıcı Bilgisi Alırken Hata");
+                    MessageBox.Show("Kullanıcı adı ya da şifre hatalı");
                     return;
                 }
                 user = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
@@ -126,7 +126,10 @@ namespace YektamakDesktop.Formlar
             {
                 MessageBox.Show(ex.Message);
             }
-            this.Enabled = true;
+            finally
+            {
+                this.Enabled = true;
+            }
         }
         /// <summary>
         /// Yeni şifre tanımlamak için program içinde dinamik olarak tanımlanan şifre textbox alanlarının passwordchar olarak gözükmesini sağlar.

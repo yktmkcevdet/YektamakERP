@@ -1,19 +1,15 @@
-﻿using YektamakDesktop.CustomControls;
-using YektamakDesktop.Formlar;
-using FontAwesome.Sharp;
+﻿using FontAwesome.Sharp;
 using Models;
+using Models.DTO;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using Models.DTO;
 using Utilities.Interfaces;
-using Patagames.Pdf.Net.Controls.WinForms;
-using YektamakDesktop.Formlar.ProjeModul;
-using System.ComponentModel;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop
 {

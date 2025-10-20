@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="Services\**" />
+    <Compile Remove="WebUIGlobals\**" />
     <Compile Remove="wwwroot\css\bootstrap\**" />
     <Content Remove="Services\**" />
+    <Content Remove="WebUIGlobals\**" />
     <Content Remove="wwwroot\css\bootstrap\**" />
     <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="WebUIGlobals\**" />
     <EmbeddedResource Remove="wwwroot\css\bootstrap\**" />
     <None Remove="Services\**" />
+    <None Remove="WebUIGlobals\**" />
     <None Remove="wwwroot\css\bootstrap\**" />
   </ItemGroup>
 
@@ -23,14 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="WebUIGlobals\Global\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.Bootstrap" Version="3.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
-    <PackageReference Include="NPOI" Version="2.7.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
+    <PackageReference Include="MudBlazor" Version="8.12.0" />
+    <PackageReference Include="NPOI" Version="2.7.4" />
   </ItemGroup>
 
 </Project>

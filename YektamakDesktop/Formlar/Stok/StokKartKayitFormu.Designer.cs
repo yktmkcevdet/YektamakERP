@@ -122,39 +122,67 @@ namespace YektamakDesktop.Formlar.Stok
             label30 = new Label();
             label31 = new Label();
             ctbStokKartId = new CustomTextBox();
+            ctbStokKartNo = new CustomTextBox();
+            label3 = new Label();
+            chkTalasli = new CheckBox();
+            chkBukum = new CheckBox();
             ctxSagClickMenu.SuspendLayout();
             SuspendLayout();
             // 
             // ctbId
             // 
             ctbId.BackColor = Color.White;
+            ctbId.BorderColor = Color.Silver;
+            ctbId.BorderFocusColor = Color.HotPink;
+            ctbId.BorderSize = 1;
             ctbId.Enabled = false;
-            ctbId.Font = new Font("Segoe UI", 9.5F);
+            ctbId.Font = new Font("Segoe UI", 8F);
             ctbId.ForeColor = Color.Black;
-            ctbId.Location = new Point(113, 55);
+            ctbId.Location = new Point(113, 35);
+            ctbId.Margin = new Padding(1);
             ctbId.Multiline = false;
             ctbId.Name = "ctbId";
-            ctbId.Padding = new Padding(7, 5, 7, 5);
-            ctbId.Size = new Size(94, 28);
+            ctbId.Padding = new Padding(3);
+            ctbId.PasswordChar = false;
+            ctbId.PlaceholderColor = Color.DarkGray;
+            ctbId.PlaceholderText = "";
+            ctbId.ReadOnly = false;
+            ctbId.SelectionStart = 0;
+            ctbId.Size = new Size(94, 25);
             ctbId.TabIndex = 0;
+            ctbId.TextAlignment = HorizontalAlignment.Left;
+            ctbId.TextCustom = "";
+            ctbId.UnderlinedStyle = false;
             // 
             // ctbKod
             // 
             ctbKod.BackColor = Color.White;
-            ctbKod.Font = new Font("Segoe UI", 9.5F);
+            ctbKod.BorderColor = Color.Silver;
+            ctbKod.BorderFocusColor = Color.HotPink;
+            ctbKod.BorderSize = 1;
+            ctbKod.Font = new Font("Segoe UI", 8F);
             ctbKod.ForeColor = Color.Black;
-            ctbKod.Location = new Point(113, 193);
+            ctbKod.Location = new Point(113, 170);
+            ctbKod.Margin = new Padding(1);
             ctbKod.Multiline = false;
             ctbKod.Name = "ctbKod";
-            ctbKod.Padding = new Padding(7, 5, 7, 5);
-            ctbKod.Size = new Size(259, 28);
+            ctbKod.Padding = new Padding(3);
+            ctbKod.PasswordChar = false;
+            ctbKod.PlaceholderColor = Color.DarkGray;
+            ctbKod.PlaceholderText = "";
+            ctbKod.ReadOnly = false;
+            ctbKod.SelectionStart = 0;
+            ctbKod.Size = new Size(259, 25);
             ctbKod.TabIndex = 3;
+            ctbKod.TextAlignment = HorizontalAlignment.Left;
+            ctbKod.TextCustom = "";
+            ctbKod.UnderlinedStyle = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.Location = new Point(20, 63);
+            label1.Location = new Point(22, 42);
             label1.Name = "label1";
             label1.Size = new Size(18, 15);
             label1.TabIndex = 9;
@@ -164,7 +192,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(20, 200);
+            label2.Location = new Point(22, 176);
             label2.Name = "label2";
             label2.Size = new Size(69, 15);
             label2.TabIndex = 10;
@@ -174,7 +202,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.Location = new Point(20, 233);
+            label4.Location = new Point(22, 203);
             label4.Name = "label4";
             label4.Size = new Size(54, 15);
             label4.TabIndex = 14;
@@ -183,20 +211,32 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbStokAd
             // 
             ctbStokAd.BackColor = Color.White;
-            ctbStokAd.Font = new Font("Segoe UI", 9.5F);
+            ctbStokAd.BorderColor = Color.Silver;
+            ctbStokAd.BorderFocusColor = Color.HotPink;
+            ctbStokAd.BorderSize = 1;
+            ctbStokAd.Font = new Font("Segoe UI", 8F);
             ctbStokAd.ForeColor = Color.Black;
-            ctbStokAd.Location = new Point(113, 227);
+            ctbStokAd.Location = new Point(113, 197);
+            ctbStokAd.Margin = new Padding(1);
             ctbStokAd.Multiline = false;
             ctbStokAd.Name = "ctbStokAd";
-            ctbStokAd.Padding = new Padding(7, 5, 7, 5);
-            ctbStokAd.Size = new Size(362, 28);
+            ctbStokAd.Padding = new Padding(3);
+            ctbStokAd.PasswordChar = false;
+            ctbStokAd.PlaceholderColor = Color.DarkGray;
+            ctbStokAd.PlaceholderText = "";
+            ctbStokAd.ReadOnly = false;
+            ctbStokAd.SelectionStart = 0;
+            ctbStokAd.Size = new Size(362, 25);
             ctbStokAd.TabIndex = 4;
+            ctbStokAd.TextAlignment = HorizontalAlignment.Left;
+            ctbStokAd.TextCustom = "";
+            ctbStokAd.UnderlinedStyle = false;
             // 
             // lblStokGrup
             // 
             lblStokGrup.AutoSize = true;
             lblStokGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblStokGrup.Location = new Point(526, 68);
+            lblStokGrup.Location = new Point(514, 44);
             lblStokGrup.Name = "lblStokGrup";
             lblStokGrup.Size = new Size(71, 15);
             lblStokGrup.TabIndex = 16;
@@ -207,7 +247,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblMalzemeStandart.AutoSize = true;
             lblMalzemeStandart.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblMalzemeStandart.Location = new Point(526, 326);
+            lblMalzemeStandart.Location = new Point(514, 179);
             lblMalzemeStandart.Name = "lblMalzemeStandart";
             lblMalzemeStandart.Size = new Size(76, 15);
             lblMalzemeStandart.TabIndex = 18;
@@ -217,7 +257,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblMalzemeGrup.AutoSize = true;
             lblMalzemeGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblMalzemeGrup.Location = new Point(526, 121);
+            lblMalzemeGrup.Location = new Point(514, 71);
             lblMalzemeGrup.Name = "lblMalzemeGrup";
             lblMalzemeGrup.Size = new Size(96, 15);
             lblMalzemeGrup.TabIndex = 20;
@@ -227,7 +267,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label8.Location = new Point(20, 304);
+            label8.Location = new Point(22, 258);
             label8.Name = "label8";
             label8.Size = new Size(68, 15);
             label8.TabIndex = 22;
@@ -237,7 +277,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label9.Location = new Point(20, 165);
+            label9.Location = new Point(22, 149);
             label9.Name = "label9";
             label9.Size = new Size(68, 15);
             label9.TabIndex = 24;
@@ -247,7 +287,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblBoy.AutoSize = true;
             lblBoy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblBoy.Location = new Point(774, 115);
+            lblBoy.Location = new Point(136, 344);
             lblBoy.Name = "lblBoy";
             lblBoy.Size = new Size(28, 15);
             lblBoy.TabIndex = 34;
@@ -256,26 +296,28 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbBoy
             // 
             ctbBoy.BackColor = Color.White;
-            ctbBoy.Font = new Font("Segoe UI", 9.5F);
+            ctbBoy.Font = new Font("Segoe UI", 8F);
             ctbBoy.ForeColor = Color.Black;
-            ctbBoy.Location = new Point(774, 133);
+            ctbBoy.Location = new Point(136, 362);
+            ctbBoy.Margin = new Padding(1);
             ctbBoy.Name = "ctbBoy";
             ctbBoy.OndalikBasamak = 0;
-            ctbBoy.Padding = new Padding(10, 7, 10, 7);
-            ctbBoy.Size = new Size(71, 32);
+            ctbBoy.Padding = new Padding(3);
+            ctbBoy.Size = new Size(71, 25);
             ctbBoy.TabIndex = 16;
             ctbBoy.TextCustom = "0";
             // 
             // ctbEn
             // 
             ctbEn.BackColor = Color.White;
-            ctbEn.Font = new Font("Segoe UI", 9.5F);
+            ctbEn.Font = new Font("Segoe UI", 8F);
             ctbEn.ForeColor = Color.Black;
-            ctbEn.Location = new Point(774, 186);
+            ctbEn.Location = new Point(258, 362);
+            ctbEn.Margin = new Padding(1);
             ctbEn.Name = "ctbEn";
             ctbEn.OndalikBasamak = 0;
-            ctbEn.Padding = new Padding(10, 7, 10, 7);
-            ctbEn.Size = new Size(71, 32);
+            ctbEn.Padding = new Padding(3);
+            ctbEn.Size = new Size(71, 25);
             ctbEn.TabIndex = 17;
             ctbEn.TextCustom = "0";
             // 
@@ -283,7 +325,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblEn.AutoSize = true;
             lblEn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblEn.Location = new Point(774, 168);
+            lblEn.Location = new Point(258, 344);
             lblEn.Name = "lblEn";
             lblEn.Size = new Size(20, 15);
             lblEn.TabIndex = 36;
@@ -292,13 +334,14 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbYukseklik
             // 
             ctbYukseklik.BackColor = Color.White;
-            ctbYukseklik.Font = new Font("Segoe UI", 9.5F);
+            ctbYukseklik.Font = new Font("Segoe UI", 8F);
             ctbYukseklik.ForeColor = Color.Black;
-            ctbYukseklik.Location = new Point(774, 241);
+            ctbYukseklik.Location = new Point(379, 362);
+            ctbYukseklik.Margin = new Padding(1);
             ctbYukseklik.Name = "ctbYukseklik";
             ctbYukseklik.OndalikBasamak = 0;
-            ctbYukseklik.Padding = new Padding(10, 7, 10, 7);
-            ctbYukseklik.Size = new Size(71, 32);
+            ctbYukseklik.Padding = new Padding(3);
+            ctbYukseklik.Size = new Size(71, 25);
             ctbYukseklik.TabIndex = 18;
             ctbYukseklik.TextCustom = "0";
             // 
@@ -306,7 +349,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblYukseklik.AutoSize = true;
             lblYukseklik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblYukseklik.Location = new Point(774, 223);
+            lblYukseklik.Location = new Point(379, 344);
             lblYukseklik.Name = "lblYukseklik";
             lblYukseklik.Size = new Size(59, 15);
             lblYukseklik.TabIndex = 38;
@@ -315,13 +358,14 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbCap
             // 
             ctbCap.BackColor = Color.White;
-            ctbCap.Font = new Font("Segoe UI", 9.5F);
+            ctbCap.Font = new Font("Segoe UI", 8F);
             ctbCap.ForeColor = Color.Black;
-            ctbCap.Location = new Point(774, 293);
+            ctbCap.Location = new Point(524, 362);
+            ctbCap.Margin = new Padding(1);
             ctbCap.Name = "ctbCap";
             ctbCap.OndalikBasamak = 0;
-            ctbCap.Padding = new Padding(10, 7, 10, 7);
-            ctbCap.Size = new Size(71, 32);
+            ctbCap.Padding = new Padding(3);
+            ctbCap.Size = new Size(71, 25);
             ctbCap.TabIndex = 19;
             ctbCap.TextCustom = "0";
             // 
@@ -329,7 +373,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblCap.AutoSize = true;
             lblCap.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblCap.Location = new Point(774, 275);
+            lblCap.Location = new Point(524, 344);
             lblCap.Name = "lblCap";
             lblCap.Size = new Size(27, 15);
             lblCap.TabIndex = 40;
@@ -338,13 +382,14 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbUzunluk
             // 
             ctbUzunluk.BackColor = Color.White;
-            ctbUzunluk.Font = new Font("Segoe UI", 9.5F);
+            ctbUzunluk.Font = new Font("Segoe UI", 8F);
             ctbUzunluk.ForeColor = Color.Black;
-            ctbUzunluk.Location = new Point(774, 353);
+            ctbUzunluk.Location = new Point(647, 362);
+            ctbUzunluk.Margin = new Padding(1);
             ctbUzunluk.Name = "ctbUzunluk";
             ctbUzunluk.OndalikBasamak = 0;
-            ctbUzunluk.Padding = new Padding(10, 7, 10, 7);
-            ctbUzunluk.Size = new Size(71, 32);
+            ctbUzunluk.Padding = new Padding(3);
+            ctbUzunluk.Size = new Size(71, 25);
             ctbUzunluk.TabIndex = 20;
             ctbUzunluk.TextCustom = "0";
             // 
@@ -352,7 +397,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblUzunluk.AutoSize = true;
             lblUzunluk.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblUzunluk.Location = new Point(774, 335);
+            lblUzunluk.Location = new Point(647, 344);
             lblUzunluk.Name = "lblUzunluk";
             lblUzunluk.Size = new Size(53, 15);
             lblUzunluk.TabIndex = 42;
@@ -361,13 +406,14 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbEtKalinlik
             // 
             ctbEtKalinlik.BackColor = Color.White;
-            ctbEtKalinlik.Font = new Font("Segoe UI", 9.5F);
+            ctbEtKalinlik.Font = new Font("Segoe UI", 8F);
             ctbEtKalinlik.ForeColor = Color.Black;
-            ctbEtKalinlik.Location = new Point(774, 413);
+            ctbEtKalinlik.Location = new Point(771, 362);
+            ctbEtKalinlik.Margin = new Padding(1);
             ctbEtKalinlik.Name = "ctbEtKalinlik";
             ctbEtKalinlik.OndalikBasamak = 0;
-            ctbEtKalinlik.Padding = new Padding(10, 7, 10, 7);
-            ctbEtKalinlik.Size = new Size(71, 32);
+            ctbEtKalinlik.Padding = new Padding(3);
+            ctbEtKalinlik.Size = new Size(71, 25);
             ctbEtKalinlik.TabIndex = 21;
             ctbEtKalinlik.TextCustom = "0";
             // 
@@ -375,7 +421,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblEtKalinlik.AutoSize = true;
             lblEtKalinlik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblEtKalinlik.Location = new Point(774, 395);
+            lblEtKalinlik.Location = new Point(771, 344);
             lblEtKalinlik.Name = "lblEtKalinlik";
             lblEtKalinlik.Size = new Size(64, 15);
             lblEtKalinlik.TabIndex = 44;
@@ -385,7 +431,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label20.Location = new Point(22, 338);
+            label20.Location = new Point(22, 282);
             label20.Name = "label20";
             label20.Size = new Size(57, 15);
             label20.TabIndex = 47;
@@ -394,20 +440,32 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbAciklama
             // 
             ctbAciklama.BackColor = Color.White;
-            ctbAciklama.Font = new Font("Segoe UI", 9.5F);
+            ctbAciklama.BorderColor = Color.Silver;
+            ctbAciklama.BorderFocusColor = Color.HotPink;
+            ctbAciklama.BorderSize = 1;
+            ctbAciklama.Font = new Font("Segoe UI", 8F);
             ctbAciklama.ForeColor = Color.Black;
-            ctbAciklama.Location = new Point(113, 330);
+            ctbAciklama.Location = new Point(113, 277);
+            ctbAciklama.Margin = new Padding(1);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new Padding(7, 5, 7, 5);
+            ctbAciklama.PasswordChar = false;
+            ctbAciklama.PlaceholderColor = Color.DarkGray;
+            ctbAciklama.PlaceholderText = "";
+            ctbAciklama.ReadOnly = false;
+            ctbAciklama.SelectionStart = 0;
             ctbAciklama.Size = new Size(362, 60);
             ctbAciklama.TabIndex = 7;
+            ctbAciklama.TextAlignment = HorizontalAlignment.Left;
+            ctbAciklama.TextCustom = "";
+            ctbAciklama.UnderlinedStyle = false;
             // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label21.Location = new Point(20, 130);
+            label21.Location = new Point(22, 122);
             label21.Name = "label21";
             label21.Size = new Size(56, 15);
             label21.TabIndex = 49;
@@ -417,7 +475,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblMalzemeAltGrup.AutoSize = true;
             lblMalzemeAltGrup.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblMalzemeAltGrup.Location = new Point(526, 173);
+            lblMalzemeAltGrup.Location = new Point(514, 98);
             lblMalzemeAltGrup.Name = "lblMalzemeAltGrup";
             lblMalzemeAltGrup.Size = new Size(115, 15);
             lblMalzemeAltGrup.TabIndex = 54;
@@ -427,7 +485,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblMalzemeAltGrup2.AutoSize = true;
             lblMalzemeAltGrup2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblMalzemeAltGrup2.Location = new Point(526, 225);
+            lblMalzemeAltGrup2.Location = new Point(514, 125);
             lblMalzemeAltGrup2.Name = "lblMalzemeAltGrup2";
             lblMalzemeAltGrup2.Size = new Size(125, 15);
             lblMalzemeAltGrup2.TabIndex = 56;
@@ -438,29 +496,30 @@ namespace YektamakDesktop.Formlar.Stok
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Location = new Point(20, 462);
+            panel1.Location = new Point(20, 411);
             panel1.Name = "panel1";
-            panel1.Size = new Size(785, 207);
+            panel1.Size = new Size(855, 205);
             panel1.TabIndex = 57;
             // 
             // ctbAgirlik
             // 
             ctbAgirlik.BackColor = Color.White;
-            ctbAgirlik.Font = new Font("Segoe UI", 9.5F);
+            ctbAgirlik.Font = new Font("Segoe UI", 8F);
             ctbAgirlik.ForeColor = Color.Black;
-            ctbAgirlik.Location = new Point(774, 83);
+            ctbAgirlik.Location = new Point(22, 362);
+            ctbAgirlik.Margin = new Padding(1);
             ctbAgirlik.Name = "ctbAgirlik";
-            ctbAgirlik.OndalikBasamak = 0;
-            ctbAgirlik.Padding = new Padding(10, 7, 10, 7);
-            ctbAgirlik.Size = new Size(71, 32);
+            ctbAgirlik.OndalikBasamak = 2;
+            ctbAgirlik.Padding = new Padding(3);
+            ctbAgirlik.Size = new Size(71, 25);
             ctbAgirlik.TabIndex = 15;
-            ctbAgirlik.TextCustom = "0";
+            ctbAgirlik.TextCustom = "0,00";
             // 
             // lblAgirlik
             // 
             lblAgirlik.AutoSize = true;
             lblAgirlik.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAgirlik.Location = new Point(774, 65);
+            lblAgirlik.Location = new Point(22, 344);
             lblAgirlik.Name = "lblAgirlik";
             lblAgirlik.Size = new Size(43, 15);
             lblAgirlik.TabIndex = 58;
@@ -470,7 +529,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label11.Location = new Point(20, 444);
+            label11.Location = new Point(18, 393);
             label11.Name = "label11";
             label11.Size = new Size(54, 15);
             label11.TabIndex = 60;
@@ -479,7 +538,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(849, 94);
+            label12.Location = new Point(97, 368);
             label12.Name = "label12";
             label12.Size = new Size(20, 15);
             label12.TabIndex = 61;
@@ -488,7 +547,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(849, 136);
+            label13.Location = new Point(211, 367);
             label13.Name = "label13";
             label13.Size = new Size(29, 15);
             label13.TabIndex = 62;
@@ -497,7 +556,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(849, 198);
+            label22.Location = new Point(333, 369);
             label22.Name = "label22";
             label22.Size = new Size(29, 15);
             label22.TabIndex = 63;
@@ -506,7 +565,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new Point(849, 253);
+            label25.Location = new Point(454, 369);
             label25.Name = "label25";
             label25.Size = new Size(29, 15);
             label25.TabIndex = 64;
@@ -515,7 +574,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new Point(849, 305);
+            label26.Location = new Point(599, 369);
             label26.Name = "label26";
             label26.Size = new Size(29, 15);
             label26.TabIndex = 65;
@@ -524,7 +583,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new Point(849, 365);
+            label27.Location = new Point(722, 369);
             label27.Name = "label27";
             label27.Size = new Size(29, 15);
             label27.TabIndex = 66;
@@ -533,7 +592,7 @@ namespace YektamakDesktop.Formlar.Stok
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new Point(849, 425);
+            label28.Location = new Point(846, 369);
             label28.Name = "label28";
             label28.Size = new Size(29, 15);
             label28.TabIndex = 67;
@@ -543,7 +602,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblBoyut.AutoSize = true;
             lblBoyut.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblBoyut.Location = new Point(526, 376);
+            lblBoyut.Location = new Point(514, 206);
             lblBoyut.Name = "lblBoyut";
             lblBoyut.Size = new Size(40, 15);
             lblBoyut.TabIndex = 69;
@@ -552,20 +611,32 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbBoyut
             // 
             ctbBoyut.BackColor = Color.White;
+            ctbBoyut.BorderColor = Color.Silver;
+            ctbBoyut.BorderFocusColor = Color.HotPink;
+            ctbBoyut.BorderSize = 1;
             ctbBoyut.Enabled = false;
-            ctbBoyut.Font = new Font("Segoe UI", 9.5F);
+            ctbBoyut.Font = new Font("Segoe UI", 8F);
             ctbBoyut.ForeColor = Color.Black;
-            ctbBoyut.Location = new Point(526, 428);
+            ctbBoyut.Location = new Point(650, 228);
+            ctbBoyut.Margin = new Padding(1);
             ctbBoyut.Multiline = false;
             ctbBoyut.Name = "ctbBoyut";
-            ctbBoyut.Padding = new Padding(7, 5, 7, 5);
-            ctbBoyut.Size = new Size(185, 28);
+            ctbBoyut.Padding = new Padding(3);
+            ctbBoyut.PasswordChar = false;
+            ctbBoyut.PlaceholderColor = Color.DarkGray;
+            ctbBoyut.PlaceholderText = "";
+            ctbBoyut.ReadOnly = false;
+            ctbBoyut.SelectionStart = 0;
+            ctbBoyut.Size = new Size(185, 25);
             ctbBoyut.TabIndex = 22;
+            ctbBoyut.TextAlignment = HorizontalAlignment.Left;
+            ctbBoyut.TextCustom = "";
+            ctbBoyut.UnderlinedStyle = false;
             // 
             // checkBoxIsSatinalma
             // 
             checkBoxIsSatinalma.AutoSize = true;
-            checkBoxIsSatinalma.Location = new Point(12, 36);
+            checkBoxIsSatinalma.Location = new Point(659, 312);
             checkBoxIsSatinalma.Name = "checkBoxIsSatinalma";
             checkBoxIsSatinalma.Size = new Size(15, 14);
             checkBoxIsSatinalma.TabIndex = 70;
@@ -575,7 +646,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsPdf
             // 
             checkBoxIsPdf.AutoSize = true;
-            checkBoxIsPdf.Location = new Point(33, 36);
+            checkBoxIsPdf.Location = new Point(680, 312);
             checkBoxIsPdf.Name = "checkBoxIsPdf";
             checkBoxIsPdf.Size = new Size(15, 14);
             checkBoxIsPdf.TabIndex = 71;
@@ -585,7 +656,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsFromExcel
             // 
             checkBoxIsFromExcel.AutoSize = true;
-            checkBoxIsFromExcel.Location = new Point(54, 36);
+            checkBoxIsFromExcel.Location = new Point(701, 312);
             checkBoxIsFromExcel.Name = "checkBoxIsFromExcel";
             checkBoxIsFromExcel.Size = new Size(15, 14);
             checkBoxIsFromExcel.TabIndex = 72;
@@ -595,7 +666,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsStep
             // 
             checkBoxIsStep.AutoSize = true;
-            checkBoxIsStep.Location = new Point(75, 36);
+            checkBoxIsStep.Location = new Point(722, 312);
             checkBoxIsStep.Name = "checkBoxIsStep";
             checkBoxIsStep.Size = new Size(15, 14);
             checkBoxIsStep.TabIndex = 73;
@@ -605,7 +676,7 @@ namespace YektamakDesktop.Formlar.Stok
             // checkBoxIsDxf
             // 
             checkBoxIsDxf.AutoSize = true;
-            checkBoxIsDxf.Location = new Point(102, 36);
+            checkBoxIsDxf.Location = new Point(749, 312);
             checkBoxIsDxf.Name = "checkBoxIsDxf";
             checkBoxIsDxf.Size = new Size(15, 14);
             checkBoxIsDxf.TabIndex = 74;
@@ -622,14 +693,14 @@ namespace YektamakDesktop.Formlar.Stok
             headerPanel1.Margin = new Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new Padding(1);
-            headerPanel1.Size = new Size(946, 32);
+            headerPanel1.Size = new Size(891, 25);
             headerPanel1.TabIndex = 75;
             // 
             // rButtonKaydet
             // 
             rButtonKaydet.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             rButtonKaydet.BackColor = Color.Transparent;
-            rButtonKaydet.Location = new Point(811, 623);
+            rButtonKaydet.Location = new Point(769, 624);
             rButtonKaydet.Name = "rButtonKaydet";
             rButtonKaydet.Size = new Size(106, 46);
             rButtonKaydet.TabIndex = 76;
@@ -638,13 +709,16 @@ namespace YektamakDesktop.Formlar.Stok
             // clbProjeKod
             // 
             clbProjeKod.BorderColor = Color.Silver;
+            clbProjeKod.BorderRadius = 8;
             clbProjeKod.BorderSize = 1;
             clbProjeKod.DisplayMember = "kod";
-            clbProjeKod.Location = new Point(113, 158);
+            clbProjeKod.Font = new Font("Segoe UI", 8F);
+            clbProjeKod.Location = new Point(113, 143);
+            clbProjeKod.Margin = new Padding(1);
             clbProjeKod.Name = "clbProjeKod";
-            clbProjeKod.Padding = new Padding(7, 5, 7, 5);
+            clbProjeKod.Padding = new Padding(6, 4, 6, 4);
             clbProjeKod.PlaceholderText = "Seçiniz...";
-            clbProjeKod.Size = new Size(161, 29);
+            clbProjeKod.Size = new Size(138, 25);
             clbProjeKod.TabIndex = 2;
             clbProjeKod.ValueMember = "Id";
             clbProjeKod.SelectedIndexChanged += clbProjeKod_SelectedIndexChanged;
@@ -652,13 +726,16 @@ namespace YektamakDesktop.Formlar.Stok
             // clbStokTip
             // 
             clbStokTip.BorderColor = Color.Silver;
+            clbStokTip.BorderRadius = 8;
             clbStokTip.BorderSize = 1;
             clbStokTip.DisplayMember = "ad";
-            clbStokTip.Location = new Point(113, 123);
+            clbStokTip.Font = new Font("Segoe UI", 8F);
+            clbStokTip.Location = new Point(113, 116);
+            clbStokTip.Margin = new Padding(1);
             clbStokTip.Name = "clbStokTip";
-            clbStokTip.Padding = new Padding(7, 5, 7, 5);
+            clbStokTip.Padding = new Padding(6, 4, 6, 4);
             clbStokTip.PlaceholderText = "Seçiniz...";
-            clbStokTip.Size = new Size(161, 29);
+            clbStokTip.Size = new Size(138, 25);
             clbStokTip.TabIndex = 1;
             clbStokTip.ValueMember = "Id";
             clbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
@@ -666,39 +743,48 @@ namespace YektamakDesktop.Formlar.Stok
             // clbOlcuBirim
             // 
             clbOlcuBirim.BorderColor = Color.Silver;
+            clbOlcuBirim.BorderRadius = 8;
             clbOlcuBirim.BorderSize = 1;
             clbOlcuBirim.DisplayMember = "ad";
-            clbOlcuBirim.Location = new Point(113, 295);
+            clbOlcuBirim.Font = new Font("Segoe UI", 8F);
+            clbOlcuBirim.Location = new Point(113, 250);
+            clbOlcuBirim.Margin = new Padding(1);
             clbOlcuBirim.Name = "clbOlcuBirim";
-            clbOlcuBirim.Padding = new Padding(7, 5, 7, 5);
+            clbOlcuBirim.Padding = new Padding(6, 4, 6, 4);
             clbOlcuBirim.PlaceholderText = "Seçiniz...";
-            clbOlcuBirim.Size = new Size(119, 29);
+            clbOlcuBirim.Size = new Size(102, 25);
             clbOlcuBirim.TabIndex = 6;
             clbOlcuBirim.ValueMember = "Id";
             // 
             // clbMalzemeStandart
             // 
             clbMalzemeStandart.BorderColor = Color.Silver;
+            clbMalzemeStandart.BorderRadius = 8;
             clbMalzemeStandart.BorderSize = 1;
             clbMalzemeStandart.DisplayMember = "ad";
-            clbMalzemeStandart.Location = new Point(526, 344);
+            clbMalzemeStandart.Font = new Font("Segoe UI", 8F);
+            clbMalzemeStandart.Location = new Point(650, 174);
+            clbMalzemeStandart.Margin = new Padding(1);
             clbMalzemeStandart.Name = "clbMalzemeStandart";
-            clbMalzemeStandart.Padding = new Padding(7, 5, 7, 5);
+            clbMalzemeStandart.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeStandart.PlaceholderText = "Seçiniz...";
-            clbMalzemeStandart.Size = new Size(185, 29);
+            clbMalzemeStandart.Size = new Size(159, 25);
             clbMalzemeStandart.TabIndex = 13;
             clbMalzemeStandart.ValueMember = "Id";
             // 
             // clbStokGrup
             // 
             clbStokGrup.BorderColor = Color.Silver;
+            clbStokGrup.BorderRadius = 8;
             clbStokGrup.BorderSize = 1;
             clbStokGrup.DisplayMember = "ad";
-            clbStokGrup.Location = new Point(526, 86);
+            clbStokGrup.Font = new Font("Segoe UI", 8F);
+            clbStokGrup.Location = new Point(650, 39);
+            clbStokGrup.Margin = new Padding(1);
             clbStokGrup.Name = "clbStokGrup";
-            clbStokGrup.Padding = new Padding(7, 5, 7, 5);
+            clbStokGrup.Padding = new Padding(6, 4, 6, 4);
             clbStokGrup.PlaceholderText = "Seçiniz...";
-            clbStokGrup.Size = new Size(185, 29);
+            clbStokGrup.Size = new Size(159, 25);
             clbStokGrup.TabIndex = 8;
             clbStokGrup.ValueMember = "Id";
             clbStokGrup.SelectedIndexChanged += cbxStokGrup_SelectedIndexChanged;
@@ -706,13 +792,16 @@ namespace YektamakDesktop.Formlar.Stok
             // clbMalzemeGrup
             // 
             clbMalzemeGrup.BorderColor = Color.Silver;
+            clbMalzemeGrup.BorderRadius = 8;
             clbMalzemeGrup.BorderSize = 1;
             clbMalzemeGrup.DisplayMember = "ad";
-            clbMalzemeGrup.Location = new Point(526, 139);
+            clbMalzemeGrup.Font = new Font("Segoe UI", 8F);
+            clbMalzemeGrup.Location = new Point(650, 66);
+            clbMalzemeGrup.Margin = new Padding(1);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
-            clbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
+            clbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeGrup.PlaceholderText = "Seçiniz...";
-            clbMalzemeGrup.Size = new Size(185, 29);
+            clbMalzemeGrup.Size = new Size(159, 25);
             clbMalzemeGrup.TabIndex = 9;
             clbMalzemeGrup.ValueMember = "Id";
             clbMalzemeGrup.SelectedIndexChanged += cbxMalzemeGrup_SelectedIndexChanged;
@@ -721,13 +810,16 @@ namespace YektamakDesktop.Formlar.Stok
             // clbMalzemeAltGrup
             // 
             clbMalzemeAltGrup.BorderColor = Color.Silver;
+            clbMalzemeAltGrup.BorderRadius = 8;
             clbMalzemeAltGrup.BorderSize = 1;
             clbMalzemeAltGrup.DisplayMember = "ad";
-            clbMalzemeAltGrup.Location = new Point(526, 191);
+            clbMalzemeAltGrup.Font = new Font("Segoe UI", 8F);
+            clbMalzemeAltGrup.Location = new Point(650, 93);
+            clbMalzemeAltGrup.Margin = new Padding(1);
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
-            clbMalzemeAltGrup.Padding = new Padding(7, 5, 7, 5);
+            clbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
-            clbMalzemeAltGrup.Size = new Size(185, 29);
+            clbMalzemeAltGrup.Size = new Size(159, 25);
             clbMalzemeAltGrup.TabIndex = 10;
             clbMalzemeAltGrup.ValueMember = "Id";
             clbMalzemeAltGrup.SelectedIndexChanged += cbxMalzemeAltGrup_SelectedIndexChanged;
@@ -735,26 +827,30 @@ namespace YektamakDesktop.Formlar.Stok
             // clbMalzemeAltGrup2
             // 
             clbMalzemeAltGrup2.BorderColor = Color.Silver;
+            clbMalzemeAltGrup2.BorderRadius = 8;
             clbMalzemeAltGrup2.BorderSize = 1;
             clbMalzemeAltGrup2.DisplayMember = "ad";
-            clbMalzemeAltGrup2.Location = new Point(526, 243);
+            clbMalzemeAltGrup2.Font = new Font("Segoe UI", 8F);
+            clbMalzemeAltGrup2.Location = new Point(650, 120);
+            clbMalzemeAltGrup2.Margin = new Padding(1);
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
-            clbMalzemeAltGrup2.Padding = new Padding(7, 5, 7, 5);
+            clbMalzemeAltGrup2.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
-            clbMalzemeAltGrup2.Size = new Size(185, 29);
+            clbMalzemeAltGrup2.Size = new Size(159, 25);
             clbMalzemeAltGrup2.TabIndex = 11;
             clbMalzemeAltGrup2.ValueMember = "Id";
             // 
             // ctbProjeAdet
             // 
             ctbProjeAdet.BackColor = Color.White;
-            ctbProjeAdet.Font = new Font("Segoe UI", 9.5F);
+            ctbProjeAdet.Font = new Font("Segoe UI", 8F);
             ctbProjeAdet.ForeColor = Color.Black;
-            ctbProjeAdet.Location = new Point(526, 297);
+            ctbProjeAdet.Location = new Point(650, 147);
+            ctbProjeAdet.Margin = new Padding(1);
             ctbProjeAdet.Name = "ctbProjeAdet";
             ctbProjeAdet.OndalikBasamak = 0;
-            ctbProjeAdet.Padding = new Padding(7, 5, 7, 5);
-            ctbProjeAdet.Size = new Size(92, 26);
+            ctbProjeAdet.Padding = new Padding(3);
+            ctbProjeAdet.Size = new Size(92, 25);
             ctbProjeAdet.TabIndex = 12;
             ctbProjeAdet.TextCustom = "0";
             // 
@@ -762,7 +858,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             lblProjeAdet.AutoSize = true;
             lblProjeAdet.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblProjeAdet.Location = new Point(526, 279);
+            lblProjeAdet.Location = new Point(514, 152);
             lblProjeAdet.Name = "lblProjeAdet";
             lblProjeAdet.Size = new Size(95, 15);
             lblProjeAdet.TabIndex = 86;
@@ -771,27 +867,41 @@ namespace YektamakDesktop.Formlar.Stok
             // fcbBoyut
             // 
             fcbBoyut.BorderColor = Color.Silver;
+            fcbBoyut.BorderRadius = 8;
             fcbBoyut.BorderSize = 1;
             fcbBoyut.DisplayMember = "ad";
-            fcbBoyut.Location = new Point(526, 394);
+            fcbBoyut.Font = new Font("Segoe UI", 8F);
+            fcbBoyut.Location = new Point(650, 201);
+            fcbBoyut.Margin = new Padding(1);
             fcbBoyut.Name = "fcbBoyut";
-            fcbBoyut.Padding = new Padding(7, 5, 7, 5);
+            fcbBoyut.Padding = new Padding(6, 4, 6, 4);
             fcbBoyut.PlaceholderText = "Seçiniz...";
-            fcbBoyut.Size = new Size(185, 29);
+            fcbBoyut.Size = new Size(159, 25);
             fcbBoyut.TabIndex = 14;
             fcbBoyut.ValueMember = "Id";
             // 
             // roundedButton1
             // 
-            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            roundedButton1.BackgroundColor = Color.Firebrick;
+            roundedButton1.BorderColor = Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = FlatStyle.Flat;
             roundedButton1.ForeColor = Color.White;
-            roundedButton1.Location = new Point(811, 484);
+            roundedButton1.GradientColor1 = Color.DodgerBlue;
+            roundedButton1.GradientColor2 = Color.MidnightBlue;
+            roundedButton1.HoverColor1 = Color.RoyalBlue;
+            roundedButton1.HoverColor2 = Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new Point(22, 622);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new Size(117, 40);
             roundedButton1.TabIndex = 88;
             roundedButton1.Text = "YENİ KAYIT";
+            roundedButton1.TextColor = Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click;
             // 
@@ -836,21 +946,33 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // ctbTedarikciKod
             // 
-            ctbTedarikciKod.BackColor = SystemColors.Window;
-            ctbTedarikciKod.Font = new Font("Segoe UI", 9.5F);
-            ctbTedarikciKod.ForeColor = Color.DimGray;
-            ctbTedarikciKod.Location = new Point(113, 261);
+            ctbTedarikciKod.BackColor = Color.White;
+            ctbTedarikciKod.BorderColor = Color.Silver;
+            ctbTedarikciKod.BorderFocusColor = Color.HotPink;
+            ctbTedarikciKod.BorderSize = 1;
+            ctbTedarikciKod.Font = new Font("Segoe UI", 8F);
+            ctbTedarikciKod.ForeColor = Color.Black;
+            ctbTedarikciKod.Location = new Point(113, 223);
+            ctbTedarikciKod.Margin = new Padding(1);
             ctbTedarikciKod.Multiline = false;
             ctbTedarikciKod.Name = "ctbTedarikciKod";
-            ctbTedarikciKod.Padding = new Padding(7, 5, 7, 5);
-            ctbTedarikciKod.Size = new Size(262, 28);
+            ctbTedarikciKod.Padding = new Padding(3);
+            ctbTedarikciKod.PasswordChar = false;
+            ctbTedarikciKod.PlaceholderColor = Color.DarkGray;
+            ctbTedarikciKod.PlaceholderText = "";
+            ctbTedarikciKod.ReadOnly = false;
+            ctbTedarikciKod.SelectionStart = 0;
+            ctbTedarikciKod.Size = new Size(262, 25);
             ctbTedarikciKod.TabIndex = 5;
+            ctbTedarikciKod.TextAlignment = HorizontalAlignment.Left;
+            ctbTedarikciKod.TextCustom = "";
+            ctbTedarikciKod.UnderlinedStyle = false;
             // 
             // label30
             // 
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label30.Location = new Point(20, 268);
+            label30.Location = new Point(22, 229);
             label30.Name = "label30";
             label30.Size = new Size(89, 15);
             label30.TabIndex = 90;
@@ -860,7 +982,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label31.Location = new Point(20, 97);
+            label31.Location = new Point(22, 67);
             label31.Name = "label31";
             label31.Size = new Size(74, 15);
             label31.TabIndex = 92;
@@ -869,21 +991,92 @@ namespace YektamakDesktop.Formlar.Stok
             // ctbStokKartId
             // 
             ctbStokKartId.BackColor = Color.White;
+            ctbStokKartId.BorderColor = Color.Silver;
+            ctbStokKartId.BorderFocusColor = Color.HotPink;
+            ctbStokKartId.BorderSize = 1;
             ctbStokKartId.Enabled = false;
-            ctbStokKartId.Font = new Font("Segoe UI", 9.5F);
+            ctbStokKartId.Font = new Font("Segoe UI", 8F);
             ctbStokKartId.ForeColor = Color.Black;
-            ctbStokKartId.Location = new Point(113, 89);
+            ctbStokKartId.Location = new Point(113, 62);
+            ctbStokKartId.Margin = new Padding(1);
             ctbStokKartId.Multiline = false;
             ctbStokKartId.Name = "ctbStokKartId";
-            ctbStokKartId.Padding = new Padding(7, 5, 7, 5);
-            ctbStokKartId.Size = new Size(94, 28);
+            ctbStokKartId.Padding = new Padding(3);
+            ctbStokKartId.PasswordChar = false;
+            ctbStokKartId.PlaceholderColor = Color.DarkGray;
+            ctbStokKartId.PlaceholderText = "";
+            ctbStokKartId.ReadOnly = false;
+            ctbStokKartId.SelectionStart = 0;
+            ctbStokKartId.Size = new Size(94, 25);
             ctbStokKartId.TabIndex = 91;
+            ctbStokKartId.TextAlignment = HorizontalAlignment.Left;
+            ctbStokKartId.TextCustom = "";
+            ctbStokKartId.UnderlinedStyle = false;
+            // 
+            // ctbStokKartNo
+            // 
+            ctbStokKartNo.BackColor = Color.White;
+            ctbStokKartNo.BorderColor = Color.Silver;
+            ctbStokKartNo.BorderFocusColor = Color.HotPink;
+            ctbStokKartNo.BorderSize = 1;
+            ctbStokKartNo.Enabled = false;
+            ctbStokKartNo.Font = new Font("Segoe UI", 8F);
+            ctbStokKartNo.ForeColor = Color.Black;
+            ctbStokKartNo.Location = new Point(113, 89);
+            ctbStokKartNo.Margin = new Padding(1);
+            ctbStokKartNo.Multiline = false;
+            ctbStokKartNo.Name = "ctbStokKartNo";
+            ctbStokKartNo.Padding = new Padding(3);
+            ctbStokKartNo.PasswordChar = false;
+            ctbStokKartNo.PlaceholderColor = Color.DarkGray;
+            ctbStokKartNo.PlaceholderText = "";
+            ctbStokKartNo.ReadOnly = false;
+            ctbStokKartNo.SelectionStart = 0;
+            ctbStokKartNo.Size = new Size(94, 25);
+            ctbStokKartNo.TabIndex = 93;
+            ctbStokKartNo.TextAlignment = HorizontalAlignment.Left;
+            ctbStokKartNo.TextCustom = "";
+            ctbStokKartNo.UnderlinedStyle = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.Location = new Point(22, 94);
+            label3.Name = "label3";
+            label3.Size = new Size(79, 15);
+            label3.TabIndex = 94;
+            label3.Text = "Stok Kart No";
+            // 
+            // chkTalasli
+            // 
+            chkTalasli.AutoSize = true;
+            chkTalasli.Location = new Point(653, 258);
+            chkTalasli.Name = "chkTalasli";
+            chkTalasli.Size = new Size(57, 19);
+            chkTalasli.TabIndex = 95;
+            chkTalasli.Text = "Talaşlı";
+            chkTalasli.UseVisualStyleBackColor = true;
+            // 
+            // chkBukum
+            // 
+            chkBukum.AutoSize = true;
+            chkBukum.Location = new Point(653, 282);
+            chkBukum.Name = "chkBukum";
+            chkBukum.Size = new Size(64, 19);
+            chkBukum.TabIndex = 96;
+            chkBukum.Text = "Büküm";
+            chkBukum.UseVisualStyleBackColor = true;
             // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(946, 681);
+            ClientSize = new Size(891, 698);
+            Controls.Add(chkBukum);
+            Controls.Add(chkTalasli);
+            Controls.Add(label3);
+            Controls.Add(ctbStokKartNo);
             Controls.Add(label31);
             Controls.Add(ctbStokKartId);
             Controls.Add(label30);
@@ -960,7 +1153,15 @@ namespace YektamakDesktop.Formlar.Stok
         }
 
         #endregion
-
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid);
+        }
         private CustomControls.CustomTextBox ctbId;
         private CustomControls.CustomTextBox ctbKod;
         private System.Windows.Forms.Label label1;
@@ -1057,12 +1258,12 @@ namespace YektamakDesktop.Formlar.Stok
                 IdControl = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
                 stokKartIdControl = new() { TabIndex = 2, Width = 0, Visible = true, Tag = "StokKartId" };
                 dosyaTipControl = new() { TabIndex = 3, Width = 60, Visible = true, Tag = "DosyaTip",DisplayMember="ad",ValueMember="Id" };
-                dosyaAdControl = new() { TabIndex = 4, Width = 250, Tag = "Dosya Adı" };
+                dosyaAdControl = new() { TabIndex = 4, Width = 350, Tag = "Dosya Adı" };
                 dosyaUzantiControl = new() { TabIndex = 5, Width = 50, Tag = "Dosya Uzantı"};
-                iconButton = new() { TabIndex = 6, Width = 35, Height = 28, Tag = " Ekle", BackgroundImage = Resources.ekle, 
+                iconButton = new() { TabIndex = 6, Width = 35, Height = 25, Tag = " Ekle", BackgroundImage = Resources.ekle, 
                     BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom, CornerRadius = 5 };
                 iconButton.Click += ButtonDosyaEkle_Click;
-                iconButtonView = new() { TabIndex = 7, Width = 35, Height = 28, Tag = "Göster", BackgroundImage = Resources.pngegg, 
+                iconButtonView = new() { TabIndex = 7, Width = 35, Height = 25, Tag = "Göster", BackgroundImage = Resources.pngegg, 
                     BackColor = Color.Transparent, BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,CornerRadius=5 };
                 iconButtonView.Click += ButtonDosyaGoruntule_Click;
                 dosyaVeri = new byte[0];
@@ -1104,7 +1305,7 @@ namespace YektamakDesktop.Formlar.Stok
                 if(string.IsNullOrWhiteSpace(stokKartIdControl.TextCustom))
                     return;
                 StokKart stokKart = new StokKart() { Id = int.Parse(stokKartIdControl.TextCustom) };
-                string jsonResult = await _stokService.GetStokKartPdf(stokKart);
+                string jsonResult = _stokService.GetStokKartPdf(stokKart );
                 if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
@@ -1175,5 +1376,9 @@ namespace YektamakDesktop.Formlar.Stok
         private Label label30;
         private Label label31;
         private CustomTextBox ctbStokKartId;
+        private CustomTextBox ctbStokKartNo;
+        private Label label3;
+        private CheckBox chkTalasli;
+        private CheckBox chkBukum;
     }
 }

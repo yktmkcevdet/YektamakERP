@@ -42,7 +42,7 @@
             // labelUyariAnaMenu
             // 
             labelUyariAnaMenu.AutoSize = true;
-            labelUyariAnaMenu.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            labelUyariAnaMenu.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             labelUyariAnaMenu.ForeColor = System.Drawing.Color.Red;
             labelUyariAnaMenu.Location = new System.Drawing.Point(482, 93);
             labelUyariAnaMenu.Name = "labelUyariAnaMenu";
@@ -52,7 +52,7 @@
             // labelUyariFormAdi
             // 
             labelUyariFormAdi.AutoSize = true;
-            labelUyariFormAdi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            labelUyariFormAdi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             labelUyariFormAdi.ForeColor = System.Drawing.Color.Red;
             labelUyariFormAdi.Location = new System.Drawing.Point(482, 135);
             labelUyariFormAdi.Name = "labelUyariFormAdi";
@@ -62,7 +62,7 @@
             // labelUyariMenuAdi
             // 
             labelUyariMenuAdi.AutoSize = true;
-            labelUyariMenuAdi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            labelUyariMenuAdi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             labelUyariMenuAdi.ForeColor = System.Drawing.Color.Red;
             labelUyariMenuAdi.Location = new System.Drawing.Point(482, 172);
             labelUyariMenuAdi.Name = "labelUyariMenuAdi";
@@ -79,7 +79,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(412, 32);
+            headerPanel1.Size = new System.Drawing.Size(412, 25);
             headerPanel1.TabIndex = 94;
             // 
             // label2
@@ -112,37 +112,33 @@
             // clbForm
             // 
             clbForm.BorderColor = System.Drawing.Color.Silver;
+            clbForm.BorderRadius = 8;
             clbForm.BorderSize = 1;
-            clbForm.DataSource = null;
             clbForm.DisplayMember = "ad";
+            clbForm.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbForm.Location = new System.Drawing.Point(114, 113);
+            clbForm.Margin = new System.Windows.Forms.Padding(1);
             clbForm.Name = "clbForm";
             clbForm.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbForm.PlaceholderText = "Seçiniz...";
-            clbForm.SelectedIndex = -1;
-            clbForm.SelectedItem = null;
-            clbForm.SelectedValue = null;
             clbForm.Size = new System.Drawing.Size(172, 29);
             clbForm.TabIndex = 102;
-            clbForm.UnderlinedStyle = false;
             clbForm.ValueMember = "Id";
             // 
             // clbAnaMenu
             // 
             clbAnaMenu.BorderColor = System.Drawing.Color.Silver;
+            clbAnaMenu.BorderRadius = 8;
             clbAnaMenu.BorderSize = 1;
-            clbAnaMenu.DataSource = null;
             clbAnaMenu.DisplayMember = "ad";
+            clbAnaMenu.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbAnaMenu.Location = new System.Drawing.Point(114, 68);
+            clbAnaMenu.Margin = new System.Windows.Forms.Padding(1);
             clbAnaMenu.Name = "clbAnaMenu";
             clbAnaMenu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbAnaMenu.PlaceholderText = "Seçiniz...";
-            clbAnaMenu.SelectedIndex = -1;
-            clbAnaMenu.SelectedItem = null;
-            clbAnaMenu.SelectedValue = null;
             clbAnaMenu.Size = new System.Drawing.Size(172, 29);
             clbAnaMenu.TabIndex = 103;
-            clbAnaMenu.UnderlinedStyle = false;
             clbAnaMenu.ValueMember = "Id";
             // 
             // AltMenuEkleForm

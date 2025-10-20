@@ -22,15 +22,11 @@ namespace YektamakDesktop.CustomControls
     public partial class UniversalGrid : UserControl
     {
         public BindingSource binding = new BindingSource();
-        List<object> changedItems = new List<object>();
-        string settingsFile = "grid.settings.json";
         [Browsable(true)]
         [Category("Behavior")]
         public event MouseEventHandler MouseDown1;
         private readonly ICache _cache;
         private readonly ConcurrentDictionary<Type, IEnumerable<PropertyAttributePair>> _propertyCache = new();
-        private static readonly Bitmap _updateIcon = Properties.Resources.data_update_icon1;
-        private static readonly Bitmap _deleteIcon = Properties.Resources.sil1;
         private HashSet<string> allowedFields;
         private bool _isCheck = false;
         public sealed record PropertyAttributePair(
@@ -144,6 +140,7 @@ namespace YektamakDesktop.CustomControls
                             comboCell.ItemsSource = dataSource.Cast<object>().ToList();
                         }
                         col = comboColumn;
+                        col.SortMode = DataGridViewColumnSortMode.Automatic;
                     }
                     else
                     {
@@ -154,6 +151,7 @@ namespace YektamakDesktop.CustomControls
                             Name = pair.Attribute.Header,
                             ReadOnly = pair.Attribute.readOnly,
                             Visible = pair.Attribute.Visible,
+                            SortMode = DataGridViewColumnSortMode.Automatic,
                         }
                     ;
                     }
@@ -201,14 +199,16 @@ namespace YektamakDesktop.CustomControls
         public async Task SetData<T>(List<T> list, string formName, bool isCheck = false)
         {
             lblSecilenKayitSayisi.Text = "";
+            lblGosterilenKayitSayisi.Text = "";
             _isCheck = isCheck;
             _formName = formName;
             headerCheckBoxState = false;
             var liste = new SortableBindingList<T>(list);
             binding.DataSource = liste;
 
-            list1 = list.Cast<object>().ToList();
+            list1 = liste.Cast<object>().ToList();
             dataGridView1.DataSource = binding;
+            if(binding.Count==0)
             await LoadSettings<T>(formName, isCheck);
 
             lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
@@ -266,7 +266,7 @@ namespace YektamakDesktop.CustomControls
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
             var hit = dataGridView1.HitTest(e.X, e.Y);
-            if (e.Button == MouseButtons.Left && hit.Type == DataGridViewHitTestType.ColumnHeader && dataGridView1.Columns[0].Name == "Sec")
+            if (e.Button == MouseButtons.Left && hit.Type == DataGridViewHitTestType.ColumnHeader)
             {
                 if (dataGridView1.Columns[hit.ColumnIndex].Name == "Sec")
                 {
@@ -283,24 +283,24 @@ namespace YektamakDesktop.CustomControls
                 }
                 else
                 {
-                    string columnName = dataGridView1.Columns[hit.ColumnIndex].DataPropertyName;
+                    //string columnName = dataGridView1.Columns[hit.ColumnIndex].DataPropertyName;
 
-                    if (dataGridView1.Columns[hit.ColumnIndex].SortMode != DataGridViewColumnSortMode.Programmatic)
-                    {
-                        dataGridView1.Columns[hit.ColumnIndex].SortMode = DataGridViewColumnSortMode.Programmatic;
-                        dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
-                    }
-                    else
-                    {
-                        if (dataGridView1.SortOrder == SortOrder.Descending)
-                        {
-                            dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Ascending);
-                        }
-                        else
-                        {
-                            dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
-                        }
-                    }
+                    //if (dataGridView1.Columns[hit.ColumnIndex].SortMode != DataGridViewColumnSortMode.Programmatic)
+                    //{
+                    //    dataGridView1.Columns[hit.ColumnIndex].SortMode = DataGridViewColumnSortMode.Programmatic;
+                    //    dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
+                    //}
+                    //else
+                    //{
+                    //    if (dataGridView1.SortOrder == SortOrder.Descending)
+                    //    {
+                    //        dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Ascending);
+                    //    }
+                    //    else
+                    //    {
+                    //        dataGridView1.Sort(dataGridView1.Columns[hit.ColumnIndex], ListSortDirection.Descending);
+                    //    }
+                    //}
                 }
             }
             else if (e.Button == MouseButtons.Right && hit.Type == DataGridViewHitTestType.ColumnHeader)
@@ -451,7 +451,7 @@ namespace YektamakDesktop.CustomControls
             var list = (SortableBindingList<T>)binding.DataSource;
             var filtreliListe = Filtrele(list, filtreNesnesi);
             dataGridView1.DataSource = filtreliListe;
-            await LoadSettings<T>(_formName, _isCheck);
+            //await LoadSettings<T>(_formName, _isCheck);
             headerCheckBoxState = false;
             lblSecilenKayitSayisi.Text = $"Seçilen kayıt sayısı : 0";
             lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {dataGridView1.Rows.Count.ToString()}";

@@ -38,6 +38,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.TabIndex = 1;
             universalGrid1.MouseDown1 += universalGrid1_MouseDown;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<SatinalmaTalepDTO>(), this.Name);
         }
 
         private SatinalmaTalepDTO _satinalmaTalepOnayDTO;

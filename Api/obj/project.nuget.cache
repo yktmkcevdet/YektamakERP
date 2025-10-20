@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "VUNv13zEEos=",
+  "dgSpecHash": "MXOqrHSRYv4=",
   "success": true,
   "projectFilePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yektamak-118\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
+    "C:\\Users\\yektamak-118\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\k4os.compression.lz4\\1.3.8\\k4os.compression.lz4.1.3.8.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.8\\k4os.compression.lz4.streams.1.3.8.nupkg.sha512",

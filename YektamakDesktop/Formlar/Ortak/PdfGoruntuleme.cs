@@ -1,75 +1,58 @@
-﻿using System;
+﻿using Spire.Pdf; 
+using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using Spire.Pdf;
-using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Ortak
 {
     public partial class PdfGoruntuleme : Form
     {
-        private string _pdfFilePath;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string pdfFilePath 
-        { 
-            get { return _pdfFilePath; } 
-            set 
-            {
-                _pdfFilePath = value;
-                InitializePdfViewer();
+        private static PdfDocument pdfViewer = new PdfDocument();
 
-            }
-        }
-        public PdfGoruntuleme()
+        public PdfGoruntuleme(string base64Pdf)
         {
             InitializeComponent();
-        }
-        private static PdfGoruntuleme _pdfGoruntuleme;
-        public static PdfGoruntuleme pdfGoruntuleme { get { if (_pdfGoruntuleme == null) _pdfGoruntuleme = new PdfGoruntuleme(); return _pdfGoruntuleme; } }
-        
-        private void InitializePdfViewer()
-        {
-            WebBrowser webBrowser = new WebBrowser();
-            webBrowser.Dock = DockStyle.Fill;
-            this.Controls.Add(webBrowser);
-            webBrowser.Navigate(_pdfFilePath);
-            //PdfViewer pdfViewer = new PdfViewer
-            //{
-            //    Dock = DockStyle.Fill
-            //};
-            //using (var pdfDocument = PdfDocument.Load(_pdfFilePath))
-            //{
-            //    pdfViewer.Document = pdfDocument;
-            //}
-            //Controls.Add(pdfViewer);
-        }   
 
-        private void OpenPdfButton_Click(string pdfFilePath)
-        {
-            //try
-            //{
-            //    //pdfViewer.LoadFromFile(Path.Combine(Application.StartupPath, pdfFilePath));
-            //    pdfViewer.LoadFromFile(pdfFilePath);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Error opening PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            this.Width = 800;
+            this.Height = 600;
+
+            
         }
-        private void CloseForm()
+        private static PdfGoruntuleme _instance;
+        public static PdfGoruntuleme GetInstance(string base64Pdf)
         {
-            Close();
-            _pdfGoruntuleme = null;
+            if (_instance == null || _instance.IsDisposed)
+            {
+                _instance = new PdfGoruntuleme(base64Pdf);
+                byte[] pdfBytes = Convert.FromBase64String(base64Pdf);
+                MemoryStream stream = new MemoryStream(pdfBytes);
+                pdfViewer.LoadFromBytes(pdfBytes);
+                Image img = pdfViewer.SaveAsImage(0);
+                pictureBox1.Image = img;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                return _instance;
+            }
+            else
+            {
+                byte[] pdfBytes = Convert.FromBase64String(base64Pdf);
+                MemoryStream stream = new MemoryStream(pdfBytes);
+                pdfViewer.LoadFromBytes(pdfBytes);
+                Image img = pdfViewer.SaveAsImage(0);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.Image = img;
+                
+                return _instance;
+            }
         }
 
-        private void PdfGoruntuleme_FormClosing(object sender, FormClosingEventArgs e)
+        private void ShowPdf(string base64Pdf)
         {
-            _pdfGoruntuleme = null;
-        }
-
-        private void PdfGoruntuleme_Load(object sender, EventArgs e)
-        {
-            OpenPdfButton_Click(_pdfFilePath);
+            byte[] pdfBytes = Convert.FromBase64String(base64Pdf);
+            MemoryStream stream = new MemoryStream(pdfBytes);
+            pdfViewer.LoadFromBytes(pdfBytes);
+            Image img = pdfViewer.SaveAsImage(0);
+            pictureBox1.Image = img;
         }
     }
 }

@@ -62,8 +62,8 @@ namespace YektamakDesktop
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.940594F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.0594F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.384724F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.61527F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(1149, 710);
             tableLayoutPanel1.TabIndex = 0;
@@ -75,17 +75,17 @@ namespace YektamakDesktop
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.1356077F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.8643951F));
+            tableLayoutPanel2.Controls.Add(panelMenu, 1, 0);
             tableLayoutPanel2.Controls.Add(panelState, 1, 1);
             tableLayoutPanel2.Controls.Add(panelAnaMenu, 0, 0);
-            tableLayoutPanel2.Controls.Add(panelMenu, 1, 0);
             tableLayoutPanel2.Controls.Add(panelExit, 0, 1);
             tableLayoutPanel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            tableLayoutPanel2.Location = new Point(6, 50);
+            tableLayoutPanel2.Location = new Point(6, 39);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            tableLayoutPanel2.Size = new Size(1137, 654);
+            tableLayoutPanel2.Size = new Size(1137, 665);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // panelState
@@ -93,7 +93,7 @@ namespace YektamakDesktop
             panelState.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelState.Controls.Add(statusStrip1);
             panelState.Controls.Add(lblKullanici);
-            panelState.Location = new Point(172, 609);
+            panelState.Location = new Point(172, 620);
             panelState.Margin = new System.Windows.Forms.Padding(0);
             panelState.Name = "panelState";
             panelState.Size = new Size(965, 45);
@@ -104,9 +104,9 @@ namespace YektamakDesktop
             statusStrip1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblOturumSuresi, toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(820, 20);
+            statusStrip1.Location = new Point(851, 20);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(293, 22);
+            statusStrip1.Size = new Size(262, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -144,7 +144,7 @@ namespace YektamakDesktop
             panelAnaMenu.Location = new Point(0, 0);
             panelAnaMenu.Margin = new System.Windows.Forms.Padding(0);
             panelAnaMenu.Name = "panelAnaMenu";
-            panelAnaMenu.Size = new Size(172, 609);
+            panelAnaMenu.Size = new Size(172, 620);
             panelAnaMenu.TabIndex = 0;
             // 
             // panelMenu
@@ -154,14 +154,14 @@ namespace YektamakDesktop
             panelMenu.Location = new Point(172, 0);
             panelMenu.Margin = new System.Windows.Forms.Padding(0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(965, 609);
+            panelMenu.Size = new Size(965, 620);
             panelMenu.TabIndex = 1;
             // 
             // panelExit
             // 
             panelExit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panelExit.BackColor = Color.DodgerBlue;
-            panelExit.Location = new Point(0, 609);
+            panelExit.Location = new Point(0, 620);
             panelExit.Margin = new System.Windows.Forms.Padding(0);
             panelExit.Name = "panelExit";
             panelExit.Size = new Size(172, 45);
@@ -170,12 +170,14 @@ namespace YektamakDesktop
             // panelHandle
             // 
             panelHandle.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panelHandle.AutoSize = true;
+            panelHandle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             panelHandle.BackColor = Color.White;
             panelHandle.Controls.Add(headerPanel1);
             panelHandle.Location = new Point(4, 4);
             panelHandle.Margin = new System.Windows.Forms.Padding(1);
             panelHandle.Name = "panelHandle";
-            panelHandle.Size = new Size(1141, 39);
+            panelHandle.Size = new Size(1141, 28);
             panelHandle.TabIndex = 1;
             panelHandle.MouseDown += panelHeader_MouseDown;
             panelHandle.MouseMove += panelHeader_MouseMove;
@@ -191,7 +193,7 @@ namespace YektamakDesktop
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new Size(1138, 32);
+            headerPanel1.Size = new Size(1138, 25);
             headerPanel1.TabIndex = 0;
             // 
             // MainWindow
@@ -210,6 +212,7 @@ namespace YektamakDesktop
             Text = "Ana Menü";
             Load += AnaSayfa_Load;
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             panelState.ResumeLayout(false);
             panelState.PerformLayout();

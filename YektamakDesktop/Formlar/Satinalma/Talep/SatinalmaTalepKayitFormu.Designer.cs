@@ -62,29 +62,31 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctbTeslimTarihi
             // 
             ctbTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbTeslimTarihi.Location = new System.Drawing.Point(150, 139);
+            ctbTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbTeslimTarihi.Location = new System.Drawing.Point(154, 119);
             ctbTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeslimTarihi.Name = "ctbTeslimTarihi";
-            ctbTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctbTeslimTarihi.Size = new System.Drawing.Size(145, 32);
+            ctbTeslimTarihi.Padding = new System.Windows.Forms.Padding(3);
+            ctbTeslimTarihi.Size = new System.Drawing.Size(124, 25);
             ctbTeslimTarihi.TabIndex = 13;
-            ctbTeslimTarihi.TextCustom = null;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(35, 149);
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(37, 124);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(73, 15);
+            label1.Size = new System.Drawing.Size(77, 15);
             label1.TabIndex = 15;
             label1.Text = "İhtiyaç Tarihi";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(35, 184);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(37, 151);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(65, 15);
+            label2.Size = new System.Drawing.Size(68, 15);
             label2.TabIndex = 16;
             label2.Text = "Proje Kodu";
             // 
@@ -93,15 +95,14 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbAciklama.BackColor = System.Drawing.Color.White;
             ctbAciklama.BorderColor = System.Drawing.Color.Silver;
             ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbAciklama.BorderRadius = 5;
             ctbAciklama.BorderSize = 1;
-            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
-            ctbAciklama.isPlaceHolder = false;
-            ctbAciklama.Location = new System.Drawing.Point(583, 162);
+            ctbAciklama.Location = new System.Drawing.Point(415, 38);
+            ctbAciklama.Margin = new System.Windows.Forms.Padding(1);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
-            ctbAciklama.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbAciklama.Padding = new System.Windows.Forms.Padding(3);
             ctbAciklama.PasswordChar = false;
             ctbAciklama.PlaceholderColor = System.Drawing.Color.DarkGray;
             ctbAciklama.PlaceholderText = "";
@@ -116,18 +117,20 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(521, 162);
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label4.Location = new System.Drawing.Point(353, 38);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(56, 15);
+            label4.Size = new System.Drawing.Size(57, 15);
             label4.TabIndex = 19;
             label4.Text = "Açıklama";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(35, 219);
+            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label5.Location = new System.Drawing.Point(37, 178);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(111, 15);
+            label5.Size = new System.Drawing.Size(115, 15);
             label5.TabIndex = 24;
             label5.Text = "Talep Eden Kullanıcı";
             // 
@@ -136,21 +139,20 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTalepNo.BackColor = System.Drawing.Color.White;
             ctbTalepNo.BorderColor = System.Drawing.Color.Silver;
             ctbTalepNo.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbTalepNo.BorderRadius = 5;
             ctbTalepNo.BorderSize = 1;
-            ctbTalepNo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbTalepNo.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTalepNo.ForeColor = System.Drawing.Color.Black;
-            ctbTalepNo.isPlaceHolder = false;
-            ctbTalepNo.Location = new System.Drawing.Point(150, 38);
+            ctbTalepNo.Location = new System.Drawing.Point(154, 38);
+            ctbTalepNo.Margin = new System.Windows.Forms.Padding(1);
             ctbTalepNo.Multiline = false;
             ctbTalepNo.Name = "ctbTalepNo";
-            ctbTalepNo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbTalepNo.Padding = new System.Windows.Forms.Padding(3);
             ctbTalepNo.PasswordChar = false;
             ctbTalepNo.PlaceholderColor = System.Drawing.Color.DarkGray;
             ctbTalepNo.PlaceholderText = "";
             ctbTalepNo.ReadOnly = false;
             ctbTalepNo.SelectionStart = 0;
-            ctbTalepNo.Size = new System.Drawing.Size(166, 28);
+            ctbTalepNo.Size = new System.Drawing.Size(166, 25);
             ctbTalepNo.TabIndex = 26;
             ctbTalepNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbTalepNo.TextCustom = "";
@@ -159,38 +161,40 @@ namespace YektamakDesktop.Formlar.Satinalma
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(35, 43);
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label6.Location = new System.Drawing.Point(37, 43);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(53, 15);
+            label6.Size = new System.Drawing.Size(55, 15);
             label6.TabIndex = 27;
             label6.Text = "Talep No";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(35, 77);
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label7.Location = new System.Drawing.Point(37, 70);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(65, 15);
+            label7.Size = new System.Drawing.Size(69, 15);
             label7.TabIndex = 29;
             label7.Text = "Talep Tarihi";
             // 
             // ctbTalepTarihi
             // 
             ctbTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbTalepTarihi.Location = new System.Drawing.Point(150, 70);
+            ctbTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbTalepTarihi.Location = new System.Drawing.Point(154, 65);
             ctbTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTalepTarihi.Name = "ctbTalepTarihi";
-            ctbTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctbTalepTarihi.Size = new System.Drawing.Size(145, 32);
+            ctbTalepTarihi.Padding = new System.Windows.Forms.Padding(3);
+            ctbTalepTarihi.Size = new System.Drawing.Size(107, 25);
             ctbTalepTarihi.TabIndex = 28;
-            ctbTalepTarihi.TextCustom = null;
             // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(12, 264);
+            universalGrid1.Location = new System.Drawing.Point(12, 231);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1262, 487);
+            universalGrid1.Size = new System.Drawing.Size(1262, 520);
             universalGrid1.TabIndex = 30;
             universalGrid1.MouseDown1 += universalGrid1_MouseClick;
             // 
@@ -204,41 +208,30 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1286, 32);
+            headerPanel1.Size = new System.Drawing.Size(1286, 25);
             headerPanel1.TabIndex = 31;
             // 
             // ctbSetAdet
             // 
             ctbSetAdet.BackColor = System.Drawing.Color.White;
-            ctbSetAdet.BorderColor = System.Drawing.Color.Silver;
-            ctbSetAdet.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbSetAdet.BorderRadius = 5;
-            ctbSetAdet.BorderSize = 1;
-            ctbSetAdet.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbSetAdet.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbSetAdet.ForeColor = System.Drawing.Color.Black;
-            ctbSetAdet.Location = new System.Drawing.Point(385, 210);
+            ctbSetAdet.Location = new System.Drawing.Point(154, 199);
             ctbSetAdet.Margin = new System.Windows.Forms.Padding(0);
-            ctbSetAdet.Multiline = false;
             ctbSetAdet.Name = "ctbSetAdet";
             ctbSetAdet.OndalikBasamak = 0;
-            ctbSetAdet.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            ctbSetAdet.PasswordChar = false;
-            ctbSetAdet.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbSetAdet.PlaceholderText = "";
-            ctbSetAdet.ReadOnly = false;
-            ctbSetAdet.SelectionStart = 0;
-            ctbSetAdet.Size = new System.Drawing.Size(101, 32);
+            ctbSetAdet.Padding = new System.Windows.Forms.Padding(3);
+            ctbSetAdet.Size = new System.Drawing.Size(101, 25);
             ctbSetAdet.TabIndex = 32;
-            ctbSetAdet.TextAlignment = System.Windows.Forms.HorizontalAlignment.Right;
-            ctbSetAdet.TextCustom = "0";
-            ctbSetAdet.UnderlinedStyle = false;
+            ctbSetAdet.TextCustom = "1";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(385, 193);
+            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label8.Location = new System.Drawing.Point(37, 204);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(51, 15);
+            label8.Size = new System.Drawing.Size(56, 15);
             label8.TabIndex = 33;
             label8.Text = "Set Adet";
             // 
@@ -282,67 +275,59 @@ namespace YektamakDesktop.Formlar.Satinalma
             // clbProjeKodu
             // 
             clbProjeKodu.BorderColor = System.Drawing.Color.Silver;
+            clbProjeKodu.BorderRadius = 8;
             clbProjeKodu.BorderSize = 1;
-            clbProjeKodu.DataSource = null;
             clbProjeKodu.DisplayMember = "kod";
-            clbProjeKodu.Location = new System.Drawing.Point(150, 175);
+            clbProjeKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbProjeKodu.Location = new System.Drawing.Point(154, 146);
+            clbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
             clbProjeKodu.Name = "clbProjeKodu";
-            clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbProjeKodu.Padding = new System.Windows.Forms.Padding(3);
             clbProjeKodu.PlaceholderText = "Seçiniz...";
-            clbProjeKodu.SelectedDisplayValue = "Seçiniz...";
-            clbProjeKodu.SelectedIndex = -1;
-            clbProjeKodu.SelectedItem = null;
-            clbProjeKodu.SelectedValue = null;
-            clbProjeKodu.Size = new System.Drawing.Size(119, 29);
+            clbProjeKodu.Size = new System.Drawing.Size(119, 25);
             clbProjeKodu.TabIndex = 35;
-            clbProjeKodu.UnderlinedStyle = false;
             clbProjeKodu.ValueMember = "Id";
             clbProjeKodu.SelectedIndexChanged += clbProjeKodu_SelectedIndexChanged;
             // 
             // clbKullaniciId
             // 
             clbKullaniciId.BorderColor = System.Drawing.Color.Silver;
+            clbKullaniciId.BorderRadius = 8;
             clbKullaniciId.BorderSize = 1;
-            clbKullaniciId.DataSource = null;
             clbKullaniciId.DisplayMember = "ad";
-            clbKullaniciId.Location = new System.Drawing.Point(150, 210);
+            clbKullaniciId.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbKullaniciId.Location = new System.Drawing.Point(154, 173);
+            clbKullaniciId.Margin = new System.Windows.Forms.Padding(1);
             clbKullaniciId.Name = "clbKullaniciId";
-            clbKullaniciId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbKullaniciId.Padding = new System.Windows.Forms.Padding(3);
             clbKullaniciId.PlaceholderText = "Seçiniz...";
-            clbKullaniciId.SelectedDisplayValue = "Seçiniz...";
-            clbKullaniciId.SelectedIndex = -1;
-            clbKullaniciId.SelectedItem = null;
-            clbKullaniciId.SelectedValue = null;
-            clbKullaniciId.Size = new System.Drawing.Size(119, 29);
+            clbKullaniciId.Size = new System.Drawing.Size(119, 25);
             clbKullaniciId.TabIndex = 36;
-            clbKullaniciId.UnderlinedStyle = false;
             clbKullaniciId.ValueMember = "Id";
             // 
             // fcbTalepNeden
             // 
             fcbTalepNeden.BorderColor = System.Drawing.Color.Silver;
+            fcbTalepNeden.BorderRadius = 8;
             fcbTalepNeden.BorderSize = 1;
-            fcbTalepNeden.DataSource = null;
             fcbTalepNeden.DisplayMember = "ad";
-            fcbTalepNeden.Location = new System.Drawing.Point(150, 106);
+            fcbTalepNeden.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbTalepNeden.Location = new System.Drawing.Point(154, 92);
+            fcbTalepNeden.Margin = new System.Windows.Forms.Padding(1);
             fcbTalepNeden.Name = "fcbTalepNeden";
-            fcbTalepNeden.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbTalepNeden.Padding = new System.Windows.Forms.Padding(3);
             fcbTalepNeden.PlaceholderText = "Seçiniz...";
-            fcbTalepNeden.SelectedDisplayValue = "Seçiniz...";
-            fcbTalepNeden.SelectedIndex = -1;
-            fcbTalepNeden.SelectedItem = null;
-            fcbTalepNeden.SelectedValue = null;
-            fcbTalepNeden.Size = new System.Drawing.Size(119, 29);
+            fcbTalepNeden.Size = new System.Drawing.Size(119, 25);
             fcbTalepNeden.TabIndex = 37;
-            fcbTalepNeden.UnderlinedStyle = false;
             fcbTalepNeden.ValueMember = "Id";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(35, 110);
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(37, 97);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(75, 15);
+            label3.Size = new System.Drawing.Size(79, 15);
             label3.TabIndex = 38;
             label3.Text = "Talep Nedeni";
             // 

@@ -28,14 +28,19 @@ namespace YektamakDesktop.Formlar.Genel
         private void Initialize()
         {
             InitializeComponent();
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(10, 307);
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(704, 299);
-            universalGrid1.TabIndex = 15;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<MalzemeAltGrupDTO>(), this.Name);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
             fcbStokGrup.SetDataSource(_cache.stokGrups);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);

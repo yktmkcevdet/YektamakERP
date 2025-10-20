@@ -1,63 +1,55 @@
-﻿@using YektamakWeb.Commands.Accounts
-@using Utilities.Interfaces
-@using Models.DTO
+﻿@inherits LayoutComponentBase
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-@inherits LayoutComponentBase
-@inject ICache cache
-@inject CustomAuthStateProvider authStateProvider
-@inject NavigationManager navigation
-<div class="bb-page">
+<MudLayout>
 
-    <Sidebar @ref="sidebar"
-    Href="/"
-    IconName="IconName.BootstrapFill"
-    Title="Yektamak"
-    DataProvider="SidebarDataProvider"
-    onclick="ToggleSidebar"/>
+    <!-- Sol Drawer -->
+    <MudDrawer @bind-Open="_drawerOpen"
+               Anchor="Anchor.Left"
+               Elevation="2"
+               Variant="DrawerVariant.Responsive">
+        <NavMenu />
+    </MudDrawer>
 
-    <main>
-        <AuthorizeView>
-            <Authorized>
-                <div class="d-flex justify-content-end">
-                    <p>Hoş geldin, @context.User.Identity.Name!<br>
-                        <a href="/" @onclick="LogOut">Çıkış Yap</a>
-                    </p>
-                </div>
-            </Authorized>
-        </AuthorizeView>
+    <MudMainContent>
+        
+        <MudAppBar Color="Color.Primary" Elevation="4">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                           Color="Color.Inherit"
+                           Edge="Edge.Start"
+                           OnClick="ToggleDrawer" />
+            <MudText Typo="Typo.h6" Class="ml-2">Yektamak</MudText>
+            <MudSpacer />
+            <AuthorizeView>
+                <Authorized>
+                    <MudText Class="mr-4">Hoş geldin, @context.User.Identity.Name</MudText>
+                    <MudButton Variant="Variant.Text" Color="Color.Inherit" OnClick="LogOut">Çıkış Yap</MudButton>
+                </Authorized>
+            </AuthorizeView>
+        </MudAppBar>
 
-        <article class="content px-4">
-            <div class="py-2">@Body</div> 
-        </article>
-    </main>
-</div>
+        <!-- Sayfa içeriği -->
+        <div class="p-4">
+            @Body
+        </div>
+    </MudMainContent>
+
+</MudLayout>
+
+
 @code {
-    public static Sidebar sidebar = default!;
-    IEnumerable<NavItem>? navItems = default!;
-    @inject LoginService loginService
-    
-    
+    private bool _drawerOpen = true;
+
+    private void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
     private void LogOut()
     {
-        loginService.LogoutAsync();
-    }
-    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
-    {
-        if (navItems is null)
-            navItems = GetNavItems();
-
-        return await Task.FromResult(request.ApplyTo(navItems));
-    }
-
-    private IEnumerable<NavItem> GetNavItems()
-    {
-        foreach (AnaMenuDTO menu in cache.anaMenuList)
-        {
-            yield return new NavItem { Id = menu.Id.ToString(), Href = $"/{char.ToUpper(menu.ad[0]) + menu.ad.Substring(1).ToLower()}", IconName = IconName.HouseDoorFill, Text = menu.ad };
-        }
-    }
-    private void ToggleSidebar()
-    {
-        sidebar.ToggleSidebar();
+        // logout işlemleri
     }
 }

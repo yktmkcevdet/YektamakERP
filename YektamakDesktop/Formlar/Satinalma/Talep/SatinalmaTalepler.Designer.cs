@@ -46,33 +46,33 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { talebiOnaylaToolStripMenuItem, talebiReddetToolStripMenuItem, görüntüleToolStripMenuItem, silToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            contextMenuStrip1.Size = new System.Drawing.Size(145, 92);
             // 
             // talebiOnaylaToolStripMenuItem
             // 
             talebiOnaylaToolStripMenuItem.Name = "talebiOnaylaToolStripMenuItem";
-            talebiOnaylaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            talebiOnaylaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             talebiOnaylaToolStripMenuItem.Text = "Talebi Onayla";
             talebiOnaylaToolStripMenuItem.Click += talebiOnaylaToolStripMenuItem_Click;
             // 
             // talebiReddetToolStripMenuItem
             // 
             talebiReddetToolStripMenuItem.Name = "talebiReddetToolStripMenuItem";
-            talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            talebiReddetToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             talebiReddetToolStripMenuItem.Text = "Talebi Reddet";
             talebiReddetToolStripMenuItem.Click += talebiReddetToolStripMenuItem_Click;
             // 
             // görüntüleToolStripMenuItem
             // 
             görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
-            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            görüntüleToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             görüntüleToolStripMenuItem.Text = "Görüntüle";
             görüntüleToolStripMenuItem.Click += görüntüleToolStripMenuItem_Click;
             // 
             // silToolStripMenuItem
             // 
             silToolStripMenuItem.Name = "silToolStripMenuItem";
-            silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            silToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             silToolStripMenuItem.Text = "Sil";
             silToolStripMenuItem.Click += silToolStripMenuItem_Click;
             // 
@@ -86,7 +86,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1138, 32);
+            headerPanel1.Size = new System.Drawing.Size(1138, 25);
             headerPanel1.TabIndex = 12;
             // 
             // universalGrid1

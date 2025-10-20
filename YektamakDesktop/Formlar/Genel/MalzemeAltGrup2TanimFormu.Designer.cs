@@ -1,4 +1,7 @@
-﻿namespace YektamakDesktop.Formlar.Genel
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace YektamakDesktop.Formlar.Genel
 {
     partial class MalzemeAltGrup2TanimFormu
     {
@@ -30,21 +33,21 @@
         {
             components = new System.ComponentModel.Container();
             ctbMalzemeAltGrup2Id = new YektamakDesktop.CustomControls.CustomTextBox();
-            label3 = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
+            label3 = new Label();
+            label1 = new Label();
             ctbMalzemeAltGrup2Ad = new YektamakDesktop.CustomControls.CustomTextBox();
-            label2 = new System.Windows.Forms.Label();
+            label2 = new Label();
             ctbMalzemeAltGrup2Kod = new YektamakDesktop.CustomControls.CustomTextBox();
             fcbStokGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
-            label4 = new System.Windows.Forms.Label();
+            label4 = new Label();
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
-            label5 = new System.Windows.Forms.Label();
+            label5 = new Label();
             fcbMalzemeAltGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
-            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            malzemeGrubunuSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
-            formuTemizleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            label6 = new System.Windows.Forms.Label();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            malzemeGrubunuSilToolStripMenuItem = new ToolStripMenuItem();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            formuTemizleToolStripMenuItem = new ToolStripMenuItem();
+            label6 = new Label();
             fcbMalzemeGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
@@ -55,190 +58,271 @@
             // 
             // ctbMalzemeAltGrup2Id
             // 
-            ctbMalzemeAltGrup2Id.BackColor = System.Drawing.Color.White;
+            ctbMalzemeAltGrup2Id.BackColor = Color.White;
+            ctbMalzemeAltGrup2Id.BorderColor = Color.Silver;
+            ctbMalzemeAltGrup2Id.BorderFocusColor = Color.HotPink;
+            ctbMalzemeAltGrup2Id.BorderSize = 1;
             ctbMalzemeAltGrup2Id.Enabled = false;
-            ctbMalzemeAltGrup2Id.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            ctbMalzemeAltGrup2Id.ForeColor = System.Drawing.Color.Black;
-            ctbMalzemeAltGrup2Id.Location = new System.Drawing.Point(180, 70);
+            ctbMalzemeAltGrup2Id.Font = new Font("Segoe UI", 8F);
+            ctbMalzemeAltGrup2Id.ForeColor = Color.Black;
+            ctbMalzemeAltGrup2Id.Location = new Point(170, 43);
+            ctbMalzemeAltGrup2Id.Margin = new Padding(1);
+            ctbMalzemeAltGrup2Id.Multiline = false;
             ctbMalzemeAltGrup2Id.Name = "ctbMalzemeAltGrup2Id";
-            ctbMalzemeAltGrup2Id.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbMalzemeAltGrup2Id.Size = new System.Drawing.Size(63, 28);
+            ctbMalzemeAltGrup2Id.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Id.PasswordChar = false;
+            ctbMalzemeAltGrup2Id.PlaceholderColor = Color.DarkGray;
+            ctbMalzemeAltGrup2Id.PlaceholderText = "";
+            ctbMalzemeAltGrup2Id.ReadOnly = false;
+            ctbMalzemeAltGrup2Id.SelectionStart = 0;
+            ctbMalzemeAltGrup2Id.Size = new Size(63, 25);
             ctbMalzemeAltGrup2Id.TabIndex = 1;
+            ctbMalzemeAltGrup2Id.TextAlignment = HorizontalAlignment.Left;
+            ctbMalzemeAltGrup2Id.TextCustom = "";
+            ctbMalzemeAltGrup2Id.UnderlinedStyle = false;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(37, 76);
+            label3.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label3.Location = new Point(33, 48);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(18, 15);
+            label3.Size = new Size(18, 13);
             label3.TabIndex = 2;
             label3.Text = "ID";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(37, 110);
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label1.Location = new Point(33, 75);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(129, 15);
+            label1.Size = new Size(128, 13);
             label1.TabIndex = 5;
             label1.Text = "Malzeme Alt Grup2 Adı";
             // 
             // ctbMalzemeAltGrup2Ad
             // 
-            ctbMalzemeAltGrup2Ad.BackColor = System.Drawing.Color.White;
-            ctbMalzemeAltGrup2Ad.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            ctbMalzemeAltGrup2Ad.ForeColor = System.Drawing.Color.Black;
-            ctbMalzemeAltGrup2Ad.Location = new System.Drawing.Point(180, 104);
+            ctbMalzemeAltGrup2Ad.BackColor = Color.White;
+            ctbMalzemeAltGrup2Ad.BorderColor = Color.Silver;
+            ctbMalzemeAltGrup2Ad.BorderFocusColor = Color.HotPink;
+            ctbMalzemeAltGrup2Ad.BorderSize = 1;
+            ctbMalzemeAltGrup2Ad.Font = new Font("Segoe UI", 8F);
+            ctbMalzemeAltGrup2Ad.ForeColor = Color.Black;
+            ctbMalzemeAltGrup2Ad.Location = new Point(170, 70);
+            ctbMalzemeAltGrup2Ad.Margin = new Padding(1);
+            ctbMalzemeAltGrup2Ad.Multiline = false;
             ctbMalzemeAltGrup2Ad.Name = "ctbMalzemeAltGrup2Ad";
-            ctbMalzemeAltGrup2Ad.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbMalzemeAltGrup2Ad.Size = new System.Drawing.Size(262, 28);
+            ctbMalzemeAltGrup2Ad.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Ad.PasswordChar = false;
+            ctbMalzemeAltGrup2Ad.PlaceholderColor = Color.DarkGray;
+            ctbMalzemeAltGrup2Ad.PlaceholderText = "";
+            ctbMalzemeAltGrup2Ad.ReadOnly = false;
+            ctbMalzemeAltGrup2Ad.SelectionStart = 0;
+            ctbMalzemeAltGrup2Ad.Size = new Size(262, 25);
             ctbMalzemeAltGrup2Ad.TabIndex = 4;
+            ctbMalzemeAltGrup2Ad.TextAlignment = HorizontalAlignment.Left;
+            ctbMalzemeAltGrup2Ad.TextCustom = "";
+            ctbMalzemeAltGrup2Ad.UnderlinedStyle = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(37, 144);
+            label2.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label2.Location = new Point(33, 102);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(139, 15);
+            label2.Size = new Size(138, 13);
             label2.TabIndex = 7;
             label2.Text = "Malzeme Alt Grup2 Kodu";
             // 
             // ctbMalzemeAltGrup2Kod
             // 
-            ctbMalzemeAltGrup2Kod.BackColor = System.Drawing.Color.White;
-            ctbMalzemeAltGrup2Kod.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            ctbMalzemeAltGrup2Kod.ForeColor = System.Drawing.Color.Black;
-            ctbMalzemeAltGrup2Kod.Location = new System.Drawing.Point(180, 138);
+            ctbMalzemeAltGrup2Kod.BackColor = Color.White;
+            ctbMalzemeAltGrup2Kod.BorderColor = Color.Silver;
+            ctbMalzemeAltGrup2Kod.BorderFocusColor = Color.HotPink;
+            ctbMalzemeAltGrup2Kod.BorderSize = 1;
+            ctbMalzemeAltGrup2Kod.Font = new Font("Segoe UI", 8F);
+            ctbMalzemeAltGrup2Kod.ForeColor = Color.Black;
+            ctbMalzemeAltGrup2Kod.Location = new Point(170, 97);
+            ctbMalzemeAltGrup2Kod.Margin = new Padding(1);
+            ctbMalzemeAltGrup2Kod.Multiline = false;
             ctbMalzemeAltGrup2Kod.Name = "ctbMalzemeAltGrup2Kod";
-            ctbMalzemeAltGrup2Kod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbMalzemeAltGrup2Kod.Size = new System.Drawing.Size(134, 28);
+            ctbMalzemeAltGrup2Kod.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Kod.PasswordChar = false;
+            ctbMalzemeAltGrup2Kod.PlaceholderColor = Color.DarkGray;
+            ctbMalzemeAltGrup2Kod.PlaceholderText = "";
+            ctbMalzemeAltGrup2Kod.ReadOnly = false;
+            ctbMalzemeAltGrup2Kod.SelectionStart = 0;
+            ctbMalzemeAltGrup2Kod.Size = new Size(134, 25);
             ctbMalzemeAltGrup2Kod.TabIndex = 6;
+            ctbMalzemeAltGrup2Kod.TextAlignment = HorizontalAlignment.Left;
+            ctbMalzemeAltGrup2Kod.TextCustom = "";
+            ctbMalzemeAltGrup2Kod.UnderlinedStyle = false;
             // 
             // fcbStokGrup
             // 
-            fcbStokGrup.Location = new System.Drawing.Point(180, 172);
+            fcbStokGrup.BorderColor = Color.Silver;
+            fcbStokGrup.BorderSize = 1;
+            fcbStokGrup.DisplayMember = "ad";
+            fcbStokGrup.Font = new Font("Segoe UI", 8F);
+            fcbStokGrup.Location = new Point(170, 124);
+            fcbStokGrup.Margin = new Padding(1);
             fcbStokGrup.Name = "fcbStokGrup";
-            fcbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbStokGrup.Size = new System.Drawing.Size(262, 29);
+            fcbStokGrup.Padding = new Padding(6, 4, 6, 4);
+            fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.Size = new Size(225, 25);
             fcbStokGrup.TabIndex = 8;
+            fcbStokGrup.ValueMember = "Id";
             fcbStokGrup.SelectedIndexChanged += fcbStokGrup_SelectedIndexChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(37, 179);
+            label4.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label4.Location = new Point(33, 129);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(66, 15);
+            label4.Size = new Size(66, 13);
             label4.TabIndex = 9;
             label4.Text = "Stok Grubu";
             // 
             // customButtonSave1
             // 
-            customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(454, 288);
+            customButtonSave1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            customButtonSave1.BackColor = Color.Transparent;
+            customButtonSave1.Location = new Point(427, 509);
             customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new System.Drawing.Size(106, 46);
+            customButtonSave1.Size = new Size(106, 46);
             customButtonSave1.TabIndex = 10;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(37, 249);
+            label5.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label5.Location = new Point(33, 183);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(109, 15);
+            label5.Size = new Size(108, 13);
             label5.TabIndex = 12;
             label5.Text = "Malzeme Alt Grubu";
             // 
             // fcbMalzemeAltGrup
             // 
-            fcbMalzemeAltGrup.Location = new System.Drawing.Point(180, 242);
+            fcbMalzemeAltGrup.BorderColor = Color.Silver;
+            fcbMalzemeAltGrup.BorderSize = 1;
+            fcbMalzemeAltGrup.DisplayMember = "ad";
+            fcbMalzemeAltGrup.Font = new Font("Segoe UI", 8F);
+            fcbMalzemeAltGrup.Location = new Point(170, 178);
+            fcbMalzemeAltGrup.Margin = new Padding(1);
             fcbMalzemeAltGrup.Name = "fcbMalzemeAltGrup";
-            fcbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMalzemeAltGrup.Size = new System.Drawing.Size(262, 29);
+            fcbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
+            fcbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeAltGrup.Size = new Size(225, 25);
             fcbMalzemeAltGrup.TabIndex = 11;
+            fcbMalzemeAltGrup.ValueMember = "Id";
             fcbMalzemeAltGrup.SelectedIndexChanged += fcbMalzemeAltGrup_SelectedIndexChanged;
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { malzemeGrubunuSilToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { malzemeGrubunuSilToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(188, 26);
+            contextMenuStrip1.Size = new Size(188, 26);
             // 
             // malzemeGrubunuSilToolStripMenuItem
             // 
             malzemeGrubunuSilToolStripMenuItem.Name = "malzemeGrubunuSilToolStripMenuItem";
-            malzemeGrubunuSilToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            malzemeGrubunuSilToolStripMenuItem.Size = new Size(187, 22);
             malzemeGrubunuSilToolStripMenuItem.Text = "Malzeme Grubunu Sil";
             // 
             // contextMenuStrip2
             // 
-            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { formuTemizleToolStripMenuItem });
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { formuTemizleToolStripMenuItem });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new System.Drawing.Size(152, 26);
+            contextMenuStrip2.Size = new Size(152, 26);
             // 
             // formuTemizleToolStripMenuItem
             // 
             formuTemizleToolStripMenuItem.Name = "formuTemizleToolStripMenuItem";
-            formuTemizleToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            formuTemizleToolStripMenuItem.Size = new Size(151, 22);
             formuTemizleToolStripMenuItem.Text = "Formu Temizle";
             formuTemizleToolStripMenuItem.Click += formuTemizleToolStripMenuItem_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(37, 214);
+            label6.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label6.Location = new Point(33, 156);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(91, 15);
+            label6.Size = new Size(90, 13);
             label6.TabIndex = 14;
             label6.Text = "Malzeme Grubu";
             // 
             // fcbMalzemeGrup
             // 
-            fcbMalzemeGrup.Location = new System.Drawing.Point(180, 207);
+            fcbMalzemeGrup.BorderColor = Color.Silver;
+            fcbMalzemeGrup.BorderSize = 1;
+            fcbMalzemeGrup.DisplayMember = "ad";
+            fcbMalzemeGrup.Font = new Font("Segoe UI", 8F);
+            fcbMalzemeGrup.Location = new Point(170, 151);
+            fcbMalzemeGrup.Margin = new Padding(1);
             fcbMalzemeGrup.Name = "fcbMalzemeGrup";
-            fcbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMalzemeGrup.Size = new System.Drawing.Size(262, 29);
+            fcbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
+            fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeGrup.Size = new Size(225, 25);
             fcbMalzemeGrup.TabIndex = 13;
+            fcbMalzemeGrup.ValueMember = "Id";
             fcbMalzemeGrup.SelectedIndexChanged += fcbMalzemeGrup_SelectedIndexChanged_1;
             // 
             // headerPanel1
             // 
-            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            headerPanel1.BackColor = System.Drawing.Color.SteelBlue;
-            headerPanel1.Location = new System.Drawing.Point(0, 0);
-            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = Color.SteelBlue;
+            headerPanel1.Baslik = "Malzeme Alt Grup2 Tanımı";
+            headerPanel1.Location = new Point(0, 0);
+            headerPanel1.Margin = new Padding(1);
             headerPanel1.Name = "headerPanel1";
-            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(706, 32);
+            headerPanel1.Padding = new Padding(1);
+            headerPanel1.Size = new Size(558, 25);
             headerPanel1.TabIndex = 15;
             // 
             // universalGrid1
             // 
-            universalGrid1.Location = new System.Drawing.Point(37, 340);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new Point(33, 207);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(627, 409);
+            universalGrid1.Size = new Size(500, 296);
             universalGrid1.TabIndex = 16;
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            roundedButton1.BackgroundColor = Color.Firebrick;
+            roundedButton1.BorderColor = Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
             roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.Location = new System.Drawing.Point(46, 288);
+            roundedButton1.FlatStyle = FlatStyle.Flat;
+            roundedButton1.ForeColor = Color.White;
+            roundedButton1.GradientColor1 = Color.DodgerBlue;
+            roundedButton1.GradientColor2 = Color.MidnightBlue;
+            roundedButton1.HoverColor1 = Color.RoyalBlue;
+            roundedButton1.HoverColor2 = Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new Point(33, 509);
             roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new System.Drawing.Size(120, 40);
+            roundedButton1.Size = new Size(120, 40);
             roundedButton1.TabIndex = 17;
             roundedButton1.Text = "YENİ KAYIT";
+            roundedButton1.TextColor = Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click;
             // 
             // MalzemeAltGrup2TanimFormu
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(706, 752);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(558, 562);
             Controls.Add(roundedButton1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
@@ -255,9 +339,10 @@
             Controls.Add(ctbMalzemeAltGrup2Ad);
             Controls.Add(label3);
             Controls.Add(ctbMalzemeAltGrup2Id);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "MalzemeAltGrup2TanimFormu";
             Text = "MalzemeAltGrupTanimFormu";
+            FormClosing += MalzemeAltGrup2TanimFormu_FormClosing;
             MouseClick += MalzemeAltGrupTanimFormu_MouseClick;
             contextMenuStrip1.ResumeLayout(false);
             contextMenuStrip2.ResumeLayout(false);
@@ -266,6 +351,15 @@
         }
 
         #endregion
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid);
+        }
         private CustomControls.CustomTextBox ctbMalzemeAltGrup2Id;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;

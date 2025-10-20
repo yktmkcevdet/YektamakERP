@@ -24,14 +24,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
-        private readonly IDataTableMapper _dataTableMapper;
         private readonly IJsonConverter _jsonConverter;
-        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IDataTableMapper dataTableMapper,IJsonConverter jsonConverter)
+        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IJsonConverter jsonConverter)
         {
             _cache = cache;
             _projeService = projeService;
             _stokService = stokService;
-            _dataTableMapper = dataTableMapper;
             _jsonConverter = jsonConverter;
             InitializeComponent();
             ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref clbProjeKodu);
@@ -126,7 +124,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             klasor = Path.GetDirectoryName(logDosyasi);
             if (!Directory.Exists(klasor))
                 Directory.CreateDirectory(klasor);
-            File.WriteAllText(logDosyasi, "Eklenemeyen dosyalar");
+            File.WriteAllText(logDosyasi, "Eklenemeyen satırlar");
             for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
             {
                 var rowData = sheet.GetRow(rowIndex);
@@ -182,7 +180,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 proje = { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) },
                 adet = excelData.adet,
                 miktar = excelData.miktar,
-                stokKart={
+                no = excelData.no,
+                stokKart ={
                     stokTip = { Id=excelData.stokTip },
                     stokGrup = { Id = excelData.stokGrup },
                     malzemeGrup = { Id = excelData.malzemeGrup },
@@ -190,6 +189,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     malzemeAltGrup2 = { Id = excelData.malzemeAltGrup2 },
                     malzemeStandart = { Id = excelData.malzemeStandart },
                     isTalasli = excelData.isTalasli,
+                    isBukum = excelData.isBukum,
                     kod = excelData.kod,
                     parcaKod = excelData.kod,
                     ad = excelData.parcaAdi,
@@ -207,15 +207,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private void SetGrupIds(ExcelFormat excelData)
         {
-            string jsonResult = _stokService.GetExcelGrupParametre(new ExcelGrupParametre());
-
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show(jsonResult);
-                return;
-            }
-
-            List<ExcelGrupParametre> grupParametreList = JsonConvert.DeserializeObject<List<ExcelGrupParametre>>(jsonResult);
+            List<ExcelGrupParametre> grupParametreList = _cache.excelGrupParametreList;
 
             foreach (var param in grupParametreList)
             {
@@ -237,7 +229,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         excelData.malzemeAltGrup = excelData.malzemeAltGrup==null? param.malzemeAltGrupId : excelData.malzemeAltGrup;
                         excelData.malzemeAltGrup2 = excelData.malzemeAltGrup2==null? param.malzemeAltGrup2Id : excelData.malzemeAltGrup2;
                         excelData.malzemeStandart = excelData.malzemeStandart==null? param.malzemeStandartId : excelData.malzemeStandart;
-                        excelData.isTalasli = excelData.isTalasli == null ? param.isTalasli: excelData.isTalasli;
+                        excelData.isTalasli = excelData.isTalasli==null ? param.isTalasli: excelData.isTalasli;
+                        excelData.isBukum = excelData.isBukum == null ? param.isBukum : excelData.isBukum;
                     }
                 }
                 catch (Exception ex)
@@ -251,7 +244,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         {
             return new ExcelFormat
             {
-                no = GetCellValueAsInt(rowData, 0),
+                no = GetCellValueAsString(rowData, 0),
                 kod = GetCellValueAsString(rowData, 1),
                 parcaAdi = GetCellValueAsString(rowData, 2),
                 miktar = GetCellValueAsInt(rowData, 3),
@@ -266,7 +259,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private string GetCellValueAsString(IRow row, int columnIndex)
         {
-            return row.GetCell(columnIndex)?.ToString()?.Trim() ?? string.Empty;
+            return row.GetCell(columnIndex)?
+                       .ToString()?
+                       .Replace("\r", "")
+                       .Replace("\n", "")
+                       .Trim()
+                   ?? string.Empty;
         }
         private int GetCellValueAsInt(IRow row, int columnIndex)
         {
@@ -288,8 +286,13 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
             // DXF dosyası ekle
             var dxfDosya = await CreateStokKartDosya(projeStokKart.dxfFileName(), 2);
+            string jsonResult = _stokService.GetMalzemeStandart(projeStokKart.stokKart.malzemeStandart);
+            MalzemeStandart malzemeStandart = _jsonConverter.DeserializeObject<List<MalzemeStandart>>(jsonResult).FirstOrDefault();
             if (dxfDosya != null)
+            {
+                dxfDosya.dosyaAd = $"{projeStokKart.stokKart.kod}_{malzemeStandart.ad}_{projeStokKart.dxfAddition()}mm_{projeStokKart.miktar}adet";
                 projeStokKart.stokKart.dosyaList.Add(dxfDosya);
+            }
 
             // STEP dosyası ekle
             var stepDosya = await CreateStokKartDosya(projeStokKart.stepFileName(), 3);
@@ -298,6 +301,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private async Task<StokKartDosya> CreateStokKartDosya(string fileName, int dosyaTipId)
         {
+            if(fileName == null) return null;
             var file = files.FirstOrDefault(f => Regex.IsMatch(f, fileName, RegexOptions.IgnoreCase));
             if (file == null) return null;
             var content = await ReadFileAsBinaryAsync(file);
@@ -326,7 +330,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             foreach (var projeStokKart in projeStokKarts)
             {
                 string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
-                    _cache.stokKartList.Add(JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult)[0].stokKart);
                 if (jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
                 {
                     using (var sw = new StreamWriter(logDosyasi, append: true))
@@ -336,6 +339,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 }
                 else
                 {
+                    _cache.stokKartList.Add(JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult)[0].stokKart);
                     if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                     {
                         using (var sw = new StreamWriter(logDosyasi, append: true))

@@ -25,7 +25,7 @@ namespace YektamakDesktop.CustomControls
         private string _placeholder = "Seçiniz...";
 
         [Category("Custom")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string PlaceholderText
         {
             get => _placeholder;
@@ -91,13 +91,21 @@ namespace YektamakDesktop.CustomControls
             dropDown.Items.Add(host);
             //dropDown.Items.Add(infoLabel.Text);
         }
-
+        private bool dropDownOpen = false;
         private void ShowDropDown()
         {
             if (dropDown == null)
                 InitializeDropDown();
-
-            dropDown.Show(this, 0, this.Height);
+            if(dropDownOpen)
+            {
+                dropDown.Close();
+                dropDownOpen = false;
+            }
+            else
+            {
+                dropDown.Show(this, 0, this.Height);
+                dropDownOpen = true;
+            }
         }
 
         public void SetDataSource<T>(List<T> items)

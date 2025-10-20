@@ -70,7 +70,6 @@ namespace YektamakDesktop.Abstracts
 				}
 			}
 		}
-
         public void Dispose()
         {
             

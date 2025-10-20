@@ -1,6 +1,7 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using NPOI.Util;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -109,6 +110,7 @@ namespace YektamakDesktop.Formlar.Genel
                             malzemeAltGrupTanimFormu.UpdateMode(ConvertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup));
                             malzemeAltGrupTanimFormu.TopLevel = false;
                             malzemeAltGrupTanimFormu.Dock = DockStyle.Fill;
+                            malzemeAltGrupTanimFormu.AfterSave += MalzemeAltGrupTanimFormu_AfterSave;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(malzemeAltGrupTanimFormu);
                             malzemeAltGrupTanimFormu.Show();
@@ -129,6 +131,7 @@ namespace YektamakDesktop.Formlar.Genel
                             malzemeAltGrup2TanimFormu.UpdateMode(malzemeAltGrup2);
                             malzemeAltGrup2TanimFormu.TopLevel = false;
                             malzemeAltGrup2TanimFormu.Dock = DockStyle.Fill;
+                            malzemeAltGrup2TanimFormu.AfterSave += MalzemeAltGrup2TanimFormu_AfterSave;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(malzemeAltGrup2TanimFormu);
                             malzemeAltGrup2TanimFormu.Show();

@@ -70,7 +70,7 @@ namespace YektamakDesktop.Formlar.Stok
             result = GlobalData.CheckField("*", clbStokTip) && result;
             result = GlobalData.CheckField("*", clbStokGrup) && result;
             result = GlobalData.CheckField("*", clbMalzemeGrup) && result;
-            if(clbMalzemeGrup.SelectedIndex!=-1) result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
+            if (clbMalzemeGrup.SelectedIndex != -1) result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
             if (clbMalzemeAltGrup.SelectedIndex != -1) result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
             result = GlobalData.CheckField("*", clbOlcuBirim) && result;
             result = GlobalData.CheckField("*", clbProjeKod) && result;
@@ -116,6 +116,7 @@ namespace YektamakDesktop.Formlar.Stok
         {
             BindHelper.BindData(ctbId, projeStokKart, nameof(projeStokKart.Id));
             BindHelper.BindData(ctbStokKartId, projeStokKart.stokKart, nameof(projeStokKart.stokKart.Id));
+            BindHelper.BindData(ctbStokKartNo, projeStokKart, nameof(projeStokKart.no));
             BindHelper.BindData(clbProjeKod, projeStokKart.proje, nameof(projeStokKart.proje.Id));
             BindHelper.BindData(ctbKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod));
             BindHelper.BindData(ctbTedarikciKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.tedarikciKod));
@@ -146,6 +147,8 @@ namespace YektamakDesktop.Formlar.Stok
             BindHelper.BindData(clbStokGrup, projeStokKart.stokKart.stokGrup, nameof(projeStokKart.stokKart.stokGrup.Id));
             BindHelper.BindData(ctbProjeAdet, projeStokKart, nameof(projeStokKart.adet));
             BindHelper.BindData(fcbBoyut, projeStokKart.stokKart.boyutTanim, nameof(projeStokKart.stokKart.boyutTanim.Id));
+            BindHelper.BindData(chkTalasli, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isTalasli));
+            BindHelper.BindData(chkBukum, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isBukum));
             List<DataControlStokKartDosya> dataControlStokKartDosyaList = new List<DataControlStokKartDosya>();
             for (int i = 0; i < projeStokKart.stokKart.dosyaList.Count; i++)
             {
@@ -153,7 +156,7 @@ namespace YektamakDesktop.Formlar.Stok
                 dataControlStokKartDosya.stokKartDosya = projeStokKart.stokKart.dosyaList[i];
                 dataControlStokKartDosyaList.Add(dataControlStokKartDosya);
             }
-            customDataGrid = new CustomDataGrid<DataControlStokKartDosya>(2, 30, new Point(5, 5), new Size(700, 250));
+            customDataGrid = new CustomDataGrid<DataControlStokKartDosya>(2, 27, new Point(5, 5), new Size(700, 250));
 
             panel1.Controls.Clear();
             panel1.Controls.Add(customDataGrid.headerPanel);
@@ -271,7 +274,7 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void clbStokTip_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (clbStokTip.SelectedItem!=null && ((StokTip)clbStokTip.SelectedItem).ad.Contains("SARF",StringComparison.OrdinalIgnoreCase))
+            if (clbStokTip.SelectedItem != null && ((StokTip)clbStokTip.SelectedItem).ad.Contains("SARF", StringComparison.OrdinalIgnoreCase))
             {
                 clbStokGrup.SelectedValue = 7;// Sarf
                 ctbKod.Enabled = false;
@@ -285,7 +288,7 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void clbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

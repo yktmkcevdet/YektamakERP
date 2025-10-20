@@ -16,25 +16,26 @@ namespace YektamakWeb.Commands.Accounts
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IPasswordService _passwordService;
-        public LoginService(CustomAuthStateProvider authStateProvider, NavigationManager navigationManager, IConfiguration configuration,IUserService userService, IPasswordService passwordService)
+        private readonly ICache _cache;
+        public LoginService(CustomAuthStateProvider authStateProvider, NavigationManager navigationManager, IConfiguration configuration,IUserService userService, 
+            IPasswordService passwordService, ICache cache)
         {
             _authStateProvider = authStateProvider;
             _navigationManager = navigationManager;
             _configuration = configuration;
             _userService = userService;
             _passwordService = passwordService;
+            _cache = cache;
         }
 
         public async Task<string?> LoginAsync(string username, string password)
         {
             ILoginHelper loginHelper = new LoginHelper();
             JwtHelper jwtHelper = new JwtHelper(_configuration);
-            Kullanici user = new Kullanici();
-            user = await _userService.GetKullaniciAsync(username);
-            string sifre = loginHelper.ComputeHash(password, user.salt);
-            if (_passwordService.VerifyPassword(password, user.sifre))
+            _cache.kullanici = await _userService.GetKullaniciAsync(username);
+            if (_passwordService.VerifyPassword(password, _cache.kullanici.sifre))
             {
-                var jwtToken = new LoginHandler(_configuration).GenerateJwtToken(user);
+                var jwtToken = new LoginHandler(_configuration).GenerateJwtToken(_cache.kullanici);
                 await _authStateProvider.NotifyUserAuthentication(jwtHelper.GetClaimsPrincipalFromToken(jwtToken));
                 return jwtToken;
             }

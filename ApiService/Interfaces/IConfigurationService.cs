@@ -1,5 +1,5 @@
 ﻿using Models;
-using Models.Configuration;
+using Models.DTO;
 
 namespace ApiService.Interfaces
 {

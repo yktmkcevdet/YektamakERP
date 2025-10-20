@@ -22,9 +22,10 @@ namespace Utilities.Implementations
         private readonly IMaliyetService _maliyetService;
         private readonly IAnaVeriService _anaVeriService;
         private readonly IVadeService _vadeService;
+        private readonly IConfigurationService _configurationService;
         public Cache(IJsonConverter jsonConverter, IProjeService projeService, 
-            IStokService stokService,IKullaniciYetkiService kullaniciYetki,IFirmaService firmaService,IPersonelService personelService,ISatisService satisService,
-            IDovizCinsiService dovizCinsiService,IMaliyetService maliyetService,IAnaVeriService anaVeriService, IVadeService vadeService)
+            IStokService stokService, IKullaniciYetkiService kullaniciYetki, IFirmaService firmaService, IPersonelService personelService, ISatisService satisService,
+            IDovizCinsiService dovizCinsiService, IMaliyetService maliyetService, IAnaVeriService anaVeriService, IVadeService vadeService, IConfigurationService configurationService)
         {
             _jsonConverter = jsonConverter;
             _projeService = projeService;
@@ -37,15 +38,16 @@ namespace Utilities.Implementations
             _maliyetService = maliyetService;
             _anaVeriService = anaVeriService;
             _vadeService = vadeService;
+            _configurationService = configurationService;
         }
-        private Models.Kullanici _kullanici;
-        public Models.Kullanici kullanici
+        private Kullanici _kullanici;
+        public Kullanici kullanici
         {
             get
             {
                 if (_kullanici == null)
                 {
-                    _kullanici = new Models.Kullanici();
+                    _kullanici = new Kullanici();
                 }
                 return _kullanici;
             }
@@ -529,6 +531,30 @@ namespace Utilities.Implementations
                     _kdvList = GetModelList<KDV>(_anaVeriService.GetKdv);
                 }
                 return _kdvList;
+            }
+        }
+        private Task<List<DosyalamaYapisi>> _dosyalamaYapisiList;
+        public Task<List<DosyalamaYapisi>> dosyalamaYapisiList
+        {
+            get
+            {
+                if (_dosyalamaYapisiList == null)
+                {
+                    _dosyalamaYapisiList = GetModelListAsync<DosyalamaYapisi>(async()=>{ return await _configurationService.GetDosyalamaYapisi(new DosyalamaYapisi()); });
+                }
+                return _dosyalamaYapisiList;
+            }
+        }
+        private List<ExcelGrupParametre> _excelGrupParametreList;
+        public List<ExcelGrupParametre> excelGrupParametreList
+        {
+            get
+            {
+                if (_excelGrupParametreList == null)
+                {
+                    _excelGrupParametreList = GetModelList<ExcelGrupParametre>(()=> { return _stokService.GetExcelGrupParametre(new ExcelGrupParametre()); });
+                }
+                return _excelGrupParametreList;
             }
         }
 

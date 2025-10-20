@@ -28,14 +28,19 @@ namespace YektamakDesktop.Formlar.Genel
         private void Initialize()
         {
             InitializeComponent();
-            headerPanel1.Baslik = "Malzeme Alt Grup Tanımlama";
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Location = new System.Drawing.Point(37, 340);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(627, 409);
-            universalGrid1.TabIndex = 16;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<MalzemeAltGrup2DTO>(), this.Name);
             this.Load += MalzemeAltGrup2TanimFormu_Load;
 
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
@@ -48,12 +53,12 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void MalzemeAltGrup2TanimFormu_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
-            malzemeAltGrup2 = (MalzemeAltGrup2)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            malzemeAltGrup2 = ConvertHelper.ToEntity<MalzemeAltGrup2>((MalzemeAltGrup2DTO)universalGrid1.Grid.CurrentRow.DataBoundItem);
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(universalGrid1, e.Location);
@@ -119,7 +124,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
         public void UpdateMode(MalzemeAltGrup2 malzemeAltGrup2)
         {
-            this.malzemeAltGrup2 = malzemeAltGrup2;
+            this.malzemeAltGrup2 = JsonConvert.DeserializeObject<MalzemeAltGrup2>(JsonConvert.SerializeObject(malzemeAltGrup2));
         }
         private bool CheckFields()
         {
@@ -140,6 +145,11 @@ namespace YektamakDesktop.Formlar.Genel
         private void fcbMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             universalGrid1.Filtrele(ConvertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
+        }
+
+        private void MalzemeAltGrup2TanimFormu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveSettings();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.Size = new System.Drawing.Size(959, 473);
             universalGrid1.TabIndex = 1;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<SatinalmaTeklifBaslikDTO>(), this.Name, true);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1; ;
             ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);

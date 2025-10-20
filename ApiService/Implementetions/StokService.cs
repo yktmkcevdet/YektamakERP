@@ -91,12 +91,12 @@ namespace ApiService.Implementetions
             return _apiService.Post(stokKart, $"GetStokKart/");
         }
 
-        public async Task<string> GetStokKartPdf(StokKart stokKart)
+        public string GetStokKartPdf(StokKart stokKart)
         {
-            return await _apiService.PostAsync(stokKart, "GetStokKartPdf");
+            return _apiService.Post(stokKart, "GetStokKartPdf");
         }
 
-        public async Task<string> GetStokKartPdfAsync(StokKart stokKart)
+        public async Task<string> GetStokKartPdfAsync(ProjeStokKart stokKart)
         {
             return await _apiService.PostAsync(stokKart, $"GetStokKartPdf/");
         }
@@ -110,7 +110,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(stokKart, "SaveStokKart");
         }
-        public async Task<string> DeleteStokKart(StokKart stokKart)
+        public async Task<string> DeleteStokKart(ProjeStokKart stokKart)
         {
             return await _apiService.PostAsync(stokKart, "DeleteStokKart");
         }
@@ -118,7 +118,7 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(stokKartDosya, "DeleteStokKartDosya");
         }
-        public async Task<string> SaveStokKartHammadde(StokKart stokKart)
+        public async Task<string> SaveStokKartHammadde(ProjeStokKart stokKart)
         {
             return await _apiService.PostAsync(stokKart, "SaveStokKartHammadde");
         }

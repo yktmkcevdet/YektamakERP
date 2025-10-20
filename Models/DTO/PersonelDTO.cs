@@ -11,8 +11,8 @@ namespace Models.DTO
         [GridDisplay(Header = "Telefon")] public string telefon { get; set; }
         [GridDisplay(Header = "mail")] public string mail { get; set; }
         [GridDisplay(Header = "firmaId")] public int? firmaId { get; set; }
-        [GridDisplay(Header = "pozisyonId")] public int? pozisyonId { get; set; }
-        [GridDisplay(Header = "yoneticiId")] public int? yoneticiPersonelId { get; set; }
+        [GridDisplay(Header = "pozisyonId",Tip ="Liste",ListName = "pozisyonList",ListVisibleColumnName ="ad")] public int? pozisyonId { get; set; }
+        [GridDisplay(Header = "yoneticiId", Tip = "Liste", ListName = "personelList", ListVisibleColumnName = "adSoyad")] public int? yoneticiPersonelId { get; set; }
         public int? personelResimId { get; set; }
         public byte[] personelResimdata { get; set; }
         

@@ -64,7 +64,7 @@
             comboListBoxRol.Padding = new System.Windows.Forms.Padding(1);
             comboListBoxRol.selectedDataRowId = null;
             comboListBoxRol.selectedDataRowValue = null;
-            comboListBoxRol.Size = new System.Drawing.Size(277, 36);
+            comboListBoxRol.Size = new System.Drawing.Size(277, 37);
             comboListBoxRol.TabIndex = 52;
             // 
             // contextMenuStrip1
@@ -97,7 +97,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(795, 32);
+            headerPanel1.Size = new System.Drawing.Size(795, 25);
             headerPanel1.TabIndex = 53;
             // 
             // cbxKullanici
@@ -110,7 +110,7 @@
             cbxKullanici.Padding = new System.Windows.Forms.Padding(1);
             cbxKullanici.selectedDataRowId = null;
             cbxKullanici.selectedDataRowValue = null;
-            cbxKullanici.Size = new System.Drawing.Size(250, 36);
+            cbxKullanici.Size = new System.Drawing.Size(250, 37);
             cbxKullanici.TabIndex = 55;
             cbxKullanici.SelectedIndexChanged += cbxKullanici_SelectedIndexChanged;
             // 

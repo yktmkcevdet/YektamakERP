@@ -1,5 +1,6 @@
 using Api.Business;
 using Api.Converters;
+using Api.Interfaces;
 using Api.TokenJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +16,7 @@ namespace Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySqlLocal>();
+            builder.Services.AddScoped<IProjeStokKartService, ProjeStokKartService>();
 
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin
             //              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

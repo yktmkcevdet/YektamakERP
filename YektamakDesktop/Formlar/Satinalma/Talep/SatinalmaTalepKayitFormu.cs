@@ -1,5 +1,4 @@
-﻿using ApiService.Implementetions;
-using ApiService.Interfaces;
+﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
 using Newtonsoft.Json;
@@ -11,7 +10,6 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -39,7 +37,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             InitializeComponent();
             Initialize();
         }
-        private void Initialize()
+        private async void Initialize()
         {
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
@@ -50,12 +48,13 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.TabIndex = 124;
             universalGrid1.MouseDown1 += universalGrid1_MouseClick;
             Controls.Add(universalGrid1);
-            ComboBoxListFill.GetLookupAd(_cache.talepNedenList, ref fcbTalepNeden);
+            fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKodu);
+            clbProjeKodu.SetDataSource(_cache.projes.Where(p=>p.personel.Id==_cache.kullanici.personel.Id).ToList());
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             satinalmaTalep.talepTarihi = DateTime.Today;
+            await universalGrid1.SetData(new List<SatinalmaTalepDetayDTO>(), this.Name, true);
         }
         public event EventHandler<SatinalmaTalepDTO> TalepOnaylandi;
         private SatinalmaTalep _satinalmaTalep;
@@ -92,10 +91,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             foreach (var std in _satinalmaTalep.satinalmaTalepDetays)
             {
                 satinalmaTalepDetayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDetayDTO>(std));
-                _cache.stokKartList.Add(std.stokKart);
+                _cache.stokKartList.Add(std.projeStokKart.stokKart);
             }
-
             await universalGrid1.SetData(satinalmaTalepDetayList, this.Name, true);
+
         }
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
@@ -107,7 +106,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
                 CreateSatinalmaTalep();
                 string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
-                if(satinalmaTalep.onayKullanici.Id == _cache.kullanici.Id)
+                if (satinalmaTalep.onayKullanici.Id == _cache.kullanici.Id)
                 {
                     satinalmaTalep.onayDurum = true;
                     string jsonResultOnay = await _satinalmaTalepService.SatinalmaTalepOnay(satinalmaTalep);
@@ -179,9 +178,9 @@ namespace YektamakDesktop.Formlar.Satinalma
                 SetRowData(sheet, row, currentRow);
                 currentRow++;
             }
-            if (currentRow < 151) 
+            if (currentRow < 151)
             {
-                for (int i = 150; i > currentRow-1; i--) 
+                for (int i = 150; i > currentRow - 1; i--)
                 {
                     IRow row = sheet.GetRow(i);
                     if (row != null)
@@ -202,16 +201,16 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void SetRowData(ISheet sheet, SatinalmaTalepDetayDTO row, int rowIndex)
         {
-            SetCellValue(sheet, rowIndex, 1, row.stokKartkod?.ToString());
-            SetCellValue(sheet, rowIndex, 2, row.stokKartad?.ToString());
+            SetCellValue(sheet, rowIndex, 1, row.projeStokKartstokKartkod?.ToString());
+            SetCellValue(sheet, rowIndex, 2, row.projeStokKartstokKartad?.ToString());
             SetCellValue(sheet, rowIndex, 6, row.miktar?.ToString("N0"));
-            SetCellValue(sheet, rowIndex, 8, row.stokKartmalzemeStandart?.ToString());
+            SetCellValue(sheet, rowIndex, 8, row.projeStokKartstokKartmalzemeStandart?.ToString());
             //SetCellValue(sheet, rowIndex, 10, row.Cells[SatinalmaTalepDetayDTOHeader.ProjeStokKartAdet].FormattedValue?.ToString());
-            SetCellValue(sheet, rowIndex, 13, row.stokKartboyut?.ToString());
-            SetCellValue(sheet, rowIndex, 15, row.stokKartuzunluk?.ToString());
-            SetCellValue(sheet, rowIndex, 17, row.stokKartagirlik?.ToString("N1"));
+            SetCellValue(sheet, rowIndex, 13, row.projeStokKartstokKartboyut?.ToString());
+            SetCellValue(sheet, rowIndex, 15, row.projeStokKartstokKartuzunluk?.ToString());
+            SetCellValue(sheet, rowIndex, 17, row.projeStokKartstokKartagirlik?.ToString("N1"));
             SetCellValue(sheet, rowIndex, 19, row.agirlik?.ToString("N1"));
-            SetCellValue(sheet, rowIndex, 21, row.stokKartaciklama?.ToString());
+            SetCellValue(sheet, rowIndex, 21, row.projeStokKartstokKartaciklama?.ToString());
 
         }
         private void SetCellValue(ISheet sheet, int rowIndex, int cellIndex, string value)
@@ -318,7 +317,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
-            ProjeStokKart projeStokKart = new ProjeStokKart { stokKart = satinalmaTalepDetay.stokKart };
+            ProjeStokKart projeStokKart =  satinalmaTalepDetay.projeStokKart;
             string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -346,8 +345,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             var list = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>();
             var stok = FormFactory.CreateForm<StokKartKayitFormu>();
             ProjeStokKart projeStokKart = new ProjeStokKart();
-            projeStokKart.stokKart = ConvertHelper.ToEntity<SatinalmaTalepDetay>(list[0]).stokKart;
-            projeStokKart.stokKart.Id = null;
+            projeStokKart = ConvertHelper.ToEntity<SatinalmaTalepDetay>(list[0]).projeStokKart;
             stok.UpdateMode(projeStokKart);
             stok.ShowDialog();
 

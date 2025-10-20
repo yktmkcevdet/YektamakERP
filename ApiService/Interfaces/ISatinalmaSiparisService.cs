@@ -1,9 +1,4 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiService.Interfaces
 {
@@ -11,5 +6,6 @@ namespace ApiService.Interfaces
     {
         public Task<string> GetSatinalmaSiparisAsync(SatinalmaSiparis satinalmaSiparis);
         public Task<string> SaveSatinalmaSiparis(SatinalmaSiparis satinalmaSiparis);
+        public Task<string> DeleteSatinalmaSiparis(SatinalmaSiparis satinalmaSiparis);
     }
 }

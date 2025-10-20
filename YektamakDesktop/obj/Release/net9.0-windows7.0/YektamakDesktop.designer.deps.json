@@ -6,11 +6,19 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "BouncyCastle.Cryptography/2.3.1": {
+      "BouncyCastle.Cryptography/2.4.0": {
         "runtime": {
           "lib/net6.0/BouncyCastle.Cryptography.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.3.1.17862"
+            "fileVersion": "2.4.0.33771"
+          }
+        }
+      },
+      "DG.AdvancedDataGridView/1.2.30115.18": {
+        "runtime": {
+          "lib/net8.0-windows7.0/AdvancedDataGridView.dll": {
+            "assemblyVersion": "1.2.30115.18",
+            "fileVersion": "1.2.30115.18"
           }
         }
       },
@@ -110,6 +118,17 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "iTextSharp/5.5.13.4": {
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.4.0"
+        },
+        "runtime": {
+          "lib/net461/itextsharp.dll": {
+            "assemblyVersion": "5.5.13.4",
+            "fileVersion": "5.5.13.4"
           }
         }
       },
@@ -667,6 +686,163 @@
           }
         }
       },
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1652.0": {
+        "dependencies": {
+          "Microsoft.SqlServer.Types": "14.0.314.76"
+        },
+        "runtime": {
+          "lib/net40/Microsoft.ReportViewer.Common.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.1652.0"
+          },
+          "lib/net40/Microsoft.ReportViewer.DataVisualization.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.1652.0"
+          },
+          "lib/net40/Microsoft.ReportViewer.Design.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.1652.0"
+          },
+          "lib/net40/Microsoft.ReportViewer.ProcessingObjectModel.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.1652.0"
+          },
+          "lib/net40/Microsoft.ReportViewer.WinForms.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.1652.0"
+          }
+        },
+        "resources": {
+          "lib/net40/de/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/de/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/de/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/de/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/es/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/es/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/es/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/es/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/fr/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/fr/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/fr/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/fr/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/it/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/it/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/it/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/it/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/ja/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net40/ja/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net40/ja/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net40/ja/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net40/ko/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net40/ko/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net40/ko/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net40/ko/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net40/pt/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/net40/pt/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/net40/pt/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/net40/pt/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/net40/ru/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/ru/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/ru/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/ru/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/zh-CHS/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "zh-CHS"
+          },
+          "lib/net40/zh-CHS/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "zh-CHS"
+          },
+          "lib/net40/zh-CHS/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "zh-CHS"
+          },
+          "lib/net40/zh-CHS/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "zh-CHS"
+          },
+          "lib/net40/zh-CHT/Microsoft.ReportViewer.Common.resources.dll": {
+            "locale": "zh-CHT"
+          },
+          "lib/net40/zh-CHT/Microsoft.ReportViewer.DataVisualization.resources.dll": {
+            "locale": "zh-CHT"
+          },
+          "lib/net40/zh-CHT/Microsoft.ReportViewer.Design.resources.dll": {
+            "locale": "zh-CHT"
+          },
+          "lib/net40/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll": {
+            "locale": "zh-CHT"
+          }
+        }
+      },
+      "Microsoft.SqlServer.Types/14.0.314.76": {
+        "runtime": {
+          "lib/net40/Microsoft.SqlServer.Types.dll": {
+            "assemblyVersion": "14.0.0.0",
+            "fileVersion": "2016.140.100.187"
+          }
+        }
+      },
       "Microsoft.Win32.SystemEvents/9.0.0": {
         "runtime": {
           "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
@@ -701,14 +877,14 @@
       },
       "NPOI/2.7.2": {
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.3.1",
+          "BouncyCastle.Cryptography": "2.4.0",
           "Enums.NET": "4.0.1",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.0",
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.9",
+          "SixLabors.ImageSharp": "2.1.11",
           "System.Security.Cryptography.Pkcs": "9.0.0",
           "System.Security.Cryptography.Xml": "9.0.0"
         },
@@ -728,26 +904,6 @@
           "lib/net6.0/NPOI.OpenXmlFormats.dll": {
             "assemblyVersion": "2.7.2.0",
             "fileVersion": "2.7.2.0"
-          }
-        }
-      },
-      "Pdfium.Net.SDK/4.96.2704": {
-        "runtime": {
-          "lib/net8.0-windows/Patagames.Pdf.Gdi.dll": {
-            "assemblyVersion": "1.2.0.80",
-            "fileVersion": "1.2.0.80"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.WinForms.dll": {
-            "assemblyVersion": "4.29.18.80",
-            "fileVersion": "4.29.18.80"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.Wpf.dll": {
-            "assemblyVersion": "4.29.20.80",
-            "fileVersion": "4.29.20.80"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.dll": {
-            "assemblyVersion": "11.85.47.80",
-            "fileVersion": "11.85.47.80"
           }
         }
       },
@@ -821,7 +977,7 @@
           }
         }
       },
-      "SixLabors.ImageSharp/2.1.9": {
+      "SixLabors.ImageSharp/2.1.11": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0",
           "System.Text.Encoding.CodePages": "9.0.0"
@@ -829,11 +985,11 @@
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.9.0"
+            "fileVersion": "2.1.11.0"
           }
         }
       },
-      "Spire.PDF/11.4.10": {
+      "Spire.PDF/11.8.0": {
         "dependencies": {
           "HarfBuzzSharp": "8.3.0.1",
           "System.Drawing.Common": "9.0.0",
@@ -844,8 +1000,8 @@
         },
         "runtime": {
           "lib/net9.0/Spire.Pdf.dll": {
-            "assemblyVersion": "11.4.10.0",
-            "fileVersion": "11.4.10.1390"
+            "assemblyVersion": "11.8.0.0",
+            "fileVersion": "11.8.0.1390"
           }
         }
       },
@@ -989,16 +1145,51 @@
             "fileVersion": "9.0.24.52809"
           }
         }
+      },
+      "Visiativ.SOLIDWORKS.DocumentManager.Interop/33.0.0": {
+        "runtime": {
+          "lib/net6.0/SolidWorks.Interop.swdocumentmgr.dll": {
+            "assemblyVersion": "33.0.0.5050",
+            "fileVersion": "33.0.0.5050"
+          }
+        }
+      },
+      "Visiativ.SOLIDWORKS.Interop/33.0.0": {
+        "runtime": {
+          "lib/net6.0/SolidWorks.Interop.sldworks.dll": {
+            "assemblyVersion": "33.0.0.5050",
+            "fileVersion": "33.0.0.5050"
+          },
+          "lib/net6.0/SolidWorks.Interop.swcommands.dll": {
+            "assemblyVersion": "33.0.0.5050",
+            "fileVersion": "33.0.0.5050"
+          },
+          "lib/net6.0/SolidWorks.Interop.swconst.dll": {
+            "assemblyVersion": "33.0.0.5050",
+            "fileVersion": "33.0.0.5050"
+          },
+          "lib/net6.0/SolidWorks.Interop.swpublished.dll": {
+            "assemblyVersion": "33.0.0.5050",
+            "fileVersion": "33.0.0.5050"
+          }
+        }
       }
     }
   },
   "libraries": {
-    "BouncyCastle.Cryptography/2.3.1": {
+    "BouncyCastle.Cryptography/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ==",
-      "path": "bouncycastle.cryptography/2.3.1",
-      "hashPath": "bouncycastle.cryptography.2.3.1.nupkg.sha512"
+      "sha512": "sha512-SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ==",
+      "path": "bouncycastle.cryptography/2.4.0",
+      "hashPath": "bouncycastle.cryptography.2.4.0.nupkg.sha512"
+    },
+    "DG.AdvancedDataGridView/1.2.30115.18": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-natekCFqarfedCa7IpUZxqRdhNqI/QqLh5EzJhVDrCy9cY3Qm0W9RwXjaLol1g64sIiEiRKghTIRjhnjAcwDzw==",
+      "path": "dg.advanceddatagridview/1.2.30115.18",
+      "hashPath": "dg.advanceddatagridview.1.2.30115.18.nupkg.sha512"
     },
     "Enums.NET/4.0.1": {
       "type": "package",
@@ -1062,6 +1253,13 @@
       "sha512": "sha512-ow0DtGEUjo65qhiI22of7qiVbN1xDFsZ5P5xJljRmGZ5WSxNy+1batLNJFGxahqhB1MTHYV8kAXf0GqC8WaevQ==",
       "path": "harfbuzzsharp.nativeassets.win32/8.3.0.1",
       "hashPath": "harfbuzzsharp.nativeassets.win32.8.3.0.1.nupkg.sha512"
+    },
+    "iTextSharp/5.5.13.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/cvCNv8AJ+XuD99u4NfHSSxkBJKTdvP36wcfQF9V1Cjzi1ycyFSa4vJ64a3DhFVUTKVO60WF8OmAqngQDTHgYA==",
+      "path": "itextsharp/5.5.13.4",
+      "hashPath": "itextsharp.5.5.13.4.nupkg.sha512"
     },
     "MathNet.Numerics.Signed/5.0.0": {
       "type": "package",
@@ -1301,6 +1499,20 @@
       "path": "microsoft.io.recyclablememorystream/3.0.0",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512"
     },
+    "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1652.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-635TIM0OY7vreXBj5xTx2bV+lnMgCaKcPT+UzRghF7HGVVwfKfZD5Bv7Kcj/3rzVe96POj5h9YT5IYqXGLu7vA==",
+      "path": "microsoft.reportingservices.reportviewercontrol.winforms/150.1652.0",
+      "hashPath": "microsoft.reportingservices.reportviewercontrol.winforms.150.1652.0.nupkg.sha512"
+    },
+    "Microsoft.SqlServer.Types/14.0.314.76": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gAekCmSfjtRBaiuuRIqJJV6cfEsEbYY5vI7Ssoc5sYI04JcyPrZ4C8RC3z7K9xfpr9ejQAQ1AtfvtgqEnjmwOw==",
+      "path": "microsoft.sqlserver.types/14.0.314.76",
+      "hashPath": "microsoft.sqlserver.types.14.0.314.76.nupkg.sha512"
+    },
     "Microsoft.Win32.SystemEvents/9.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1328,13 +1540,6 @@
       "sha512": "sha512-hKJeAQOuVl8b2qiQQg0ph8uhqm5ihq94SDSnmPu5ytCLIRTVcg2rFA274ow+IacrORImdvo0Q3K51L1t3vLqpw==",
       "path": "npoi/2.7.2",
       "hashPath": "npoi.2.7.2.nupkg.sha512"
-    },
-    "Pdfium.Net.SDK/4.96.2704": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-P1K+5jpnQw81U+/KhuIzYF0H5PWWSAWxckbquT7B3gwA1qlA0g41a8q543jP4LqFJAUGjSXKm/piAJ08cQh7Ag==",
-      "path": "pdfium.net.sdk/4.96.2704",
-      "hashPath": "pdfium.net.sdk.4.96.2704.nupkg.sha512"
     },
     "RtfPipe/2.0.7677.4303": {
       "type": "package",
@@ -1385,19 +1590,19 @@
       "path": "sixlabors.fonts/1.0.1",
       "hashPath": "sixlabors.fonts.1.0.1.nupkg.sha512"
     },
-    "SixLabors.ImageSharp/2.1.9": {
+    "SixLabors.ImageSharp/2.1.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VcjfKbOExie3RgZGrQL1jJMI4iZ3J9B6ifDo2QpDVJUYhTZKVcKnBhpNOHqbvNjHgadAks1jzhRjB7OZet1PJA==",
-      "path": "sixlabors.imagesharp/2.1.9",
-      "hashPath": "sixlabors.imagesharp.2.1.9.nupkg.sha512"
+      "sha512": "sha512-tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
+      "path": "sixlabors.imagesharp/2.1.11",
+      "hashPath": "sixlabors.imagesharp.2.1.11.nupkg.sha512"
     },
-    "Spire.PDF/11.4.10": {
+    "Spire.PDF/11.8.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1mBzHheZCoqnn9fBmQabEJplbsl13d35Fn40ROfUmKPV4wf7Q+Zs/v5ldF0UQrZ6GFWfWLHW6XSsN0FI4YnMjA==",
-      "path": "spire.pdf/11.4.10",
-      "hashPath": "spire.pdf.11.4.10.nupkg.sha512"
+      "sha512": "sha512-yiRonZqaCT7UXihXyXpNzHHKeldUPagoe75qlRMJyLidC5v4owFhOfBUrse30zDlHDadukfU7pe1dwCxBZqdAg==",
+      "path": "spire.pdf/11.8.0",
+      "hashPath": "spire.pdf.11.8.0.nupkg.sha512"
     },
     "System.Collections.Immutable/5.0.0": {
       "type": "package",
@@ -1489,6 +1694,20 @@
       "sha512": "sha512-U9msthvnH2Fsw7xwAvIhNHOdnIjOQTwOc8Vd0oGOsiRcGMGoBFlUD6qtYawRUoQdKH9ysxesZ9juFElt1Jw/7A==",
       "path": "system.windows.extensions/9.0.0",
       "hashPath": "system.windows.extensions.9.0.0.nupkg.sha512"
+    },
+    "Visiativ.SOLIDWORKS.DocumentManager.Interop/33.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-S72kQ4DipqqgpPKdRtgnp1s+igojFowwJPGwnkJxos5CYNh0Xr8jqryxjacoHHogg91XNb0h3fIP4SbFe5UIXg==",
+      "path": "visiativ.solidworks.documentmanager.interop/33.0.0",
+      "hashPath": "visiativ.solidworks.documentmanager.interop.33.0.0.nupkg.sha512"
+    },
+    "Visiativ.SOLIDWORKS.Interop/33.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+yke8aZiBO4MXN9TtSYSueeEK0sgPnrZVUU2eEqUTyqm4FiVzL/0IDM1jj4kNPLk8Lvt97nyTGBLOPLg3BJRgw==",
+      "path": "visiativ.solidworks.interop/33.0.0",
+      "hashPath": "visiativ.solidworks.interop.33.0.0.nupkg.sha512"
     }
   }
 }

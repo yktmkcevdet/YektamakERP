@@ -11,6 +11,8 @@ using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakWeb.Commands.Accounts;
 using YektamakWeb.Hub;
+using MudBlazor.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +28,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthorization();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddBlazorBootstrap();
-
+builder.Services.AddMudServices();
+builder.Services.AddMudBlazorJsEvent();
 // Dependency Injection
 builder.Services.AddApiServices();
 builder.Services.AddUtilities();
@@ -36,7 +38,7 @@ builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.Get
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddTransient<YektamakWeb.Commands.Accounts.UserService>();
+builder.Services.AddTransient<UserService>();
 builder.Services.AddScoped<LoginService>();
 
 // JWT Authentication

@@ -6,7 +6,7 @@ namespace ApiService.Interfaces
     {
         public Task<string> GetStokKartAsync(StokKart stokKart=null);
         public string GetStokKart(StokKart stokKart = null);
-        public Task<string> GetStokKartPdf(StokKart stokKart);
+        public string GetStokKartPdf(StokKart stokKart);
         public string GetStokGrup(StokGrup stokGrup);
         public string SaveStokGrup(StokGrup stokGrup);
         public string DeleteStokGrup(StokGrup stokGrup);
@@ -27,12 +27,12 @@ namespace ApiService.Interfaces
         public string GetMalzemeStandart(MalzemeStandart malzemeStandart);
         public Task<string> SaveStokKart(StokKart stokKart);
         public Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart);
-        public Task<string> SaveStokKartHammadde(StokKart stokKart);
+        public Task<string> SaveStokKartHammadde(ProjeStokKart stokKart);
         public Task<string> GetStokGrupKriter();
         public string GetExcelGrupParametre(ExcelGrupParametre excelGrupParametre);
         public string SaveExcelGrupParametre(ExcelGrupParametre excelGrupParametre);
         public string DeleteExcelGrupParametre(ExcelGrupParametre excelGrupParametre);
-        public Task<string> DeleteStokKart(StokKart stokKart);
+        public Task<string> DeleteStokKart(ProjeStokKart stokKart);
         public Task<string> DeleteStokKartDosya(StokKartDosya stokKartDosya);
 
     }

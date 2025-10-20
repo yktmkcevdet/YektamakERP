@@ -45,7 +45,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(803, 32);
+            headerPanel1.Size = new System.Drawing.Size(803, 25);
             headerPanel1.TabIndex = 0;
             // 
             // ctxtFormAd
@@ -53,12 +53,11 @@
             ctxtFormAd.BackColor = System.Drawing.Color.White;
             ctxtFormAd.BorderColor = System.Drawing.Color.Silver;
             ctxtFormAd.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctxtFormAd.BorderRadius = 5;
             ctxtFormAd.BorderSize = 1;
-            ctxtFormAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctxtFormAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctxtFormAd.ForeColor = System.Drawing.Color.Black;
-            ctxtFormAd.isPlaceHolder = false;
             ctxtFormAd.Location = new System.Drawing.Point(224, 91);
+            ctxtFormAd.Margin = new System.Windows.Forms.Padding(1);
             ctxtFormAd.Multiline = false;
             ctxtFormAd.Name = "ctxtFormAd";
             ctxtFormAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -67,7 +66,7 @@
             ctxtFormAd.PlaceholderText = "";
             ctxtFormAd.ReadOnly = false;
             ctxtFormAd.SelectionStart = 0;
-            ctxtFormAd.Size = new System.Drawing.Size(363, 28);
+            ctxtFormAd.Size = new System.Drawing.Size(363, 33);
             ctxtFormAd.TabIndex = 1;
             ctxtFormAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctxtFormAd.TextCustom = "";
@@ -78,12 +77,11 @@
             ctxtFilePath.BackColor = System.Drawing.Color.White;
             ctxtFilePath.BorderColor = System.Drawing.Color.Silver;
             ctxtFilePath.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctxtFilePath.BorderRadius = 5;
             ctxtFilePath.BorderSize = 1;
-            ctxtFilePath.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctxtFilePath.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctxtFilePath.ForeColor = System.Drawing.Color.Black;
-            ctxtFilePath.isPlaceHolder = false;
             ctxtFilePath.Location = new System.Drawing.Point(224, 139);
+            ctxtFilePath.Margin = new System.Windows.Forms.Padding(1);
             ctxtFilePath.Multiline = false;
             ctxtFilePath.Name = "ctxtFilePath";
             ctxtFilePath.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -92,7 +90,7 @@
             ctxtFilePath.PlaceholderText = "";
             ctxtFilePath.ReadOnly = false;
             ctxtFilePath.SelectionStart = 0;
-            ctxtFilePath.Size = new System.Drawing.Size(363, 28);
+            ctxtFilePath.Size = new System.Drawing.Size(363, 33);
             ctxtFilePath.TabIndex = 2;
             ctxtFilePath.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctxtFilePath.TextCustom = "";
@@ -103,11 +101,17 @@
             btnDosyaSec.BackColor = System.Drawing.Color.MediumSlateBlue;
             btnDosyaSec.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             btnDosyaSec.BorderColor = System.Drawing.Color.PaleVioletRed;
-            btnDosyaSec.CornerRadius = 8;
             btnDosyaSec.BorderSize = 0;
+            btnDosyaSec.CornerRadius = 8;
             btnDosyaSec.FlatAppearance.BorderSize = 0;
             btnDosyaSec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnDosyaSec.ForeColor = System.Drawing.Color.White;
+            btnDosyaSec.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnDosyaSec.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnDosyaSec.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnDosyaSec.HoverColor2 = System.Drawing.Color.Navy;
+            btnDosyaSec.Icon = null;
+            btnDosyaSec.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnDosyaSec.Location = new System.Drawing.Point(593, 139);
             btnDosyaSec.Name = "btnDosyaSec";
             btnDosyaSec.Size = new System.Drawing.Size(35, 28);
@@ -122,11 +126,17 @@
             btnSave.BackColor = System.Drawing.Color.MediumSlateBlue;
             btnSave.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             btnSave.BorderColor = System.Drawing.Color.PaleVioletRed;
-            btnSave.CornerRadius = 8;
             btnSave.BorderSize = 0;
+            btnSave.CornerRadius = 8;
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSave.ForeColor = System.Drawing.Color.White;
+            btnSave.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnSave.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnSave.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnSave.HoverColor2 = System.Drawing.Color.Navy;
+            btnSave.Icon = null;
+            btnSave.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSave.Location = new System.Drawing.Point(463, 274);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(96, 32);

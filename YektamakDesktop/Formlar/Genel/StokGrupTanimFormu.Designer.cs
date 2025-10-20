@@ -1,4 +1,7 @@
-﻿namespace YektamakDesktop.Formlar.Genel
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace YektamakDesktop.Formlar.Genel
 {
     partial class StokGrupTanimFormu
     {
@@ -49,85 +52,119 @@
             headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.SteelBlue;
+            headerPanel1.Baslik = "Stok Grup Tanımlama";
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(579, 32);
+            headerPanel1.Size = new System.Drawing.Size(579, 25);
             headerPanel1.TabIndex = 0;
             // 
             // ctbStokGrupId
             // 
             ctbStokGrupId.BackColor = System.Drawing.Color.White;
-            ctbStokGrupId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbStokGrupId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbStokGrupId.ForeColor = System.Drawing.Color.Black;
-            ctbStokGrupId.Location = new System.Drawing.Point(151, 47);
+            ctbStokGrupId.Location = new System.Drawing.Point(113, 47);
+            ctbStokGrupId.Margin = new System.Windows.Forms.Padding(1);
             ctbStokGrupId.Name = "ctbStokGrupId";
+            ctbStokGrupId.OndalikBasamak = 0;
             ctbStokGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbStokGrupId.Size = new System.Drawing.Size(63, 28);
+            ctbStokGrupId.Size = new System.Drawing.Size(63, 25);
             ctbStokGrupId.TabIndex = 1;
+            ctbStokGrupId.TextCustom = "0";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(55, 53);
+            label3.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(17, 52);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(18, 15);
+            label3.Size = new System.Drawing.Size(18, 13);
             label3.TabIndex = 2;
             label3.Text = "ID";
             // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(0, 219);
+            universalGrid1.Location = new System.Drawing.Point(12, 130);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(579, 232);
+            universalGrid1.Size = new System.Drawing.Size(555, 232);
             universalGrid1.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(55, 87);
+            label1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(17, 79);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(80, 15);
+            label1.Size = new System.Drawing.Size(80, 13);
             label1.TabIndex = 5;
             label1.Text = "Stok Grup Adı";
             // 
             // ctbStokGrupAd
             // 
             ctbStokGrupAd.BackColor = System.Drawing.Color.White;
-            ctbStokGrupAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbStokGrupAd.BorderColor = System.Drawing.Color.Silver;
+            ctbStokGrupAd.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbStokGrupAd.BorderSize = 1;
+            ctbStokGrupAd.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbStokGrupAd.ForeColor = System.Drawing.Color.Black;
-            ctbStokGrupAd.Location = new System.Drawing.Point(151, 81);
+            ctbStokGrupAd.Location = new System.Drawing.Point(113, 74);
+            ctbStokGrupAd.Margin = new System.Windows.Forms.Padding(1);
+            ctbStokGrupAd.Multiline = false;
             ctbStokGrupAd.Name = "ctbStokGrupAd";
             ctbStokGrupAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbStokGrupAd.Size = new System.Drawing.Size(262, 28);
+            ctbStokGrupAd.PasswordChar = false;
+            ctbStokGrupAd.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbStokGrupAd.PlaceholderText = "";
+            ctbStokGrupAd.ReadOnly = false;
+            ctbStokGrupAd.SelectionStart = 0;
+            ctbStokGrupAd.Size = new System.Drawing.Size(262, 25);
             ctbStokGrupAd.TabIndex = 4;
+            ctbStokGrupAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbStokGrupAd.TextCustom = "";
+            ctbStokGrupAd.UnderlinedStyle = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(55, 121);
+            label2.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(17, 106);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(90, 15);
+            label2.Size = new System.Drawing.Size(90, 13);
             label2.TabIndex = 7;
             label2.Text = "Stok Grup Kodu";
             // 
             // ctbStokGrupKod
             // 
             ctbStokGrupKod.BackColor = System.Drawing.Color.White;
-            ctbStokGrupKod.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbStokGrupKod.BorderColor = System.Drawing.Color.Silver;
+            ctbStokGrupKod.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbStokGrupKod.BorderSize = 1;
+            ctbStokGrupKod.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbStokGrupKod.ForeColor = System.Drawing.Color.Black;
-            ctbStokGrupKod.Location = new System.Drawing.Point(151, 115);
+            ctbStokGrupKod.Location = new System.Drawing.Point(113, 101);
+            ctbStokGrupKod.Margin = new System.Windows.Forms.Padding(1);
+            ctbStokGrupKod.Multiline = false;
             ctbStokGrupKod.Name = "ctbStokGrupKod";
             ctbStokGrupKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbStokGrupKod.Size = new System.Drawing.Size(134, 28);
+            ctbStokGrupKod.PasswordChar = false;
+            ctbStokGrupKod.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbStokGrupKod.PlaceholderText = "";
+            ctbStokGrupKod.ReadOnly = false;
+            ctbStokGrupKod.SelectionStart = 0;
+            ctbStokGrupKod.Size = new System.Drawing.Size(134, 25);
             ctbStokGrupKod.TabIndex = 6;
+            ctbStokGrupKod.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbStokGrupKod.TextCustom = "";
+            ctbStokGrupKod.UnderlinedStyle = false;
             // 
             // customButtonSave1
             // 
+            customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(360, 167);
+            customButtonSave1.Location = new System.Drawing.Point(461, 368);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(106, 46);
             customButtonSave1.TabIndex = 8;
@@ -135,14 +172,26 @@
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
+            roundedButton1.BorderColor = System.Drawing.Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.Location = new System.Drawing.Point(36, 172);
+            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new System.Drawing.Point(12, 374);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(125, 40);
             roundedButton1.TabIndex = 9;
             roundedButton1.Text = "YENİ KAYIT";
+            roundedButton1.TextColor = System.Drawing.Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click;
             // 
@@ -163,7 +212,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(579, 450);
+            ClientSize = new System.Drawing.Size(579, 421);
             Controls.Add(roundedButton1);
             Controls.Add(customButtonSave1);
             Controls.Add(label2);
@@ -184,7 +233,15 @@
         }
 
         #endregion
-
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid);
+        }
         private CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBoxSayisal ctbStokGrupId;
         private System.Windows.Forms.Label label3;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.14" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -43,33 +43,42 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="16384">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="17376">
       <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DLyXtgpfNPUC77h9sTBXBPcbEoIOanIvFgMm8BnYI5c=</dsig:DigestValue>
+        <dsig:DigestValue>7RVLY4ZaDHizuJafEQOYe1QDsEUhNLoVg7A/CEUrfrs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ApiService.dll" size="71680">
+  <file name="AdvancedDataGridView.dll" size="104448">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>D6geAj8XGH5Aj3c3/zTMD0TanSKtqcAerjuZXiGeitw=</dsig:DigestValue>
+      <dsig:DigestValue>2+STe2uVmNI6vi6jkHsp1l8sd8X7XoeqiNTDlZmCaQ0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BouncyCastle.Cryptography.dll" size="7161624">
+  <file name="ApiService.dll" size="72704">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>qoYaz4Uvp3vpRroE++QnJlqWPtT5GS1cCxXQXGRMtB4=</dsig:DigestValue>
+      <dsig:DigestValue>EiMpyW4l2hBuIyJFmTBDm+s0s+E2MakWGLVrObSTlIQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="BouncyCastle.Cryptography.dll" size="7072536">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>qWlpx5ZGSMJKuieVWH7kSNB7UMpSEunY6t4CHrDwzvY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="cs\Microsoft.CodeAnalysis.CSharp.resources.dll" size="364656">
@@ -126,6 +135,42 @@
       <dsig:DigestValue>qZBSw/NF2LJqGgVQsMAT5wtuqY+HQFUu9qCCY4dJYv8=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="de\Microsoft.ReportViewer.Common.resources.dll" size="1456200">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>DxySA0V9aSAOfFgWwizRVLcHOkPds6P2WQhgmns4lN0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="de\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1418296">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ML9J75vcxMGINiqVdQ44S0fLwg6o1oxHXE8YHlnVf5Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="de\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eqZ2uWjcm7dS/g+8B3w1pOQ+WV2cSxRFB7ZpZx3CJOM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="de\Microsoft.ReportViewer.WinForms.resources.dll" size="71112">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pdm8JVhOUvxdlk+kCBloY1QkFKkBWkZxprWbGv7/VWI=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Enums.NET.dll" size="128000">
     <hash>
       <dsig:Transforms>
@@ -160,6 +205,42 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>C1Tiujfr+yHuSjY299DdwtVQiTT2s+5WC9gr+/EYEcA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="es\Microsoft.ReportViewer.Common.resources.dll" size="1454040">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>apDo84BJYmyJpHWjGgBdn6jWottMjsitRibwFmIlbhc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="es\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1414712">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>VXYhtBAPb/Pye6gK1AkeK+qs6Coo9hGBbBL6EbsoMzc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="es\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>/Ksg6udcWCSoJKBHpJ2Sj/aNzeDKKr0udBnoKC//TQg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="es\Microsoft.ReportViewer.WinForms.resources.dll" size="71736">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4LwHy0dJkInB/S0590lfbNrcK1hDAbLTfetDbJlC+wM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ExtendedNumerics.BigDecimal.dll" size="36864">
@@ -234,6 +315,42 @@
       <dsig:DigestValue>ap29Uornxgy27uYqt5oI9SK+8aNuE3qP/4x7H57Hjog=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="fr\Microsoft.ReportViewer.Common.resources.dll" size="1463752">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>arJ59sH6ahwh+OqHlt3Kz+xbMFPIyK37cWlzcoktLlk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="fr\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1425464">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Xiiiz8Je+86KwNZfg7YkU1GQQ11ADFiA9QcGHWST7kY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="fr\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>tesuqvG2Xy/UXEMbRP4huapUwklj/8WeCgLPnMF/UWU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="fr\Microsoft.ReportViewer.WinForms.resources.dll" size="72136">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+DoTmg1ZhRV0X+bK5E6AVHiW67PsP1z/+xs9Rs0+sYg=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="HarfBuzzSharp.dll" size="122416">
     <hash>
       <dsig:Transforms>
@@ -250,15 +367,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>MuotDONRLnTxx62CWR/mfmuJOddqik/5yT6tAwEx5xw=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="icudt.dll" size="10210816">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>8YhgHx9qOfRJdDjX9acvJm/j5sMONyK62JfNWn/b8nw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="it\Microsoft.CodeAnalysis.CSharp.resources.dll" size="385664">
@@ -288,6 +396,51 @@
       <dsig:DigestValue>XuBbNfsoztf4xm0iXawv1KtKMxP1CTBXjO8rDP3xOTs=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="it\Microsoft.ReportViewer.Common.resources.dll" size="1460280">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ZRcsFmTAGyjmW/Jfi9ZpTV1JVwZG9H7mTsVKcqM1YMw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="it\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1409592">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Qqupa693hL29yi9Rkg2tkPUJRlANmmt/PWXGUDuG+lQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="it\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>INUF8wPzyE3rniddoy1kHvN2SkPxiLIfsLAEV0j4OC8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="it\Microsoft.ReportViewer.WinForms.resources.dll" size="71736">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>DrprmO2UfBRIF44l4nHGqLyajULeS83xSidf+Za9bJk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="itextsharp.dll" size="2592768">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>K31q/P+F9Sm5aL/s2KHzVhIoG5E8m0UEaTMe3SBRwQk=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="ja\Microsoft.CodeAnalysis.CSharp.resources.dll" size="424560">
     <hash>
       <dsig:Transforms>
@@ -313,6 +466,42 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>5QsD0mAF/dpcFh+kgihOTLNmTF6CyAWsG6kNa/CQAec=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ja\Microsoft.ReportViewer.Common.resources.dll" size="1478200">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>9CDFcWEgxVkY+tiiYY0hGwNhMMRpRrjGLR19xZ/S1tQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ja\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1453128">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>tCNLDE8XvBKf23AKGLMYp1lX+551DtBbzvFQuWfZDB0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ja\Microsoft.ReportViewer.Design.resources.dll" size="23608">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pAVWtcbO96e6pXJvGVDmGIEGuJS2iN0RLzFVfOGcAgc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ja\Microsoft.ReportViewer.WinForms.resources.dll" size="74200">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>92vx5vuXTX3arm9aG9zlI9wVeOs1T261jgNk2FOOP1c=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ko\Microsoft.CodeAnalysis.CSharp.resources.dll" size="391272">
@@ -342,13 +531,40 @@
       <dsig:DigestValue>BPwDRDcEc09/+VVRHErZw4s+WhzOXrm7XZpj6dZo3bU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="libpdfium.dylib" size="46625696">
+  <file name="ko\Microsoft.ReportViewer.Common.resources.dll" size="1451992">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>HopavdSRBZiKOO/cZ6aDzsJDo9I7OOVjKd3gZMi23xM=</dsig:DigestValue>
+      <dsig:DigestValue>g28fh7mxNZNZILE2uwzjWjWJHkrmQo9XpAw/HdT5JKE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ko\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1421368">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>RhC9bLyn2OCDuLQFcR4P+g3PYQw+oFncKb12UTIKRvU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ko\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>t6ZcGM0sZZLx+H/o0N5E+zULzvQUr3v4N9zGuNBNcIA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ko\Microsoft.ReportViewer.WinForms.resources.dll" size="71736">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>/uV6m5Cbz+YnFeg3GGLqdAhT38Z9Bc4smYywoS61fBU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="logo.ico" size="16958">
@@ -657,13 +873,67 @@
       <dsig:DigestValue>ryT6NCt/nwhifrGy+UEPL2SXCx4TXF/kg3h4+Ks+y2g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Models.dll" size="151552">
+  <file name="Microsoft.ReportViewer.Common.dll" size="9036248">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0py94edppiYOHbjpzoaIh71wJ3hdXgTUx3kMs8N31Vk=</dsig:DigestValue>
+      <dsig:DigestValue>i/Ur1M6Rs4y1lCU7xBxwKaASWqdTegVTY33lwJkGyhg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.DataVisualization.dll" size="5094968">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>I6NC1JTBMnXKZG3hT58r01DHvFR3tvF83zsPaetY2sY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.Design.dll" size="84536">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ekWXvCQFfP3xi+P13QWVe7KTHYvfsfemW3Xw4Y6YQJc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.ProcessingObjectModel.dll" size="98248">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>0n0FhwHZiZMCSWR9JJ9i/lrrZc2+XhSyWUg56TF1ag4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.WinForms.dll" size="598584">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>G5J8LTEuhk6nOtUHEeX2wvWBE4aVl+Or8z07ON9fI+o=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.SqlServer.Types.dll" size="391880">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>aDughU/4oIdP0U5PVA/hienfFEP3z8qTXas2lk6ov0s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Models.dll" size="207360">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Ny3Jw9BQQfgX+8TjOf6UN0NPgie793sPVuh59NR0fx8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="netDxf.dll" size="767488">
@@ -720,42 +990,6 @@
       <dsig:DigestValue>vKNRAxy0kZWSMauuwUlKSasiGlhNOOnisiJpRObw3GM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Patagames.Pdf.dll" size="804864">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>G0KMtfy1lVm7Vq4gyqSd/4Pjsiny7yEon077LZvEthM=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Patagames.Pdf.Gdi.dll" size="10752">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jBS58//USc04wUw1TRv/TZH4Y1O/bXNidMpowCzQSN0=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Patagames.Pdf.WinForms.dll" size="224256">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>tUcRoNQQn4imkami0hIRocthaM/h183gTgxI/J75pn8=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Patagames.Pdf.Wpf.dll" size="236544">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jbGK2uU6BI2fal1gKozp+K0C6+nKxx8Fihib1e44tJE=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="pl\Microsoft.CodeAnalysis.CSharp.resources.dll" size="391808">
     <hash>
       <dsig:Transforms>
@@ -781,6 +1015,42 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>FyUzNs5j0rWC5AS9EWufdF6WnbXErDc6AuJYEq4+2Is=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="pt\Microsoft.ReportViewer.Common.resources.dll" size="1442888">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>88oQSRTjkWnylNWxgiYxecBYiDrLoW7oEL8o+ELqLCY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="pt\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1404984">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3CVOnzYl5mnVMPqDoka067kmMtp5G90D2HlC4vh5gPo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="pt\Microsoft.ReportViewer.Design.resources.dll" size="23496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jnREn7lPjHr6/4V6lL2P/qpYxpgjzMVaHs2D8sd9lT8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="pt\Microsoft.ReportViewer.WinForms.resources.dll" size="71736">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>TQZntCd1IeJx54KhdW90ryMENyg50/HnJv46838uaHI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll" size="373888">
@@ -844,6 +1114,42 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>kVfmeh5WFldP9un9bGPltECuzZwf4Sd7kFaMQc0jVRM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ru\Microsoft.ReportViewer.Common.resources.dll" size="1535944">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>aAL51PEmCzrkf9YF/1dwTD92d5jF+hnAIbhfo2kPSvA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ru\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1589816">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pI/NXG+8ApFCfUSo6gCnylQFDLXwNCkP/xaYmpYj2qc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ru\Microsoft.ReportViewer.Design.resources.dll" size="24024">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>UhcKx/FEgRV+1wwSuoz6jM76N4SOHbIU80ohQjyblPM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ru\Microsoft.ReportViewer.WinForms.resources.dll" size="78808">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>wuU4ZPBtM1kQM59zgosKNFVnjq5DxjeP2zZInBOUD6M=</dsig:DigestValue>
     </hash>
   </file>
   <file name="runtimes\osx\native\libHarfBuzzSharp.dylib" size="2889712">
@@ -927,22 +1233,67 @@
       <dsig:DigestValue>NuLkwK9QdTix6Yur60dWmeLokI3vrlhsxRm0ta7bLjY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SixLabors.ImageSharp.dll" size="1806336">
+  <file name="SixLabors.ImageSharp.dll" size="1806848">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Sjl5hckv3MUoS2fwpVvVAMDxE8hAwZD5Rof/pUziQlQ=</dsig:DigestValue>
+      <dsig:DigestValue>3ygVp4Av1QmrlBaS/1qsD8TI4FaKuwx5lp28nn46Bw0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Spire.Pdf.dll" size="21200352">
+  <file name="SolidWorks.Interop.sldworks.dll" size="2780488">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>e3bY3yIu8JDYRUB1J69vwKXTx82Zc8SCz0xIrGeVsVE=</dsig:DigestValue>
+      <dsig:DigestValue>jOXNvuKI/fZp8e26BsFsVPK6JTYAeaGsgalqhWtMkOA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SolidWorks.Interop.swcommands.dll" size="190280">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>r00FjnhZLgOBTRIWo4z89pSzVSLEAsJgJYBrwjZitJk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SolidWorks.Interop.swconst.dll" size="467784">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eeOM4xzbENsG5YIkfa1Dhla7h1OPak9Cjv6danDmFfw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SolidWorks.Interop.swdocumentmgr.dll" size="371016">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>aZdl+RAI6nUZfjjBo0zoXR15BoKnZoBGafpuf07b6dc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SolidWorks.Interop.swpublished.dll" size="46920">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>aOBOnOY5U72zhNLJY5nz6a/7fOAmh2agZ/WwjROySnQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Spire.Pdf.dll" size="21268960">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>9uBE8PtuAn1ctXjCL+7fOEoxUdto7XGAb68IsdpZ7zg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="System.Linq.Dynamic.Core.dll" size="241152">
@@ -981,49 +1332,31 @@
       <dsig:DigestValue>h3P4JczN5h/nCJ5C4JH0TXgaZAx5BzMISeCPsYGcINI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Utilities.dll" size="36864">
+  <file name="Utilities.dll" size="38912">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0WrOeoZToVeZdzS5k2o4VFKVd/CIo0Q/D4ne30XfgRQ=</dsig:DigestValue>
+      <dsig:DigestValue>5sw3ud8TC4Jifb4PBM2Pl0TUUNjqBZBs7UbCKqswGlM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="x64\pdfium.dll" size="13015040">
+  <file name="YektamakDesktop.deps.json" size="68575">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>fWkKQLEfRxVA/42z/ppBw9eClIKbYXOdP74IA6z94SY=</dsig:DigestValue>
+      <dsig:DigestValue>rBm+4qDiAxUR7ubnLy+nfXdzcpg4CZ/frlkGAdAVGyQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="x86\pdfium.dll" size="10499072">
+  <file name="YektamakDesktop.dll" size="927712">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9RFHqCz0P2osq99SGbX+sn48spwYUh73dI7UVs8fZ7U=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="YektamakDesktop.deps.json" size="59418">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LK/+DuXJymd7NWNL996GUkAQyZ/KlLeA/gIOVL5WNLw=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="YektamakDesktop.dll" size="1452544">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>q+NmnSdiZZG2oYGhi3N0hkHlFxJKaucX/4utdUJvIPg=</dsig:DigestValue>
+      <dsig:DigestValue>BzNlaaG4MtI9qvhfkDfU1uZfwxlytQb/bYIn26gm8R8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.dll.config" size="838">
@@ -1035,13 +1368,13 @@
       <dsig:DigestValue>KV8eAeWS1EisgFKs1Zl5gTo5hMan931y0J7AyXNQ6Bw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.exe" size="172032">
+  <file name="YektamakDesktop.exe" size="173024">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>yCwZGQEubXlW5vnMcTwyOdQYHLglCuQguPjCL1R4RnA=</dsig:DigestValue>
+      <dsig:DigestValue>W0jMfbwHsiA9TLgV4d4uYDUZnFcbyPsZCljwpQYLwJg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.runtimeconfig.json" size="516">
@@ -1051,6 +1384,78 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>BZF7QJ1ZrzG8jTAhvAYwKgwhx9BbRJYD1syfAwGitmw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHS\Microsoft.ReportViewer.Common.resources.dll" size="1412152">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>iLVRBnK4d/dp/Uy+jWqzolvwxkXEc/6usBht1RE6Czw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1338936">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>0RXQ1UHWIIuiPNGfHyEy4emqW+/sMt/+DtCbfwftj2k=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHS\Microsoft.ReportViewer.Design.resources.dll" size="22984">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>VXQ6Zkw9ef8y7bEVIJvMI7qBWErt+WhlfkE874j91Ww=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll" size="68152">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pEVcw6ripz+hJNbhZbm8wD3pfpHGPFL/FAjHpn81LQQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHT\Microsoft.ReportViewer.Common.resources.dll" size="1410504">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>OOb8kY05/oZK6R83gWay4mky0mibHEkEBGfwMNsP8us=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll" size="1342536">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>NZDmse+vOcWZ26XmuLC17dOP+lc7ObEOEeL6xDkem6w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHT\Microsoft.ReportViewer.Design.resources.dll" size="22984">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>CrPphIP2HF/I6Skmatuy+/7TzO4YhdkTi5QD+KnWOTI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll" size="68552">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Jf09WvgU1Y8Sp1NoKNRAYsCHujRG/GR4GFnuLGdf5ZA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll" size="330368">

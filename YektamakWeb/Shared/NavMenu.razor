@@ -5,53 +5,44 @@
 @using Models.DTO
 @using YektamakWeb.Commands.Accounts
 @using System.Security.Claims
-@inject ICache cache
+
+@inherits LayoutComponentBase
+@inject ICache _cache
 @inject CustomAuthStateProvider authStateProvider
-@inject NavigationManager navigation
-<div class="bb-page">
+@inject NavigationManager Navigation
 
-   
+    <MudNavMenu Class="mud-width-full">
+        <MudText Typo="Typo.h6" Class="px-4">YEKTAMAK</MudText>
+        <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">menu</MudText>
+        <MudDivider Class="my-2" />
 
-    <main>
-        
-    </main>
+        <AuthorizeView>
+            <Authorized>
+            @foreach (var item in _cache.anaMenuList)
+            {
+                <MudNavGroup Title=@item.ad Expanded="false" Icon=@Icons.Material.Filled.Settings>
+                    @foreach(var detail in _cache.yetkiList.Where(y=>y.menu.Id==item.Id))
+                    {
+                        <MudNavLink OnClick="@(() => Navigate($"/{detail.ekran.ekranAdi}"))">
+                            <MudIcon Icon=@Icons.Material.Filled.Settings />
+                            @detail.ekran.ekranAdi
+                        </MudNavLink>
+                    }
+                </MudNavGroup>
+            }
+            </Authorized>
+        </AuthorizeView>
+    <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
 
-</div>
+    </MudNavMenu>
 
 @code {
-    Sidebar sidebar = default!;
-    IEnumerable<NavItem>? navItems;
-    private ClaimsPrincipal user;
-    private bool isAuth;
-    private bool collapseNavMenu = true;
-    private string? NavMenuCssClass => collapseNavMenu ? "Collapse" : null;
-    protected override async void OnInitialized()
+    bool _drawerOpen = true;
+    void ToggleDrawer() => _drawerOpen = !_drawerOpen;
+    private void Navigate(string url)
     {
-        authStateProvider.OnChange += StateHasChanged;
-
+        // sadece Body güncellenir, tam sayfa refresh olmaz
+        Navigation.NavigateTo(url);
     }
-    protected override async void OnAfterRender(bool firstRender)
-    {
-        var authState = await authStateProvider.GetAuthenticationStateAsync();
-        user = authState.User; // Kullanıcı bilgilerini alıyoruz.
-        isAuth = user.Identity.IsAuthenticated;
-    }
-    public void Dispose()
-    {
-        authStateProvider.OnChange -= StateHasChanged;
-    }
-
-    private async void ToggleNavMenu()
-    {
-        collapseNavMenu = false;
-        //SidebarDataProviderRequest sidebarDataProviderRequest = new SidebarDataProviderRequest();
-        //sidebarDataProviderRequest.ApplyTo(GetNavItems());
-        //await sidebar.DataProvider(sidebarDataProviderRequest);
-        StateHasChanged();
-    }
-    private void OpenPage(string page)
-    {
-        navigation?.NavigateTo(char.ToUpper(page[0])+page.Substring(1).ToLower());
-    }
-    
 }
+

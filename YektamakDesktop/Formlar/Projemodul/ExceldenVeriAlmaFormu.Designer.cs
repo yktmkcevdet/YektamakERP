@@ -46,12 +46,11 @@
             ctbDosyaYolu.BackColor = System.Drawing.Color.White;
             ctbDosyaYolu.BorderColor = System.Drawing.Color.Silver;
             ctbDosyaYolu.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbDosyaYolu.BorderRadius = 5;
             ctbDosyaYolu.BorderSize = 1;
-            ctbDosyaYolu.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbDosyaYolu.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbDosyaYolu.ForeColor = System.Drawing.Color.Black;
-            ctbDosyaYolu.isPlaceHolder = true;
             ctbDosyaYolu.Location = new System.Drawing.Point(143, 135);
+            ctbDosyaYolu.Margin = new System.Windows.Forms.Padding(1);
             ctbDosyaYolu.Multiline = false;
             ctbDosyaYolu.Name = "ctbDosyaYolu";
             ctbDosyaYolu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -60,7 +59,7 @@
             ctbDosyaYolu.PlaceholderText = "Dosya Yolu";
             ctbDosyaYolu.ReadOnly = false;
             ctbDosyaYolu.SelectionStart = 0;
-            ctbDosyaYolu.Size = new System.Drawing.Size(388, 28);
+            ctbDosyaYolu.Size = new System.Drawing.Size(388, 33);
             ctbDosyaYolu.TabIndex = 0;
             ctbDosyaYolu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbDosyaYolu.TextCustom = "";
@@ -123,26 +122,23 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(687, 32);
+            headerPanel1.Size = new System.Drawing.Size(687, 25);
             headerPanel1.TabIndex = 104;
             // 
             // clbProjeKodu
             // 
             clbProjeKodu.BorderColor = System.Drawing.Color.Silver;
+            clbProjeKodu.BorderRadius = 8;
             clbProjeKodu.BorderSize = 1;
-            clbProjeKodu.DataSource = null;
             clbProjeKodu.DisplayMember = "kod";
+            clbProjeKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbProjeKodu.Location = new System.Drawing.Point(143, 100);
+            clbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKodu.PlaceholderText = "Proje Kodu";
-            clbProjeKodu.SelectedDisplayValue = "Proje Kodu";
-            clbProjeKodu.SelectedIndex = -1;
-            clbProjeKodu.SelectedItem = null;
-            clbProjeKodu.SelectedValue = null;
             clbProjeKodu.Size = new System.Drawing.Size(211, 29);
             clbProjeKodu.TabIndex = 105;
-            clbProjeKodu.UnderlinedStyle = false;
             clbProjeKodu.ValueMember = "Id";
             // 
             // chkProjeDosyaSil

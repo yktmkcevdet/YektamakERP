@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,21 +36,25 @@ namespace YektamakDesktop.Formlar.Stok
         }
         private void InitializeGridForm()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(12, 289);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1062, 503);
-            universalGrid1.TabIndex = 129;
-            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref fcbProjeKodu);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref fcbStokGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref fcbMalzemeGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List, ref fcbMalzemeAltGrup2);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups, ref fcbMalzemeAltGrup);
-            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref fcbStokTip);
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            fcbProjeKodu.SetDataSource(_cache.projes.Select(p => new { p.Id, p.kod}).Distinct().ToList());
+            fcbStokGrup.SetDataSource(_cache.stokGrups);
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
+            fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
+            fcbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
+            fcbStokTip.SetDataSource(_cache.stokTips);
             Binding();
             Load += async (s, e) => await StokKartGridForm_Load(s, e);
             fcbProjeKodu.SelectedIndexChanged += async (s, e) => await projeKodu_SelectedIndexChanged(s, e);
@@ -258,23 +264,27 @@ namespace YektamakDesktop.Formlar.Stok
         private async Task stokKartınıSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show($"Seçilen kayıtlar silinecektir. Onaylıyor musunuz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates), @"\Logs\app.log");
+            string klasor = Path.GetDirectoryName(logDosyasi);
+            if (!Directory.Exists(klasor))
+                Directory.CreateDirectory(klasor);
+            File.WriteAllText(logDosyasi, "Silinemeyen satırlar");
             if (dialogResult == DialogResult.Yes)
             {
                 List<ProjeStokKartDTO> projeStokKartDTOs = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
                 for (int i = 0; i < projeStokKartDTOs.Count; i++)
                 {
                     var item = projeStokKartDTOs[i];
-                    if (_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == item.Id))
+                    if (!_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == item.projeId))
                     {
-                        MessageBox.Show($"{item.projekod} koduna ait stok kartını silemezsiniz");
+                        File.AppendAllText(logDosyasi, $"{item.stokKartkod} koduna ait stok kartını silemezsiniz\r\n");
                     }
                     else
                     {
                         string jsonResult = await _projeService.DeleteProjeStokKart(ConvertHelper.ToEntity<ProjeStokKart>(item));
                         if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                         {
-                            MessageBox.Show($"{item.stokKartkod} silinirken hata oluştu: {jsonResult}");
-                            return;
+                            File.AppendAllText(logDosyasi, $"{item.stokKartkod} {jsonResult}\r\n");
                         }
                         else
                         {
@@ -282,6 +292,11 @@ namespace YektamakDesktop.Formlar.Stok
                         }
                     }
                 }
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = logDosyasi,
+                    UseShellExecute = true
+                });
             }
         }
     }

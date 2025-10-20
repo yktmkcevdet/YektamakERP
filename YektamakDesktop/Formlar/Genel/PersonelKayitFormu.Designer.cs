@@ -55,6 +55,20 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxPersonel).BeginInit();
             SuspendLayout();
             // 
+            // ctbId
+            // 
+            ctbId.BackColor = System.Drawing.Color.White;
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbId.ForeColor = System.Drawing.Color.Black;
+            ctbId.Location = new System.Drawing.Point(325, 50);
+            ctbId.Margin = new System.Windows.Forms.Padding(1);
+            ctbId.Name = "ctbId";
+            ctbId.OndalikBasamak = 0;
+            ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbId.Size = new System.Drawing.Size(69, 33);
+            ctbId.TabIndex = 62;
+            ctbId.TextCustom = "0";
+            // 
             // buttonResimSec
             // 
             buttonResimSec.Location = new System.Drawing.Point(12, 242);
@@ -85,12 +99,11 @@
             ctbPersonelAd.BackColor = System.Drawing.Color.White;
             ctbPersonelAd.BorderColor = System.Drawing.Color.Silver;
             ctbPersonelAd.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbPersonelAd.BorderRadius = 5;
             ctbPersonelAd.BorderSize = 1;
-            ctbPersonelAd.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbPersonelAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbPersonelAd.ForeColor = System.Drawing.Color.Black;
-            ctbPersonelAd.isPlaceHolder = false;
             ctbPersonelAd.Location = new System.Drawing.Point(325, 82);
+            ctbPersonelAd.Margin = new System.Windows.Forms.Padding(1);
             ctbPersonelAd.Multiline = false;
             ctbPersonelAd.Name = "ctbPersonelAd";
             ctbPersonelAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -99,7 +112,7 @@
             ctbPersonelAd.PlaceholderText = "";
             ctbPersonelAd.ReadOnly = false;
             ctbPersonelAd.SelectionStart = 0;
-            ctbPersonelAd.Size = new System.Drawing.Size(240, 28);
+            ctbPersonelAd.Size = new System.Drawing.Size(240, 33);
             ctbPersonelAd.TabIndex = 36;
             ctbPersonelAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbPersonelAd.TextCustom = "";
@@ -128,12 +141,11 @@
             ctbPersonelSoyad.BackColor = System.Drawing.Color.White;
             ctbPersonelSoyad.BorderColor = System.Drawing.Color.Silver;
             ctbPersonelSoyad.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbPersonelSoyad.BorderRadius = 5;
             ctbPersonelSoyad.BorderSize = 1;
-            ctbPersonelSoyad.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbPersonelSoyad.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbPersonelSoyad.ForeColor = System.Drawing.Color.Black;
-            ctbPersonelSoyad.isPlaceHolder = false;
             ctbPersonelSoyad.Location = new System.Drawing.Point(325, 116);
+            ctbPersonelSoyad.Margin = new System.Windows.Forms.Padding(1);
             ctbPersonelSoyad.Multiline = false;
             ctbPersonelSoyad.Name = "ctbPersonelSoyad";
             ctbPersonelSoyad.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -142,7 +154,7 @@
             ctbPersonelSoyad.PlaceholderText = "";
             ctbPersonelSoyad.ReadOnly = false;
             ctbPersonelSoyad.SelectionStart = 0;
-            ctbPersonelSoyad.Size = new System.Drawing.Size(240, 28);
+            ctbPersonelSoyad.Size = new System.Drawing.Size(240, 33);
             ctbPersonelSoyad.TabIndex = 38;
             ctbPersonelSoyad.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbPersonelSoyad.TextCustom = "";
@@ -158,7 +170,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(992, 32);
+            headerPanel1.Size = new System.Drawing.Size(992, 25);
             headerPanel1.TabIndex = 40;
             // 
             // label3
@@ -175,12 +187,11 @@
             ctbTelefon.BackColor = System.Drawing.Color.White;
             ctbTelefon.BorderColor = System.Drawing.Color.Silver;
             ctbTelefon.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbTelefon.BorderRadius = 5;
             ctbTelefon.BorderSize = 1;
-            ctbTelefon.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbTelefon.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbTelefon.ForeColor = System.Drawing.Color.Black;
-            ctbTelefon.isPlaceHolder = false;
             ctbTelefon.Location = new System.Drawing.Point(325, 150);
+            ctbTelefon.Margin = new System.Windows.Forms.Padding(1);
             ctbTelefon.Multiline = false;
             ctbTelefon.Name = "ctbTelefon";
             ctbTelefon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -189,7 +200,7 @@
             ctbTelefon.PlaceholderText = "";
             ctbTelefon.ReadOnly = false;
             ctbTelefon.SelectionStart = 0;
-            ctbTelefon.Size = new System.Drawing.Size(240, 28);
+            ctbTelefon.Size = new System.Drawing.Size(240, 33);
             ctbTelefon.TabIndex = 41;
             ctbTelefon.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbTelefon.TextCustom = "";
@@ -209,12 +220,11 @@
             ctbMail.BackColor = System.Drawing.Color.White;
             ctbMail.BorderColor = System.Drawing.Color.Silver;
             ctbMail.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbMail.BorderRadius = 5;
             ctbMail.BorderSize = 1;
-            ctbMail.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ctbMail.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbMail.ForeColor = System.Drawing.Color.Black;
-            ctbMail.isPlaceHolder = false;
             ctbMail.Location = new System.Drawing.Point(325, 184);
+            ctbMail.Margin = new System.Windows.Forms.Padding(1);
             ctbMail.Multiline = false;
             ctbMail.Name = "ctbMail";
             ctbMail.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -223,7 +233,7 @@
             ctbMail.PlaceholderText = "";
             ctbMail.ReadOnly = false;
             ctbMail.SelectionStart = 0;
-            ctbMail.Size = new System.Drawing.Size(240, 28);
+            ctbMail.Size = new System.Drawing.Size(240, 33);
             ctbMail.TabIndex = 43;
             ctbMail.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbMail.TextCustom = "";
@@ -309,84 +319,50 @@
             // clbYonetici
             // 
             clbYonetici.BorderColor = System.Drawing.Color.Silver;
+            clbYonetici.BorderRadius = 8;
             clbYonetici.BorderSize = 1;
-            clbYonetici.DataSource = null;
             clbYonetici.DisplayMember = "adSoyad";
+            clbYonetici.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbYonetici.Location = new System.Drawing.Point(325, 291);
+            clbYonetici.Margin = new System.Windows.Forms.Padding(1);
             clbYonetici.Name = "clbYonetici";
             clbYonetici.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbYonetici.PlaceholderText = "Seçiniz...";
-            clbYonetici.SelectedDisplayValue = "Seçiniz...";
-            clbYonetici.SelectedIndex = -1;
-            clbYonetici.SelectedItem = null;
-            clbYonetici.SelectedValue = null;
             clbYonetici.Size = new System.Drawing.Size(200, 29);
             clbYonetici.TabIndex = 59;
-            clbYonetici.UnderlinedStyle = false;
             clbYonetici.ValueMember = "Id";
             // 
             // clbFirma
             // 
             clbFirma.BorderColor = System.Drawing.Color.Silver;
+            clbFirma.BorderRadius = 8;
             clbFirma.BorderSize = 1;
-            clbFirma.DataSource = null;
             clbFirma.DisplayMember = "ad";
+            clbFirma.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbFirma.Location = new System.Drawing.Point(325, 218);
+            clbFirma.Margin = new System.Windows.Forms.Padding(1);
             clbFirma.Name = "clbFirma";
             clbFirma.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbFirma.PlaceholderText = "Seçiniz...";
-            clbFirma.SelectedDisplayValue = "Seçiniz...";
-            clbFirma.SelectedIndex = -1;
-            clbFirma.SelectedItem = null;
-            clbFirma.SelectedValue = null;
             clbFirma.Size = new System.Drawing.Size(364, 29);
             clbFirma.TabIndex = 60;
-            clbFirma.UnderlinedStyle = false;
             clbFirma.ValueMember = "Id";
             // 
             // clbPozisyon
             // 
             clbPozisyon.BorderColor = System.Drawing.Color.Silver;
+            clbPozisyon.BorderRadius = 8;
             clbPozisyon.BorderSize = 1;
-            clbPozisyon.DataSource = null;
             clbPozisyon.DisplayMember = "ad";
+            clbPozisyon.Font = new System.Drawing.Font("Segoe UI", 8F);
             clbPozisyon.Location = new System.Drawing.Point(325, 253);
+            clbPozisyon.Margin = new System.Windows.Forms.Padding(1);
             clbPozisyon.Name = "clbPozisyon";
             clbPozisyon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbPozisyon.PlaceholderText = "Seçiniz...";
-            clbPozisyon.SelectedDisplayValue = "Seçiniz...";
-            clbPozisyon.SelectedIndex = -1;
-            clbPozisyon.SelectedItem = null;
-            clbPozisyon.SelectedValue = null;
             clbPozisyon.Size = new System.Drawing.Size(200, 29);
             clbPozisyon.TabIndex = 61;
-            clbPozisyon.UnderlinedStyle = false;
             clbPozisyon.ValueMember = "Id";
-            // 
-            // ctbId
-            // 
-            ctbId.BackColor = System.Drawing.SystemColors.Window;
-            ctbId.BorderColor = System.Drawing.Color.Silver;
-            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
-            ctbId.BorderRadius = 5;
-            ctbId.BorderSize = 1;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ctbId.ForeColor = System.Drawing.Color.DimGray;
-            ctbId.Location = new System.Drawing.Point(325, 50);
-            ctbId.Multiline = false;
-            ctbId.Name = "ctbId";
-            ctbId.OndalikBasamak = 0;
-            ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbId.PasswordChar = false;
-            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
-            ctbId.PlaceholderText = "";
-            ctbId.ReadOnly = false;
-            ctbId.SelectionStart = 0;
-            ctbId.Size = new System.Drawing.Size(69, 26);
-            ctbId.TabIndex = 62;
-            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Right;
-            ctbId.TextCustom = "0";
-            ctbId.UnderlinedStyle = false;
             // 
             // PersonelKayitFormu
             // 

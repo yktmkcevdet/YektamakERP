@@ -128,7 +128,7 @@ namespace YektamakDesktop.CustomControls
         public void FillDataRows()
         {
             detailPanel.Controls.Clear();
-            controlPointY = 0;
+            controlPointY = 2;
             CreateLabels();
             orderNr = 1;
             foreach (T dataRow in dataSource)

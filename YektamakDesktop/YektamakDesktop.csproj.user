@@ -50,13 +50,13 @@
     <Compile Update="CustomControls\UniversalGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Form3.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Genel\AnaVeriTanimlamaFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\DosyalamaParametreleri.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Genel\DovizKurlari.cs">
@@ -80,6 +80,9 @@
     <Compile Update="Formlar\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\LogoEntegrasyon.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +95,9 @@
     <Compile Update="Formlar\Projemodul\ProfilOptimizasyon.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Projemodul\ProjeDosyaAgacStil.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Projemodul\ProjeDosyalari.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,7 +107,16 @@
     <Compile Update="Formlar\Satinalma\MailGonder.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Satinalma\Rapor\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\Rapor\rapor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Satinalma\Siparis\SatinalmaSiparisKayitFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Satinalma\Siparis\SatinalmaSiparisler.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\Talep\SatinalmaTalepOlusturmaAltForm.cs">
@@ -188,9 +203,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="CustomControls\HeaderPanel.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Form1.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\Genel\AnaVeriTanimlamaFormu.resx">

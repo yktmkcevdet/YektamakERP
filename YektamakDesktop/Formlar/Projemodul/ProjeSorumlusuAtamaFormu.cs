@@ -28,20 +28,25 @@ namespace YektamakDesktop.Formlar.Projemodul
         }
         private void Initialize()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new Point(1, 243);
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(482, 369);
-            universalGrid1.TabIndex = 6;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<ProjeSorumluDTO>(), this.Name);
             Load += async (s, e) => await ProjeSorumlusuAtama_Load(s, e);
             universalGrid1.Grid.MouseClick += Grid_MouseClick;
             customButtonSave1.SaveButtonClick += async (s, e) => await customButtonSave1_SaveButtonClick(s,e);
             fcbPersonel.DisplayMember = "adSoyad";
             fcbProje.DisplayMember = "kod";
-            fcbProje.SetDataSource(_cache.projes);
+            fcbProje.SetDataSource(_cache.projes.GroupBy(x => new { x.Id,x.kod}).Select(g=>g.First()).ToList());
             fcbPersonel.SetDataSource(_cache.personelList);
             Binding();
         }

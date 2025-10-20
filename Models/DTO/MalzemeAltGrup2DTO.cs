@@ -16,9 +16,9 @@ namespace Models.DTO
         [GridDisplay(Header = "kod")]
         public string kod { get; set; }
         [GridDisplay(Header = "Stok Grup",Tip ="Liste",ListName ="stokGrups",ListVisibleColumnName ="ad")]
-        public int? stokGrupId { get; set; }
+        public int? malzemeAltGrupmalzemeGrupstokGrupId { get; set; }
         [GridDisplay(Header = "Malzeme Grup", Tip = "Liste", ListName = "malzemeGrups", ListVisibleColumnName = "ad")]
-        public int? malzemeGrupId { get; set; }
+        public int? malzemeAltGrupmalzemeGrupId { get; set; }
         [GridDisplay(Header = "Malzeme Alt Grup", Tip = "Liste", ListName = "malzemeAltGrups", ListVisibleColumnName = "ad")]
         public int? malzemeAltGrupId { get; set; }
     }

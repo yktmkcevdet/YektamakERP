@@ -18,23 +18,23 @@ namespace ApiService
                     ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 });
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ISatinalmaTalepService, SatinalmaTalepService>();
-            services.AddScoped<ISatinalmaTeklifService, SatinalmaTeklifService>();
-            services.AddScoped<ISatisService, SatisService>();
-            services.AddScoped<IStokService, StokService>();
-            services.AddScoped<IProjeService, ProjeService>();
-            services.AddScoped<IKullaniciYetkiService, KullaniciYetkiService>();
-            services.AddScoped<IFirmaService, FirmaService>();
-            services.AddScoped<IPersonelService, PersonelService>();
-            services.AddScoped<IProjeService, ProjeService>();
-            services.AddScoped<ICariService, CariService>();
-            services.AddScoped<IDovizCinsiService, DovizCinsiService>();
-            services.AddScoped<IMaliyetService, MaliyetService>();
-            services.AddScoped<IAnaVeriService, AnaVeriService>();
-            services.AddScoped<IVadeService, VadeService>();
-            services.AddScoped<IConfigurationService, ConfigurationService>();
-            services.AddScoped<ISatinalmaSiparisService, SatinalmaSiparisService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<ISatinalmaTalepService, SatinalmaTalepService>();
+            services.AddSingleton<ISatinalmaTeklifService, SatinalmaTeklifService>();
+            services.AddSingleton<ISatisService, SatisService>();
+            services.AddSingleton<IStokService, StokService>();
+            services.AddSingleton<IProjeService, ProjeService>();
+            services.AddSingleton<IKullaniciYetkiService, KullaniciYetkiService>();
+            services.AddSingleton<IFirmaService, FirmaService>();
+            services.AddSingleton<IPersonelService, PersonelService>();
+            services.AddSingleton<IProjeService, ProjeService>();
+            services.AddSingleton<ICariService, CariService>();
+            services.AddSingleton<IDovizCinsiService, DovizCinsiService>();
+            services.AddSingleton<IMaliyetService, MaliyetService>();
+            services.AddSingleton<IAnaVeriService, AnaVeriService>();
+            services.AddSingleton<IVadeService, VadeService>();
+            services.AddSingleton<IConfigurationService, ConfigurationService>();
+            services.AddSingleton<ISatinalmaSiparisService, SatinalmaSiparisService>();
             return services;
         }
     }

@@ -6,7 +6,7 @@ namespace Models
 {
     public class ExcelFormat
     {
-        public int no { get; set; }
+        public string no { get; set; }
         public string kod { get; set; }
         public string parcaAdi { get; set; }
         public int miktar { get; set; }
@@ -24,6 +24,7 @@ namespace Models
         public int? malzemeAltGrup2 { get; set; }
         public int? malzemeStandart { get; set; }
         public bool? isTalasli {  get; set; }
+        public bool? isBukum { get; set; }
         public (double uzunluk, string boyutText) Boyut()
         {
             Match match = Regex.Match(boyut, @"L:\s*(\d+)");
@@ -58,6 +59,7 @@ namespace Models
         [GridDisplay(Header = "Malzeme Alt Grup 2", Tip = "Liste", ListName = "malzemeAltGrup2List", ListVisibleColumnName = "ad")] public int? malzemeAltGrup2Id { get; set; }
         [GridDisplay(Header = "Malzeme Standart", Tip = "Liste", ListName = "malzemeStandarts", ListVisibleColumnName = "ad")] public int? malzemeStandartId { get; set; }
         [GridDisplay(Header = "Talaşlı?")] public bool? isTalasli {  get; set; }
+        [GridDisplay(Header = "Büküm?")] public bool? isBukum { get; set; }
         [GridDisplay(Header = "Anahtar Kelime")] public string karsilastirmaKelimesi { get; set; }
         [GridDisplay(Header = "Karşılaştırma Op")] public KarsilastirmaOperatoru? karsilastirmaOperatoru { get; set; }
         

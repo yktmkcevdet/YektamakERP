@@ -1,4 +1,5 @@
 ﻿using Api.Business;
+using Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -7,10 +8,12 @@ namespace Api.Controllers
     public class ProjeController:Controller
     {
         private readonly IDataAccessLayer _dataAccessLayer;
+        private readonly IProjeStokKartService _projeStokKartService;
 
-        public ProjeController(IDataAccessLayer dataAccessLayer)
+        public ProjeController(IDataAccessLayer dataAccessLayer, IProjeStokKartService projeStokKartService)
         {
             _dataAccessLayer = dataAccessLayer;
+            _projeStokKartService = projeStokKartService;
         }
         [HttpPost, Route("api/SaveProje")]
         public string SaveProje([FromBody] Proje proje)
@@ -45,6 +48,7 @@ namespace Api.Controllers
         [HttpPost, Route("api/SaveProjeStokKart")]
         public string SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {
+            //return await _projeStokKartService.SaveProjeStokKartAsync(projeStokKart);
             string result = _dataAccessLayer.SaveObject(projeStokKart, "spSaveProjeStokKart");
             return result;
         }
@@ -58,6 +62,12 @@ namespace Api.Controllers
         public string DeleteProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {
             string result = _dataAccessLayer.DeleteObject(projeStokKart, "spDeleteProjeStokKart");
+            return result;
+        }
+        [HttpPost, Route("api/GetProjeBomList")]
+        public string GetBomList([FromBody] ProjeBom projeBomList)
+        {
+            string result = _dataAccessLayer.GetObject(projeBomList, "spGetProjeBomList");
             return result;
         }
     }

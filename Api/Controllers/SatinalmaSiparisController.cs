@@ -24,5 +24,11 @@ namespace Api.Controllers
             string result = _dataAccesLayer.SaveObject(restData, "spSaveSatinalmaSiparis");
             return result;
         }
+        [HttpPost, Route("api/DeleteSatinalmaSiparis")]
+        public string DeleteSatinalmaSiparis([FromBody] SatinalmaTeklifBaslik restData)
+        {
+            string result = _dataAccesLayer.SaveObject(restData, "spDeleteSatinalmaSiparis");
+            return result;
+        }
     }
 }

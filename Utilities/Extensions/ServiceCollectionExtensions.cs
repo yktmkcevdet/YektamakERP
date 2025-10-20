@@ -23,13 +23,13 @@ namespace Utilities
             //});
 
             // Utilities servislerini ekle
-            services.AddScoped<IAppLogger, AppLogger>();
-            services.AddScoped<ICache, Cache>();
-            services.AddScoped<IDataTableMapper, DataTableMapper>();
-            services.AddScoped<IJsonConverter, JsonConverter>();
-            services.AddScoped<ILoginHelper, LoginHelper>();
-            services.AddScoped<IMailHandler, MailHandler>();
-            services.AddScoped<IConvertHelper, ConvertHelper>();
+            services.AddSingleton<IAppLogger, AppLogger>();
+            services.AddSingleton<ICache, Cache>();
+            services.AddSingleton<IDataTableMapper, DataTableMapper>();
+            services.AddSingleton<IJsonConverter, JsonConverter>();
+            services.AddSingleton<ILoginHelper, LoginHelper>();
+            services.AddSingleton<IMailHandler, MailHandler>();
+            services.AddSingleton<IConvertHelper, ConvertHelper>();
             return services;
         }
     }

@@ -47,7 +47,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(959, 32);
+            headerPanel1.Size = new System.Drawing.Size(959, 25);
             headerPanel1.TabIndex = 0;
             // 
             // universalGrid1

@@ -1,7 +1,5 @@
 ﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
-using Models;
-using static Api.Controllers.GeneralMethods;
 namespace Api.Controllers
 {
     public class ButtonImageController:Controller

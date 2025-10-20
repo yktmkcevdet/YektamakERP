@@ -55,7 +55,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             iconButtonAdd.FlatAppearance.MouseOverBackColor = Color.Yellow;
             iconButtonAdd.FlatStyle = FlatStyle.Popup;
             iconButtonAdd.ForeColor = Color.FromArgb(192, 0, 192);
-            iconButtonAdd.IconChar = IconChar.Add;
+            iconButtonAdd.IconChar = IconChar.Plus;
             iconButtonAdd.IconColor = Color.OliveDrab;
             iconButtonAdd.IconFont = IconFont.Auto;
             iconButtonAdd.IconSize = 20;
@@ -78,7 +78,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             headerPanel1.Margin = new Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new Padding(1);
-            headerPanel1.Size = new Size(798, 32);
+            headerPanel1.Size = new Size(798, 25);
             headerPanel1.TabIndex = 1;
             // 
             // Menuler

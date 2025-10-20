@@ -40,6 +40,8 @@ namespace Utilities.Interfaces
         public List<DosyaTip> dosyaTipList { get; set; }
         public List<TalepNeden> talepNedenList { get; set; }
         public List<Boyut> boyutList { get; set; }
+        public Task<List<DosyalamaYapisi>> dosyalamaYapisiList { get; }
+        public List<ExcelGrupParametre> excelGrupParametreList { get; }
         void Reset();
     }
 }

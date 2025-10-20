@@ -63,26 +63,39 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(928, 32);
+            headerPanel1.Size = new System.Drawing.Size(928, 25);
             headerPanel1.TabIndex = 0;
             // 
             // ctbTeklifNo
             // 
             ctbTeklifNo.BackColor = System.Drawing.Color.White;
+            ctbTeklifNo.BorderColor = System.Drawing.Color.Silver;
+            ctbTeklifNo.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbTeklifNo.BorderSize = 1;
             ctbTeklifNo.Enabled = false;
-            ctbTeklifNo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbTeklifNo.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTeklifNo.ForeColor = System.Drawing.Color.Black;
-            ctbTeklifNo.Location = new System.Drawing.Point(151, 49);
+            ctbTeklifNo.Location = new System.Drawing.Point(160, 49);
+            ctbTeklifNo.Margin = new System.Windows.Forms.Padding(1);
             ctbTeklifNo.Multiline = false;
             ctbTeklifNo.Name = "ctbTeklifNo";
             ctbTeklifNo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbTeklifNo.Size = new System.Drawing.Size(156, 28);
+            ctbTeklifNo.PasswordChar = false;
+            ctbTeklifNo.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbTeklifNo.PlaceholderText = "";
+            ctbTeklifNo.ReadOnly = false;
+            ctbTeklifNo.SelectionStart = 0;
+            ctbTeklifNo.Size = new System.Drawing.Size(156, 29);
             ctbTeklifNo.TabIndex = 1;
+            ctbTeklifNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbTeklifNo.TextCustom = "";
+            ctbTeklifNo.UnderlinedStyle = false;
             // 
             // ctbTeklifTalepTarihi
             // 
             ctbTeklifTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbTeklifTalepTarihi.Location = new System.Drawing.Point(151, 116);
+            ctbTeklifTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbTeklifTalepTarihi.Location = new System.Drawing.Point(160, 107);
             ctbTeklifTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeklifTalepTarihi.Name = "ctbTeklifTalepTarihi";
             ctbTeklifTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -92,7 +105,8 @@
             // ctbTeklifTarihi
             // 
             ctbTeklifTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbTeklifTarihi.Location = new System.Drawing.Point(151, 189);
+            ctbTeklifTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbTeklifTarihi.Location = new System.Drawing.Point(160, 176);
             ctbTeklifTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeklifTarihi.Name = "ctbTeklifTarihi";
             ctbTeklifTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -102,76 +116,84 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(54, 53);
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(54, 58);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(53, 15);
+            label1.Size = new System.Drawing.Size(57, 15);
             label1.TabIndex = 6;
             label1.Text = "Teklif No";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(54, 223);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(54, 215);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(32, 15);
+            label2.Size = new System.Drawing.Size(34, 15);
             label2.TabIndex = 7;
             label2.Text = "Vade";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(54, 189);
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(54, 181);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(65, 15);
+            label3.Size = new System.Drawing.Size(71, 15);
             label3.TabIndex = 8;
             label3.Text = "Teklif Tarihi";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(54, 155);
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label4.Location = new System.Drawing.Point(54, 146);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(77, 15);
+            label4.Size = new System.Drawing.Size(83, 15);
             label4.TabIndex = 9;
             label4.Text = "Termin Süresi";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(54, 125);
+            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label5.Location = new System.Drawing.Point(54, 112);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(95, 15);
+            label5.Size = new System.Drawing.Size(103, 15);
             label5.TabIndex = 10;
             label5.Text = "Teklif Talep Tarihi";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(54, 92);
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label6.Location = new System.Drawing.Point(54, 85);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(37, 15);
+            label6.Size = new System.Drawing.Size(38, 15);
             label6.TabIndex = 11;
             label6.Text = "Firma";
             // 
             // ctbTutar
             // 
             ctbTutar.BackColor = System.Drawing.Color.White;
-            ctbTutar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbTutar.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTutar.ForeColor = System.Drawing.Color.Black;
-            ctbTutar.Location = new System.Drawing.Point(151, 255);
+            ctbTutar.Location = new System.Drawing.Point(160, 237);
+            ctbTutar.Margin = new System.Windows.Forms.Padding(1);
             ctbTutar.Name = "ctbTutar";
             ctbTutar.OndalikBasamak = 0;
             ctbTutar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            ctbTutar.Size = new System.Drawing.Size(96, 32);
+            ctbTutar.Size = new System.Drawing.Size(96, 33);
             ctbTutar.TabIndex = 13;
             ctbTutar.TextCustom = "0";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(54, 262);
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label7.Location = new System.Drawing.Point(54, 244);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(34, 15);
+            label7.Size = new System.Drawing.Size(36, 15);
             label7.TabIndex = 15;
             label7.Text = "Tutar";
             // 
@@ -196,35 +218,38 @@
             // ctbTerminSuresi
             // 
             ctbTerminSuresi.BackColor = System.Drawing.Color.White;
-            ctbTerminSuresi.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbTerminSuresi.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTerminSuresi.ForeColor = System.Drawing.Color.Black;
-            ctbTerminSuresi.Location = new System.Drawing.Point(151, 150);
+            ctbTerminSuresi.Location = new System.Drawing.Point(160, 141);
+            ctbTerminSuresi.Margin = new System.Windows.Forms.Padding(1);
             ctbTerminSuresi.Name = "ctbTerminSuresi";
             ctbTerminSuresi.OndalikBasamak = 0;
             ctbTerminSuresi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            ctbTerminSuresi.Size = new System.Drawing.Size(79, 32);
+            ctbTerminSuresi.Size = new System.Drawing.Size(79, 33);
             ctbTerminSuresi.TabIndex = 19;
             ctbTerminSuresi.TextCustom = "0";
             // 
             // ctbTeklifGecerlilikSuresi
             // 
             ctbTeklifGecerlilikSuresi.BackColor = System.Drawing.Color.White;
-            ctbTeklifGecerlilikSuresi.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbTeklifGecerlilikSuresi.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTeklifGecerlilikSuresi.ForeColor = System.Drawing.Color.Black;
-            ctbTeklifGecerlilikSuresi.Location = new System.Drawing.Point(151, 293);
+            ctbTeklifGecerlilikSuresi.Location = new System.Drawing.Point(160, 272);
+            ctbTeklifGecerlilikSuresi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeklifGecerlilikSuresi.Name = "ctbTeklifGecerlilikSuresi";
             ctbTeklifGecerlilikSuresi.OndalikBasamak = 0;
             ctbTeklifGecerlilikSuresi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            ctbTeklifGecerlilikSuresi.Size = new System.Drawing.Size(73, 32);
+            ctbTeklifGecerlilikSuresi.Size = new System.Drawing.Size(73, 33);
             ctbTeklifGecerlilikSuresi.TabIndex = 20;
             ctbTeklifGecerlilikSuresi.TextCustom = "0";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(54, 302);
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label9.Location = new System.Drawing.Point(54, 277);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(89, 15);
+            label9.Size = new System.Drawing.Size(97, 15);
             label9.TabIndex = 21;
             label9.Text = "Geçerlilik Süresi";
             // 
@@ -232,73 +257,106 @@
             // 
             ctbAciklama.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             ctbAciklama.BackColor = System.Drawing.Color.White;
-            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbAciklama.BorderColor = System.Drawing.Color.Silver;
+            ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbAciklama.BorderSize = 1;
+            ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
-            ctbAciklama.Location = new System.Drawing.Point(151, 331);
+            ctbAciklama.Location = new System.Drawing.Point(160, 307);
+            ctbAciklama.Margin = new System.Windows.Forms.Padding(1);
             ctbAciklama.Multiline = false;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbAciklama.Size = new System.Drawing.Size(358, 28);
+            ctbAciklama.PasswordChar = false;
+            ctbAciklama.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbAciklama.PlaceholderText = "";
+            ctbAciklama.ReadOnly = false;
+            ctbAciklama.SelectionStart = 0;
+            ctbAciklama.Size = new System.Drawing.Size(358, 29);
             ctbAciklama.TabIndex = 22;
+            ctbAciklama.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbAciklama.TextCustom = "";
+            ctbAciklama.UnderlinedStyle = false;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(54, 339);
+            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label10.Location = new System.Drawing.Point(54, 312);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(56, 15);
+            label10.Size = new System.Drawing.Size(57, 15);
             label10.TabIndex = 23;
             label10.Text = "Açıklama";
             // 
             // fcbFirma
             // 
             fcbFirma.BorderColor = System.Drawing.Color.Silver;
+            fcbFirma.BorderRadius = 8;
             fcbFirma.BorderSize = 1;
             fcbFirma.DisplayMember = "ad";
-            fcbFirma.Location = new System.Drawing.Point(151, 83);
+            fcbFirma.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbFirma.Location = new System.Drawing.Point(160, 80);
+            fcbFirma.Margin = new System.Windows.Forms.Padding(1);
             fcbFirma.Name = "fcbFirma";
             fcbFirma.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbFirma.PlaceholderText = "Seçiniz...";
-            fcbFirma.Size = new System.Drawing.Size(434, 29);
+            fcbFirma.Size = new System.Drawing.Size(434, 25);
             fcbFirma.TabIndex = 24;
             fcbFirma.ValueMember = "Id";
             // 
             // clbVade
             // 
             clbVade.BorderColor = System.Drawing.Color.Silver;
+            clbVade.BorderRadius = 8;
             clbVade.BorderSize = 1;
             clbVade.DisplayMember = "ad";
-            clbVade.Location = new System.Drawing.Point(151, 223);
+            clbVade.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbVade.Location = new System.Drawing.Point(160, 210);
+            clbVade.Margin = new System.Windows.Forms.Padding(1);
             clbVade.Name = "clbVade";
             clbVade.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbVade.PlaceholderText = "Seçiniz...";
-            clbVade.Size = new System.Drawing.Size(119, 29);
+            clbVade.Size = new System.Drawing.Size(119, 25);
             clbVade.TabIndex = 25;
             clbVade.ValueMember = "Id";
             // 
             // clbDoviz
             // 
             clbDoviz.BorderColor = System.Drawing.Color.Silver;
+            clbDoviz.BorderRadius = 8;
             clbDoviz.BorderSize = 1;
             clbDoviz.DisplayMember = "kod";
-            clbDoviz.Location = new System.Drawing.Point(253, 257);
+            clbDoviz.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbDoviz.Location = new System.Drawing.Point(257, 239);
+            clbDoviz.Margin = new System.Windows.Forms.Padding(1);
             clbDoviz.Name = "clbDoviz";
             clbDoviz.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbDoviz.PlaceholderText = "Seçiniz...";
-            clbDoviz.Size = new System.Drawing.Size(72, 29);
+            clbDoviz.Size = new System.Drawing.Size(72, 25);
             clbDoviz.TabIndex = 26;
             clbDoviz.ValueMember = "Id";
             // 
             // btnSipariseDonustur
             // 
+            btnSipariseDonustur.BackgroundColor = System.Drawing.Color.Firebrick;
+            btnSipariseDonustur.BorderColor = System.Drawing.Color.Black;
+            btnSipariseDonustur.BorderSize = 0;
+            btnSipariseDonustur.CornerRadius = 10;
             btnSipariseDonustur.FlatAppearance.BorderSize = 0;
             btnSipariseDonustur.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSipariseDonustur.ForeColor = System.Drawing.Color.White;
+            btnSipariseDonustur.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnSipariseDonustur.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnSipariseDonustur.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnSipariseDonustur.HoverColor2 = System.Drawing.Color.Navy;
+            btnSipariseDonustur.Icon = null;
+            btnSipariseDonustur.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnSipariseDonustur.Location = new System.Drawing.Point(552, 748);
             btnSipariseDonustur.Name = "btnSipariseDonustur";
             btnSipariseDonustur.Size = new System.Drawing.Size(150, 40);
             btnSipariseDonustur.TabIndex = 27;
             btnSipariseDonustur.Text = "SİPARİŞE DÖNÜŞTÜR";
+            btnSipariseDonustur.TextColor = System.Drawing.Color.White;
             btnSipariseDonustur.UseVisualStyleBackColor = true;
             btnSipariseDonustur.Click += btnSipariseDonustur_Click;
             // 

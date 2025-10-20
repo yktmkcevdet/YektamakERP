@@ -35,10 +35,10 @@
             // 
             textBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox.Location = new System.Drawing.Point(4, 3);
+            textBox.Location = new System.Drawing.Point(3, 4);
             textBox.Margin = new System.Windows.Forms.Padding(0);
             textBox.Name = "textBox";
-            textBox.Size = new System.Drawing.Size(251, 17);
+            textBox.Size = new System.Drawing.Size(257, 15);
             textBox.TabIndex = 0;
             textBox.Click += textBox_Click;
             textBox.TextChanged += textBox_TextChanged;
@@ -56,10 +56,11 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.Window;
             Controls.Add(textBox);
-            Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("Segoe UI", 8F);
             ForeColor = System.Drawing.Color.DimGray;
+            Margin = new System.Windows.Forms.Padding(1);
             Name = "CustomTextBox";
-            Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            Padding = new System.Windows.Forms.Padding(3);
             Size = new System.Drawing.Size(262, 25);
             Enter += CustomTextBox_Enter;
             Leave += CustomTextBox_Leave;

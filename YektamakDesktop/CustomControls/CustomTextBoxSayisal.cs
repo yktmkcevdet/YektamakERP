@@ -82,10 +82,10 @@ namespace YektamakDesktop.CustomControls
             {
                 base.Font = value;
                 textBox.Font = value;
-                //if (this.DesignMode)
-                //{
-                //    UpdateControlHeight();
-                //}
+                if (this.DesignMode)
+                {
+                    UpdateControlHeight();
+                }
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -280,7 +280,7 @@ namespace YektamakDesktop.CustomControls
                     this.Region = new Region(pathBorderSmooth);//Set the rounded region of UserControl
                     if (borderRadius > 15) SetTextBoxRoundedRegion();//Set the rounded region of TextBox component
                     graph.SmoothingMode = SmoothingMode.AntiAlias;
-                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+                    penBorder.Alignment = PenAlignment.Center;
                     if (isFocused) penBorder.Color = borderFocusColor;
 
                     if (underlinedStyle)
@@ -307,7 +307,7 @@ namespace YektamakDesktop.CustomControls
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
                     this.Region = new Region(this.ClientRectangle);
-                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+                    penBorder.Alignment = PenAlignment.Inset;
 
                     if (isFocused)
                         penBorder.Color = borderFocusColor;
@@ -351,19 +351,20 @@ namespace YektamakDesktop.CustomControls
 
             return path;
         }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            //if (this.DesignMode)
-            //{
-            //    UpdateControlHeight();
-            //}
+            if (this.DesignMode)
+            {
+                UpdateControlHeight();
+            }
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            //UpdateControlHeight();
+            UpdateControlHeight();
         }
 
         protected override void OnTextChanged(EventArgs e)
@@ -375,7 +376,7 @@ namespace YektamakDesktop.CustomControls
         {
             if (textBox.Multiline == false)
             {
-                int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 1;
+                int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 6;
                 //Bizim kontrolümüz textBox1'in parent control'ü
                 //textBox.Multiline özelliği false olduğu zamanlarda textbox'ın minimumSize özelliği aktif olmuyor(tek satıra göre otomatik ayarlanıyor)
                 //textBox1'e MinimumSize özelliği atayabilmek için Multiline'ı önce true sonra false yapıyoruz

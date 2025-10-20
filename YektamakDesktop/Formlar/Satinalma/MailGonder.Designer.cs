@@ -74,7 +74,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1020, 32);
+            headerPanel1.Size = new System.Drawing.Size(1020, 25);
             headerPanel1.TabIndex = 0;
             // 
             // rtbBody
@@ -88,17 +88,10 @@
             // btnSendMail
             // 
             btnSendMail.BackColor = System.Drawing.SystemColors.Control;
-            btnSendMail.BorderColor = System.Drawing.Color.Black;
-            btnSendMail.BorderSize = 0;
-            btnSendMail.CornerRadius = 20;
             btnSendMail.Cursor = System.Windows.Forms.Cursors.Hand;
             btnSendMail.FlatAppearance.BorderSize = 0;
             btnSendMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSendMail.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            btnSendMail.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            btnSendMail.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            btnSendMail.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            btnSendMail.HoverColor2 = System.Drawing.Color.Navy;
             btnSendMail.IconChar = FontAwesome.Sharp.IconChar.MailBulk;
             btnSendMail.IconColor = System.Drawing.Color.DeepSkyBlue;
             btnSendMail.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -115,12 +108,11 @@
             tbxMailTo.BackColor = System.Drawing.Color.White;
             tbxMailTo.BorderColor = System.Drawing.Color.Silver;
             tbxMailTo.BorderFocusColor = System.Drawing.Color.HotPink;
-            tbxMailTo.BorderRadius = 5;
             tbxMailTo.BorderSize = 1;
-            tbxMailTo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tbxMailTo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             tbxMailTo.ForeColor = System.Drawing.Color.Black;
-            tbxMailTo.isPlaceHolder = false;
             tbxMailTo.Location = new System.Drawing.Point(82, 53);
+            tbxMailTo.Margin = new System.Windows.Forms.Padding(1);
             tbxMailTo.Multiline = false;
             tbxMailTo.Name = "tbxMailTo";
             tbxMailTo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -129,7 +121,7 @@
             tbxMailTo.PlaceholderText = "";
             tbxMailTo.ReadOnly = false;
             tbxMailTo.SelectionStart = 0;
-            tbxMailTo.Size = new System.Drawing.Size(777, 28);
+            tbxMailTo.Size = new System.Drawing.Size(777, 33);
             tbxMailTo.TabIndex = 3;
             tbxMailTo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             tbxMailTo.TextCustom = "";
@@ -148,7 +140,7 @@
             // tsbBold
             // 
             tsbBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbBold.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            tsbBold.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             tsbBold.Image = (System.Drawing.Image)resources.GetObject("tsbBold.Image");
             tsbBold.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbBold.Name = "tsbBold";
@@ -160,7 +152,7 @@
             // tsbItalic
             // 
             tsbItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbItalic.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            tsbItalic.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
             tsbItalic.Image = (System.Drawing.Image)resources.GetObject("tsbItalic.Image");
             tsbItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbItalic.Name = "tsbItalic";
@@ -227,12 +219,11 @@
             tbxMailCc.BackColor = System.Drawing.Color.White;
             tbxMailCc.BorderColor = System.Drawing.Color.Silver;
             tbxMailCc.BorderFocusColor = System.Drawing.Color.HotPink;
-            tbxMailCc.BorderRadius = 5;
             tbxMailCc.BorderSize = 1;
-            tbxMailCc.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tbxMailCc.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             tbxMailCc.ForeColor = System.Drawing.Color.Black;
-            tbxMailCc.isPlaceHolder = false;
             tbxMailCc.Location = new System.Drawing.Point(82, 87);
+            tbxMailCc.Margin = new System.Windows.Forms.Padding(1);
             tbxMailCc.Multiline = false;
             tbxMailCc.Name = "tbxMailCc";
             tbxMailCc.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -241,7 +232,7 @@
             tbxMailCc.PlaceholderText = "";
             tbxMailCc.ReadOnly = false;
             tbxMailCc.SelectionStart = 0;
-            tbxMailCc.Size = new System.Drawing.Size(777, 28);
+            tbxMailCc.Size = new System.Drawing.Size(777, 33);
             tbxMailCc.TabIndex = 6;
             tbxMailCc.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             tbxMailCc.TextCustom = "";
@@ -252,12 +243,11 @@
             tbxMailBcc.BackColor = System.Drawing.Color.White;
             tbxMailBcc.BorderColor = System.Drawing.Color.Silver;
             tbxMailBcc.BorderFocusColor = System.Drawing.Color.HotPink;
-            tbxMailBcc.BorderRadius = 5;
             tbxMailBcc.BorderSize = 1;
-            tbxMailBcc.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tbxMailBcc.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             tbxMailBcc.ForeColor = System.Drawing.Color.Black;
-            tbxMailBcc.isPlaceHolder = false;
             tbxMailBcc.Location = new System.Drawing.Point(82, 121);
+            tbxMailBcc.Margin = new System.Windows.Forms.Padding(1);
             tbxMailBcc.Multiline = false;
             tbxMailBcc.Name = "tbxMailBcc";
             tbxMailBcc.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -266,7 +256,7 @@
             tbxMailBcc.PlaceholderText = "";
             tbxMailBcc.ReadOnly = false;
             tbxMailBcc.SelectionStart = 0;
-            tbxMailBcc.Size = new System.Drawing.Size(777, 28);
+            tbxMailBcc.Size = new System.Drawing.Size(777, 33);
             tbxMailBcc.TabIndex = 9;
             tbxMailBcc.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             tbxMailBcc.TextCustom = "";
@@ -277,12 +267,11 @@
             tbxKonu.BackColor = System.Drawing.Color.White;
             tbxKonu.BorderColor = System.Drawing.Color.Silver;
             tbxKonu.BorderFocusColor = System.Drawing.Color.HotPink;
-            tbxKonu.BorderRadius = 5;
             tbxKonu.BorderSize = 1;
-            tbxKonu.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            tbxKonu.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             tbxKonu.ForeColor = System.Drawing.Color.Black;
-            tbxKonu.isPlaceHolder = false;
             tbxKonu.Location = new System.Drawing.Point(82, 155);
+            tbxKonu.Margin = new System.Windows.Forms.Padding(1);
             tbxKonu.Multiline = false;
             tbxKonu.Name = "tbxKonu";
             tbxKonu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
@@ -291,7 +280,7 @@
             tbxKonu.PlaceholderText = "";
             tbxKonu.ReadOnly = false;
             tbxKonu.SelectionStart = 0;
-            tbxKonu.Size = new System.Drawing.Size(777, 28);
+            tbxKonu.Size = new System.Drawing.Size(777, 33);
             tbxKonu.TabIndex = 14;
             tbxKonu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             tbxKonu.TextCustom = "";
@@ -300,17 +289,10 @@
             // btnTo
             // 
             btnTo.BackColor = System.Drawing.Color.Transparent;
-            btnTo.BorderColor = System.Drawing.Color.Black;
-            btnTo.BorderSize = 0;
-            btnTo.CornerRadius = 10;
             btnTo.FlatAppearance.BorderSize = 0;
             btnTo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnTo.ForeColor = System.Drawing.Color.White;
-            btnTo.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            btnTo.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            btnTo.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            btnTo.HoverColor2 = System.Drawing.Color.Navy;
             btnTo.IconChar = FontAwesome.Sharp.IconChar.None;
             btnTo.IconColor = System.Drawing.Color.Black;
             btnTo.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -326,17 +308,10 @@
             // btnCc
             // 
             btnCc.BackColor = System.Drawing.Color.Transparent;
-            btnCc.BorderColor = System.Drawing.Color.Black;
-            btnCc.BorderSize = 0;
-            btnCc.CornerRadius = 10;
             btnCc.FlatAppearance.BorderSize = 0;
             btnCc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnCc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnCc.ForeColor = System.Drawing.Color.White;
-            btnCc.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            btnCc.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            btnCc.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            btnCc.HoverColor2 = System.Drawing.Color.Navy;
             btnCc.IconChar = FontAwesome.Sharp.IconChar.None;
             btnCc.IconColor = System.Drawing.Color.Black;
             btnCc.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -352,17 +327,10 @@
             // btnBcc
             // 
             btnBcc.BackColor = System.Drawing.Color.Transparent;
-            btnBcc.BorderColor = System.Drawing.Color.Black;
-            btnBcc.BorderSize = 0;
-            btnBcc.CornerRadius = 10;
             btnBcc.FlatAppearance.BorderSize = 0;
             btnBcc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             btnBcc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnBcc.ForeColor = System.Drawing.Color.White;
-            btnBcc.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            btnBcc.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            btnBcc.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            btnBcc.HoverColor2 = System.Drawing.Color.Navy;
             btnBcc.IconChar = FontAwesome.Sharp.IconChar.None;
             btnBcc.IconColor = System.Drawing.Color.Black;
             btnBcc.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -444,17 +412,10 @@
             // btnAttach
             // 
             btnAttach.BackColor = System.Drawing.Color.Transparent;
-            btnAttach.BorderColor = System.Drawing.Color.Black;
-            btnAttach.BorderSize = 0;
-            btnAttach.CornerRadius = 20;
             btnAttach.Cursor = System.Windows.Forms.Cursors.Hand;
             btnAttach.FlatAppearance.BorderSize = 0;
             btnAttach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnAttach.ForeColor = System.Drawing.Color.White;
-            btnAttach.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            btnAttach.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            btnAttach.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            btnAttach.HoverColor2 = System.Drawing.Color.Navy;
             btnAttach.IconChar = FontAwesome.Sharp.IconChar.Paperclip;
             btnAttach.IconColor = System.Drawing.Color.Black;
             btnAttach.IconFont = FontAwesome.Sharp.IconFont.Auto;

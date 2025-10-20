@@ -1,0 +1,114 @@
+﻿@page "/icon-gallery"
+@using MudBlazor
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+
+<MudPaper Class="pa-4">
+    <MudText Typo="Typo.h5">Icon Galerisi</MudText>
+
+    <div class="d-flex align-center my-3">
+        <MudTextField @bind-Value="search" Placeholder="Ara (ör. Home, Menu...)" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" Class="me-2" />
+        <MudSelect T="int" @bind-Value="iconSize" Dense="true" Style="width:120px">
+            <MudSelectItem Value="24">24</MudSelectItem>
+            <MudSelectItem Value="28">28</MudSelectItem>
+            <MudSelectItem Value="32">32</MudSelectItem>
+            <MudSelectItem Value="40">40</MudSelectItem>
+        </MudSelect>
+    </div>
+
+    <MudGrid GutterSize="2">
+        @foreach (var icon in FilteredIcons)
+        {
+            <MudItem xs="6" sm="4" md="3" lg="2">
+                <MudPaper Class="pa-2 d-flex align-center" Style="gap:8px;">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <MudIcon Icon="@icon" Size="@(GetSize(iconSize))" />
+                        <div style="font-size:0.85rem; max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            @icon
+                        </div>
+                    </div>
+
+                    <MudSpacer />
+
+                    <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
+                                   Size="Size.Small"
+                                   OnClick="@(async ()=> await CopyToClipboard(icon))"
+                                   Title="Kopyala" />
+                    <MudIconButton Icon="@Icons.Material.Filled.OpenInNew"
+                                   Size="Size.Small"
+                                   Href="@($"https://fonts.google.com/icons?selected=Material+Icons+{Uri.EscapeDataString(icon)}")"
+                                   Target="_blank"
+                                   Title="Detay (Google Icons)" />
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    @if (!FilteredIcons.Any())
+    {
+        <div class="mt-3">Eşleşen icon bulunamadı.</div>
+    }
+</MudPaper>
+
+@code {
+    private List<string> allIcons = new();
+    private string search = "";
+    private int iconSize = 28;
+
+    protected override void OnInitialized()
+    {
+        allIcons = GetMaterialFilledIcons().OrderBy(x => x).ToList();
+    }
+
+    private IEnumerable<string> FilteredIcons =>
+        string.IsNullOrWhiteSpace(search)
+            ? allIcons
+            : allIcons.Where(i => i.Contains(search, StringComparison.OrdinalIgnoreCase));
+
+    // MudBlazor Icons class'ını yansıtarak tüm ikon string'lerini alıyoruz
+    private List<string> GetMaterialFilledIcons()
+    {
+        var list = new List<string>();
+        var t = typeof(Icons.Material.Filled);
+
+        // public static field'ler
+        var fields = t.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        foreach (var f in fields)
+        {
+            var val = f.GetValue(null)?.ToString();
+            if (!string.IsNullOrEmpty(val)) list.Add(val);
+        }
+
+        // public static property'ler (varsa)
+        var props = t.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        foreach (var p in props)
+        {
+            var val = p.GetValue(null)?.ToString();
+            if (!string.IsNullOrEmpty(val)) list.Add(val);
+        }
+
+        return list.Distinct().ToList();
+    }
+
+    private Size GetSize(int px) => px switch
+    {
+        <= 20 => Size.Small,
+        <= 28 => Size.Medium,
+        <= 36 => Size.Large,
+        _ => Size.Large
+    };
+
+    private async Task CopyToClipboard(string text)
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", text);
+            Snackbar.Add($"Kopyalandı: {text}", Severity.Success);
+        }
+        catch
+        {
+            Snackbar.Add("Kopyalama başarısız oldu.", Severity.Error);
+        }
+    }
+}

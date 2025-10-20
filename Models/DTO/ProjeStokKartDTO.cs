@@ -54,6 +54,8 @@ namespace Models.DTO
         [GridDisplay(Header = "Malzeme Alt Grup2 Adı")] public string stokKartmalzemeAltGrup2ad { get; set; }
         [GridDisplay(Header = "Boyut Id", Tip = "Liste", ListName = "boyutList", ListVisibleColumnName = "ad")] public int? stokKartboyutTanimId { get; set; }
         [GridDisplay(Header = "Stok Kart Dosyaları")] public List<StokKartDosya> stokKartdosyaList { get; set; }
+        [GridDisplay(Header = "Talaşlı?")] public bool? stokKartisTalasli { get; set; }
+        [GridDisplay(Header = "Büküm?")] public bool? stokKartisBukum { get; set; }
     }
 
 }

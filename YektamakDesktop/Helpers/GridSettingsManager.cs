@@ -64,7 +64,7 @@ namespace YektamakDesktop.Helpers
             gridSettings = JsonConvert.DeserializeObject<List<GridSettings>>(jsonResult).FirstOrDefault();
             var json = gridSettings.ayar;
             var columnSettings = JsonConvert.DeserializeObject<List<dynamic>>(json);
-            
+            dataGridView.SuspendLayout();
             foreach (var setting in columnSettings)
             {
                 var c = dataGridView.Columns[setting.Name.ToString()];
@@ -75,6 +75,7 @@ namespace YektamakDesktop.Helpers
                     c.Visible = (bool)setting.Visible;
                 }
             }
+            dataGridView.ResumeLayout();
         }
     }
 

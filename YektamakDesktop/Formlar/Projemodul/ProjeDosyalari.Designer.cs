@@ -1,4 +1,6 @@
-﻿using YektamakDesktop.Common;
+﻿using System.Drawing;
+using System.Windows.Forms;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.ProjeModul
@@ -32,32 +34,35 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            label2 = new System.Windows.Forms.Label();
-            panelFooter = new System.Windows.Forms.Panel();
+            label2 = new Label();
+            panelFooter = new Panel();
             roundedButton4 = new RoundedButton();
-            label1 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            label4 = new System.Windows.Forms.Label();
-            ctbParcaAdi = new CustomTextBox();
-            chkSatinalma = new System.Windows.Forms.CheckBox();
-            chkPdf = new System.Windows.Forms.CheckBox();
-            chkDxf = new System.Windows.Forms.CheckBox();
-            chkStep = new System.Windows.Forms.CheckBox();
-            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            seçiliKalemlerİçinSaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            seçilenKayıtlarıSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            label5 = new System.Windows.Forms.Label();
-            label6 = new System.Windows.Forms.Label();
+            label1 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            ctbParcaKod = new CustomTextBox();
+            chkSatinalma = new CheckBox();
+            chkPdf = new CheckBox();
+            chkDxf = new CheckBox();
+            chkStep = new CheckBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            seçiliKalemlerİçinSaToolStripMenuItem = new ToolStripMenuItem();
+            stokKartınıGörüntüleToolStripMenuItem = new ToolStripMenuItem();
+            seçilenKayıtlarıSilToolStripMenuItem = new ToolStripMenuItem();
+            label5 = new Label();
+            label6 = new Label();
             roundedIconButton1 = new RoundedIconButton();
-            headerPanel1 = new HeaderPanel();
-            universalGrid1 = new UniversalGrid();
-            roundedIconButton2 = new RoundedIconButton();
             fcbProjeKod = new FilterableComboBox();
             clbStokGrup = new FilterableComboBox();
             clbMalzemeGrup = new FilterableComboBox();
             clbMalzemeAltGrup = new FilterableComboBox();
             clbMalzemeAltGrup2 = new FilterableComboBox();
+            fcbStokTip = new FilterableComboBox();
+            label7 = new Label();
+            ctbParcaAd = new CustomTextBox();
+            label8 = new Label();
+            headerPanel1 = new HeaderPanel();
+            universalGrid1 = new UniversalGrid();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -65,85 +70,113 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(9, 54);
+            label2.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label2.Location = new Point(8, 47);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(65, 15);
+            label2.Size = new Size(65, 13);
             label2.TabIndex = 26;
             label2.Text = "Proje Kodu";
             // 
             // panelFooter
             // 
-            panelFooter.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panelFooter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelFooter.Controls.Add(roundedButton4);
-            panelFooter.Location = new System.Drawing.Point(0, 741);
-            panelFooter.Margin = new System.Windows.Forms.Padding(0);
+            panelFooter.Location = new Point(0, 642);
+            panelFooter.Margin = new Padding(0);
             panelFooter.Name = "panelFooter";
-            panelFooter.Size = new System.Drawing.Size(1284, 65);
+            panelFooter.Size = new Size(1101, 56);
             panelFooter.TabIndex = 101;
             // 
             // roundedButton4
             // 
-            roundedButton4.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            roundedButton4.BackColor = System.Drawing.Color.SteelBlue;
-            roundedButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            roundedButton4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            roundedButton4.BackColor = Color.SteelBlue;
+            roundedButton4.BackgroundColor = Color.Firebrick;
+            roundedButton4.BorderColor = Color.Black;
+            roundedButton4.BorderSize = 0;
+            roundedButton4.CornerRadius = 10;
+            roundedButton4.Cursor = Cursors.Hand;
             roundedButton4.FlatAppearance.BorderSize = 0;
-            roundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            roundedButton4.ForeColor = System.Drawing.Color.White;
-            roundedButton4.Location = new System.Drawing.Point(1079, 2);
+            roundedButton4.FlatStyle = FlatStyle.Flat;
+            roundedButton4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            roundedButton4.ForeColor = Color.White;
+            roundedButton4.GradientColor1 = Color.DodgerBlue;
+            roundedButton4.GradientColor2 = Color.MidnightBlue;
+            roundedButton4.HoverColor1 = Color.RoyalBlue;
+            roundedButton4.HoverColor2 = Color.Navy;
+            roundedButton4.Icon = null;
+            roundedButton4.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton4.Location = new Point(961, 2);
             roundedButton4.Name = "roundedButton4";
-            roundedButton4.Size = new System.Drawing.Size(152, 59);
+            roundedButton4.Size = new Size(130, 51);
             roundedButton4.TabIndex = 2;
             roundedButton4.Text = "Satınalma Talebi Oluştur =>";
+            roundedButton4.TextColor = Color.White;
             roundedButton4.UseVisualStyleBackColor = false;
             roundedButton4.Click += roundedButton4_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(9, 84);
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label1.Location = new Point(10, 110);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(66, 15);
+            label1.Size = new Size(66, 13);
             label1.TabIndex = 103;
             label1.Text = "Stok Grubu";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(9, 116);
+            label3.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label3.Location = new Point(303, 47);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(91, 15);
+            label3.Size = new Size(90, 13);
             label3.TabIndex = 105;
             label3.Text = "Malzeme Grubu";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(9, 223);
+            label4.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label4.Location = new Point(10, 139);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(57, 15);
+            label4.Size = new Size(66, 13);
             label4.TabIndex = 107;
-            label4.Text = "Parça Adı";
+            label4.Text = "Parça Kodu";
             // 
-            // ctbParcaAdi
+            // ctbParcaKod
             // 
-            ctbParcaAdi.BackColor = System.Drawing.Color.White;
-            ctbParcaAdi.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            ctbParcaAdi.ForeColor = System.Drawing.Color.Black;
-            ctbParcaAdi.Location = new System.Drawing.Point(128, 217);
-            ctbParcaAdi.Name = "ctbParcaAdi";
-            ctbParcaAdi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbParcaAdi.Size = new System.Drawing.Size(250, 28);
-            ctbParcaAdi.TabIndex = 108;
+            ctbParcaKod.BackColor = Color.White;
+            ctbParcaKod.BorderColor = Color.Silver;
+            ctbParcaKod.BorderFocusColor = Color.HotPink;
+            ctbParcaKod.BorderSize = 1;
+            ctbParcaKod.Font = new Font("Segoe UI", 8F);
+            ctbParcaKod.ForeColor = Color.Black;
+            ctbParcaKod.Location = new Point(110, 131);
+            ctbParcaKod.Margin = new Padding(1);
+            ctbParcaKod.Multiline = false;
+            ctbParcaKod.Name = "ctbParcaKod";
+            ctbParcaKod.Padding = new Padding(7, 5, 7, 5);
+            ctbParcaKod.PasswordChar = false;
+            ctbParcaKod.PlaceholderColor = Color.DarkGray;
+            ctbParcaKod.PlaceholderText = "";
+            ctbParcaKod.ReadOnly = false;
+            ctbParcaKod.SelectionStart = 0;
+            ctbParcaKod.Size = new Size(344, 25);
+            ctbParcaKod.TabIndex = 108;
+            ctbParcaKod.TextAlignment = HorizontalAlignment.Left;
+            ctbParcaKod.TextCustom = "";
+            ctbParcaKod.UnderlinedStyle = false;
             // 
             // chkSatinalma
             // 
             chkSatinalma.AutoSize = true;
             chkSatinalma.Checked = true;
-            chkSatinalma.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            chkSatinalma.Location = new System.Drawing.Point(713, 218);
+            chkSatinalma.CheckState = CheckState.Indeterminate;
+            chkSatinalma.Location = new Point(665, 103);
             chkSatinalma.Name = "chkSatinalma";
-            chkSatinalma.Size = new System.Drawing.Size(107, 19);
+            chkSatinalma.Size = new Size(105, 17);
             chkSatinalma.TabIndex = 109;
             chkSatinalma.Text = "Satınalma talep";
             chkSatinalma.ThreeState = true;
@@ -153,10 +186,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             chkPdf.AutoSize = true;
             chkPdf.Checked = true;
-            chkPdf.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            chkPdf.Location = new System.Drawing.Point(444, 217);
+            chkPdf.CheckState = CheckState.Indeterminate;
+            chkPdf.Location = new Point(665, 42);
             chkPdf.Name = "chkPdf";
-            chkPdf.Size = new System.Drawing.Size(47, 19);
+            chkPdf.Size = new Size(46, 17);
             chkPdf.TabIndex = 110;
             chkPdf.Text = "PDF";
             chkPdf.ThreeState = true;
@@ -166,10 +199,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             chkDxf.AutoSize = true;
             chkDxf.Checked = true;
-            chkDxf.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            chkDxf.Location = new System.Drawing.Point(525, 218);
+            chkDxf.CheckState = CheckState.Indeterminate;
+            chkDxf.Location = new Point(665, 63);
             chkDxf.Name = "chkDxf";
-            chkDxf.Size = new System.Drawing.Size(47, 19);
+            chkDxf.Size = new Size(46, 17);
             chkDxf.TabIndex = 111;
             chkDxf.Text = "DXF";
             chkDxf.ThreeState = true;
@@ -179,10 +212,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             chkStep.AutoSize = true;
             chkStep.Checked = true;
-            chkStep.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            chkStep.Location = new System.Drawing.Point(612, 218);
+            chkStep.CheckState = CheckState.Indeterminate;
+            chkStep.Location = new Point(665, 85);
             chkStep.Name = "chkStep";
-            chkStep.Size = new System.Drawing.Size(51, 19);
+            chkStep.Size = new Size(50, 17);
             chkStep.TabIndex = 112;
             chkStep.Text = "STEP";
             chkStep.ThreeState = true;
@@ -190,165 +223,254 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { seçiliKalemlerİçinSaToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem, seçilenKayıtlarıSilToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { seçiliKalemlerİçinSaToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem, seçilenKayıtlarıSilToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(303, 92);
+            contextMenuStrip1.Size = new Size(303, 70);
             // 
             // seçiliKalemlerİçinSaToolStripMenuItem
             // 
             seçiliKalemlerİçinSaToolStripMenuItem.Name = "seçiliKalemlerİçinSaToolStripMenuItem";
-            seçiliKalemlerİçinSaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            seçiliKalemlerİçinSaToolStripMenuItem.Size = new Size(302, 22);
             seçiliKalemlerİçinSaToolStripMenuItem.Text = "Seçili Kalemler İçin Satınalma Talebi Oluştur";
             seçiliKalemlerİçinSaToolStripMenuItem.Click += seçiliKalemlerİçinSaToolStripMenuItem_Click;
             // 
             // stokKartınıGörüntüleToolStripMenuItem
             // 
             stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
-            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            stokKartınıGörüntüleToolStripMenuItem.Size = new Size(302, 22);
             stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
             stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
             // 
             // seçilenKayıtlarıSilToolStripMenuItem
             // 
             seçilenKayıtlarıSilToolStripMenuItem.Name = "seçilenKayıtlarıSilToolStripMenuItem";
-            seçilenKayıtlarıSilToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            seçilenKayıtlarıSilToolStripMenuItem.Size = new Size(302, 22);
             seçilenKayıtlarıSilToolStripMenuItem.Text = "Seçilen Kayıtları Sil";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(8, 151);
+            label5.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label5.Location = new Point(303, 77);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(109, 15);
+            label5.Size = new Size(108, 13);
             label5.TabIndex = 119;
             label5.Text = "Malzeme Alt Grubu";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(9, 189);
+            label6.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label6.Location = new Point(303, 107);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(118, 15);
+            label6.Size = new Size(117, 13);
             label6.TabIndex = 121;
             label6.Text = "Malzeme Alt Grubu 2";
             // 
             // roundedIconButton1
             // 
-            roundedIconButton1.BackColor = System.Drawing.Color.Cyan;
-            roundedIconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            roundedIconButton1.BackColor = Color.Cyan;
+            roundedIconButton1.Cursor = Cursors.Hand;
             roundedIconButton1.FlatAppearance.BorderSize = 0;
-            roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedIconButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            roundedIconButton1.ForeColor = System.Drawing.Color.Purple;
+            roundedIconButton1.FlatStyle = FlatStyle.Flat;
+            roundedIconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            roundedIconButton1.ForeColor = Color.Purple;
             roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
-            roundedIconButton1.IconColor = System.Drawing.Color.Purple;
+            roundedIconButton1.IconColor = Color.Purple;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             roundedIconButton1.IconSize = 24;
-            roundedIconButton1.Location = new System.Drawing.Point(1112, 54);
+            roundedIconButton1.Location = new Point(961, 36);
             roundedIconButton1.Name = "roundedIconButton1";
-            roundedIconButton1.Size = new System.Drawing.Size(119, 35);
+            roundedIconButton1.Size = new Size(109, 44);
             roundedIconButton1.TabIndex = 122;
             roundedIconButton1.Text = "Excelden Al";
-            roundedIconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            roundedIconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
             roundedIconButton1.UseVisualStyleBackColor = false;
             roundedIconButton1.Click += roundedIconButton1_Click;
             // 
-            // headerPanel1
-            // 
-            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
-            headerPanel1.Location = new System.Drawing.Point(0, 0);
-            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
-            headerPanel1.Name = "headerPanel1";
-            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1287, 32);
-            headerPanel1.TabIndex = 123;
-            // 
-            // universalGrid1
-            // 
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(8, 270);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1273, 474);
-            universalGrid1.TabIndex = 124;
-            universalGrid1.MouseDown1 += universalGrid1_MouseClick;
-            // 
-            // roundedIconButton2
-            // 
-            roundedIconButton2.BackColor = System.Drawing.Color.DodgerBlue;
-            roundedIconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            roundedIconButton2.FlatAppearance.BorderSize = 0;
-            roundedIconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedIconButton2.ForeColor = System.Drawing.Color.White;
-            roundedIconButton2.IconChar = FontAwesome.Sharp.IconChar.Repeat;
-            roundedIconButton2.IconColor = System.Drawing.Color.White;
-            roundedIconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            roundedIconButton2.IconSize = 36;
-            roundedIconButton2.Location = new System.Drawing.Point(409, 49);
-            roundedIconButton2.Name = "roundedIconButton2";
-            roundedIconButton2.Size = new System.Drawing.Size(45, 32);
-            roundedIconButton2.TabIndex = 125;
-            roundedIconButton2.UseVisualStyleBackColor = false;
-            // 
             // fcbProjeKod
             // 
-            fcbProjeKod.ForeColor = System.Drawing.Color.Gray;
-            fcbProjeKod.Location = new System.Drawing.Point(128, 48);
+            fcbProjeKod.BorderColor = Color.Silver;
+            fcbProjeKod.BorderRadius = 8;
+            fcbProjeKod.BorderSize = 1;
+            fcbProjeKod.DisplayMember = "kod";
+            fcbProjeKod.Font = new Font("Segoe UI", 8F);
+            fcbProjeKod.ForeColor = Color.Gray;
+            fcbProjeKod.Location = new Point(110, 42);
+            fcbProjeKod.Margin = new Padding(1);
             fcbProjeKod.Name = "fcbProjeKod";
-            fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbProjeKod.Size = new System.Drawing.Size(189, 29);
+            fcbProjeKod.Padding = new Padding(6, 4, 6, 4);
+            fcbProjeKod.PlaceholderText = "Seçiniz...";
+            fcbProjeKod.Size = new Size(162, 25);
             fcbProjeKod.TabIndex = 126;
-            fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
+            fcbProjeKod.ValueMember = "Id";
             // 
             // clbStokGrup
             // 
-            clbStokGrup.ForeColor = System.Drawing.Color.Gray;
-            clbStokGrup.Location = new System.Drawing.Point(128, 80);
+            clbStokGrup.BorderColor = Color.Silver;
+            clbStokGrup.BorderRadius = 8;
+            clbStokGrup.BorderSize = 1;
+            clbStokGrup.DisplayMember = "ad";
+            clbStokGrup.Font = new Font("Segoe UI", 8F);
+            clbStokGrup.ForeColor = Color.Gray;
+            clbStokGrup.Location = new Point(110, 102);
+            clbStokGrup.Margin = new Padding(1);
             clbStokGrup.Name = "clbStokGrup";
-            clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbStokGrup.Size = new System.Drawing.Size(189, 29);
+            clbStokGrup.Padding = new Padding(6, 4, 6, 4);
+            clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.Size = new Size(162, 25);
             clbStokGrup.TabIndex = 127;
+            clbStokGrup.ValueMember = "Id";
             // 
             // clbMalzemeGrup
             // 
-            clbMalzemeGrup.ForeColor = System.Drawing.Color.Gray;
-            clbMalzemeGrup.Location = new System.Drawing.Point(128, 113);
+            clbMalzemeGrup.BorderColor = Color.Silver;
+            clbMalzemeGrup.BorderRadius = 8;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.Font = new Font("Segoe UI", 8F);
+            clbMalzemeGrup.ForeColor = Color.Gray;
+            clbMalzemeGrup.Location = new Point(423, 42);
+            clbMalzemeGrup.Margin = new Padding(1);
             clbMalzemeGrup.Name = "clbMalzemeGrup";
-            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeGrup.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.Size = new Size(162, 25);
             clbMalzemeGrup.TabIndex = 128;
+            clbMalzemeGrup.ValueMember = "Id";
             // 
             // clbMalzemeAltGrup
             // 
-            clbMalzemeAltGrup.ForeColor = System.Drawing.Color.Gray;
-            clbMalzemeAltGrup.Location = new System.Drawing.Point(128, 148);
+            clbMalzemeAltGrup.BorderColor = Color.Silver;
+            clbMalzemeAltGrup.BorderRadius = 8;
+            clbMalzemeAltGrup.BorderSize = 1;
+            clbMalzemeAltGrup.DisplayMember = "ad";
+            clbMalzemeAltGrup.Font = new Font("Segoe UI", 8F);
+            clbMalzemeAltGrup.ForeColor = Color.Gray;
+            clbMalzemeAltGrup.Location = new Point(423, 72);
+            clbMalzemeAltGrup.Margin = new Padding(1);
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
-            clbMalzemeAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
+            clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.Size = new Size(162, 25);
             clbMalzemeAltGrup.TabIndex = 129;
+            clbMalzemeAltGrup.ValueMember = "Id";
             // 
             // clbMalzemeAltGrup2
             // 
-            clbMalzemeAltGrup2.ForeColor = System.Drawing.Color.Gray;
-            clbMalzemeAltGrup2.Location = new System.Drawing.Point(128, 184);
+            clbMalzemeAltGrup2.BorderColor = Color.Silver;
+            clbMalzemeAltGrup2.BorderRadius = 8;
+            clbMalzemeAltGrup2.BorderSize = 1;
+            clbMalzemeAltGrup2.DisplayMember = "ad";
+            clbMalzemeAltGrup2.Font = new Font("Segoe UI", 8F);
+            clbMalzemeAltGrup2.ForeColor = Color.Gray;
+            clbMalzemeAltGrup2.Location = new Point(423, 100);
+            clbMalzemeAltGrup2.Margin = new Padding(1);
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
-            clbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeAltGrup2.Size = new System.Drawing.Size(189, 29);
+            clbMalzemeAltGrup2.Padding = new Padding(6, 4, 6, 4);
+            clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.Size = new Size(162, 25);
             clbMalzemeAltGrup2.TabIndex = 130;
+            clbMalzemeAltGrup2.ValueMember = "Id";
+            // 
+            // fcbStokTip
+            // 
+            fcbStokTip.BorderColor = Color.Silver;
+            fcbStokTip.BorderRadius = 8;
+            fcbStokTip.BorderSize = 1;
+            fcbStokTip.DisplayMember = "ad";
+            fcbStokTip.Font = new Font("Segoe UI", 8F);
+            fcbStokTip.ForeColor = Color.Gray;
+            fcbStokTip.Location = new Point(110, 72);
+            fcbStokTip.Margin = new Padding(1);
+            fcbStokTip.Name = "fcbStokTip";
+            fcbStokTip.Padding = new Padding(6, 4, 6, 4);
+            fcbStokTip.PlaceholderText = "Seçiniz...";
+            fcbStokTip.Size = new Size(162, 25);
+            fcbStokTip.TabIndex = 131;
+            fcbStokTip.ValueMember = "Id";
+            fcbStokTip.SelectedIndexChanged += fcbStokTip_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label7.Location = new Point(10, 79);
+            label7.Name = "label7";
+            label7.Size = new Size(52, 13);
+            label7.TabIndex = 132;
+            label7.Text = "Stok Tipi";
+            // 
+            // ctbParcaAd
+            // 
+            ctbParcaAd.BackColor = Color.White;
+            ctbParcaAd.BorderColor = Color.Silver;
+            ctbParcaAd.BorderFocusColor = Color.HotPink;
+            ctbParcaAd.BorderSize = 1;
+            ctbParcaAd.Font = new Font("Segoe UI", 8F);
+            ctbParcaAd.ForeColor = Color.Black;
+            ctbParcaAd.Location = new Point(539, 131);
+            ctbParcaAd.Margin = new Padding(1);
+            ctbParcaAd.Multiline = false;
+            ctbParcaAd.Name = "ctbParcaAd";
+            ctbParcaAd.Padding = new Padding(7, 5, 7, 5);
+            ctbParcaAd.PasswordChar = false;
+            ctbParcaAd.PlaceholderColor = Color.DarkGray;
+            ctbParcaAd.PlaceholderText = "";
+            ctbParcaAd.ReadOnly = false;
+            ctbParcaAd.SelectionStart = 0;
+            ctbParcaAd.Size = new Size(344, 25);
+            ctbParcaAd.TabIndex = 134;
+            ctbParcaAd.TextAlignment = HorizontalAlignment.Left;
+            ctbParcaAd.TextCustom = "";
+            ctbParcaAd.UnderlinedStyle = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            label8.Location = new Point(463, 139);
+            label8.Name = "label8";
+            label8.Size = new Size(56, 13);
+            label8.TabIndex = 133;
+            label8.Text = "Parça Adı";
+            // 
+            // headerPanel1
+            // 
+            headerPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = Color.SteelBlue;
+            headerPanel1.Baslik = "Proje Dosyaları";
+            headerPanel1.Location = new Point(0, 0);
+            headerPanel1.Margin = new Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new Padding(1);
+            headerPanel1.Size = new Size(1103, 25);
+            headerPanel1.TabIndex = 135;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.Location = new Point(10, 163);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new Size(1089, 475);
+            universalGrid1.TabIndex = 136;
             // 
             // ProjeDosyalari
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1287, 807);
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1103, 699);
+            Controls.Add(universalGrid1);
+            Controls.Add(headerPanel1);
+            Controls.Add(ctbParcaAd);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(fcbStokTip);
             Controls.Add(clbMalzemeAltGrup2);
             Controls.Add(clbMalzemeAltGrup);
             Controls.Add(clbMalzemeGrup);
             Controls.Add(clbStokGrup);
             Controls.Add(fcbProjeKod);
-            Controls.Add(roundedIconButton2);
-            Controls.Add(headerPanel1);
             Controls.Add(roundedIconButton1);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -356,16 +478,16 @@ namespace YektamakDesktop.Formlar.ProjeModul
             Controls.Add(chkDxf);
             Controls.Add(chkPdf);
             Controls.Add(chkSatinalma);
-            Controls.Add(ctbParcaAdi);
+            Controls.Add(ctbParcaKod);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(panelFooter);
-            Controls.Add(universalGrid1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Font = new Font("Segoe UI", 8F);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "ProjeDosyalari";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ProjeDosyalari";
             panelFooter.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
@@ -374,12 +496,21 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
 
         #endregion
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid,
+                Color.Black, 1, ButtonBorderStyle.Solid);
+        }
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private CustomControls.CustomTextBox ctbParcaAdi;
+        private CustomControls.CustomTextBox ctbParcaKod;
         private System.Windows.Forms.CheckBox chkSatinalma;
         private System.Windows.Forms.CheckBox chkPdf;
         private System.Windows.Forms.CheckBox chkDxf;
@@ -391,14 +522,17 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private CustomControls.RoundedIconButton roundedIconButton1;
-        private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.RoundedIconButton roundedIconButton2;
         private FilterableComboBox fcbProjeKod;
         private FilterableComboBox clbStokGrup;
         private FilterableComboBox clbMalzemeGrup;
         private FilterableComboBox clbMalzemeAltGrup;
         private FilterableComboBox clbMalzemeAltGrup2;
         private System.Windows.Forms.ToolStripMenuItem seçilenKayıtlarıSilToolStripMenuItem;
+        private FilterableComboBox fcbStokTip;
+        private System.Windows.Forms.Label label7;
+        private CustomTextBox ctbParcaAd;
+        private System.Windows.Forms.Label label8;
+        private HeaderPanel headerPanel1;
+        private UniversalGrid universalGrid1;
     }
 }

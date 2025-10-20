@@ -343,7 +343,6 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     {
                         var alanYetki = ConvertHelper.ToEntity<AlanYetki>(alan);
                         string jsonResult = await _kullaniciYetkiService.DeleteAlanYetki(alanYetki);
-                        MessageBox.Show(jsonResult);
                         universalGrid1.binding.RemoveAt(universalGrid1.Grid.SelectedCells[0].RowIndex);
                     }
                         

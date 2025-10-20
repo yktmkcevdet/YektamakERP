@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Models.DTO;
 
 namespace ApiService.Implementetions
 {
@@ -31,6 +32,18 @@ namespace ApiService.Implementetions
         public string GetDosyaTip()
         {
             return _apiService.Get($"GetDosyaTip");
+        }
+        public string GetDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi)
+        {
+            return _apiService.Post(dosyalamaYapisi,$"GetDosyalamaYapisi");
+        }
+        public string SaveDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi)
+        {
+            return _apiService.Post(dosyalamaYapisi,$"SaveDosyalamaYapisi");
+        }
+        public string DeleteDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi)
+        {
+            return _apiService.Post(dosyalamaYapisi,$"DeleteDosyalamaYapisi");
         }
         public async Task<string> SaveExcelForm(ExcelForm excelForm)
         {

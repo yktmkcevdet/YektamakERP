@@ -195,5 +195,56 @@ namespace Utilities.Implementations
                      || underlyingType == typeof(DateTime)
                      || underlyingType == typeof(Guid));
         }
+        public T ToEntity<T>(object dto, object entity = null, string classNamePrefix = "") where T : class, new()
+        {
+            if (dto == null)
+                throw new ArgumentNullException(nameof(dto));
+
+            if (entity == null)
+                entity = new T();
+
+            Type entityType = entity.GetType();
+            var properties = entityType.GetProperties();
+
+            foreach (var prop in properties)
+            {
+                if (!prop.CanWrite)
+                    continue;
+
+                string fullName = string.IsNullOrEmpty(classNamePrefix) ? prop.Name : classNamePrefix + "." + prop.Name;
+
+                if (prop.PropertyType.IsClass && prop.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(prop.PropertyType))
+                {
+                    // İç içe class: örn. entity.StokKart gibi
+                    object nestedEntity = prop.GetValue(entity);
+                    if (nestedEntity == null)
+                    {
+                        nestedEntity = Activator.CreateInstance(prop.PropertyType);
+                        prop.SetValue(entity, nestedEntity);
+                    }
+
+                    // recursive çağrı
+                    IConvertHelper helper = new ConvertHelper();
+                    var method = typeof(IConvertHelper).GetMethod(nameof(IConvertHelper.ToEntity), BindingFlags.Public | BindingFlags.Instance);
+                    var genericMethod = method.MakeGenericMethod(prop.PropertyType);
+                    var updatedNested = genericMethod.Invoke(helper, new object[] { dto, nestedEntity, fullName });
+
+                    prop.SetValue(entity, updatedNested);
+                }
+                else
+                {
+                    // DTO tarafındaki düz ad: Örn. ProjeStokKartStokKartAd
+                    string flatDtoPropName = fullName.Replace(".", "");
+                    PropertyInfo dtoProp = dto.GetType().GetProperty(flatDtoPropName);
+                    if (dtoProp != null)
+                    {
+                        var value = dtoProp.GetValue(dto);
+                        prop.SetValue(entity, value);
+                    }
+                }
+            }
+
+            return (T)entity;
+        }
     }
 }

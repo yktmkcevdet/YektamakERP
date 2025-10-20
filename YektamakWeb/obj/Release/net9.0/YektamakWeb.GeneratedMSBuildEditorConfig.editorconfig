@@ -1,4 +1,7 @@
 is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudAllowedAttributeList = 
 build_property.TargetFramework = net9.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
@@ -40,8 +43,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/DialogComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlhbG9nQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/IconGallery.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWNvbkdhbGxlcnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Index.razor]
@@ -50,6 +61,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Pdf.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGRmLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/PdfView.razor]
@@ -98,4 +113,8 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

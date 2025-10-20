@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net9.0-windows7.0": {
-      "BouncyCastle.Cryptography/2.3.1": {
+      "BouncyCastle.Cryptography/2.4.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/BouncyCastle.Cryptography.dll": {
@@ -14,6 +14,18 @@
             "related": ".xml"
           }
         }
+      },
+      "DG.AdvancedDataGridView/1.2.30115.18": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows7.0/AdvancedDataGridView.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/AdvancedDataGridView.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
       },
       "Enums.NET/4.0.1": {
         "type": "package",
@@ -154,6 +166,18 @@
             "assetType": "native",
             "rid": "win-x86"
           }
+        }
+      },
+      "iTextSharp/5.5.13.4": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.4.0"
+        },
+        "compile": {
+          "lib/net461/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/net461/itextsharp.dll": {}
         }
       },
       "MathNet.Numerics.Signed/5.0.0": {
@@ -1056,40 +1080,6 @@
           }
         }
       },
-      "Pdfium.Net.SDK/4.96.2704": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0-windows/Patagames.Pdf.Gdi.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.WinForms.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.Wpf.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.dll": {
-            "related": ".deps.json;.Gdi.deps.json;.Gdi.xml;.WinForms.deps.json;.WinForms.xml;.Wpf.deps.json;.Wpf.xml;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0-windows/Patagames.Pdf.Gdi.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.WinForms.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.Wpf.dll": {
-            "related": ".deps.json;.xml"
-          },
-          "lib/net8.0-windows/Patagames.Pdf.dll": {
-            "related": ".deps.json;.Gdi.deps.json;.Gdi.xml;.WinForms.deps.json;.WinForms.xml;.Wpf.deps.json;.Wpf.xml;.xml"
-          }
-        },
-        "build": {
-          "build/Pdfium.Net.SDK.targets": {}
-        }
-      },
       "RtfPipe/2.0.7677.4303": {
         "type": "package",
         "compile": {
@@ -1194,7 +1184,7 @@
           }
         }
       },
-      "SixLabors.ImageSharp/2.1.9": {
+      "SixLabors.ImageSharp/2.1.11": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0",
@@ -1211,7 +1201,7 @@
           }
         }
       },
-      "Spire.PDF/11.4.10": {
+      "Spire.PDF/11.8.0": {
         "type": "package",
         "dependencies": {
           "HarfBuzzSharp": "8.3.0.1",
@@ -1454,6 +1444,30 @@
           }
         }
       },
+      "Visiativ.SOLIDWORKS.DocumentManager.Interop/33.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/SolidWorks.Interop.swdocumentmgr.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/SolidWorks.Interop.swdocumentmgr.dll": {}
+        }
+      },
+      "Visiativ.SOLIDWORKS.Interop/33.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/SolidWorks.Interop.sldworks.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swcommands.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swconst.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swpublished.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/SolidWorks.Interop.sldworks.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swcommands.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swconst.dll": {},
+          "lib/net6.0/SolidWorks.Interop.swpublished.dll": {}
+        }
+      },
       "ApiService/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -1503,16 +1517,16 @@
     }
   },
   "libraries": {
-    "BouncyCastle.Cryptography/2.3.1": {
-      "sha512": "buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ==",
+    "BouncyCastle.Cryptography/2.4.0": {
+      "sha512": "SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ==",
       "type": "package",
-      "path": "bouncycastle.cryptography/2.3.1",
+      "path": "bouncycastle.cryptography/2.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "README.md",
-        "bouncycastle.cryptography.2.3.1.nupkg.sha512",
+        "bouncycastle.cryptography.2.4.0.nupkg.sha512",
         "bouncycastle.cryptography.nuspec",
         "lib/net461/BouncyCastle.Cryptography.dll",
         "lib/net461/BouncyCastle.Cryptography.xml",
@@ -1521,6 +1535,26 @@
         "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
         "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
         "packageIcon.png"
+      ]
+    },
+    "DG.AdvancedDataGridView/1.2.30115.18": {
+      "sha512": "natekCFqarfedCa7IpUZxqRdhNqI/QqLh5EzJhVDrCy9cY3Qm0W9RwXjaLol1g64sIiEiRKghTIRjhnjAcwDzw==",
+      "type": "package",
+      "path": "dg.advanceddatagridview/1.2.30115.18",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AdvancedDataGridView_logo.png",
+        "LICENSE",
+        "README.md",
+        "dg.advanceddatagridview.1.2.30115.18.nupkg.sha512",
+        "dg.advanceddatagridview.nuspec",
+        "lib/net40/AdvancedDataGridView.dll",
+        "lib/net5.0-windows7.0/AdvancedDataGridView.dll",
+        "lib/net6.0-windows7.0/AdvancedDataGridView.dll",
+        "lib/net7.0-windows7.0/AdvancedDataGridView.dll",
+        "lib/net8.0-windows7.0/AdvancedDataGridView.dll",
+        "lib/netcoreapp3.1/AdvancedDataGridView.dll"
       ]
     },
     "Enums.NET/4.0.1": {
@@ -1740,6 +1774,22 @@
         "runtimes/win-arm64/native/libHarfBuzzSharp.dll",
         "runtimes/win-x64/native/libHarfBuzzSharp.dll",
         "runtimes/win-x86/native/libHarfBuzzSharp.dll"
+      ]
+    },
+    "iTextSharp/5.5.13.4": {
+      "sha512": "/cvCNv8AJ+XuD99u4NfHSSxkBJKTdvP36wcfQF9V1Cjzi1ycyFSa4vJ64a3DhFVUTKVO60WF8OmAqngQDTHgYA==",
+      "type": "package",
+      "path": "itextsharp/5.5.13.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itextsharp.5.5.13.4.nupkg.sha512",
+        "itextsharp.nuspec",
+        "lib/net461/iTextSharp.xml",
+        "lib/net461/itextsharp.dll",
+        "notice.txt"
       ]
     },
     "MathNet.Numerics.Signed/5.0.0": {
@@ -3036,194 +3086,6 @@
         "npoi.nuspec"
       ]
     },
-    "Pdfium.Net.SDK/4.96.2704": {
-      "sha512": "P1K+5jpnQw81U+/KhuIzYF0H5PWWSAWxckbquT7B3gwA1qlA0g41a8q543jP4LqFJAUGjSXKm/piAJ08cQh7Ag==",
-      "type": "package",
-      "path": "pdfium.net.sdk/4.96.2704",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "build/Pdfium.Net.SDK.targets",
-        "content/Pdf.Net.SDK.licx",
-        "content/icudt.dll",
-        "content/libpdfium.dylib",
-        "content/x64/pdfium.dll",
-        "content/x86/pdfium.dll",
-        "lib/net20/Patagames.Pdf.WinForms.dll",
-        "lib/net20/Patagames.Pdf.WinForms.xml",
-        "lib/net20/Patagames.Pdf.dll",
-        "lib/net20/Patagames.Pdf.xml",
-        "lib/net30/Patagames.Pdf.WinForms.dll",
-        "lib/net30/Patagames.Pdf.WinForms.xml",
-        "lib/net30/Patagames.Pdf.Wpf.dll",
-        "lib/net30/Patagames.Pdf.Wpf.xml",
-        "lib/net30/Patagames.Pdf.dll",
-        "lib/net30/Patagames.Pdf.xml",
-        "lib/net35/Patagames.Pdf.WinForms.dll",
-        "lib/net35/Patagames.Pdf.WinForms.xml",
-        "lib/net35/Patagames.Pdf.Wpf.dll",
-        "lib/net35/Patagames.Pdf.Wpf.xml",
-        "lib/net35/Patagames.Pdf.dll",
-        "lib/net35/Patagames.Pdf.xml",
-        "lib/net40/Patagames.Pdf.WinForms.dll",
-        "lib/net40/Patagames.Pdf.WinForms.xml",
-        "lib/net40/Patagames.Pdf.Wpf.dll",
-        "lib/net40/Patagames.Pdf.Wpf.xml",
-        "lib/net40/Patagames.Pdf.dll",
-        "lib/net40/Patagames.Pdf.xml",
-        "lib/net45/Patagames.Pdf.WinForms.dll",
-        "lib/net45/Patagames.Pdf.WinForms.xml",
-        "lib/net45/Patagames.Pdf.Wpf.dll",
-        "lib/net45/Patagames.Pdf.Wpf.xml",
-        "lib/net45/Patagames.Pdf.dll",
-        "lib/net45/Patagames.Pdf.xml",
-        "lib/net451/Patagames.Pdf.WinForms.dll",
-        "lib/net451/Patagames.Pdf.WinForms.xml",
-        "lib/net451/Patagames.Pdf.Wpf.dll",
-        "lib/net451/Patagames.Pdf.Wpf.xml",
-        "lib/net451/Patagames.Pdf.dll",
-        "lib/net451/Patagames.Pdf.xml",
-        "lib/net452/Patagames.Pdf.WinForms.dll",
-        "lib/net452/Patagames.Pdf.WinForms.xml",
-        "lib/net452/Patagames.Pdf.Wpf.dll",
-        "lib/net452/Patagames.Pdf.Wpf.xml",
-        "lib/net452/Patagames.Pdf.dll",
-        "lib/net452/Patagames.Pdf.xml",
-        "lib/net46/Patagames.Pdf.WinForms.dll",
-        "lib/net46/Patagames.Pdf.WinForms.xml",
-        "lib/net46/Patagames.Pdf.Wpf.dll",
-        "lib/net46/Patagames.Pdf.Wpf.xml",
-        "lib/net46/Patagames.Pdf.dll",
-        "lib/net46/Patagames.Pdf.xml",
-        "lib/net461/Patagames.Pdf.WinForms.dll",
-        "lib/net461/Patagames.Pdf.WinForms.xml",
-        "lib/net461/Patagames.Pdf.Wpf.dll",
-        "lib/net461/Patagames.Pdf.Wpf.xml",
-        "lib/net461/Patagames.Pdf.dll",
-        "lib/net461/Patagames.Pdf.xml",
-        "lib/net462/Patagames.Pdf.WinForms.dll",
-        "lib/net462/Patagames.Pdf.WinForms.xml",
-        "lib/net462/Patagames.Pdf.Wpf.dll",
-        "lib/net462/Patagames.Pdf.Wpf.xml",
-        "lib/net462/Patagames.Pdf.dll",
-        "lib/net462/Patagames.Pdf.xml",
-        "lib/net47/Patagames.Pdf.WinForms.dll",
-        "lib/net47/Patagames.Pdf.WinForms.xml",
-        "lib/net47/Patagames.Pdf.Wpf.dll",
-        "lib/net47/Patagames.Pdf.Wpf.xml",
-        "lib/net47/Patagames.Pdf.dll",
-        "lib/net47/Patagames.Pdf.xml",
-        "lib/net471/Patagames.Pdf.WinForms.dll",
-        "lib/net471/Patagames.Pdf.WinForms.xml",
-        "lib/net471/Patagames.Pdf.Wpf.dll",
-        "lib/net471/Patagames.Pdf.Wpf.xml",
-        "lib/net471/Patagames.Pdf.dll",
-        "lib/net471/Patagames.Pdf.xml",
-        "lib/net472/Patagames.Pdf.WinForms.dll",
-        "lib/net472/Patagames.Pdf.WinForms.xml",
-        "lib/net472/Patagames.Pdf.Wpf.dll",
-        "lib/net472/Patagames.Pdf.Wpf.xml",
-        "lib/net472/Patagames.Pdf.dll",
-        "lib/net472/Patagames.Pdf.xml",
-        "lib/net48/Patagames.Pdf.WinForms.dll",
-        "lib/net48/Patagames.Pdf.WinForms.xml",
-        "lib/net48/Patagames.Pdf.Wpf.dll",
-        "lib/net48/Patagames.Pdf.Wpf.xml",
-        "lib/net48/Patagames.Pdf.dll",
-        "lib/net48/Patagames.Pdf.xml",
-        "lib/net481/Patagames.Pdf.WinForms.dll",
-        "lib/net481/Patagames.Pdf.WinForms.xml",
-        "lib/net481/Patagames.Pdf.Wpf.dll",
-        "lib/net481/Patagames.Pdf.Wpf.xml",
-        "lib/net481/Patagames.Pdf.dll",
-        "lib/net481/Patagames.Pdf.xml",
-        "lib/net5.0-windows/Patagames.Pdf.Gdi.deps.json",
-        "lib/net5.0-windows/Patagames.Pdf.Gdi.dll",
-        "lib/net5.0-windows/Patagames.Pdf.Gdi.xml",
-        "lib/net5.0-windows/Patagames.Pdf.WinForms.deps.json",
-        "lib/net5.0-windows/Patagames.Pdf.WinForms.dll",
-        "lib/net5.0-windows/Patagames.Pdf.WinForms.xml",
-        "lib/net5.0-windows/Patagames.Pdf.Wpf.deps.json",
-        "lib/net5.0-windows/Patagames.Pdf.Wpf.dll",
-        "lib/net5.0-windows/Patagames.Pdf.Wpf.xml",
-        "lib/net5.0-windows/Patagames.Pdf.deps.json",
-        "lib/net5.0-windows/Patagames.Pdf.dll",
-        "lib/net5.0-windows/Patagames.Pdf.xml",
-        "lib/net5.0/Patagames.Pdf.deps.json",
-        "lib/net5.0/Patagames.Pdf.dll",
-        "lib/net5.0/Patagames.Pdf.xml",
-        "lib/net6.0-windows/Patagames.Pdf.Gdi.deps.json",
-        "lib/net6.0-windows/Patagames.Pdf.Gdi.dll",
-        "lib/net6.0-windows/Patagames.Pdf.Gdi.xml",
-        "lib/net6.0-windows/Patagames.Pdf.WinForms.deps.json",
-        "lib/net6.0-windows/Patagames.Pdf.WinForms.dll",
-        "lib/net6.0-windows/Patagames.Pdf.WinForms.xml",
-        "lib/net6.0-windows/Patagames.Pdf.Wpf.deps.json",
-        "lib/net6.0-windows/Patagames.Pdf.Wpf.dll",
-        "lib/net6.0-windows/Patagames.Pdf.Wpf.xml",
-        "lib/net6.0-windows/Patagames.Pdf.deps.json",
-        "lib/net6.0-windows/Patagames.Pdf.dll",
-        "lib/net6.0-windows/Patagames.Pdf.xml",
-        "lib/net6.0/Patagames.Pdf.deps.json",
-        "lib/net6.0/Patagames.Pdf.dll",
-        "lib/net6.0/Patagames.Pdf.xml",
-        "lib/net7.0-windows/Patagames.Pdf.Gdi.deps.json",
-        "lib/net7.0-windows/Patagames.Pdf.Gdi.dll",
-        "lib/net7.0-windows/Patagames.Pdf.Gdi.xml",
-        "lib/net7.0-windows/Patagames.Pdf.WinForms.deps.json",
-        "lib/net7.0-windows/Patagames.Pdf.WinForms.dll",
-        "lib/net7.0-windows/Patagames.Pdf.WinForms.xml",
-        "lib/net7.0-windows/Patagames.Pdf.Wpf.deps.json",
-        "lib/net7.0-windows/Patagames.Pdf.Wpf.dll",
-        "lib/net7.0-windows/Patagames.Pdf.Wpf.xml",
-        "lib/net7.0-windows/Patagames.Pdf.deps.json",
-        "lib/net7.0-windows/Patagames.Pdf.dll",
-        "lib/net7.0-windows/Patagames.Pdf.xml",
-        "lib/net7.0/Patagames.Pdf.deps.json",
-        "lib/net7.0/Patagames.Pdf.dll",
-        "lib/net7.0/Patagames.Pdf.xml",
-        "lib/net8.0-windows/Patagames.Pdf.Gdi.deps.json",
-        "lib/net8.0-windows/Patagames.Pdf.Gdi.dll",
-        "lib/net8.0-windows/Patagames.Pdf.Gdi.xml",
-        "lib/net8.0-windows/Patagames.Pdf.WinForms.deps.json",
-        "lib/net8.0-windows/Patagames.Pdf.WinForms.dll",
-        "lib/net8.0-windows/Patagames.Pdf.WinForms.xml",
-        "lib/net8.0-windows/Patagames.Pdf.Wpf.deps.json",
-        "lib/net8.0-windows/Patagames.Pdf.Wpf.dll",
-        "lib/net8.0-windows/Patagames.Pdf.Wpf.xml",
-        "lib/net8.0-windows/Patagames.Pdf.deps.json",
-        "lib/net8.0-windows/Patagames.Pdf.dll",
-        "lib/net8.0-windows/Patagames.Pdf.xml",
-        "lib/net8.0/Patagames.Pdf.deps.json",
-        "lib/net8.0/Patagames.Pdf.dll",
-        "lib/net8.0/Patagames.Pdf.xml",
-        "lib/netstandard2.0/Patagames.Pdf.Gdi.deps.json",
-        "lib/netstandard2.0/Patagames.Pdf.Gdi.dll",
-        "lib/netstandard2.0/Patagames.Pdf.Gdi.xml",
-        "lib/netstandard2.0/Patagames.Pdf.deps.json",
-        "lib/netstandard2.0/Patagames.Pdf.dll",
-        "lib/netstandard2.0/Patagames.Pdf.xml",
-        "lib/netstandard2.1/Patagames.Pdf.Gdi.deps.json",
-        "lib/netstandard2.1/Patagames.Pdf.Gdi.dll",
-        "lib/netstandard2.1/Patagames.Pdf.Gdi.xml",
-        "lib/netstandard2.1/Patagames.Pdf.deps.json",
-        "lib/netstandard2.1/Patagames.Pdf.dll",
-        "lib/netstandard2.1/Patagames.Pdf.xml",
-        "lib/uap10.0/Beta Notice.txt",
-        "lib/uap10.0/Patagames.Pdf.WinUI.XML",
-        "lib/uap10.0/Patagames.Pdf.WinUI.dll",
-        "lib/uap10.0/Patagames.Pdf.XML",
-        "lib/uap10.0/Patagames.Pdf.dll",
-        "license.md",
-        "pdfium.net.sdk.4.96.2704.nupkg.sha512",
-        "pdfium.net.sdk.nuspec",
-        "tools/Pdf.Net SDK Activation/Patagames.Pdf.dll",
-        "tools/Pdf.Net SDK Activation/Pdf.Net SDK Activation.exe",
-        "tools/Pdf.Net SDK Activation/Pdf.Net SDK Activation.exe.config",
-        "tools/install.ps1"
-      ]
-    },
     "RtfPipe/2.0.7677.4303": {
       "sha512": "ek6wuC69GYVJr0b/C5mcgbFUHPLL11iAbUFqQphdBaqSoEjOdSB/HWCID5nneA5exM88UZzOTCJCMpftDYnCZA==",
       "type": "package",
@@ -3374,10 +3236,10 @@
         "sixlabors.fonts.nuspec"
       ]
     },
-    "SixLabors.ImageSharp/2.1.9": {
-      "sha512": "VcjfKbOExie3RgZGrQL1jJMI4iZ3J9B6ifDo2QpDVJUYhTZKVcKnBhpNOHqbvNjHgadAks1jzhRjB7OZet1PJA==",
+    "SixLabors.ImageSharp/2.1.11": {
+      "sha512": "tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
       "type": "package",
-      "path": "sixlabors.imagesharp/2.1.9",
+      "path": "sixlabors.imagesharp/2.1.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3392,14 +3254,14 @@
         "lib/netstandard2.1/SixLabors.ImageSharp.dll",
         "lib/netstandard2.1/SixLabors.ImageSharp.xml",
         "sixlabors.imagesharp.128.png",
-        "sixlabors.imagesharp.2.1.9.nupkg.sha512",
+        "sixlabors.imagesharp.2.1.11.nupkg.sha512",
         "sixlabors.imagesharp.nuspec"
       ]
     },
-    "Spire.PDF/11.4.10": {
-      "sha512": "1mBzHheZCoqnn9fBmQabEJplbsl13d35Fn40ROfUmKPV4wf7Q+Zs/v5ldF0UQrZ6GFWfWLHW6XSsN0FI4YnMjA==",
+    "Spire.PDF/11.8.0": {
+      "sha512": "yiRonZqaCT7UXihXyXpNzHHKeldUPagoe75qlRMJyLidC5v4owFhOfBUrse30zDlHDadukfU7pe1dwCxBZqdAg==",
       "type": "package",
-      "path": "spire.pdf/11.4.10",
+      "path": "spire.pdf/11.8.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3412,7 +3274,7 @@
         "lib/net9.0/Spire.Pdf.dll",
         "lib/net9.0/Spire.Pdf.xml",
         "license.txt",
-        "spire.pdf.11.4.10.nupkg.sha512",
+        "spire.pdf.11.8.0.nupkg.sha512",
         "spire.pdf.nuspec"
       ]
     },
@@ -3845,6 +3707,69 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Visiativ.SOLIDWORKS.DocumentManager.Interop/33.0.0": {
+      "sha512": "S72kQ4DipqqgpPKdRtgnp1s+igojFowwJPGwnkJxos5CYNh0Xr8jqryxjacoHHogg91XNb0h3fIP4SbFe5UIXg==",
+      "type": "package",
+      "path": "visiativ.solidworks.documentmanager.interop/33.0.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/Logo.jpg",
+        "lib/net20/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net35/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net40/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net45/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net48/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net5.0/SolidWorks.Interop.swdocumentmgr.dll",
+        "lib/net6.0/SolidWorks.Interop.swdocumentmgr.dll",
+        "tools/install.ps1",
+        "visiativ.solidworks.documentmanager.interop.33.0.0.nupkg.sha512",
+        "visiativ.solidworks.documentmanager.interop.nuspec"
+      ]
+    },
+    "Visiativ.SOLIDWORKS.Interop/33.0.0": {
+      "sha512": "+yke8aZiBO4MXN9TtSYSueeEK0sgPnrZVUU2eEqUTyqm4FiVzL/0IDM1jj4kNPLk8Lvt97nyTGBLOPLg3BJRgw==",
+      "type": "package",
+      "path": "visiativ.solidworks.interop/33.0.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/Logo.jpg",
+        "lib/net20/SolidWorks.Interop.sldworks.dll",
+        "lib/net20/SolidWorks.Interop.swcommands.dll",
+        "lib/net20/SolidWorks.Interop.swconst.dll",
+        "lib/net20/SolidWorks.Interop.swpublished.dll",
+        "lib/net35/SolidWorks.Interop.sldworks.dll",
+        "lib/net35/SolidWorks.Interop.swcommands.dll",
+        "lib/net35/SolidWorks.Interop.swconst.dll",
+        "lib/net35/SolidWorks.Interop.swpublished.dll",
+        "lib/net40/SolidWorks.Interop.sldworks.dll",
+        "lib/net40/SolidWorks.Interop.swcommands.dll",
+        "lib/net40/SolidWorks.Interop.swconst.dll",
+        "lib/net40/SolidWorks.Interop.swpublished.dll",
+        "lib/net45/SolidWorks.Interop.sldworks.dll",
+        "lib/net45/SolidWorks.Interop.swcommands.dll",
+        "lib/net45/SolidWorks.Interop.swconst.dll",
+        "lib/net45/SolidWorks.Interop.swpublished.dll",
+        "lib/net48/SolidWorks.Interop.sldworks.dll",
+        "lib/net48/SolidWorks.Interop.swcommands.dll",
+        "lib/net48/SolidWorks.Interop.swconst.dll",
+        "lib/net48/SolidWorks.Interop.swpublished.dll",
+        "lib/net5.0/SolidWorks.Interop.sldworks.dll",
+        "lib/net5.0/SolidWorks.Interop.swcommands.dll",
+        "lib/net5.0/SolidWorks.Interop.swconst.dll",
+        "lib/net5.0/SolidWorks.Interop.swpublished.dll",
+        "lib/net6.0/SolidWorks.Interop.sldworks.dll",
+        "lib/net6.0/SolidWorks.Interop.swcommands.dll",
+        "lib/net6.0/SolidWorks.Interop.swconst.dll",
+        "lib/net6.0/SolidWorks.Interop.swpublished.dll",
+        "tools/install.ps1",
+        "visiativ.solidworks.interop.33.0.0.nupkg.sha512",
+        "visiativ.solidworks.interop.nuspec"
+      ]
+    },
     "ApiService/1.0.0": {
       "type": "project",
       "path": "../ApiService/ApiService.csproj",
@@ -3864,6 +3789,7 @@
   "projectFileDependencyGroups": {
     "net9.0-windows7.0": [
       "ApiService >= 1.0.0",
+      "DG.AdvancedDataGridView >= 1.2.30115.18",
       "FastReport.OpenSource >= 2024.1.10",
       "FastReport.OpenSource.Export.PdfSimple >= 2024.1.10",
       "FontAwesome.Sharp >= 6.3.0",
@@ -3871,11 +3797,14 @@
       "Models >= 1.0.0",
       "NPOI >= 2.7.2",
       "Newtonsoft.Json >= 13.0.3",
-      "Pdfium.Net.SDK >= 4.96.2704",
       "RtfPipe >= 2.0.7677.4303",
-      "Spire.PDF >= 11.4.10",
+      "SixLabors.ImageSharp >= 2.1.11",
+      "Spire.PDF >= 11.8.0",
       "System.Linq.Dynamic.Core >= 1.6.6",
       "Utilities >= 1.0.0",
+      "Visiativ.SOLIDWORKS.DocumentManager.Interop >= 33.0.0",
+      "Visiativ.SOLIDWORKS.Interop >= 33.0.0",
+      "iTextSharp >= 5.5.13.4",
       "netDxf >= 2023.11.10"
     ]
   },
@@ -3940,6 +3869,10 @@
       "net9.0-windows7.0": {
         "targetAlias": "net9.0-windows7.0",
         "dependencies": {
+          "DG.AdvancedDataGridView": {
+            "target": "Package",
+            "version": "[1.2.30115.18, )"
+          },
           "FastReport.OpenSource": {
             "target": "Package",
             "version": "[2024.1.10, )"
@@ -3964,21 +3897,33 @@
             "target": "Package",
             "version": "[13.0.3, )"
           },
-          "Pdfium.Net.SDK": {
-            "target": "Package",
-            "version": "[4.96.2704, )"
-          },
           "RtfPipe": {
             "target": "Package",
             "version": "[2.0.7677.4303, )"
           },
+          "SixLabors.ImageSharp": {
+            "target": "Package",
+            "version": "[2.1.11, )"
+          },
           "Spire.PDF": {
             "target": "Package",
-            "version": "[11.4.10, )"
+            "version": "[11.8.0, )"
           },
           "System.Linq.Dynamic.Core": {
             "target": "Package",
             "version": "[1.6.6, )"
+          },
+          "Visiativ.SOLIDWORKS.DocumentManager.Interop": {
+            "target": "Package",
+            "version": "[33.0.0, )"
+          },
+          "Visiativ.SOLIDWORKS.Interop": {
+            "target": "Package",
+            "version": "[33.0.0, )"
+          },
+          "iTextSharp": {
+            "target": "Package",
+            "version": "[5.5.13.4, )"
           },
           "netDxf": {
             "target": "Package",
@@ -4007,5 +3952,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'iTextSharp 5.5.13.4' paketi, proje hedef çerçevesi 'net9.0-windows7.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    }
+  ]
 }

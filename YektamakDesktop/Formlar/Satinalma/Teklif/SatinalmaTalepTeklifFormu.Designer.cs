@@ -39,6 +39,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctxEndTeslimTarihi = new CustomTextBoxTarih();
             contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
             parçaListesiniGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ctbBeginTalepTarihi = new CustomTextBoxTarih();
             ctbEndTalepTarihi = new CustomTextBoxTarih();
             panel1 = new System.Windows.Forms.Panel();
@@ -46,12 +47,15 @@ namespace YektamakDesktop.Formlar.Satinalma
             label1 = new System.Windows.Forms.Label();
             clbStokGrupId = new FilterableComboBox();
             clbMalzemeGrupId = new FilterableComboBox();
-            clbMalzemeAltGrupId = new FilterableComboBox();
             clbProjeKod = new FilterableComboBox();
-            fcbMalzemeAltGrup2 = new FilterableComboBox();
             fcbBoyut = new FilterableCheckedComboBox();
-            stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            isTeklif = new System.Windows.Forms.CheckBox();
+            fccMalzemeAltGrupId = new FilterableCheckedComboBox();
+            fccMalzemeAltGrup2 = new FilterableCheckedComboBox();
+            dgv = new System.Windows.Forms.DataGridView();
+            chkBukum = new System.Windows.Forms.CheckBox();
             contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
             // 
             // headerPanel1
@@ -64,7 +68,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1097, 32);
+            headerPanel1.Size = new System.Drawing.Size(1098, 25);
             headerPanel1.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -85,7 +89,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             btnTeklif.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnTeklif.IconSize = 24;
             btnTeklif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnTeklif.Location = new System.Drawing.Point(799, 289);
+            btnTeklif.Location = new System.Drawing.Point(800, 289);
             btnTeklif.Name = "btnTeklif";
             btnTeklif.Size = new System.Drawing.Size(149, 34);
             btnTeklif.TabIndex = 4;
@@ -96,7 +100,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctxBeginTeslimTarihi
             // 
             ctxBeginTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(787, 158);
+            ctxBeginTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(785, 253);
             ctxBeginTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxBeginTeslimTarihi.Name = "ctxBeginTeslimTarihi";
             ctxBeginTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -107,7 +112,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctxEndTeslimTarihi
             // 
             ctxEndTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxEndTeslimTarihi.Location = new System.Drawing.Point(934, 158);
+            ctxEndTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctxEndTeslimTarihi.Location = new System.Drawing.Point(932, 253);
             ctxEndTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxEndTeslimTarihi.Name = "ctxEndTeslimTarihi";
             ctxEndTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -119,7 +125,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { parçaListesiniGösterToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new System.Drawing.Size(191, 70);
+            contextMenuStrip2.Size = new System.Drawing.Size(191, 48);
             // 
             // parçaListesiniGösterToolStripMenuItem
             // 
@@ -128,10 +134,18 @@ namespace YektamakDesktop.Formlar.Satinalma
             parçaListesiniGösterToolStripMenuItem.Text = "Parça Listesini Göster";
             parçaListesiniGösterToolStripMenuItem.Click += parçaListesiniGösterToolStripMenuItem_Click;
             // 
+            // stokKartınıGörüntüleToolStripMenuItem
+            // 
+            stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
+            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
+            stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
+            // 
             // ctbBeginTalepTarihi
             // 
             ctbBeginTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbBeginTalepTarihi.Location = new System.Drawing.Point(787, 119);
+            ctbBeginTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbBeginTalepTarihi.Location = new System.Drawing.Point(785, 214);
             ctbBeginTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbBeginTalepTarihi.Name = "ctbBeginTalepTarihi";
             ctbBeginTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -142,7 +156,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             // ctbEndTalepTarihi
             // 
             ctbEndTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbEndTalepTarihi.Location = new System.Drawing.Point(934, 119);
+            ctbEndTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbEndTalepTarihi.Location = new System.Drawing.Point(932, 214);
             ctbEndTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbEndTalepTarihi.Name = "ctbEndTalepTarihi";
             ctbEndTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -154,24 +169,24 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panel1.Location = new System.Drawing.Point(306, 68);
+            panel1.Location = new System.Drawing.Point(306, 55);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(453, 255);
+            panel1.Size = new System.Drawing.Size(454, 255);
             panel1.TabIndex = 14;
             // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(-2, 329);
+            universalGrid1.Location = new System.Drawing.Point(-2, 361);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1097, 418);
+            universalGrid1.Size = new System.Drawing.Size(1098, 386);
             universalGrid1.TabIndex = 15;
             universalGrid1.MouseDown1 += universalGrid1_MouseDown;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(306, 50);
+            label1.Location = new System.Drawing.Point(306, 37);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(132, 15);
             label1.TabIndex = 16;
@@ -180,13 +195,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             // clbStokGrupId
             // 
             clbStokGrupId.BorderColor = System.Drawing.Color.Silver;
+            clbStokGrupId.BorderRadius = 8;
             clbStokGrupId.BorderSize = 1;
             clbStokGrupId.DisplayMember = "ad";
-            clbStokGrupId.Location = new System.Drawing.Point(37, 108);
+            clbStokGrupId.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbStokGrupId.Location = new System.Drawing.Point(37, 87);
+            clbStokGrupId.Margin = new System.Windows.Forms.Padding(1);
             clbStokGrupId.Name = "clbStokGrupId";
             clbStokGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbStokGrupId.PlaceholderText = "Seçiniz...";
-            clbStokGrupId.Size = new System.Drawing.Size(250, 29);
+            clbStokGrupId.PlaceholderText = "Stok Grubu";
+            clbStokGrupId.Size = new System.Drawing.Size(250, 25);
             clbStokGrupId.TabIndex = 17;
             clbStokGrupId.ValueMember = "Id";
             clbStokGrupId.SelectedIndexChanged += cbxStokGrupId_SelectedIndexChanged;
@@ -194,84 +212,110 @@ namespace YektamakDesktop.Formlar.Satinalma
             // clbMalzemeGrupId
             // 
             clbMalzemeGrupId.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrupId.BorderRadius = 8;
             clbMalzemeGrupId.BorderSize = 1;
             clbMalzemeGrupId.DisplayMember = "ad";
-            clbMalzemeGrupId.Location = new System.Drawing.Point(37, 143);
+            clbMalzemeGrupId.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbMalzemeGrupId.Location = new System.Drawing.Point(37, 114);
+            clbMalzemeGrupId.Margin = new System.Windows.Forms.Padding(1);
             clbMalzemeGrupId.Name = "clbMalzemeGrupId";
             clbMalzemeGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeGrupId.PlaceholderText = "Seçiniz...";
-            clbMalzemeGrupId.Size = new System.Drawing.Size(250, 29);
+            clbMalzemeGrupId.PlaceholderText = "Malzeme Grubu";
+            clbMalzemeGrupId.Size = new System.Drawing.Size(250, 25);
             clbMalzemeGrupId.TabIndex = 18;
             clbMalzemeGrupId.ValueMember = "Id";
             clbMalzemeGrupId.SelectedIndexChanged += cbxMalzemeGrupId_SelectedIndexChanged;
             // 
-            // clbMalzemeAltGrupId
-            // 
-            clbMalzemeAltGrupId.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeAltGrupId.BorderSize = 1;
-            clbMalzemeAltGrupId.DisplayMember = "ad";
-            clbMalzemeAltGrupId.Location = new System.Drawing.Point(37, 178);
-            clbMalzemeAltGrupId.Name = "clbMalzemeAltGrupId";
-            clbMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbMalzemeAltGrupId.PlaceholderText = "Seçiniz...";
-            clbMalzemeAltGrupId.Size = new System.Drawing.Size(250, 29);
-            clbMalzemeAltGrupId.TabIndex = 19;
-            clbMalzemeAltGrupId.ValueMember = "Id";
-            clbMalzemeAltGrupId.SelectedIndexChanged += clbMalzemeAltGrupId_SelectedIndexChanged;
-            // 
             // clbProjeKod
             // 
             clbProjeKod.BorderColor = System.Drawing.Color.Silver;
+            clbProjeKod.BorderRadius = 8;
             clbProjeKod.BorderSize = 1;
             clbProjeKod.DisplayMember = "kod";
-            clbProjeKod.Location = new System.Drawing.Point(37, 73);
+            clbProjeKod.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbProjeKod.Location = new System.Drawing.Point(37, 60);
+            clbProjeKod.Margin = new System.Windows.Forms.Padding(1);
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            clbProjeKod.PlaceholderText = "Seçiniz...";
-            clbProjeKod.Size = new System.Drawing.Size(250, 29);
+            clbProjeKod.PlaceholderText = "Proje Kodu";
+            clbProjeKod.Size = new System.Drawing.Size(250, 25);
             clbProjeKod.TabIndex = 20;
             clbProjeKod.ValueMember = "Id";
             clbProjeKod.SelectedIndexChanged += clbProjeKod_SelectedIndexChanged;
             // 
-            // fcbMalzemeAltGrup2
-            // 
-            fcbMalzemeAltGrup2.BorderColor = System.Drawing.Color.Silver;
-            fcbMalzemeAltGrup2.BorderSize = 1;
-            fcbMalzemeAltGrup2.DisplayMember = "ad";
-            fcbMalzemeAltGrup2.Location = new System.Drawing.Point(37, 213);
-            fcbMalzemeAltGrup2.Name = "fcbMalzemeAltGrup2";
-            fcbMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
-            fcbMalzemeAltGrup2.Size = new System.Drawing.Size(250, 29);
-            fcbMalzemeAltGrup2.TabIndex = 21;
-            fcbMalzemeAltGrup2.ValueMember = "Id";
-            fcbMalzemeAltGrup2.SelectedIndexChanged += fcbMalzemeAltGrup2_SelectedIndexChanged;
-            // 
             // fcbBoyut
             // 
-            fcbBoyut.Location = new System.Drawing.Point(37, 248);
+            fcbBoyut.Location = new System.Drawing.Point(37, 239);
             fcbBoyut.Name = "fcbBoyut";
             fcbBoyut.Padding = new System.Windows.Forms.Padding(5);
-            fcbBoyut.Size = new System.Drawing.Size(250, 46);
+            fcbBoyut.PlaceholderText = "Boyut";
+            fcbBoyut.Size = new System.Drawing.Size(250, 42);
             fcbBoyut.TabIndex = 23;
             fcbBoyut.ItemsChanged += fcbBoyut_SelectedIndexChanged;
             // 
-            // stokKartınıGörüntüleToolStripMenuItem
+            // isTeklif
             // 
-            stokKartınıGörüntüleToolStripMenuItem.Name = "stokKartınıGörüntüleToolStripMenuItem";
-            stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
-            stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
+            isTeklif.AutoSize = true;
+            isTeklif.Location = new System.Drawing.Point(38, 314);
+            isTeklif.Name = "isTeklif";
+            isTeklif.Size = new System.Drawing.Size(147, 19);
+            isTeklif.TabIndex = 24;
+            isTeklif.Text = "Teklif İstenenleri Göster";
+            isTeklif.UseVisualStyleBackColor = true;
+            isTeklif.CheckedChanged += isTeklif_CheckedChanged;
+            // 
+            // fccMalzemeAltGrupId
+            // 
+            fccMalzemeAltGrupId.Location = new System.Drawing.Point(37, 143);
+            fccMalzemeAltGrupId.Name = "fccMalzemeAltGrupId";
+            fccMalzemeAltGrupId.Padding = new System.Windows.Forms.Padding(5);
+            fccMalzemeAltGrupId.PlaceholderText = "Malzeme Alt Grubu";
+            fccMalzemeAltGrupId.Size = new System.Drawing.Size(250, 42);
+            fccMalzemeAltGrupId.TabIndex = 25;
+            fccMalzemeAltGrupId.ItemsChanged += fccMalzemeAltGrupId_ItemsChanged;
+            // 
+            // fccMalzemeAltGrup2
+            // 
+            fccMalzemeAltGrup2.Location = new System.Drawing.Point(37, 191);
+            fccMalzemeAltGrup2.Name = "fccMalzemeAltGrup2";
+            fccMalzemeAltGrup2.Padding = new System.Windows.Forms.Padding(5);
+            fccMalzemeAltGrup2.PlaceholderText = "Malzeme Alt Grup2";
+            fccMalzemeAltGrup2.Size = new System.Drawing.Size(250, 42);
+            fccMalzemeAltGrup2.TabIndex = 26;
+            fccMalzemeAltGrup2.ItemsChanged += fccMalzemeAltGrup2_ItemsChanged;
+            // 
+            // dgv
+            // 
+            dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.Location = new System.Drawing.Point(772, 48);
+            dgv.Name = "dgv";
+            dgv.Size = new System.Drawing.Size(240, 150);
+            dgv.TabIndex = 27;
+            // 
+            // chkBukum
+            // 
+            chkBukum.AutoSize = true;
+            chkBukum.Location = new System.Drawing.Point(38, 289);
+            chkBukum.Name = "chkBukum";
+            chkBukum.Size = new System.Drawing.Size(69, 19);
+            chkBukum.TabIndex = 28;
+            chkBukum.Text = "Büküm?";
+            chkBukum.ThreeState = true;
+            chkBukum.UseVisualStyleBackColor = true;
+            chkBukum.CheckStateChanged += checkBox1_CheckedChanged;
             // 
             // SatinalmaTalepTeklifFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1095, 745);
+            ClientSize = new System.Drawing.Size(1096, 745);
+            Controls.Add(chkBukum);
+            Controls.Add(dgv);
+            Controls.Add(fccMalzemeAltGrup2);
+            Controls.Add(fccMalzemeAltGrupId);
+            Controls.Add(isTeklif);
             Controls.Add(fcbBoyut);
-            Controls.Add(fcbMalzemeAltGrup2);
             Controls.Add(clbProjeKod);
-            Controls.Add(clbMalzemeAltGrupId);
             Controls.Add(clbMalzemeGrupId);
             Controls.Add(clbStokGrupId);
             Controls.Add(label1);
@@ -288,6 +332,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Text = "SatinalmaTalepTeklifFormu";
             FormClosing += SatinalmaTalepTeklifFormu_FormClosing;
             contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -308,10 +353,13 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.Label label1;
         private FilterableComboBox clbStokGrupId;
         private FilterableComboBox clbMalzemeGrupId;
-        private FilterableComboBox clbMalzemeAltGrupId;
         private FilterableComboBox clbProjeKod;
-        private FilterableComboBox fcbMalzemeAltGrup2;
         private FilterableCheckedComboBox fcbBoyut;
         private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;
+        private System.Windows.Forms.CheckBox isTeklif;
+        private FilterableCheckedComboBox fccMalzemeAltGrupId;
+        private FilterableCheckedComboBox fccMalzemeAltGrup2;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.CheckBox chkBukum;
     }
 }

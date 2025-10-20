@@ -9,6 +9,7 @@
         private readonly string[] formats = new[]
         {
             "dd.MM.yyyy HH:mm:ss",
+            "M.dd.yyyy HH:mm:ss",
             "dd.MM.yyyy",
             "yyyy-MM-ddTHH:mm:ss",
             "yyyy-MM-dd",
@@ -39,6 +40,41 @@
         {
             var dt = (DateTime)value;
             writer.WriteValue(dt.ToString(formats[0]));
+        }
+    }
+    public class GuidConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(Guid) || objectType == typeof(Guid?);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var str = reader.Value?.ToString();
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                if (objectType == typeof(Guid?))
+                    return null;
+                return Guid.Empty;
+            }
+
+            if (Guid.TryParse(str, out var guid))
+                return guid;
+
+            throw new JsonSerializationException($"'{str}' geçerli bir Guid formatı değil.");
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            if (value is Guid guid)
+            {
+                writer.WriteValue(guid.ToString("D")); // 8-4-4-4-12 formatında
+            }
+            else
+            {
+                writer.WriteNull();
+            }
         }
     }
 }

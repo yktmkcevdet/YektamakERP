@@ -2,7 +2,7 @@
 using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.Configuration;
+using Models.DTO;
 
 namespace Api.Controllers
 {

@@ -6,6 +6,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\Api.runtimeconfig.json
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\Api.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\Dapper.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\Google.Protobuf.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\K4os.Compression.LZ4.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\PubTmp\Out\K4os.Compression.LZ4.Streams.dll

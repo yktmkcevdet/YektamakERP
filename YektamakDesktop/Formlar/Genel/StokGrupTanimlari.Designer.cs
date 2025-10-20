@@ -49,12 +49,11 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1117, 32);
+            headerPanel1.Size = new System.Drawing.Size(1117, 25);
             headerPanel1.TabIndex = 0;
             // 
             // treeView1
             // 
-            treeView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             treeView1.Location = new System.Drawing.Point(22, 36);
             treeView1.Name = "treeView1";
             treeView1.Size = new System.Drawing.Size(303, 713);
@@ -83,7 +82,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.Location = new System.Drawing.Point(331, 36);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(773, 333);

@@ -15,6 +15,7 @@ namespace Models
         [GridDisplay(Header = "ad")]
         public string ad { get; set; }
         [GridDisplay(Header = "kod")]
+        [MaxLength(1)]
         public string kod { get; set; }
 
         private MalzemeAltGrup _malzemeAltGrup;

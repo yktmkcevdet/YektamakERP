@@ -1,6 +1,7 @@
 ﻿using ApiService.Common;
 using ApiService.Interfaces;
 using Models;
+using Newtonsoft.Json;
 using System.Data;
 
 namespace ApiService.Implementetions
@@ -16,10 +17,9 @@ namespace ApiService.Implementetions
 
         public async Task<Kullanici> GetKullaniciAsync(string username)
         {
-            var response = await _apiService.GetAsync($"GetKullanici/{username}");
-            DataSet dataSet = ConvertHelper.JsonStringToDataSet(response);
-            if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0) return null;
-            return ConvertHelper.DataRowToModel<Kullanici>(dataSet.Tables[0].Rows[0]);
+            var jsonResult = await _apiService.GetAsync($"GetKullanici/{username}");
+            if (string.IsNullOrEmpty(jsonResult)) return null;
+            return JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
         }
     }
 }

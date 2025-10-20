@@ -28,15 +28,19 @@ namespace YektamakDesktop.Formlar.Genel
         private void Initialize()
         {
             InitializeComponent();
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new Point(0, 219);
+            universalGrid1.Location = new Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(800, 232);
-            universalGrid1.TabIndex = 3;
+            universalGrid1.Size = new Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
-            headerPanel1.Baslik = "Stok Grup Tanımlama";
+            universalGrid1.SetData(new List<StokGrup>(), this.Name);
             Load += async (s, e) => await StokGrupTanimFormu_Load(s, e);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
             Binding();

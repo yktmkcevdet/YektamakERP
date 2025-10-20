@@ -1,9 +1,8 @@
-﻿using Api.DatabaseJobs;
-using Models;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
-using Api.Business;
+using Models;
+using Models.DTO;
 using static Api.Controllers.GeneralMethods;
-using Models.Models;
 
 namespace Api.Controllers
 {
@@ -59,6 +58,21 @@ namespace Api.Controllers
         public string GetDosyaTip()
         {
             return _dataAccessLayer.GetObject("spGetDosyaTip");
+        }
+        [HttpGet, Route("api/GetDosyalamayapisi")]
+        public string GetDosyalamaYapisi([FromBody] DosyalamaYapisi dosyalamaYapisi)
+        {
+            return _dataAccessLayer.GetObject(dosyalamaYapisi,"spGetDosyalamaYapisi");
+        }
+        [HttpPost, Route("api/SaveDosyalamaYapisi")]
+        public string SaveDosyalamaYapisi([FromBody] DosyalamaYapisi restData)
+        {
+            return _dataAccessLayer.SaveObject(restData, "spSaveDosyalamaYapisi");
+        }
+        [HttpPost, Route("api/DeleteDosyalamaYapisi")]
+        public string DeleteDosyalamaYapisi([FromBody] DosyalamaYapisi restData)
+        {
+            return _dataAccessLayer.SaveObject(restData, "spDeleteDosyalamaYapisi");
         }
         [HttpPost, Route("api/SaveExcelForm")]
         public string SaveExcelForm([FromBody] ExcelForm restData)

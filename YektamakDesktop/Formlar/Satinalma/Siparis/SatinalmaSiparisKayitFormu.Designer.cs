@@ -62,25 +62,38 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(920, 32);
+            headerPanel1.Size = new System.Drawing.Size(920, 25);
             headerPanel1.TabIndex = 0;
             // 
             // ctbId
             // 
             ctbId.BackColor = System.Drawing.SystemColors.Window;
+            ctbId.BorderColor = System.Drawing.Color.Silver;
+            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbId.BorderSize = 1;
             ctbId.Enabled = false;
             ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbId.ForeColor = System.Drawing.Color.DimGray;
             ctbId.Location = new System.Drawing.Point(104, 57);
+            ctbId.Margin = new System.Windows.Forms.Padding(1);
             ctbId.Multiline = false;
             ctbId.Name = "ctbId";
             ctbId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbId.Size = new System.Drawing.Size(49, 28);
+            ctbId.PasswordChar = false;
+            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbId.PlaceholderText = "";
+            ctbId.ReadOnly = false;
+            ctbId.SelectionStart = 0;
+            ctbId.Size = new System.Drawing.Size(49, 33);
             ctbId.TabIndex = 1;
+            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbId.TextCustom = "";
+            ctbId.UnderlinedStyle = false;
             // 
             // ctbSiparisTarihi
             // 
             ctbSiparisTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            ctbSiparisTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbSiparisTarihi.Location = new System.Drawing.Point(104, 123);
             ctbSiparisTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbSiparisTarihi.Name = "ctbSiparisTarihi";
@@ -91,6 +104,7 @@
             // ctbTeslimTarihi
             // 
             ctbTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            ctbTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbTeslimTarihi.Location = new System.Drawing.Point(104, 157);
             ctbTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbTeslimTarihi.Name = "ctbTeslimTarihi";
@@ -101,9 +115,12 @@
             // fcbFirmaId
             // 
             fcbFirmaId.BorderColor = System.Drawing.Color.Silver;
+            fcbFirmaId.BorderRadius = 8;
             fcbFirmaId.BorderSize = 1;
             fcbFirmaId.DisplayMember = "ad";
+            fcbFirmaId.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbFirmaId.Location = new System.Drawing.Point(104, 193);
+            fcbFirmaId.Margin = new System.Windows.Forms.Padding(1);
             fcbFirmaId.Name = "fcbFirmaId";
             fcbFirmaId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbFirmaId.PlaceholderText = "Seçiniz...";
@@ -114,9 +131,12 @@
             // fcbVadeId
             // 
             fcbVadeId.BorderColor = System.Drawing.Color.Silver;
+            fcbVadeId.BorderRadius = 8;
             fcbVadeId.BorderSize = 1;
             fcbVadeId.DisplayMember = "ad";
+            fcbVadeId.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbVadeId.Location = new System.Drawing.Point(104, 228);
+            fcbVadeId.Margin = new System.Windows.Forms.Padding(1);
             fcbVadeId.Name = "fcbVadeId";
             fcbVadeId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbVadeId.PlaceholderText = "Seçiniz...";
@@ -128,34 +148,61 @@
             // 
             ctbAciklama.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             ctbAciklama.BackColor = System.Drawing.SystemColors.Window;
+            ctbAciklama.BorderColor = System.Drawing.Color.Silver;
+            ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbAciklama.BorderSize = 1;
             ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbAciklama.ForeColor = System.Drawing.Color.DimGray;
             ctbAciklama.Location = new System.Drawing.Point(595, 234);
+            ctbAciklama.Margin = new System.Windows.Forms.Padding(1);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
             ctbAciklama.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbAciklama.PasswordChar = false;
+            ctbAciklama.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbAciklama.PlaceholderText = "";
+            ctbAciklama.ReadOnly = false;
+            ctbAciklama.SelectionStart = 0;
             ctbAciklama.Size = new System.Drawing.Size(302, 104);
             ctbAciklama.TabIndex = 6;
+            ctbAciklama.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbAciklama.TextCustom = "";
+            ctbAciklama.UnderlinedStyle = false;
             // 
             // ctbSiparisNo
             // 
             ctbSiparisNo.BackColor = System.Drawing.SystemColors.Window;
+            ctbSiparisNo.BorderColor = System.Drawing.Color.Silver;
+            ctbSiparisNo.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbSiparisNo.BorderSize = 1;
             ctbSiparisNo.Enabled = false;
             ctbSiparisNo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbSiparisNo.ForeColor = System.Drawing.Color.DimGray;
             ctbSiparisNo.Location = new System.Drawing.Point(104, 91);
+            ctbSiparisNo.Margin = new System.Windows.Forms.Padding(1);
             ctbSiparisNo.Multiline = false;
             ctbSiparisNo.Name = "ctbSiparisNo";
             ctbSiparisNo.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbSiparisNo.Size = new System.Drawing.Size(104, 28);
+            ctbSiparisNo.PasswordChar = false;
+            ctbSiparisNo.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbSiparisNo.PlaceholderText = "";
+            ctbSiparisNo.ReadOnly = false;
+            ctbSiparisNo.SelectionStart = 0;
+            ctbSiparisNo.Size = new System.Drawing.Size(104, 33);
             ctbSiparisNo.TabIndex = 7;
+            ctbSiparisNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbSiparisNo.TextCustom = "";
+            ctbSiparisNo.UnderlinedStyle = false;
             // 
             // fcbKdv
             // 
             fcbKdv.BorderColor = System.Drawing.Color.Silver;
+            fcbKdv.BorderRadius = 8;
             fcbKdv.BorderSize = 1;
             fcbKdv.DisplayMember = "ad";
+            fcbKdv.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbKdv.Location = new System.Drawing.Point(104, 263);
+            fcbKdv.Margin = new System.Windows.Forms.Padding(1);
             fcbKdv.Name = "fcbKdv";
             fcbKdv.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbKdv.PlaceholderText = "Seçiniz...";
@@ -259,10 +306,11 @@
             ctbTutar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbTutar.ForeColor = System.Drawing.Color.DimGray;
             ctbTutar.Location = new System.Drawing.Point(104, 298);
+            ctbTutar.Margin = new System.Windows.Forms.Padding(1);
             ctbTutar.Name = "ctbTutar";
             ctbTutar.OndalikBasamak = 0;
             ctbTutar.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            ctbTutar.Size = new System.Drawing.Size(119, 26);
+            ctbTutar.Size = new System.Drawing.Size(119, 33);
             ctbTutar.TabIndex = 19;
             ctbTutar.TextCustom = "0";
             // 
@@ -278,9 +326,12 @@
             // fcbDovizCinsi
             // 
             fcbDovizCinsi.BorderColor = System.Drawing.Color.Silver;
+            fcbDovizCinsi.BorderRadius = 8;
             fcbDovizCinsi.BorderSize = 1;
             fcbDovizCinsi.DisplayMember = "ad";
+            fcbDovizCinsi.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbDovizCinsi.Location = new System.Drawing.Point(231, 297);
+            fcbDovizCinsi.Margin = new System.Windows.Forms.Padding(1);
             fcbDovizCinsi.Name = "fcbDovizCinsi";
             fcbDovizCinsi.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbDovizCinsi.PlaceholderText = "Seçiniz...";

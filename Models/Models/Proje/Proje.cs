@@ -9,21 +9,40 @@ namespace Models
         [GridDisplay(Header = "Id")]  public int? Id { get; set; }
         [GridDisplay(Header = "Proje No")] public int? projeNo { get; set; }
         [GridDisplay(Header = "Ver.")] public string? versiyon { get; set; }
-        [GridDisplay(Header = "Kod")] public string kod { get => ProjeKodString();}
+        private string _kod;
+        [GridDisplay(Header = "Kod")] public string kod { get { if (_kod == null) { _kod = ProjeKodString(); } return _kod; } set { _kod = value; } }
         private Marka _marka;
         [GridDisplay(Header = "Marka", Tip = "Liste", ListName = "markaList", ListVisibleColumnName = "ad", readOnly = false)]
         public Marka marka { get { if (_marka == null) { _marka = new(); } return _marka; } set { _marka = value; } }
         public string ProjeKodString()
         {
-            int repeatCount = 4 - projeNo.ToString().Length;
-            if (string.IsNullOrWhiteSpace(versiyon))
+            if (string.IsNullOrEmpty(_kod) && projeNo!=null)
             {
-                return $"{marka.prefix}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}";
+                int repeatCount = 4 - projeNo.ToString().Length;
+                if (string.IsNullOrWhiteSpace(versiyon))
+                {
+                    if (string.IsNullOrEmpty(projeTip.kod))
+                    {
+                        _kod = $"{marka.prefix}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}";
+                    }
+                    else
+                    {
+                        _kod = $"{projeTip.kod}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}";
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(projeTip.kod))
+                    {
+                        _kod = $"{marka.prefix}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}-{versiyon}";
+                    }
+                    else
+                    {
+                        _kod = $"{projeTip.kod}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}-{versiyon}";
+                    }
+                }
             }
-            else
-            {
-                return $"{marka.prefix}-{string.Concat(Enumerable.Repeat("0", repeatCount))}{projeNo.ToString()}-{versiyon}";
-            }
+            return _kod;
         }
 
        

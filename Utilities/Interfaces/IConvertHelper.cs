@@ -23,5 +23,6 @@ namespace Utilities.Interfaces
         /// <param name="type"></param>
         /// <returns></returns>
         public bool IsComplexType(Type type);
+        public T ToEntity<T>(object dto, object entity = null, string classNamePrefix = "") where T : class, new();
     }
 }

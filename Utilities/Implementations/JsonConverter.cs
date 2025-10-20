@@ -24,7 +24,8 @@ namespace Utilities.Implementations
                 DateFormatString = "yyyy-MM-dd HH:mm:ss",
                 Converters = new List<Newtonsoft.Json.JsonConverter>
                 {
-                    new MultiFormatDateTimeConverter()
+                    new MultiFormatDateTimeConverter(),
+                    new GuidConverter()
                 }
             };
         }

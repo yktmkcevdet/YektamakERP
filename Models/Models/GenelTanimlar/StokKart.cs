@@ -67,6 +67,7 @@ namespace Models
         private MalzemeStandart _malzemeStandart;
         public MalzemeStandart malzemeStandart { get { if (_malzemeStandart == null) { _malzemeStandart = new MalzemeStandart(); } return _malzemeStandart; } set { _malzemeStandart = value; } }
         public bool? isTalasli { get; set; }
+        public bool? isBukum { get; set; }
         private List<StokKartDosya> _dosyaList;
         [GridDisplay(Header = "Stok Kart Dosyaları", Visible = false)]
         public List<StokKartDosya> dosyaList

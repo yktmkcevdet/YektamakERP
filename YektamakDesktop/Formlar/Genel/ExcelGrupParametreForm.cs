@@ -26,16 +26,20 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void Initialize()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(-1, 215);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(808, 249);
-            universalGrid1.TabIndex = 0;
-            universalGrid1.Grid.MouseClick += UniversalGrid1_MouseClick;
-            universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<ExcelGrupParametre>(), this.Name);
+            universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
 
             fcbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
             fcbStokTip.SetDataSource(_cache.stokTips);
@@ -50,26 +54,25 @@ namespace YektamakDesktop.Formlar.Genel
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
             excelGrupParametre = (ExcelGrupParametre)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            contextMenuStrip1.Show(universalGrid1, e.Location);
-        }
-
-        private void UniversalGrid1_MouseClick(object sender, MouseEventArgs e)
-        {
-            excelGrupParametre = (ExcelGrupParametre)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1, e.Location);
+            }
         }
         private void Binding()
         {
-            BindHelper.BindData(fcbMalzemeStandart, excelGrupParametre, "malzemeStandartId");
-            BindHelper.BindData(fcbStokTip, excelGrupParametre, "stokTipId");
-            BindHelper.BindData(fcbStokGrup, excelGrupParametre, "stokGrupId");
-            BindHelper.BindData(fcbMalzemeGrup, excelGrupParametre, "malzemeGrupId");
-            BindHelper.BindData(fcbMalzemeAltGrup, excelGrupParametre, "malzemeAltGrupId");
-            BindHelper.BindData(fcbMalzemeAltGrup2, excelGrupParametre, "malzemeAltGrup2Id");
-            BindHelper.BindData(ctbAnahtarKelime, excelGrupParametre, "karsilastirmaKelimesi");
-            BindHelper.BindData(ctbExcelSutunAd, excelGrupParametre, "sutunAdi");
-            BindHelper.BindDataEnum(fcbKarsilastirmaOperator, excelGrupParametre, "karsilastirmaOperatoru");
-            BindHelper.BindData(ctbId, excelGrupParametre, "Id");
-            BindHelper.BindData(chkTalasli, excelGrupParametre, "isTalasli");
+            BindHelper.BindData(fcbMalzemeStandart, excelGrupParametre, nameof(excelGrupParametre.malzemeStandartId));
+            BindHelper.BindData(fcbStokTip, excelGrupParametre, nameof(excelGrupParametre.stokTipId));
+            BindHelper.BindData(fcbStokGrup, excelGrupParametre, nameof(excelGrupParametre.stokGrupId));
+            BindHelper.BindData(fcbMalzemeGrup, excelGrupParametre, nameof(excelGrupParametre.malzemeGrupId));
+            BindHelper.BindData(fcbMalzemeAltGrup, excelGrupParametre, nameof(excelGrupParametre.malzemeAltGrupId));
+            BindHelper.BindData(fcbMalzemeAltGrup2, excelGrupParametre, nameof(excelGrupParametre.malzemeAltGrup2Id));
+            BindHelper.BindData(ctbAnahtarKelime, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaKelimesi));
+            BindHelper.BindData(ctbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
+            BindHelper.BindDataEnum(fcbKarsilastirmaOperator, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaOperatoru));
+            BindHelper.BindData(ctbId, excelGrupParametre, nameof(excelGrupParametre.Id));
+            BindHelper.BindData(chkTalasli, excelGrupParametre, nameof(excelGrupParametre.isTalasli));
+            BindHelper.BindData(chkBukum, excelGrupParametre, nameof(excelGrupParametre.isBukum));
         }
 
         private ExcelGrupParametre _excelGrupParametre;
@@ -91,12 +94,12 @@ namespace YektamakDesktop.Formlar.Genel
             if (!CheckFields()) return;
             if ((KarsilastirmaOperatoru)fcbKarsilastirmaOperator.SelectedItem == KarsilastirmaOperatoru.Count)
             {
-                excelGrupParametre.kosulMetni = $"{excelGrupParametre.kosulMetni}{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
+                excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(p=>p==\"{excelGrupParametre.karsilastirmaKelimesi}\")=={ctbCount.TextCustom}";
             }
             else
             {
-                excelGrupParametre.kosulMetni = $"{excelGrupParametre.kosulMetni}{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
+                excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(\"{excelGrupParametre.karsilastirmaKelimesi}\", StringComparison.OrdinalIgnoreCase)";
             }
             string jsonResult = _stokService.SaveExcelGrupParametre(excelGrupParametre);
@@ -143,9 +146,16 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void koşuluSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            universalGrid1.binding.Remove(excelGrupParametre);
             string jsonResult = _stokService.DeleteExcelGrupParametre(excelGrupParametre);
-            MessageBox.Show(jsonResult);
+
+            if (string.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(jsonResult);
+            }
+            else
+            {
+                universalGrid1.binding.Remove(excelGrupParametre);
+            }
         }
 
         private void roundedButton1_Click(object sender, EventArgs e)
@@ -165,7 +175,7 @@ namespace YektamakDesktop.Formlar.Genel
             }
             else if ((KarsilastirmaOperatoru)fcbKarsilastirmaOperator.SelectedItem == KarsilastirmaOperatoru.Count)
             {
-                excelGrupParametre.kosulMetni = $"{excelGrupParametre.kosulMetni}{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
+                excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(p=>p==\"{excelGrupParametre.karsilastirmaKelimesi}\")=={ctbCount.TextCustom} && ";
                 ctbExcelSutunAd.TextCustom = null;
                 fcbKarsilastirmaOperator.SelectedIndex = -1;
@@ -173,7 +183,7 @@ namespace YektamakDesktop.Formlar.Genel
             }
             else
             {
-                excelGrupParametre.kosulMetni = $"{excelGrupParametre.kosulMetni}{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
+                excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(\"{excelGrupParametre.karsilastirmaKelimesi}\", StringComparison.OrdinalIgnoreCase) && ";
                 ctbExcelSutunAd.TextCustom = null;
                 fcbKarsilastirmaOperator.SelectedIndex = -1;

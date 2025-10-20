@@ -1,15 +1,10 @@
-﻿using NPOI.POIFS.NIO;
-using RtfPipe.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Windows;
 using System.Windows.Forms;
-using YektamakDesktop.Common;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -17,46 +12,68 @@ namespace YektamakDesktop.CustomControls
     {
         [Browsable(false)]
         public ComboBox ComboBox => comboBox1;
+
         private List<object> allItems = new List<object>();
         private bool underlinedStyle = false;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool UnderlinedStyle { get => underlinedStyle; set { underlinedStyle = value; this.Invalidate(); } }
+        private bool suppressEvents = false;
+
         public FilterableComboBox()
         {
             InitializeComponent();
+
+            // Reduce flicker
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint, true);
+            DoubleBuffered = true;
+
+            // ComboBox basic setup
             comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
             comboBox1.AutoCompleteMode = AutoCompleteMode.None;
             comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox1.KeyUp += ComboBox1_KeyUp;
             comboBox1.Enter += comboBox1_Enter;
             comboBox1.Leave += comboBox1_Leave;
+
+            // Layout & region
+            this.Resize += (s, e) => { UpdateRegion(); LayoutInnerCombo(); };
+            UpdateRegion();
+            LayoutInnerCombo();
+
             SetPlaceholder();
         }
+
+        // --- appearance properties ---
         private Color borderFocusColor = Color.HotPink;
         private bool isFocused = false;
-        private int borderRadius = 5;
+        private int borderRadius = 8;
         private Color borderColor = Color.Silver;
         private int borderSize = 1;
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
+        public Color BorderColor { get => borderColor; set { borderColor = value; Invalidate(); } }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
-        private string _displayMember = "ad"; // Default display member
+        public int BorderSize { get => borderSize; set { borderSize = value; Invalidate(); LayoutInnerCombo(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int BorderRadius { get => borderRadius; set { borderRadius = value; UpdateRegion(); Invalidate(); } }
+
+        // Display/Value members
+        private string _displayMember = "ad";
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string DisplayMember
         {
             get => _displayMember;
-            set { _displayMember = value; this.comboBox1.DisplayMember = value; }
+            set { _displayMember = value; comboBox1.DisplayMember = value; }
         }
-        private string _valueMember = "Id"; // Default value member
+        private string _valueMember = "Id";
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string ValueMember
         {
             get => _valueMember;
-            set { _valueMember = value; this.comboBox1.ValueMember = value; }
+            set { _valueMember = value; comboBox1.ValueMember = value; }
         }
+
+        // DataSource proxy
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object DataSource
@@ -64,34 +81,39 @@ namespace YektamakDesktop.CustomControls
             get => comboBox1.DataSource;
             set => comboBox1.DataSource = value;
         }
+        [Browsable(true)]
+        public event MouseEventHandler MouseDown
+        {
+            add { comboBox1.MouseDown += value; }
+            remove { comboBox1.MouseDown -= value; }
+        }
+
+        // Placeholder
         private string _placeholder = "Seçiniz...";
         [Category("Behavior")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string PlaceholderText
         {
             get => _placeholder;
-            set
-            {
-                _placeholder = value;
-                SetPlaceholder();
-            }
+            set { _placeholder = value; SetPlaceholder(); }
         }
 
         private void SetPlaceholder()
         {
-            if (comboBox1.SelectedIndex == -1)
+            // Placeholder only when nothing selected and textbox empty
+            if (comboBox1.SelectedIndex == -1 && string.IsNullOrWhiteSpace(comboBox1.Text))
             {
                 comboBox1.ForeColor = Color.Gray;
                 comboBox1.Text = _placeholder;
             }
         }
+
         private void comboBox1_Enter(object sender, EventArgs e)
         {
             if (comboBox1.Text == _placeholder)
             {
                 suppressEvents = true;
                 comboBox1.Text = "";
-                comboBox1.BackColor = Color.White;
                 comboBox1.ForeColor = Color.Black;
                 suppressEvents = false;
             }
@@ -100,68 +122,93 @@ namespace YektamakDesktop.CustomControls
         private void comboBox1_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(comboBox1.Text))
-            {
                 SetPlaceholder();
-            }
         }
         protected override void OnEnter(EventArgs e)
         {
             base.OnEnter(e);
             isFocused = true;
-            if (this.Text == _placeholder)
-            {
-                this.Text = "";
-                this.ForeColor = Color.Black;
-            }
-            this.Invalidate();
+            Invalidate();
         }
-
         protected override void OnLeave(EventArgs e)
         {
             base.OnLeave(e);
             isFocused = false;
-            if (string.IsNullOrEmpty(this.Text))
-            {
+            // don't touch this.Text (avoid interfering with comboBox)
+            if (string.IsNullOrEmpty(comboBox1.Text))
                 SetPlaceholder();
-            }
-            this.Invalidate();
+            Invalidate();
         }
+
+        // --- region / painting ---
+        private void UpdateRegion()
+        {
+            // compute rounded region once (on resize / radius change), not every paint
+            Rectangle rect = this.ClientRectangle;
+            GraphicsPath path = GetFigurePath(rect, borderRadius);
+            Region old = this.Region;
+            this.Region = new Region(path);
+            old?.Dispose();
+            path.Dispose();
+        }
+
+        private void LayoutInnerCombo()
+        {
+            // inset the combobox so it doesn't sit exactly on the border. Avoid rapid enter/leave when mouse hovers border.
+            int inset = Math.Max(3, borderSize + 2);
+            comboBox1.Bounds = new Rectangle(inset, inset, Math.Max(10, this.ClientSize.Width - inset * 2), Math.Max(10, this.ClientSize.Height - inset * 2));
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
-            //base.OnPaint(e);
-            Graphics graph = e.Graphics;
+            base.OnPaint(e);
+
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
             Rectangle rectBorderSmooth = this.ClientRectangle;
-            Rectangle rectBorder = Rectangle.Inflate(rectBorderSmooth, -borderSize, -borderSize);//Orjinal çerçevenin borderSize kadar küçültülmüş hali
-            int smoothSize = borderSize > 0 ? borderSize : 1;//Negatif borderSize olmasın diye
+            Rectangle rectBorder = Rectangle.Inflate(rectBorderSmooth, -borderSize, -borderSize);
+            int smoothSize = Math.Max(1, borderSize);
+
             using (GraphicsPath pathBorderSmooth = GetFigurePath(rectBorderSmooth, borderRadius))
-            using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
-            using (Pen penBorderSmooth = new Pen(this.Parent.BackColor, smoothSize))
+            using (GraphicsPath pathBorder = GetFigurePath(rectBorder, Math.Max(0, borderRadius - borderSize)))
+            using (Pen penBorderSmooth = new Pen(this.Parent?.BackColor ?? this.BackColor, smoothSize))
             using (Pen penBorder = new Pen(borderColor, borderSize))
             {
-                //Drawing
-                //this.Region = new Region(pathBorderSmooth);//Set the rounded region of UserControl
-                graph.SmoothingMode = SmoothingMode.AntiAlias;
                 penBorder.Alignment = PenAlignment.Center;
                 if (isFocused) penBorder.Color = borderFocusColor;
-                //Draw border smoothing
-                graph.DrawPath(penBorderSmooth, pathBorderSmooth);
-                //Draw border
-                graph.DrawPath(penBorder, pathBorder);
-            }
 
+                // Draw smoothing + border (BUT DO NOT set Region here — we handle region in UpdateRegion).
+                g.DrawPath(penBorderSmooth, pathBorderSmooth);
+                g.DrawPath(penBorder, pathBorder);
+            }
         }
-        private GraphicsPath GetFigurePath(RectangleF rect, float radius)
+
+        private GraphicsPath GetFigurePath(Rectangle rect, float radius)
         {
             GraphicsPath path = new GraphicsPath();
+            float r = Math.Max(0, radius);
+            if (r < 1f)
+            {
+                path.AddRectangle(rect);
+                return path;
+            }
+
+            float right = rect.Right;
+            float bottom = rect.Bottom;
+
             path.StartFigure();
-            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
-            path.AddArc(rect.Width - radius, rect.Y, radius, radius, 270, 90);
-            path.AddArc(rect.Width - radius, rect.Height - radius, radius, radius, 0, 90);
-            path.AddArc(rect.X, rect.Height - radius, radius, radius, 90, 90);
+            path.AddArc(rect.X, rect.Y, r, r, 180, 90);
+            path.AddArc(right - r, rect.Y, r, r, 270, 90);
+            path.AddArc(right - r, bottom - r, r, r, 0, 90);
+            path.AddArc(rect.X, bottom - r, r, r, 90, 90);
             path.CloseFigure();
 
             return path;
         }
+
+        // --- selection proxies & events ---
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object SelectedItem
@@ -192,63 +239,51 @@ namespace YektamakDesktop.CustomControls
             set => comboBox1.SelectedIndex = value;
         }
 
-        [Browsable(false)]
-        public object SelectedObject;
-        //{
-        //    get { return comboBox1.SelectedItem; }
-        //    set { comboBox1.SelectedItem = value; }
-        //}
-
         public event EventHandler SelectedIndexChanged;
-        //{
-        //    add { comboBox1.SelectedIndexChanged += value; }
-        //    remove { comboBox1.SelectedIndexChanged -= value; }
-        //}
         public event EventHandler SelectedValueChanged
         {
             add { comboBox1.SelectedValueChanged += value; }
             remove { comboBox1.SelectedValueChanged -= value; }
         }
 
-        private bool suppressEvents = false;
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (suppressEvents) return;
+            comboBox1.ForeColor = Color.Black;
+            SelectedIndexChanged?.Invoke(this, e);
+            SetPlaceholder();
+        }
+
+        // --- data helpers ---
         public void SetDataSource<T>(List<T> items)
         {
             suppressEvents = true;
             allItems = items.Cast<object>().ToList();
 
-            comboBox1.DisplayMember = DisplayMember; // bu değer yukarıdan alınmalı
+            comboBox1.DisplayMember = DisplayMember;
             comboBox1.ValueMember = ValueMember;
-            object value = comboBox1.SelectedValue; // Seçili indeksi sakla
+            object value = comboBox1.SelectedValue;
             var prop = typeof(T).GetProperty(DisplayMember);
-            if(prop == null)
-            {
+            if (prop == null)
                 comboBox1.DataSource = items;
-            }
             else
-            {
                 comboBox1.DataSource = items.OrderBy(x => prop.GetValue(x, null)).ToList();
-            }
-                
-            if (value == null)
-            {
-                comboBox1.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
-            }
-            else
-            {
-                comboBox1.SelectedValue = value; // Seçili öğe varsa onu ayarla
-            }
+
+            if (value == null) comboBox1.SelectedIndex = -1; else comboBox1.SelectedValue = value;
+
             SetPlaceholder();
             suppressEvents = false;
         }
+
         private void RefreshData(List<object> filteredList)
         {
             if (filteredList != null && filteredList.Count != 0)
             {
+                // keep the DataSource usage simple
                 comboBox1.DataSource = filteredList;
             }
             comboBox1.DroppedDown = true;
         }
-
 
         private void ComboBox1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -261,9 +296,9 @@ namespace YektamakDesktop.CustomControls
                 }
                 return;
             }
+
             suppressEvents = true;
             string searchText = comboBox1.Text;
-
             if (string.IsNullOrEmpty(DisplayMember)) return;
 
             var filtered = allItems
@@ -291,39 +326,5 @@ namespace YektamakDesktop.CustomControls
             comboBox1.SelectionStart = searchText.Length;
             comboBox1.SelectionLength = 0;
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (suppressEvents)
-                return;
-
-            comboBox1.ForeColor = Color.Black;
-            SelectedIndexChanged?.Invoke(this, e);
-        }
-
-        private void FilterableComboBox_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void FilterableComboBox_DoubleClick(object sender, EventArgs e)
-        {
-            DoubleClick1?.Invoke(this, e);
-        }
-
-        [Browsable(true)]
-        public event EventHandler DoubleClick1;
-
-
-        public override Color BackColor
-        {
-            get => base.BackColor;
-            set { base.BackColor = value; comboBox1.BackColor = value; }
-        }
-        public override Color ForeColor
-        {
-            get => base.ForeColor;
-            set { base.ForeColor = value; comboBox1.ForeColor = value; }
-        }
-
     }
 }

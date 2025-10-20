@@ -86,19 +86,19 @@ namespace Models
 
         private TalepNeden _talepNeden;
         public TalepNeden talepNeden { get { if (_talepNeden == null) _talepNeden = new(); return _talepNeden; } set { _talepNeden = value; } }
-        private StokKart _stokKart;
-		public StokKart stokKart{
+        private ProjeStokKart _projeStokKart;
+		public ProjeStokKart projeStokKart{
 			get
 			{
-				if (_stokKart == null)
+				if (_projeStokKart == null)
 				{
-					_stokKart = new StokKart();
+					_projeStokKart = new ProjeStokKart();
 				}
-				return _stokKart;
+				return _projeStokKart;
 			}
 			set
 			{
-				_stokKart = value;
+				_projeStokKart = value;
 			}
 		}
 		public double? miktar { get; set; }
@@ -111,6 +111,7 @@ namespace Models
 		public string talepEdenPersonelad { get; set; }
 		public bool? onayDurum { get; set; }
 		public bool? isTeklif { get; set; }
+		public int? teklifSayisi { get; set; }
         private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
         {
@@ -127,20 +128,20 @@ namespace Models
 	public class SatinalmaTalepSatirDetay : IEntity
 	{
 		public int? Id { get; set; }
-		private StokKart _stokKart;
-		public StokKart stokKart
+		private ProjeStokKart _projeStokKart;
+		public ProjeStokKart projeStokKart
 		{
 			get
 			{
-				if (_stokKart == null)
+				if (_projeStokKart == null)
 				{
-					_stokKart = new StokKart();
+					_projeStokKart = new ProjeStokKart();
 				}
-				return _stokKart;
+				return _projeStokKart;
 			}
 			set
 			{
-				_stokKart = value;
+				_projeStokKart = value;
 			}
 		}
 		public double? miktar { get; set; }
