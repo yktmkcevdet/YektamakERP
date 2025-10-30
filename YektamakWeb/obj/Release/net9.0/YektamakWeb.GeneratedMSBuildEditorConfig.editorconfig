@@ -39,6 +39,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXERpYWxvZ1dpbmRvdy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Components/UniversalGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVbml2ZXJzYWxHcmlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -61,6 +65,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/OnaylanacakTalepler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25heWxhbmFjYWtUYWxlcGxlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/yektamak-118/source/repos/YektamakErp/YektamakWeb/Pages/Pdf.razor]

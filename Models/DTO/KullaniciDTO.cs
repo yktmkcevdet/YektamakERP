@@ -12,5 +12,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Rol Id")] public int? rolId { get; set; }
         [GridDisplay(Header = "Rol ad")] public string rolad { get; set; }
         [GridDisplay(Header = "Şifre değiştir")] public bool? isSifreDegisti { get; set; }
+        [GridDisplay(Header = "Mail Adre Id")] public int? mailAdresId { get; set; }
+        [GridDisplay(Header = "Mail Adresi")] public string mailAdresadres { get; set; }
     }
 }

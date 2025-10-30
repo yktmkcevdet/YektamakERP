@@ -20,7 +20,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         private readonly IJsonConverter _jsonConverter;
         private readonly ICache _cache;
         private readonly IDataTableMapper _dataTableMapper;
-        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService,  IJsonConverter jsonConverter, ICache cache, IDataTableMapper dataTableMapper)
+        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService, IJsonConverter jsonConverter, ICache cache, IDataTableMapper dataTableMapper)
         {
             _satinalmaTeklifService = satinalmaTeklifService;
             _jsonConverter = jsonConverter;
@@ -42,6 +42,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
             universalGrid1.TabIndex = 13;
+            universalGrid1.CellValueChanged += universalGrid1_CellEndEdit;
             Controls.Add(universalGrid1);
             universalGrid1.SetData(new List<SatinalmaTeklifDetayDTO>(), this.Name);
             fcbFirma.SetDataSource(_cache.firmaList);
@@ -68,7 +69,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         }
         private async void customButtonSave1_Click(object sender, EventArgs e)
         {
-            if(!ValidateForm())
+            if (!ValidateForm())
             {
                 return;
             }
@@ -101,7 +102,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         private bool ValidateForm()
         {
             bool result = true;
-            result &= GlobalData.CheckField("Firma Seçiniz",fcbFirma);
+            result &= GlobalData.CheckField("Firma Seçiniz", fcbFirma);
             result &= GlobalData.CheckField("Teklif Tarihi Giriniz", ctbTeklifTarihi);
             result &= GlobalData.CheckField("Teklif Talep Tarihi Giriniz", ctbTeklifTalepTarihi);
             result &= GlobalData.CheckField("*", clbDoviz);
@@ -151,7 +152,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
 
         private async void btnSipariseDonustur_Click(object sender, EventArgs e)
         {
-            if(!ValidateForm())
+            if (!ValidateForm())
             {
                 return;
             }
@@ -171,11 +172,40 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
                 satinalmaSiparisDetay.aciklama = item.satinalmaTalepDetay.aciklama;
                 satinalmaSiparisDetay.birimFiyat = item.birimFiyat;
                 satinalmaSiparisDetay.stokKartId = item.satinalmaTalepDetay.projeStokKart.Id;
-                satinalmaSiparis.satinalmaSiparisDetayList.Add( satinalmaSiparisDetay );
+                satinalmaSiparis.satinalmaSiparisDetayList.Add(satinalmaSiparisDetay);
             }
             var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
             satinalmaSiparisKayitFormu.UpdateMode(satinalmaSiparis);
             satinalmaSiparisKayitFormu.ShowDialog();
+        }
+
+        private void universalGrid1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == universalGrid1.Grid.Columns["Miktar"].Index ||
+                e.ColumnIndex == universalGrid1.Grid.Columns["Birim fiyat"].Index)
+            {
+                var row = universalGrid1.Grid.Rows[e.RowIndex];
+                //if (double.TryParse(Convert.ToString(row.Cells["Miktar"].Value), out double miktar) &&
+                //    double.TryParse(Convert.ToString(row.Cells["Birim fiyat"].Value), out double fiyat))
+                //{
+                //    row.Cells["Birim fiyat"].Value = miktar * fiyat;
+                //}
+                HesaplaToplam();
+            }
+        }
+        private void HesaplaToplam()
+        {
+            double toplam = 0;
+            foreach (DataGridViewRow row in universalGrid1.Grid.Rows)
+            {
+                if (row.Cells["Birim fiyat"].Value != null &&
+                    double.TryParse(row.Cells["Birim fiyat"].Value.ToString(), out double tutar))
+                {
+                    toplam += tutar;
+                }
+            }
+
+            ctbTutar.TextCustom = toplam.ToString();
         }
     }
 }

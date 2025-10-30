@@ -1,0 +1,185 @@
+﻿@using Models.Attributes
+@using Models.Models
+@using System.Reflection
+@typeparam TData
+@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthStateProvider
+@inject IJSRuntime JS
+
+<MudPaper Class="p-2">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+        <MudText Typo="Typo.h6">@Title</MudText>
+
+        <MudMenu Label="Sütunlar">
+            @foreach (var col in Columns)
+            {
+                <MudMenuItem>
+                    <MudCheckBox @bind-Value="col.Visible" Label="@col.Header" OnChange="@(async() => SaveColumnPreferences())" />
+                </MudMenuItem>
+            }
+        </MudMenu>
+    </MudStack>
+
+    <MudTable Items="@Data"  SortLabel="Sırala" Hover="true" Dense="true">
+        <HeaderContent>
+            @foreach (var col in Columns.Where(c => c.Visible))
+            {
+                <MudTh SortBy="@col.Property.Name">@col.Header</MudTh>
+            }
+        </HeaderContent>
+        <RowTemplate>
+           
+                @foreach (var col in Columns.Where(c => c.Visible))
+                {
+                <MudTd @oncontextmenu:preventDefault="true" @onclick="((MouseEventArgs e) => OnRowRightClick(e, context))">
+                        @GetFormattedValue(context, col)
+                </MudTd>
+                } 
+        </RowTemplate>  
+    </MudTable>
+
+</MudPaper>
+@if (ShowContextMenu)
+{   
+    <MudPaper Class="context-menu" Width="200px" Style="top:100px; left:800px;">
+        <MudList T="string">
+            <MudListItem @onclick="() => EditItem(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" /> Düzenle
+            </MudListItem>
+            <MudListItem @onclick="() => DeleteItem(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Delete" /> Sil
+            </MudListItem>
+            <MudListItem @onclick="() => ViewItem(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Info" /> Detay
+            </MudListItem>
+        </MudList>
+    </MudPaper>
+}
+@code {
+    [Parameter] public IEnumerable<TData> Data { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public Func<string, bool> PermissionChecker { get; set; }
+
+    private List<GridColumnMetadata> Columns = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Columns = typeof(TData)
+            .GetProperties()
+            .Select(p =>
+            {
+                var attr = p.GetCustomAttribute<GridDisplayAttribute>();
+                return new GridColumnMetadata
+                {
+                    Property = p,
+                    Header = attr?.Header ?? p.Name,
+                    Visible = attr?.Visible ?? true,
+                    Sortable = attr?.Sortable ?? true,
+                    Format = attr?.Format,
+                    Order = attr?.Order ?? 0,
+                    Permission = attr?.Permission
+                };
+            })
+            .OrderBy(c => c.Order)
+            .ToList();
+
+        // yetki kontrolü
+        if (PermissionChecker != null)
+        {
+            foreach (var col in Columns)
+            {
+                if (!string.IsNullOrEmpty(col.Permission) && !PermissionChecker(col.Permission))
+                    col.Visible = false;
+            }
+        }
+
+        // localStorage'dan kullanıcı sütun tercihlerini yükle
+        await LoadColumnPreferences();
+    }
+
+    //private bool Filter(TData element) => element;
+
+    private object GetFormattedValue(TData item, GridColumnMetadata col)
+    {
+        var val = col.Property.GetValue(item);
+        if (val == null) return string.Empty;
+
+        if (!string.IsNullOrEmpty(col.Format))
+            return string.Format($"{{0:{col.Format}}}", val);
+
+        return val;
+    }
+
+    private async Task LoadColumnPreferences()
+    {
+        var key = $"grid_{typeof(TData).Name}_columns";
+        var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
+        if (string.IsNullOrEmpty(json)) return;
+
+        var prefs = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, bool>>(json);
+        if (prefs == null) return;
+
+        foreach (var col in Columns)
+        {
+            if (prefs.TryGetValue(col.Property.Name, out bool visible))
+                col.Visible = visible;
+        }
+    }
+
+    private async Task SaveColumnPreferences()
+    {
+        var key = $"grid_{typeof(TData).Name}_columns";
+        var prefs = Columns.ToDictionary(c => c.Property.Name, c => c.Visible);
+        var json = System.Text.Json.JsonSerializer.Serialize(prefs);
+        await JS.InvokeVoidAsync("localStorage.setItem", key, json);
+    }
+
+    [Parameter] public EventCallback<TData> OnEdit { get; set; }
+    [Parameter] public EventCallback<TData> OnDelete { get; set; }
+    [Parameter] public EventCallback<TData> OnView { get; set; }
+
+    private bool ShowContextMenu;
+    private string MenuXpx;
+    private string MenuYpx;
+    private TData? SelectedItem;
+
+    private void OnRowRightClick(MouseEventArgs e, TData item)
+    {
+        if (e.Button == 2)
+        {
+
+            SelectedItem = item;
+            MenuXpx = $"{e.ClientX + 100}px";
+            MenuYpx = $"{e.ClientY}px";
+            ShowContextMenu = true;
+            StateHasChanged();
+        }
+    }
+
+    private async Task EditItem(TData item)
+    {
+        ShowContextMenu = false;
+        if (OnEdit.HasDelegate)
+            await OnEdit.InvokeAsync(item);
+    }
+
+    private async Task DeleteItem(TData item)
+    {
+        ShowContextMenu = false;
+        if (OnDelete.HasDelegate)
+            await OnDelete.InvokeAsync(item);
+    }
+
+    private async Task ViewItem(TData item)
+    {
+        ShowContextMenu = false;
+        if (OnView.HasDelegate)
+            await OnView.InvokeAsync(item);
+    }
+
+    public class GridColumn
+    {
+        public string HeaderText { get; set; } = "";
+        public PropertyInfo Property { get; set; } = default!;
+    }
+}
+

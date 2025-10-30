@@ -181,7 +181,7 @@
             ctbTutar.Location = new System.Drawing.Point(160, 237);
             ctbTutar.Margin = new System.Windows.Forms.Padding(1);
             ctbTutar.Name = "ctbTutar";
-            ctbTutar.OndalikBasamak = 0;
+            ctbTutar.OndalikBasamak = 2;
             ctbTutar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             ctbTutar.Size = new System.Drawing.Size(96, 33);
             ctbTutar.TabIndex = 13;

@@ -49,6 +49,8 @@
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             clbPersonel = new YektamakDesktop.CustomControls.FilterableComboBox();
             clbRol = new YektamakDesktop.CustomControls.FilterableComboBox();
+            fcbMailAdres = new YektamakDesktop.CustomControls.FilterableComboBox();
+            label5 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // labelUyariKulllaniciAdi
@@ -96,7 +98,7 @@
             labelUyariRol.AutoSize = true;
             labelUyariRol.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             labelUyariRol.ForeColor = System.Drawing.Color.Red;
-            labelUyariRol.Location = new System.Drawing.Point(332, 203);
+            labelUyariRol.Location = new System.Drawing.Point(332, 186);
             labelUyariRol.Name = "labelUyariRol";
             labelUyariRol.Size = new System.Drawing.Size(0, 15);
             labelUyariRol.TabIndex = 95;
@@ -117,7 +119,7 @@
             // btnSave
             // 
             btnSave.BackColor = System.Drawing.Color.Transparent;
-            btnSave.Location = new System.Drawing.Point(414, 257);
+            btnSave.Location = new System.Drawing.Point(480, 178);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(106, 46);
             btnSave.TabIndex = 98;
@@ -130,9 +132,9 @@
             ctbKullaniciAd.BorderColor = System.Drawing.Color.Silver;
             ctbKullaniciAd.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbKullaniciAd.BorderSize = 1;
-            ctbKullaniciAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbKullaniciAd.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbKullaniciAd.ForeColor = System.Drawing.Color.Black;
-            ctbKullaniciAd.Location = new System.Drawing.Point(124, 82);
+            ctbKullaniciAd.Location = new System.Drawing.Point(124, 79);
             ctbKullaniciAd.Margin = new System.Windows.Forms.Padding(1);
             ctbKullaniciAd.Multiline = false;
             ctbKullaniciAd.Name = "ctbKullaniciAd";
@@ -142,7 +144,7 @@
             ctbKullaniciAd.PlaceholderText = "";
             ctbKullaniciAd.ReadOnly = false;
             ctbKullaniciAd.SelectionStart = 0;
-            ctbKullaniciAd.Size = new System.Drawing.Size(204, 33);
+            ctbKullaniciAd.Size = new System.Drawing.Size(204, 29);
             ctbKullaniciAd.TabIndex = 99;
             ctbKullaniciAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbKullaniciAd.TextCustom = "";
@@ -154,9 +156,9 @@
             ctbSifre.BorderColor = System.Drawing.Color.Silver;
             ctbSifre.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbSifre.BorderSize = 1;
-            ctbSifre.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbSifre.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbSifre.ForeColor = System.Drawing.Color.Black;
-            ctbSifre.Location = new System.Drawing.Point(124, 119);
+            ctbSifre.Location = new System.Drawing.Point(124, 110);
             ctbSifre.Margin = new System.Windows.Forms.Padding(1);
             ctbSifre.Multiline = false;
             ctbSifre.Name = "ctbSifre";
@@ -166,7 +168,7 @@
             ctbSifre.PlaceholderText = "";
             ctbSifre.ReadOnly = false;
             ctbSifre.SelectionStart = 0;
-            ctbSifre.Size = new System.Drawing.Size(262, 33);
+            ctbSifre.Size = new System.Drawing.Size(262, 29);
             ctbSifre.TabIndex = 100;
             ctbSifre.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbSifre.TextCustom = "";
@@ -178,9 +180,9 @@
             ctbSifreTekrar.BorderColor = System.Drawing.Color.Silver;
             ctbSifreTekrar.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbSifreTekrar.BorderSize = 1;
-            ctbSifreTekrar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbSifreTekrar.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbSifreTekrar.ForeColor = System.Drawing.Color.Black;
-            ctbSifreTekrar.Location = new System.Drawing.Point(124, 155);
+            ctbSifreTekrar.Location = new System.Drawing.Point(124, 141);
             ctbSifreTekrar.Margin = new System.Windows.Forms.Padding(1);
             ctbSifreTekrar.Multiline = false;
             ctbSifreTekrar.Name = "ctbSifreTekrar";
@@ -190,7 +192,7 @@
             ctbSifreTekrar.PlaceholderText = "";
             ctbSifreTekrar.ReadOnly = false;
             ctbSifreTekrar.SelectionStart = 0;
-            ctbSifreTekrar.Size = new System.Drawing.Size(262, 33);
+            ctbSifreTekrar.Size = new System.Drawing.Size(262, 29);
             ctbSifreTekrar.TabIndex = 101;
             ctbSifreTekrar.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbSifreTekrar.TextCustom = "";
@@ -199,54 +201,59 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(45, 87);
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label6.Location = new System.Drawing.Point(45, 84);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(73, 15);
+            label6.Size = new System.Drawing.Size(74, 15);
             label6.TabIndex = 102;
             label6.Text = "Kullanıcı Adı";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(45, 126);
+            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label8.Location = new System.Drawing.Point(45, 117);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(30, 15);
+            label8.Size = new System.Drawing.Size(34, 15);
             label8.TabIndex = 103;
             label8.Text = "Şifre";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(45, 161);
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(45, 147);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(64, 15);
+            label1.Size = new System.Drawing.Size(73, 15);
             label1.TabIndex = 104;
             label1.Text = "Şifre Tekrar";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(45, 194);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(45, 177);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(52, 15);
+            label2.Size = new System.Drawing.Size(55, 15);
             label2.TabIndex = 105;
             label2.Text = "Personel";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(45, 232);
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(45, 207);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(24, 15);
+            label3.Size = new System.Drawing.Size(25, 15);
             label3.TabIndex = 106;
             label3.Text = "Rol";
             // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(0, 319);
+            universalGrid1.Location = new System.Drawing.Point(0, 310);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(693, 353);
+            universalGrid1.Size = new System.Drawing.Size(693, 362);
             universalGrid1.TabIndex = 107;
             // 
             // roundedButton1
@@ -276,9 +283,10 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             label4.Location = new System.Drawing.Point(45, 53);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(65, 15);
+            label4.Size = new System.Drawing.Size(67, 15);
             label4.TabIndex = 110;
             label4.Text = "Kullanıcı Id";
             // 
@@ -289,7 +297,7 @@
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbId.BorderSize = 1;
             ctbId.Enabled = false;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbId.ForeColor = System.Drawing.Color.Black;
             ctbId.Location = new System.Drawing.Point(124, 48);
             ctbId.Margin = new System.Windows.Forms.Padding(1);
@@ -301,7 +309,7 @@
             ctbId.PlaceholderText = "";
             ctbId.ReadOnly = false;
             ctbId.SelectionStart = 0;
-            ctbId.Size = new System.Drawing.Size(87, 33);
+            ctbId.Size = new System.Drawing.Size(87, 29);
             ctbId.TabIndex = 109;
             ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbId.TextCustom = "";
@@ -314,12 +322,12 @@
             clbPersonel.BorderSize = 1;
             clbPersonel.DisplayMember = "adSoyad";
             clbPersonel.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbPersonel.Location = new System.Drawing.Point(124, 189);
+            clbPersonel.Location = new System.Drawing.Point(124, 172);
             clbPersonel.Margin = new System.Windows.Forms.Padding(1);
             clbPersonel.Name = "clbPersonel";
             clbPersonel.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbPersonel.PlaceholderText = "Seçiniz...";
-            clbPersonel.Size = new System.Drawing.Size(231, 29);
+            clbPersonel.Size = new System.Drawing.Size(231, 25);
             clbPersonel.TabIndex = 111;
             clbPersonel.ValueMember = "Id";
             // 
@@ -330,20 +338,48 @@
             clbRol.BorderSize = 1;
             clbRol.DisplayMember = "ad";
             clbRol.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbRol.Location = new System.Drawing.Point(124, 224);
+            clbRol.Location = new System.Drawing.Point(124, 199);
             clbRol.Margin = new System.Windows.Forms.Padding(1);
             clbRol.Name = "clbRol";
             clbRol.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbRol.PlaceholderText = "Seçiniz...";
-            clbRol.Size = new System.Drawing.Size(179, 29);
+            clbRol.Size = new System.Drawing.Size(179, 25);
             clbRol.TabIndex = 112;
             clbRol.ValueMember = "Id";
+            // 
+            // fcbMailAdres
+            // 
+            fcbMailAdres.BorderColor = System.Drawing.Color.Silver;
+            fcbMailAdres.BorderRadius = 8;
+            fcbMailAdres.BorderSize = 1;
+            fcbMailAdres.DisplayMember = "adres";
+            fcbMailAdres.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbMailAdres.Location = new System.Drawing.Point(124, 226);
+            fcbMailAdres.Margin = new System.Windows.Forms.Padding(1);
+            fcbMailAdres.Name = "fcbMailAdres";
+            fcbMailAdres.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            fcbMailAdres.PlaceholderText = "Seçiniz...";
+            fcbMailAdres.Size = new System.Drawing.Size(179, 25);
+            fcbMailAdres.TabIndex = 114;
+            fcbMailAdres.ValueMember = "Id";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label5.Location = new System.Drawing.Point(45, 234);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(65, 15);
+            label5.TabIndex = 113;
+            label5.Text = "Mail Adres";
             // 
             // KullaniciKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(693, 673);
+            Controls.Add(fcbMailAdres);
+            Controls.Add(label5);
             Controls.Add(clbRol);
             Controls.Add(clbPersonel);
             Controls.Add(label4);
@@ -396,5 +432,7 @@
         private CustomControls.CustomTextBox ctbId;
         private CustomControls.FilterableComboBox clbPersonel;
         private CustomControls.FilterableComboBox clbRol;
+        private CustomControls.FilterableComboBox fcbMailAdres;
+        private System.Windows.Forms.Label label5;
     }
 }

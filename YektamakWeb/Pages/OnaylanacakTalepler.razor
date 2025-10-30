@@ -1,0 +1,105 @@
+﻿@page "/Onaylanacak Talepler/"
+@using ApiService.Interfaces
+@using Models
+@using Models.DTO
+@using Utilities.Interfaces
+@using YektamakWeb.Components
+@inject IJSRuntime JS
+<UniversalGrid Data="@satinalmaTalepOnayList" Title="Teklif Listesi"  />
+<div>
+    @if (IsMenuVisible)
+    {
+        <div class="context-menu"
+             style="top:@MenuYpx; left:@MenuXpx;">
+            <ul>
+                <li @onclick="() => EditOffer(SelectedOffer)">Düzenle</li>
+                <li @onclick="() => DeleteOffer(SelectedOffer)">Sil</li>
+                <li @onclick="() => ViewOffer(SelectedOffer)">Detay</li>
+            </ul>
+        </div>
+    }
+</div>
+@code {
+    @inject ISatinalmaTalepService _satinalmaService
+    @inject IJsonConverter _jsonConverter;
+    @inject IConvertHelper _convertHelper;
+    List<SatinalmaTalepDTO> PurchaseOffers = new();
+
+    bool HasPermission(string code)
+    {
+        // örnek: gerçek sistemde JWT veya Claims üzerinden kontrol edilir
+        return code != "Offer.ViewVat";
+    }
+    private List<SatinalmaTalepDTO> _satinalmaTalepOnayList;
+    public List<SatinalmaTalepDTO> satinalmaTalepOnayList
+    {
+        get
+        {
+            if (_satinalmaTalepOnayList == null)
+            {
+                _satinalmaTalepOnayList = new List<SatinalmaTalepDTO>();
+            }
+            return _satinalmaTalepOnayList;
+        }
+        set 
+        { 
+            _satinalmaTalepOnayList = value; 
+            
+        }
+    }
+    protected override async void OnInitialized()
+    {
+        var jsonResult = await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep());
+        if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+        else
+        {
+            List<SatinalmaTalep> satinalmaTalep = _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
+            foreach (var item in satinalmaTalep.Where(t => t.onayDurum == null))
+            {
+                satinalmaTalepOnayList.Add(_convertHelper.ToDTO<SatinalmaTalepDTO>(item));
+            }
+            InvokeAsync(StateHasChanged);
+        }
+    }
+    private bool IsMenuVisible;
+    private string MenuXpx;
+    private string MenuYpx;
+    private SatinalmaTalepDTO? SelectedOffer;
+
+    private void ShowContextMenu(MouseEventArgs e, SatinalmaTalepDTO offer)
+    {
+        //e.PreventDefault(); // Tarayıcı varsayılan sağ tık menüsünü engelle
+        SelectedOffer = offer;
+        IsMenuVisible = true;
+        MenuXpx = $"{e.ClientX}px";
+        MenuYpx = $"{e.ClientY}px";
+        StateHasChanged();
+    }
+
+    private void EditOffer(SatinalmaTalepDTO offer)
+    {
+        Console.WriteLine($"Düzenlenecek teklif: {offer.Id}");
+        IsMenuVisible = false;
+    }
+
+    private void DeleteOffer(SatinalmaTalepDTO offer)
+    {
+        Console.WriteLine($"Silinecek teklif: {offer.Id}");
+        IsMenuVisible = false;
+    }
+
+    private void ViewOffer(SatinalmaTalepDTO offer)
+    {
+        Console.WriteLine($"Detay: {offer.Id}");
+        IsMenuVisible = false;
+    }
+
+    private void HandleRightClick(MouseEventArgs e)
+    {
+        // Boş alana sağ tıklanınca menüyü kapat
+        IsMenuVisible = false;
+    }
+}

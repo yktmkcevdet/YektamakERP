@@ -557,7 +557,18 @@ namespace Utilities.Implementations
                 return _excelGrupParametreList;
             }
         }
-
+        private Task<List<MailAdres>> _mailAdresList;
+        public Task<List<MailAdres>> mailAdresList
+        {
+            get
+            {
+                if (_mailAdresList == null)
+                {
+                    _mailAdresList = GetModelListAsync<MailAdres>(async () => { return await _kullaniciYetki.GetMailAdres(new MailAdres()); });
+                }
+                return _mailAdresList;
+            }
+        }
         public List<T> GetModelList<T>(Func<T, string> fetchFunction, T t) where T : IEntity, new()
         {
             var jsonResult = fetchFunction.Invoke(t);

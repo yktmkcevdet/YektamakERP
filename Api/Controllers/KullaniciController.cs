@@ -6,7 +6,7 @@ using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
 {
-    public class KullaniciController:Controller
+    public class KullaniciController : Controller
     {
         private readonly IDataAccessLayer _dataAccessLayer;
 
@@ -20,14 +20,14 @@ namespace Api.Controllers
         {
             string result = _dataAccessLayer.SaveObject(restData, "spSaveKullanici");
             return result;
-		}
-        
+        }
+
         [HttpPost, Route("api/GetKullanici")]
         public string GetKullanici([FromBody] Kullanici restData)
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetKullanici");
             return result;
-		}
+        }
         [HttpPost, Route("api/GetRol")]
         public string GetRol([FromBody] Kullanici restData)
         {
@@ -39,7 +39,7 @@ namespace Api.Controllers
         {
             Kullanici kullanici = new Kullanici();
             kullanici.ad = username;
-            string result = _dataAccessLayer.GetObject(kullanici,"spGetKullanici");
+            string result = _dataAccessLayer.GetObject(kullanici, "spGetKullanici");
             return result;
         }
 
@@ -48,21 +48,21 @@ namespace Api.Controllers
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetKullaniciYetki");
             return result;
-		}
+        }
 
         [HttpPost, Route("api/SaveEkran")]
         public string SaveEkran([FromBody] Ekran restData)
         {
             string result = _dataAccessLayer.SaveObject(restData, "spSaveEkran");
             return result;
-		}
+        }
 
         [HttpPost, Route("api/SaveYetki")]
         public string SaveYetki([FromBody] Yetki restData)
         {
             string result = _dataAccessLayer.SaveObject(restData, "spSaveYetki");
             return result;
-		}
+        }
         [HttpPost, Route("api/SaveAlanYetki")]
         public string SaveAlanYetki([FromBody] AlanYetki restData)
         {
@@ -80,7 +80,7 @@ namespace Api.Controllers
         {
             string result = _dataAccessLayer.DeleteObject(restData, "spDeleteEkran");
             return result;
-		}
+        }
         [HttpPost, Route("api/GetAnaMenu")]
         public string GetAnaMenu([FromBody] AnaMenuDTO restData)
         {
@@ -96,10 +96,10 @@ namespace Api.Controllers
         [HttpPost, Route("api/GetMenu")]
         public string GetMenu([FromBody] Menu restData)
         {
-            string result = _dataAccessLayer.GetObject(restData,"spGetMenu");
+            string result = _dataAccessLayer.GetObject(restData, "spGetMenu");
             return result;
         }
-        [HttpPost,Route("api/SaveMenu")]
+        [HttpPost, Route("api/SaveMenu")]
         public string SaveMenu([FromBody] Menu restData)
         {
             string result = _dataAccessLayer.SaveObject(restData, "spSaveMenu");
@@ -115,6 +115,18 @@ namespace Api.Controllers
         public string GetAlanYetki([FromBody] AlanYetki restData)
         {
             string result = _dataAccessLayer.GetObject(restData, "spGetAlanYetki");
+            return result;
+        }
+        [HttpPost, Route("api/SaveMailAdres")]
+        public string SaveMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMailAdres");
+            return result;
+        }
+        [HttpPost, Route("api/GetMailAdres")]
+        public string GetMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spGetMailAdres");
             return result;
         }
     }

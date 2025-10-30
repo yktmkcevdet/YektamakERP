@@ -96,5 +96,13 @@ namespace ApiService.Implementetions
         {
             return await _apiService.PostAsync(alanYetki, "SaveAlanYetki");
         }
+        public async Task<string> SaveMailAdres(MailAdres mail)
+        {
+            return await _apiService.PostAsync(mail, "SaveMailAdres");
+        }
+        public async Task<string> GetMailAdres(MailAdres mail)
+        {
+            return await _apiService.PostAsync(mail, "GetMailAdres");
+        }
     }
 }

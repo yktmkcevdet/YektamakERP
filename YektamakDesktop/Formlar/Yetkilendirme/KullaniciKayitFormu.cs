@@ -33,19 +33,25 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             InitializeComponent();
             Initialize();
         }
-        private void Initialize()
+        private async void Initialize()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(0, 319);
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(693, 353);
-            universalGrid1.TabIndex = 107;
-            universalGrid1.Grid.MouseClick += universalGrid1_CellClick;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
+            universalGrid1.MouseDown1 += universalGrid1_CellClick;
+            universalGrid1.SetData(new List<KullaniciDTO>(), this.Name);
             ComboBoxListFill.GetLookupAd(_cache.rolList, ref clbRol);
             ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbPersonel);
+            fcbMailAdres.SetDataSource(await _cache.mailAdresList);
         }
 
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
@@ -69,26 +75,18 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             set
             {
                 _kullanici = value;
-                _kullaniciId = _kullanici.Id;
                 Binding();
             }
         }
         private void Binding()
         {
-            ctbKullaniciAd.DataBindings.Clear();
-            ctbSifre.DataBindings.Clear();
-            ctbSifreTekrar.DataBindings.Clear();
-            clbPersonel.DataBindings.Clear();
-            clbRol.DataBindings.Clear();
-            ctbId.DataBindings.Clear();
-            ctbId.DataBindings.Add(nameof(ctbId.TextCustom),kullanici,$"{nameof(kullanici.Id)}",true,DataSourceUpdateMode.OnPropertyChanged);
-            ctbKullaniciAd.DataBindings.Add(nameof(ctbKullaniciAd.TextCustom), kullanici, $"{nameof(kullanici.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbSifre.DataBindings.Add(nameof(ctbSifre.TextCustom), kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbSifreTekrar.DataBindings.Add(nameof(ctbSifreTekrar.TextCustom), kullanici, $"{nameof(kullanici.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbPersonel.DataBindings.Add(nameof(clbPersonel.SelectedValue), kullanici.personel, $"{nameof(kullanici.personel.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbRol.DataBindings.Add(nameof(clbRol.SelectedValue), kullanici.rol, $"{nameof(kullanici.rol.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbId, kullanici, nameof(kullanici.Id));
+            BindHelper.BindData(ctbKullaniciAd, kullanici, nameof(kullanici.ad));
+            BindHelper.BindData(ctbSifre, kullanici, nameof(kullanici.sifre));
+            BindHelper.BindData(clbPersonel, kullanici.personel, nameof(kullanici.personel.Id));
+            BindHelper.BindData(clbRol, kullanici.rol, nameof(kullanici.rol.Id));
+            BindHelper.BindData(fcbMailAdres, kullanici.mailAdres, nameof(kullanici.mailAdres.Id));
         }
-        private int? _kullaniciId { get; set; }
         private void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
         {
             if (!ValidateInputs()) return;

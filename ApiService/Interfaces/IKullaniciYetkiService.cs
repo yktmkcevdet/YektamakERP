@@ -22,5 +22,7 @@ namespace ApiService.Interfaces
         public Task<string> SaveYetki(Yetki yetki);
         public Task<string> SaveAlanYetki(AlanYetki alanYetki);
         public Task<string> GetAlanYetki(AlanYetki alanYetki);
+        public Task<string> SaveMailAdres(MailAdres mail);
+        public Task<string> GetMailAdres(MailAdres mail);
     }
 }

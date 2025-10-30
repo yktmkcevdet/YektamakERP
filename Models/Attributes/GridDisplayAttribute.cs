@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models.Attributes
+﻿namespace Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class GridDisplayAttribute : Attribute
@@ -17,5 +11,8 @@ namespace Models.Attributes
         public string ListVisibleColumnName { get; set; }
         public string ListName { get; set; }
         public bool readOnly { get; set; }=true;
+        public bool Sortable { get; set; } = true;
+        public string Format { get; set; }
+        public string Permission { get; set; }
     }
 }

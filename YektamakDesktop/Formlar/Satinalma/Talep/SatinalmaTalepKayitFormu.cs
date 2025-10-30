@@ -166,16 +166,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             var excelBytes = Convert.FromBase64String(excelForm.excel);
             return new XSSFWorkbook(new MemoryStream(excelBytes));
         }
-        private void FillExcelData(ISheet sheet, IEnumerable<SatinalmaTalepDetayDTO> selectedRows)
+        private void FillExcelData(IWorkbook workbook,ISheet sheet, IEnumerable<SatinalmaTalepDetayDTO> selectedRows)
         {
             // Header bilgilerini doldur
-            SetHeaderData(sheet, selectedRows.First());
+            SetHeaderData(workbook, sheet, selectedRows.First());
 
             // Satır verilerini doldur
             int currentRow = 10;
             foreach (var row in selectedRows)
             {
-                SetRowData(sheet, row, currentRow);
+                SetRowData(workbook,sheet, row, currentRow);
                 currentRow++;
             }
             if (currentRow < 151)
@@ -190,33 +190,36 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
             }
         }
-        private void SetHeaderData(ISheet sheet, SatinalmaTalepDetayDTO firstRow)
+        private void SetHeaderData(IWorkbook workbook,ISheet sheet, SatinalmaTalepDetayDTO firstRow)
         {
             // Talep Eden ve Talep Tarihi
-            SetCellValue(sheet, 5, 4, clbKullaniciId.SelectedDisplayValue.ToString());
-            SetCellValue(sheet, 6, 4, fcbTalepNeden.SelectedDisplayValue.ToString());
-            SetCellValue(sheet, 5, 16, DateTime.Parse(ctbTalepTarihi.TextCustom.ToString()).ToShortDateString());
-            SetCellValue(sheet, 6, 16, clbProjeKodu.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 5, 4, clbKullaniciId.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 6, 4, fcbTalepNeden.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 5, 16, DateTime.Parse(ctbTalepTarihi.TextCustom.ToString()).ToShortDateString());
+            SetCellValue(workbook, sheet, 6, 16, clbProjeKodu.SelectedDisplayValue.ToString());
         }
 
-        private void SetRowData(ISheet sheet, SatinalmaTalepDetayDTO row, int rowIndex)
+        private void SetRowData(IWorkbook workbook, ISheet sheet, SatinalmaTalepDetayDTO row, int rowIndex)
         {
-            SetCellValue(sheet, rowIndex, 1, row.projeStokKartstokKartkod?.ToString());
-            SetCellValue(sheet, rowIndex, 2, row.projeStokKartstokKartad?.ToString());
-            SetCellValue(sheet, rowIndex, 6, row.miktar?.ToString("N0"));
-            SetCellValue(sheet, rowIndex, 8, row.projeStokKartstokKartmalzemeStandart?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 1, row.projeStokKartstokKartkod?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 2, row.projeStokKartstokKartad?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 6, row.miktar.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 8, row.projeStokKartstokKartmalzemeStandart?.ToString());
             //SetCellValue(sheet, rowIndex, 10, row.Cells[SatinalmaTalepDetayDTOHeader.ProjeStokKartAdet].FormattedValue?.ToString());
-            SetCellValue(sheet, rowIndex, 13, row.projeStokKartstokKartboyut?.ToString());
-            SetCellValue(sheet, rowIndex, 15, row.projeStokKartstokKartuzunluk?.ToString());
-            SetCellValue(sheet, rowIndex, 17, row.projeStokKartstokKartagirlik?.ToString("N1"));
-            SetCellValue(sheet, rowIndex, 19, row.agirlik?.ToString("N1"));
-            SetCellValue(sheet, rowIndex, 21, row.projeStokKartstokKartaciklama?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 13, row.projeStokKartstokKartboyut?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 15, row.projeStokKartstokKartuzunluk?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 17, row.projeStokKartstokKartagirlik?.ToString("N1"));
+            SetCellValue(workbook, sheet, rowIndex, 19, row.agirlik?.ToString("N1"));
+            SetCellValue(workbook, sheet, rowIndex, 21, row.projeStokKartstokKartaciklama?.ToString());
 
         }
-        private void SetCellValue(ISheet sheet, int rowIndex, int cellIndex, string value)
+        private void SetCellValue(IWorkbook workbook, ISheet sheet, int rowIndex, int cellIndex, string value)
         {
             var row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             var cell = row.GetCell(cellIndex) ?? row.CreateCell(cellIndex);
+            ICellStyle cellStyle = cell.CellStyle;
+            IDataFormat format = workbook.CreateDataFormat();
+            cell.CellStyle.DataFormat = format.GetFormat("0.#");
             cell.SetCellValue(value ?? string.Empty);
         }
         private async Task HandleSaveResult(string jsonResult)
@@ -232,7 +235,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             var sheet = workbook.GetSheetAt(0);
 
-            FillExcelData(sheet, selectedRows);
+            FillExcelData(workbook,sheet, selectedRows);
 
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -255,7 +258,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 var attachment = new MailAttachament { fileName = "malzeme_talep_formu.xlsx", fileData = excelBytes };
                 mail.attachmentData.Add(attachment);
-                MailHelper.SendSystemMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                MailHelper.SendUserMail(_cache.kullanici,mail.To, mail.Subject, mail.Body, mail.attachmentData);
             }
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)

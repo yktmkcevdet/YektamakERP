@@ -43,6 +43,11 @@ namespace YektamakDesktop.CustomControls
         {
             InitializeComponent();
         }
+        public event DataGridViewCellEventHandler CellValueChanged
+        {
+            add { dataGridView1.CellValueChanged += value; }
+            remove { dataGridView1.CellValueChanged -= value; }
+        }
         private bool headerCheckBoxState = false;
         public DataGridView Grid => dataGridView1;
         private List<object> list1;

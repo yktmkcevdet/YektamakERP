@@ -14,5 +14,7 @@ namespace Models
         private Rol _rol;
         public Rol rol { get { if (_rol == null) _rol = new Rol(); return _rol; } set { _rol = value; } }
         public bool? isSifreDegisti { get; set; }
+        private MailAdres _mailAdres;
+        public MailAdres mailAdres { get { if (_mailAdres == null) _mailAdres = new MailAdres(); return _mailAdres; } set { _mailAdres = value; } }
     }
 }

@@ -8,7 +8,7 @@
         "DebugTarget": "IIS Express"
       },
       {
-        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
+        "Path": "YektamakWeb\\YektamakWeb.csproj",
         "Action": "Start"
       }
     ]

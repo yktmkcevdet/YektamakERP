@@ -63,7 +63,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 var jsonResult = await _satinalmaTeklifService.GetSatinalmaTeklif(new SatinalmaTeklifBaslik());
                 List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
-                foreach (var item in satinalmaTeklifBasliks.Where(x => (Double.TryParse(x.teklifTutar?.ToString(), out Double result1) ? x.teklifTutar : 0) == 0))
+                foreach (var item in satinalmaTeklifBasliks)
                 {
                     satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
                 }

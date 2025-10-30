@@ -68,6 +68,9 @@
     <Compile Update="Formlar\Genel\ExcelTanimlamaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\MailAyarlari.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Genel\PersonelKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -55,13 +55,13 @@ namespace YektamakDesktop.Helpers
                 throw new Exception("Mail gönderim hatası: " + ex.Message);
             }
         }
-        public static void SendUserMail(Personel personel, string to, string subject, string body, List<MailAttachament> attachmentData = null)
+        public static void SendUserMail(Kullanici kullanici, string to, string subject, string body, List<MailAttachament> attachmentData = null)
         {
             try
             {
                 MailMessage mail = new MailMessage();
-                string senderEmail = personel.mail;
-                string senderPassword = personel.mailPassword;
+                string senderEmail = kullanici.mailAdres.adres;
+                string senderPassword = kullanici.mailAdres.sifre;
                 mail.From = new MailAddress(senderEmail);
                 mail.To.Add(to);
                 mail.Subject = subject;
@@ -82,11 +82,11 @@ namespace YektamakDesktop.Helpers
                     }
                 }
 
-                SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com")
+                SmtpClient smtpClient = new SmtpClient(kullanici.mailAdres.smtpServer)
                 {
                     Credentials = new NetworkCredential(senderEmail, senderPassword),
-                    EnableSsl = true,
-                    Port = 587
+                    EnableSsl = kullanici.mailAdres.SSL,
+                    Port = kullanici.mailAdres.port
                 };
 
                 smtpClient.Send(mail);

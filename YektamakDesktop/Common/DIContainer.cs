@@ -51,6 +51,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<KullaniciKayitFormu>();
             services.AddTransient<LogoEntegrasyon>();
+            services.AddTransient<MailAyarlari>();
             services.AddTransient<MailGonder>();
             services.AddTransient<MainWindow>();
             services.AddTransient<MalzemeAltGrupTanimFormu>();

@@ -1,10 +1,5 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utilities.Interfaces
 {
@@ -24,5 +19,6 @@ namespace Utilities.Interfaces
         /// <returns></returns>
         public bool IsComplexType(Type type);
         public T ToEntity<T>(object dto, object entity = null, string classNamePrefix = "") where T : class, new();
+        public T ToDTO<T>(object entity, string parentName = "", object dto = null) where T : IEntity, new();
     }
 }

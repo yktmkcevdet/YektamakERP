@@ -42,6 +42,7 @@ namespace Utilities.Interfaces
         public List<Boyut> boyutList { get; set; }
         public Task<List<DosyalamaYapisi>> dosyalamaYapisiList { get; }
         public List<ExcelGrupParametre> excelGrupParametreList { get; }
+        public Task<List<MailAdres>> mailAdresList { get; }
         void Reset();
     }
 }

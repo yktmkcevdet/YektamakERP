@@ -246,5 +246,36 @@ namespace Utilities.Implementations
 
             return (T)entity;
         }
+        public T ToDTO<T>(object entity, string parentName = "", object dto = null) where T : IEntity, new()
+        {
+            if (dto == null)
+            {
+                dto = new T();
+            }
+            IEnumerable<PropertyInfo> members = entity.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var member in members)
+            {
+                Type memberType = GetMemberType(member);
+                object value = GetValue(member, entity);
+                if (memberType.IsClass && memberType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(memberType))
+                {
+                    MethodInfo methodInfo = typeof(IConvertHelper).GetMethod(nameof(IConvertHelper.ToDTO), BindingFlags.Public | BindingFlags.Instance, null,
+                                                                                new Type[] { typeof(object), typeof(string), typeof(object) },
+                                                                                null).MakeGenericMethod(dto.GetType());
+                    object newEntity = Activator.CreateInstance(entity.GetType());
+                    string name = newEntity.GetType().GetProperties().FirstOrDefault(p => p.Name == member.Name).Name;
+                    name = $"{parentName}{name}";
+                    IConvertHelper convertHelper = new ConvertHelper();
+                    methodInfo.Invoke(convertHelper, new object[] { value, name, dto });
+                }
+                else
+                {
+                    var propertyName = string.IsNullOrEmpty(parentName) ? member.Name : $"{parentName}{member.Name}";
+                    PropertyInfo propertyInfo = dto.GetType().GetProperty(propertyName);
+                    if (propertyInfo != null && propertyInfo.SetMethod != null) propertyInfo.SetValue(dto, value);
+                }
+            }
+            return (T)dto;
+        }
     }
 }
