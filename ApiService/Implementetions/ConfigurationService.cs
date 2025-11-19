@@ -2,7 +2,7 @@
 using Models;
 using Models.DTO;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class ConfigurationService : IConfigurationService
     {

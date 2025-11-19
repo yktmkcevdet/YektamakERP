@@ -33,6 +33,7 @@
             fcbProjeKod = new YektamakDesktop.CustomControls.FilterableComboBox();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
+            ctbParcaKodu = new YektamakDesktop.CustomControls.CustomTextBox();
             SuspendLayout();
             // 
             // headerPanel1
@@ -53,7 +54,7 @@
             treeView1.CheckBoxes = true;
             treeView1.Location = new System.Drawing.Point(36, 83);
             treeView1.Name = "treeView1";
-            treeView1.Size = new System.Drawing.Size(429, 629);
+            treeView1.Size = new System.Drawing.Size(429, 600);
             treeView1.TabIndex = 1;
             treeView1.AfterCheck += treeView1_AfterCheck;
             // 
@@ -68,8 +69,8 @@
             fcbProjeKod.Margin = new System.Windows.Forms.Padding(1);
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbProjeKod.PlaceholderText = "Seçiniz...";
-            fcbProjeKod.Size = new System.Drawing.Size(429, 29);
+            fcbProjeKod.PlaceholderText = "Proje Kodu ";
+            fcbProjeKod.Size = new System.Drawing.Size(167, 25);
             fcbProjeKod.TabIndex = 2;
             fcbProjeKod.ValueMember = "Id";
             fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
@@ -122,11 +123,37 @@
             roundedButton2.UseVisualStyleBackColor = true;
             roundedButton2.Click += roundedButton2_Click;
             // 
+            // ctbParcaKodu
+            // 
+            ctbParcaKodu.BackColor = System.Drawing.SystemColors.Window;
+            ctbParcaKodu.BorderColor = System.Drawing.Color.Silver;
+            ctbParcaKodu.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbParcaKodu.BorderSize = 1;
+            ctbParcaKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbParcaKodu.ForeColor = System.Drawing.Color.DimGray;
+            ctbParcaKodu.Location = new System.Drawing.Point(222, 48);
+            ctbParcaKodu.Margin = new System.Windows.Forms.Padding(1);
+            ctbParcaKodu.Multiline = false;
+            ctbParcaKodu.Name = "ctbParcaKodu";
+            ctbParcaKodu.Padding = new System.Windows.Forms.Padding(3);
+            ctbParcaKodu.PasswordChar = false;
+            ctbParcaKodu.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbParcaKodu.PlaceholderText = "Parça Kodu İle Ara";
+            ctbParcaKodu.ReadOnly = false;
+            ctbParcaKodu.SelectionStart = 0;
+            ctbParcaKodu.Size = new System.Drawing.Size(243, 25);
+            ctbParcaKodu.TabIndex = 5;
+            ctbParcaKodu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbParcaKodu.TextCustom = "";
+            ctbParcaKodu.UnderlinedStyle = false;
+            ctbParcaKodu.KeyDown += ctbParcaKodu_KeyDown;
+            // 
             // ProjeDosyaAgacStil
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1218, 775);
+            Controls.Add(ctbParcaKodu);
             Controls.Add(roundedButton2);
             Controls.Add(roundedButton1);
             Controls.Add(fcbProjeKod);
@@ -145,5 +172,6 @@
         private CustomControls.FilterableComboBox fcbProjeKod;
         private CustomControls.RoundedButton roundedButton1;
         private CustomControls.RoundedButton roundedButton2;
+        private CustomControls.CustomTextBox ctbParcaKodu;
     }
 }

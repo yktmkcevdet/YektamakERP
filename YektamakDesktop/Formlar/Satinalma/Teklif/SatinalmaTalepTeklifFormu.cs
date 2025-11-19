@@ -601,8 +601,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            string jsonResult = await _projeService.GetProjeStokKart(new ProjeStokKart { stokKart = { Id = satinalmaTalepDetayDTO.projeStokKartstokKartId }, proje = { Id = satinalmaTalepDetayDTO.projeId } });
-            ProjeStokKart projeStokKart = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult)[0];
+            ProjeStokKart projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart { stokKart = { Id = satinalmaTalepDetayDTO.projeStokKartstokKartId }, proje = { Id = satinalmaTalepDetayDTO.projeId } })).FirstOrDefault();
             StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
             stokKartKayitFormu.UpdateMode(projeStokKart);
             stokKartKayitFormu.ShowDialog();
@@ -614,16 +613,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             //ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(c => c.malzemeGrup.Id == filter.projeStokKartstokKartmalzemeGrupId).ToList(), ref clbMalzemeAltGrupId);
             universalGrid1.Filtrele(filter);
         }
-        private void cbxMalzemeGrupId_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbxMalzemeGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
             fccMalzemeAltGrupId.SetDataSource(satinalmaTalepDetayDTOs
                 .Where(s => s.projeStokKartstokKartmalzemeGrupId.ToString() == clbMalzemeGrupId.SelectedValue?.ToString() && !string.IsNullOrEmpty(s.projeStokKartstokKartmalzemeAltGrupId.ToString()))
                 .Select(s => new { Id = s.projeStokKartstokKartmalzemeAltGrupId, _cache.malzemeAltGrups.Where(m => m.Id == s.projeStokKartstokKartmalzemeAltGrupId).First().ad })
                 .DistinctBy(b => b.Id)
                 .ToList());
-            fcbBoyut.SetDataSource(_cache.stokKartList
-                .Where(s => s.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString())
-                .Select(s => s.boyutTanim)
+            fcbBoyut.SetDataSource((await _projeService.GetProjeStokKart(new ProjeStokKart ()))
+                .Where(s => s.stokKart.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString())
+                .Select(s => s.stokKart.boyutTanim)
                 .DistinctBy(b => b.Id)
                 .ToList());
             universalGrid1.Filtrele(filter);

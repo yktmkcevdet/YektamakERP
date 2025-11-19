@@ -1,5 +1,5 @@
 ﻿using ApiService.Constants;
-using ApiService.Implementetions;
+using ApiService.Implementations;
 using ApiService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 namespace ApiService
@@ -35,6 +35,8 @@ namespace ApiService
             services.AddSingleton<IVadeService, VadeService>();
             services.AddSingleton<IConfigurationService, ConfigurationService>();
             services.AddSingleton<ISatinalmaSiparisService, SatinalmaSiparisService>();
+            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<ICache, Cache>();
             return services;
         }
     }

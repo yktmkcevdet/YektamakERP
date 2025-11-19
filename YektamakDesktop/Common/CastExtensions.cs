@@ -16,5 +16,12 @@ namespace YektamakDesktop.Common
                 yield return ConvertHelper.ToDTO<TDto>(item);
             }
         }
+        public static IEnumerable<TEntity> CastToEntity<TEntity>(this IEnumerable<object> source) where TEntity : class,IEntity, new()
+        {
+            foreach (var item in source)
+            {
+                yield return ConvertHelper.ToEntity<TEntity>(item);
+            }
+        }
     }
 }

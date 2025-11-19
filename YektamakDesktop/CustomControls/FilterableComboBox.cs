@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
@@ -11,8 +13,116 @@ namespace YektamakDesktop.CustomControls
     public partial class FilterableComboBox : UserControl
     {
         [Browsable(false)]
-        public ComboBox ComboBox => comboBox1;
+        public ReadOnlyComboBox ComboBox => comboBox1;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool ReadOnly
+        {
+            get => comboBox1.ReadOnly;
+            set => comboBox1.ReadOnly = value;
+        }
+        public class ReadOnlyComboBox : ComboBox
+        {
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+            public bool ReadOnly { get; set; }
 
+            [DllImport("user32.dll", CharSet = CharSet.Auto)]
+            private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+
+            private const int WM_LBUTTONDOWN = 0x0201;
+            private const int WM_LBUTTONDBLCLK = 0x0203;
+            private const int WM_KEYDOWN = 0x0100;
+            private const int CB_SHOWDROPDOWN = 0x014F;
+
+            public ReadOnlyComboBox()
+            {
+                // Yazı girişini engelle
+                this.KeyPress += (s, e) =>
+                {
+                    if (ReadOnly)
+                        e.Handled = true;
+                };
+
+                // Seçim değişince DisplayMember’a göre göster
+                this.SelectedIndexChanged += (s, e) =>
+                {
+                    if (ReadOnly)
+                        UpdateDisplayText();
+                };
+            }
+
+            protected override void WndProc(ref Message m)
+            {
+                if (ReadOnly)
+                {
+                    // Fare, klavye ve dropdown açma işlemlerini iptal et
+                    if (m.Msg == WM_LBUTTONDOWN ||
+                        m.Msg == WM_LBUTTONDBLCLK ||
+                        m.Msg == WM_KEYDOWN ||
+                        m.Msg == CB_SHOWDROPDOWN)
+                        return;
+                }
+
+                base.WndProc(ref m);
+            }
+
+            protected override void OnCreateControl()
+            {
+                base.OnCreateControl();
+
+                if (this.DropDownStyle == ComboBoxStyle.DropDown)
+                {
+                    foreach (Control c in this.Controls)
+                    {
+                        if (c is TextBox tb)
+                        {
+                            tb.ReadOnly = ReadOnly;
+                            tb.Cursor = Cursors.Default;
+                        }
+                    }
+                }
+
+                if (ReadOnly)
+                    UpdateDisplayText();
+            }
+
+            protected override void OnEnabledChanged(EventArgs e)
+            {
+                base.OnEnabledChanged(e);
+
+                if (this.Enabled && this.ReadOnly)
+                {
+                    this.ForeColor = System.Drawing.SystemColors.WindowText;
+                    this.BackColor = System.Drawing.SystemColors.Window;
+                }
+            }
+
+            private void UpdateDisplayText()
+            {
+                if (SelectedItem == null)
+                    return;
+
+                // DisplayMember varsa onun değerini al
+                string displayText = "";
+
+                if (!string.IsNullOrEmpty(DisplayMember))
+                {
+                    PropertyInfo prop = SelectedItem.GetType().GetProperty(DisplayMember);
+                    if (prop != null)
+                    {
+                        var value = prop.GetValue(SelectedItem);
+                        displayText = value?.ToString() ?? "";
+                    }
+                }
+                else
+                {
+                    // yoksa varsayılan ToString()
+                    displayText = SelectedItem.ToString();
+                }
+
+                // TextBox’a direkt yaz (kullanıcı yazamaz ama biz yazabiliriz)
+                this.Text = displayText;
+            }
+        }
         private List<object> allItems = new List<object>();
         private bool underlinedStyle = false;
         private bool suppressEvents = false;
@@ -158,6 +268,7 @@ namespace YektamakDesktop.CustomControls
             int inset = Math.Max(3, borderSize + 2);
             comboBox1.Bounds = new Rectangle(inset, inset, Math.Max(10, this.ClientSize.Width - inset * 2), Math.Max(10, this.ClientSize.Height - inset * 2));
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            comboBox1.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -184,7 +295,7 @@ namespace YektamakDesktop.CustomControls
                 g.DrawPath(penBorder, pathBorder);
             }
         }
-
+        
         private GraphicsPath GetFigurePath(Rectangle rect, float radius)
         {
             GraphicsPath path = new GraphicsPath();

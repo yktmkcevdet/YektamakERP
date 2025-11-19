@@ -34,6 +34,7 @@
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             teklifTalebiniSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             teklifTalebiniGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,9 +62,9 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifTalebiniSilToolStripMenuItem, teklifTalebiniGörüntüleToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifTalebiniSilToolStripMenuItem, teklifTalebiniGörüntüleToolStripMenuItem, toolStripMenuItem1 });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(201, 48);
+            contextMenuStrip1.Size = new System.Drawing.Size(201, 92);
             // 
             // teklifTalebiniSilToolStripMenuItem
             // 
@@ -78,6 +79,13 @@
             teklifTalebiniGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             teklifTalebiniGörüntüleToolStripMenuItem.Text = "Teklif Talebini Görüntüle";
             teklifTalebiniGörüntüleToolStripMenuItem.Click += teklifTalebiniGörüntüleToolStripMenuItem_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
+            toolStripMenuItem1.Text = "Teklifi Siparişe Dönüştür";
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // SatinalmaTeklifTaleplerFormu
             // 
@@ -102,5 +110,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem teklifTalebiniSilToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teklifTalebiniGörüntüleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            comboBox1 = new ReadOnlyComboBox();
             SuspendLayout();
             // 
             // comboBox1
@@ -37,7 +37,6 @@
             comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new System.Drawing.Point(3, 2);
-            comboBox1.Margin = new System.Windows.Forms.Padding(0);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new System.Drawing.Size(152, 21);
             comboBox1.TabIndex = 0;
@@ -58,6 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private ReadOnlyComboBox comboBox1;
     }
 }

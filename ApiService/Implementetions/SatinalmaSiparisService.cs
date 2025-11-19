@@ -1,7 +1,7 @@
 ﻿using ApiService.Interfaces;
 using Models;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class SatinalmaSiparisService : ISatinalmaSiparisService
     {

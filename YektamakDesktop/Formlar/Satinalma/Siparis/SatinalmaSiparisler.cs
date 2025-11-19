@@ -41,6 +41,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
             universalGrid1.TabIndex = 1;
             Controls.Add(universalGrid1);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
+            universalGrid1.SetData(new List<SatinalmaSiparisDTO>(), this.Name);
         }
 
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
@@ -59,13 +60,15 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         {
             string jsonData = await _satinalmaSiparisService.GetSatinalmaSiparisAsync(new SatinalmaSiparis());
             var data = _jsonConverter.DeserializeObject<List<SatinalmaSiparis>>(jsonData);
-            universalGrid1.SetData(data.CastToDTO<SatinalmaSiparisDTO>().ToList(), this.Name);
+            if (data == null)
+                data = new List<SatinalmaSiparis>();
+            await universalGrid1.SetData(data.CastToDTO<SatinalmaSiparisDTO>().ToList(), this.Name);
         }
 
         private void siparişiGörüntüleToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             var frm = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
-            frm.UpdateMode(ConvertHelper.ToEntity<SatinalmaSiparis>(satinalmaSiparis));
+            frm.UpdateMode(satinalmaSiparis);
             frm.ShowDialog();
         }
 

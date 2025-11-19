@@ -17,7 +17,7 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IKullaniciYetkiService _kullaniciYetkiService;
-        public MailAyarlari(ICache cache,IKullaniciYetkiService kullaniciYetkiService)
+        public MailAyarlari(ICache cache, IKullaniciYetkiService kullaniciYetkiService)
         {
             _cache = cache;
             _kullaniciYetkiService = kullaniciYetkiService;
@@ -77,7 +77,7 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                string jsonResult =await _kullaniciYetkiService.SaveMailAdres(mailAdres);
+                string jsonResult = await _kullaniciYetkiService.SaveMailAdres(mailAdres);
                 mailAdres = JsonConvert.DeserializeObject<List<MailAdres>>(jsonResult)[0];
                 universalGrid1.binding.Add(mailAdres);
             }
@@ -90,6 +90,15 @@ namespace YektamakDesktop.Formlar.Genel
             result = GlobalData.CheckField("*", ctbSmtpServer) && result;
             result = GlobalData.CheckField("*", ctbPort) && result;
             return result;
+        }
+
+        private async void mailTanımınıSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string jsonString = await _kullaniciYetkiService.DeleteMailAdres(mailAdres);
+            if(!jsonString.Contains("error",StringComparison.OrdinalIgnoreCase) || !String.IsNullOrEmpty(jsonString))
+            {
+                universalGrid1.binding.Remove(mailAdres);
+            }
         }
     }
 }

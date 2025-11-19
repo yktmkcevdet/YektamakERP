@@ -67,6 +67,8 @@ namespace Models
         
         public int? satisSiparisId { get; set; }
         public int? mirasProjeId { get; set; }
+        private List<ProjeDosya> _projeDosyaList;
+        public List<ProjeDosya> projeDosyaList { get { if (_projeDosyaList == null) { _projeDosyaList = new List<ProjeDosya>(); } return _projeDosyaList; } set { _projeDosyaList = value; } }
     }
     public record ProjeTip : IEntity
     {

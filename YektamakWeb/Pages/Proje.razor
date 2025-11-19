@@ -187,9 +187,8 @@ else
             projeStokKart.stokKart.stokGrup.Id = selectedStokGrupId;
             projeStokKart.stokKart.ad = parcaAdi;
             projeStokKart.stokKart.malzemeGrup.Id = selectedMalzemeGrupId;
-            string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-            filterStokKarts = stokKarts.ToList();
+            stokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+            filterStokKarts = stokKarts;
             foreach (var item in stokKarts)
             {
                 if (stokGrup.Count(id => id.Key == item.stokKart.stokGrup.Id) == 0)

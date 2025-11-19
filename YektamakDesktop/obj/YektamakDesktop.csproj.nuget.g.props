@@ -15,7 +15,8 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets\9.0.1\buildTransitive\net8.0\Microsoft.Extensions.Configuration.UserSecrets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets\9.0.1\buildTransitive\net8.0\Microsoft.Extensions.Configuration.UserSecrets.props')" />
-    <Import Project="$(NuGetPackageRoot)fastreport.opensource\2024.1.10\buildTransitive\FastReport.OpenSource.props" Condition="Exists('$(NuGetPackageRoot)fastreport.opensource\2024.1.10\buildTransitive\FastReport.OpenSource.props')" />
+    <Import Project="$(NuGetPackageRoot)sixlabors.imagesharp\3.1.12\build\SixLabors.ImageSharp.props" Condition="Exists('$(NuGetPackageRoot)sixlabors.imagesharp\3.1.12\build\SixLabors.ImageSharp.props')" />
+    <Import Project="$(NuGetPackageRoot)fastreport.opensource\2026.1.2\buildTransitive\FastReport.OpenSource.props" Condition="Exists('$(NuGetPackageRoot)fastreport.opensource\2026.1.2\buildTransitive\FastReport.OpenSource.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgVisiativ_SOLIDWORKS_Interop Condition=" '$(PkgVisiativ_SOLIDWORKS_Interop)' == '' ">C:\Users\yektamak-118\.nuget\packages\visiativ.solidworks.interop\33.0.0</PkgVisiativ_SOLIDWORKS_Interop>

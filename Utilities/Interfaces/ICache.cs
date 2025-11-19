@@ -12,7 +12,6 @@ namespace Utilities.Interfaces
         public List<AnaMenuDTO> anaMenuList { get; }
         public List<Menu> menuList { get; }
         public List<Yetki> yetkiList { get; }
-        public List<StokKart> stokKartList { get; }
         public List<StokGrup> stokGrups { get; }
         public List<MalzemeGrup> malzemeGrups { get; }
         public List<MalzemeAltGrup2> malzemeAltGrup2List { get; }

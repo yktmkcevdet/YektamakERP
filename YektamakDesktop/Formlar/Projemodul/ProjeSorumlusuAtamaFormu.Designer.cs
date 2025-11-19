@@ -65,6 +65,7 @@
             fcbProje.Name = "fcbProje";
             fcbProje.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbProje.PlaceholderText = "Seçiniz...";
+            fcbProje.ReadOnly = false;
             fcbProje.Size = new System.Drawing.Size(204, 25);
             fcbProje.TabIndex = 1;
             fcbProje.ValueMember = "Id";
@@ -81,6 +82,7 @@
             fcbPersonel.Name = "fcbPersonel";
             fcbPersonel.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbPersonel.PlaceholderText = "Seçiniz...";
+            fcbPersonel.ReadOnly = false;
             fcbPersonel.Size = new System.Drawing.Size(204, 25);
             fcbPersonel.TabIndex = 2;
             fcbPersonel.ValueMember = "Id";
@@ -126,6 +128,7 @@
             ctbId.BorderColor = System.Drawing.Color.Silver;
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbId.BorderSize = 1;
+            ctbId.Enabled = false;
             ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbId.ForeColor = System.Drawing.Color.Black;
             ctbId.Location = new System.Drawing.Point(135, 66);

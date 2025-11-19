@@ -85,7 +85,6 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\sc
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\scopedcss\bundle\YektamakWeb.styles.css
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\scopedcss\projectbundle\YektamakWeb.bundle.scp.css
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\yjb4c2l031-7ayc8kks76.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\zlse4fq0do-9ta1zhct73.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\tkzxc88onf-wciz6sb8mk.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\90q60tbl28-yxnxfvobon.gz
@@ -192,3 +191,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\co
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\ye4h0rkhnk-r9wphl9lzg.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\vt1htnqce4-zn766841ku.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\nzk9j5czc8-b1dkgqbala.gz
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Release\net9.0\compressed\yjb4c2l031-r7kfwwz29t.gz

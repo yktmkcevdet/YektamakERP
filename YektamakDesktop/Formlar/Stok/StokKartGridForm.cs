@@ -132,23 +132,10 @@ namespace YektamakDesktop.Formlar.Stok
         private async Task GridDoldur()
         {
             this.Enabled = false;
-            _cache.stokKartList.Clear();
             stokKarts.Clear();
-            string jsonResult = await _projeService.GetProjeStokKart(stokKartFilter);
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult); 
-                List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
-                stokKartDTOs = stokKarts.CastToDTO<ProjeStokKartDTO>().ToList();
-                foreach(var dto in stokKarts)
-                {
-                    _cache.stokKartList.Add(dto.stokKart);
-                }
-            }
-            else
-            {
-                stokKartDTOs = null;
-            }
+            stokKarts = await _projeService.GetProjeStokKart(stokKartFilter); 
+            List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
+            stokKartDTOs = stokKarts.CastToDTO<ProjeStokKartDTO>().ToList();
             await universalGrid1.SetData(stokKartDTOs, this.Name, true);
             this.Enabled = true;
         }
@@ -243,13 +230,10 @@ namespace YektamakDesktop.Formlar.Stok
             if (index == -1)
             {
                 liste.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
-                _cache.stokKartList.Add(((ProjeStokKart)e).stokKart);
             }
             else
             {
                 liste[index] = ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
-                var cacheIndex = _cache.stokKartList.FindIndex(s => s.Id == ((ProjeStokKart)e).stokKart.Id);
-                _cache.stokKartList[cacheIndex] = ((ProjeStokKart)e).stokKart;
             }
         }
 

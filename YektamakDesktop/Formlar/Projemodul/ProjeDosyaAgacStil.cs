@@ -6,10 +6,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.DirectoryServices;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 
@@ -21,14 +25,18 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
         private readonly IConfigurationService _configurationService;
-        public ProjeDosyaAgacStil(ICache cache, IProjeService projeService, IStokService stokService, IConfigurationService configurationService)
+        private readonly IFileService _fileService;
+        private readonly IFileHelper _fileHelper;
+        public ProjeDosyaAgacStil(ICache cache, IProjeService projeService, IStokService stokService, IConfigurationService configurationService, IFileService fileService, IFileHelper fileHelper)
         {
             _cache = cache;
             _projeService = projeService;
             _stokService = stokService;
             InitializeComponent();
-            fcbProjeKod.SetDataSource(_cache.projes);
+            fcbProjeKod.SetDataSource(_cache.projes.GroupBy(p => p.Id).Select(p => p.First()).ToList());
             _configurationService = configurationService;
+            _fileService = fileService;
+            _fileHelper = fileHelper;
         }
 
         private async void fcbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,11 +45,9 @@ namespace YektamakDesktop.Formlar.Projemodul
             TreeNode rootNode = new TreeNode(fcbProjeKod.SelectedDisplayValue.ToString());
             rootNode.Tag = new ProjeBom { projeStokKart = { no = "0" } };
             treeView1.Nodes.Add(rootNode);
-            var jsonResult = await _projeService.GetProjeBomList(
+            var projeBomList = await _projeService.GetProjeBomList(
                 new ProjeBom { proje = { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } }
             );
-
-            var projeBomList = JsonConvert.DeserializeObject<List<ProjeBom>>(jsonResult);
             var hamList = projeBomList.Select(s => s.projeStokKart.no).ToList();
             var list = projeBomList.Where(s => s.projeStokKart.no != null).OrderBy(x => x.projeStokKart.no?.Split('.').Select(int.Parse),
                 Comparer<IEnumerable<int>>.Create((a, b) =>
@@ -108,7 +114,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             foreach (TreeNode node in nodes)
             {
-                if (node.Checked)
+                if (node.Checked && ((ProjeBom)node.Tag).Id != null)
                     result.Add(node.Tag);
 
                 // alt node’ları da tara
@@ -117,9 +123,10 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             return result;
         }
-        private void ExportToPdf(List<object> stokKartlar, string filePath)
+        private async Task<string> ExportToPdf(List<object> stokKartlar, string filePath)
         {
             filePath = Path.Combine(filePath, $"{fcbProjeKod.SelectedDisplayValue}.pdf");
+
             using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
             using (var doc = new iTextSharp.text.Document())
             using (var copy = new iTextSharp.text.pdf.PdfCopy(doc, fs))
@@ -128,35 +135,37 @@ namespace YektamakDesktop.Formlar.Projemodul
 
                 foreach (var item in stokKartlar)
                 {
-                    if (item == null) continue;
-                    var jsonResult = _stokService.GetStokKartPdf(((ProjeBom)item).projeStokKart.stokKart);
-                    if (jsonResult == "") continue;
-                    StokKart pdfStokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult).FirstOrDefault();
-                    var pdfBytes = pdfStokKart.dosyaList
-                                      .FirstOrDefault(x => x.dosyaTip.Id == 1)
-                                      ?.dosya;
+                    var fileName = ((ProjeBom)item).projeStokKart.stokKart.dosyaList
+                        .FirstOrDefault(x => x.dosyaTip.Id == 1)?.dosyaFullPath;
 
-                    if (pdfBytes != null)
+                    if (string.IsNullOrEmpty(fileName)) continue;
+
+                    var pdfBytes = await _fileService.GetFile(fileName);
+                    if (pdfBytes == null) continue;
+
+                    using (var reader = new iTextSharp.text.pdf.PdfReader(_fileHelper.Decompress(pdfBytes)))
                     {
-                        using (var reader = new iTextSharp.text.pdf.PdfReader(pdfBytes))
-                        {
-                            copy.AddDocument(reader); // PDF'i ana dokümana ekle
-                        }
+                        copy.AddDocument(reader);
                     }
                 }
 
                 doc.Close();
             }
+
+            return filePath;
         }
 
-        private void roundedButton1_Click(object sender, EventArgs e)
+        private async void roundedButton1_Click(object sender, EventArgs e)
         {
             var selectedStokKartlar = GetCheckedNodes(treeView1.Nodes);
             OpenFolderDialog openFolderDialog = new OpenFolderDialog();
             if (openFolderDialog.ShowDialog() == true)
             {
+                this.Enabled = false;
                 string selectedPath = openFolderDialog.FolderName;
-                ExportToPdf(selectedStokKartlar, selectedPath);
+                var pdfPath = await ExportToPdf(selectedStokKartlar, selectedPath);
+                Process.Start(new ProcessStartInfo(pdfPath) { UseShellExecute = true });
+                this.Enabled = true;
             }
             else
             {
@@ -171,10 +180,11 @@ namespace YektamakDesktop.Formlar.Projemodul
         }
         private async Task CreateOrderFile()
         {
+            this.Enabled = false;
             string destinationPath = string.Empty;
             OpenFolderDialog openFileDialog = new OpenFolderDialog();
-            
-            if (openFileDialog.ShowDialog()==true)
+
+            if (openFileDialog.ShowDialog() == true)
             {
                 destinationPath = openFileDialog.FolderName;
             }
@@ -184,11 +194,12 @@ namespace YektamakDesktop.Formlar.Projemodul
                 return;
             }
             var dosyalamaYapisiList = await _cache.dosyalamaYapisiList;
-            var selectedRows = GetCheckedNodes(treeView1.Nodes); 
+            var selectedRows = GetCheckedNodes(treeView1.Nodes);
             foreach (var row in selectedRows)
             {
-                StokKart stokKart = new StokKart { Id = ((ProjeBom)row).projeStokKart.Id };
+                StokKart stokKart = new StokKart { Id = ((ProjeBom)row).projeStokKart.stokKart.Id };
                 string jsonResult = _stokService.GetStokKartPdf(stokKart);
+                if (jsonResult == "") continue;
                 stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
                 foreach (var skd in stokKart.dosyaList)
                 {
@@ -200,18 +211,19 @@ namespace YektamakDesktop.Formlar.Projemodul
                             )
                         {
                             if (dosyalamaYapisi.pdf && skd.dosyaTip.Id == 1)
-                                SaveMaterialFile(skd, Path.Combine(destinationPath,dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                SaveMaterialFile(skd, Path.Combine(destinationPath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                             if (dosyalamaYapisi.dxf && skd.dosyaTip.Id == 2)
-                                SaveMaterialFile(skd, Path.Combine(destinationPath,dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                SaveMaterialFile(skd, Path.Combine(destinationPath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                             if (dosyalamaYapisi.step && skd.dosyaTip.Id == 3)
-                                SaveMaterialFile(skd, Path.Combine(destinationPath,dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                SaveMaterialFile(skd, Path.Combine(destinationPath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                         }
                     }
                 }
-                
+
             }
+            this.Enabled = true;
         }
-        private void SaveMaterialFile(StokKartDosya skd, string path)
+        private async void SaveMaterialFile(StokKartDosya skd, string path)
         {
             string filePath = Path.Combine(path, $"{skd.dosyaAd}.{skd.dosyaUzanti}");
             string directoryPath = Path.GetDirectoryName(filePath);
@@ -220,7 +232,76 @@ namespace YektamakDesktop.Formlar.Projemodul
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            File.WriteAllBytes(filePath, skd.dosya);
+            byte[] dosya = await _fileService.GetFile(skd.dosyaFullPath);
+            File.WriteAllBytes(filePath, _fileHelper.Decompress(dosya));
         }
+
+        private void ctbParcaKodu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string searchText = ctbParcaKodu.TextCustom.Trim();
+                if (string.IsNullOrEmpty(searchText))
+                    return;
+
+                // Önceki sonuçları temizle
+                searchResults.Clear();
+                currentMatchIndex = -1;
+
+                // Tüm node’larda arama yap
+                SearchTreeNodes(treeView1.Nodes, searchText);
+
+                if (searchResults.Count > 0)
+                {
+                    currentMatchIndex = 0;
+                    SelectNode(searchResults[currentMatchIndex]);
+                }
+                else
+                {
+                    MessageBox.Show("Eşleşme bulunamadı.");
+                }
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                if (searchResults.Count == 0)
+                {
+                    //MessageBox.Show("Önce bir arama yapın.");
+                    return;
+                }
+                // Sonraki eşleşmeye git
+                currentMatchIndex = (currentMatchIndex + 1) % searchResults.Count;
+                SelectNode(searchResults[currentMatchIndex]);
+            }
+        }
+        List<TreeNode> searchResults = new List<TreeNode>();
+        int currentMatchIndex = -1;
+        private void SearchTreeNodes(TreeNodeCollection nodes, string searchText)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    searchResults.Add(node);
+                }
+
+                // Alt düğümler varsa recursive devam et
+                if (node.Nodes.Count > 0)
+                {
+                    SearchTreeNodes(node.Nodes, searchText);
+                }
+            }
+        }
+        private void SelectNode(TreeNode node)
+        {
+            treeView1.SelectedNode = node;
+            node.EnsureVisible(); // Görünür hale getir
+            node.BackColor = Color.Yellow; // İsteğe bağlı vurgulama
+
+            // Öncekilerin rengini sıfırlamak istersen:
+            foreach (TreeNode n in searchResults)
+                if (n != node)
+                    n.BackColor = Color.White;
+        }
+
     }
 }

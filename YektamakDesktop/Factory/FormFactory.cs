@@ -38,7 +38,6 @@ namespace YektamakDesktop
             SetupFormDefaults(form);
             return form;
         }
-
         private static void SetupFormDefaults(Form form)
         {
             form.StartPosition = FormStartPosition.CenterScreen;

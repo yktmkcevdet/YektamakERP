@@ -12,7 +12,7 @@ namespace Utilities.Implementations
         /// <param name="receiverEmailAdress"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
-        public void SendMail(string receiverEmailAdress, string subject, string body)
+        public void SendSystemMail(string receiverEmailAdress, string subject, string body)
         {
             // E-posta gönderenin bilgileri
             string senderEmail = "noreply@yektamak.com.tr";

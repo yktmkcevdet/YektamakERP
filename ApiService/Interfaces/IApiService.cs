@@ -11,6 +11,7 @@
         /// <param name="apiAdres"></param>
         /// <returns></returns>
         public Task<string> PostAsync<T>(T entity, string apiAdres) where T : class;
+        public Task<string> PostAsync(MultipartFormDataContent content, string apiAdres);
         /// <summary>
         /// Model nesnesini json formatına çevirip post eder ve sonucu json string olarak döner.
         /// Senkron olarak çalışır.
@@ -26,6 +27,7 @@
         /// <param name="apiAdres"></param>
         /// <returns></returns>
         public Task<string> GetAsync(string apiAdres);
+        public Task<byte[]> GetAsyncByte(string apiAdres);
         /// <summary>
         /// Get işlemi yapar ve sonucu json string olarak döner.
         /// </summary>

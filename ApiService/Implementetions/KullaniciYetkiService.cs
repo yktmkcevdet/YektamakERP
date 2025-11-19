@@ -2,7 +2,7 @@
 using Models;
 using Models.DTO;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class KullaniciYetkiService : IKullaniciYetkiService
     {
@@ -103,6 +103,10 @@ namespace ApiService.Implementetions
         public async Task<string> GetMailAdres(MailAdres mail)
         {
             return await _apiService.PostAsync(mail, "GetMailAdres");
+        }
+        public async Task<string> DeleteMailAdres(MailAdres mail)
+        {
+            return await _apiService.PostAsync(mail, "DeleteMailAdres");
         }
     }
 }

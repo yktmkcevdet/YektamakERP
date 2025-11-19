@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text.RegularExpressions;
@@ -25,8 +26,13 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
         private readonly IJsonConverter _jsonConverter;
-        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IJsonConverter jsonConverter)
+        private readonly IFileHelper _fileHelper;
+        private readonly IFileService _fileService;
+
+        public ExceldenVeriAlmaFormu(ICache cache,IProjeService projeService,IStokService stokService, IJsonConverter jsonConverter, IFileHelper fileHelper, IFileService fileService)
         {
+            _fileService = fileService;
+            _fileHelper = fileHelper;
             _cache = cache;
             _projeService = projeService;
             _stokService = stokService;
@@ -119,7 +125,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             var stokKartList = new List<StokKart>();
             const int batchSize = 1; // Her seferinde * kayıt işle
             DateTime startTime = DateTime.Now;
-            _cache.stokKartList.Clear();
             logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates),@"\Logs\app.log");
             klasor = Path.GetDirectoryName(logDosyasi);
             if (!Directory.Exists(klasor))
@@ -306,14 +311,22 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (file == null) return null;
             var content = await ReadFileAsBinaryAsync(file);
             if (content == null) return null;
+            //var folder = Path.Combine("\\\\filesrv\\departmanlar\\07 SIRKET ICI DOSYA PAYLASIM\\", "Uploads");
+            //Directory.CreateDirectory(folder);
+            var filePath = Path.Combine(Guid.NewGuid() + Path.GetExtension(file));
+            //await File.WriteAllBytesAsync(filePath, _fileHelper.Compress(content));
+            _fileService.SaveFile(_fileHelper.Compress(content,filePath));
             return new StokKartDosya
             {
                 dosyaUzanti = Path.GetExtension(file).TrimStart('.'),
                 dosyaAd = Path.GetFileNameWithoutExtension(file),
-                dosya = content,
-                dosyaTip = { Id = dosyaTipId }
+                //dosya = Compress(content),
+                dosyaTip = { Id = dosyaTipId },
+                dosyaFullPath = filePath
             };
         }
+        
+
         private async Task<byte[]> ReadFileAsBinaryAsync(string filePath)
         {
             try
@@ -339,7 +352,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 }
                 else
                 {
-                    _cache.stokKartList.Add(JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult)[0].stokKart);
                     if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                     {
                         using (var sw = new StreamWriter(logDosyasi, append: true))

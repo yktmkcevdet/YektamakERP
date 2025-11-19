@@ -4,8 +4,8 @@ using System.Threading;
 using System.Windows.Forms;
 using YektamakDesktop.Common;
 using YektamakDesktop.Formlar;
+using YektamakDesktop.Formlar.Yetkilendirme;
 using YektamakDesktop.Helpers;
-using static YektamakDesktop.Formlar.Yetkilendirme.Menuler;
 
 namespace YektamakDesktop
 {

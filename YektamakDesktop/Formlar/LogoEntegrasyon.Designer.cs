@@ -34,6 +34,7 @@
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             kaydıAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ctbDefinition = new YektamakDesktop.CustomControls.CustomTextBox();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton1.BorderColor = System.Drawing.Color.Black;
             roundedButton1.BorderSize = 0;
@@ -72,11 +74,11 @@
             roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(31, 84);
+            roundedButton1.Location = new System.Drawing.Point(995, 667);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(150, 40);
             roundedButton1.TabIndex = 2;
-            roundedButton1.Text = "roundedButton1";
+            roundedButton1.Text = "LOGO'dan Kayıtları Getir";
             roundedButton1.TextColor = System.Drawing.Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click;
@@ -94,11 +96,37 @@
             kaydıAlToolStripMenuItem.Text = "Kaydı Al";
             kaydıAlToolStripMenuItem.Click += kaydıAlToolStripMenuItem_Click;
             // 
+            // ctbDefinition
+            // 
+            ctbDefinition.BackColor = System.Drawing.SystemColors.Window;
+            ctbDefinition.BorderColor = System.Drawing.Color.Silver;
+            ctbDefinition.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbDefinition.BorderSize = 1;
+            ctbDefinition.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbDefinition.ForeColor = System.Drawing.Color.DimGray;
+            ctbDefinition.Location = new System.Drawing.Point(31, 52);
+            ctbDefinition.Margin = new System.Windows.Forms.Padding(1);
+            ctbDefinition.Multiline = false;
+            ctbDefinition.Name = "ctbDefinition";
+            ctbDefinition.Padding = new System.Windows.Forms.Padding(3);
+            ctbDefinition.PasswordChar = false;
+            ctbDefinition.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbDefinition.PlaceholderText = "Firma Adı İle Ara";
+            ctbDefinition.ReadOnly = false;
+            ctbDefinition.SelectionStart = 0;
+            ctbDefinition.Size = new System.Drawing.Size(481, 25);
+            ctbDefinition.TabIndex = 3;
+            ctbDefinition.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbDefinition.TextCustom = "";
+            ctbDefinition.UnderlinedStyle = false;
+            ctbDefinition.KeyDown += ctbDefinition_KeyDown;
+            // 
             // LogoEntegrasyon
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1216, 719);
+            Controls.Add(ctbDefinition);
             Controls.Add(roundedButton1);
             Controls.Add(headerPanel1);
             Controls.Add(universalGrid1);
@@ -116,5 +144,6 @@
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kaydıAlToolStripMenuItem;
+        private CustomControls.CustomTextBox ctbDefinition;
     }
 }

@@ -1,9 +1,8 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿using ApiService.Interfaces;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using Models;
 using Models.DTO;
-using Utilities.Interfaces;
-using static System.Net.Mime.MediaTypeNames;
 using Font = Microsoft.Maui.Font;
 
 namespace YektamakMobil

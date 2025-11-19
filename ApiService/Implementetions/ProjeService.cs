@@ -1,7 +1,11 @@
-﻿using ApiService.Interfaces;
+﻿using ApiService.Common;
+using ApiService.Interfaces;
 using Models;
+using Models.DTO;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class ProjeService : IProjeService
     {
@@ -50,9 +54,18 @@ namespace ApiService.Implementetions
         {
             return _apiService.Get($"GetProjeTip");
         }
-        public async Task<string> GetProjeStokKart(ProjeStokKart projeStokKart)
+        public async Task<List<ProjeStokKart>> GetProjeStokKart(ProjeStokKart projeStokKart)
         {
-            return await _apiService.PostAsync(projeStokKart, $"GetProjeStokKart");
+            string jsonResult = await _apiService.PostAsync(projeStokKart, $"GetProjeStokKart");
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                return new List<ProjeStokKart>();
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
+            }
+            
         }
 
         public async Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart)
@@ -71,9 +84,17 @@ namespace ApiService.Implementetions
         {
             return _apiService.Post(proje, $"DeleteProje");
         }
-        public async Task<string> GetProjeBomList(ProjeBom projeBomList)
+        public async Task<List<ProjeBom>> GetProjeBomList(ProjeBom projeBomList)
         {
-            return await _apiService.PostAsync(projeBomList, $"GetProjeBomList");
+            string jsonResult = await _apiService.PostAsync(projeBomList, $"GetProjeBomList");
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                return new List<ProjeBom>();
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<List<ProjeBom>>(jsonResult);
+            }
         }
     }
 }

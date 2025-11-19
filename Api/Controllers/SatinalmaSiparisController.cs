@@ -19,7 +19,7 @@ namespace Api.Controllers
             return result;
         }
         [HttpPost, Route("api/SaveSatinalmaSiparis")]
-        public string SaveSatinalmaSiparis([FromBody] SatinalmaTeklifBaslik restData)
+        public string SaveSatinalmaSiparis([FromBody] SatinalmaSiparis restData)
         {
             string result = _dataAccesLayer.SaveObject(restData, "spSaveSatinalmaSiparis");
             return result;

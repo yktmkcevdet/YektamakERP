@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Text;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class ApiServiceClient : IApiService
     {
@@ -80,6 +80,15 @@ namespace ApiService.Implementetions
 
             return await response.Content.ReadAsStringAsync();
         }
+        public async Task<byte[]> GetAsyncByte(string apiAdres)
+        {
+            var response = await _httpClient.GetAsync($"/api/{apiAdres}");
+            response.EnsureSuccessStatusCode();
+
+            
+            return await response.Content.ReadAsByteArrayAsync();
+            
+        }
         public string Get(string apiAdres)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/api/{apiAdres}");
@@ -94,6 +103,11 @@ namespace ApiService.Implementetions
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public Task<string> PostAsync(MultipartFormDataContent content, string apiAdres)
+        {
+            throw new NotImplementedException();
         }
     }
 }

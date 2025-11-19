@@ -2,6 +2,6 @@
 {
     public interface IMailHandler
     {
-        public void SendMail(string receiverEmailAdress, string subject, string body);
+        public void SendSystemMail(string receiverEmailAdress, string subject, string body);
     }
 }

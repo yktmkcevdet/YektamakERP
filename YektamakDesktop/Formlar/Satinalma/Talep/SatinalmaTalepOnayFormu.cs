@@ -71,41 +71,14 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
             set { _satinalmaTalepFilter = value; }
         }
-        private List<SatinalmaTalepDTO> _satinalmaTalepOnayList;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public List<SatinalmaTalepDTO> satinalmaTalepOnayList
-        {
-            get
-            {
-                if (_satinalmaTalepOnayList == null)
-                {
-                    _satinalmaTalepOnayList = new List<SatinalmaTalepDTO>();
-                }
-                return _satinalmaTalepOnayList;
-            }
-            set { _satinalmaTalepOnayList = value; }
-        }
+        
         private void SatinalmaTalepOnayFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveSettings();
         }
         private async void SatinalmaTalepOnayFormu_Load(object sender, EventArgs e)
         {
-            var jsonResult = await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep());
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                return;
-            }
-            else
-            {
-                List<SatinalmaTalep> satinalmaTalep = _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
-                foreach (var item in satinalmaTalep.Where(t => t.onayDurum == null))
-                {
-                    satinalmaTalepOnayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDTO>(item));
-                }
-            }
-
-            universalGrid1.SetData(satinalmaTalepOnayList, this.Name);
+            universalGrid1.SetData((await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).Where(P=>P.onayDurum==null).CastToDTO<SatinalmaTalepDTO>().ToList(), this.Name);
         }
 
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,7 +102,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 universalGrid1.Grid.ClearSelection();
                 universalGrid1.Grid.Rows[rowIndex].Selected = true;
-                satinalmaTalepOnayDTO = satinalmaTalepOnayList[rowIndex];
+                satinalmaTalepOnayDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
                 contextMenuStrip1.Show(universalGrid1, e.Location);
             }
         }

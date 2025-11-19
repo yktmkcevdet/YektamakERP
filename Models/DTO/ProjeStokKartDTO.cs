@@ -16,6 +16,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Stok Adı")] public string stokKartad { get; set; }
         [GridDisplay(Header = "Ağırlık")] public double? stokKartagirlik { get; set; }
         [GridDisplay(Header = "Ölçü Birim Id", Tip = "Liste", ListName = "olcuBirims", ListVisibleColumnName = "ad")] public int? stokKartolcuBirimId { get; set; }
+        [GridDisplay(Header = "Ölçü Birim")] public string stokKartolcuBirimad { get; set; }
         [GridDisplay(Header = "Malzeme Standart Id")] public int? stokKartmalzemeStandartId { get; set; }
         [GridDisplay(Header = "Boyut",Tip = "Liste", ListName = "malzemeStandarts", ListVisibleColumnName = "ad")] public string stokKartboyut { get; set; }
         [GridDisplay(Header = "Boy")] public double? stokKartboy { get; set; }
@@ -38,7 +39,8 @@ namespace Models.DTO
         [GridDisplay(Header = "Hammadde Malzeme Standart")] public int? stokKarthammaddemalzemeStandartad { get; set; }
         [GridDisplay(Header = "Hammadde Malzeme Grup")] public int? stokKarthammaddemalzemeGrupId { get; set; }
         [GridDisplay(Header = "Hammadde Malzeme Alt Grup")] public int? stokKarthammaddemalzemeAltGrupId { get; set; }
-        [GridDisplay(Header = "Hammadde Ölçü Birim")] public int? stokKarthammaddeolcuBirimId { get; set; }
+        [GridDisplay(Header = "Hammadde Ölçü Birim Id")] public int? stokKarthammaddeolcuBirimId { get; set; }
+        [GridDisplay(Header = "Hammadde Ölçü Birim")] public string stokKarthammaddeolcuBirimad { get; set; }
         [GridDisplay(Header = "isPdf")] public bool? stokKartisPdf { get; set; }
         [GridDisplay(Header = "isDxf")] public bool? stokKartisDxf { get; set; }
         [GridDisplay(Header = "isStep")] public bool? stokKartisStep { get; set; }

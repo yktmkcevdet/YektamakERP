@@ -1,11 +1,8 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
-using Models.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
@@ -30,40 +27,20 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void InitializeUniversalGrid()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(0, 164);
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1138, 424);
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
             universalGrid1.TabIndex = 13;
-            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
             Controls.Add(universalGrid1);
-            Binding();
-        }
-
-        private async void Binding()
-        {
-            await universalGrid1.SetData(satinalmaTalepDTOs, this.Name, false);
-        }
-
-        private List<SatinalmaTalepDetayDTO> _satinalmaTalepDTOs;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public List<SatinalmaTalepDetayDTO> satinalmaTalepDTOs
-        {
-            get
-            {
-                if (_satinalmaTalepDTOs == null)
-                {
-                    _satinalmaTalepDTOs = new List<SatinalmaTalepDetayDTO>();
-                }
-                return _satinalmaTalepDTOs;
-            }
-            set
-            {
-                Binding();
-                _satinalmaTalepDTOs = value;
-            }
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            universalGrid1.SetData(new List<SatinalmaTalepDTO>(), this.Name);
         }
 
         private SatinalmaTalep _satinalmaTalepFilter;
@@ -79,19 +56,23 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
             set { _satinalmaTalepFilter = value; }
         }
+        private List<SatinalmaTalepDTO> _satinalmaTalepDTO;
+        private List<SatinalmaTalepDTO> satinalmaTalepDTO
+        {
+            get
+            {
+                if (_satinalmaTalepDTO == null)
+                {
+                    _satinalmaTalepDTO = new List<SatinalmaTalepDTO>();
+                }
+                return _satinalmaTalepDTO;
+            }
+            set { _satinalmaTalepDTO = value; }
+        }
         private async void SatinalmaTalepler_Load(object sender, EventArgs e)
         {
-            string jsonResult = await _satinalmaService.GetSatinalmaTalep(satinalmaTalepFilter);
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                List<SatinalmaTalep> satinalmaTaleps = _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
-                List<SatinalmaTalepDTO> satinalmaTalepDTOs = new List<SatinalmaTalepDTO>();
-                foreach (var item in satinalmaTaleps)
-                {
-                    satinalmaTalepDTOs.Add(ConvertHelper.ToDTO<SatinalmaTalepDTO>(item));
-                }
-                universalGrid1.SetData(satinalmaTalepDTOs, this.Name, false);
-            }
+            satinalmaTalepDTO = (await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).CastToDTO<SatinalmaTalepDTO>().ToList();
+            universalGrid1.SetData(satinalmaTalepDTO, this.Name);
         }
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -100,7 +81,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
             MessageBox.Show(jsonResult);
         }
-        
+
 
         private void SatinalmaTalepler_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -130,7 +111,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
             if (satinalmaTalep.talepEdenKullanici.Id != _cache.kullanici.Id)
             {
-                MessageBox.Show("Bu talebi sadece talep eden silebilir.");
+                MessageBox.Show("Talep, sadece talebi oluşturan tarafından silebilir.");
                 return;
             }
             var onay = MessageBox.Show("Talebi silmek istediğinizden emin misiniz", "Talep Silme Onay", MessageBoxButtons.YesNo);
@@ -160,6 +141,75 @@ namespace YektamakDesktop.Formlar.Satinalma
                 universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
             }
             MessageBox.Show(jsonResult);
+        }
+
+        private void chkBenimTaleplerim_CheckStateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbTumTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterOnayDurum = "";
+            ApplyFilters();
+        }
+
+        private void rbReddedilenTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterOnayDurum = "false";
+            ApplyFilters();
+        }
+
+        private void rdOnayBekleyenTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterOnayDurum = "null";
+            ApplyFilters();
+        }
+
+        private void rbOnaylanmisTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterOnayDurum = "true";
+            ApplyFilters();
+        }
+        private int? filterTalep;
+        private string filterOnayDurum = "";
+        private void panel1_DataContextChanged(object sender, EventArgs e)
+        {
+            //universalGrid1.SetData(satinalmaTalepDTO.Where(), this.Name);
+            //if (rbActigimTalepler.Checked)
+            //{
+            //    universalGrid1.SetData(satinalmaTalepDTO.Where(s => s.onayKullaniciId == _cache.kullanici.Id).ToList(), this.Name);
+            //}
+            //else
+            //{
+            //    universalGrid1.SetData(satinalmaTalepDTO, this.Name);
+            //}
+        }
+
+        private void rbActigimTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterTalep = 1;
+            ApplyFilters();
+        }
+
+        private void rbOnaylayacagimTalepler_CheckedChanged(object sender, EventArgs e)
+        {
+            filterTalep = 2;
+            ApplyFilters();
+        }
+
+        private void rbTumKullanic_CheckedChanged(object sender, EventArgs e)
+        {
+            filterTalep = null;
+            ApplyFilters();
+        }
+        private void ApplyFilters()
+        {
+            bool? onayDurum=null;
+            if(!string.IsNullOrEmpty(filterOnayDurum) && !filterOnayDurum.Contains("null")) onayDurum=Convert.ToBoolean(filterOnayDurum);
+            universalGrid1.SetData(
+            satinalmaTalepDTO.Where(x => (filterTalep==1?x.talepEdenKullaniciId==_cache.kullanici.Id:(filterTalep==2?x.onayKullaniciId==_cache.kullanici.Id:true)) &&
+            x.onayDurum == (string.IsNullOrEmpty(filterOnayDurum) ? x.onayDurum : onayDurum)).ToList(),this.Name);
         }
     }
 }

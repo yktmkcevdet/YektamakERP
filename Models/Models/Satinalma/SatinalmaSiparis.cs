@@ -35,16 +35,14 @@
             set { _firma = value; }
         }
         public string aciklama { get; set; }
-        private SatinalmaTeklifBaslik _satinalmaTeklif;
-        public SatinalmaTeklifBaslik satinalmaTeklif { get { if (_satinalmaTeklif == null) { _satinalmaTeklif = new(); } return _satinalmaTeklif; } set { _satinalmaTeklif = value; } }
-        private List<SatinalmaSiparisDetay> _satinalmaSiparisDetayList;
-        public List<SatinalmaSiparisDetay> satinalmaSiparisDetayList { get { if (_satinalmaSiparisDetayList == null) { _satinalmaSiparisDetayList = new(); } return _satinalmaSiparisDetayList; } set { _satinalmaSiparisDetayList = value; } }
+        private List<SatinalmaSiparisDetay> _satinalmaSiparisDetay;
+        public List<SatinalmaSiparisDetay> satinalmaSiparisDetay { get { if (_satinalmaSiparisDetay == null) { _satinalmaSiparisDetay = new(); } return _satinalmaSiparisDetay; } set { _satinalmaSiparisDetay = value; } }
     }
     public record SatinalmaSiparisDetay : IEntity
     {
         public int? Id { get; set; }
         public int? satinalmaSiparisBaslikId { get; set; }
-        public int? stokKartId { get; set; }
+        public ProjeStokKart projeStokKart { get; set; }
         public double? miktar { get; set; }
         public double? birimFiyat { get; set; }
         private DovizCinsi _dovizCinsi;
@@ -52,5 +50,7 @@
         public string aciklama { get; set; }    
         private KDV _kdv;
         public KDV kdv { get { if (_kdv == null) { _kdv = new(); } return _kdv; } set { _kdv = value; } }
+        private SatinalmaTeklifDetay _satinalmaTeklifDetay;
+        public SatinalmaTeklifDetay satinalmaTeklifDetay { get { if (_satinalmaTeklifDetay == null) { _satinalmaTeklifDetay = new(); } return _satinalmaTeklifDetay; } set { _satinalmaTeklifDetay = value; } }
     }
 }

@@ -269,7 +269,7 @@ namespace YektamakDesktop.Formlar.Satis
             }
             else
             {
-                _mailHandler.SendMail("cevdet.oguz@yektamak.com.tr", "Maliyet Talebi", $"{satisTeklifTalep.musteri.ad} müşteri teklifi için maliyet talebi istenmektedir.");
+                _mailHandler.SendSystemMail("cevdet.oguz@yektamak.com.tr", "Maliyet Talebi", $"{satisTeklifTalep.musteri.ad} müşteri teklifi için maliyet talebi istenmektedir.");
                 MessageBox.Show("Maliyet talebi başarıyla iletilmiştir.");
             }
         }

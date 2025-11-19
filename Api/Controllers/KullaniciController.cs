@@ -129,5 +129,11 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject(restData, "spGetMailAdres");
             return result;
         }
+        [HttpPost, Route("api/DeleteMailAdres")]
+        public string DeleteMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spDeleteMailAdres");
+            return result;
+        }
     }
 }

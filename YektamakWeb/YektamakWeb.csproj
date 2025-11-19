@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
     <ProjectReference Include="..\ApiService\ApiService.csproj" />
   </ItemGroup>
 

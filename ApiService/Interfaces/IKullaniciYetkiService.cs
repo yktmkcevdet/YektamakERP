@@ -24,5 +24,6 @@ namespace ApiService.Interfaces
         public Task<string> GetAlanYetki(AlanYetki alanYetki);
         public Task<string> SaveMailAdres(MailAdres mail);
         public Task<string> GetMailAdres(MailAdres mail);
+        public Task<string> DeleteMailAdres(MailAdres mail);
     }
 }

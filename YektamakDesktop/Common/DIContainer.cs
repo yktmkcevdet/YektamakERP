@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Configuration;
 using System;
@@ -20,9 +21,6 @@ using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
 using YektamakDesktop.Formlar.Yetkilendirme;
 using YektamakDesktop.Helpers;
-using static YektamakDesktop.Formlar.Satinalma.SatinalmaTalepTeklifFormu;
-using static YektamakDesktop.Formlar.Stok.StokKartKayitFormu;
-using static YektamakDesktop.Formlar.Yetkilendirme.Menuler;
 
 namespace YektamakDesktop.Common
 {
@@ -36,10 +34,12 @@ namespace YektamakDesktop.Common
 
             // Servisleri ekleyin
             services.AddTransient(typeof(AnaVeriTanimlamaFormu<>));
+            services.AddTransient<AdresTanimlamaFormu>();
             services.AddTransient<AltMenuEkleForm>();
             services.AddTransient<DataControl>();
             services.AddTransient<DataControlFirma>();
             services.AddTransient<DataControlMenu>();
+            services.AddTransient<DataControlProjeDosya>();
             services.AddTransient<DataControlSatinalmaTalepDetay>();
             services.AddTransient<DataControlStokKartDosya>();
             services.AddTransient<DosyalamaParametreleri>();
@@ -47,6 +47,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ExcelGrupParametreForm>();
             services.AddTransient<ExcelTanimlamaFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
+            services.AddTransient<FirmaTanimFormu>();
             services.AddTransient<GlobalData>();
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<KullaniciKayitFormu>();

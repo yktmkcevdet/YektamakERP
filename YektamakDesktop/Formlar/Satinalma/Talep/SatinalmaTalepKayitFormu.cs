@@ -36,6 +36,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             _anaVeriService = anaVeriService;
             InitializeComponent();
             Initialize();
+            clbProjeKodu.ReadOnly = true;
+            ctbTalepTarihi.Enabled = false;
+            ctbTalepNo.Enabled = false;
+            clbKullaniciId.ReadOnly = true;
         }
         private async void Initialize()
         {
@@ -50,7 +54,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
             fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
-            clbProjeKodu.SetDataSource(_cache.projes.Where(p=>p.personel.Id==_cache.kullanici.personel.Id).ToList());
+            clbProjeKodu.SetDataSource(_cache.projes.Where(p => p.personel.Id == _cache.kullanici.personel.Id).ToList());
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             satinalmaTalep.talepTarihi = DateTime.Today;
@@ -86,12 +90,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             BindHelper.BindData(ctbTalepNo, satinalmaTalep, "satinalmaTalepNo");
             BindHelper.BindData(ctbAciklama, satinalmaTalep, "aciklama");
             BindHelper.BindData(ctbSetAdet, satinalmaTalep, "setAdet");
-            _cache.stokKartList.Clear();
             List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = new();
             foreach (var std in _satinalmaTalep.satinalmaTalepDetays)
             {
                 satinalmaTalepDetayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDetayDTO>(std));
-                _cache.stokKartList.Add(std.projeStokKart.stokKart);
             }
             await universalGrid1.SetData(satinalmaTalepDetayList, this.Name, true);
 
@@ -166,7 +168,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             var excelBytes = Convert.FromBase64String(excelForm.excel);
             return new XSSFWorkbook(new MemoryStream(excelBytes));
         }
-        private void FillExcelData(IWorkbook workbook,ISheet sheet, IEnumerable<SatinalmaTalepDetayDTO> selectedRows)
+        private void FillExcelData(IWorkbook workbook, ISheet sheet, IEnumerable<SatinalmaTalepDetayDTO> selectedRows)
         {
             // Header bilgilerini doldur
             SetHeaderData(workbook, sheet, selectedRows.First());
@@ -175,7 +177,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             int currentRow = 10;
             foreach (var row in selectedRows)
             {
-                SetRowData(workbook,sheet, row, currentRow);
+                SetRowData(workbook, sheet, row, currentRow);
                 currentRow++;
             }
             if (currentRow < 151)
@@ -190,7 +192,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
             }
         }
-        private void SetHeaderData(IWorkbook workbook,ISheet sheet, SatinalmaTalepDetayDTO firstRow)
+        private void SetHeaderData(IWorkbook workbook, ISheet sheet, SatinalmaTalepDetayDTO firstRow)
         {
             // Talep Eden ve Talep Tarihi
             SetCellValue(workbook, sheet, 5, 4, clbKullaniciId.SelectedDisplayValue.ToString());
@@ -235,7 +237,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             var sheet = workbook.GetSheetAt(0);
 
-            FillExcelData(workbook,sheet, selectedRows);
+            FillExcelData(workbook, sheet, selectedRows);
 
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -258,11 +260,16 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 var attachment = new MailAttachament { fileName = "malzeme_talep_formu.xlsx", fileData = excelBytes };
                 mail.attachmentData.Add(attachment);
-                MailHelper.SendUserMail(_cache.kullanici,mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                MailHelper.SendUserMail(_cache.kullanici, mail.To, mail.Subject, mail.Body, mail.attachmentData);
             }
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)
         {
+            var items = (List<Proje>)clbProjeKodu.DataSource;
+            items.Add(satinalmaTalepUpdate.proje);
+            clbProjeKodu.SetDataSource(items);
+            ctbSetAdet.Enabled = false;
+            fcbTalepNeden.ReadOnly = true;
             satinalmaTalep = satinalmaTalepUpdate;
         }
 
@@ -320,27 +327,20 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
-            ProjeStokKart projeStokKart =  satinalmaTalepDetay.projeStokKart;
-            string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            ProjeStokKart projeStokKart = satinalmaTalepDetay.projeStokKart;
+
+            List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+            if (projeStokKarts.Count > 1)
             {
-                MessageBox.Show("Stok kartı bulunamadı");
+                projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepDetayDTO.projeId).FirstOrDefault();
             }
             else
             {
-                List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                if (projeStokKarts.Count > 1)
-                {
-                    projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepDetayDTO.projeId).FirstOrDefault();
-                }
-                else
-                {
-                    projeStokKart = projeStokKarts[0];
-                }
-                StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
-                stokKartKayitFormu.UpdateMode(projeStokKart);
-                stokKartKayitFormu.ShowDialog();
+                projeStokKart = projeStokKarts[0];
             }
+            StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+            stokKartKayitFormu.UpdateMode(projeStokKart);
+            stokKartKayitFormu.ShowDialog();
         }
 
         private void seçilenKayıtlarıBirleştirToolStripMenuItem_Click(object sender, EventArgs e)

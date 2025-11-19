@@ -256,13 +256,14 @@
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mailTanımınıSilToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(161, 26);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
             // 
             // mailTanımınıSilToolStripMenuItem
             // 
             mailTanımınıSilToolStripMenuItem.Name = "mailTanımınıSilToolStripMenuItem";
-            mailTanımınıSilToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            mailTanımınıSilToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             mailTanımınıSilToolStripMenuItem.Text = "Mail Tanımını Sil";
+            mailTanımınıSilToolStripMenuItem.Click += mailTanımınıSilToolStripMenuItem_Click;
             // 
             // MailAyarlari
             // 

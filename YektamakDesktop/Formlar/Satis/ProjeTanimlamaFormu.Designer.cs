@@ -1,4 +1,9 @@
-﻿namespace YektamakDesktop.Formlar.Satis
+﻿using Models;
+using YektamakDesktop.Abstracts;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+
+namespace YektamakDesktop.Formlar.Satis
 {
     partial class ProjeTanimlamaFormu
     {
@@ -53,6 +58,7 @@
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             projeSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
+            panel1 = new System.Windows.Forms.Panel();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,7 +72,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(962, 22);
+            headerPanel1.Size = new System.Drawing.Size(859, 22);
             headerPanel1.TabIndex = 0;
             // 
             // ctbId
@@ -75,6 +81,7 @@
             ctbId.BorderColor = System.Drawing.Color.Silver;
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbId.BorderSize = 1;
+            ctbId.Enabled = false;
             ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbId.ForeColor = System.Drawing.Color.Black;
             ctbId.Location = new System.Drawing.Point(150, 37);
@@ -105,6 +112,7 @@
             fcbProjeTip.Name = "fcbProjeTip";
             fcbProjeTip.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbProjeTip.PlaceholderText = "Seçiniz...";
+            fcbProjeTip.ReadOnly = false;
             fcbProjeTip.Size = new System.Drawing.Size(163, 25);
             fcbProjeTip.TabIndex = 2;
             fcbProjeTip.ValueMember = "Id";
@@ -121,6 +129,7 @@
             fcbMarka.Name = "fcbMarka";
             fcbMarka.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbMarka.PlaceholderText = "Seçiniz...";
+            fcbMarka.ReadOnly = false;
             fcbMarka.Size = new System.Drawing.Size(163, 25);
             fcbMarka.TabIndex = 3;
             fcbMarka.ValueMember = "Id";
@@ -137,6 +146,7 @@
             fcbMarkaAltGrup.Name = "fcbMarkaAltGrup";
             fcbMarkaAltGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbMarkaAltGrup.PlaceholderText = "Seçiniz...";
+            fcbMarkaAltGrup.ReadOnly = false;
             fcbMarkaAltGrup.Size = new System.Drawing.Size(163, 25);
             fcbMarkaAltGrup.TabIndex = 5;
             fcbMarkaAltGrup.ValueMember = "Id";
@@ -256,6 +266,7 @@
             fcbMarkaAltGrupKategori.Name = "fcbMarkaAltGrupKategori";
             fcbMarkaAltGrupKategori.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbMarkaAltGrupKategori.PlaceholderText = "Seçiniz...";
+            fcbMarkaAltGrupKategori.ReadOnly = false;
             fcbMarkaAltGrupKategori.Size = new System.Drawing.Size(119, 25);
             fcbMarkaAltGrupKategori.TabIndex = 6;
             fcbMarkaAltGrupKategori.ValueMember = "Id";
@@ -272,6 +283,7 @@
             fcbMirasProje.Name = "fcbMirasProje";
             fcbMirasProje.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbMirasProje.PlaceholderText = "Seçiniz...";
+            fcbMirasProje.ReadOnly = false;
             fcbMirasProje.Size = new System.Drawing.Size(119, 25);
             fcbMirasProje.TabIndex = 4;
             fcbMirasProje.ValueMember = "Id";
@@ -313,7 +325,7 @@
             // 
             customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(730, 236);
+            customButtonSave1.Location = new System.Drawing.Point(730, 578);
             customButtonSave1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(106, 40);
@@ -326,7 +338,7 @@
             universalGrid1.Location = new System.Drawing.Point(37, 292);
             universalGrid1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(913, 252);
+            universalGrid1.Size = new System.Drawing.Size(799, 280);
             universalGrid1.TabIndex = 18;
             // 
             // ctbProjeNo
@@ -392,7 +404,7 @@
             roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(37, 241);
+            roundedButton1.Location = new System.Drawing.Point(37, 578);
             roundedButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(84, 35);
@@ -402,11 +414,19 @@
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click;
             // 
+            // panel1
+            // 
+            panel1.Location = new System.Drawing.Point(348, 120);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(488, 156);
+            panel1.TabIndex = 22;
+            // 
             // ProjeTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(962, 556);
+            ClientSize = new System.Drawing.Size(859, 630);
+            Controls.Add(panel1);
             Controls.Add(roundedButton1);
             Controls.Add(label8);
             Controls.Add(ctbProjeNo);
@@ -466,5 +486,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem projeSilToolStripMenuItem;
         private CustomControls.RoundedButton roundedButton1;
+        private System.Windows.Forms.Panel panel1;
+        
     }
 }

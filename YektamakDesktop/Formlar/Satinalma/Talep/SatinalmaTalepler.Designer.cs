@@ -39,7 +39,18 @@ namespace YektamakDesktop.Formlar.Satinalma
             silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             headerPanel1 = new HeaderPanel();
             universalGrid1 = new UniversalGrid();
+            rbOnaylanmisTalepler = new System.Windows.Forms.RadioButton();
+            rdOnayBekleyenTalepler = new System.Windows.Forms.RadioButton();
+            rbReddedilenTalepler = new System.Windows.Forms.RadioButton();
+            rbTumTalepler = new System.Windows.Forms.RadioButton();
+            panel1 = new System.Windows.Forms.Panel();
+            rbTumKullanic = new System.Windows.Forms.RadioButton();
+            rbOnaylayacagimTalepler = new System.Windows.Forms.RadioButton();
+            rbActigimTalepler = new System.Windows.Forms.RadioButton();
+            panel2 = new System.Windows.Forms.Panel();
             contextMenuStrip1.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // contextMenuStrip1
@@ -98,11 +109,115 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.TabIndex = 13;
             universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
             // 
+            // rbOnaylanmisTalepler
+            // 
+            rbOnaylanmisTalepler.AutoSize = true;
+            rbOnaylanmisTalepler.Location = new System.Drawing.Point(46, 7);
+            rbOnaylanmisTalepler.Name = "rbOnaylanmisTalepler";
+            rbOnaylanmisTalepler.Size = new System.Drawing.Size(131, 19);
+            rbOnaylanmisTalepler.TabIndex = 14;
+            rbOnaylanmisTalepler.Text = "Onaylanmış Talepler";
+            rbOnaylanmisTalepler.UseVisualStyleBackColor = true;
+            rbOnaylanmisTalepler.CheckedChanged += rbOnaylanmisTalepler_CheckedChanged;
+            // 
+            // rdOnayBekleyenTalepler
+            // 
+            rdOnayBekleyenTalepler.AutoSize = true;
+            rdOnayBekleyenTalepler.Location = new System.Drawing.Point(46, 32);
+            rdOnayBekleyenTalepler.Name = "rdOnayBekleyenTalepler";
+            rdOnayBekleyenTalepler.Size = new System.Drawing.Size(146, 19);
+            rdOnayBekleyenTalepler.TabIndex = 15;
+            rdOnayBekleyenTalepler.Text = "Onay Bekleyen Talepler";
+            rdOnayBekleyenTalepler.UseVisualStyleBackColor = true;
+            rdOnayBekleyenTalepler.CheckedChanged += rdOnayBekleyenTalepler_CheckedChanged;
+            // 
+            // rbReddedilenTalepler
+            // 
+            rbReddedilenTalepler.AutoSize = true;
+            rbReddedilenTalepler.Location = new System.Drawing.Point(46, 57);
+            rbReddedilenTalepler.Name = "rbReddedilenTalepler";
+            rbReddedilenTalepler.Size = new System.Drawing.Size(127, 19);
+            rbReddedilenTalepler.TabIndex = 16;
+            rbReddedilenTalepler.Text = "Reddedilen Talepler";
+            rbReddedilenTalepler.UseVisualStyleBackColor = true;
+            rbReddedilenTalepler.CheckedChanged += rbReddedilenTalepler_CheckedChanged;
+            // 
+            // rbTumTalepler
+            // 
+            rbTumTalepler.AutoSize = true;
+            rbTumTalepler.Checked = true;
+            rbTumTalepler.Location = new System.Drawing.Point(46, 82);
+            rbTumTalepler.Name = "rbTumTalepler";
+            rbTumTalepler.Size = new System.Drawing.Size(56, 19);
+            rbTumTalepler.TabIndex = 18;
+            rbTumTalepler.TabStop = true;
+            rbTumTalepler.Text = "Tümü";
+            rbTumTalepler.UseVisualStyleBackColor = true;
+            rbTumTalepler.CheckedChanged += rbTumTalepler_CheckedChanged;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(rbTumKullanic);
+            panel1.Controls.Add(rbOnaylayacagimTalepler);
+            panel1.Controls.Add(rbActigimTalepler);
+            panel1.Location = new System.Drawing.Point(47, 47);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(256, 116);
+            panel1.TabIndex = 19;
+            // 
+            // rbTumKullanic
+            // 
+            rbTumKullanic.AutoSize = true;
+            rbTumKullanic.Checked = true;
+            rbTumKullanic.Location = new System.Drawing.Point(15, 59);
+            rbTumKullanic.Name = "rbTumKullanic";
+            rbTumKullanic.Size = new System.Drawing.Size(56, 19);
+            rbTumKullanic.TabIndex = 2;
+            rbTumKullanic.TabStop = true;
+            rbTumKullanic.Text = "Tümü";
+            rbTumKullanic.UseVisualStyleBackColor = true;
+            rbTumKullanic.CheckedChanged += rbTumKullanic_CheckedChanged;
+            // 
+            // rbOnaylayacagimTalepler
+            // 
+            rbOnaylayacagimTalepler.AutoSize = true;
+            rbOnaylayacagimTalepler.Location = new System.Drawing.Point(15, 34);
+            rbOnaylayacagimTalepler.Name = "rbOnaylayacagimTalepler";
+            rbOnaylayacagimTalepler.Size = new System.Drawing.Size(150, 19);
+            rbOnaylayacagimTalepler.TabIndex = 1;
+            rbOnaylayacagimTalepler.Text = "Onaylayacağım Talepler";
+            rbOnaylayacagimTalepler.UseVisualStyleBackColor = true;
+            rbOnaylayacagimTalepler.CheckedChanged += rbOnaylayacagimTalepler_CheckedChanged;
+            // 
+            // rbActigimTalepler
+            // 
+            rbActigimTalepler.AutoSize = true;
+            rbActigimTalepler.Location = new System.Drawing.Point(15, 9);
+            rbActigimTalepler.Name = "rbActigimTalepler";
+            rbActigimTalepler.Size = new System.Drawing.Size(110, 19);
+            rbActigimTalepler.TabIndex = 0;
+            rbActigimTalepler.Text = "Açtığım Talepler";
+            rbActigimTalepler.UseVisualStyleBackColor = true;
+            rbActigimTalepler.CheckedChanged += rbActigimTalepler_CheckedChanged;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(rbTumTalepler);
+            panel2.Controls.Add(rbOnaylanmisTalepler);
+            panel2.Controls.Add(rdOnayBekleyenTalepler);
+            panel2.Controls.Add(rbReddedilenTalepler);
+            panel2.Location = new System.Drawing.Point(332, 47);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(255, 116);
+            panel2.TabIndex = 20;
+            // 
             // SatinalmaTalepler
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1138, 600);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -111,6 +226,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             FormClosing += SatinalmaTalepler_FormClosing;
             Load += SatinalmaTalepler_Load;
             contextMenuStrip1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -122,5 +241,14 @@ namespace YektamakDesktop.Formlar.Satinalma
         private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
+        private System.Windows.Forms.RadioButton rbOnaylanmisTalepler;
+        private System.Windows.Forms.RadioButton rdOnayBekleyenTalepler;
+        private System.Windows.Forms.RadioButton rbReddedilenTalepler;
+        private System.Windows.Forms.RadioButton rbTumTalepler;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rbTumKullanic;
+        private System.Windows.Forms.RadioButton rbOnaylayacagimTalepler;
+        private System.Windows.Forms.RadioButton rbActigimTalepler;
+        private System.Windows.Forms.Panel panel2;
     }
 }

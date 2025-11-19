@@ -159,22 +159,7 @@ namespace Utilities.Implementations
                 return _yetkiList;
             }
         }
-        private List<StokKart> _stokKartList;
-        public List<StokKart> stokKartList
-        {
-            get
-            {
-                if (_stokKartList == null)
-                {
-                    _stokKartList = GetModelList(_stokService.GetStokKart, new StokKart());
-                    if(_stokKartList == null)
-                    {
-                        _stokKartList = new List<StokKart>();
-                    }
-                }
-                return _stokKartList;
-            }
-        }
+        
         private List<StokGrup> _stokGrups;
         public List<StokGrup> stokGrups
         {
@@ -328,7 +313,7 @@ namespace Utilities.Implementations
             {
                 if (_firmaList == null)
                 {
-                    _firmaList = GetModelList(_firmaService.GetFirma,new Firma());
+                    _firmaList = _firmaService.GetFirma(new Firma());
                 }
                 return _firmaList;
             }

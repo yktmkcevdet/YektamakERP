@@ -10,6 +10,7 @@ using ApiService.Interfaces;
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using ApiService.Implementations;
 
 namespace YektamakDesktop.Formlar.Satinalma.Siparis
 {
@@ -17,27 +18,38 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
     {
         private readonly ICache _cache;
         private readonly ISatinalmaSiparisService _saService;
-        public SatinalmaSiparisKayitFormu(ICache cache, ISatinalmaSiparisService saService)
+        private readonly IProjeService _projeService;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
+        public SatinalmaSiparisKayitFormu(ICache cache, ISatinalmaSiparisService saService, IProjeService projeService, IJsonConverter jsonConverter, IConvertHelper convertHelper)
         {
             _cache = cache;
             _saService = saService;
+            _projeService = projeService;
+            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             InitializeComponent();
             Initialize();
         }
-        private void Initialize()
+        private async void Initialize()
         {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(12, 408);
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1297, 365);
-            universalGrid1.TabIndex = 9;
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
             fcbFirmaId.SetDataSource(_cache.firmaList);
             fcbKdv.SetDataSource(_cache.kdvList);
             fcbVadeId.SetDataSource(_cache.vadeList);
             fcbDovizCinsi.SetDataSource(_cache.dovizCinsiList);
+            universalGrid1.SetData(new List<SatinalmaSiparisDetayDTO>(),this.Name);
             Binding();
         }
         private SatinalmaSiparis _satinalmaSiparis;
@@ -75,7 +87,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         public void UpdateMode(SatinalmaSiparis satinalmaSiparisUpdate)
         {
             satinalmaSiparis = satinalmaSiparisUpdate;
-            universalGrid1.SetData(satinalmaSiparis.satinalmaSiparisDetayList.CastToDTO<SatinalmaSiparisDetayDTO>().ToList(), this.Name);
+            universalGrid1.SetData(satinalmaSiparis.satinalmaSiparisDetay.CastToDTO<SatinalmaSiparisDetayDTO>().ToList(), this.Name);
         }
 
         private void SatinalmaSiparisKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
@@ -85,10 +97,11 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 
         private async void customButtonSave1_SaveButtonClick(object sender, System.EventArgs e)
         {
+            satinalmaSiparis.satinalmaSiparisDetay = ((SortableBindingList<SatinalmaSiparisDetayDTO>)universalGrid1.binding.DataSource).CastToEntity<SatinalmaSiparisDetay>().ToList();
             string jsonResult = await _saService.SaveSatinalmaSiparis(satinalmaSiparis);
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
             {
-                satinalmaSiparis = JsonConvert.DeserializeObject<List<SatinalmaSiparis>>(jsonResult)[0];
+                satinalmaSiparis = _jsonConverter.DeserializeObject<List<SatinalmaSiparis>>(jsonResult)[0];
                 MessageBox.Show("Kayıt işlemi başarılı.");
             }
             else

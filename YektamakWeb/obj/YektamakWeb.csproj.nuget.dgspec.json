@@ -33,8 +33,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj"
+              "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj"
               }
             }
           }
@@ -55,17 +55,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[9.0.10, )"
             }
           },
           "imports": [
@@ -84,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -150,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -183,9 +175,6 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj": {
-                "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj"
-              },
               "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj": {
                 "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj"
               }
@@ -220,6 +209,10 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[4.3.0, )"
@@ -249,7 +242,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -284,9 +277,6 @@
             "projectReferences": {
               "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj": {
                 "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\ApiService\\ApiService.csproj"
-              },
-              "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj": {
-                "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj"
               }
             }
           }
@@ -339,7 +329,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

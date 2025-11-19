@@ -3,11 +3,11 @@
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("api/File")]
+    [Route("api/")]
     public class FileController : Controller
     {
         private readonly IWebHostEnvironment _env;
-
+        private readonly string _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
         public FileController(IWebHostEnvironment env)
         {
             _env = env;
@@ -43,5 +43,38 @@ namespace Api.Controllers
 
             return Ok(new { message = "PDF files processed successfully.", pdfCount = pdfFiles.Length });
         }
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("Dosya boş olamaz.");
+
+            // Uygulama dizini altına "Uploads" klasörüne kaydediyoruz
+            var uploadsPath = Path.Combine(_env.ContentRootPath, "Uploads");
+            Directory.CreateDirectory(uploadsPath);
+
+            var filePath = Path.Combine(uploadsPath, file.FileName);
+
+            // Dosyayı sunucuya kaydet
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(new { message = "Dosya başarıyla yüklendi.", path = filePath });
+        }
+        [HttpGet("download/{fileName}")]
+        public IActionResult DownloadFile(string fileName)
+        {
+            var filePath = Path.Combine(_env.ContentRootPath, "uploads", fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("Dosya bulunamadı.");
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            var contentType = "application/octet-stream";
+            return File(fileBytes, contentType, fileName);
+        }
+
     }
 }

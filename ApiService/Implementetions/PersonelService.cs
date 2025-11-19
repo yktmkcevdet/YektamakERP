@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class PersonelService : IPersonelService
     {

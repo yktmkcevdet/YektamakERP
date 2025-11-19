@@ -1,0 +1,56 @@
+﻿<!-- SatinalmaTalepForm.razor -->
+@using Models.DTO
+@using Models
+@using MudBlazor
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6" Class="mb-3">Satınalma Talep Formu</MudText>
+
+        <!-- Üst bilgi alanları -->
+        <MudGrid Class="mb-4">
+            <MudItem xs="12" sm="6">
+                <MudDatePicker Label="İhtiyaç Tarihi" @bind-Date="Talep.teslimTarihi" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudSelect Label="Proje Kodu" @bind-Value="Talep.projekod" />
+            </MudItem>
+        </MudGrid>
+
+        <!-- Satır detay grid -->
+        <MudTable Items="@Talep.satinalmaTalepDetays" Dense="true" Hover="true" Bordered="true">
+            <HeaderContent>
+                <MudTh>pro</MudTh>
+                <MudTh>Miktar</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd><MudSelect @bind-Value="@context.projeStokKart.Id" /></MudTd>
+                <MudTd><MudNumericField @bind-Value="@context.miktar" /></MudTd>
+                <MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => SatirSil(context)" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+        <MudButton StartIcon="@Icons.Material.Filled.Add" OnClick="SatirEkle" Class="mt-2">Satır Ekle</MudButton>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Iptal" Color="Color.Secondary">İptal</MudButton>
+        <MudButton OnClick="Kaydet" Color="Color.Primary">Kaydet</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    public SatinalmaTalepDTO Talep { get; set; } = new();
+
+    void Iptal() => MudDialog.Cancel();
+
+    void Kaydet() => MudDialog.Close(DialogResult.Ok(Talep));
+
+    void SatirEkle() => Talep.satinalmaTalepDetays.Add(new SatinalmaTalepDetay());
+    void SatirSil(SatinalmaTalepDetay s) => Talep.satinalmaTalepDetays.Remove(s);
+
+}

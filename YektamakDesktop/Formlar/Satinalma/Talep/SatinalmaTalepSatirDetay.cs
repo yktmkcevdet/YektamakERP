@@ -75,27 +75,19 @@ namespace YektamakDesktop.Formlar.Satinalma
             var satinalmaTalepSatirDetayDTO = (SatinalmaTalepSatirDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
             ProjeStokKart projeStokKart = satinalmaTalepSatirDetay.projeStokKart;
-            string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+            if (projeStokKarts.Count > 1)
             {
-                MessageBox.Show("Stok kartı bulunamadı");
+                MessageBox.Show("Birden fazla stok kartı bulundu");
+                //projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepSatirDetayDTO.projeId).FirstOrDefault();
             }
             else
             {
-                List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                if (projeStokKarts.Count > 1)
-                {
-                    MessageBox.Show("Birden fazla stok kartı bulundu");
-                    //projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepSatirDetayDTO.projeId).FirstOrDefault();
-                }
-                else
-                {
-                    projeStokKart = projeStokKarts[0];
-                }
-                StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
-                stokKartKayitFormu.UpdateMode(projeStokKart);
-                stokKartKayitFormu.ShowDialog();
+                projeStokKart = projeStokKarts[0];
             }
+            StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+            stokKartKayitFormu.UpdateMode(projeStokKart);
+            stokKartKayitFormu.ShowDialog();
         }
 
         private void pDFGösterToolStripMenuItem_Click(object sender, EventArgs e)

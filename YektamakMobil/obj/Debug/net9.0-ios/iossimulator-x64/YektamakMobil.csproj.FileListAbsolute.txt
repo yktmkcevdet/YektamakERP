@@ -295,6 +295,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-io
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\ApiService.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Models.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Utilities.pdb
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\build-signature\signature
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\YektamakMobil.csproj.AssemblyReference.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\mauiimage.inputs
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\mauifont.inputs

@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using ApiService.Interfaces;
+using Models;
 using Models.Attributes;
 using Newtonsoft.Json;
 using System;
@@ -13,7 +14,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.Helpers;
 
@@ -412,6 +412,7 @@ namespace YektamakDesktop.CustomControls
         public static SortableBindingList<T> Filtrele<T>(SortableBindingList<T> list, T filter)
         {
             var props = typeof(T).GetProperties()
+                .Where(p => p.GetCustomAttribute<GridDisplayAttribute>() != null)
                 .Where(p => p.GetValue(filter) != null)
                 .Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
 

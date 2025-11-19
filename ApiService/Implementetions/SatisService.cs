@@ -12,7 +12,7 @@ using ApiService.Common;
 using Models;
 using System.Data;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class SatisService : ISatisService
     {

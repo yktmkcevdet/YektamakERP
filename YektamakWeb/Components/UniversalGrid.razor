@@ -30,7 +30,7 @@
            
                 @foreach (var col in Columns.Where(c => c.Visible))
                 {
-                <MudTd @oncontextmenu:preventDefault="true" @onclick="((MouseEventArgs e) => OnRowRightClick(e, context))">
+                <MudTd @oncontextmenu="((MouseEventArgs e) => OnRowRightClick(e, context))">
                         @GetFormattedValue(context, col)
                 </MudTd>
                 } 
@@ -38,26 +38,12 @@
     </MudTable>
 
 </MudPaper>
-@if (ShowContextMenu)
-{   
-    <MudPaper Class="context-menu" Width="200px" Style="top:100px; left:800px;">
-        <MudList T="string">
-            <MudListItem @onclick="() => EditItem(SelectedItem)">
-                <MudIcon Icon="@Icons.Material.Filled.Edit" /> Düzenle
-            </MudListItem>
-            <MudListItem @onclick="() => DeleteItem(SelectedItem)">
-                <MudIcon Icon="@Icons.Material.Filled.Delete" /> Sil
-            </MudListItem>
-            <MudListItem @onclick="() => ViewItem(SelectedItem)">
-                <MudIcon Icon="@Icons.Material.Filled.Info" /> Detay
-            </MudListItem>
-        </MudList>
-    </MudPaper>
-}
+
 @code {
     [Parameter] public IEnumerable<TData> Data { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public Func<string, bool> PermissionChecker { get; set; }
+    [Parameter] public EventCallback<(TData item, MouseEventArgs e)> OnContextMenu { get; set; }
 
     private List<GridColumnMetadata> Columns = new();
 
@@ -137,43 +123,11 @@
     [Parameter] public EventCallback<TData> OnDelete { get; set; }
     [Parameter] public EventCallback<TData> OnView { get; set; }
 
-    private bool ShowContextMenu;
-    private string MenuXpx;
-    private string MenuYpx;
     private TData? SelectedItem;
 
     private void OnRowRightClick(MouseEventArgs e, TData item)
     {
-        if (e.Button == 2)
-        {
-
-            SelectedItem = item;
-            MenuXpx = $"{e.ClientX + 100}px";
-            MenuYpx = $"{e.ClientY}px";
-            ShowContextMenu = true;
-            StateHasChanged();
-        }
-    }
-
-    private async Task EditItem(TData item)
-    {
-        ShowContextMenu = false;
-        if (OnEdit.HasDelegate)
-            await OnEdit.InvokeAsync(item);
-    }
-
-    private async Task DeleteItem(TData item)
-    {
-        ShowContextMenu = false;
-        if (OnDelete.HasDelegate)
-            await OnDelete.InvokeAsync(item);
-    }
-
-    private async Task ViewItem(TData item)
-    {
-        ShowContextMenu = false;
-        if (OnView.HasDelegate)
-            await OnView.InvokeAsync(item);
+        OnContextMenu.InvokeAsync((item, e));
     }
 
     public class GridColumn

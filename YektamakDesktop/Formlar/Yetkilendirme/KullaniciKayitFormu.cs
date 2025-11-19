@@ -92,15 +92,17 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             if (!ValidateInputs()) return;
             try
             {
-                string hashedPassword = _passwordService.HashPassword(kullanici.sifre).CombinedHash;
-                kullanici.sifre = hashedPassword;
-                kullanici.isSifreDegisti = false;
+                if (!string.IsNullOrEmpty(kullanici.sifre))
+                {
+                    string hashedPassword = _passwordService.HashPassword(kullanici.sifre).CombinedHash;
+                    kullanici.sifre = hashedPassword;
+                    kullanici.isSifreDegisti = false;
+                }
+                
                 string jsonResult = _kullaniciYetkiService.SaveKullanici(kullanici);
                 if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(jsonResult);
-                        
-                    
                 }
                 else
                 {
@@ -109,12 +111,15 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     {
                         _cache.kullaniciList.Add(kullanici);
                     }
-                    IMailHandler mailHandler = new MailHandler();
-                    mailHandler.SendMail(kullanici.personel.mail, "ERP şifreniz değiştirildi", "");
+                    if (!string.IsNullOrEmpty(kullanici.sifre))
+                    {
+                        IMailHandler mailHandler = new MailHandler();
+                        mailHandler.SendSystemMail(kullanici.personel.mail, "ERP şifreniz değiştirildi", "");
+                    }
                     KullaniciKayitFormu_Load(sender, e);
                     MessageBox.Show("Kayıt başarılı");
                 }
-                    kullanici.sifre = "";
+                kullanici.sifre = "";
             }
             catch (Exception ex)
             {
@@ -128,8 +133,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             // Tüm validasyonları çalıştır, kısa devre yapmadan
             isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbKullaniciAd);
             isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbPersonel);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifre);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifreTekrar);
+            //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifre);
+            //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifreTekrar);
             isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbRol);
             return isValid;
         }

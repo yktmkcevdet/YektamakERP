@@ -223,7 +223,7 @@ namespace YektamakDesktop.Formlar
                 {
                     MessageBox.Show("Şifre değiştirildi");
                     IMailHandler mailHandler = new MailHandler();
-                    mailHandler.SendMail(kullanici.personel.mail, "Şifre Değişimi", "Şifreniz değiştirilmiştir.");
+                    mailHandler.SendSystemMail(kullanici.personel.mail, "Şifre Değişimi", "Şifreniz değiştirilmiştir.");
                     this.Close();
                 }
             }

@@ -3,7 +3,7 @@ using ApiService.Interfaces;
 using Models;
 using System.Data;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class StokService : IStokService
     {

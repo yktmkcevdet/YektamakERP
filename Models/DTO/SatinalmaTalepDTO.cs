@@ -6,6 +6,7 @@ namespace Models.DTO
     {
         [GridDisplay(Header = "Id")] public int? Id { get; set; }
         [GridDisplay(Header = "Talep No")] public string satinalmaTalepNo { get; set; }
+        [GridDisplay(Header = "Onay Durumu")] public bool? onayDurum { get; set; }
         [GridDisplay(Header = "Talep Nedeni",Tip ="Liste",ListName ="talepNedenList",ListVisibleColumnName ="ad")] public int? talepNedenId { get; set; }
         [GridDisplay(Header = "Proje Id")] public int? projeId { get; set; }
         [GridDisplay(Header = ProjeKoduHeader)] public string projekod { get; set; }

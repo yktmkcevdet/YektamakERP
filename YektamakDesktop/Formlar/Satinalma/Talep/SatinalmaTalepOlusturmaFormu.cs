@@ -100,8 +100,8 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void clbStokTip_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
+            clbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(clbStokTip.SelectedValue.ToString())).ToList());
+            clbStokGrup.SetDataSource(_cache.stokGrups);
             VeriDegisti?.Invoke(this, satinalmaTalep);
         }
         private bool Validate()
@@ -201,12 +201,11 @@ namespace YektamakDesktop.Formlar.Satinalma
                             };
                             satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
                             satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(new SatinalmaTalepSatirDetay { projeStokKart = ConvertHelper.ToEntity<ProjeStokKart>(item) });
-                            string jsonResult = await _projeService.GetProjeStokKart(new ProjeStokKart
+                            satinalmaTalepdetay.projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart
                             {
                                 proje = { Id = Convert.ToInt32(fcbProjeKod.SelectedValue) },
                                 stokKart = new StokKart { Id = item.stokKarthammaddeId }
-                            });
-                            satinalmaTalepdetay.projeStokKart = _jsonConverter.DeserializeObject<List<ProjeStokKart>>(jsonResult).FirstOrDefault();
+                            })).FirstOrDefault();
                             satinalmaTalepDetayList.Add(satinalmaTalepdetay);
                         }
                     }
@@ -401,13 +400,11 @@ namespace YektamakDesktop.Formlar.Satinalma
 
     public class DataControlSatinalmaTalepDetay : DataControl, IEntity, IAltForm
     {
-        private readonly IJsonConverter _jsonConverter;
-        private readonly IStokService _stokService;
         private readonly IProjeService _projeService;
-        public DataControlSatinalmaTalepDetay(SatinalmaTalep satinalmaTalep,IProjeService projeService)
+        public DataControlSatinalmaTalepDetay(SatinalmaTalep satinalmaTalep)
         {
             _satinalmaTalep = satinalmaTalep;
-            _projeService = projeService;
+            Initialize();
         }
         public DataControlSatinalmaTalepDetay()
         {
@@ -435,34 +432,19 @@ namespace YektamakDesktop.Formlar.Satinalma
             projeStokKart.proje.Id = satinalmaTalep.proje.Id;
             projeStokKart.stokKart.malzemeGrup.Id = satinalmaTalep.malzemeGrup.Id;
             projeStokKart.stokKart.stokTip.Id = satinalmaTalep.stokTip.Id;
-            string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                stokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                ComboBoxListFill.GetLookupAd(stokKarts.Select(item => item.stokKart with { ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList(), ref _stokKartId);
-            }
+            stokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+            _stokKartId.SetDataSource(stokKarts.CastToDTO<ProjeStokKartDTO>().Select(item => item with { stokKartad = $"{item.stokKartkod} - {item.stokKartad} - {item.stokKartboyut}" }).ToList());
         }
-        public DataControlSatinalmaTalepDetay(IJsonConverter jsonConverter, IStokService stokService, IProjeService projeService)
+        public DataControlSatinalmaTalepDetay(IProjeService projeService)
         {
-            _jsonConverter = jsonConverter;
-            _stokService = stokService;
             _projeService = projeService;
             Initialize();
         }
-        private async void StokKartId_SelectedIndexChanged(object sender, EventArgs e)
+        private void StokKartId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = stokKartId.SelectedItem as StokKart;
+            var selected = stokKartId.SelectedItem as ProjeStokKartDTO;
             if (selected == null) return;
-            olcuBirimi.TextCustom = selected.olcuBirim.ad;
-            string jsonResult = await _projeService.GetProjeStokKart(new ProjeStokKart { Id = selected.Id });
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                satinalmaTalepDetay.projeStokKart = _jsonConverter.DeserializeObject<List<ProjeStokKart>>(jsonResult).FirstOrDefault();
-            }
-            else
-            {
-
-            }
+            olcuBirimi.TextCustom = selected.stokKartolcuBirimad;
         }
         ContextMenuStrip cntxtMenuStrip = new ContextMenuStrip();
         private static SatinalmaTalep _satinalmaTalep;
@@ -492,32 +474,23 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 if (_stokKartId == null)
                 {
-                    _stokKartId = new() { TabIndex = 2, Width = 300, Visible = true, Tag = "Stok Kartı", DisplayMember = "ad", ValueMember = "Id" };
-                    _stokKartId.SetDataSource(stokKarts.Select(item => item.stokKart with { Id = item.Id, ad = $"{item.stokKart.kod} - {item.stokKart.ad} - {item.stokKart.boyut}" }).ToList());
+                    _stokKartId = new() { TabIndex = 2, Width = 300, Visible = true, Tag = "Stok Kartı", DisplayMember = "stokKartad", ValueMember = "Id" };
                     _stokKartId.MouseDown += _stokKartId_MouseDown;
                     cntxtMenuStrip.Items.Add("Stok Kartını Görüntüle", null, async (s, e) =>
                     {
                         ProjeStokKart projeStokKart = satinalmaTalepDetay.projeStokKart;
-                        string jsonResult = await _projeService.GetProjeStokKart(projeStokKart);
-                        if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                        List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+                        if (projeStokKarts.Count > 1)
                         {
-                            MessageBox.Show("Stok kartı bulunamadı");
+                            projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepDetay.proje.Id).FirstOrDefault();
                         }
                         else
                         {
-                            List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                            if (projeStokKarts.Count > 1)
-                            {
-                                projeStokKart = projeStokKarts.Where(p => p.proje.Id == satinalmaTalepDetay.proje.Id).FirstOrDefault();
-                            }
-                            else
-                            {
-                                projeStokKart = projeStokKarts[0];
-                            }
-                            StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
-                            stokKartKayitFormu.UpdateMode(projeStokKart);
-                            stokKartKayitFormu.ShowDialog();
+                            projeStokKart = projeStokKarts[0];
                         }
+                        StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+                        stokKartKayitFormu.UpdateMode(projeStokKart);
+                        stokKartKayitFormu.ShowDialog();
                     });
                 }
                 return _stokKartId;

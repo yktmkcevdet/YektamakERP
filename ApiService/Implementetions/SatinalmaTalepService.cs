@@ -1,15 +1,19 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using Newtonsoft.Json;
+using Utilities.Interfaces;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class SatinalmaTalepService : ISatinalmaTalepService
     {
         private readonly IApiService _apiService;
+        private readonly IJsonConverter _jsonConverter;
 
-        public SatinalmaTalepService(IApiService apiService)
+        public SatinalmaTalepService(IApiService apiService, IJsonConverter jsonConverter)
         {
+            _jsonConverter = jsonConverter;
             _apiService = apiService;
         }
 
@@ -28,9 +32,21 @@ namespace ApiService.Implementetions
             return await _apiService.PostAsync(satinalmaTalepDetay, "GetFilteredSatinalmaTalepDetay");
         }
 
-        public async Task<string> GetSatinalmaTalep(SatinalmaTalep satinalmaTalepBaslik)
+        public async Task<List<SatinalmaTalep>> GetSatinalmaTalep(SatinalmaTalep satinalmaTalepBaslik)
         {
-            return await _apiService.PostAsync(satinalmaTalepBaslik, "GetSatinalmaTalep");
+            string jsonResult = await _apiService.PostAsync(satinalmaTalepBaslik, "GetSatinalmaTalep");
+            if(jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new Exception("Satınalma talebi getirilirken bir hata oluştu: " + jsonResult);
+            }
+            else if (string.IsNullOrEmpty(jsonResult)) 
+            {
+                return new List<SatinalmaTalep>();
+            }
+            else
+            {
+                return _jsonConverter.DeserializeObject<List<SatinalmaTalep>>(jsonResult);
+            }
         }
         public async Task<string> GetSatinalmaTalepDetay(SatinalmaTalepDetay satinalmaTalepDetay=null)
         {

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Formlar.Satinalma.Siparis;
 using YektamakDesktop.Formlar.Satinalma.Teklif;
 
 namespace YektamakDesktop.Formlar.Satinalma
@@ -62,12 +63,24 @@ namespace YektamakDesktop.Formlar.Satinalma
             try
             {
                 var jsonResult = await _satinalmaTeklifService.GetSatinalmaTeklif(new SatinalmaTeklifBaslik());
-                List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
-                foreach (var item in satinalmaTeklifBasliks)
+                if (string.IsNullOrEmpty(jsonResult))
                 {
-                    satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
+                    return;
                 }
-                universalGrid1.SetData(satinalmaTeklifDTOs, this.Name);
+                else if (jsonResult.StartsWith("error"))
+                {
+                    MessageBox.Show(jsonResult);
+                    return;
+                }
+                else
+                {
+                    List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
+                    foreach (var item in satinalmaTeklifBasliks)
+                    {
+                        satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
+                    }
+                    universalGrid1.SetData(satinalmaTeklifDTOs, this.Name);
+                }
             }
             catch (Exception ex)
             {
@@ -103,6 +116,32 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 contextMenuStrip1.Show(universalGrid1, e.Location);
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            SatinalmaSiparis satinalmaSiparis = new SatinalmaSiparis();
+            satinalmaSiparis.siparisTarihi = DateTime.Today;
+            satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
+            satinalmaSiparis.firma = satinalmaTeklifBaslik.teklifFirma;
+            satinalmaSiparis.aciklama = satinalmaTeklifBaslik.aciklama;
+            satinalmaSiparis.vade = satinalmaTeklifBaslik.vade;
+            satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
+            satinalmaSiparis.dovizCinsi = satinalmaTeklifBaslik.dovizCinsi;
+            foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
+            {
+                SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();
+                satinalmaSiparisDetay.miktar = item.satinalmaTalepDetay.miktar;
+                satinalmaSiparisDetay.aciklama = item.satinalmaTalepDetay.aciklama;
+                satinalmaSiparisDetay.birimFiyat = item.birimFiyat;
+                satinalmaSiparisDetay.projeStokKart = item.satinalmaTalepDetay.projeStokKart;
+                satinalmaSiparis.satinalmaSiparisDetay.Add(satinalmaSiparisDetay);
+            }
+            var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
+            satinalmaSiparisKayitFormu.UpdateMode(satinalmaSiparis);
+            satinalmaSiparisKayitFormu.ShowDialog();
         }
     }
 }

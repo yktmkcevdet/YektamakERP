@@ -24,12 +24,12 @@ namespace Utilities
 
             // Utilities servislerini ekle
             services.AddSingleton<IAppLogger, AppLogger>();
-            services.AddSingleton<ICache, Cache>();
             services.AddSingleton<IDataTableMapper, DataTableMapper>();
             services.AddSingleton<IJsonConverter, JsonConverter>();
             services.AddSingleton<ILoginHelper, LoginHelper>();
             services.AddSingleton<IMailHandler, MailHandler>();
             services.AddSingleton<IConvertHelper, ConvertHelper>();
+            services.AddSingleton<IFileHelper, FileHelper>();
             return services;
         }
     }

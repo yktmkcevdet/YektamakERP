@@ -29,18 +29,19 @@
 
   <ItemGroup>
     <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.30115.18" />
-    <PackageReference Include="FastReport.OpenSource" Version="2024.1.10" />
-    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2024.1.10" />
-    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="FastReport.OpenSource" Version="2026.1.2" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2026.1.2" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.4" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.1" />
     <PackageReference Include="netDxf" Version="2023.11.10" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NPOI" Version="2.7.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="NPOI" Version="2.7.5" />
     <PackageReference Include="RtfPipe" Version="2.0.7677.4303" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.11" />
-    <PackageReference Include="Spire.PDF" Version="11.8.0" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="Spire.PDF" Version="11.10.4" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.9" />
     <PackageReference Include="Visiativ.SOLIDWORKS.DocumentManager.Interop" Version="33.0.0" />
     <PackageReference Include="Visiativ.SOLIDWORKS.Interop" Version="33.0.0" />
   </ItemGroup>
@@ -120,8 +121,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiService\ApiService.csproj" />
-    <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
   

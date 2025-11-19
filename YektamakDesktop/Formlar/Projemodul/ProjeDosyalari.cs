@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Pipelines;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,12 +26,16 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
-        public ProjeDosyalari(ICache cache, IJsonConverter jsonConvertHelper, IProjeService projeService, IStokService stokService)
+        private readonly IFileHelper _fileHelper;
+        private readonly IFileService _fileService;
+        public ProjeDosyalari(ICache cache, IJsonConverter jsonConvertHelper, IProjeService projeService, IStokService stokService, IFileHelper fileHelper, IFileService fileService)
         {
+            _fileHelper = fileHelper;
             _cache = cache;
             _jsonConverter = jsonConvertHelper;
             _projeService = projeService;
             _stokService = stokService;
+            _fileService = fileService;
             InitializeComponent();
             Initialize();
         }
@@ -56,7 +59,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbProjeKod.SelectedIndexChanged += async(s,e)=>await fcbProjeKod_SelectedIndexChanged(s,e);
             clbStokGrup.SelectedIndexChanged += async (s, e) => await parcaGrubu_SelectedIndexChanged(s, e);
             clbMalzemeGrup.SelectedIndexChanged += async (s, e) => await parcaAltGrubu_SelectedIndexChanged(s, e);
-            //ctbParcaKod.TextChanged += async (s, e) => await textBoxParcaAdi_TextChanged(s, e);
             ctbParcaKod.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
             ctbParcaAd.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
             chkSatinalma.CheckedChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
@@ -70,40 +72,15 @@ namespace YektamakDesktop.Formlar.ProjeModul
             seçilenKayıtlarıSilToolStripMenuItem.Click += async (s, e) => await seçilenKayıtlarıSilToolStripMenuItem_Click(s, e);
             universalGrid1.Grid.CellMouseEnter += Grid_CellMouseEnter;
             universalGrid1.Grid.CellMouseLeave += Grid_CellMouseLeave;
-            popupTimer.Interval = 500; // 0.5 saniye bekleme
-            popupTimer.Tick += PopupTimer_Tick;
 
         }
-        Form pdfPopup;
-        Timer popupTimer = new Timer();
-        DataGridViewCellEventArgs lastCellEvent;
-        private void PopupTimer_Tick(object sender, EventArgs e)
+        private PdfGoruntuleme _pdfPopup;
+        private PdfGoruntuleme pdfPopup
         {
-            popupTimer.Stop();
-
-            if (lastCellEvent != null)
-            {
-                var columnName = universalGrid1.Grid.Columns[lastCellEvent.ColumnIndex].Name;
-                if (columnName == "pdfColumn") // sadece istediğin sütunda
-                {
-                    ShowPdfPopup(lastCellEvent.RowIndex);
-                }
-            }
+            get { if (_pdfPopup == null || _pdfPopup.IsDisposed) { _pdfPopup = FormFactory.CreateForm<PdfGoruntuleme>(); } return _pdfPopup; }
+            set { _pdfPopup = value; }
         }
-        private void ShowPdfPopup(int rowIndex)
-        {
-            pdfPopup?.Close();
-
-            pdfPopup = new Form();
-            pdfPopup.FormBorderStyle = FormBorderStyle.None;
-            pdfPopup.Size = new Size(400, 300);
-            pdfPopup.StartPosition = FormStartPosition.Manual;
-
-            Point mousePos = Cursor.Position;
-            pdfPopup.Location = new Point(mousePos.X + 20, mousePos.Y + 20);
-
-            pdfPopup.Show();
-        }
+        
         private void Grid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
             pdfPopup?.Close();
@@ -121,12 +98,14 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     pdfPopup?.Close();
                     var projeStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.Rows[e.RowIndex].DataBoundItem;
                     var projeStokKart = ConvertHelper.ToEntity<ProjeStokKart>(projeStokKartDTO);
-                    string jsonResult = _stokService.GetStokKartPdf(projeStokKart.stokKart);
-                    var stokKartPdf = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
-                    if (stokKartPdf.dosyaList.Any(d => d.dosyaTip.Id == 1))
+                    //string jsonResult = _stokService.GetStokKartPdf(projeStokKart.stokKart);
+                    //var stokKartPdf = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
+                    if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1))
                     {
-                        string pdfBytes = Convert.ToBase64String(stokKartPdf.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault().dosya);
-                        pdfPopup = PdfGoruntuleme.GetInstance(pdfBytes);
+                        //string pdfBytes = Convert.ToBase64String(stokKartPdf.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosya);
+                        string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosyaFullPath;
+                        var pdfBytes = await _fileService.GetFile(filePath);
+                        pdfPopup.GetInstance(pdfBytes);
                         pdfPopup.FormBorderStyle = FormBorderStyle.None;
                         pdfPopup.StartPosition = FormStartPosition.Manual;
                         pdfPopup.Size = new Size(400, 300);
@@ -134,6 +113,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         Point mousePos = Cursor.Position;
                         pdfPopup.Location = new Point(mousePos.X + 20, mousePos.Y + 20);
                         pdfPopup.Show();
+                        //pdfPopup = _pdfPopup;
                     }
                 }
             }
@@ -201,22 +181,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (projeStokKartFilter.proje.Id == null || projeStokKartFilter.proje.Id == -1) return;
             this.Enabled = false;
             
-            string jsonResult = await _projeService.GetProjeStokKart(projeStokKartFilter);
-            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                projeStokKartDTOs = null;
-            }
-            else
-            {
-                _cache.stokKartList.Clear();
-                projeStokKartDTOs.Clear();
-                List<ProjeStokKart> projeStokKarts = JsonConvert.DeserializeObject<List<ProjeStokKart>>(jsonResult);
-                foreach (var psk in projeStokKarts.Where(p => p.stokKart.isFromExcel == true))
-                {
-                    _cache.stokKartList.Add(psk.stokKart);
-                    projeStokKartDTOs.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>(psk));
-                }
-            }
+            List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKartFilter);
+            projeStokKartDTOs = projeStokKarts.CastToDTO<ProjeStokKartDTO>().ToList();
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
             this.Enabled = true;
         }
@@ -339,12 +305,11 @@ namespace YektamakDesktop.Formlar.ProjeModul
                             };
                             satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
                             satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(new SatinalmaTalepSatirDetay { projeStokKart = ConvertHelper.ToEntity<ProjeStokKart>(item) });
-                            string jsonResult = await _projeService.GetProjeStokKart(new ProjeStokKart
-                            {
-                                proje = { Id = Convert.ToInt32(fcbProjeKod.SelectedValue) },
-                                stokKart = new StokKart { Id = item.stokKarthammaddeId }
-                            });
-                            satinalmaTalepdetay.projeStokKart = _jsonConverter.DeserializeObject<List<ProjeStokKart>>(jsonResult).FirstOrDefault();
+                            satinalmaTalepdetay.projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart
+                                                                        {
+                                                                            //proje = { Id = Convert.ToInt32(fcbProjeKod.SelectedValue) },
+                                                                            stokKart = new StokKart { Id = item.stokKarthammaddeId }
+                                                                        })).FirstOrDefault();
                             satinalmaTalepDetayList.Add(satinalmaTalepdetay);
                         }
                     }
@@ -360,15 +325,15 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 }
                 if(clbMalzemeGrup.SelectedValue.ToString() == "29")
                 {
-                    var profilGroups = talepList.GroupBy(t => new { t.stokKartmalzemeAltGrupId, t.stokKartboyut }).Select(group => group.First()).ToList();
+                    var profilGroups = talepList.GroupBy(t => new { t.stokKarthammaddeId }).Select(group => group.First()).ToList();
                     foreach(var profilGroup in profilGroups)
                     {
-                        var profilList = talepList.Where(t => t.stokKartmalzemeAltGrupId == profilGroup.stokKartmalzemeAltGrupId && t.stokKartboyut==profilGroup.stokKartboyut).ToList();
-                        var sonuc = OptimizedCutting(profilList,6000,2);
+                        var profilList = talepList.Where(t => t.stokKarthammaddeId == profilGroup.stokKarthammaddeId).ToList();
+                        var sonuc = OptimizedCutting(profilList,Convert.ToDouble(profilGroup.stokKarthammaddeuzunluk),2);
                         satinalmaTalepDetayList.Where(s=> s.projeStokKart.stokKart.Id == profilGroup.stokKarthammaddeId).FirstOrDefault().miktar = sonuc.Bins.Count;
                         foreach(var b in sonuc.Bins)
                         {
-                            var fire = 6010 - b.Sum(x=>x.projeStokKart.stokKart.uzunluk);
+                            var fire = profilGroup.stokKarthammaddeuzunluk - b.Sum(x=>x.projeStokKart.stokKart.uzunluk);
                         }
                     }
                 }
@@ -440,13 +405,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (liste[index] == null)
             {
                 liste.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
-                _cache.stokKartList.Add(((ProjeStokKart)e).stokKart);
-            }
-            else
-            {
-                liste[index] = ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
-                var cacheIndex = _cache.stokKartList.FindIndex(s => s.Id == ((ProjeStokKart)e).stokKart.Id);
-                _cache.stokKartList[cacheIndex] = ((ProjeStokKart)e).stokKart;
             }
         }
 
@@ -560,7 +518,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         public CuttingOptimizationResult OptimizedCutting(
             List<ProjeStokKartDTO> items,
-            int stockLength,
+            double stockLength,
             int kerf,
             double usableWasteMinLength = 0) // Minimum kullanılabilir fire uzunluğu
         {

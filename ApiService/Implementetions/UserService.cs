@@ -4,7 +4,7 @@ using Models;
 using Newtonsoft.Json;
 using System.Data;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     public class UserService : IUserService
     {

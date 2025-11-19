@@ -1,5 +1,6 @@
 ﻿using ApiService.Converters;
 using ApiService.Interfaces;
+using Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -9,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiService.Implementetions
+namespace ApiService.Implementations
 {
     internal class ApiServiceClientNotDecoded : IApiService
     {
@@ -51,7 +52,15 @@ namespace ApiService.Implementetions
 
             return await response.Content.ReadAsStringAsync();
         }
+        public async Task<byte[]> GetAsyncByte(string apiAdres)
+        {
+            var response = await _httpClient.GetAsync($"/api/{apiAdres}");
+            response.EnsureSuccessStatusCode();
 
+
+            return await response.Content.ReadAsByteArrayAsync();
+
+        }
         public string Post<T>(T entity, string apiAdres) where T : class
         {
             try
@@ -97,5 +106,23 @@ namespace ApiService.Implementetions
                 return "0";
             }
         }
+        public async Task<string> PostAsync(MultipartFormDataContent content, string apiAdres)
+        {
+            try
+            {
+
+
+                var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                return "0";
+            }
+        }
+
     }
 }

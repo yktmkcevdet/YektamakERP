@@ -4,11 +4,14 @@ using Models.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
+using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Formlar.Satinalma;
 
 namespace YektamakDesktop.Formlar.Satis
 {
@@ -17,12 +20,16 @@ namespace YektamakDesktop.Formlar.Satis
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
         private readonly IJsonConverter _jsonConverter;
+        private CustomDataGrid<DataControlProjeDosya> customDataGrid;
         public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter)
         {
             _cache = cache;
             _projeService = projeService;
             _jsonConverter = jsonConverter;
             InitializeComponent();
+            customDataGrid = new CustomDataGrid<DataControlProjeDosya>(2, 30, new Point(0, 0), new Size(990, 300));
+            panel1.Controls.Add(customDataGrid.headerPanel);
+            panel1.Controls.Add(customDataGrid.detailPanel);
             Initialize();
         }
         private void Initialize()
@@ -34,7 +41,7 @@ namespace YektamakDesktop.Formlar.Satis
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
+            universalGrid1.Location = new Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
             universalGrid1.TabIndex = 13;
@@ -79,12 +86,12 @@ namespace YektamakDesktop.Formlar.Satis
             BindHelper.BindData(fcbMarkaAltGrupKategori, proje.markaAltGrupKategori, nameof(proje.markaAltGrupKategori.Id));
             BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
             BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
-            
+
         }
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            //string jsonResultMarka = _projeService.GetMarka();
-            //proje.marka = _jsonConverter.DeserializeObject<List<Marka>>(jsonResultMarka).FirstOrDefault(m => m.Id == proje.marka.Id);
+            string jsonResultMarka = _projeService.GetMarka();
+            proje.marka = _jsonConverter.DeserializeObject<List<Marka>>(jsonResultMarka).FirstOrDefault(m => m.Id == proje.marka.Id);
             string jsonResult = _projeService.SaveProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -141,6 +148,21 @@ namespace YektamakDesktop.Formlar.Satis
         private void ProjeTanimlamaFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveSettings();
+        }
+    }
+    public class DataControlProjeDosya : DataControl, IEntity, IAltForm
+    {
+        public CustomTextBoxSayisal Id { get; set; } = new() { TabIndex = 3, Width = 100, Visible = false, Tag = "Id" };
+        public CustomTextBoxSayisal projeId { get; set; } = new() { TabIndex = 4, Width = 100, Visible = false, Tag = "ProjeId" };
+        public CustomTextBox tanim { get; set; } = new() { TabIndex = 5, Width = 200, Visible = true, Tag = "Dosya Tanımı" };
+        public CustomTextBox dosyaYolu { get; set; } = new() { TabIndex = 6, Width = 300, Visible = true, Tag = "Dosya Yolu" };
+        public DataControlProjeDosya()
+        {
+        }
+
+        public void UstFormuBagla(IUstForm ustForm)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

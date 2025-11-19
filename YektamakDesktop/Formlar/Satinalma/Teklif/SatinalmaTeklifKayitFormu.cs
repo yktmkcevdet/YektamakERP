@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
@@ -162,17 +161,18 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             satinalmaSiparis.firma = satinalmaTeklifBaslik.teklifFirma;
             satinalmaSiparis.aciklama = satinalmaTeklifBaslik.aciklama;
             satinalmaSiparis.vade = satinalmaTeklifBaslik.vade;
-            satinalmaSiparis.satinalmaTeklif.Id = satinalmaTeklifBaslik.Id;
             satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
             satinalmaSiparis.dovizCinsi = satinalmaTeklifBaslik.dovizCinsi;
+            satinalmaSiparis.teslimTarihi = DateTime.Today.AddDays(Convert.ToDouble(satinalmaTeklifBaslik.terminSuresi));
+            satinalmaSiparis.kdv.Id = 1; 
             foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
             {
                 SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();
                 satinalmaSiparisDetay.miktar = item.satinalmaTalepDetay.miktar;
                 satinalmaSiparisDetay.aciklama = item.satinalmaTalepDetay.aciklama;
                 satinalmaSiparisDetay.birimFiyat = item.birimFiyat;
-                satinalmaSiparisDetay.stokKartId = item.satinalmaTalepDetay.projeStokKart.Id;
-                satinalmaSiparis.satinalmaSiparisDetayList.Add(satinalmaSiparisDetay);
+                satinalmaSiparisDetay.projeStokKart = item.satinalmaTalepDetay.projeStokKart;
+                satinalmaSiparis.satinalmaSiparisDetay.Add(satinalmaSiparisDetay);
             }
             var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
             satinalmaSiparisKayitFormu.UpdateMode(satinalmaSiparis);
@@ -198,10 +198,11 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             double toplam = 0;
             foreach (DataGridViewRow row in universalGrid1.Grid.Rows)
             {
-                if (row.Cells["Birim fiyat"].Value != null &&
-                    double.TryParse(row.Cells["Birim fiyat"].Value.ToString(), out double tutar))
+                if (row.Cells["Birim fiyat"].Value != null)
                 {
-                    toplam += tutar;
+                    double.TryParse(row.Cells["Birim fiyat"].Value.ToString(), out double brFiyatValue);
+                    double.TryParse(row.Cells["Miktar"].Value.ToString(), out double miktarValue);
+                    toplam += brFiyatValue * miktarValue;
                 }
             }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YektamakMobil")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+6565ca7d0d5f64f8fd065e0a09422e2a7e5ae574")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+465d180c531247e8e382fb8295b95391d3c4553c")]
 [assembly: System.Reflection.AssemblyProductAttribute("YektamakMobil")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YektamakMobil")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,8 +6,8 @@ namespace ApiService.Interfaces
     public interface ISatinalmaTalepService
     {
         public Task<string> SaveSatinalmaTalep(SatinalmaTalep satinalmaTalepBaslik);
-        public Task<string> GetSatinalmaTalep(SatinalmaTalep satinalmaTalepBaslik=null);
-        public Task<string> GetSatinalmaTalepDetay(SatinalmaTalepDetay satinalmaTalepDetay=null);
+        public Task<List<SatinalmaTalep>> GetSatinalmaTalep(SatinalmaTalep satinalmaTalepBaslik);
+        public Task<string> GetSatinalmaTalepDetay(SatinalmaTalepDetay satinalmaTalepDetay);
         public string GetSatinalmaTalepSatirDetay(SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay);
         public Task<string> GetTalepTipleri();
         public Task<string> GetFilteredSatinalmaSiparis(SatinalmaSiparis satinalmaSiparis);

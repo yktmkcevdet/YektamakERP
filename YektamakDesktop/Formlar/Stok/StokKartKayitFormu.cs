@@ -5,13 +5,17 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Interfaces;
+using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Genel;
+using YektamakDesktop.Properties;
 
 namespace YektamakDesktop.Formlar.Stok
 {
@@ -289,6 +293,173 @@ namespace YektamakDesktop.Formlar.Stok
         private void clbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+    }
+    public class DataControlStokKartDosya : DataControl, IEntity
+    {
+        private readonly ICache _cache;
+        private readonly IStokService _stokService;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly IFileHelper _fileHelper;
+        private readonly IFileService _fileService;
+        private StokKartDosya _stokKartDosya;
+        public StokKartDosya stokKartDosya
+        {
+            get
+            {
+                if (_stokKartDosya == null)
+                {
+                    _stokKartDosya = new();
+                }
+                return _stokKartDosya;
+            }
+            set
+            {
+                _stokKartDosya = value;
+                Binding();
+            }
+        }
+        public DataControlStokKartDosya(ICache cache, IStokService stokService, IJsonConverter jsonConverter, IFileHelper fileHelper, IFileService fileService)
+        {
+            _fileHelper = fileHelper;
+            _cache = cache;
+            _stokService = stokService;
+            _jsonConverter = jsonConverter;
+            _fileService = fileService;
+            InitializeComponents();
+        }
+
+        private void Binding()
+        {
+            IdControl.DataBindings.Clear();
+            stokKartIdControl.DataBindings.Clear();
+            dosyaUzantiControl.DataBindings.Clear();
+            dosyaAdControl.DataBindings.Clear();
+            dosyaTipControl.DataBindings.Clear();
+            IdControl.DataBindings.Add(nameof(IdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            stokKartIdControl.DataBindings.Add(nameof(stokKartIdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.stokKartId), true, DataSourceUpdateMode.OnPropertyChanged);
+            dosyaUzantiControl.DataBindings.Add(nameof(dosyaUzantiControl.TextCustom), stokKartDosya, nameof(stokKartDosya.dosyaUzanti), true, DataSourceUpdateMode.OnPropertyChanged);
+            dosyaAdControl.DataBindings.Add(nameof(dosyaAdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.dosyaAd), true, DataSourceUpdateMode.OnPropertyChanged);
+            dosyaTipControl.DataBindings.Add(nameof(dosyaTipControl.SelectedValue), stokKartDosya.dosyaTip, nameof(stokKartDosya.dosyaTip.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        public DataControlStokKartDosya()
+        {
+            InitializeComponents();
+        }
+
+        public CustomTextBox IdControl { get; set; }
+        public CustomTextBox stokKartIdControl { get; set; }
+        private FilterableComboBox _dosyaTipControl;
+        public FilterableComboBox dosyaTipControl
+        { get { if (_dosyaTipControl == null) { _dosyaTipControl = new(); } return _dosyaTipControl; } set { _dosyaTipControl = value; } }
+        public CustomTextBox dosyaAdControl { get; set; }
+        public CustomTextBox dosyaUzantiControl { get; set; }
+        public byte[] dosyaVeri { get; set; }
+        public RoundedIconButton iconButton { get; set; }
+        public RoundedIconButton iconButtonView { get; set; }
+
+
+        private void InitializeComponents()
+        {
+            IdControl = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
+            stokKartIdControl = new() { TabIndex = 2, Width = 0, Visible = true, Tag = "StokKartId" };
+            dosyaTipControl = new() { TabIndex = 3, Width = 60, Visible = true, Tag = "DosyaTip", DisplayMember = "ad", ValueMember = "Id" };
+            dosyaAdControl = new() { TabIndex = 4, Width = 350, Tag = "Dosya Adı" };
+            dosyaUzantiControl = new() { TabIndex = 5, Width = 50, Tag = "Dosya Uzantı" };
+            iconButton = new()
+            {
+                TabIndex = 6,
+                Width = 35,
+                Height = 25,
+                Tag = " Ekle",
+                BackgroundImage = Resources.ekle,
+                BackColor = Color.Transparent,
+                BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
+                CornerRadius = 5
+            };
+            iconButton.Click += ButtonDosyaEkle_Click;
+            iconButtonView = new()
+            {
+                TabIndex = 7,
+                Width = 35,
+                Height = 25,
+                Tag = "Göster",
+                BackgroundImage = Resources.pngegg,
+                BackColor = Color.Transparent,
+                BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
+                CornerRadius = 5
+            };
+            iconButtonView.Click += ButtonDosyaGoruntule_Click;
+            dosyaVeri = new byte[0];
+
+            buttonSil.Click += ButtonSil_Click;
+            if (stokKartDosya == null)
+            {
+                stokKartDosya = new StokKartDosya();
+            }
+
+            ComboBoxListFill.GetLookupAd(_cache.dosyaTipList, ref _dosyaTipControl);
+        }
+
+        private void ButtonDosyaEkle_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                stokKartDosya.dosya = File.ReadAllBytes(openFileDialog.FileName);
+                stokKartDosya.dosyaAd = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                stokKartDosya.dosyaUzanti = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+                Binding();
+                //dosyaAdControl.TextCustom = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                //dosyaUzantiControl.TextCustom = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+            }
+        }
+        private async void ButtonSil_Click(object sender, EventArgs e)
+        {
+            StokKartDosya stokKartDosya = new();
+            if (IdControl.TextCustom != "") stokKartDosya.Id = Convert.ToInt32(IdControl.TextCustom.Replace(".", ""));
+            string jsonResult = await _stokService.DeleteStokKartDosya(stokKartDosya);
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(jsonResult);
+            }
+        }
+        private async void ButtonDosyaGoruntule_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(stokKartIdControl.TextCustom))
+                return;
+            StokKart stokKart = new StokKart() { Id = int.Parse(stokKartIdControl.TextCustom) };
+            string jsonResult = _stokService.GetStokKart(stokKart);
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
+            }
+
+            dosyaVeri = _fileHelper.Decompress(await _fileService.GetFile(stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosyaFullPath));
+            //dosyaVeri = stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosya;
+
+            string tempFilePath = Path.GetTempFileName() + "." + dosyaUzantiControl.TextCustom;
+            if (dosyaVeri != null)
+            {
+                using (MemoryStream ms = new MemoryStream(dosyaVeri))
+                {
+                    File.WriteAllBytes(tempFilePath, ms.ToArray());
+                    Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+                }
+            }
+            else
+            {
+                MessageBox.Show("Dosya bulunamadı.");
+            }
+        }
+        public bool Validate()
+        {
+            bool isValid = true;
+            isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", dosyaTipControl);
+            isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", dosyaAdControl);
+            isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", dosyaUzantiControl);
+            return isValid;
         }
     }
 }

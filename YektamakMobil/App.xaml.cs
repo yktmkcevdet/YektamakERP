@@ -1,4 +1,4 @@
-﻿using Utilities.Interfaces;
+﻿using ApiService.Interfaces;
 
 namespace YektamakMobil
 {

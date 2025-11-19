@@ -75,9 +75,9 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\runt
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\ApiService.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\Models.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\Utilities.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\Utilities.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\ApiService.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\Models.pdb
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\bin\Debug\net9.0\Utilities.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\YektamakWeb.csproj.AssemblyReference.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\rpswa.dswa.cache.json
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\YektamakWeb.GeneratedMSBuildEditorConfig.editorconfig
@@ -97,6 +97,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\scop
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\scopedcss\projectbundle\YektamakWeb.bundle.scp.css
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\tzxjg6is5z-0n6lrtb02s.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\0wz98yz2xy-lftp6ydp6b.gz
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\yjb4c2l031-r7kfwwz29t.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\zlse4fq0do-9ta1zhct73.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\tkzxc88onf-wciz6sb8mk.gz
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\90q60tbl28-yxnxfvobon.gz
@@ -191,4 +192,3 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\refi
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\YektamakWeb.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\YektamakWeb.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\ref\YektamakWeb.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakWeb\obj\Debug\net9.0\compressed\yjb4c2l031-r7kfwwz29t.gz

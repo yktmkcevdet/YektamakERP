@@ -14,3 +14,5 @@ C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Release\net9.0\Api
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Release\net9.0\refint\ApiService.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Release\net9.0\ApiService.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\obj\Release\net9.0\ref\ApiService.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\bin\Release\net9.0\Utilities.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\ApiService\bin\Release\net9.0\Utilities.pdb

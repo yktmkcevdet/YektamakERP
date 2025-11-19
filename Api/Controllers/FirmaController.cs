@@ -30,5 +30,23 @@ namespace Api.Controllers
             string result = _dataAccessLayer.GetObject("spGetFirma");
             return result;
         }
+        [HttpPost, Route("api/GetAdres")]
+        public string GetAdres([FromBody] Adres adres)
+        {
+            string result = _dataAccessLayer.GetObject(adres, "spGetAdres");
+            return result;
+        }
+        [HttpPost, Route("api/SaveAdres")]
+        public string SaveAdres([FromBody] Adres adres)
+        {
+            string result = _dataAccessLayer.SaveObject(adres, "spSaveAdres");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteAdres")]
+        public string DeleteAdres([FromBody] Adres adres)
+        {
+            string result = _dataAccessLayer.DeleteObject(adres, "spDeleteAdres");
+            return result;
+        }
     }
 }

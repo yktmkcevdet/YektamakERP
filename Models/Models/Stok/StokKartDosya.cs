@@ -22,5 +22,7 @@ namespace Models
         public string dosyaUzanti { get; set; }
         [GridDisplay(Header = "Dosya", Visible = true)]
         public byte[] dosya { get; set; }
+        [GridDisplay(Header = "Dosya Yolu", Visible = true)]
+        public string dosyaFullPath { get; set; }
     }
 }
