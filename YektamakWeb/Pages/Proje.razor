@@ -33,7 +33,7 @@
             <td>
                 <select class="flex-column" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
                     <option value="0" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in cache.projes)
+                    @foreach (var item in cache.projeList)
                     {
                         <option value="@item.Id">@item.kod</option>
                     }

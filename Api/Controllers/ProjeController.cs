@@ -45,6 +45,12 @@ namespace Api.Controllers
             string result = _dataAccessLayer.DeleteObject(proje, "spDeleteProje");
             return result;
         }
+        [HttpPost, Route("api/DeleteProjeFile")]
+        public string DeleteProjeFile([FromBody] ProjeDosya projeDosya)
+        {
+            string result = _dataAccessLayer.DeleteObject(projeDosya, "spDeleteProjeFile");
+            return result;
+        }
         [HttpPost, Route("api/SaveProjeStokKart")]
         public string SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {

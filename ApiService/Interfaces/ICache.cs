@@ -20,7 +20,7 @@ namespace ApiService.Interfaces
         public List<ProfilTip> profilTips { get; }
         public List<OlcuBirim> olcuBirims { get; }
         public List<MalzemeStandart> malzemeStandarts { get; }
-        public List<Proje> projes { get; }
+        public List<Proje> projeList { get; }
         public List<ProjeTip> projeTipList { get; }
         public List<Proje> unAssignedProjeList { get; }
         public List<Sektor> sektorList { get; }

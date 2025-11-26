@@ -36,7 +36,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Hammadde Uzunluk")] public double? stokKarthammaddeuzunluk { get; set; }
         [GridDisplay(Header = "Hammadde Stok Grup")] public int? stokKarthammaddestokGrupId { get; set; }
         [GridDisplay(Header = "Hammadde Malzeme Standart Id")] public int? stokKarthammaddemalzemeStandartId { get; set; }
-        [GridDisplay(Header = "Hammadde Malzeme Standart")] public int? stokKarthammaddemalzemeStandartad { get; set; }
+        [GridDisplay(Header = "Hammadde Malzeme Standart")] public string stokKarthammaddemalzemeStandartad { get; set; }
         [GridDisplay(Header = "Hammadde Malzeme Grup")] public int? stokKarthammaddemalzemeGrupId { get; set; }
         [GridDisplay(Header = "Hammadde Malzeme Alt Grup")] public int? stokKarthammaddemalzemeAltGrupId { get; set; }
         [GridDisplay(Header = "Hammadde Ölçü Birim Id")] public int? stokKarthammaddeolcuBirimId { get; set; }

@@ -51,6 +51,9 @@
     <Compile Update="CustomControls\CustomTextBoxSayisal.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\MailAyarlarim.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Genel\MalzemeAltGrup2TanimFormu.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -4,7 +4,8 @@
     "Projects": [
       {
         "Path": "YektamakDesktop\\YektamakDesktop.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "FinansalTakipDesktop"
       }
     ]
   }

@@ -39,7 +39,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
             universalGrid1.SetData(new List<SatinalmaTeklifBaslikDTO>(), this.Name, true);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1; ;
-            ComboBoxListFill.GetLookupKod(_cache.projes, ref clbProjeKod);
+            ComboBoxListFill.GetLookupKod(_cache.projeList, ref clbProjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
             clbProjeKod.DisplayMember = "kod";

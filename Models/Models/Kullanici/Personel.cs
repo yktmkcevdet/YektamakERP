@@ -22,9 +22,7 @@ namespace Models
         [GridDisplay(Header = "firmaId")] public Firma firma { get { if(_firma == null){ _firma = new(); } return _firma; } set { _firma = value; } }
         private PersonelResim _personelResim;
         public PersonelResim personelResim { get { if (_personelResim == null) { _personelResim = new(); } return _personelResim; } set { _personelResim = value; } }
-        [GridDisplay(Header = "yoneticiId")] public int? yoneticiPersonelId { get; set; }
-        //private Personel _yonetici;
-        //public Personel yonetici { get { if (_yonetici == null) { _yonetici = new(); } return _yonetici; } set { _yonetici = value; } }
+        [GridDisplay(Header = "yoneticiId", Tip = "Liste", ListName = "personelList", ListVisibleColumnName = "ad")] public int? yoneticiPersonelId { get; set; }
 
     }
     public class PersonelResim:IEntity

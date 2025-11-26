@@ -80,7 +80,6 @@
             Name = "CustomTextBoxTarih";
             Padding = new System.Windows.Forms.Padding(3);
             Size = new System.Drawing.Size(238, 191);
-            Load += CustomTextBoxTarih_Load;
             ResumeLayout(false);
         }
 

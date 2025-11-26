@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
 {
-    public partial class FilterableComboBox : UserControl
+    public partial class FilterableComboBox : UserControl,INotifyPropertyChanged
     {
         [Browsable(false)]
         public ReadOnlyComboBox ComboBox => comboBox1;
@@ -333,7 +333,7 @@ namespace YektamakDesktop.CustomControls
         public object SelectedValue
         {
             get => comboBox1.SelectedValue;
-            set { if (value != null && value.ToString() != "") { comboBox1.SelectedValue = value; } else { SelectedIndex = -1; } }
+            set { if (value != null && value.ToString() != "") { comboBox1.SelectedValue = value; } else { SelectedIndex = -1; } OnPropertyChanged(nameof(SelectedValue)); }
         }
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -351,6 +351,9 @@ namespace YektamakDesktop.CustomControls
         }
 
         public event EventHandler SelectedIndexChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         public event EventHandler SelectedValueChanged
         {
             add { comboBox1.SelectedValueChanged += value; }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Properties;
 
@@ -16,16 +17,13 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         
         CustomDataGrid<DataControlMenu> customDataGrid;
         private Point offset;
-        public Menuler()
-        {
-            
-        }
+       
         public Menuler(IKullaniciYetkiService kullaniciYetkiService)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
             InitializeComponent();
             var dataC=new DataControlMenu(new Menu());
-            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300), dataC);
+            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300));
             this.Controls.Add(customDataGrid.headerPanel);
             this.Controls.Add(customDataGrid.detailPanel);
         }
@@ -93,29 +91,18 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             _kullaniciYetkiService = kullaniciYetkiService;
             Initialize();
-            Binding();
         }
         public DataControlMenu(Menu menuCon)
         {
             Initialize();
             menu = menuCon;
-            Binding();
-        }
-        public DataControlMenu()
-        {
-            Initialize();
-            Binding();
         }
         private void Binding()
         {
-            menuId.DataBindings.Clear();
-            menuAdi.DataBindings.Clear();
-            formAdi.DataBindings.Clear();
-            icon.DataBindings.Clear();
-            menuId.DataBindings.Add("TextCustom", menu, $"{nameof(menu.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            menuAdi.DataBindings.Add("TextCustom", menu, $"{nameof(menu.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            formAdi.DataBindings.Add("TextCustom", menu, $"{nameof(menu.formAd)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            icon.DataBindings.Add("TextCustom", menu, $"{nameof(menu.icon)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(menuId, menu, nameof(menu.Id));
+            BindHelper.BindData(menuAdi, menu, nameof(menu.ad));
+            BindHelper.BindData(formAdi, menu, nameof(menu.formAd));
+            BindHelper.BindData(icon, menu, nameof(menu.icon));
         }
         private void Initialize()
         {
@@ -136,6 +123,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             };
             buttonSil.Click += ButtonSil_Click;
             iconButton.Click += IconButton_Click;
+            Binding();
         }
 
         public CustomTextBox menuId { get; set; }

@@ -33,7 +33,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             _projeService = projeService;
             _stokService = stokService;
             InitializeComponent();
-            fcbProjeKod.SetDataSource(_cache.projes.GroupBy(p => p.Id).Select(p => p.First()).ToList());
+            fcbProjeKod.SetDataSource(_cache.projeList.GroupBy(p => p.Id).Select(p => p.First()).ToList());
             _configurationService = configurationService;
             _fileService = fileService;
             _fileHelper = fileHelper;
@@ -143,7 +143,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     var pdfBytes = await _fileService.GetFile(fileName);
                     if (pdfBytes == null) continue;
 
-                    using (var reader = new iTextSharp.text.pdf.PdfReader(_fileHelper.Decompress(pdfBytes)))
+                    using (var reader = new iTextSharp.text.pdf.PdfReader(pdfBytes))
                     {
                         copy.AddDocument(reader);
                     }
@@ -233,7 +233,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                 Directory.CreateDirectory(directoryPath);
             }
             byte[] dosya = await _fileService.GetFile(skd.dosyaFullPath);
-            File.WriteAllBytes(filePath, _fileHelper.Decompress(dosya));
+            File.WriteAllBytes(filePath, dosya);
         }
 
         private void ctbParcaKodu_KeyDown(object sender, KeyEventArgs e)

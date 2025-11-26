@@ -87,7 +87,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             BindHelper.BindData(clbRol, kullanici.rol, nameof(kullanici.rol.Id));
             BindHelper.BindData(fcbMailAdres, kullanici.mailAdres, nameof(kullanici.mailAdres.Id));
         }
-        private void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
+        private async void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
         {
             if (!ValidateInputs()) return;
             try
@@ -106,11 +106,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 }
                 else
                 {
-                    kullanici = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
-                    if (!_cache.kullaniciList.Any(x => x.Id == kullanici.Id))
-                    {
-                        _cache.kullaniciList.Add(kullanici);
-                    }
+                    kullanici = _jsonConverter.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
+                    _cache.kullaniciList.Clear();
+                    await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
                     if (!string.IsNullOrEmpty(kullanici.sifre))
                     {
                         IMailHandler mailHandler = new MailHandler();
@@ -141,13 +139,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private async void KullaniciKayitFormu_Load(object sender, EventArgs e)
         {
             Binding();
-            var kullaniciList = _cache.kullaniciList;
-            List<KullaniciDTO> kullaniciKayit = new List<KullaniciDTO>();
-            foreach (var kullanici in kullaniciList)
-            {
-                kullaniciKayit.Add(ConvertHelper.ToDTO<KullaniciDTO>(kullanici));
-            }
-            await universalGrid1.SetData(kullaniciKayit, this.Name);
+            await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
         }
 
         

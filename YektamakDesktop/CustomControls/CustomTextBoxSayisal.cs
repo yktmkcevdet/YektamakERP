@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
 {
-    public partial class CustomTextBoxSayisal : UserControl,INotifyPropertyChanged
+    public partial class CustomTextBoxSayisal : UserControl
     {
 
         private Color borderColor = Color.Silver;
@@ -109,7 +109,7 @@ namespace YektamakDesktop.CustomControls
                 textBox.Text = value.ToString();
                 SetPlaceHolder();
                 SayiFormati();
-                OnPropertyChanged(nameof(TextCustom));
+                base.OnTextChanged(null);
             }
         }
 
@@ -257,9 +257,7 @@ namespace YektamakDesktop.CustomControls
         [Category("Focus")]
         [Description("Occurs when the control is mouse left")]
         public new event EventHandler MouseLeave;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

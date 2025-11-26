@@ -15,7 +15,7 @@
     </button>
     <select class="form-control" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
         <option value="">Seçim Yapınız</option>
-        @foreach (var item in _cache.projes)
+        @foreach (var item in _cache.projeList)
         {
             <option value="@item.Id">@item.kod</option>
         }

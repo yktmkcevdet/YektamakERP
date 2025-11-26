@@ -105,9 +105,31 @@ namespace ApiService.Implementations
             return await response.Content.ReadAsStringAsync();
         }
 
-        public Task<string> PostAsync(MultipartFormDataContent content, string apiAdres)
+        public async Task<string> PostAsync(MultipartFormDataContent content, string apiAdres)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _httpClient.PostAsync($"/api/{apiAdres}", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return "0";
+                }
+
+                string result = await response.Content.ReadAsStringAsync();
+                // Daha güvenilir hata kontrolü
+                if (string.IsNullOrWhiteSpace(result) ||
+                    result.Contains("error", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "0";
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                return "0";
+            }
         }
     }
 }
