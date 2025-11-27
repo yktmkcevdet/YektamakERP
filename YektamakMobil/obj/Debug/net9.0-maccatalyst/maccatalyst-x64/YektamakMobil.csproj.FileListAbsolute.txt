@@ -282,10 +282,6 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ma
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.a
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.dylib
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\ApiService.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Controls.HotReload.Forms.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.TapContract.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Models.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Utilities.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\ApiService.pdb

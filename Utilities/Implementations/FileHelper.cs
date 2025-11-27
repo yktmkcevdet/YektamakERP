@@ -33,5 +33,16 @@ namespace Utilities.Implementations
                 return content;
             }
         }
+        public async Task<byte[]> ReadFileAsBinaryAsync(string filePath)
+        {
+            try
+            {
+                return await File.ReadAllBytesAsync(filePath);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

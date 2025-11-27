@@ -41,11 +41,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             customDataGrid.SetUstForm(this);
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(p=>p.personel.Id==_cache.kullanici.personel.Id).ToList(), ref fcbProjeKod);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
-            ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
-            ComboBoxListFill.GetLookupAd(_cache.talepNedenList, ref fcbTalepNeden);
+            fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
+            fcbStokGrup.SetDataSource(_cache.stokGrups);
+            fcbStokTip.SetDataSource(_cache.stokTips);
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
+            fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             satinalmaTalep.talepEdenKullanici.Id = _cache.kullanici.Id;
             BindData();
         }
@@ -69,8 +69,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void BindData()
         {
-            BindHelper.BindData(clbMalzemeGrup, satinalmaTalep.malzemeGrup, nameof(satinalmaTalep.malzemeGrup.Id));
-            BindHelper.BindData(clbStokTip, satinalmaTalep.stokTip, nameof(satinalmaTalep.stokTip.Id));
+            BindHelper.BindData(fcbMalzemeGrup, satinalmaTalep.malzemeGrup, nameof(satinalmaTalep.malzemeGrup.Id));
+            BindHelper.BindData(fcbStokTip, satinalmaTalep.stokTip, nameof(satinalmaTalep.stokTip.Id));
             BindHelper.BindData(ctbAciklama, satinalmaTalep, nameof(satinalmaTalep.aciklama));
             BindHelper.BindData(ctbTalepNo,satinalmaTalep, nameof(satinalmaTalep.satinalmaTalepNo));
             BindHelper.BindData(ctbTeslimTarihi, satinalmaTalep, nameof(satinalmaTalep.teslimTarihi));
@@ -90,7 +90,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void clbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(clbStokGrup.SelectedValue.ToString())).ToList(), ref clbMalzemeGrup);
+            fcbTalepNeden.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(fcbStokGrup.SelectedValue.ToString())).ToList());
         }
 
         private void clbMalzemeGrup_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,16 +100,16 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void clbStokTip_SelectedIndexChanged(object sender, EventArgs e)
         {
-            clbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(clbStokTip.SelectedValue.ToString())).ToList());
-            clbStokGrup.SetDataSource(_cache.stokGrups);
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(fcbStokTip.SelectedValue.ToString())).ToList());
+            fcbStokGrup.SetDataSource(_cache.stokGrups);
             VeriDegisti?.Invoke(this, satinalmaTalep);
         }
         private bool Validate()
         {
             bool isValid = true;
             isValid &= GlobalData.CheckField("Proje seçilmelidir", fcbProjeKod);
-            isValid &= GlobalData.CheckField("Stok tipi seçilmelidir", clbStokTip);
-            isValid &= GlobalData.CheckField("Malzeme grubu seçilmelidir", clbMalzemeGrup);
+            isValid &= GlobalData.CheckField("Stok tipi seçilmelidir", fcbStokTip);
+            isValid &= GlobalData.CheckField("Malzeme grubu seçilmelidir", fcbMalzemeGrup);
             isValid &= GlobalData.CheckField("Talep nedeni seçilmelidir", fcbTalepNeden);
             isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
             isValid &= GlobalData.CheckField("En az bir satır eklenmelidir", customDataGrid);
@@ -411,6 +411,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void Initialize()
         {
+            stokKartId.SetDataSource(stokKarts.CastToDTO<ProjeStokKartDTO>().Select(item => item with { stokKartad = $"{item.stokKartkod} - {item.stokKartad} - {item.stokKartboyut}" }).ToList());
             stokKartId.SelectedIndexChanged += StokKartId_SelectedIndexChanged;
             BindData();
         }

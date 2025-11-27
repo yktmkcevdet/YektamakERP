@@ -48,9 +48,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             label1 = new Label();
             label7 = new Label();
             fcbProjeKod = new FilterableComboBox();
-            clbMalzemeGrup = new FilterableComboBox();
-            clbStokTip = new FilterableComboBox();
-            clbStokGrup = new FilterableComboBox();
+            fcbMalzemeGrup = new FilterableComboBox();
+            fcbStokTip = new FilterableComboBox();
+            fcbStokGrup = new FilterableComboBox();
             fcbTalepNeden = new FilterableComboBox();
             label8 = new Label();
             customButtonSave1 = new RoundedButton();
@@ -224,54 +224,54 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             // clbMalzemeGrup
             // 
-            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
-            clbMalzemeGrup.BorderRadius = 8;
-            clbMalzemeGrup.BorderSize = 1;
-            clbMalzemeGrup.DisplayMember = "ad";
-            clbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbMalzemeGrup.Location = new System.Drawing.Point(160, 201);
-            clbMalzemeGrup.Margin = new Padding(1);
-            clbMalzemeGrup.Name = "clbMalzemeGrup";
-            clbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
-            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
-            clbMalzemeGrup.Size = new System.Drawing.Size(203, 25);
-            clbMalzemeGrup.TabIndex = 24;
-            clbMalzemeGrup.ValueMember = "Id";
-            clbMalzemeGrup.SelectedIndexChanged += clbMalzemeGrup_SelectedIndexChanged;
+            fcbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
+            fcbMalzemeGrup.BorderRadius = 8;
+            fcbMalzemeGrup.BorderSize = 1;
+            fcbMalzemeGrup.DisplayMember = "ad";
+            fcbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbMalzemeGrup.Location = new System.Drawing.Point(160, 201);
+            fcbMalzemeGrup.Margin = new Padding(1);
+            fcbMalzemeGrup.Name = "clbMalzemeGrup";
+            fcbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
+            fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeGrup.Size = new System.Drawing.Size(203, 25);
+            fcbMalzemeGrup.TabIndex = 24;
+            fcbMalzemeGrup.ValueMember = "Id";
+            fcbMalzemeGrup.SelectedIndexChanged += clbMalzemeGrup_SelectedIndexChanged;
             // 
             // clbStokTip
             // 
-            clbStokTip.BorderColor = System.Drawing.Color.Silver;
-            clbStokTip.BorderRadius = 8;
-            clbStokTip.BorderSize = 1;
-            clbStokTip.DisplayMember = "ad";
-            clbStokTip.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbStokTip.Location = new System.Drawing.Point(160, 147);
-            clbStokTip.Margin = new Padding(1);
-            clbStokTip.Name = "clbStokTip";
-            clbStokTip.Padding = new Padding(7, 5, 7, 5);
-            clbStokTip.PlaceholderText = "Seçiniz...";
-            clbStokTip.Size = new System.Drawing.Size(203, 25);
-            clbStokTip.TabIndex = 25;
-            clbStokTip.ValueMember = "Id";
-            clbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
+            fcbStokTip.BorderColor = System.Drawing.Color.Silver;
+            fcbStokTip.BorderRadius = 8;
+            fcbStokTip.BorderSize = 1;
+            fcbStokTip.DisplayMember = "ad";
+            fcbStokTip.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbStokTip.Location = new System.Drawing.Point(160, 147);
+            fcbStokTip.Margin = new Padding(1);
+            fcbStokTip.Name = "clbStokTip";
+            fcbStokTip.Padding = new Padding(7, 5, 7, 5);
+            fcbStokTip.PlaceholderText = "Seçiniz...";
+            fcbStokTip.Size = new System.Drawing.Size(203, 25);
+            fcbStokTip.TabIndex = 25;
+            fcbStokTip.ValueMember = "Id";
+            fcbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
             // 
             // clbStokGrup
             // 
-            clbStokGrup.BorderColor = System.Drawing.Color.Silver;
-            clbStokGrup.BorderRadius = 8;
-            clbStokGrup.BorderSize = 1;
-            clbStokGrup.DisplayMember = "ad";
-            clbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbStokGrup.Location = new System.Drawing.Point(160, 174);
-            clbStokGrup.Margin = new Padding(1);
-            clbStokGrup.Name = "clbStokGrup";
-            clbStokGrup.Padding = new Padding(7, 5, 7, 5);
-            clbStokGrup.PlaceholderText = "Seçiniz...";
-            clbStokGrup.Size = new System.Drawing.Size(203, 25);
-            clbStokGrup.TabIndex = 26;
-            clbStokGrup.ValueMember = "Id";
-            clbStokGrup.SelectedIndexChanged += clbStokGrup_SelectedIndexChanged;
+            fcbStokGrup.BorderColor = System.Drawing.Color.Silver;
+            fcbStokGrup.BorderRadius = 8;
+            fcbStokGrup.BorderSize = 1;
+            fcbStokGrup.DisplayMember = "ad";
+            fcbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
+            fcbStokGrup.Location = new System.Drawing.Point(160, 174);
+            fcbStokGrup.Margin = new Padding(1);
+            fcbStokGrup.Name = "clbStokGrup";
+            fcbStokGrup.Padding = new Padding(7, 5, 7, 5);
+            fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.Size = new System.Drawing.Size(203, 25);
+            fcbStokGrup.TabIndex = 26;
+            fcbStokGrup.ValueMember = "Id";
+            fcbStokGrup.SelectedIndexChanged += clbStokGrup_SelectedIndexChanged;
             // 
             // fcbTalepNeden
             // 
@@ -334,9 +334,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(label6);
             Controls.Add(label8);
             Controls.Add(fcbTalepNeden);
-            Controls.Add(clbStokGrup);
-            Controls.Add(clbStokTip);
-            Controls.Add(clbMalzemeGrup);
+            Controls.Add(fcbStokGrup);
+            Controls.Add(fcbStokTip);
+            Controls.Add(fcbMalzemeGrup);
             Controls.Add(fcbProjeKod);
             Controls.Add(label7);
             Controls.Add(label1);
@@ -370,9 +370,9 @@ namespace YektamakDesktop.Formlar.Satinalma
         private Label label1;
         private Label label7;
         private FilterableComboBox fcbProjeKod;
-        private FilterableComboBox clbMalzemeGrup;
-        private FilterableComboBox clbStokTip;
-        private FilterableComboBox clbStokGrup;
+        private FilterableComboBox fcbMalzemeGrup;
+        private FilterableComboBox fcbStokTip;
+        private FilterableComboBox fcbStokGrup;
         private FilterableComboBox fcbTalepNeden;
         private Label label8;
         private RoundedButton customButtonSave1;

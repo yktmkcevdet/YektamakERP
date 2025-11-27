@@ -82,6 +82,7 @@ namespace YektamakDesktop.CustomControls
                     textBox.TextCustom = value.Value.ToShortDateString();
                 }
                 SetPlaceHolder();
+                base.OnTextChanged(null);
             }
         }
         protected virtual void OnGuncelle(EventArgs e)
@@ -110,11 +111,6 @@ namespace YektamakDesktop.CustomControls
         [Category("Key")]
         [Description("Occurs when a key is released.")]
         public event KeyEventHandler Key_Up;
-
-        [Browsable(true)]
-        [Category("Behavior")]
-        [Description("Occurs when the value of the SelectedIndex property changes.")]
-
 
         private void textBox_Enter(object sender, EventArgs e)
         {
@@ -222,8 +218,8 @@ namespace YektamakDesktop.CustomControls
         {
             if (focusOnTextBox == false)
             {
-                this.Height = 32;
-                this.Width = 145;
+                this.Height = 25;
+                this.Width = 91;
                 monthCalendar.Visible = false;
             }
             else
@@ -251,11 +247,6 @@ namespace YektamakDesktop.CustomControls
             {
                 textBox.TextCustom = "";
             }
-        }
-
-        private void monthCalendar_Leave(object sender, EventArgs e)
-        {
-
         }
         private void TariheDonustur()
         {
@@ -288,11 +279,6 @@ namespace YektamakDesktop.CustomControls
                 focusOnTextBox = false;
                 Resize_MonthCalendar();
             }
-        }
-
-        private void CustomTextBoxTarih_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

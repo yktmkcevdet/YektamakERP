@@ -286,16 +286,11 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-io
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\libxamarin-dotnet.a
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\libxamarin-dotnet.dylib
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\ApiService.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Maui.Controls.HotReload.Forms.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.VisualStudio.DesignTools.TapContract.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Models.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Utilities.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\ApiService.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Models.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\bin\Debug\net9.0-ios\iossimulator-x64\Utilities.pdb
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\build-signature\signature
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\YektamakMobil.csproj.AssemblyReference.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\mauiimage.inputs
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\mauifont.inputs
@@ -355,3 +350,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-io
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\YektamakMobil.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\YektamakMobil.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\ref\YektamakMobil.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakMobil\obj\Debug\net9.0-ios\iossimulator-x64\build-signature\signature

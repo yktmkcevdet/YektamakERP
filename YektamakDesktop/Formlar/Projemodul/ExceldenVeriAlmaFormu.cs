@@ -1,6 +1,5 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -8,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text.RegularExpressions;
@@ -38,7 +36,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _stokService = stokService;
             _jsonConverter = jsonConverter;
             InitializeComponent();
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList(), ref clbProjeKodu);
+            ComboBoxListFill.GetLookupKod(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList(), ref clbProjeKodu);
         }
         private List<ProjeStokKart> _projeStokKarts;
         private List<ProjeStokKart> projeStokKarts
@@ -59,7 +57,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 {
                     // Seçilen dosya yolunu TextBox'a yükle
                     ctbDosyaYolu.isPlaceHolder = false;
-                    ctbDosyaYolu.textBox.Text = openFileDialog.FileName;
+                    ctbDosyaYolu.TextCustom = openFileDialog.FileName;
                     string filePath = Path.GetDirectoryName(openFileDialog.FileName);
                     files = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
                 }
@@ -309,34 +307,17 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if(fileName == null) return null;
             var file = files.FirstOrDefault(f => Regex.IsMatch(f, fileName, RegexOptions.IgnoreCase));
             if (file == null) return null;
-            var content = await ReadFileAsBinaryAsync(file);
+            var content = await _fileHelper.ReadFileAsBinaryAsync(file);
             if (content == null) return null;
-            //var folder = Path.Combine("\\\\filesrv\\departmanlar\\07 SIRKET ICI DOSYA PAYLASIM\\", "Uploads");
-            //Directory.CreateDirectory(folder);
             var filePath = Path.Combine(Guid.NewGuid() + Path.GetExtension(file));
-            //await File.WriteAllBytesAsync(filePath, _fileHelper.Compress(content));
-            _fileService.SaveFile(_fileHelper.Compress(content,filePath));
+            _fileService.SaveFile(content,filePath);
             return new StokKartDosya
             {
                 dosyaUzanti = Path.GetExtension(file).TrimStart('.'),
                 dosyaAd = Path.GetFileNameWithoutExtension(file),
-                //dosya = Compress(content),
                 dosyaTip = { Id = dosyaTipId },
                 dosyaFullPath = filePath
             };
-        }
-        
-
-        private async Task<byte[]> ReadFileAsBinaryAsync(string filePath)
-        {
-            try
-            {
-                return await File.ReadAllBytesAsync(filePath);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
         private async Task SaveStokKartBatch()
         {

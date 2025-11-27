@@ -75,8 +75,7 @@
       },
       "Microsoft.AspNetCore.Components/9.0.1": {
         "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "9.0.1",
-          "Microsoft.AspNetCore.Components.Analyzers": "9.0.1"
+          "Microsoft.AspNetCore.Authorization": "9.0.1"
         },
         "runtime": {
           "lib/net9.0/Microsoft.AspNetCore.Components.dll": {
@@ -85,7 +84,6 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Components.Analyzers/9.0.1": {},
       "Microsoft.AspNetCore.Components.Forms/9.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "9.0.1"
@@ -597,7 +595,6 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/5.0.0": {},
       "MudBlazor/8.12.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "9.0.1",
@@ -629,7 +626,6 @@
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
           "SixLabors.ImageSharp": "2.1.10",
-          "System.Security.Cryptography.Xml": "8.0.2",
           "ZString": "2.6.0"
         },
         "runtime": {
@@ -714,10 +710,6 @@
         }
       },
       "SixLabors.ImageSharp/2.1.10": {
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0"
-        },
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "assemblyVersion": "2.0.0.0",
@@ -751,18 +743,6 @@
             "assemblyVersion": "8.0.1.0",
             "fileVersion": "8.0.1.50722"
           }
-        }
-      },
-      "System.Runtime.CompilerServices.Unsafe/5.0.0": {},
-      "System.Security.Cryptography.Pkcs/8.0.1": {},
-      "System.Security.Cryptography.Xml/8.0.2": {
-        "dependencies": {
-          "System.Security.Cryptography.Pkcs": "8.0.1"
-        }
-      },
-      "System.Text.Encoding.CodePages/5.0.0": {
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
         }
       },
       "ZString/2.6.0": {
@@ -867,13 +847,6 @@
       "sha512": "sha512-6pwfbQKNtvPkbF4tCGiAKGyt6BVpu58xAXz7u2YXcUKTNmNxrymbG1mEyMc0EPzVdnquDDqTyfXM3mC1EJycxQ==",
       "path": "microsoft.aspnetcore.components/9.0.1",
       "hashPath": "microsoft.aspnetcore.components.9.0.1.nupkg.sha512"
-    },
-    "Microsoft.AspNetCore.Components.Analyzers/9.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-I8Rs4LXT5UQxM5Nin2+Oj8aSY2heszSZ3EyTLgt3mxmfiRPrVO7D8NNSsf1voI2Gb0qFJceof/J5c9E+nfNuHw==",
-      "path": "microsoft.aspnetcore.components.analyzers/9.0.1",
-      "hashPath": "microsoft.aspnetcore.components.analyzers.9.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.Forms/9.0.1": {
       "type": "package",
@@ -1162,13 +1135,6 @@
       "path": "microsoft.jsinterop/9.0.1",
       "hashPath": "microsoft.jsinterop.9.0.1.nupkg.sha512"
     },
-    "Microsoft.NETCore.Platforms/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
-      "path": "microsoft.netcore.platforms/5.0.0",
-      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
-    },
     "MudBlazor/8.12.0": {
       "type": "package",
       "serviceable": true,
@@ -1252,34 +1218,6 @@
       "sha512": "sha512-GJw3bYkWpOgvN3tJo5X4lYUeIFA2HD293FPUhKmp7qxS+g5ywAb34Dnd3cDAFLkcMohy5XTpoaZ4uAHuw0uSPQ==",
       "path": "system.identitymodel.tokens.jwt/8.0.1",
       "hashPath": "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
-    },
-    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
-      "path": "system.runtime.compilerservices.unsafe/5.0.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
-    },
-    "System.Security.Cryptography.Pkcs/8.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-CoCRHFym33aUSf/NtWSVSZa99dkd0Hm7OCZUxORBjRB16LNhIEOf8THPqzIYlvKM0nNDAPTRBa1FxEECrgaxxA==",
-      "path": "system.security.cryptography.pkcs/8.0.1",
-      "hashPath": "system.security.cryptography.pkcs.8.0.1.nupkg.sha512"
-    },
-    "System.Security.Cryptography.Xml/8.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-aDM/wm0ZGEZ6ZYJLzgqjp2FZdHbDHh6/OmpGfb7AdZ105zYmPn/83JRU2xLIbwgoNz9U1SLUTJN0v5th3qmvjA==",
-      "path": "system.security.cryptography.xml/8.0.2",
-      "hashPath": "system.security.cryptography.xml.8.0.2.nupkg.sha512"
-    },
-    "System.Text.Encoding.CodePages/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
-      "path": "system.text.encoding.codepages/5.0.0",
-      "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
     },
     "ZString/2.6.0": {
       "type": "package",

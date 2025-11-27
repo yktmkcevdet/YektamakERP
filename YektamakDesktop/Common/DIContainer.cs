@@ -53,6 +53,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<KullaniciKayitFormu>();
             services.AddTransient<LogoEntegrasyon>();
             services.AddTransient<MailAyarlari>();
+            services.AddTransient<MailAyarlarim>();
             services.AddTransient<MailGonder>();
             services.AddTransient<MainWindow>();
             services.AddTransient<MalzemeAltGrupTanimFormu>();

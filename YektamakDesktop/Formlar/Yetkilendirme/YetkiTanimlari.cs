@@ -45,11 +45,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             treeView1.Nodes.Clear();
             Kullanici kullanici = new Kullanici();
-            kullanici.rol.Id = comboListBoxRol.selectedDataRowId;
+            kullanici.rol.Id = int.Parse(comboListBoxRol.SelectedValue.ToString());
             string jsonResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
             List<KullaniciYetki> kullaniciYetkiList = JsonConvert.DeserializeObject<List<KullaniciYetki>>(jsonResult);
             TreeNodes(kullaniciYetkiList);
-            ComboBoxListFill.GetLookupAd(_cache.kullaniciList.Where(k => k.rol.Id == comboListBoxRol.selectedDataRowId).ToList(), ref cbxKullanici);
+            ComboBoxListFill.GetLookupAd(_cache.kullaniciList.Where(k => k.rol.Id.ToString() == comboListBoxRol.SelectedValue.ToString()).ToList(), ref cbxKullanici);
         }
         bool isLoading=false;
         private void TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
@@ -97,7 +97,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             if (isLoading) return;
             Yetki yetki = new Yetki();
-            yetki.rolId = comboListBoxRol.selectedDataRowId;
+            yetki.rolId = int.Parse(comboListBoxRol.SelectedValue.ToString());
             if (e.Node.Parent != null)
             {
                 yetki.menu.Id = int.TryParse(e.Node.Parent.Name, out int parentId) ? parentId : yetki.menu.Id;
@@ -197,10 +197,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         private async Task<bool> SetAlanYetkiList()
         {
-            if (cbxKullanici.selectedDataRowId == null) return false;
+            if (cbxKullanici.SelectedValue == null) return false;
             if (selectedNode == null) return false;
             AlanYetki alanYetki = new AlanYetki();
-            alanYetki.kullanici.Id = cbxKullanici.selectedDataRowId == null ? 0 : cbxKullanici.selectedDataRowId;
+            alanYetki.kullanici.Id = cbxKullanici.SelectedValue == null ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString());
             alanYetki.formAd = selectedNode.Text;
             string jsonResult = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
             var yetkiListDTO = new List<AlanYetkiDTO>();
@@ -256,7 +256,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     {
                         model = menu.model,
                         formAd = menu.formAd,
-                        kullaniciId = cbxKullanici.selectedDataRowId == -1 ? 0 : cbxKullanici.selectedDataRowId
+                        kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString()) == -1 ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString())
                     };
                     var attrs = property.GetCustomAttributes(typeof(GridDisplayAttribute), true);
                     if (attrs.Length > 0 && attrs[0] is GridDisplayAttribute attr)
@@ -317,7 +317,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private async Task YetkiTanimla()
         {
-            alanYetki.kullaniciId = cbxKullanici.selectedDataRowId;
+            alanYetki.kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString());
             alanYetki.yetki = !alanYetki.yetki;
             alanYetki.formAd = selectedNode.Text;
             string httpResult = await _kullaniciYetkiService.SaveAlanYetki(ConvertHelper.ToEntity<AlanYetki>(alanYetki));

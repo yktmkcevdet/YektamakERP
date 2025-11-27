@@ -491,6 +491,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // panel1
             // 
+            panel1.AllowDrop = true;
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.BorderStyle = BorderStyle.FixedSingle;
@@ -498,6 +499,8 @@ namespace YektamakDesktop.Formlar.Stok
             panel1.Name = "panel1";
             panel1.Size = new Size(855, 205);
             panel1.TabIndex = 57;
+            panel1.DragDrop += panel1_DragDrop;
+            panel1.DragEnter += panel1_DragEnter;
             // 
             // ctbAgirlik
             // 
@@ -612,7 +615,6 @@ namespace YektamakDesktop.Formlar.Stok
             ctbBoyut.BorderColor = Color.Silver;
             ctbBoyut.BorderFocusColor = Color.HotPink;
             ctbBoyut.BorderSize = 1;
-            ctbBoyut.Enabled = false;
             ctbBoyut.Font = new Font("Segoe UI", 8F);
             ctbBoyut.ForeColor = Color.Black;
             ctbBoyut.Location = new Point(650, 228);
@@ -716,6 +718,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new Padding(6, 4, 6, 4);
             clbProjeKod.PlaceholderText = "Seçiniz...";
+            clbProjeKod.ReadOnly = false;
             clbProjeKod.Size = new Size(138, 25);
             clbProjeKod.TabIndex = 2;
             clbProjeKod.ValueMember = "Id";
@@ -733,6 +736,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbStokTip.Name = "clbStokTip";
             clbStokTip.Padding = new Padding(6, 4, 6, 4);
             clbStokTip.PlaceholderText = "Seçiniz...";
+            clbStokTip.ReadOnly = false;
             clbStokTip.Size = new Size(138, 25);
             clbStokTip.TabIndex = 1;
             clbStokTip.ValueMember = "Id";
@@ -750,6 +754,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbOlcuBirim.Name = "clbOlcuBirim";
             clbOlcuBirim.Padding = new Padding(6, 4, 6, 4);
             clbOlcuBirim.PlaceholderText = "Seçiniz...";
+            clbOlcuBirim.ReadOnly = false;
             clbOlcuBirim.Size = new Size(102, 25);
             clbOlcuBirim.TabIndex = 6;
             clbOlcuBirim.ValueMember = "Id";
@@ -766,6 +771,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeStandart.Name = "clbMalzemeStandart";
             clbMalzemeStandart.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeStandart.PlaceholderText = "Seçiniz...";
+            clbMalzemeStandart.ReadOnly = false;
             clbMalzemeStandart.Size = new Size(159, 25);
             clbMalzemeStandart.TabIndex = 13;
             clbMalzemeStandart.ValueMember = "Id";
@@ -782,6 +788,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbStokGrup.Name = "clbStokGrup";
             clbStokGrup.Padding = new Padding(6, 4, 6, 4);
             clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.ReadOnly = false;
             clbStokGrup.Size = new Size(159, 25);
             clbStokGrup.TabIndex = 8;
             clbStokGrup.ValueMember = "Id";
@@ -799,6 +806,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeGrup.Name = "clbMalzemeGrup";
             clbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.ReadOnly = false;
             clbMalzemeGrup.Size = new Size(159, 25);
             clbMalzemeGrup.TabIndex = 9;
             clbMalzemeGrup.ValueMember = "Id";
@@ -817,6 +825,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
             clbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup.ReadOnly = false;
             clbMalzemeAltGrup.Size = new Size(159, 25);
             clbMalzemeAltGrup.TabIndex = 10;
             clbMalzemeAltGrup.ValueMember = "Id";
@@ -834,6 +843,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
             clbMalzemeAltGrup2.Padding = new Padding(6, 4, 6, 4);
             clbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            clbMalzemeAltGrup2.ReadOnly = false;
             clbMalzemeAltGrup2.Size = new Size(159, 25);
             clbMalzemeAltGrup2.TabIndex = 11;
             clbMalzemeAltGrup2.ValueMember = "Id";
@@ -874,6 +884,7 @@ namespace YektamakDesktop.Formlar.Stok
             fcbBoyut.Name = "fcbBoyut";
             fcbBoyut.Padding = new Padding(6, 4, 6, 4);
             fcbBoyut.PlaceholderText = "Seçiniz...";
+            fcbBoyut.ReadOnly = false;
             fcbBoyut.Size = new Size(159, 25);
             fcbBoyut.TabIndex = 14;
             fcbBoyut.ValueMember = "Id";

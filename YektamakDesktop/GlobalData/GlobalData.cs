@@ -1,37 +1,21 @@
-﻿using ApiService.Interfaces;
-using Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
-using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
 using YektamakDesktop.CustomControls;
-using YektamakDesktop.Formlar;
 
 namespace YektamakDesktop
 {
     public partial class GlobalData
     {
-        private static ICache _cache;
-        private static IJsonConverter _converter;
-        private static IDataTableMapper _dataTableHelper;
-        private static IKullaniciYetkiService _kullaniciYetkiService;
-        private static IConvertHelper _convertHelper;
-        public GlobalData(ICache cache,IJsonConverter jsonConverter,IDataTableMapper dataTableHelper, IKullaniciYetkiService kullaniciYetkiService,
-                            IConvertHelper convertHelper)
+        
+        public GlobalData()
         {
-            _cache = cache;
-            _converter = jsonConverter;
-            _dataTableHelper = dataTableHelper;
-            _kullaniciYetkiService = kullaniciYetkiService;
-            _convertHelper = convertHelper;
+          
         }
         
         
