@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
-using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -21,14 +20,16 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
     {
         private readonly IKullaniciYetkiService _kullaniciYetkiService;
         private readonly ICache _cache;
-        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService, ICache cache)
+        private readonly IConvertHelper _convertHelper;
+        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService, ICache cache, IConvertHelper convertHelper)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
             _cache = cache;
             InitializeComponent();
             Initialize();
-            treeView1.AfterCheck += async(s,e)=> await treeView1_AfterCheck(s,e);
+            treeView1.AfterCheck += async (s, e) => await treeView1_AfterCheck(s, e);
             comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -49,7 +50,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             string jsonResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
             List<KullaniciYetki> kullaniciYetkiList = JsonConvert.DeserializeObject<List<KullaniciYetki>>(jsonResult);
             TreeNodes(kullaniciYetkiList);
-            ComboBoxListFill.GetLookupAd(_cache.kullaniciList.Where(k => k.rol.Id.ToString() == comboListBoxRol.SelectedValue.ToString()).ToList(), ref cbxKullanici);
+            cbxKullanici.SetDataSource(_cache.kullaniciList.Where(k => k.rol.Id.ToString() == comboListBoxRol.SelectedValue.ToString()).ToList());
         }
         bool isLoading=false;
         private void TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
@@ -210,7 +211,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(jsonResult);
                 foreach (var yetki in yetkiList)
                 {
-                    yetkiListDTO.Add(ConvertHelper.ToDTO<AlanYetkiDTO>(yetki));
+                    yetkiListDTO.Add(_convertHelper.ToDTO<AlanYetkiDTO>(yetki));
                 }
                 yetkiListDTO.RemoveAll(yetkiDTO => !yetkiListDTOFromAttr.Any(y => y.alanAd == yetkiDTO.alanAd));
 
@@ -320,7 +321,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             alanYetki.kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString());
             alanYetki.yetki = !alanYetki.yetki;
             alanYetki.formAd = selectedNode.Text;
-            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(ConvertHelper.ToEntity<AlanYetki>(alanYetki));
+            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(_convertHelper.ToEntity<AlanYetki>(alanYetki));
             if (list.Find(y => y == alanYetki) is { } item)
             {
                 item.yetki = alanYetki.yetki;
@@ -329,7 +330,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void YetkiTanimlari_Load(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupAd(_cache.rolList, ref comboListBoxRol);
+            comboListBoxRol.SetDataSource(_cache.rolList);
         }
 
         private async void yetkileriSilToolStripMenuItem_Click(object sender, EventArgs e)
@@ -341,7 +342,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     foreach (var alan in alanYetkiList)
                     {
-                        var alanYetki = ConvertHelper.ToEntity<AlanYetki>(alan);
+                        var alanYetki = _convertHelper.ToEntity<AlanYetki>(alan);
                         string jsonResult = await _kullaniciYetkiService.DeleteAlanYetki(alanYetki);
                         universalGrid1.binding.RemoveAt(universalGrid1.Grid.SelectedCells[0].RowIndex);
                     }

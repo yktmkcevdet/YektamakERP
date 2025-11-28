@@ -36,7 +36,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _stokService = stokService;
             _jsonConverter = jsonConverter;
             InitializeComponent();
-            ComboBoxListFill.GetLookupKod(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList(), ref clbProjeKodu);
+            clbProjeKodu.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
         }
         private List<ProjeStokKart> _projeStokKarts;
         private List<ProjeStokKart> projeStokKarts
@@ -66,8 +66,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private bool ValidateInputs()
         {
             bool isValid = true;
-            isValid = GlobalData.CheckField("Dosya seçilmelidir.",  ctbDosyaYolu) && isValid;
-            isValid = GlobalData.CheckField("Proje kodu seçilmelidir.", clbProjeKodu) && isValid;
+            isValid = CheckFieldHelper.CheckField("Dosya seçilmelidir.",  ctbDosyaYolu) && isValid;
+            isValid = CheckFieldHelper.CheckField("Proje kodu seçilmelidir.", clbProjeKodu) && isValid;
             return isValid;
         }
         public class MyCustomEventArgs : EventArgs

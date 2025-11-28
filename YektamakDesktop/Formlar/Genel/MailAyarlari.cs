@@ -88,10 +88,10 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbKullaniciAdi) && result;
-            result = GlobalData.CheckField("*", ctbSifre) && result;
-            result = GlobalData.CheckField("*", ctbSmtpServer) && result;
-            result = GlobalData.CheckField("*", ctbPort) && result;
+            result = CheckFieldHelper.CheckField("*", ctbKullaniciAdi) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSifre) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSmtpServer) && result;
+            result = CheckFieldHelper.CheckField("*", ctbPort) && result;
             return result;
         }
 

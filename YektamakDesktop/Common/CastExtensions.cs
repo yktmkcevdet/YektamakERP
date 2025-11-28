@@ -1,9 +1,6 @@
 ﻿using Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Utilities.Interfaces;
 
 namespace YektamakDesktop.Common
 {
@@ -16,7 +13,7 @@ namespace YektamakDesktop.Common
                 yield return ConvertHelper.ToDTO<TDto>(item);
             }
         }
-        public static IEnumerable<TEntity> CastToEntity<TEntity>(this IEnumerable<object> source) where TEntity : class,IEntity, new()
+        public static IEnumerable<TEntity> CastToEntity<TEntity>(this IEnumerable<object> source) where TEntity : class, IEntity, new()
         {
             foreach (var item in source)
             {

@@ -91,8 +91,8 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbStokGrupAd) && result;
-            result = GlobalData.CheckField("*", ctbStokGrupKod) && result;
+            result = CheckFieldHelper.CheckField("*", ctbStokGrupAd) && result;
+            result = CheckFieldHelper.CheckField("*", ctbStokGrupKod) && result;
             return result;
         }
 

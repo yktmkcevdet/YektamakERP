@@ -11,6 +11,7 @@ using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using ApiService.Implementations;
+using Utilities.Implementations; 
 
 namespace YektamakDesktop.Formlar.Satinalma.Siparis
 {
@@ -87,7 +88,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         public void UpdateMode(SatinalmaSiparis satinalmaSiparisUpdate)
         {
             satinalmaSiparis = satinalmaSiparisUpdate;
-            universalGrid1.SetData(satinalmaSiparis.satinalmaSiparisDetay.CastToDTO<SatinalmaSiparisDetayDTO>().ToList(), this.Name);
+            universalGrid1.SetData(satinalmaSiparis.satinalmaSiparisDetay.CastToDTO<SatinalmaSiparisDetayDTO>(_convertHelper).ToList(), this.Name);
         }
 
         private void SatinalmaSiparisKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
@@ -97,7 +98,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 
         private async void customButtonSave1_SaveButtonClick(object sender, System.EventArgs e)
         {
-            satinalmaSiparis.satinalmaSiparisDetay = ((SortableBindingList<SatinalmaSiparisDetayDTO>)universalGrid1.binding.DataSource).CastToEntity<SatinalmaSiparisDetay>().ToList();
+            satinalmaSiparis.satinalmaSiparisDetay = ((SortableBindingList<SatinalmaSiparisDetayDTO>)universalGrid1.binding.DataSource).CastToEntity<SatinalmaSiparisDetay>(_convertHelper).ToList();
             string jsonResult = await _saService.SaveSatinalmaSiparis(satinalmaSiparis);
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
             {

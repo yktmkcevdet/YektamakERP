@@ -11,7 +11,6 @@ using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
-using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
 using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
@@ -22,14 +21,15 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private readonly IPasswordService _passwordService;
         private readonly ICache _cache;
         private readonly IJsonConverter _jsonConverter;
-        private readonly IDataTableMapper _dataTableMapper;
-        public KullaniciKayitFormu(IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, ICache cache, IJsonConverter jsonConverter, IDataTableMapper dataTableMapper)
+        private readonly IConvertHelper _convertHelper;
+        public KullaniciKayitFormu(IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, ICache cache, 
+            IJsonConverter jsonConverter, IConvertHelper convertHelper)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
             _passwordService = passwordService;
             _cache = cache;
             _jsonConverter = jsonConverter;
-            _dataTableMapper = dataTableMapper;
+            _convertHelper = convertHelper;
             InitializeComponent();
             Initialize();
         }
@@ -49,9 +49,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             Controls.Add(universalGrid1);
             universalGrid1.MouseDown1 += universalGrid1_CellClick;
             universalGrid1.SetData(new List<KullaniciDTO>(), this.Name);
-            ComboBoxListFill.GetLookupAd(_cache.rolList, ref clbRol);
-            ComboBoxListFill.GetLookupAd(_cache.personelList, ref clbPersonel);
-            fcbMailAdres.SetDataSource(await _cache.mailAdresList);
+            clbRol.SetDataSource(_cache.rolList);
+            clbPersonel.SetDataSource(_cache.personelList);
+            clbPersonel.SetDataSource(await _cache.mailAdresList);
         }
 
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
@@ -59,7 +59,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             try
             {
                 KullaniciDTO kullaniciDTO = (KullaniciDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                kullanici = ConvertHelper.ToEntity<Kullanici>(kullaniciDTO);
+                kullanici = _convertHelper.ToEntity<Kullanici>(kullaniciDTO);
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     kullanici = _jsonConverter.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
                     _cache.kullaniciList.Clear();
-                    await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
+                    await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
                     if (!string.IsNullOrEmpty(kullanici.sifre))
                     {
                         IMailHandler mailHandler = new MailHandler();
@@ -129,17 +129,17 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             bool isValid = true;
 
             // Tüm validasyonları çalıştır, kısa devre yapmadan
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbKullaniciAd);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbPersonel);
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", ctbKullaniciAd);
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", clbPersonel);
             //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifre);
             //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifreTekrar);
-            isValid &= GlobalData.CheckField("Bu alan boş olamaz", clbRol);
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", clbRol);
             return isValid;
         }
         private async void KullaniciKayitFormu_Load(object sender, EventArgs e)
         {
             Binding();
-            await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
+            await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
         }
 
         

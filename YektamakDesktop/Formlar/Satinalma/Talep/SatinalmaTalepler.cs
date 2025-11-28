@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -14,12 +15,12 @@ namespace YektamakDesktop.Formlar.Satinalma
     public partial class SatinalmaTalepler : Form
     {
         private static ISatinalmaTalepService _satinalmaService;
-        private static IJsonConverter _jsonConverter;
+        private static IConvertHelper _convertHelper;
         private static ICache _cache;
-        public SatinalmaTalepler(ISatinalmaTalepService satinalmaService, IJsonConverter jsonConverter, ICache cache)
+        public SatinalmaTalepler(ISatinalmaTalepService satinalmaService, IConvertHelper convertHelper, ICache cache)
         {
             _satinalmaService = satinalmaService;
-            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             _cache = cache;
             InitializeComponent();
             InitializeUniversalGrid();
@@ -71,12 +72,12 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void SatinalmaTalepler_Load(object sender, EventArgs e)
         {
-            satinalmaTalepDTO = (await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).CastToDTO<SatinalmaTalepDTO>().ToList();
+            satinalmaTalepDTO = (await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).CastToDTO<SatinalmaTalepDTO>(_convertHelper).ToList();
             universalGrid1.SetData(satinalmaTalepDTO, this.Name);
         }
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            satinalmaTalepFilter = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+            satinalmaTalepFilter = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
             satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
             MessageBox.Show(jsonResult);
@@ -91,7 +92,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void görüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
             SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
             satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
             satinalmaTalepKayitFormu.Show();
@@ -108,7 +109,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void silToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
             if (satinalmaTalep.talepEdenKullanici.Id != _cache.kullanici.Id)
             {
                 MessageBox.Show("Talep, sadece talebi oluşturan tarafından silebilir.");
@@ -132,7 +133,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private async void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
             satinalmaTalep.onayKullanici = _cache.kullanici;
             satinalmaTalep.onayDurum = false;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);

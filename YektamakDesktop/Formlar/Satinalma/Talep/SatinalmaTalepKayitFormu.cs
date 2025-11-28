@@ -27,7 +27,9 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IAnaVeriService _anaVeriService;
-        public SatinalmaTalepKayitFormu(ICache cache, ISatinalmaTalepService satinalmaTalepService, IJsonConverter jsonConverter, IProjeService projeService, IAnaVeriService anaVeriService)
+        private readonly IConvertHelper _convertHelper;
+        public SatinalmaTalepKayitFormu(ICache cache, ISatinalmaTalepService satinalmaTalepService, 
+            IJsonConverter jsonConverter, IProjeService projeService, IAnaVeriService anaVeriService, IConvertHelper convertHelper)
         {
             _cache = cache;
             _satinalmaTalepService = satinalmaTalepService;
@@ -40,6 +42,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTalepTarihi.Enabled = false;
             ctbTalepNo.Enabled = false;
             clbKullaniciId.ReadOnly = true;
+            _convertHelper = convertHelper;
         }
         private async void Initialize()
         {
@@ -93,7 +96,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = new();
             foreach (var std in _satinalmaTalep.satinalmaTalepDetays)
             {
-                satinalmaTalepDetayList.Add(ConvertHelper.ToDTO<SatinalmaTalepDetayDTO>(std));
+                satinalmaTalepDetayList.Add(_convertHelper.ToDTO<SatinalmaTalepDetayDTO>(std));
             }
             await universalGrid1.SetData(satinalmaTalepDetayList, this.Name, true);
 
@@ -119,7 +122,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     }
                     else
                     {
-                        TalepOnaylandi?.Invoke(this, ConvertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
+                        TalepOnaylandi?.Invoke(this, _convertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
                     }
                 }
                 await HandleSaveResult(jsonResult);
@@ -137,13 +140,13 @@ namespace YektamakDesktop.Formlar.Satinalma
         private bool ValidateInputs()
         {
             bool isValid = true;
-            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
-            isValid &= GlobalData.CheckField("Talep Nedeni seçilmelidir", fcbTalepNeden);
-            isValid &= GlobalData.CheckField("Set Adet girilmelidir", ctbSetAdet);
-            isValid &= GlobalData.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
-            isValid &= GlobalData.CheckField("Talep tarihi girilmelidir", ctbTalepTarihi);
-            isValid &= GlobalData.CheckField("Proje kodu seçilmelidir", clbProjeKodu);
-            isValid &= GlobalData.CheckField("Talep eden kullanıcı seçilmelidir", clbKullaniciId);
+            isValid &= CheckFieldHelper.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
+            isValid &= CheckFieldHelper.CheckField("Talep Nedeni seçilmelidir", fcbTalepNeden);
+            isValid &= CheckFieldHelper.CheckField("Set Adet girilmelidir", ctbSetAdet);
+            isValid &= CheckFieldHelper.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
+            isValid &= CheckFieldHelper.CheckField("Talep tarihi girilmelidir", ctbTalepTarihi);
+            isValid &= CheckFieldHelper.CheckField("Proje kodu seçilmelidir", clbProjeKodu);
+            isValid &= CheckFieldHelper.CheckField("Talep eden kullanıcı seçilmelidir", clbKullaniciId);
             return isValid;
         }
         private void CreateSatinalmaTalep()
@@ -153,7 +156,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 item.miktar = item.miktar * int.Parse(ctbSetAdet.TextCustom);
                 //item.agirlik = item.agirlik * int.Parse(ctbSetAdet.TextCustom);
-                _satinalmaTalep.satinalmaTalepDetays.Add(ConvertHelper.ToEntity<SatinalmaTalepDetay>(item));
+                _satinalmaTalep.satinalmaTalepDetays.Add(_convertHelper.ToEntity<SatinalmaTalepDetay>(item));
             }
         }
         private async Task<XSSFWorkbook> GetExcelWorkbook(int? satirSayisi)
@@ -265,10 +268,9 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)
         {
-            var items = (List<Proje>)clbProjeKodu.DataSource;
-            items.Add(satinalmaTalepUpdate.proje);
-            clbProjeKodu.SetDataSource(items);
-            ctbSetAdet.Enabled = false;
+            //var items = (List<Proje>)clbProjeKodu.DataSource;
+            //items.Add(satinalmaTalepUpdate.proje);
+            //clbProjeKodu.SetDataSource(items);
             fcbTalepNeden.ReadOnly = true;
             satinalmaTalep = satinalmaTalepUpdate;
         }
@@ -312,7 +314,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void görüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
+            SatinalmaTalepDetay satinalmaTalepDetay = _convertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
             SatinalmaTalepSatirDetayForm satinalmaTalepSatirDetayForm = FormFactory.CreateForm<SatinalmaTalepSatirDetayForm>();
             satinalmaTalepSatirDetayForm.UpdateMode(satinalmaTalepDetay.satinalmaTalepSatirDetays);
             satinalmaTalepSatirDetayForm.Show();
@@ -326,7 +328,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void stokKartıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
+            SatinalmaTalepDetay satinalmaTalepDetay = _convertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
             ProjeStokKart projeStokKart = satinalmaTalepDetay.projeStokKart;
 
             List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKart);
@@ -348,7 +350,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             var list = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>();
             var stok = FormFactory.CreateForm<StokKartKayitFormu>();
             ProjeStokKart projeStokKart = new ProjeStokKart();
-            projeStokKart = ConvertHelper.ToEntity<SatinalmaTalepDetay>(list[0]).projeStokKart;
+            projeStokKart = _convertHelper.ToEntity<SatinalmaTalepDetay>(list[0]).projeStokKart;
             stok.UpdateMode(projeStokKart);
             stok.ShowDialog();
 

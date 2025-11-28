@@ -289,11 +289,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "MailAyarlarim";
             Text = "MailAyarlarim";
-<<<<<<< HEAD
             Load += async (s,e)=>await MailAyarlarim_Load(s,e);
-=======
-            Load += MailAyarlarim_Load;
->>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
             ResumeLayout(false);
             PerformLayout();
         }

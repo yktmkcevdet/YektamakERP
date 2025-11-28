@@ -18,13 +18,11 @@ namespace YektamakDesktop.Formlar.Satinalma
     public partial class SatinalmaTeklifTaleplerFormu : Form
     {
         private readonly ISatinalmaTeklifService _satinalmaTeklifService;
-        private readonly IJsonConverter _jsonConverter;
-        private readonly ICache _cache;
-        public SatinalmaTeklifTaleplerFormu(ISatinalmaTeklifService satinalmaTeklifService, IJsonConverter jsonConverter, ICache cache)
+        private readonly IConvertHelper _convertHelper;
+        public SatinalmaTeklifTaleplerFormu(ISatinalmaTeklifService satinalmaTeklifService, IConvertHelper convertHelper)
         {
             _satinalmaTeklifService = satinalmaTeklifService;
-            _jsonConverter = jsonConverter;
-            _cache = cache;
+            _convertHelper = convertHelper;
             InitializeComponent();
             Initialize();
         }
@@ -77,7 +75,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     List<SatinalmaTeklifBaslik> satinalmaTeklifBasliks = JsonConvert.DeserializeObject<List<SatinalmaTeklifBaslik>>(jsonResult);
                     foreach (var item in satinalmaTeklifBasliks)
                     {
-                        satinalmaTeklifDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
+                        satinalmaTeklifDTOs.Add(_convertHelper.ToDTO<SatinalmaTeklifBaslikDTO>(item));
                     }
                     universalGrid1.SetData(satinalmaTeklifDTOs, this.Name);
                 }
@@ -95,7 +93,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void teklifTalebiniSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
-            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = _convertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
             string jsonResult = await _satinalmaTeklifService.DeleteSatinalmaTeklif(satinalmaTeklifBaslik);
             MessageBox.Show(jsonResult);
             universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
@@ -104,7 +102,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void teklifTalebiniGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
-            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = _convertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
             SatinalmaTeklifKayitFormu satinalmaTeklifKayitFormu = FormFactory.CreateForm<SatinalmaTeklifKayitFormu>();
             satinalmaTeklifKayitFormu.UpdateMode(satinalmaTeklifBaslik);
             satinalmaTeklifKayitFormu.ShowDialog();
@@ -121,7 +119,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var satinalmaTeklifBaslikDTO = (SatinalmaTeklifBaslikDTO)universalGrid1.binding.Current;
-            SatinalmaTeklifBaslik satinalmaTeklifBaslik = ConvertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
+            SatinalmaTeklifBaslik satinalmaTeklifBaslik = _convertHelper.ToEntity<SatinalmaTeklifBaslik>(satinalmaTeklifBaslikDTO);
             SatinalmaSiparis satinalmaSiparis = new SatinalmaSiparis();
             satinalmaSiparis.siparisTarihi = DateTime.Today;
             satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;

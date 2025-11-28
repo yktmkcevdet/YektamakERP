@@ -1,9 +1,7 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
-using Models.Models;
 using Newtonsoft.Json;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +13,12 @@ namespace YektamakDesktop.Helpers
 {
     public class PermissionManager:IDisposable
     {
-        private static IKullaniciYetkiService _kullaniciYetkiService;
-        private static ICache _cache;
-        private static IJsonConverter _jsonConverter;
-        private static IDataTableMapper _dataTableMapper;
-        public PermissionManager(IKullaniciYetkiService kullaniciYetkiService, ICache cache,IJsonConverter jsonConverter,IDataTableMapper dataTableMapper)
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly IConvertHelper _convertHelper;
+        public PermissionManager(IKullaniciYetkiService kullaniciYetkiService, IConvertHelper convertHelper)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
-            _cache = cache;
-            _jsonConverter = jsonConverter;
-            _dataTableMapper = dataTableMapper;
+            _convertHelper = convertHelper;
         }
         public PermissionManager(){}
         
@@ -39,7 +33,7 @@ namespace YektamakDesktop.Helpers
                 var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(alanYetkiJson);
                 foreach(var yetki in yetkiList)
                 {
-                    _alanYetki.Add(ConvertHelper.ToDTO<AlanYetkiDTO>(yetki));
+                    _alanYetki.Add(_convertHelper.ToDTO<AlanYetkiDTO>(yetki));
                 }
             }
             return _alanYetki;

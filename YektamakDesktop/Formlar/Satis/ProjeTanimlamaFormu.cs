@@ -24,8 +24,9 @@ namespace YektamakDesktop.Formlar.Satis
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
         private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
         private CustomDataGrid<DataControlProjeDosya> customDataGrid;
-        public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter)
+        public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter, IConvertHelper convertHelper)
         {
             _cache = cache;
             _projeService = projeService;
@@ -35,6 +36,7 @@ namespace YektamakDesktop.Formlar.Satis
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
             Initialize();
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -55,7 +57,7 @@ namespace YektamakDesktop.Formlar.Satis
             universalGrid1.SetData(new List<ProjeDTO>(), this.Name);
             universalGrid1.SetData(_cache.projeList
                 .GroupBy(p => new { p.Id })
-                .Select(g => ConvertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
+                .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             fcbProjeTip.SetDataSource(_cache.projeTipList);
             fcbMarka.SetDataSource(_cache.markaList);
             fcbMarkaAltGrup.SetDataSource(_cache.markaAltGrupList);
@@ -109,12 +111,12 @@ namespace YektamakDesktop.Formlar.Satis
                 _cache.projeList.Add(proje);
                 universalGrid1.SetData(_cache.projeList
                     .GroupBy(p => new { p.Id })
-                    .Select(g => ConvertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
+                    .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             }
         }
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
-            proje = ConvertHelper.ToEntity<Proje>(((ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem));
+            proje = _convertHelper.ToEntity<Proje>(((ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem));
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
@@ -124,7 +126,7 @@ namespace YektamakDesktop.Formlar.Satis
         private void projeSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            proje = ConvertHelper.ToEntity<Proje>(projeDTO);
+            proje = _convertHelper.ToEntity<Proje>(projeDTO);
             string jsonResult = _projeService.DeleteProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {

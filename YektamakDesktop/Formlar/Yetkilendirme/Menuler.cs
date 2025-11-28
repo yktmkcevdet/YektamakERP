@@ -23,11 +23,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             _kullaniciYetkiService = kullaniciYetkiService;
             InitializeComponent();
             var dataC=new DataControlMenu(new Menu());
-<<<<<<< HEAD
             customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300),dataC);
-=======
-            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300));
->>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
             this.Controls.Add(customDataGrid.headerPanel);
             this.Controls.Add(customDataGrid.detailPanel);
         }
@@ -100,13 +96,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             Initialize();
             menu = menuCon;
-<<<<<<< HEAD
         }
         public DataControlMenu()
         {
             Initialize();
-=======
->>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
         }
         private void Binding()
         {

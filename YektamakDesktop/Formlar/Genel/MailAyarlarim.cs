@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Interfaces;
 using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Genel
@@ -27,10 +26,16 @@ namespace YektamakDesktop.Formlar.Genel
         public MailAdres mailAdres
         {
             get { if (_mailAdres == null) { _mailAdres = new(); } return _mailAdres; }
-            set {   _mailAdres = value; }
+            set {   _mailAdres = value; Binding(); }
         }
         private void Initialize()
         {
+            
+            mailAdres = _cache.kullanici.mailAdres;
+            if (mailAdres.Id == null)
+            {
+                mailAdres = new MailAdres { smtpServer = "smtp-mail.outlook.com", SSL = true, port = 587 };
+            }
             Binding();
         }
         private void Binding()
@@ -55,22 +60,16 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbKullaniciAdi) && result;
-            result = GlobalData.CheckField("*", ctbSifre) && result;
-            result = GlobalData.CheckField("*", ctbSmtpServer) && result;
-            result = GlobalData.CheckField("*", ctbPort) && result;
+            result = CheckFieldHelper.CheckField("*", ctbKullaniciAdi) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSifre) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSmtpServer) && result;
+            result = CheckFieldHelper.CheckField("*", ctbPort) && result;
             return result;
         }
 
         private async Task MailAyarlarim_Load(object sender, EventArgs e)
         {
-            mailAdres = _cache.kullanici.mailAdres; 
-            if(mailAdres.Id==null)
-            {
-                ctbSmtpServer.TextCustom = "smtp-mail.outlook.com";
-                ctbPort.TextCustom = "587";
-                chkSSL.Checked = true;
-            }
+            
         }
     }
 }

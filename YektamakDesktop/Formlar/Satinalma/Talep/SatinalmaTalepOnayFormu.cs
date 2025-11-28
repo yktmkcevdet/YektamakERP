@@ -11,17 +11,18 @@ using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using System.ComponentModel;
+using Utilities.Implementations;
 
 namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepOnayFormu : Form
     {
-        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
         private readonly ISatinalmaTalepService _satinalmaService;
         private readonly ICache _cache;
-        public SatinalmaTalepOnayFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, ICache cache)
+        public SatinalmaTalepOnayFormu(IConvertHelper convertHelper, ISatinalmaTalepService satinalmaService, ICache cache)
         {
-            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             _satinalmaService = satinalmaService;
             _cache = cache;
             InitializeComponent();
@@ -78,12 +79,12 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void SatinalmaTalepOnayFormu_Load(object sender, EventArgs e)
         {
-            universalGrid1.SetData((await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).Where(P=>P.onayDurum==null).CastToDTO<SatinalmaTalepDTO>().ToList(), this.Name);
+            universalGrid1.SetData((await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep())).Where(P=>P.onayDurum==null).CastToDTO<SatinalmaTalepDTO>(_convertHelper).ToList(), this.Name);
         }
 
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
             satinalmaTalep.onayKullanici = _cache.kullanici;
             satinalmaTalep.onayDurum = true;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
@@ -110,7 +111,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private async void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepOnayDTO);
             satinalmaTalep.onayKullanici = _cache.kullanici;
             satinalmaTalep.onayDurum = false;
             string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
@@ -124,7 +125,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void talebiGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepDTO = (SatinalmaTalepDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalep satinalmaTalep = ConvertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>(satinalmaTalepDTO);
             SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
             satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
             satinalmaTalepKayitFormu.TalepOnaylandi += SatinalmaTalepKayitFormu_TalepOnaylandi;

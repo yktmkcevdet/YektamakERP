@@ -172,15 +172,6 @@
   ],
   "logs": [
     {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Önbellek dosyası C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\obj\\project.nuget.cache okunurken bir sorun oluştu : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\YektamakDesktop.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\YektamakDesktop.csproj",
-      "targetGraphs": []
-    },
-    {
       "code": "NU1701",
       "level": "Warning",
       "message": "'iTextSharp 5.5.13.4' paketi, proje hedef çerçevesi 'net9.0-windows7.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
