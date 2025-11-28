@@ -60,6 +60,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "Microsoft.AspNetCore.Authorization/9.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Metadata": "9.0.1",
@@ -515,6 +516,8 @@
           }
         }
       },
+=======
+>>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
       "Microsoft.IdentityModel.Abstractions/8.0.1": {
         "runtime": {
           "lib/net9.0/Microsoft.IdentityModel.Abstractions.dll": {
@@ -587,6 +590,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "Microsoft.JSInterop/9.0.1": {
         "runtime": {
           "lib/net9.0/Microsoft.JSInterop.dll": {
@@ -595,12 +599,9 @@
           }
         }
       },
+=======
+>>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
       "MudBlazor/8.12.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Components": "9.0.1",
-          "Microsoft.AspNetCore.Components.Web": "9.0.1",
-          "Microsoft.Extensions.Localization": "9.0.1"
-        },
         "runtime": {
           "lib/net9.0/MudBlazor.dll": {
             "assemblyVersion": "8.12.0.0",
@@ -657,9 +658,6 @@
       },
       "Serilog.Extensions.Hosting/9.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.10",
-          "Microsoft.Extensions.Hosting.Abstractions": "9.0.1",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.10",
           "Serilog": "4.3.0",
           "Serilog.Extensions.Logging": "9.0.0"
         },
@@ -672,7 +670,6 @@
       },
       "Serilog.Extensions.Logging/9.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Logging": "9.0.10",
           "Serilog": "4.3.0"
         },
         "runtime": {
@@ -717,22 +714,6 @@
           }
         }
       },
-      "System.Diagnostics.EventLog/9.0.1": {
-        "runtime": {
-          "lib/net9.0/System.Diagnostics.EventLog.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.124.61010"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net9.0/System.Diagnostics.EventLog.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.124.61010"
-          }
-        }
-      },
       "System.IdentityModel.Tokens.Jwt/8.0.1": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "8.0.1",
@@ -755,7 +736,6 @@
       },
       "ApiService/1.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Http": "9.0.10",
           "Utilities": "1.0.0"
         },
         "runtime": {
@@ -775,9 +755,6 @@
       },
       "Utilities/1.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.10",
-          "Microsoft.Extensions.DependencyInjection": "9.0.10",
-          "Microsoft.Extensions.Hosting": "9.0.1",
           "Models": "1.0.0",
           "Newtonsoft.Json": "13.0.4",
           "Serilog": "4.3.0",
@@ -834,6 +811,7 @@
       "path": "microsoft.aspnetcore.authentication.jwtbearer/9.0.9",
       "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.9.0.9.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.AspNetCore.Authorization/9.0.1": {
       "type": "package",
       "serviceable": true,
@@ -1079,6 +1057,8 @@
       "path": "microsoft.extensions.primitives/9.0.10",
       "hashPath": "microsoft.extensions.primitives.9.0.10.nupkg.sha512"
     },
+=======
+>>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
     "Microsoft.IdentityModel.Abstractions/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -1128,6 +1108,7 @@
       "path": "microsoft.io.recyclablememorystream/3.0.1",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.JSInterop/9.0.1": {
       "type": "package",
       "serviceable": true,
@@ -1135,6 +1116,8 @@
       "path": "microsoft.jsinterop/9.0.1",
       "hashPath": "microsoft.jsinterop.9.0.1.nupkg.sha512"
     },
+=======
+>>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
     "MudBlazor/8.12.0": {
       "type": "package",
       "serviceable": true,
@@ -1204,13 +1187,6 @@
       "sha512": "sha512-hk1E7U3RSlxrBVo6Gb6OjeM52fChpFYH+SZvyT/M2vzSGlzAaKE33hc3V/Pvnjcnn1opT8/Z+0QfqdM5HsIaeA==",
       "path": "sixlabors.imagesharp/2.1.10",
       "hashPath": "sixlabors.imagesharp.2.1.10.nupkg.sha512"
-    },
-    "System.Diagnostics.EventLog/9.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-iVnDpgYJsRaRFnk77kcLA3+913WfWDtnAKrQl9tQ5ahqKANTaJKmQdsuPWWiAPWE9pk1Kj4Pg9JGXWfFYYyakQ==",
-      "path": "system.diagnostics.eventlog/9.0.1",
-      "hashPath": "system.diagnostics.eventlog.9.0.1.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/8.0.1": {
       "type": "package",

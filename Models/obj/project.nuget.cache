@@ -4,5 +4,15 @@
   "success": true,
   "projectFilePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Önbellek dosyası C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\obj\\project.nuget.cache okunurken bir sorun oluştu : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Models\\Models.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

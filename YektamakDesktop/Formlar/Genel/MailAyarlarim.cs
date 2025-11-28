@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Interfaces;
 using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Genel
@@ -63,7 +64,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private async Task MailAyarlarim_Load(object sender, EventArgs e)
         {
-            mailAdres = _cache.kullanici.mailAdres;
+            mailAdres = _cache.kullanici.mailAdres; 
             if(mailAdres.Id==null)
             {
                 ctbSmtpServer.TextCustom = "smtp-mail.outlook.com";

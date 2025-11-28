@@ -74,5 +74,15 @@
     "C:\\Users\\yektamak-118\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\zstdsharp.port\\0.8.0\\zstdsharp.port.0.8.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Önbellek dosyası C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Api\\obj\\project.nuget.cache okunurken bir sorun oluştu : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Api\\Api.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Api\\Api.csproj",
+      "targetGraphs": []
+    }
+  ]
 }
