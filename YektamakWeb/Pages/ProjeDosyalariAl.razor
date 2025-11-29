@@ -18,7 +18,7 @@
         <label for="comboBox">Projeler</label>
         <select id="comboBox" name="ComboBoxValue" @onchange="OnProjeChanged">
             <option value="">Seçim Yapınız</option>
-            @foreach (var item in _cache.projes)
+            @foreach (var item in _cache.projeList)
             {
                 <option value="@item.Id">@item.kod</option>
             }

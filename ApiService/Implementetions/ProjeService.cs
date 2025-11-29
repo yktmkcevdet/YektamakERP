@@ -84,6 +84,10 @@ namespace ApiService.Implementations
         {
             return _apiService.Post(proje, $"DeleteProje");
         }
+        public string DeleteProjeFile(ProjeDosya projeDosya)
+        {
+            return _apiService.Post(projeDosya, $"DeleteProjeFile");
+        }
         public async Task<List<ProjeBom>> GetProjeBomList(ProjeBom projeBomList)
         {
             string jsonResult = await _apiService.PostAsync(projeBomList, $"GetProjeBomList");

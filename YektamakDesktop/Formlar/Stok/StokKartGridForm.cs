@@ -49,7 +49,7 @@ namespace YektamakDesktop.Formlar.Stok
             universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
             universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
-            fcbProjeKodu.SetDataSource(_cache.projes.Select(p => new { p.Id, p.kod}).Distinct().ToList());
+            fcbProjeKodu.SetDataSource(_cache.projeList.Select(p => new { p.Id, p.kod}).Distinct().ToList());
             fcbStokGrup.SetDataSource(_cache.stokGrups);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
@@ -259,7 +259,7 @@ namespace YektamakDesktop.Formlar.Stok
                 for (int i = 0; i < projeStokKartDTOs.Count; i++)
                 {
                     var item = projeStokKartDTOs[i];
-                    if (!_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == item.projeId))
+                    if (!_cache.projeList.Any(p => p.sorumluList.Where(s=>s.Id == _cache.kullanici.personel.Id).Count()>0 && p.Id == item.projeId))
                     {
                         File.AppendAllText(logDosyasi, $"{item.stokKartkod} koduna ait stok kartını silemezsiniz\r\n");
                     }

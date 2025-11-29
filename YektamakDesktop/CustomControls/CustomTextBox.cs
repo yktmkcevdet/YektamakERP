@@ -118,8 +118,8 @@ namespace YektamakDesktop.CustomControls
             set
             {
                 textBox.Text = value;
-                
                 SetPlaceHolder();
+                base.OnTextChanged(null);
             }
         }
 
@@ -262,8 +262,6 @@ namespace YektamakDesktop.CustomControls
         [Category("Focus")]
         [Description("Occurs when the control is mouse left")]
         public new event EventHandler MouseLeave;
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

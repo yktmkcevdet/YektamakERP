@@ -41,7 +41,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             customDataGrid.SetUstForm(this);
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
-            ComboBoxListFill.GetLookupKod(_cache.projes.Where(p=>p.personel.Id==_cache.kullanici.personel.Id).ToList(), ref fcbProjeKod);
+            ComboBoxListFill.GetLookupKod(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList(), ref fcbProjeKod);
             ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
             ComboBoxListFill.GetLookupAd(_cache.stokTips, ref clbStokTip);
             ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
@@ -411,6 +411,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void Initialize()
         {
+            stokKartId.SetDataSource(stokKarts.CastToDTO<ProjeStokKartDTO>().Select(item => item with { stokKartad = $"{item.stokKartkod} - {item.stokKartad} - {item.stokKartboyut}" }).ToList());
             stokKartId.SelectedIndexChanged += StokKartId_SelectedIndexChanged;
             BindData();
         }

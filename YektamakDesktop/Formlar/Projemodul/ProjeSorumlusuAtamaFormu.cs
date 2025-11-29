@@ -46,7 +46,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             customButtonSave1.SaveButtonClick += async (s, e) => await customButtonSave1_SaveButtonClick(s,e);
             fcbPersonel.DisplayMember = "adSoyad";
             fcbProje.DisplayMember = "kod";
-            fcbProje.SetDataSource(_cache.projes.GroupBy(x => new { x.Id,x.kod}).Select(g=>g.First()).ToList());
+            fcbProje.SetDataSource(_cache.projeList.GroupBy(x => new { x.Id,x.kod}).Select(g=>g.First()).ToList());
             fcbPersonel.SetDataSource(_cache.personelList);
             Binding();
         }

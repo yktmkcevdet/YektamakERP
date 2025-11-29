@@ -54,7 +54,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
             fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
-            clbProjeKodu.SetDataSource(_cache.projes.Where(p => p.personel.Id == _cache.kullanici.personel.Id).ToList());
+            clbProjeKodu.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             satinalmaTalep.talepTarihi = DateTime.Today;

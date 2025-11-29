@@ -17,10 +17,12 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IKullaniciYetkiService _kullaniciYetkiService;
-        public MailAyarlari(ICache cache, IKullaniciYetkiService kullaniciYetkiService)
+        private readonly IPasswordService _passwordService;
+        public MailAyarlari(ICache cache, IKullaniciYetkiService kullaniciYetkiService,IPasswordService passwordService)
         {
             _cache = cache;
             _kullaniciYetkiService = kullaniciYetkiService;
+            _passwordService = passwordService;
             InitializeComponent();
             Initialize();
         }
@@ -28,7 +30,7 @@ namespace YektamakDesktop.Formlar.Genel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MailAdres mailAdres
         {
-            get { if (_mail == null) { _mail = new(); } return _mail; }
+            get { if (_mail == null) { _mail = new(); } if (!string.IsNullOrEmpty(_mail.sifre)) { _mail.sifre = _passwordService.HashPassword(_mail.sifre).CombinedHash; } return _mail; }
             set { _mail = value; Binding(); }
         }
         private void Initialize()
@@ -79,7 +81,8 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 string jsonResult = await _kullaniciYetkiService.SaveMailAdres(mailAdres);
                 mailAdres = JsonConvert.DeserializeObject<List<MailAdres>>(jsonResult)[0];
-                universalGrid1.binding.Add(mailAdres);
+                (await _cache.mailAdresList).Clear();
+                universalGrid1.SetData(JsonConvert.DeserializeObject<List<MailAdres>>(jsonResult), this.Name);
             }
         }
         private bool CheckFields()

@@ -34,31 +34,32 @@ namespace YektamakDesktop.Formlar.Satis
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
-            fcbProjeTip = new YektamakDesktop.CustomControls.FilterableComboBox();
-            fcbMarka = new YektamakDesktop.CustomControls.FilterableComboBox();
-            fcbMarkaAltGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
+            headerPanel1 = new HeaderPanel();
+            ctbId = new CustomTextBox();
+            fcbProjeTip = new FilterableComboBox();
+            fcbMarka = new FilterableComboBox();
+            fcbMarkaAltGrup = new FilterableComboBox();
             Id = new System.Windows.Forms.Label();
-            ctbAd = new YektamakDesktop.CustomControls.CustomTextBox();
+            ctbAd = new CustomTextBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            ctbAciklama = new YektamakDesktop.CustomControls.CustomTextBox();
-            fcbMarkaAltGrupKategori = new YektamakDesktop.CustomControls.FilterableComboBox();
-            fcbMirasProje = new YektamakDesktop.CustomControls.FilterableComboBox();
+            ctbAciklama = new CustomTextBox();
+            fcbMarkaAltGrupKategori = new FilterableComboBox();
+            fcbMirasProje = new FilterableComboBox();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
-            customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
-            ctbProjeNo = new YektamakDesktop.CustomControls.CustomTextBox();
+            customButtonSave1 = new CustomButtonSave();
+            universalGrid1 = new UniversalGrid();
+            ctbProjeNo = new CustomTextBox();
             label8 = new System.Windows.Forms.Label();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             projeSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
+            roundedButton1 = new RoundedButton();
             panel1 = new System.Windows.Forms.Panel();
+            ctbVersiyon = new CustomTextBox();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -372,9 +373,9 @@ namespace YektamakDesktop.Formlar.Satis
             label8.Location = new System.Drawing.Point(45, 75);
             label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(53, 13);
+            label8.Size = new System.Drawing.Size(82, 13);
             label8.TabIndex = 20;
-            label8.Text = "Proje No";
+            label8.Text = "Proje No / Ver.";
             // 
             // contextMenuStrip1
             // 
@@ -416,16 +417,42 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // panel1
             // 
+            panel1.AutoScroll = true;
             panel1.Location = new System.Drawing.Point(348, 120);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(488, 156);
             panel1.TabIndex = 22;
+            // 
+            // ctbVersiyon
+            // 
+            ctbVersiyon.BackColor = System.Drawing.Color.White;
+            ctbVersiyon.BorderColor = System.Drawing.Color.Silver;
+            ctbVersiyon.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbVersiyon.BorderSize = 1;
+            ctbVersiyon.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbVersiyon.ForeColor = System.Drawing.Color.Black;
+            ctbVersiyon.Location = new System.Drawing.Point(264, 68);
+            ctbVersiyon.Margin = new System.Windows.Forms.Padding(1);
+            ctbVersiyon.Multiline = false;
+            ctbVersiyon.Name = "ctbVersiyon";
+            ctbVersiyon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            ctbVersiyon.PasswordChar = false;
+            ctbVersiyon.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbVersiyon.PlaceholderText = "";
+            ctbVersiyon.ReadOnly = false;
+            ctbVersiyon.SelectionStart = 0;
+            ctbVersiyon.Size = new System.Drawing.Size(49, 29);
+            ctbVersiyon.TabIndex = 23;
+            ctbVersiyon.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbVersiyon.TextCustom = "";
+            ctbVersiyon.UnderlinedStyle = false;
             // 
             // ProjeTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(859, 630);
+            Controls.Add(ctbVersiyon);
             Controls.Add(panel1);
             Controls.Add(roundedButton1);
             Controls.Add(label8);
@@ -487,6 +514,6 @@ namespace YektamakDesktop.Formlar.Satis
         private System.Windows.Forms.ToolStripMenuItem projeSilToolStripMenuItem;
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Panel panel1;
-        
+        private CustomTextBox ctbVersiyon;
     }
 }

@@ -59,8 +59,8 @@ namespace Models
         [GridDisplay(Header = "Ad")] public string ad { get; set; }
         public string aciklama { get; set; }
 
-        private Personel _personel;
-        public Personel personel { get { if (_personel == null) { _personel = new(); } return _personel; } set { _personel = value; } }
+        private List<Personel> _sorumluList;
+        public List<Personel> sorumluList { get { if (_sorumluList == null) { _sorumluList = new(); } return _sorumluList; } set { _sorumluList = value; } }
         private ProjeTip _projeTip;
         [GridDisplay(Header = "Proje Tipi", Tip = "Liste", ListName = "projeTipList",ListVisibleColumnName ="ad",readOnly =false)]
         public ProjeTip projeTip { get { if (_projeTip == null) { _projeTip = new(); } return _projeTip; } set { _projeTip = value; } }

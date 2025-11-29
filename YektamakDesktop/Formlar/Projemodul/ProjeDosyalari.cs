@@ -91,18 +91,13 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string columnName = universalGrid1.Grid.Columns[e.ColumnIndex].Name;
-
-                // Sadece istediğin sütun için popup aç
                 if (columnName == "Stok Kart Kod")
                 {
                     pdfPopup?.Close();
                     var projeStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.Rows[e.RowIndex].DataBoundItem;
                     var projeStokKart = ConvertHelper.ToEntity<ProjeStokKart>(projeStokKartDTO);
-                    //string jsonResult = _stokService.GetStokKartPdf(projeStokKart.stokKart);
-                    //var stokKartPdf = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
                     if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1))
                     {
-                        //string pdfBytes = Convert.ToBase64String(stokKartPdf.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosya);
                         string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosyaFullPath;
                         var pdfBytes = await _fileService.GetFile(filePath);
                         pdfPopup.GetInstance(pdfBytes);
@@ -113,7 +108,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         Point mousePos = Cursor.Position;
                         pdfPopup.Location = new Point(mousePos.X + 20, mousePos.Y + 20);
                         pdfPopup.Show();
-                        //pdfPopup = _pdfPopup;
                     }
                 }
             }
@@ -155,7 +149,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         public async Task form_Load(object sender, EventArgs e)
         {
-            fcbProjeKod.SetDataSource(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList());
+            fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s=>s.Id == _cache.kullanici.personel.Id).Count()>0).ToList());
             clbStokGrup.SetDataSource(_cache.stokGrups);
             await Binding();
         }
@@ -401,7 +395,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private void StokKartKayitFormu_AfterSave(object sender, object e)
         {
             var index = universalGrid1.Grid.CurrentRow.Index;
-            var liste = (BindingList<ProjeStokKartDTO>)universalGrid1.Grid.DataSource;
+            var liste = (BindingList<ProjeStokKartDTO>)universalGrid1.binding.DataSource;
             if (liste[index] == null)
             {
                 liste.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));

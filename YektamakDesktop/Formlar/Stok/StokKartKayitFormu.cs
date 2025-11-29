@@ -1,4 +1,5 @@
-﻿using ApiService.Interfaces;
+﻿using ApiService.Implementations;
+using ApiService.Interfaces;
 using Models;
 using Models.DTO;
 using Newtonsoft.Json;
@@ -26,24 +27,27 @@ namespace YektamakDesktop.Formlar.Stok
         private readonly IDataTableMapper _dataTableHelper;
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
-        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, IStokService stokService, IProjeService projeService)
+        private readonly IFileService _fileService;
+        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, IStokService stokService, IProjeService projeService, IFileService fileService)
         {
             _cache = cache;
             _dataTableHelper = dataTableHelper;
             _jsonConverter = jsonConvertHelper;
             _stokService = stokService;
             _projeService = projeService;
+            _fileService = fileService;
             InitializeComponent();
             clbStokTip.SetDataSource(_cache.stokTips);
             clbOlcuBirim.SetDataSource(_cache.olcuBirims);
             clbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
-            clbProjeKod.SetDataSource(_cache.projes.Where(x => x.personel.Id == _cache.kullanici.personel.Id).ToList());
+            clbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             clbStokGrup.SetDataSource(_cache.stokGrups);
             clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
+            _fileService = fileService;
         }
         public event EventHandler<object> AfterSave;
         private ProjeStokKart _projeStokKart;
@@ -80,7 +84,7 @@ namespace YektamakDesktop.Formlar.Stok
             result = GlobalData.CheckField("*", clbProjeKod) && result;
             if (_cache.kullanici.Id != 1)
             {
-                if (!_cache.projes.Any(p => p.personel.Id == _cache.kullanici.personel.Id && p.Id == projeStokKart.proje.Id))
+                if (!_cache.projeList.Any(p => p.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0 && p.Id == projeStokKart.proje.Id))
                 {
                     MessageBox.Show("Bu stok kartı için seçilen proje, kullanıcının projeleri arasında bulunmamaktadır. Lütfen geçerli bir proje seçiniz.");
                     result = false;
@@ -102,6 +106,9 @@ namespace YektamakDesktop.Formlar.Stok
             {
                 if (!dataControlStokKartDosya.Validate()) return;
                 projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
+                var filePath = Path.Combine(Guid.NewGuid() + "." + dataControlStokKartDosya.stokKartDosya.dosyaUzanti);
+                dataControlStokKartDosya.stokKartDosya.dosyaFullPath = filePath;
+                _fileService.SaveFile(dataControlStokKartDosya.dosyaVeri, filePath);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
@@ -125,12 +132,9 @@ namespace YektamakDesktop.Formlar.Stok
             BindHelper.BindData(ctbKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod));
             BindHelper.BindData(ctbTedarikciKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.tedarikciKod));
             BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
-            BindHelper.BindData(ctbStokAd, projeStokKart.stokKart, nameof(projeStokKart.stokKart.ad));
             BindHelper.BindData(ctbBoyut, projeStokKart.stokKart, nameof(projeStokKart.stokKart.boyut));
             BindHelper.BindData(ctbUzunluk, projeStokKart.stokKart, nameof(projeStokKart.stokKart.uzunluk));
-            BindHelper.BindData(ctbUzunluk, projeStokKart.stokKart, nameof(projeStokKart.stokKart.uzunluk));
             BindHelper.BindData(ctbAciklama, projeStokKart.stokKart, nameof(projeStokKart.stokKart.aciklama));
-            BindHelper.BindData(ctbAgirlik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.agirlik));
             BindHelper.BindData(ctbAgirlik, projeStokKart.stokKart, nameof(projeStokKart.stokKart.agirlik));
             BindHelper.BindData(ctbBoy, projeStokKart.stokKart, nameof(projeStokKart.stokKart.boy));
             BindHelper.BindData(ctbEn, projeStokKart.stokKart, nameof(projeStokKart.stokKart.en));
@@ -294,6 +298,29 @@ namespace YektamakDesktop.Formlar.Stok
         {
 
         }
+
+        private void panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void panel1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            // Eğer birden fazla dosya bırakıldıysa ilkini al
+            string sourceFile = files[0];
+            var d = File.ReadAllBytes(sourceFile);
+            customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().stokKartDosya=new StokKartDosya{ 
+                dosyaAd = Path.GetFileNameWithoutExtension(sourceFile),
+                dosyaUzanti= Path.GetExtension(sourceFile).Replace(".", ""),
+                dosyaTip = new DosyaTip { Id = _cache.dosyaTipList.FirstOrDefault(dt => dt.ad.Equals(Path.GetExtension(sourceFile).Replace(".", ""), StringComparison.OrdinalIgnoreCase))?.Id ?? 0 },
+                dosya = d
+            };
+        }
     }
     public class DataControlStokKartDosya : DataControl, IEntity
     {
@@ -331,16 +358,11 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void Binding()
         {
-            IdControl.DataBindings.Clear();
-            stokKartIdControl.DataBindings.Clear();
-            dosyaUzantiControl.DataBindings.Clear();
-            dosyaAdControl.DataBindings.Clear();
-            dosyaTipControl.DataBindings.Clear();
-            IdControl.DataBindings.Add(nameof(IdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.Id), true, DataSourceUpdateMode.OnPropertyChanged);
-            stokKartIdControl.DataBindings.Add(nameof(stokKartIdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.stokKartId), true, DataSourceUpdateMode.OnPropertyChanged);
-            dosyaUzantiControl.DataBindings.Add(nameof(dosyaUzantiControl.TextCustom), stokKartDosya, nameof(stokKartDosya.dosyaUzanti), true, DataSourceUpdateMode.OnPropertyChanged);
-            dosyaAdControl.DataBindings.Add(nameof(dosyaAdControl.TextCustom), stokKartDosya, nameof(stokKartDosya.dosyaAd), true, DataSourceUpdateMode.OnPropertyChanged);
-            dosyaTipControl.DataBindings.Add(nameof(dosyaTipControl.SelectedValue), stokKartDosya.dosyaTip, nameof(stokKartDosya.dosyaTip.Id), true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbId,stokKartDosya,nameof(stokKartDosya.Id));
+            BindHelper.BindData(ctbStokKartId,stokKartDosya,nameof(stokKartDosya.stokKartId));
+            BindHelper.BindData(ctbDosyaUzanti, stokKartDosya, nameof(stokKartDosya.dosyaUzanti));
+            BindHelper.BindData(ctbDosyaAd, stokKartDosya, nameof(stokKartDosya.dosyaAd));
+            BindHelper.BindData(fcbDosyaTip, stokKartDosya.dosyaTip, nameof(stokKartDosya.dosyaTip.Id));
         }
 
         public DataControlStokKartDosya()
@@ -348,13 +370,13 @@ namespace YektamakDesktop.Formlar.Stok
             InitializeComponents();
         }
 
-        public CustomTextBox IdControl { get; set; }
-        public CustomTextBox stokKartIdControl { get; set; }
+        public CustomTextBox ctbId { get; set; }
+        public CustomTextBox ctbStokKartId { get; set; }
         private FilterableComboBox _dosyaTipControl;
-        public FilterableComboBox dosyaTipControl
+        public FilterableComboBox fcbDosyaTip
         { get { if (_dosyaTipControl == null) { _dosyaTipControl = new(); } return _dosyaTipControl; } set { _dosyaTipControl = value; } }
-        public CustomTextBox dosyaAdControl { get; set; }
-        public CustomTextBox dosyaUzantiControl { get; set; }
+        public CustomTextBox ctbDosyaAd { get; set; }
+        public CustomTextBox ctbDosyaUzanti { get; set; }
         public byte[] dosyaVeri { get; set; }
         public RoundedIconButton iconButton { get; set; }
         public RoundedIconButton iconButtonView { get; set; }
@@ -362,11 +384,11 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void InitializeComponents()
         {
-            IdControl = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
-            stokKartIdControl = new() { TabIndex = 2, Width = 0, Visible = true, Tag = "StokKartId" };
-            dosyaTipControl = new() { TabIndex = 3, Width = 60, Visible = true, Tag = "DosyaTip", DisplayMember = "ad", ValueMember = "Id" };
-            dosyaAdControl = new() { TabIndex = 4, Width = 350, Tag = "Dosya Adı" };
-            dosyaUzantiControl = new() { TabIndex = 5, Width = 50, Tag = "Dosya Uzantı" };
+            ctbId = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
+            ctbStokKartId = new() { TabIndex = 2, Width = 0, Visible = true, Tag = "StokKartId" };
+            fcbDosyaTip = new() { TabIndex = 3, Width = 60, Visible = true, Tag = "DosyaTip", DisplayMember = "ad", ValueMember = "Id" };
+            ctbDosyaAd = new() { TabIndex = 4, Width = 350, Tag = "Dosya Adı" };
+            ctbDosyaUzanti = new() { TabIndex = 5, Width = 50, Tag = "Dosya Uzantı" };
             iconButton = new()
             {
                 TabIndex = 6,
@@ -411,35 +433,33 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKartDosya.dosyaAd = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 stokKartDosya.dosyaUzanti = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
                 Binding();
-                //dosyaAdControl.TextCustom = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                //dosyaUzantiControl.TextCustom = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
             }
         }
         private async void ButtonSil_Click(object sender, EventArgs e)
         {
             StokKartDosya stokKartDosya = new();
-            if (IdControl.TextCustom != "") stokKartDosya.Id = Convert.ToInt32(IdControl.TextCustom.Replace(".", ""));
+            if (ctbId.TextCustom != "") stokKartDosya.Id = Convert.ToInt32(ctbId.TextCustom.Replace(".", ""));
             string jsonResult = await _stokService.DeleteStokKartDosya(stokKartDosya);
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(jsonResult))
             {
                 MessageBox.Show(jsonResult);
             }
         }
         private async void ButtonDosyaGoruntule_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(stokKartIdControl.TextCustom))
+            if (string.IsNullOrWhiteSpace(ctbStokKartId.TextCustom))
                 return;
-            StokKart stokKart = new StokKart() { Id = int.Parse(stokKartIdControl.TextCustom) };
+            StokKart stokKart = new StokKart() { Id = int.Parse(ctbStokKartId.TextCustom) };
             string jsonResult = _stokService.GetStokKart(stokKart);
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrEmpty(jsonResult))
             {
                 stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
             }
 
-            dosyaVeri = _fileHelper.Decompress(await _fileService.GetFile(stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosyaFullPath));
+            dosyaVeri = await _fileService.GetFile(stokKart.dosyaList.First(d => d.Id == int.Parse(ctbId.TextCustom)).dosyaFullPath);
             //dosyaVeri = stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosya;
 
-            string tempFilePath = Path.GetTempFileName() + "." + dosyaUzantiControl.TextCustom;
+            string tempFilePath = Path.GetTempFileName() + "." + ctbDosyaUzanti.TextCustom;
             if (dosyaVeri != null)
             {
                 using (MemoryStream ms = new MemoryStream(dosyaVeri))
@@ -456,9 +476,9 @@ namespace YektamakDesktop.Formlar.Stok
         public bool Validate()
         {
             bool isValid = true;
-            isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", dosyaTipControl);
-            isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", dosyaAdControl);
-            isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", dosyaUzantiControl);
+            isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", fcbDosyaTip);
+            isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", ctbDosyaAd);
+            isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", ctbDosyaUzanti);
             return isValid;
         }
     }

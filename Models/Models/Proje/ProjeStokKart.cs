@@ -43,22 +43,6 @@ namespace Models
             }
             return "";
         }
-        string FormatKod(string kod, int spc)
-        {
-            return string.IsNullOrWhiteSpace(kod) ? "0".PadLeft(spc, '0') : kod.PadLeft(spc, '0');
-        }
-        public string hammaddeKod
-        {
-            get
-            {
-                return string.Join("_",
-                FormatKod(stokKart.stokGrup.kod, 2),
-                FormatKod(stokKart.malzemeGrup.kod, 3),
-                FormatKod(stokKart.malzemeAltGrup.kod, 4),
-                string.Join("", FormatKod(stokKart.malzemeAltGrup2.kod, 1),
-                FormatKod(stokKart.boyut, 2),
-                FormatKod(stokKart.malzeme, 2)));
-            }
-        }
+        
     }
 }

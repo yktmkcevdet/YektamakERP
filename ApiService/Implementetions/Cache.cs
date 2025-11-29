@@ -258,16 +258,16 @@ namespace ApiService.Implementations
                 return _malzemeStandarts;
             }
         }
-        private List<Proje> _projes;
-        public List<Proje> projes
+        private List<Proje> _projeList;
+        public List<Proje> projeList
         {
             get
             {
-                if (_projes == null)
+                if (_projeList == null || _projeList.Count()==0)
                 {
-                    _projes = GetModelList(_projeService.GetProje, new Proje());
+                    _projeList = GetModelList(_projeService.GetProje, new Proje());
                 }
-                return _projes;
+                return _projeList;
             }
         }
         private List<ProjeTip> _projeTipList;

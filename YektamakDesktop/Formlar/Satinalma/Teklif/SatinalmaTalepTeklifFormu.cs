@@ -55,7 +55,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbBoyut.PlaceholderText = "Boyut Seçimleri...";
             clbStokGrupId.SetDataSource(_cache.stokGrups);
             clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups);
-            clbProjeKod.SetDataSource(_cache.projes.GroupBy(p => p.Id).Select(g => g.First()).ToList());
+            clbProjeKod.SetDataSource(_cache.projeList.GroupBy(p => p.Id).Select(g => g.First()).ToList());
             fcbBoyut.SetDataSource(_cache.boyutList);
             customDataGrid = new CustomDataGrid<DataControlFirma>(2, 30, new Point(0, 0), new Size(650, 300));
             this.panel1.Controls.Add(customDataGrid.headerPanel);
@@ -294,11 +294,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 List<SatinalmaTalepDetay> satinalmaTalepDetayList = JsonConvert.DeserializeObject<List<SatinalmaTalepDetay>>(jsonResult);
-                foreach (var item in satinalmaTalepDetayList)
-                {
-                    var detay = ConvertHelper.ToDTO<SatinalmaTalepDetayDTO>(item);
-                    satinalmaTalepDetayDTOs.Add(detay);
-                }
+                satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>().ToList();
                 await universalGrid1.SetData(satinalmaTalepDetayDTOs, this.Name, true);
             }
         }
