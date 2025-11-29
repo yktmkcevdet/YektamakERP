@@ -1,8 +1,6 @@
 ﻿using ApiService.Converters;
 using ApiService.Interfaces;
-using Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Text;
 
 namespace ApiService.Implementations

@@ -12,6 +12,7 @@ using YektamakDesktop.Common;
 using System.ComponentModel;
 using YektamakDesktop.CustomControls;
 using Models.DTO;
+using Utilities.Implementations;
 
 namespace YektamakDesktop.Formlar.Genel
 {
@@ -19,11 +20,13 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IStokService _stokService;
-        public MalzemeAltGrupTanimFormu(ICache cache, IStokService stokService)
+        private readonly IConvertHelper _convertHelper;
+        public MalzemeAltGrupTanimFormu(ICache cache, IStokService stokService, IConvertHelper convertHelper)
         {
             _cache = cache;
             _stokService = stokService;
             Initialize();
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -46,7 +49,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
 
             Binding();
-            universalGrid1.SetData(_cache.malzemeAltGrups.CastToDTO<MalzemeAltGrupDTO>().ToList(), this.Name);
+            universalGrid1.SetData(_cache.malzemeAltGrups.CastToDTO<MalzemeAltGrupDTO>(_convertHelper).ToList(), this.Name);
 
         }
 
@@ -79,11 +82,11 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                string jsonResult = _stokService.SaveMalzemeAltGrup(ConvertHelper.ToEntity<MalzemeAltGrup>(malzemeAltGrupDTO));
+                string jsonResult = _stokService.SaveMalzemeAltGrup(_convertHelper.ToEntity<MalzemeAltGrup>(malzemeAltGrupDTO));
                 if (jsonResult != null && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     var malzemeAltGrup = JsonConvert.DeserializeObject<List<MalzemeAltGrup>>(jsonResult)[0];
-                    malzemeAltGrupDTO = ConvertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup);
+                    malzemeAltGrupDTO = _convertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup);
                     _cache.malzemeAltGrups.Add(malzemeAltGrup);
                     AfterSave?.Invoke(sender, malzemeAltGrup);
                     universalGrid1.binding.Add(malzemeAltGrupDTO);
@@ -119,10 +122,10 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbMalzemeAltGrupAd) && result;
-            result = GlobalData.CheckField("*", ctbMalzemeAltGrupKod) && result;
-            result = GlobalData.CheckField("*", fcbStokGrup) && result;
-            result = GlobalData.CheckField("*", fcbMalzemeGrup) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeAltGrupAd) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeAltGrupKod) && result;
+            result = CheckFieldHelper.CheckField("*", fcbStokGrup) && result;
+            result = CheckFieldHelper.CheckField("*", fcbMalzemeGrup) && result;
             return result;
         }
 
@@ -133,7 +136,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void malzemeGrubunuSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var malzemeAltGrup = ConvertHelper.ToEntity<MalzemeAltGrup>(malzemeAltGrupDTO);
+            var malzemeAltGrup = _convertHelper.ToEntity<MalzemeAltGrup>(malzemeAltGrupDTO);
             string jsonResult = _stokService.DeleteMalzemeAltGrup(malzemeAltGrup);
             if (string.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {

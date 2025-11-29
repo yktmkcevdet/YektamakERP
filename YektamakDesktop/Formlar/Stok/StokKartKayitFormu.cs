@@ -28,7 +28,13 @@ namespace YektamakDesktop.Formlar.Stok
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
+<<<<<<< HEAD
         public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, IStokService stokService, IProjeService projeService, IFileService fileService)
+=======
+        private readonly IConvertHelper _convertHelper;
+        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, 
+            IStokService stokService, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper)
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         {
             _cache = cache;
             _dataTableHelper = dataTableHelper;
@@ -48,6 +54,10 @@ namespace YektamakDesktop.Formlar.Stok
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
             _fileService = fileService;
+<<<<<<< HEAD
+=======
+            _convertHelper = convertHelper;
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         }
         public event EventHandler<object> AfterSave;
         private ProjeStokKart _projeStokKart;
@@ -74,14 +84,14 @@ namespace YektamakDesktop.Formlar.Stok
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbStokAd) && result;
-            result = GlobalData.CheckField("*", clbStokTip) && result;
-            result = GlobalData.CheckField("*", clbStokGrup) && result;
-            result = GlobalData.CheckField("*", clbMalzemeGrup) && result;
-            if (clbMalzemeGrup.SelectedIndex != -1) result = GlobalData.CheckField("*", clbMalzemeAltGrup2) && result;
-            if (clbMalzemeAltGrup.SelectedIndex != -1) result = GlobalData.CheckField("*", clbMalzemeAltGrup) && result;
-            result = GlobalData.CheckField("*", clbOlcuBirim) && result;
-            result = GlobalData.CheckField("*", clbProjeKod) && result;
+            result = CheckFieldHelper.CheckField("*", ctbStokAd) && result;
+            result = CheckFieldHelper.CheckField("*", clbStokTip) && result;
+            result = CheckFieldHelper.CheckField("*", clbStokGrup) && result;
+            result = CheckFieldHelper.CheckField("*", clbMalzemeGrup) && result;
+            if (clbMalzemeGrup.SelectedIndex != -1) result = CheckFieldHelper.CheckField("*", clbMalzemeAltGrup2) && result;
+            if (clbMalzemeAltGrup.SelectedIndex != -1) result = CheckFieldHelper.CheckField("*", clbMalzemeAltGrup) && result;
+            result = CheckFieldHelper.CheckField("*", clbOlcuBirim) && result;
+            result = CheckFieldHelper.CheckField("*", clbProjeKod) && result;
             if (_cache.kullanici.Id != 1)
             {
                 if (!_cache.projeList.Any(p => p.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0 && p.Id == projeStokKart.proje.Id))
@@ -258,7 +268,7 @@ namespace YektamakDesktop.Formlar.Stok
             MalzemeAltGrup malzemeAltGrup = new MalzemeAltGrup();
             malzemeAltGrup.malzemeGrup = projeStokKart.stokKart.malzemeGrup;
             malzemeAltGrup.malzemeGrup.stokGrup = projeStokKart.stokKart.stokGrup;
-            malzemeAltGrupGrupTanimFormu.UpdateMode(ConvertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup));
+            malzemeAltGrupGrupTanimFormu.UpdateMode(_convertHelper.ToDTO<MalzemeAltGrupDTO>(malzemeAltGrup));
             malzemeAltGrupGrupTanimFormu.ShowDialog();
         }
 
@@ -421,7 +431,7 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKartDosya = new StokKartDosya();
             }
 
-            ComboBoxListFill.GetLookupAd(_cache.dosyaTipList, ref _dosyaTipControl);
+            _dosyaTipControl.SetDataSource(_cache.dosyaTipList);
         }
 
         private void ButtonDosyaEkle_Click(object sender, EventArgs e)
@@ -476,9 +486,15 @@ namespace YektamakDesktop.Formlar.Stok
         public bool Validate()
         {
             bool isValid = true;
+<<<<<<< HEAD
             isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", fcbDosyaTip);
             isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", ctbDosyaAd);
             isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", ctbDosyaUzanti);
+=======
+            isValid &= CheckFieldHelper.CheckField("Dosya Tipi seçilmelidir", fcbDosyaTip);
+            isValid &= CheckFieldHelper.CheckField("Dosya Adı boş olmamalıdır", ctbDosyaAd);
+            isValid &= CheckFieldHelper.CheckField("Dosya Uzantısı boş olmamalıdır", ctbDosyaUzanti);
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
             return isValid;
         }
     }

@@ -19,8 +19,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             _kullaniciYetkiService = kullaniciYetkiService;
             _cache = cache;
             InitializeComponent();
-            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbAnaMenu);
-            ComboBoxListFill.GetLookupAd(_cache.menuList, ref clbForm);
+            clbAnaMenu.SetDataSource(_cache.menuList);
+            clbForm.SetDataSource(_cache.menuList);
             Binding();
         }
 
@@ -51,8 +51,8 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("* Ana menü seçimi yapılmalıdır.", clbAnaMenu) ? result : false;
-            result = GlobalData.CheckField("* Form seçimi yapılmalıdır.", clbForm) ? result : false;
+            result = CheckFieldHelper.CheckField("* Ana menü seçimi yapılmalıdır.", clbAnaMenu) ? result : false;
+            result = CheckFieldHelper.CheckField("* Form seçimi yapılmalıdır.", clbForm) ? result : false;
             return result;
         }
         private async void rButtonKaydet_Click(object sender, EventArgs e)

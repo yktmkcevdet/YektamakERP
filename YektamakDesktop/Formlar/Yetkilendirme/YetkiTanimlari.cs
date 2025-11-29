@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
-using ConvertHelper = YektamakDesktop.Common.ConvertHelper;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
@@ -21,14 +20,16 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
     {
         private readonly IKullaniciYetkiService _kullaniciYetkiService;
         private readonly ICache _cache;
-        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService, ICache cache)
+        private readonly IConvertHelper _convertHelper;
+        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService, ICache cache, IConvertHelper convertHelper)
         {
             _kullaniciYetkiService = kullaniciYetkiService;
             _cache = cache;
             InitializeComponent();
             Initialize();
-            treeView1.AfterCheck += async(s,e)=> await treeView1_AfterCheck(s,e);
+            treeView1.AfterCheck += async (s, e) => await treeView1_AfterCheck(s, e);
             comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -45,11 +46,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             treeView1.Nodes.Clear();
             Kullanici kullanici = new Kullanici();
-            kullanici.rol.Id = comboListBoxRol.selectedDataRowId;
+            kullanici.rol.Id = int.Parse(comboListBoxRol.SelectedValue.ToString());
             string jsonResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
             List<KullaniciYetki> kullaniciYetkiList = JsonConvert.DeserializeObject<List<KullaniciYetki>>(jsonResult);
             TreeNodes(kullaniciYetkiList);
-            ComboBoxListFill.GetLookupAd(_cache.kullaniciList.Where(k => k.rol.Id == comboListBoxRol.selectedDataRowId).ToList(), ref cbxKullanici);
+            cbxKullanici.SetDataSource(_cache.kullaniciList.Where(k => k.rol.Id.ToString() == comboListBoxRol.SelectedValue.ToString()).ToList());
         }
         bool isLoading=false;
         private void TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
@@ -97,7 +98,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             if (isLoading) return;
             Yetki yetki = new Yetki();
-            yetki.rolId = comboListBoxRol.selectedDataRowId;
+            yetki.rolId = int.Parse(comboListBoxRol.SelectedValue.ToString());
             if (e.Node.Parent != null)
             {
                 yetki.menu.Id = int.TryParse(e.Node.Parent.Name, out int parentId) ? parentId : yetki.menu.Id;
@@ -197,10 +198,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         private async Task<bool> SetAlanYetkiList()
         {
-            if (cbxKullanici.selectedDataRowId == null) return false;
+            if (cbxKullanici.SelectedValue == null) return false;
             if (selectedNode == null) return false;
             AlanYetki alanYetki = new AlanYetki();
-            alanYetki.kullanici.Id = cbxKullanici.selectedDataRowId == null ? 0 : cbxKullanici.selectedDataRowId;
+            alanYetki.kullanici.Id = cbxKullanici.SelectedValue == null ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString());
             alanYetki.formAd = selectedNode.Text;
             string jsonResult = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
             var yetkiListDTO = new List<AlanYetkiDTO>();
@@ -210,7 +211,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(jsonResult);
                 foreach (var yetki in yetkiList)
                 {
-                    yetkiListDTO.Add(ConvertHelper.ToDTO<AlanYetkiDTO>(yetki));
+                    yetkiListDTO.Add(_convertHelper.ToDTO<AlanYetkiDTO>(yetki));
                 }
                 yetkiListDTO.RemoveAll(yetkiDTO => !yetkiListDTOFromAttr.Any(y => y.alanAd == yetkiDTO.alanAd));
 
@@ -256,7 +257,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                     {
                         model = menu.model,
                         formAd = menu.formAd,
-                        kullaniciId = cbxKullanici.selectedDataRowId == -1 ? 0 : cbxKullanici.selectedDataRowId
+                        kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString()) == -1 ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString())
                     };
                     var attrs = property.GetCustomAttributes(typeof(GridDisplayAttribute), true);
                     if (attrs.Length > 0 && attrs[0] is GridDisplayAttribute attr)
@@ -317,10 +318,10 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private async Task YetkiTanimla()
         {
-            alanYetki.kullaniciId = cbxKullanici.selectedDataRowId;
+            alanYetki.kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString());
             alanYetki.yetki = !alanYetki.yetki;
             alanYetki.formAd = selectedNode.Text;
-            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(ConvertHelper.ToEntity<AlanYetki>(alanYetki));
+            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(_convertHelper.ToEntity<AlanYetki>(alanYetki));
             if (list.Find(y => y == alanYetki) is { } item)
             {
                 item.yetki = alanYetki.yetki;
@@ -329,7 +330,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void YetkiTanimlari_Load(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupAd(_cache.rolList, ref comboListBoxRol);
+            comboListBoxRol.SetDataSource(_cache.rolList);
         }
 
         private async void yetkileriSilToolStripMenuItem_Click(object sender, EventArgs e)
@@ -341,7 +342,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     foreach (var alan in alanYetkiList)
                     {
-                        var alanYetki = ConvertHelper.ToEntity<AlanYetki>(alan);
+                        var alanYetki = _convertHelper.ToEntity<AlanYetki>(alan);
                         string jsonResult = await _kullaniciYetkiService.DeleteAlanYetki(alanYetki);
                         universalGrid1.binding.RemoveAt(universalGrid1.Grid.SelectedCells[0].RowIndex);
                     }

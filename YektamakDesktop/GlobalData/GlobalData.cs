@@ -12,6 +12,7 @@ namespace YektamakDesktop
 {
     public partial class GlobalData
     {
+<<<<<<< HEAD
         
         public GlobalData()
         {
@@ -106,5 +107,7 @@ namespace YektamakDesktop
             }
             return result;
         }
+=======
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -18,12 +19,14 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IStokService _stokService;
-        public MalzemeGrupTanimFormu(ICache cache, IStokService stokService)
+        private readonly IConvertHelper _convertHelper;
+        public MalzemeGrupTanimFormu(ICache cache, IStokService stokService, IConvertHelper convertHelper)
         {
             _cache = cache;
             _stokService = stokService;
             InitializeComponent();
             Initialize();
+            _convertHelper = convertHelper;
         }
         public event EventHandler<object> AfterSave;
         private void Initialize()
@@ -75,10 +78,10 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (CheckFields())
             {
-                var malzemeGrup = ConvertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO);
+                var malzemeGrup = _convertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO);
                 string jsonResult = _stokService.SaveMalzemeGrup(malzemeGrup);
                 malzemeGrup = JsonConvert.DeserializeObject<List<MalzemeGrup>>(jsonResult)[0];
-                malzemeGrupDTO = ConvertHelper.ToDTO<MalzemeGrupDTO>(malzemeGrup);
+                malzemeGrupDTO = _convertHelper.ToDTO<MalzemeGrupDTO>(malzemeGrup);
                 universalGrid1.binding.Add(malzemeGrupDTO);
                 _cache.malzemeGrups.Add(malzemeGrup);
                 AfterSave?.Invoke(this, malzemeGrupDTO);
@@ -87,7 +90,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private async Task MalzemeGrupTanimFormu_Load(object sender, EventArgs e)
         {
-            await universalGrid1.SetData(_cache.malzemeGrups.CastToDTO<MalzemeGrupDTO>().ToList(), this.Name);
+            await universalGrid1.SetData(_cache.malzemeGrups.CastToDTO<MalzemeGrupDTO>(_convertHelper).ToList(), this.Name);
         }
         public void UpdateMode(MalzemeGrupDTO malzemeGrup)
         {
@@ -96,9 +99,9 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbMalzemeGrupAd) && result;
-            result = GlobalData.CheckField("*", ctbMalzemeGrupKod) && result;
-            result = GlobalData.CheckField("*", fcbStokGrup) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeGrupAd) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeGrupKod) && result;
+            result = CheckFieldHelper.CheckField("*", fcbStokGrup) && result;
             return result;
         }
 
@@ -120,7 +123,7 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 return;
             }
-            string jsonResult = _stokService.DeleteMalzemeGrup(ConvertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO));
+            string jsonResult = _stokService.DeleteMalzemeGrup(_convertHelper.ToEntity<MalzemeGrup>(malzemeGrupDTO));
             if (string.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(jsonResult, "Silme işleminde hata oluştu.");

@@ -18,6 +18,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.TextFormatting;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
@@ -28,17 +29,17 @@ namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepTeklifFormu : Form
     {
-        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
         private readonly ISatinalmaTalepService _satinalmaService;
         private readonly IConfigurationService _configurationService;
         private readonly ICache _cache;
         private readonly IAnaVeriService _anaVeriService;
         private readonly IStokService _stokService;
         private readonly IProjeService _projeService;
-        public SatinalmaTalepTeklifFormu(IJsonConverter jsonConverter, ISatinalmaTalepService satinalmaService, IConfigurationService configurationService,
+        public SatinalmaTalepTeklifFormu(IConvertHelper convertHelper, ISatinalmaTalepService satinalmaService, IConfigurationService configurationService,
             ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService)
         {
-            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             _satinalmaService = satinalmaService;
             _configurationService = configurationService;
             _cache = cache;
@@ -294,7 +295,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 List<SatinalmaTalepDetay> satinalmaTalepDetayList = JsonConvert.DeserializeObject<List<SatinalmaTalepDetay>>(jsonResult);
+<<<<<<< HEAD
                 satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>().ToList();
+=======
+                satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>(_convertHelper).ToList();
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
                 await universalGrid1.SetData(satinalmaTalepDetayDTOs, this.Name, true);
             }
         }
@@ -378,7 +383,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     satinalmaTeklifBaslik.teklifTalepTarihi = DateTime.Now;
                     foreach (var satinalmaTalep in (IEnumerable<SatinalmaTalepDetayDTO>)universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>())
                     {
-                        satinalmaTeklifBaslik.satinalmaTeklifDetayList.Add(new SatinalmaTeklifDetay { satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalep) });
+                        satinalmaTeklifBaslik.satinalmaTeklifDetayList.Add(new SatinalmaTeklifDetay { satinalmaTalepDetay = _convertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalep) });
 
                     }
                     mailGonder.UpdateMode(satinalmaTeklifBaslik);
@@ -396,8 +401,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         private bool ValidateControl()
         {
             bool isValid = true;
-            isValid &= GlobalData.CheckField("Malzeme grubu seçilmelidir.", clbMalzemeGrupId);
-            isValid &= GlobalData.CheckField("En az bir firma seçilmelidir.", customDataGrid);
+            isValid &= CheckFieldHelper.CheckField("Malzeme grubu seçilmelidir.", clbMalzemeGrupId);
+            isValid &= CheckFieldHelper.CheckField("En az bir firma seçilmelidir.", customDataGrid);
             return isValid;
         }
         private async Task CreateOrderFile()
@@ -589,7 +594,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             //    return;
             //var talepDTO = (SatinalmaTalepDetayDTO)dataGridView.CurrentRow.DataBoundItem;
             var satinalmaTalepDetayDTO = (SatinalmaTalepDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalepDetay satinalmaTalepDetay = ConvertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
+            SatinalmaTalepDetay satinalmaTalepDetay = _convertHelper.ToEntity<SatinalmaTalepDetay>(satinalmaTalepDetayDTO);
             SatinalmaTalepSatirDetayForm satinalmaTalepSatirDetayForm = FormFactory.CreateForm<SatinalmaTalepSatirDetayForm>();
             satinalmaTalepSatirDetayForm.UpdateMode(satinalmaTalepDetay.satinalmaTalepSatirDetays);
             satinalmaTalepSatirDetayForm.Show();
@@ -605,8 +610,6 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void cbxStokGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(c => c.stokGrup.Id == filter.projeStokKartstokKartstokGrupId).ToList(), ref clbMalzemeGrupId);
-            //ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(c => c.malzemeGrup.Id == filter.projeStokKartstokKartmalzemeGrupId).ToList(), ref clbMalzemeAltGrupId);
             universalGrid1.Filtrele(filter);
         }
         private async void cbxMalzemeGrupId_SelectedIndexChanged(object sender, EventArgs e)
@@ -625,12 +628,12 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void cbxFirma_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomComboListBox firma = (CustomComboListBox)sender;
-            firmaList.Add(_cache.firmaList.First(f => f.Id == firma.selectedDataRowId));
-            CustomComboListBox customComboListBox = new CustomComboListBox();
+            FilterableComboBox firma = (FilterableComboBox)sender;
+            firmaList.Add(_cache.firmaList.First(f => f.Id.ToString() == firma.SelectedValue.ToString()));
+            FilterableComboBox customComboListBox = new FilterableComboBox();
             customComboListBox.Location = new Point(firma.Location.X, firma.Location.Y + firma.Height);
             customComboListBox.Size = firma.Size;
-            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref customComboListBox);
+            customComboListBox.SetDataSource(_cache.firmaList);
             customComboListBox.SelectedIndexChanged += cbxFirma_SelectedIndexChanged;
             this.Controls.Add(customComboListBox);
         }
@@ -819,7 +822,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             Id.SelectedIndexChanged += Id_SelectedIndexChanged;
             _cache = cache;
-            ComboBoxListFill.GetLookupAd(_cache.firmaList, ref _Id);
+            _Id.SetDataSource(_cache.firmaList);
         }
         public DataControlFirma() { }
 

@@ -1,6 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "rD7XnfpMHPk=",
+=======
+<<<<<<< HEAD
+  "dgSpecHash": "KKJP8dazVkQ=",
+=======
+  "dgSpecHash": "mzbgkUx+CVw=",
+>>>>>>> e603588513f88228ba1400dbd71a4331b6b4321c
+>>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
   "success": true,
   "projectFilePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakMobil\\YektamakMobil.csproj",
   "expectedPackageFiles": [
@@ -64,10 +72,7 @@
     "C:\\Users\\yektamak-118\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.11\\sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\sqlitepclraw.provider.sqlite3\\2.1.11\\sqlitepclraw.provider.sqlite3.2.1.11.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\syncfusion.maui.toolkit\\1.0.6\\syncfusion.maui.toolkit.1.0.6.nupkg.sha512",
-    "C:\\Users\\yektamak-118\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.1\\system.diagnostics.eventlog.9.0.1.nupkg.sha512",
-    "C:\\Users\\yektamak-118\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\yektamak-118\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\system.runtime.interopservices.nfloat.internal\\6.0.1\\system.runtime.interopservices.nfloat.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\system.speech\\9.0.5\\system.speech.9.0.5.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\xamarin.android.glide\\4.16.0.12\\xamarin.android.glide.4.16.0.12.nupkg.sha512",

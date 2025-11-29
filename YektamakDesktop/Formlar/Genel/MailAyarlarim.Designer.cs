@@ -63,6 +63,7 @@
             ctbMailId.BorderColor = System.Drawing.Color.Silver;
             ctbMailId.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbMailId.BorderSize = 1;
+            ctbMailId.Enabled = false;
             ctbMailId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbMailId.ForeColor = System.Drawing.Color.Black;
             ctbMailId.Location = new System.Drawing.Point(143, 74);
@@ -288,7 +289,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "MailAyarlarim";
             Text = "MailAyarlarim";
-            Load += MailAyarlarim_Load;
+            Load += async (s,e)=>await MailAyarlarim_Load(s,e);
             ResumeLayout(false);
             PerformLayout();
         }

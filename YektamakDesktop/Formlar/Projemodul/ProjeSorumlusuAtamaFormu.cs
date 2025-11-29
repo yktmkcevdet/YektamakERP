@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -19,12 +20,14 @@ namespace YektamakDesktop.Formlar.Projemodul
     {
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
-        public ProjeSorumlusuAtamaFormu(IProjeService projeService, ICache cache)
+        private readonly IConvertHelper _convertHelper;
+        public ProjeSorumlusuAtamaFormu(IProjeService projeService, ICache cache, IConvertHelper convertHelper)
         {
             _cache = cache;
             _projeService = projeService;
             InitializeComponent();
             Initialize();
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -58,9 +61,9 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private async Task ProjeSorumlusuAtama_Load(object sender, EventArgs e)
         {
-            string jsonResult = await _projeService.GetProjeSorumlu(ConvertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
+            string jsonResult = await _projeService.GetProjeSorumlu(_convertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
             List<ProjeSorumlu> projeSorumluList = JsonConvert.DeserializeObject<List<ProjeSorumlu>>(jsonResult);
-            await universalGrid1.SetData(projeSorumluList.CastToDTO<ProjeSorumluDTO>().ToList(), this.Name);
+            await universalGrid1.SetData(projeSorumluList.CastToDTO<ProjeSorumluDTO>(_convertHelper).ToList(), this.Name);
         }
 
         private ProjeSorumluDTO _projeSorumluDTO;
@@ -88,7 +91,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private async Task customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            var jsonResult=await _projeService.SaveProjeSorumlu(ConvertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
+            var jsonResult=await _projeService.SaveProjeSorumlu(_convertHelper.ToEntity<ProjeSorumlu>(projeSorumluDTO));
             if (jsonResult == null || jsonResult.Contains("erro", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(jsonResult, "Hata");

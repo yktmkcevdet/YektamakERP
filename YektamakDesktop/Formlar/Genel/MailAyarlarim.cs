@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Interfaces;
 using YektamakDesktop.Common;
 
 namespace YektamakDesktop.Formlar.Genel
@@ -14,24 +14,28 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IKullaniciYetkiService _kullaniciYetkiService;
-        private readonly IPasswordService _passwordService;
-        public MailAyarlarim(ICache cache, IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService)
+        public MailAyarlarim(ICache cache, IKullaniciYetkiService kullaniciYetkiService)
         {
             _cache = cache;
             _kullaniciYetkiService = kullaniciYetkiService;
-            _passwordService = passwordService;
             InitializeComponent();
             Initialize();
         }
-        private MailAdres _mail;
+        private MailAdres _mailAdres;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MailAdres mailAdres
         {
-            get { if (_mail == null) { _mail = new(); } if (!string.IsNullOrEmpty(_mail.sifre)) { _mail.sifre = _passwordService.HashPassword(_mail.sifre).CombinedHash; } return _mail; }
-            set { _mail = value; Binding(); }
+            get { if (_mailAdres == null) { _mailAdres = new(); } return _mailAdres; }
+            set {   _mailAdres = value; Binding(); }
         }
         private void Initialize()
         {
+            
+            mailAdres = _cache.kullanici.mailAdres;
+            if (mailAdres.Id == null)
+            {
+                mailAdres = new MailAdres { smtpServer = "smtp-mail.outlook.com", SSL = true, port = 587 };
+            }
             Binding();
         }
         private void Binding()
@@ -56,16 +60,16 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbKullaniciAdi) && result;
-            result = GlobalData.CheckField("*", ctbSifre) && result;
-            result = GlobalData.CheckField("*", ctbSmtpServer) && result;
-            result = GlobalData.CheckField("*", ctbPort) && result;
+            result = CheckFieldHelper.CheckField("*", ctbKullaniciAdi) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSifre) && result;
+            result = CheckFieldHelper.CheckField("*", ctbSmtpServer) && result;
+            result = CheckFieldHelper.CheckField("*", ctbPort) && result;
             return result;
         }
 
-        private void MailAyarlarim_Load(object sender, EventArgs e)
+        private async Task MailAyarlarim_Load(object sender, EventArgs e)
         {
-            mailAdres = _cache.kullanici.mailAdres; 
+            
         }
     }
 }

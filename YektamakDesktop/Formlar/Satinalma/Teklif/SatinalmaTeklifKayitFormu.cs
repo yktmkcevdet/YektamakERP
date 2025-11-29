@@ -16,13 +16,13 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
     public partial class SatinalmaTeklifKayitFormu : Form
     {
         private readonly ISatinalmaTeklifService _satinalmaTeklifService;
-        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
         private readonly ICache _cache;
         private readonly IDataTableMapper _dataTableMapper;
-        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService, IJsonConverter jsonConverter, ICache cache, IDataTableMapper dataTableMapper)
+        public SatinalmaTeklifKayitFormu(ISatinalmaTeklifService satinalmaTeklifService, IConvertHelper convertHelper, ICache cache, IDataTableMapper dataTableMapper)
         {
             _satinalmaTeklifService = satinalmaTeklifService;
-            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             _cache = cache;
             _dataTableMapper = dataTableMapper;
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
                 satinalmaTeklifBaslik.satinalmaTeklifDetayList.Clear();
                 foreach (var item in detay)
                 {
-                    satinalmaTeklifBaslik.satinalmaTeklifDetayList.Add(ConvertHelper.ToEntity<SatinalmaTeklifDetay>(item));
+                    satinalmaTeklifBaslik.satinalmaTeklifDetayList.Add(_convertHelper.ToEntity<SatinalmaTeklifDetay>(item));
                 }
                 string jsonResult = await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
                 if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
@@ -101,14 +101,14 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
         private bool ValidateForm()
         {
             bool result = true;
-            result &= GlobalData.CheckField("Firma Seçiniz", fcbFirma);
-            result &= GlobalData.CheckField("Teklif Tarihi Giriniz", ctbTeklifTarihi);
-            result &= GlobalData.CheckField("Teklif Talep Tarihi Giriniz", ctbTeklifTalepTarihi);
-            result &= GlobalData.CheckField("*", clbDoviz);
-            result &= GlobalData.CheckField("Teklif Tutarı Giriniz", ctbTutar);
-            result &= GlobalData.CheckField("Teklif Geçerlilik Süresi Giriniz", ctbTeklifGecerlilikSuresi);
-            result &= GlobalData.CheckField("Termin Süresi Giriniz", ctbTerminSuresi);
-            result &= GlobalData.CheckField("*", clbVade);
+            result &= CheckFieldHelper.CheckField("Firma Seçiniz", fcbFirma);
+            result &= CheckFieldHelper.CheckField("Teklif Tarihi Giriniz", ctbTeklifTarihi);
+            result &= CheckFieldHelper.CheckField("Teklif Talep Tarihi Giriniz", ctbTeklifTalepTarihi);
+            result &= CheckFieldHelper.CheckField("*", clbDoviz);
+            result &= CheckFieldHelper.CheckField("Teklif Tutarı Giriniz", ctbTutar);
+            result &= CheckFieldHelper.CheckField("Teklif Geçerlilik Süresi Giriniz", ctbTeklifGecerlilikSuresi);
+            result &= CheckFieldHelper.CheckField("Termin Süresi Giriniz", ctbTerminSuresi);
+            result &= CheckFieldHelper.CheckField("*", clbVade);
             return result;
         }
         public void UpdateMode(SatinalmaTeklifBaslik satinalmaTeklifBaslik)
@@ -139,7 +139,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             List<SatinalmaTeklifDetayDTO> satinalmaTeklifDetayDTOs = new();
             foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
             {
-                satinalmaTeklifDetayDTOs.Add(ConvertHelper.ToDTO<SatinalmaTeklifDetayDTO>(item));
+                satinalmaTeklifDetayDTOs.Add(_convertHelper.ToDTO<SatinalmaTeklifDetayDTO>(item));
             }
             await universalGrid1.SetData(satinalmaTeklifDetayDTOs, this.Name);
         }

@@ -115,9 +115,9 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result &= GlobalData.CheckField("*", fcbKarsilastirmaOperator);
-            result &= GlobalData.CheckField("*", ctbAnahtarKelime);
-            result &= GlobalData.CheckField("*", ctbExcelSutunAd);
+            result &= CheckFieldHelper.CheckField("*", fcbKarsilastirmaOperator);
+            result &= CheckFieldHelper.CheckField("*", ctbAnahtarKelime);
+            result &= CheckFieldHelper.CheckField("*", ctbExcelSutunAd);
             return result;
         }
 

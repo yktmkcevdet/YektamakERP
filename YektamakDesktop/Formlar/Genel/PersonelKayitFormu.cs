@@ -11,6 +11,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -21,12 +22,12 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly IPersonelService _personelService;
         private readonly ICache _cache;
-        private readonly IJsonConverter _jsonConverter;
-        public PersonelKayitFormu(IPersonelService personelService, ICache cache, IJsonConverter jsonConverter)
+        private readonly IConvertHelper _convertHelper;
+        public PersonelKayitFormu(IPersonelService personelService, ICache cache, IConvertHelper convertHelper)
         {
             _personelService = personelService;
             _cache = cache;
-            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             InitializeComponent();
             Initialize();
             Binding();
@@ -131,16 +132,16 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!",  ctbPersonelAd);
-            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!",  ctbPersonelSoyad);
-            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!",  clbFirma);
+            result = result & CheckFieldHelper.CheckField("*İsim alanı boş bırakılamaz!",  ctbPersonelAd);
+            result = result & CheckFieldHelper.CheckField("*Soyisim alanı boş bırakılamaz!",  ctbPersonelSoyad);
+            result = result & CheckFieldHelper.CheckField("*Firma seçimi yapılmalıdır!",  clbFirma);
             return result;
         }
         private async void buttonPersonelKaydet_Click(object sender, EventArgs e)
         {
             if (CheckFields())
             {
-                string jsonResult = await _personelService.SavePersonel(ConvertHelper.ToEntity<Personel>(personelDTO));
+                string jsonResult = await _personelService.SavePersonel(_convertHelper.ToEntity<Personel>(personelDTO));
                 if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(jsonResult,"Personel kaydederken hata");
@@ -163,7 +164,7 @@ namespace YektamakDesktop.Formlar.Genel
                     List<PersonelDTO> personelList = new();
                     foreach (var item in _cache.personelList)
                     {
-                        personelList.Add(ConvertHelper.ToDTO<PersonelDTO>(item));
+                        personelList.Add(_convertHelper.ToDTO<PersonelDTO>(item));
                     }
                     universalGrid1.SetData(personelList, this.Name);
                 }
@@ -173,7 +174,7 @@ namespace YektamakDesktop.Formlar.Genel
         private void PersonelKayitFormu_Load(object sender, EventArgs e)
         {
             List<Personel> personelList = new();
-            universalGrid1.SetData(_cache.personelList.CastToDTO<PersonelDTO>().ToList(), this.Name);
+            universalGrid1.SetData(_cache.personelList.CastToDTO<PersonelDTO>(_convertHelper).ToList(), this.Name);
         }
 
         private void PersonelKayitFormu_FormClosing(object sender, FormClosingEventArgs e)

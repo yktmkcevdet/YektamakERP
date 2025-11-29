@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             treeView1 = new System.Windows.Forms.TreeView();
-            comboListBoxRol = new YektamakDesktop.CustomControls.CustomComboListBox();
+            comboListBoxRol = new YektamakDesktop.CustomControls.FilterableComboBox();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             menuEkle = new System.Windows.Forms.ToolStripMenuItem();
             menuSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
-            cbxKullanici = new YektamakDesktop.CustomControls.CustomComboListBox();
+            cbxKullanici = new YektamakDesktop.CustomControls.FilterableComboBox();
             contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
             menuChangeAuth = new System.Windows.Forms.ToolStripMenuItem();
             alanEkleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,15 +57,20 @@
             // comboListBoxRol
             // 
             comboListBoxRol.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxRol.ListBoxVisualSize = 5;
-            comboListBoxRol.Location = new System.Drawing.Point(37, 81);
+            comboListBoxRol.BorderColor = System.Drawing.Color.Silver;
+            comboListBoxRol.BorderRadius = 8;
+            comboListBoxRol.BorderSize = 1;
+            comboListBoxRol.DisplayMember = "ad";
+            comboListBoxRol.Font = new System.Drawing.Font("Segoe UI", 8F);
+            comboListBoxRol.Location = new System.Drawing.Point(37, 92);
             comboListBoxRol.Margin = new System.Windows.Forms.Padding(1);
             comboListBoxRol.Name = "comboListBoxRol";
             comboListBoxRol.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxRol.selectedDataRowId = null;
-            comboListBoxRol.selectedDataRowValue = null;
-            comboListBoxRol.Size = new System.Drawing.Size(277, 37);
+            comboListBoxRol.PlaceholderText = "Seçiniz...";
+            comboListBoxRol.ReadOnly = false;
+            comboListBoxRol.Size = new System.Drawing.Size(237, 25);
             comboListBoxRol.TabIndex = 52;
+            comboListBoxRol.ValueMember = "Id";
             // 
             // contextMenuStrip1
             // 
@@ -103,15 +108,20 @@
             // cbxKullanici
             // 
             cbxKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            cbxKullanici.ListBoxVisualSize = 5;
-            cbxKullanici.Location = new System.Drawing.Point(355, 81);
+            cbxKullanici.BorderColor = System.Drawing.Color.Silver;
+            cbxKullanici.BorderRadius = 8;
+            cbxKullanici.BorderSize = 1;
+            cbxKullanici.DisplayMember = "ad";
+            cbxKullanici.Font = new System.Drawing.Font("Segoe UI", 8F);
+            cbxKullanici.Location = new System.Drawing.Point(355, 96);
             cbxKullanici.Margin = new System.Windows.Forms.Padding(1);
             cbxKullanici.Name = "cbxKullanici";
             cbxKullanici.Padding = new System.Windows.Forms.Padding(1);
-            cbxKullanici.selectedDataRowId = null;
-            cbxKullanici.selectedDataRowValue = null;
-            cbxKullanici.Size = new System.Drawing.Size(250, 37);
+            cbxKullanici.PlaceholderText = "Seçiniz...";
+            cbxKullanici.ReadOnly = false;
+            cbxKullanici.Size = new System.Drawing.Size(214, 25);
             cbxKullanici.TabIndex = 55;
+            cbxKullanici.ValueMember = "Id";
             cbxKullanici.SelectedIndexChanged += cbxKullanici_SelectedIndexChanged;
             // 
             // contextMenuStrip2
@@ -170,12 +180,12 @@
 
         #endregion
         private System.Windows.Forms.TreeView treeView1;
-        private CustomControls.CustomComboListBox comboListBoxRol;
+        private CustomControls.FilterableComboBox comboListBoxRol;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuEkle;
         private System.Windows.Forms.ToolStripMenuItem menuSilToolStripMenuItem;
         private CustomControls.HeaderPanel headerPanel1;
-        private CustomControls.CustomComboListBox cbxKullanici;
+        private CustomControls.FilterableComboBox cbxKullanici;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem menuChangeAuth;
         private System.Windows.Forms.ToolStripMenuItem alanEkleToolStripMenuItem;

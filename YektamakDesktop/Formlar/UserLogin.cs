@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar
@@ -147,8 +148,8 @@ namespace YektamakDesktop.Formlar
         private bool CheckFields()
         {
             bool result = true;
-            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", ctbKullaniciAdi);
-            result &= GlobalData.CheckField("* Şifre girilmelidir!", ctbSifre);
+            result &= CheckFieldHelper.CheckField("* Kullanıcı adı girilmelidir!", ctbKullaniciAdi);
+            result &= CheckFieldHelper.CheckField("* Şifre girilmelidir!", ctbSifre);
 
             if (newPasswordMode)
             {

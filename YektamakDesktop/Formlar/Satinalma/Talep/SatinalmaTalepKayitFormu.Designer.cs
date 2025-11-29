@@ -152,7 +152,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbTalepNo.PlaceholderText = "";
             ctbTalepNo.ReadOnly = false;
             ctbTalepNo.SelectionStart = 0;
-            ctbTalepNo.Size = new System.Drawing.Size(166, 25);
+            ctbTalepNo.Size = new System.Drawing.Size(119, 25);
             ctbTalepNo.TabIndex = 26;
             ctbTalepNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbTalepNo.TextCustom = "";
@@ -284,6 +284,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(3);
             clbProjeKodu.PlaceholderText = "Seçiniz...";
+            clbProjeKodu.ReadOnly = false;
             clbProjeKodu.Size = new System.Drawing.Size(119, 25);
             clbProjeKodu.TabIndex = 35;
             clbProjeKodu.ValueMember = "Id";
@@ -301,6 +302,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.Name = "clbKullaniciId";
             clbKullaniciId.Padding = new System.Windows.Forms.Padding(3);
             clbKullaniciId.PlaceholderText = "Seçiniz...";
+            clbKullaniciId.ReadOnly = false;
             clbKullaniciId.Size = new System.Drawing.Size(119, 25);
             clbKullaniciId.TabIndex = 36;
             clbKullaniciId.ValueMember = "Id";
@@ -317,7 +319,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbTalepNeden.Name = "fcbTalepNeden";
             fcbTalepNeden.Padding = new System.Windows.Forms.Padding(3);
             fcbTalepNeden.PlaceholderText = "Seçiniz...";
-            fcbTalepNeden.Size = new System.Drawing.Size(119, 25);
+            fcbTalepNeden.ReadOnly = false;
+            fcbTalepNeden.Size = new System.Drawing.Size(201, 25);
             fcbTalepNeden.TabIndex = 37;
             fcbTalepNeden.ValueMember = "Id";
             // 

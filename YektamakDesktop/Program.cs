@@ -30,7 +30,6 @@ namespace YektamakDesktop
             {
                 DIContainer.Reset();
                 DIContainer.ConfigureServices();
-                DIContainer.GetService<GlobalData>();
                 DIContainer.GetService<PermissionManager>();
                 DIContainer.GetService<DataControlMenu>();
 

@@ -18,12 +18,12 @@ namespace YektamakDesktop.Formlar.Satinalma
 {
     public partial class SatinalmaTalepSatirDetayForm : Form
     {
-        private readonly ICache _cache;
+        private readonly IConvertHelper _convertHelper;
         private readonly IProjeService _projeService;
         private readonly IStokService _stokService;
-        public SatinalmaTalepSatirDetayForm(ICache cache, IProjeService projeService, IStokService stokService)
+        public SatinalmaTalepSatirDetayForm(IConvertHelper convertHelper, IProjeService projeService, IStokService stokService)
         {
-            _cache = cache;
+            _convertHelper = convertHelper;
             _projeService = projeService;
             _stokService = stokService;
             InitializeComponent();
@@ -60,7 +60,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             List<SatinalmaTalepSatirDetayDTO> satinalmaTalepSatirDetayDTOs = new();
             foreach (var satinalmaTalepSatirDetay in satinalmaTalepSatirDetays)
             {
-                satinalmaTalepSatirDetayDTOs.Add(ConvertHelper.ToDTO<SatinalmaTalepSatirDetayDTO>(satinalmaTalepSatirDetay));
+                satinalmaTalepSatirDetayDTOs.Add(_convertHelper.ToDTO<SatinalmaTalepSatirDetayDTO>(satinalmaTalepSatirDetay));
             }
             universalGrid1.SetData(satinalmaTalepSatirDetayDTOs, this.Name);
         }
@@ -73,7 +73,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void stokKartıGörüntüleToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             var satinalmaTalepSatirDetayDTO = (SatinalmaTalepSatirDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
+            SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = _convertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
             ProjeStokKart projeStokKart = satinalmaTalepSatirDetay.projeStokKart;
             List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKart);
             if (projeStokKarts.Count > 1)
@@ -93,7 +93,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void pDFGösterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var satinalmaTalepSatirDetayDTO = (SatinalmaTalepSatirDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = ConvertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
+            SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = _convertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
             ProjeStokKart projeStokKart = satinalmaTalepSatirDetay.projeStokKart;
             string jsonResult=_stokService.GetStokKartPdf(projeStokKart.stokKart);
             StokKart stokKart = new StokKart();

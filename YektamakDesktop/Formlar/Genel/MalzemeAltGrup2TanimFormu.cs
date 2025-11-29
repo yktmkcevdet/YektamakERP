@@ -12,6 +12,7 @@ using YektamakDesktop.Common;
 using System.ComponentModel;
 using YektamakDesktop.CustomControls;
 using Models.DTO;
+using Utilities.Implementations;
 
 namespace YektamakDesktop.Formlar.Genel
 {
@@ -19,11 +20,13 @@ namespace YektamakDesktop.Formlar.Genel
     {
         private readonly ICache _cache;
         private readonly IStokService _stokService;
-        public MalzemeAltGrup2TanimFormu(ICache cache, IStokService stokService)
+        private readonly IConvertHelper _convertHelper;
+        public MalzemeAltGrup2TanimFormu(ICache cache, IStokService stokService, IConvertHelper convertHelper)
         {
             _cache = cache;
             _stokService = stokService;
             Initialize();
+            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -48,7 +51,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             Binding();
-            universalGrid1.SetData(_cache.malzemeAltGrup2List.CastToDTO<MalzemeAltGrup2DTO>().ToList(), this.Name);
+            universalGrid1.SetData(_cache.malzemeAltGrup2List.CastToDTO<MalzemeAltGrup2DTO>(_convertHelper).ToList(), this.Name);
         }
 
         private void MalzemeAltGrup2TanimFormu_Load(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
-            malzemeAltGrup2 = ConvertHelper.ToEntity<MalzemeAltGrup2>((MalzemeAltGrup2DTO)universalGrid1.Grid.CurrentRow.DataBoundItem);
+            malzemeAltGrup2 = _convertHelper.ToEntity<MalzemeAltGrup2>((MalzemeAltGrup2DTO)universalGrid1.Grid.CurrentRow.DataBoundItem);
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(universalGrid1, e.Location);
@@ -103,13 +106,13 @@ namespace YektamakDesktop.Formlar.Genel
         {
             if (fcbStokGrup.SelectedIndex == -1) return;
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id.ToString() == fcbStokGrup.SelectedValue.ToString()).ToList());
-            universalGrid1.Filtrele(ConvertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
+            universalGrid1.Filtrele(_convertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
         }
         private void fcbMalzemeGrup_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (fcbMalzemeGrup.SelectedIndex == -1) return;
             fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups.Where(m => m.malzemeGrup.Id.ToString() == fcbMalzemeGrup.SelectedValue.ToString()).ToList());
-            universalGrid1.Filtrele(ConvertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
+            universalGrid1.Filtrele(_convertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
         }
         private void MalzemeAltGrupTanimFormu_MouseClick(object sender, MouseEventArgs e)
         {
@@ -129,11 +132,11 @@ namespace YektamakDesktop.Formlar.Genel
         private bool CheckFields()
         {
             bool result = true;
-            result = GlobalData.CheckField("*", ctbMalzemeAltGrup2Ad) && result;
-            result = GlobalData.CheckField("*", ctbMalzemeAltGrup2Kod) && result;
-            result = GlobalData.CheckField("*", fcbStokGrup) && result;
-            result = GlobalData.CheckField("*", fcbMalzemeGrup) && result;
-            result = GlobalData.CheckField("*", fcbMalzemeAltGrup) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeAltGrup2Ad) && result;
+            result = CheckFieldHelper.CheckField("*", ctbMalzemeAltGrup2Kod) && result;
+            result = CheckFieldHelper.CheckField("*", fcbStokGrup) && result;
+            result = CheckFieldHelper.CheckField("*", fcbMalzemeGrup) && result;
+            result = CheckFieldHelper.CheckField("*", fcbMalzemeAltGrup) && result;
             return result;
         }
 
@@ -144,7 +147,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void fcbMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            universalGrid1.Filtrele(ConvertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
+            universalGrid1.Filtrele(_convertHelper.ToDTO<MalzemeAltGrup2DTO>(malzemeAltGrup2));
         }
 
         private void MalzemeAltGrup2TanimFormu_FormClosing(object sender, FormClosingEventArgs e)

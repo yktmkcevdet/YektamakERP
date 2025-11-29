@@ -487,14 +487,6 @@
       },
       "Microsoft.Maui.Controls/9.0.100": {
         "dependencies": {
-          "Microsoft.Maui.Controls.Build.Tasks": "9.0.100",
-          "Microsoft.Maui.Controls.Core": "9.0.100",
-          "Microsoft.Maui.Controls.Xaml": "9.0.100",
-          "Microsoft.Maui.Resizetizer": "9.0.100"
-        }
-      },
-      "Microsoft.Maui.Controls.Build.Tasks/9.0.100": {
-        "dependencies": {
           "Microsoft.Maui.Controls.Core": "9.0.100",
           "Microsoft.Maui.Controls.Xaml": "9.0.100"
         }
@@ -642,7 +634,6 @@
           "Microsoft.Maui.Graphics": "9.0.100",
           "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop": "9.0.100",
           "Microsoft.Web.WebView2": "1.0.3179.45",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.7.250606001"
         },
         "runtime": {
@@ -688,7 +679,6 @@
           }
         }
       },
-      "Microsoft.Maui.Resizetizer/9.0.100": {},
       "Microsoft.Web.WebView2/1.0.3179.45": {
         "native": {
           "runtimes/win-x64/native/WebView2Loader.dll": {
@@ -696,11 +686,9 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {},
       "Microsoft.WindowsAppSDK/1.7.250606001": {
         "dependencies": {
-          "Microsoft.Web.WebView2": "1.0.3179.45",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756"
+          "Microsoft.Web.WebView2": "1.0.3179.45"
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.Graphics.Imaging.Projection.dll": {
@@ -880,9 +868,6 @@
         }
       },
       "SQLitePCLRaw.core/2.1.11": {
-        "dependencies": {
-          "System.Memory": "4.5.3"
-        },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.core.dll": {
             "assemblyVersion": "2.1.11.2622",
@@ -933,7 +918,6 @@
           }
         }
       },
-      "System.Memory/4.5.3": {},
       "System.Speech/9.0.5": {
         "runtime": {
           "runtimes/win/lib/net9.0/System.Speech.dll": {
@@ -1278,13 +1262,6 @@
       "path": "microsoft.maui.controls/9.0.100",
       "hashPath": "microsoft.maui.controls.9.0.100.nupkg.sha512"
     },
-    "Microsoft.Maui.Controls.Build.Tasks/9.0.100": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-dZXuXcRyifZ5tAUQ7k7lLFWOy0XY4fErMIb3S/tsFp7uKtSwZwNN4PYlNqSvhRQgR9Gz8AdwzPR5HU1imbO2CQ==",
-      "path": "microsoft.maui.controls.build.tasks/9.0.100",
-      "hashPath": "microsoft.maui.controls.build.tasks.9.0.100.nupkg.sha512"
-    },
     "Microsoft.Maui.Controls.Core/9.0.100": {
       "type": "package",
       "serviceable": true,
@@ -1327,26 +1304,12 @@
       "path": "microsoft.maui.graphics.win2d.winui.desktop/9.0.100",
       "hashPath": "microsoft.maui.graphics.win2d.winui.desktop.9.0.100.nupkg.sha512"
     },
-    "Microsoft.Maui.Resizetizer/9.0.100": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-KH/5zQM52I/QZNuED2Z7hqznzemywba8dru4ZVHiE+zFO0FkkCtRjIPav2VkASaT6NWMOxX/8zg72L0vy6DBtg==",
-      "path": "microsoft.maui.resizetizer/9.0.100",
-      "hashPath": "microsoft.maui.resizetizer.9.0.100.nupkg.sha512"
-    },
     "Microsoft.Web.WebView2/1.0.3179.45": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-3pokSH5CnN0G6rGhGFo1y87inxYhNxBQ2Vdf0wlvBj99KHxQJormjDACmqRnFeUsmuNFIhWwfAL1ztq7wD5qRA==",
       "path": "microsoft.web.webview2/1.0.3179.45",
       "hashPath": "microsoft.web.webview2.1.0.3179.45.nupkg.sha512"
-    },
-    "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7ZL2sFSioYm1Ry067Kw1hg0SCcW5kuVezC2SwjGbcPE61Nn+gTbH86T73G3LcEOVj0S3IZzNuE/29gZvOLS7VA==",
-      "path": "microsoft.windows.sdk.buildtools/10.0.22621.756",
-      "hashPath": "microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512"
     },
     "Microsoft.WindowsAppSDK/1.7.250606001": {
       "type": "package",
@@ -1431,13 +1394,6 @@
       "sha512": "sha512-iVnDpgYJsRaRFnk77kcLA3+913WfWDtnAKrQl9tQ5ahqKANTaJKmQdsuPWWiAPWE9pk1Kj4Pg9JGXWfFYYyakQ==",
       "path": "system.diagnostics.eventlog/9.0.1",
       "hashPath": "system.diagnostics.eventlog.9.0.1.nupkg.sha512"
-    },
-    "System.Memory/4.5.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
-      "path": "system.memory/4.5.3",
-      "hashPath": "system.memory.4.5.3.nupkg.sha512"
     },
     "System.Speech/9.0.5": {
       "type": "package",

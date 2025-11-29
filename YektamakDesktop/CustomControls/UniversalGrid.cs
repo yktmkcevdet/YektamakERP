@@ -65,7 +65,7 @@ namespace YektamakDesktop.CustomControls
         }
         private async Task<HashSet<string>> GetAllowedFields(string formName, List<string> fieldNames)
         {
-            using var permissionManager = new PermissionManager();
+            using var permissionManager = DIContainer.GetService<PermissionManager>();
             var allowedFields = new HashSet<string>();
 
             foreach (var field in fieldNames)

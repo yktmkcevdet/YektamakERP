@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -12,17 +13,17 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 {
     public partial class SatinalmaSiparisler : Form
     {
-        private readonly ICache _cache;
         private readonly ISatinalmaSiparisService _satinalmaSiparisService;
         private readonly IJsonConverter _jsonConverter;
-        public SatinalmaSiparisler(ICache cache, ISatinalmaSiparisService satinalmaSiparisService, IJsonConverter jsonConverter)
+        private readonly IConvertHelper _convertHelper;
+        public SatinalmaSiparisler(ISatinalmaSiparisService satinalmaSiparisService, IJsonConverter jsonConverter, IConvertHelper convertHelper)
         {
-            _cache = cache;
             _satinalmaSiparisService = satinalmaSiparisService;
             _jsonConverter = jsonConverter;
             InitializeComponent();
             Initialize();
             Binding();
+            _convertHelper = convertHelper;
         }
         private SatinalmaSiparis _satinalmaSiparis;
         private SatinalmaSiparis satinalmaSiparis
@@ -47,7 +48,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
             var satinalmaSiparisDTO = (SatinalmaSiparisDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            satinalmaSiparis = ConvertHelper.ToEntity<SatinalmaSiparis>(satinalmaSiparisDTO);
+            satinalmaSiparis = _convertHelper.ToEntity<SatinalmaSiparis>(satinalmaSiparisDTO);
             contextMenuStrip1.Show(universalGrid1, e.Location);
         }
 
@@ -62,7 +63,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
             var data = _jsonConverter.DeserializeObject<List<SatinalmaSiparis>>(jsonData);
             if (data == null)
                 data = new List<SatinalmaSiparis>();
-            await universalGrid1.SetData(data.CastToDTO<SatinalmaSiparisDTO>().ToList(), this.Name);
+            await universalGrid1.SetData(data.CastToDTO<SatinalmaSiparisDTO>(_convertHelper).ToList(), this.Name);
         }
 
         private void siparişiGörüntüleToolStripMenuItem_Click(object sender, System.EventArgs e)

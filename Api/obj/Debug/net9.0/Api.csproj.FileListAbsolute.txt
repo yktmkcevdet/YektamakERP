@@ -69,6 +69,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\staticwebass
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\swae.build.ex.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\Api.csproj.Up2Date
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Debug\net9.0\Api.dll

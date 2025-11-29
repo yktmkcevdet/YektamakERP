@@ -49,9 +49,9 @@
             ctbMenuAd.BorderColor = System.Drawing.Color.Silver;
             ctbMenuAd.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbMenuAd.BorderSize = 2;
-            ctbMenuAd.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbMenuAd.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbMenuAd.ForeColor = System.Drawing.Color.Black;
-            ctbMenuAd.Location = new System.Drawing.Point(127, 131);
+            ctbMenuAd.Location = new System.Drawing.Point(128, 115);
             ctbMenuAd.Margin = new System.Windows.Forms.Padding(1);
             ctbMenuAd.Multiline = false;
             ctbMenuAd.Name = "ctbMenuAd";
@@ -61,7 +61,7 @@
             ctbMenuAd.PlaceholderText = "";
             ctbMenuAd.ReadOnly = false;
             ctbMenuAd.SelectionStart = 0;
-            ctbMenuAd.Size = new System.Drawing.Size(250, 37);
+            ctbMenuAd.Size = new System.Drawing.Size(250, 33);
             ctbMenuAd.TabIndex = 5;
             ctbMenuAd.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbMenuAd.TextCustom = "";
@@ -77,9 +77,9 @@
             roundedIconButton1.IconColor = System.Drawing.Color.Black;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             roundedIconButton1.IconSize = 24;
-            roundedIconButton1.Location = new System.Drawing.Point(321, 161);
+            roundedIconButton1.Location = new System.Drawing.Point(321, 138);
             roundedIconButton1.Name = "roundedIconButton1";
-            roundedIconButton1.Size = new System.Drawing.Size(75, 40);
+            roundedIconButton1.Size = new System.Drawing.Size(75, 42);
             roundedIconButton1.TabIndex = 25;
             roundedIconButton1.UseVisualStyleBackColor = true;
             // 
@@ -108,36 +108,40 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(41, 97);
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label1.Location = new System.Drawing.Point(41, 94);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(56, 15);
+            label1.Size = new System.Drawing.Size(57, 15);
             label1.TabIndex = 28;
             label1.Text = "Form Adı";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(41, 136);
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(41, 121);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(57, 15);
+            label2.Size = new System.Drawing.Size(59, 15);
             label2.TabIndex = 29;
             label2.Text = "Ekran Adı";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(41, 173);
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(41, 156);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(30, 15);
+            label3.Size = new System.Drawing.Size(31, 15);
             label3.TabIndex = 30;
             label3.Text = "Icon";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(41, 217);
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label4.Location = new System.Drawing.Point(41, 183);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(47, 15);
+            label4.Size = new System.Drawing.Size(49, 15);
             label4.TabIndex = 32;
             label4.Text = "Dto Adı";
             // 
@@ -147,9 +151,9 @@
             ctbDtoName.BorderColor = System.Drawing.Color.Silver;
             ctbDtoName.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbDtoName.BorderSize = 2;
-            ctbDtoName.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbDtoName.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbDtoName.ForeColor = System.Drawing.Color.Black;
-            ctbDtoName.Location = new System.Drawing.Point(128, 207);
+            ctbDtoName.Location = new System.Drawing.Point(128, 177);
             ctbDtoName.Margin = new System.Windows.Forms.Padding(1);
             ctbDtoName.Multiline = false;
             ctbDtoName.Name = "ctbDtoName";
@@ -159,7 +163,7 @@
             ctbDtoName.PlaceholderText = "";
             ctbDtoName.ReadOnly = false;
             ctbDtoName.SelectionStart = 0;
-            ctbDtoName.Size = new System.Drawing.Size(250, 37);
+            ctbDtoName.Size = new System.Drawing.Size(250, 33);
             ctbDtoName.TabIndex = 31;
             ctbDtoName.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbDtoName.TextCustom = "";
@@ -168,9 +172,10 @@
             // ID
             // 
             ID.AutoSize = true;
+            ID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             ID.Location = new System.Drawing.Point(41, 63);
             ID.Name = "ID";
-            ID.Size = new System.Drawing.Size(17, 15);
+            ID.Size = new System.Drawing.Size(18, 15);
             ID.TabIndex = 34;
             ID.Text = "Id";
             // 
@@ -180,7 +185,7 @@
             ctbId.BorderColor = System.Drawing.Color.Silver;
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbId.BorderSize = 2;
-            ctbId.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbId.ForeColor = System.Drawing.Color.Black;
             ctbId.Location = new System.Drawing.Point(128, 53);
             ctbId.Margin = new System.Windows.Forms.Padding(1);
@@ -192,7 +197,7 @@
             ctbId.PlaceholderText = "";
             ctbId.ReadOnly = false;
             ctbId.SelectionStart = 0;
-            ctbId.Size = new System.Drawing.Size(59, 37);
+            ctbId.Size = new System.Drawing.Size(59, 33);
             ctbId.TabIndex = 33;
             ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbId.TextCustom = "";
@@ -205,14 +210,15 @@
             clbFormAd.BorderSize = 1;
             clbFormAd.DisplayMember = "ad";
             clbFormAd.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbFormAd.Location = new System.Drawing.Point(127, 91);
+            clbFormAd.Location = new System.Drawing.Point(128, 88);
             clbFormAd.Margin = new System.Windows.Forms.Padding(1);
             clbFormAd.Name = "clbFormAd";
             clbFormAd.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbFormAd.PlaceholderText = "Seçiniz...";
-            clbFormAd.Size = new System.Drawing.Size(188, 29);
+            clbFormAd.ReadOnly = false;
+            clbFormAd.Size = new System.Drawing.Size(188, 25);
             clbFormAd.TabIndex = 35;
-            clbFormAd.ValueMember = "Id";
+            clbFormAd.ValueMember = "ad";
             // 
             // clbIcon
             // 
@@ -221,14 +227,15 @@
             clbIcon.BorderSize = 1;
             clbIcon.DisplayMember = "ad";
             clbIcon.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbIcon.Location = new System.Drawing.Point(128, 169);
+            clbIcon.Location = new System.Drawing.Point(128, 150);
             clbIcon.Margin = new System.Windows.Forms.Padding(1);
             clbIcon.Name = "clbIcon";
             clbIcon.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbIcon.PlaceholderText = "Seçiniz...";
-            clbIcon.Size = new System.Drawing.Size(187, 29);
+            clbIcon.ReadOnly = false;
+            clbIcon.Size = new System.Drawing.Size(187, 25);
             clbIcon.TabIndex = 36;
-            clbIcon.ValueMember = "Id";
+            clbIcon.ValueMember = "ad";
             clbIcon.SelectedIndexChanged += customComboListBoxIcon_SelectedIndexChanged;
             // 
             // EkranEkle

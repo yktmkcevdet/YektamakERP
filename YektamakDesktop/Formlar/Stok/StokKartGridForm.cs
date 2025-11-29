@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -23,13 +24,13 @@ namespace YektamakDesktop.Formlar.Stok
     {
         private readonly IStokService _stokService;
         private readonly ICache _cache;
-        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
         private readonly IProjeService _projeService;
-        public StokKartGridForm(ICache cache, IJsonConverter jsonConvertHelper, IStokService stokService, IProjeService projeService)
+        public StokKartGridForm(ICache cache, IConvertHelper convertHelper, IStokService stokService, IProjeService projeService)
         {
             _stokService = stokService;
             _cache = cache;
-            _jsonConverter = jsonConvertHelper;
+            _convertHelper = convertHelper;
             _projeService = projeService;
             InitializeComponent();
             InitializeGridForm();
@@ -135,20 +136,18 @@ namespace YektamakDesktop.Formlar.Stok
             stokKarts.Clear();
             stokKarts = await _projeService.GetProjeStokKart(stokKartFilter); 
             List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
-            stokKartDTOs = stokKarts.CastToDTO<ProjeStokKartDTO>().ToList();
+            stokKartDTOs = stokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).ToList();
             await universalGrid1.SetData(stokKartDTOs, this.Name, true);
             this.Enabled = true;
         }
         private void malzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridYenile();
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrups.Where(x => x.malzemeGrup.Id == stokKartFilter.stokKart.malzemeGrup.Id).ToList(), ref fcbMalzemeAltGrup);
-
         }
 
         private void GridYenile()
         {
-            ProjeStokKartDTO stokKartDTO = ConvertHelper.ToDTO<ProjeStokKartDTO>(stokKartFilter);
+            ProjeStokKartDTO stokKartDTO = _convertHelper.ToDTO<ProjeStokKartDTO>(stokKartFilter);
             universalGrid1.Filtrele(stokKartDTO);
         }
 
@@ -182,13 +181,11 @@ namespace YektamakDesktop.Formlar.Stok
         private void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridYenile();
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups.Where(x => x.stokGrup.Id == stokKartFilter.stokKart.stokGrup.Id).ToList(), ref fcbMalzemeGrup);
         }
 
         private void cbxMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridYenile();
-            ComboBoxListFill.GetLookupAd(_cache.malzemeAltGrup2List.Where(x => x.malzemeAltGrup.Id == stokKartFilter.stokKart.malzemeAltGrup.Id).ToList(), ref fcbMalzemeAltGrup2);
         }
 
         private void cbxMalzemeAltGrup2_DoubleClick(object sender, EventArgs e)
@@ -216,7 +213,7 @@ namespace YektamakDesktop.Formlar.Stok
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var proejStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            ProjeStokKart projeStokKart = ConvertHelper.ToEntity<ProjeStokKart>(proejStokKartDTO);
+            ProjeStokKart projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(proejStokKartDTO);
             StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
             stokKartKayitFormu.AfterSave += StokKartKayitFormu_AfterSave;
             stokKartKayitFormu.UpdateMode(projeStokKart);
@@ -229,11 +226,11 @@ namespace YektamakDesktop.Formlar.Stok
             var index = liste.ToList().FindIndex(s => s.Id == ((ProjeStokKart)e).Id);
             if (index == -1)
             {
-                liste.Add(ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
+                liste.Add(_convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
             }
             else
             {
-                liste[index] = ConvertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
+                liste[index] = _convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
             }
         }
 
@@ -265,7 +262,7 @@ namespace YektamakDesktop.Formlar.Stok
                     }
                     else
                     {
-                        string jsonResult = await _projeService.DeleteProjeStokKart(ConvertHelper.ToEntity<ProjeStokKart>(item));
+                        string jsonResult = await _projeService.DeleteProjeStokKart(_convertHelper.ToEntity<ProjeStokKart>(item));
                         if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                         {
                             File.AppendAllText(logDosyasi, $"{item.stokKartkod} {jsonResult}\r\n");

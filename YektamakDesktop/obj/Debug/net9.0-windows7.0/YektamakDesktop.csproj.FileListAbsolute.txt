@@ -144,7 +144,6 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.CustomControls.FilterableComboBox.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.CustomControls.HeaderPanel.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.CustomControls.UniversalGrid.resources
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Form3.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.AdresTanimlamaFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.AnaVeriTanimlamaFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.DosyalamaParametreleri.resources
@@ -153,6 +152,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.ExcelTanimlamaFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.FirmaTanimFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.MailAyarlari.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.MailAyarlarim.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.MalzemeAltGrup2TanimFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.MalzemeAltGrupTanimFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.MalzemeGrupTanimFormu.resources
@@ -186,9 +186,6 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.SatinalmaTeklifTaleplerFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.Monday.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.ProjeTanimlamaFormu.resources
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.SatisSiparisTeklifTalepGridForm.resources
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.SatisTeklifTalepKayitFormu.resources
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.SatisTeklifMaliyetKayitFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.MalzemeGrubu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartGridForm.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartKayitFormu.resources

@@ -33,16 +33,11 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void Binding()
         {
-            ctbId.DataBindings.Clear();
-            clbFormAd.DataBindings.Clear();
-            clbIcon.DataBindings.Clear();
-            ctbDtoName.DataBindings.Clear();
-            ctbMenuAd.DataBindings.Clear();
-            ctbId.DataBindings.Add("TextCustom", menu, $"{nameof(menu.Id)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbFormAd.DataBindings.Add("SelectedDisplayValue", menu, $"{nameof(menu.formAd)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            clbIcon.DataBindings.Add("SelectedDisplayValue", menu, $"{nameof(menu.icon)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbDtoName.DataBindings.Add("TextCustom", menu, $"{nameof(menu.model)}", true, DataSourceUpdateMode.OnPropertyChanged);
-            ctbMenuAd.DataBindings.Add("TextCustom", menu, $"{nameof(menu.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            BindHelper.BindData(ctbId, menu, nameof(menu.Id));
+            BindHelper.BindData(clbFormAd, menu, nameof(menu.formAd));
+            BindHelper.BindData(clbIcon, menu, nameof(menu.icon));
+            BindHelper.BindData(ctbDtoName, menu, nameof(menu.model));
+            BindHelper.BindData(ctbMenuAd, menu, nameof(menu.ad));
         }
 
         private Menu _menu;
