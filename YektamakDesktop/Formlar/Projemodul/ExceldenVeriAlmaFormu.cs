@@ -36,11 +36,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _stokService = stokService;
             _jsonConverter = jsonConverter;
             InitializeComponent();
-<<<<<<< HEAD
-            ComboBoxListFill.GetLookupKod(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList(), ref clbProjeKodu);
-=======
             clbProjeKodu.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         }
         private List<ProjeStokKart> _projeStokKarts;
         private List<ProjeStokKart> projeStokKarts

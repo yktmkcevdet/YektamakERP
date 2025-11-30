@@ -108,11 +108,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
                 {
                     kullanici = _jsonConverter.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
                     _cache.kullaniciList.Clear();
-<<<<<<< HEAD
-                    await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
-=======
                     await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
                     if (!string.IsNullOrEmpty(kullanici.sifre))
                     {
                         IMailHandler mailHandler = new MailHandler();
@@ -143,11 +139,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         private async void KullaniciKayitFormu_Load(object sender, EventArgs e)
         {
             Binding();
-<<<<<<< HEAD
-            await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>().ToList(), this.Name);
-=======
             await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         }
 
         

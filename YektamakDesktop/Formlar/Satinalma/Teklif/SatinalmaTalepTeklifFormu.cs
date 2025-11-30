@@ -295,11 +295,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 List<SatinalmaTalepDetay> satinalmaTalepDetayList = JsonConvert.DeserializeObject<List<SatinalmaTalepDetay>>(jsonResult);
-<<<<<<< HEAD
-                satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>().ToList();
-=======
                 satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>(_convertHelper).ToList();
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
                 await universalGrid1.SetData(satinalmaTalepDetayDTOs, this.Name, true);
             }
         }

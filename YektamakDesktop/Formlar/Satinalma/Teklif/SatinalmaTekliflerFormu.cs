@@ -41,15 +41,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
             universalGrid1.SetData(new List<SatinalmaTeklifBaslikDTO>(), this.Name, true);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1; ;
-<<<<<<< HEAD
-            ComboBoxListFill.GetLookupKod(_cache.projeList, ref clbProjeKod);
-            ComboBoxListFill.GetLookupAd(_cache.stokGrups, ref clbStokGrup);
-            ComboBoxListFill.GetLookupAd(_cache.malzemeGrups, ref clbMalzemeGrup);
-=======
             clbProjeKod.SetDataSource(_cache.projeList);
             clbStokGrup.SetDataSource(_cache.stokGrups);
             clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
             clbProjeKod.DisplayMember = "kod";
             Load += async (s, e) => await SatinalmaTeklifTaleplerFormu_Load(s, e);
             FormClosing += async (s, e) => await SatinalmaTeklifTaleplerFormu_FormClosing(s, e);

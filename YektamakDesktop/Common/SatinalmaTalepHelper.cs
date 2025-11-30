@@ -1,0 +1,262 @@
+﻿using ApiService.Implementations;
+using ApiService.Interfaces;
+using Models;
+using Models.DTO;
+using Models.Models.Stok;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using Utilities.Implementations;
+using Utilities.Interfaces;
+using YektamakDesktop.Formlar.Satinalma;
+
+namespace YektamakDesktop.Common
+{
+    public static class SatinalmaTalepHelper
+    {
+        private static IConvertHelper _convertHelper=DIContainer.GetService<ConvertHelper>();
+        private static IProjeService _projeService = DIContainer.GetService<ProjeService>();
+        private static ICache _cache = DIContainer.GetService<Cache>();
+        public static async void CreateSatinalmaTalep(List<ProjeStokKartDTO> talepList,Proje proje, MalzemeGrup malzemeGrup)
+        {
+            if (ValidateForm(talepList))
+            {
+                List<SatinalmaTalepDetay> satinalmaTalepDetayList = new List<SatinalmaTalepDetay>();
+                foreach (var item in talepList)
+                {
+                    //item.Id = null; //projestokKartId satinalmaTalepDetayId olarak aktarılmaması için null yapılıyor
+                    SatinalmaTalepDetay satinalmaTalepdetay = new SatinalmaTalepDetay { proje = proje };
+                    SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetayDTO();
+                    // Eğer stok kartının hammaddeId'si varsa, ve lazer grubuna ait parça değilse satınalma talep detay listesine hammadde olarak ekle
+                    if (item.stokKarthammaddeId != null && item.stokKartmalzemeGrupId != 28)
+                    {
+                        //Hammadde ise ve listeye daha önce eklenmiş mi kontrol et, eklenmişse miktarını güncelle
+                        if (satinalmaTalepDetayList.Any(x => x.projeStokKart.stokKart.Id == item.stokKarthammaddeId))
+                        {
+                            satinalmaTalepdetay = satinalmaTalepDetayList.FirstOrDefault(x => x.projeStokKart.stokKart.Id == item.stokKarthammaddeId);
+                            if (item.stokKarthammaddeolcuBirimId == 2)
+                            {
+                                satinalmaTalepdetay.miktar += item.miktar * item.stokKartagirlik;
+                            }
+                            else
+                            {
+                                satinalmaTalepdetay.miktar += item.miktar;
+                            }
+                            satinalmaTalepdetay.agirlik += item.miktar * item.stokKartagirlik;
+
+                            satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(
+                                new SatinalmaTalepSatirDetay { projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(item) });
+                        }
+                        // Eğer hammadde olarak eklenmemişse, yeni bir hammadde olarak ekle
+                        else
+                        {
+                            if (satinalmaTalepdetay.projeStokKart.stokKart.hammadde.olcuBirim.Id == 2)
+                            {
+                                satinalmaTalepdetay.miktar = item.miktar * item.stokKartagirlik;
+                            }
+                            else
+                            {
+                                satinalmaTalepdetay.miktar = item.miktar;
+                            }
+                            satinalmaTalepdetay.projeStokKart = new ProjeStokKart
+                            {
+                                stokKart = new StokKart { Id = item.stokKarthammaddeId }
+                            };
+                            satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
+                            satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(new SatinalmaTalepSatirDetay { projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(item) });
+                            satinalmaTalepdetay.projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart
+                            {
+                                //proje = { Id = Convert.ToInt32(fcbProjeKod.SelectedValue) },
+                                stokKart = new StokKart { Id = item.stokKarthammaddeId }
+                            })).FirstOrDefault();
+                            satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                        }
+                    }
+                    // Eğer stok kartının hammaddeId'si yoksa, satınalma talep detay listesine normal stok kartı olarak ekle
+                    else
+                    {
+                        satinalmaTalepdetay = new SatinalmaTalepDetay { projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(item) };
+                        satinalmaTalepdetay.miktar = item.miktar;
+                        satinalmaTalepdetay.onaylananMiktar = item.miktar;
+                        satinalmaTalepdetay.agirlik = item.miktar * item.stokKartagirlik;
+                        satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                    }
+                }
+                if (malzemeGrup.Id == 29)
+                {
+                    var profilGroups = talepList.GroupBy(t => new { t.stokKarthammaddeId }).Select(group => group.First()).ToList();
+                    foreach (var profilGroup in profilGroups)
+                    {
+                        var profilList = talepList.Where(t => t.stokKarthammaddeId == profilGroup.stokKarthammaddeId).ToList();
+                        var sonuc = OptimizedCutting(profilList, Convert.ToDouble(profilGroup.stokKarthammaddeuzunluk), 2);
+                        satinalmaTalepDetayList.Where(s => s.projeStokKart.stokKart.Id == profilGroup.stokKarthammaddeId).FirstOrDefault().miktar = sonuc.Bins.Count;
+                        foreach (var b in sonuc.Bins)
+                        {
+                            var fire = profilGroup.stokKarthammaddeuzunluk - b.Sum(x => x.projeStokKart.stokKart.uzunluk);
+                        }
+                    }
+                }
+                SatinalmaTalep satinalmaTalep = new SatinalmaTalep
+                {
+                    proje = proje,
+                    //malzemeGrup = new MalzemeGrup { Id = int.TryParse(clbMalzemeGrup.SelectedValue.ToString(), out int malzemegrupId) ? malzemegrupId : null },
+                    talepNeden = new TalepNeden { Id = 1 }, //Varsayılan olarak 1 atanıyor
+                    talepTarihi = DateTime.Today,
+                    teslimTarihi = null,
+                    aciklama = "Otomatik oluşturulan satınalma talebi",
+                    talepEdenKullanici = _cache.kullanici,
+                    satinalmaTalepDetays = satinalmaTalepDetayList
+                };
+                SatinalmaTalepKayitFormu satinalmaTalepKayitFormu = FormFactory.CreateForm<SatinalmaTalepKayitFormu>();
+                satinalmaTalepKayitFormu.UpdateMode(satinalmaTalep);
+                satinalmaTalepKayitFormu.ShowDialog();
+            }
+        }
+        private static bool ValidateForm(List<ProjeStokKartDTO> stokKarts)
+        {
+            // Formdaki gerekli alanların dolu olup olmadığını kontrol et
+            if (!stokKarts.Any())
+            {
+                MessageBox.Show("Satınalma talebi oluşturulacak satırlar seçilmelidir.");
+                return false;
+            }
+            if (stokKarts.Any(x => x.stokKartisPdf == false))
+            {
+                MessageBox.Show("PDF dosyası olmayan kayıtlar seçilemez.");
+                return false;
+            }
+            if (stokKarts.Any(x => x.stokKartisDxf == false))
+            {
+                MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
+                return false;
+            }
+            if (stokKarts.Any(x => x.stokKartisStep == false))
+            {
+                DialogResult dialogResult = MessageBox.Show("STEP dosyası olmayan kayıtlar var devam edilsin mi?", "STEP Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+            if (stokKarts.Any(x => x.stokKartisSatinalma == true))
+            {
+                DialogResult dialogResult = MessageBox.Show("Satınalma talebi açılmış kayıtlar seçildi. Devam etmek istiyor musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static CuttingOptimizationResult OptimizedCutting(
+            List<ProjeStokKartDTO> items,
+            double stockLength,
+            int kerf,
+            double usableWasteMinLength = 0) // Minimum kullanılabilir fire uzunluğu
+        {
+            // 1) Tüm parçaları adetlerine göre aç
+            var allPieces = new List<SatinalmaTalepDetay>();
+            foreach (var item in items)
+            {
+                for (int i = 0; i < item.miktar; i++)
+                {
+                    allPieces.Add(new SatinalmaTalepDetay { miktar = item.miktar, projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(item) });
+                }
+            }
+
+            // 2) Parçaları boydan küçüğe sırala
+            var sorted = allPieces.OrderByDescending(x => x.projeStokKart.stokKart.uzunluk).ToList();
+
+            // Bin sınıfı - her stoğun durumunu takip eder
+            var bins = new List<BinInfo>();
+
+            // 3) Best Fit Decreasing ile yerleştirme
+            foreach (var piece in sorted)
+            {
+                BinInfo bestBin = null;
+                double bestRemainingSpace = double.MaxValue;
+
+                // Mevcut stoklarda en uygun yeri bul
+                foreach (var bin in bins)
+                {
+                    double requiredSpace = piece.projeStokKart.stokKart.uzunluk.Value + (bin.Pieces.Count > 0 ? kerf : 0);
+                    double remainingSpace = bin.RemainingSpace - requiredSpace;
+
+                    // Parça sığıyor mu?
+                    if (remainingSpace >= 0)
+                    {
+                        // En az fire bırakacak stoğu seç
+                        if (remainingSpace < bestRemainingSpace)
+                        {
+                            bestRemainingSpace = remainingSpace;
+                            bestBin = bin;
+                        }
+                    }
+                }
+
+                // Uygun stok bulunduysa yerleştir
+                if (bestBin != null)
+                {
+                    bestBin.AddPiece(piece, kerf);
+                }
+                else
+                {
+                    // Yeni stok aç
+                    var newBin = new BinInfo(stockLength);
+                    newBin.AddPiece(piece, kerf);
+                    bins.Add(newBin);
+                }
+            }
+
+            // 4) İkinci geçiş: Küçük parçaları fire alanlarına yerleştirmeye çalış
+            if (usableWasteMinLength > 0)
+            {
+                OptimizeWithWasteReuse(bins, sorted, kerf, usableWasteMinLength);
+            }
+
+            // 5) Sonuçları hesapla
+            var result = new CuttingOptimizationResult
+            {
+                Bins = bins.Select(b => b.Pieces).ToList(),
+                TotalStocksUsed = bins.Count,
+                TotalWaste = bins.Sum(b => b.RemainingSpace),
+                UsableWaste = bins.Count(b => b.RemainingSpace >= usableWasteMinLength) * usableWasteMinLength,
+                WastePercentage = (bins.Sum(b => b.RemainingSpace) / (bins.Count * stockLength)) * 100
+            };
+
+            return result;
+        }
+        private static void OptimizeWithWasteReuse(
+            List<BinInfo> bins,
+            List<SatinalmaTalepDetay> allPieces,
+            int kerf,
+            double usableWasteMinLength)
+        {
+            // Fire alanlarını büyükten küçüğe sırala
+            var binsWithUsableWaste = bins
+                .Where(b => b.RemainingSpace >= usableWasteMinLength)
+                .OrderByDescending(b => b.RemainingSpace)
+                .ToList();
+
+            // Kullanılmayan küçük parçaları bul
+            var unusedSmallPieces = allPieces
+                .Where(p => p.projeStokKart.stokKart.uzunluk <= usableWasteMinLength)
+                .OrderByDescending(p => p.projeStokKart.stokKart.uzunluk)
+                .ToList();
+
+            foreach (var wasteBin in binsWithUsableWaste)
+            {
+                foreach (var smallPiece in unusedSmallPieces.ToList())
+                {
+                    double requiredSpace = smallPiece.projeStokKart.stokKart.uzunluk.Value + kerf;
+                    if (wasteBin.RemainingSpace >= requiredSpace)
+                    {
+                        // Not: Gerçek uygulamada bu parçanın başka bir bin'den çıkarılması gerekebilir
+                        // Bu basitleştirilmiş versiyon sadece konsepti gösteriyor
+                    }
+                }
+            }
+        }
+    }
+}

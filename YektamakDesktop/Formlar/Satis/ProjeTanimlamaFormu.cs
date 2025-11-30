@@ -111,11 +111,7 @@ namespace YektamakDesktop.Formlar.Satis
                 _cache.projeList.Add(proje);
                 universalGrid1.SetData(_cache.projeList
                     .GroupBy(p => new { p.Id })
-<<<<<<< HEAD
-                    .Select(g => ConvertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
-=======
                     .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
             }
         }
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)

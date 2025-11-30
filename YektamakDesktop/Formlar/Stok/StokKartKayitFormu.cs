@@ -28,13 +28,9 @@ namespace YektamakDesktop.Formlar.Stok
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
-<<<<<<< HEAD
-        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, IStokService stokService, IProjeService projeService, IFileService fileService)
-=======
         private readonly IConvertHelper _convertHelper;
         public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, 
             IStokService stokService, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper)
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         {
             _cache = cache;
             _dataTableHelper = dataTableHelper;
@@ -54,10 +50,7 @@ namespace YektamakDesktop.Formlar.Stok
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
             _fileService = fileService;
-<<<<<<< HEAD
-=======
             _convertHelper = convertHelper;
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
         }
         public event EventHandler<object> AfterSave;
         private ProjeStokKart _projeStokKart;
@@ -486,15 +479,9 @@ namespace YektamakDesktop.Formlar.Stok
         public bool Validate()
         {
             bool isValid = true;
-<<<<<<< HEAD
-            isValid &= GlobalData.CheckField("Dosya Tipi seçilmelidir", fcbDosyaTip);
-            isValid &= GlobalData.CheckField("Dosya Adı boş olmamalıdır", ctbDosyaAd);
-            isValid &= GlobalData.CheckField("Dosya Uzantısı boş olmamalıdır", ctbDosyaUzanti);
-=======
             isValid &= CheckFieldHelper.CheckField("Dosya Tipi seçilmelidir", fcbDosyaTip);
             isValid &= CheckFieldHelper.CheckField("Dosya Adı boş olmamalıdır", ctbDosyaAd);
             isValid &= CheckFieldHelper.CheckField("Dosya Uzantısı boş olmamalıdır", ctbDosyaUzanti);
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
             return isValid;
         }
     }

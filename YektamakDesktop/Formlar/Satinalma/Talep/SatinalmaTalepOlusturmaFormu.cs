@@ -45,7 +45,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             customDataGrid.SetUstForm(this);
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
-            fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
+            fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             fcbStokGrup.SetDataSource(_cache.stokGrups);
             fcbStokTip.SetDataSource(_cache.stokTips);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
@@ -122,20 +122,26 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-
             if (!Validate()) return;
             satinalmaTalep.satinalmaTalepDetays.Clear();
+            List<ProjeStokKartDTO> talepList = new List<ProjeStokKartDTO>();
             foreach (var dataControlSatinalmaTalepDetay in customDataGrid.dataSource.Where(x => x.newRec == false))
             {
                 if (!dataControlSatinalmaTalepDetay.ValidateFields()) return;
-                SatinalmaTalepDetay satinalmaTalepDetay = new();
-                satinalmaTalepDetay = dataControlSatinalmaTalepDetay.satinalmaTalepDetay;
-                satinalmaTalep.satinalmaTalepDetays.Add(satinalmaTalepDetay);
+                talepList.Add(_convertHelper.ToDTO<ProjeStokKartDTO>(dataControlSatinalmaTalepDetay.satinalmaTalepDetay.projeStokKart));
+                //SatinalmaTalepDetay satinalmaTalepDetay = new();
+                //satinalmaTalepDetay = dataControlSatinalmaTalepDetay.satinalmaTalepDetay;
+                //satinalmaTalep.satinalmaTalepDetays.Add(satinalmaTalepDetay);
             }
+            Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
+            MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
+            SatinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
+
+            
             satinalmaTalep.talepTarihi = DateTime.Today;
             if (!ValidateTalepList(satinalmaTalep.satinalmaTalepDetays)) return;
-            CreateSatinalmaTalep();
-            string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
+            // CreateSatinalmaTalep();
+            // string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
             if (satinalmaTalep.onayKullanici.Id == _cache.kullanici.Id)
             {
                 satinalmaTalep.onayDurum = true;
@@ -150,7 +156,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     TalepOnaylandi?.Invoke(this, _convertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
                 }
             }
-            await HandleSaveResult(jsonResult);
+            //await HandleSaveResult(jsonResult);
         }
         private async void CreateSatinalmaTalep()
         {
@@ -417,11 +423,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void Initialize()
         {
-<<<<<<< HEAD
-            stokKartId.SetDataSource(stokKarts.CastToDTO<ProjeStokKartDTO>().Select(item => item with { stokKartad = $"{item.stokKartkod} - {item.stokKartad} - {item.stokKartboyut}" }).ToList());
-=======
             stokKartId.SetDataSource(stokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).Select(item => item with { stokKartad = $"{item.stokKartkod} - {item.stokKartad} - {item.stokKartboyut}" }).ToList());
->>>>>>> eec1cb6992518e942eefcdc7450f4dd3eb638a98
             stokKartId.SelectedIndexChanged += StokKartId_SelectedIndexChanged;
             BindData();
         }
