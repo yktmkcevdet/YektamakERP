@@ -69,6 +69,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ProjeTanimlamaFormu>();
             services.AddTransient<SatinalmaSiparisKayitFormu>();
             services.AddTransient<SatinalmaSiparisler>();
+            services.AddTransient<SatinalmaTalepHelper>();
             services.AddTransient<SatinalmaTalepKayitFormu>();
             services.AddTransient<SatinalmaTalepler>();
             services.AddTransient<SatinalmaTalepOlusturmaAltForm>();
@@ -92,6 +93,7 @@ namespace YektamakDesktop.Common
                 options.MinPasswordLength = 6;
             });
             services.AddScoped<IPasswordService, PasswordService>();
+            services.AddScoped<ISatinalmaTalepHelper, SatinalmaTalepHelper>();
             services.AddUtilities();
             services.AddApiServices();
 

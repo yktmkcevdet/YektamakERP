@@ -31,8 +31,9 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IJsonConverter _jsonConverter;
         private readonly IProjeService _projeService;
         private readonly IConvertHelper _convertHelper;
+        private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
         public SatinalmaTalepOlusturmaFormu(ICache cache, ISatinalmaTalepService satinalmaTalepService, 
-            IAnaVeriService anaVeriService, IJsonConverter jsonConverter, IProjeService projeService, IConvertHelper convertHelper)
+            IAnaVeriService anaVeriService, IJsonConverter jsonConverter, IProjeService projeService, IConvertHelper convertHelper, ISatinalmaTalepHelper satinalmaTalepHelper)
         {
             _cache = cache;
             _satinalmaTalepService = satinalmaTalepService;
@@ -53,6 +54,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaTalep.talepEdenKullanici.Id = _cache.kullanici.Id;
             BindData();
             _convertHelper = convertHelper;
+            _satinalmaTalepHelper = satinalmaTalepHelper;
         }
         public event EventHandler<object> VeriDegisti;
         public event EventHandler<SatinalmaTalepDTO> TalepOnaylandi;
@@ -95,7 +97,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void clbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fcbTalepNeden.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(fcbStokGrup.SelectedValue.ToString())).ToList());
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(fcbStokGrup.SelectedValue.ToString())).ToList());
         }
 
         private void clbMalzemeGrup_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,7 +137,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
-            SatinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
+            _satinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
 
             
             satinalmaTalep.talepTarihi = DateTime.Today;

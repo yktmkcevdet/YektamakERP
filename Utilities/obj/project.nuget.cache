@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NvXwFMlj+NU=",
+  "dgSpecHash": "1WIC+G3i0JA=",
   "success": true,
   "projectFilePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj",
   "expectedPackageFiles": [
@@ -38,15 +38,5 @@
     "C:\\Users\\yektamak-118\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.1\\system.diagnostics.eventlog.9.0.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Önbellek dosyası C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\obj\\project.nuget.cache okunurken bir sorun oluştu : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\Utilities\\Utilities.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

@@ -24,7 +24,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
         private readonly IConvertHelper _convertHelper;
-        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper)
+        private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
+        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper, ISatinalmaTalepHelper satinalmaTalepHelper)
         {
             _cache = cache;
             _projeService = projeService;
@@ -32,6 +33,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             InitializeComponent();
             Initialize();
             _convertHelper = convertHelper;
+            _satinalmaTalepHelper = satinalmaTalepHelper;
         }
         private void Initialize()
         {
@@ -246,7 +248,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
-            if (result) SatinalmaTalepHelper.CreateSatinalmaTalep(talepList,proje,malzemeGrup);
+            if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList,proje,malzemeGrup);
         }
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -344,7 +346,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
-            if (result) SatinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
+            if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
         }
 
 

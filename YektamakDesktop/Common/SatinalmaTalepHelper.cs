@@ -13,12 +13,20 @@ using YektamakDesktop.Formlar.Satinalma;
 
 namespace YektamakDesktop.Common
 {
-    public static class SatinalmaTalepHelper
+    public class SatinalmaTalepHelper : ISatinalmaTalepHelper
     {
-        private static IConvertHelper _convertHelper=DIContainer.GetService<ConvertHelper>();
-        private static IProjeService _projeService = DIContainer.GetService<ProjeService>();
-        private static ICache _cache = DIContainer.GetService<Cache>();
-        public static async void CreateSatinalmaTalep(List<ProjeStokKartDTO> talepList,Proje proje, MalzemeGrup malzemeGrup)
+        private readonly IConvertHelper _convertHelper;
+        private readonly IProjeService _projeService;
+        private readonly ICache _cache;
+
+        public SatinalmaTalepHelper(IConvertHelper convertHelper, IProjeService projeService, ICache cache)
+        {
+            _convertHelper = convertHelper;
+            _projeService = projeService;
+            _cache = cache;
+        }
+
+        public async void CreateSatinalmaTalep(List<ProjeStokKartDTO> talepList, Proje proje, MalzemeGrup malzemeGrup)
         {
             if (ValidateForm(talepList))
             {
@@ -113,7 +121,7 @@ namespace YektamakDesktop.Common
                 satinalmaTalepKayitFormu.ShowDialog();
             }
         }
-        private static bool ValidateForm(List<ProjeStokKartDTO> stokKarts)
+        private bool ValidateForm(List<ProjeStokKartDTO> stokKarts)
         {
             // Formdaki gerekli alanların dolu olup olmadığını kontrol et
             if (!stokKarts.Any())
@@ -149,7 +157,7 @@ namespace YektamakDesktop.Common
             }
             return true;
         }
-        public static CuttingOptimizationResult OptimizedCutting(
+        public CuttingOptimizationResult OptimizedCutting(
             List<ProjeStokKartDTO> items,
             double stockLength,
             int kerf,
@@ -227,7 +235,7 @@ namespace YektamakDesktop.Common
 
             return result;
         }
-        private static void OptimizeWithWasteReuse(
+        private void OptimizeWithWasteReuse(
             List<BinInfo> bins,
             List<SatinalmaTalepDetay> allPieces,
             int kerf,
