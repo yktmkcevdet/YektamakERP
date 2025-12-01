@@ -42,7 +42,7 @@ namespace YektamakDesktop.Formlar.Stok
             clbStokTip.SetDataSource(_cache.stokTips);
             clbOlcuBirim.SetDataSource(_cache.olcuBirims);
             clbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
-            clbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
+            clbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             clbStokGrup.SetDataSource(_cache.stokGrups);
             clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
@@ -87,7 +87,7 @@ namespace YektamakDesktop.Formlar.Stok
             result = CheckFieldHelper.CheckField("*", clbProjeKod) && result;
             if (_cache.kullanici.Id != 1)
             {
-                if (!_cache.projeList.Any(p => p.sorumluList.Where(s => s.Id == _cache.kullanici.personel.Id).Count() > 0 && p.Id == projeStokKart.proje.Id))
+                if (!_cache.projeList.Any(p => p.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0 && p.Id == projeStokKart.proje.Id))
                 {
                     MessageBox.Show("Bu stok kartı için seçilen proje, kullanıcının projeleri arasında bulunmamaktadır. Lütfen geçerli bir proje seçiniz.");
                     result = false;
@@ -111,7 +111,7 @@ namespace YektamakDesktop.Formlar.Stok
                 projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
                 var filePath = Path.Combine(Guid.NewGuid() + "." + dataControlStokKartDosya.stokKartDosya.dosyaUzanti);
                 dataControlStokKartDosya.stokKartDosya.dosyaFullPath = filePath;
-                _fileService.SaveFile(dataControlStokKartDosya.dosyaVeri, filePath);
+                _fileService.SaveFile(dataControlStokKartDosya.stokKartDosya.dosya, filePath);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
@@ -323,6 +323,7 @@ namespace YektamakDesktop.Formlar.Stok
                 dosyaTip = new DosyaTip { Id = _cache.dosyaTipList.FirstOrDefault(dt => dt.ad.Equals(Path.GetExtension(sourceFile).Replace(".", ""), StringComparison.OrdinalIgnoreCase))?.Id ?? 0 },
                 dosya = d
             };
+            customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().dosyaVeri = d;
         }
     }
     public class DataControlStokKartDosya : DataControl, IEntity

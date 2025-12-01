@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
@@ -284,25 +285,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             await Binding();
         }
-
-        private void clbMalzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //var stokKart = new StokKart
-            //{
-            //    malzemeGrup = new MalzemeGrup { Id = int.Parse(clbMalzemeGrubu.SelectedValue.ToString()) },
-            //};
-            //var yeniUrunListesi = _cache.stokKartList
-            //    .Where(x => x.malzemeGrup.Id == stokKart.malzemeGrup.Id)
-            //    .ToList();
-            //universalGrid1.SetComboColumnData("Stok Kart Id", yeniUrunListesi, "ad", "Id");
-        }
-
-        private void yeniKayıtEkleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<SatinalmaTalepDetayDTO> satinalmaTalepDetayList = universalGrid1.binding.OfType<SatinalmaTalepDetayDTO>().ToList();
-            universalGrid1.AddRow(satinalmaTalepDetayList);
-        }
-
         private void universalGrid1_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
