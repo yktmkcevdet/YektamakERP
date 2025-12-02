@@ -264,7 +264,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 var attachment = new MailAttachament { fileName = "malzeme_talep_formu.xlsx", fileData = excelBytes };
                 mail.attachmentData.Add(attachment);
-                MailHelper.SendUserMail(_cache.kullanici, mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                MailHelper.SendSystemMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
             }
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)

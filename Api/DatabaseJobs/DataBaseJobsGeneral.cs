@@ -76,7 +76,20 @@ namespace Api.DatabaseJobs
                 return null;
             }
         }
-
+        internal static MySqlConnection MySqlConnectionTest()
+        {
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb_test;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            //MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
+            try
+            {
+                mySqlConnection.Open();
+                return mySqlConnection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         internal static string SerializeObject(object o)
         {
             string result = "";

@@ -35,6 +35,7 @@ namespace YektamakDesktop.Common
                 {
                     SatinalmaTalepDetay satinalmaTalepdetay = new SatinalmaTalepDetay { proje = proje };
                     SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetayDTO();
+                    satinalmaTalepdetay.projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(item);
                     // Eğer stok kartının hammaddeId'si varsa, ve lazer grubuna ait parça değilse satınalma talep detay listesine hammadde olarak ekle
                     if (item.stokKarthammaddeId != null && item.stokKartmalzemeGrupId != 28)
                     {
@@ -186,6 +187,7 @@ namespace YektamakDesktop.Common
                         satinalmaTalepdetay.onaylananMiktar = item.miktar;
                         satinalmaTalepDetayList.Add(satinalmaTalepdetay);
                     }
+                    
                     satinalmaTalepdetay.aciklama = item.aciklama;
                     satinalmaTalepdetay.agirlik = item.miktar * item.projeStokKart.stokKart.agirlik;
                 }
