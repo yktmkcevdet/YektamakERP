@@ -204,6 +204,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbStokGrupId.Name = "clbStokGrupId";
             clbStokGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbStokGrupId.PlaceholderText = "Stok Grubu";
+            clbStokGrupId.ReadOnly = false;
             clbStokGrupId.Size = new System.Drawing.Size(250, 25);
             clbStokGrupId.TabIndex = 17;
             clbStokGrupId.ValueMember = "Id";
@@ -221,6 +222,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrupId.Name = "clbMalzemeGrupId";
             clbMalzemeGrupId.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbMalzemeGrupId.PlaceholderText = "Malzeme Grubu";
+            clbMalzemeGrupId.ReadOnly = false;
             clbMalzemeGrupId.Size = new System.Drawing.Size(250, 25);
             clbMalzemeGrupId.TabIndex = 18;
             clbMalzemeGrupId.ValueMember = "Id";
@@ -238,6 +240,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKod.Name = "clbProjeKod";
             clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKod.PlaceholderText = "Proje Kodu";
+            clbProjeKod.ReadOnly = false;
             clbProjeKod.Size = new System.Drawing.Size(250, 25);
             clbProjeKod.TabIndex = 20;
             clbProjeKod.ValueMember = "Id";
@@ -256,11 +259,14 @@ namespace YektamakDesktop.Formlar.Satinalma
             // isTeklif
             // 
             isTeklif.AutoSize = true;
+            isTeklif.Checked = true;
+            isTeklif.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             isTeklif.Location = new System.Drawing.Point(38, 314);
             isTeklif.Name = "isTeklif";
             isTeklif.Size = new System.Drawing.Size(147, 19);
             isTeklif.TabIndex = 24;
             isTeklif.Text = "Teklif İstenenleri Göster";
+            isTeklif.ThreeState = true;
             isTeklif.UseVisualStyleBackColor = true;
             isTeklif.CheckedChanged += isTeklif_CheckedChanged;
             // 
