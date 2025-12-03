@@ -259,14 +259,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             // isTeklif
             // 
             isTeklif.AutoSize = true;
-            isTeklif.Checked = true;
-            isTeklif.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             isTeklif.Location = new System.Drawing.Point(38, 314);
             isTeklif.Name = "isTeklif";
             isTeklif.Size = new System.Drawing.Size(147, 19);
             isTeklif.TabIndex = 24;
             isTeklif.Text = "Teklif İstenenleri Göster";
-            isTeklif.ThreeState = true;
             isTeklif.UseVisualStyleBackColor = true;
             isTeklif.CheckedChanged += isTeklif_CheckedChanged;
             // 
