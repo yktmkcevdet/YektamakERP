@@ -30,10 +30,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _cache = cache;
             _projeService = projeService;
             _fileService = fileService;
-            InitializeComponent();
-            Initialize();
             _convertHelper = convertHelper;
             _satinalmaTalepHelper = satinalmaTalepHelper;
+            InitializeComponent();
+            Initialize();
         }
         private void Initialize()
         {

@@ -325,7 +325,7 @@ namespace YektamakDesktop.CustomControls
         public object SelectedItem
         {
             get => comboBox1.SelectedItem;
-            set => comboBox1.SelectedItem = value;
+            set { comboBox1.SelectedItem = value; }
         }
 
         [Browsable(false)]
@@ -358,6 +358,11 @@ namespace YektamakDesktop.CustomControls
         {
             add { comboBox1.SelectedValueChanged += value; }
             remove { comboBox1.SelectedValueChanged -= value; }
+        }
+        public event EventHandler SelectedItemChanged
+        {
+            add { comboBox1.SelectedIndexChanged += value; }
+            remove { comboBox1.SelectedIndexChanged -= value; }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

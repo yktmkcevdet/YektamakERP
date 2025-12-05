@@ -256,6 +256,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 mail.Subject = $"{satinalmaTalep.satinalmaTalepNo} no'lu Talep Onayı Hakkında";
                 mail.Body = $"{satinalmaTalep.satinalmaTalepNo} no'lu talep onayınıza sunulmuştur.";
                 mail.To = _cache.kullaniciList.Where(x => x.Id == satinalmaTalep.onayKullanici.Id).Select(x => x.personel.mail).First();
+                mail.Cc = _cache.kullaniciList.Where(x => x.Id == satinalmaTalep.talepEdenKullanici.Id).Select(x => x.personel.mail).First();
                 byte[] excelBytes;
                 using (var ms = new MemoryStream())
                 {
@@ -264,7 +265,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 var attachment = new MailAttachament { fileName = "malzeme_talep_formu.xlsx", fileData = excelBytes };
                 mail.attachmentData.Add(attachment);
-                MailHelper.SendSystemMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                MailHelper.SendSystemMail(mail.To,mail.Cc, mail.Subject, mail.Body, mail.attachmentData);
             }
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)

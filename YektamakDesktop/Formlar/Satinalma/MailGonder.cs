@@ -170,6 +170,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 this.Enabled = false;
                 mail.To = tbxMailTo.TextCustom;
                 mail.Subject = tbxKonu.TextCustom;
+                mail.Cc= "";
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // rtf'yi html'e döndürmek için gerekli
                 mail.Body = RtfPipe.Rtf.ToHtml(rtbBody.Rtf);
                 string jsonResult =await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);
@@ -179,7 +180,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 else
                 {
-                    MailHelper.SendSystemMail(mail.To, mail.Subject, mail.Body, mail.attachmentData);
+                    MailHelper.SendSystemMail(mail.To,mail.Cc, mail.Subject, mail.Body, mail.attachmentData);
                     MessageBox.Show("Mail başarıyla gönderildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }

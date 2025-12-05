@@ -89,7 +89,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             btnTeklif.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnTeklif.IconSize = 24;
             btnTeklif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnTeklif.Location = new System.Drawing.Point(800, 289);
+            btnTeklif.Location = new System.Drawing.Point(564, 321);
             btnTeklif.Name = "btnTeklif";
             btnTeklif.Size = new System.Drawing.Size(149, 34);
             btnTeklif.TabIndex = 4;
@@ -101,7 +101,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             ctxBeginTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ctxBeginTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(785, 253);
+            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(776, 315);
             ctxBeginTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxBeginTeslimTarihi.Name = "ctxBeginTeslimTarihi";
             ctxBeginTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -113,7 +113,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             ctxEndTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ctxEndTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctxEndTeslimTarihi.Location = new System.Drawing.Point(932, 253);
+            ctxEndTeslimTarihi.Location = new System.Drawing.Point(923, 315);
             ctxEndTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctxEndTeslimTarihi.Name = "ctxEndTeslimTarihi";
             ctxEndTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -145,7 +145,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             ctbBeginTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ctbBeginTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbBeginTalepTarihi.Location = new System.Drawing.Point(785, 214);
+            ctbBeginTalepTarihi.Location = new System.Drawing.Point(776, 283);
             ctbBeginTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbBeginTalepTarihi.Name = "ctbBeginTalepTarihi";
             ctbBeginTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -157,7 +157,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             ctbEndTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ctbEndTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbEndTalepTarihi.Location = new System.Drawing.Point(932, 214);
+            ctbEndTalepTarihi.Location = new System.Drawing.Point(923, 283);
             ctbEndTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
             ctbEndTalepTarihi.Name = "ctbEndTalepTarihi";
             ctbEndTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
@@ -171,7 +171,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Location = new System.Drawing.Point(306, 55);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(454, 255);
+            panel1.Size = new System.Drawing.Size(407, 255);
             panel1.TabIndex = 14;
             // 
             // universalGrid1
@@ -290,9 +290,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             // dgv
             // 
             dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv.Location = new System.Drawing.Point(772, 48);
+            dgv.Location = new System.Drawing.Point(719, 55);
             dgv.Name = "dgv";
-            dgv.Size = new System.Drawing.Size(240, 150);
+            dgv.Size = new System.Drawing.Size(371, 224);
             dgv.TabIndex = 27;
             // 
             // chkBukum

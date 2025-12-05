@@ -8,7 +8,7 @@ namespace YektamakDesktop.Helpers
 {
     public static class MailHelper
     {
-        public static void SendSystemMail(string to, string subject, string body, List<MailAttachament> attachmentData = null)
+        public static void SendSystemMail(string to,string cc, string subject, string body, List<MailAttachament> attachmentData = null)
         {
             try
             {
@@ -17,6 +17,7 @@ namespace YektamakDesktop.Helpers
                 string senderPassword = "Yod43257";
                 mail.From = new MailAddress(senderEmail);
                 mail.To.Add(to);
+                mail.CC.Add(cc);
                 mail.Subject = subject;
                 mail.Body = body;
                 mail.Bcc.Add("cevdet.oguz@yektamak.com.tr");

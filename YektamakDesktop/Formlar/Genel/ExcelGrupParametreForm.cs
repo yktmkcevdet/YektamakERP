@@ -47,7 +47,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             fcbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
-            fcbKarsilastirmaOperator.SetDataSource(Enum.GetValues(typeof(KarsilastirmaOperatoru)).Cast<KarsilastirmaOperatoru?>()
+            fcbKarsilastirmaOperator.SetDataSource(Enum.GetValues(typeof(KarsilastirmaOperatoru)).Cast<KarsilastirmaOperatoru>()
                 .ToList());
             Binding();
         }

@@ -76,3 +76,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\Api.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\Api.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\ref\Api.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\Api\bin\Release\net9.0\Dapper.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\Api\obj\Release\net9.0\swae.build.ex.cache

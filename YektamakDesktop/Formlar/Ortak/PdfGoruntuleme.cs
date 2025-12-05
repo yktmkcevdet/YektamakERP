@@ -15,11 +15,12 @@ namespace YektamakDesktop.Formlar.Ortak
 
             this.Width = 800;
             this.Height = 600;
-
+            
             
         }
         public void GetInstance(byte[] base64Pdf)
         {
+            this.WindowState = FormWindowState.Normal;
             pdfViewer.LoadFromBytes(base64Pdf);
             Image img = pdfViewer.SaveAsImage(0);
             pictureBox1.Image = img;

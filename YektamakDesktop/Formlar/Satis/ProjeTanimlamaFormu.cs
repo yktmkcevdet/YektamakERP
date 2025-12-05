@@ -31,12 +31,12 @@ namespace YektamakDesktop.Formlar.Satis
             _cache = cache;
             _projeService = projeService;
             _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
             InitializeComponent();
             customDataGrid = new CustomDataGrid<DataControlProjeDosya>(2, 30, new Point(0, 0), new Size(990, 300));
             panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
             Initialize();
-            _convertHelper = convertHelper;
         }
         private void Initialize()
         {
@@ -56,7 +56,7 @@ namespace YektamakDesktop.Formlar.Satis
 
             universalGrid1.SetData(new List<ProjeDTO>(), this.Name);
             universalGrid1.SetData(_cache.projeList
-                .GroupBy(p => new { p.Id })
+                .GroupBy(p =>  p.Id )
                 .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             fcbProjeTip.SetDataSource(_cache.projeTipList);
             fcbMarka.SetDataSource(_cache.markaList);
@@ -110,7 +110,7 @@ namespace YektamakDesktop.Formlar.Satis
                 proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
                 _cache.projeList.Add(proje);
                 universalGrid1.SetData(_cache.projeList
-                    .GroupBy(p => new { p.Id })
+                    .GroupBy(p =>  p.Id )
                     .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             }
         }

@@ -223,6 +223,26 @@ namespace YektamakDesktop.Common
         }
         private bool ValidateForm(List<ProjeStokKartDTO> stokKarts)
         {
+            foreach(var item in stokKarts)
+            {
+                if(item.stokKartmalzemeAltGrupId == null)
+                {
+                    if(_cache.malzemeAltGrups.Where(m=>m.malzemeGrup.Id== item.stokKartmalzemeGrupId).Any())
+                    {
+                        MessageBox.Show($"{item.stokKartkod} kodlu parçanın Malzeme Grup tanımı yapılmalıdır.");
+                        return false;
+                    }
+                }
+                if (item.stokKartmalzemeAltGrup2Id == null)
+                {
+                    if (_cache.malzemeAltGrup2List.Where(m => m.malzemeAltGrup.Id == item.stokKartmalzemeAltGrupId).Any())
+                    {
+                        MessageBox.Show($"{item.stokKartkod} kodlu parçanın Malzeme Alt Grup-2 tanımı yapılmalıdır.");
+                        return false;
+                    }
+                }
+
+            }
             // Formdaki gerekli alanların dolu olup olmadığını kontrol et
             if (!stokKarts.Any())
             {

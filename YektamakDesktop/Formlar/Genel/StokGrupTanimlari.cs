@@ -190,7 +190,7 @@ namespace YektamakDesktop.Formlar.Genel
                     case 3:
                         {
                             MalzemeAltGrup2 malzemeAltGrup2 = new MalzemeAltGrup2 { Id = int.Parse(node.Name) };
-                            _stokService.DeleteMalzemeAltGrup2(malzemeAltGrup2);
+                            string jsonResult=_stokService.DeleteMalzemeAltGrup2(malzemeAltGrup2);
                             _cache.malzemeAltGrup2List.Remove(_cache.malzemeAltGrup2List.FirstOrDefault(s => s.Id == malzemeAltGrup2.Id));
                             treeView1.Nodes.Remove(node);
                             break;

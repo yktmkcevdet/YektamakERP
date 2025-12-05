@@ -25,8 +25,8 @@ namespace YektamakDesktop.Formlar.Genel
         {
             _cache = cache;
             _stokService = stokService;
-            Initialize();
             _convertHelper = convertHelper;
+            Initialize();
         }
         private void Initialize()
         {

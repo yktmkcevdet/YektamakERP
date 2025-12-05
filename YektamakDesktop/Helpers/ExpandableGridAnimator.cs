@@ -1,7 +1,9 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using YektamakDesktop.Formlar.Satinalma;
 
@@ -16,16 +18,24 @@ public class ExpandableGridAnimator
     public ExpandableGridAnimator(DataGridView grid)
     {
         dgv = grid;
+        dgv.Columns.Clear();
+        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.projeKod), "Proje");
+        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.satirSayisi), "Talep");
+        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.teklifSayisi), "Teklif");
+        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.yuzde), "%");
+        dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Format = "N2";
 
         dgv.Scroll += (s, e) => RepositionAll();
         dgv.SizeChanged += (s, e) => RepositionAll();
         dgv.CellPainting += dgv_CellPainting;
+        dgv.CellClick += dgv_CellClick;
 
         animationTimer.Interval = 15;
         animationTimer.Tick += AnimationTick;
     }
 
-    private class ExpandInfo
+    public class ExpandInfo
     {
         public DataGridViewRow Row;
         public object Tag;
@@ -56,9 +66,12 @@ public class ExpandableGridAnimator
         };
 
         expandList.Add(exp);
-        row.Cells[0].Value = "+";
     }
-
+    private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.ColumnIndex == -1)
+            Toggle(dgv.Rows[e.RowIndex]);
+    }
     // Tıklama ile aç/kapa
     public void Toggle(DataGridViewRow row)
     {
@@ -79,7 +92,6 @@ public class ExpandableGridAnimator
             BuildPanel(exp);
 
         exp.IsExpanded = true;
-        exp.Row.Cells[0].Value = "-";
 
         exp.AnimOpening = true;
         exp.AnimClosing = false;
@@ -94,7 +106,6 @@ public class ExpandableGridAnimator
     private void StartCollapse(ExpandInfo exp)
     {
         exp.IsExpanded = false;
-        exp.Row.Cells[0].Value = "+";
 
         exp.AnimClosing = true;
         exp.AnimOpening = false;
@@ -180,14 +191,15 @@ public class ExpandableGridAnimator
     private void BuildPanel(ExpandInfo exp)
     {
         var info = (SatinalmaTalepForGrup)exp.Tag;
-
+        exp.Row.DefaultCellStyle.Alignment=DataGridViewContentAlignment.TopLeft;
         // Modern tema: yuvarlak kenarlı mavi gölgeli panel
         var panel = new Panel
         {
             BorderStyle = BorderStyle.None,
-            Padding = new Padding(10),
+            Padding = new Padding(5),
             BackColor = Color.FromArgb(0, 245, 250, 255),
-            Width = dgv.Width - 60
+            Width = dgv.Width - 60,
+            AutoScroll = true
         };
 
         // Mavi gölge efekti
@@ -224,7 +236,7 @@ public class ExpandableGridAnimator
             sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
 
         // Panel yüksekliği
-        panel.Height = sub.Rows.Count * 24 + 25;
+        panel.Height = sub.Rows.Count * 35 + 25;
         exp.ExpandedHeight = panel.Height;
 
         panel.Controls.Add(sub);
@@ -243,7 +255,7 @@ public class ExpandableGridAnimator
     {
         if (exp.Panel == null) return;
 
-        var rect = dgv.GetCellDisplayRectangle(0, exp.Row.Index, true);
+        var rect = dgv.GetCellDisplayRectangle(-1, exp.Row.Index-1, true);
 
         exp.Panel.Location = new Point(
             rect.Left + TargetPanelPadding,
@@ -262,21 +274,64 @@ public class ExpandableGridAnimator
     // ---------------- (+)(-) İKON ÇİZİMİ -----------------
     private void dgv_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
     {
-        if (e.ColumnIndex == 0 && expandList.Exists(x => x.Row.Index == e.RowIndex))
+        if (e.ColumnIndex == -1 && e.RowIndex >= 0)
         {
+            // Expandable row mu?
+            var exp = GetExpandInfo(dgv.Rows[e.RowIndex]);
+            if (exp == null) return;
+
             e.PaintBackground(e.CellBounds, true);
 
-            string text = (string)e.FormattedValue;
+            string icon = exp.IsExpanded ? "-" : "+";
 
-            TextRenderer.DrawText(e.Graphics, text,
-                e.CellStyle.Font, e.CellBounds, Color.Black,
-                TextFormatFlags.HorizontalCenter |
-                TextFormatFlags.VerticalCenter);
+            TextRenderer.DrawText(
+                e.Graphics,
+                icon,
+                e.CellStyle.Font,
+                e.CellBounds,
+                Color.Black,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+            );
 
             e.Handled = true;
         }
-    }
+        // Başlık satırlarını veya boş alanları boyama
+        if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            return;
 
+        // Yüzde değeri hangi sütundaysa kontrol et (örneğin "Yuzde" isimli sütun)
+        if (dgv.Columns[e.ColumnIndex].Name == "yuzde")
+        {
+            e.Handled = true; // Varsayılan boyamayı engelle
+            e.PaintBackground(e.CellBounds, true);
+            e.PaintContent(e.CellBounds);
+
+            // Hücredeki değeri al
+            if (e.Value != null && double.TryParse(e.Value.ToString().Replace("%", ""), out double value))
+            {
+                // 0–100 aralığına çek
+                value = Math.Max(0, Math.Min(100, value));
+
+                // Dolum oranına göre genişlik hesapla
+                int fillWidth = (int)(e.CellBounds.Width * (value / 100.0));
+
+                // Renk (örneğin yeşil)
+                using (Brush b = new SolidBrush(Color.LightGreen))
+                {
+                    Rectangle fillRect = new Rectangle(e.CellBounds.X, e.CellBounds.Y, fillWidth, e.CellBounds.Height);
+                    e.Graphics.FillRectangle(b, fillRect);
+                }
+
+                // Kenarlık ve metni yeniden çiz
+                e.PaintContent(e.CellBounds);
+                e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds);
+            }
+        }
+    }
+    public ExpandInfo GetExpandInfo(DataGridViewRow row)
+    {
+        return expandList.FirstOrDefault(x => x.Row == row);
+    }
     // WinAPI - yuvarlak panel
     [System.Runtime.InteropServices.DllImport("gdi32.dll")]
     private static extern IntPtr CreateRoundRectRgn

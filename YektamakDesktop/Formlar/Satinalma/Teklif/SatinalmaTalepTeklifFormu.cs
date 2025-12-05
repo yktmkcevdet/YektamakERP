@@ -123,38 +123,23 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 await Binding();
                 await GridDoldur();
-                //dgv.Parent = this;
-                //dgv.Dock = DockStyle.None;
-                //dgv.AllowUserToAddRows = false;
-                //dgv.RowHeadersVisible = false;
-                //dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                //dgv.MultiSelect = false;
-                //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                dgv.Columns.Clear();
-                // dgv.Columns.Add("Expand", "");
-                dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.projeKod), "Proje");
-                dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.satirSayisi), "Talep");
-                dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.teklifSayisi), "Teklif");
-                dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.yuzde), "%");
-
-                //dgv.Columns["Expand"].Width = 40;
-                //dgv.Columns["Expand"].ReadOnly = true;
-                dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Format = "N2";
-
-
-                //dgv.CellClick += dgv_CellClick;
-                dgv.CellPainting += dataGridView1_CellPainting;
-                FillGrid();
                 mgr = new ExpandableGridAnimator(dgv);
-                var data = GetGrupData("Y-0553").ToList();
-                foreach (var info in data)
-                {
-                    var rowIndex = dgv.Rows.Add(info.Grup, info.satirSayisi, info.teklifSayisi);
-                    var row = dgv.Rows[rowIndex];
+                var grupList = GetData();
 
-                    mgr.BindRow(row, info);
+                foreach (var grup in grupList)
+                {
+                    var detayList = GetGrupData(grup.projeKod);
+
+                    var gorunumModel = new SatinalmaTalepForGrup
+                    {
+                        Grup = grup.projeKod,
+                        satirSayisi = grup.satirSayisi,
+                        teklifSayisi = grup.teklifSayisi,
+                        Details = detayList
+                    };
+
+                    int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde());
+                    mgr.BindRow(dgv.Rows[rowIndex], gorunumModel);
                 }
 
             }
@@ -165,107 +150,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             }
         }
 
-        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-                mgr.Toggle(dgv.Rows[e.RowIndex]);
-        }
-
-        private void FillGrid()
-        {
-            dgv.Rows.Clear();
-
-            var data = GetData().GroupBy(x => x.projeKod).ToList();
-
-            foreach (var grup in data)
-            {
-                int rowIndex = dgv.Rows.Add("+", grup.Key, grup.Sum(x => x.satirSayisi),grup.Sum(x=>x.teklifSayisi),grup.First().yuzde());
-                var detayData = GetGrupData(grup.Key).ToList();
-                dgv.Rows[rowIndex].Tag = new SatinalmaTalepForGrup
-                {
-                    projeKod = grup.Key,
-                    Details = detayData,
-                    IsExpanded = false,
-                    DetailGrid = null
-                };
-                dgv.Rows[rowIndex].DefaultCellStyle.Font = new Font(dgv.Font, FontStyle.Bold);
-                dgv.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGray;
-            }
-        }
-        private void Dgv_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            if (e.ColumnIndex != 0) return;
-
-            var row = dgv.Rows[e.RowIndex];
-            if (row.Tag is not SatinalmaTalepForGrup info) return;
-
-            if (info.IsExpanded)
-            {
-                CollapseGroup(row, info);
-            }
-            else
-            {
-                ExpandGroup(row, info);
-            }
-        }
-        private void ExpandGroup(DataGridViewRow row, SatinalmaTalepForGrup info)
-        {
-            // Daha önce grid oluşturulmuş mu kontrol et
-            if (info.DetailGrid == null)
-            {
-                var subGrid = new DataGridView
-                {
-                    AllowUserToAddRows = false,
-                    RowHeadersVisible = false,
-                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                    ReadOnly = true,
-                    BackgroundColor = Color.White,
-                    BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                };
-                subGrid.Columns.Add(nameof(SatinalmaTalepForGrup.Grup), "Grup");
-                subGrid.Columns.Add(nameof(SatinalmaTalepForGrup.satirSayisi), "Talep");
-                subGrid.Columns.Add(nameof(SatinalmaTalepForGrup.teklifSayisi), "Teklif");
-                subGrid.Columns.Add(nameof(SatinalmaTalepForGrup.yuzde), "yuzde");
-                subGrid.Columns[nameof(SatinalmaTalepForGrup.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                subGrid.Columns[nameof(SatinalmaTalepForGrup.yuzde)].DefaultCellStyle.Format = "N2";
-
-                foreach (var d in info.Details)
-                {
-                    subGrid.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
-                }
-
-                // Alt grid tasarımı
-                subGrid.Height = info.Details.Count * 24 + 25;
-                subGrid.Width = dgv.Width - 60;
-                subGrid.ScrollBars = ScrollBars.None;
-                subGrid.ReadOnly = true;
-                subGrid.CellPainting += dataGridView1_CellPainting;
-                // Form üzerine ekle
-                dgv.Controls.Add(subGrid);
-                info.DetailGrid = subGrid;
-                row.Height= info.DetailGrid.Height + 5;
-            }
-
-            // Grup satırının hemen altına konumlandır
-            var rect = dgv.GetCellDisplayRectangle(0, row.Index, true);
-            var nextRowBottom = rect.Bottom;
-            info.DetailGrid.Location = new Point(rect.Left + 40, nextRowBottom);
-            info.DetailGrid.BringToFront();
-            info.DetailGrid.Visible = true;
-
-            row.Cells[0].Value = "-";
-            info.IsExpanded = true;
-        }
-        private void CollapseGroup(DataGridViewRow row, SatinalmaTalepForGrup info)
-        {
-            if (info.DetailGrid != null)
-                info.DetailGrid.Visible = false;
-
-            row.Cells[0].Value = "+";
-            info.IsExpanded = false;
-            row.Height = dgv.RowTemplate.Height;
-        }
+        
+        
         private List<SatinalmaTalepForMusteri> GetData()
         {
             return satinalmaTalepDetayDTOs.GroupBy(s =>
@@ -277,41 +163,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             return satinalmaTalepDetayDTOs.Where(s=>s.projekod== projeKod).GroupBy(s =>
                 s.projeStokKartstokKartmalzemeGrupId
             ).Select(g => new SatinalmaTalepForGrup { Grup = _cache.malzemeGrups.Where(m=>m.Id==g.First().projeStokKartstokKartmalzemeGrupId).First().ad, satirSayisi = g.Count(), teklifSayisi = g.Where(x => x.isTeklif == true).Count() }).ToList();
-        }
-        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            // Başlık satırlarını veya boş alanları boyama
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
-
-            // Yüzde değeri hangi sütundaysa kontrol et (örneğin "Yuzde" isimli sütun)
-            if (dgv.Columns[e.ColumnIndex].Name == "yuzde")
-            {
-                e.Handled = true; // Varsayılan boyamayı engelle
-                e.PaintBackground(e.CellBounds, true);
-                e.PaintContent(e.CellBounds);
-
-                // Hücredeki değeri al
-                if (e.Value != null && double.TryParse(e.Value.ToString().Replace("%", ""), out double value))
-                {
-                    // 0–100 aralığına çek
-                    value = Math.Max(0, Math.Min(100, value));
-
-                    // Dolum oranına göre genişlik hesapla
-                    int fillWidth = (int)(e.CellBounds.Width * (value / 100.0));
-
-                    // Renk (örneğin yeşil)
-                    using (Brush b = new SolidBrush(Color.LightGreen))
-                    {
-                        Rectangle fillRect = new Rectangle(e.CellBounds.X, e.CellBounds.Y, fillWidth, e.CellBounds.Height);
-                        e.Graphics.FillRectangle(b, fillRect);
-                    }
-
-                    // Kenarlık ve metni yeniden çiz
-                    e.PaintContent(e.CellBounds);
-                    e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds);
-                }
-            }
         }
         private async Task GridDoldur()
         {
