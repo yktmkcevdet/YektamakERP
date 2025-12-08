@@ -36,7 +36,6 @@ namespace YektamakDesktop.Formlar.Genel
             universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
-            universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
             universalGrid1.SetData(new List<ExcelGrupParametre>(), this.Name);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;

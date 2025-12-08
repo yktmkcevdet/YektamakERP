@@ -121,7 +121,7 @@ namespace YektamakDesktop.Formlar.Genel
             }
         }
 
-        private void StokGrupTanimFormu_FormClosing(object sender, FormClosedEventArgs e)
+        private void StokGrupTanimFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveSettings();
         }

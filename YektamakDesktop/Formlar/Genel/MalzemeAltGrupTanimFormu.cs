@@ -154,5 +154,10 @@ namespace YektamakDesktop.Formlar.Genel
         {
             universalGrid1.Filtrele(malzemeAltGrupDTO);
         }
+
+        private void customButtonNewRecord1_Click(object sender, EventArgs e)
+        {
+            malzemeAltGrupDTO = null;
+        }
     }
 }

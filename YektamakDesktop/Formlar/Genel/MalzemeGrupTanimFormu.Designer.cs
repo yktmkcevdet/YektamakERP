@@ -41,11 +41,11 @@ namespace YektamakDesktop.Formlar.Genel
             fcbStokGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
             label4 = new Label();
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1 = new ContextMenuStrip(components);
             malzemeGrubunuSilToolStripMenuItem = new ToolStripMenuItem();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeGrupId.Margin = new Padding(1);
             ctbMalzemeGrupId.Name = "ctbMalzemeGrupId";
             ctbMalzemeGrupId.OndalikBasamak = 0;
-            ctbMalzemeGrupId.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeGrupId.Padding = new Padding(3);
             ctbMalzemeGrupId.Size = new Size(63, 25);
             ctbMalzemeGrupId.TabIndex = 1;
             ctbMalzemeGrupId.TextCustom = "0";
@@ -96,7 +96,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeGrupAd.Margin = new Padding(1);
             ctbMalzemeGrupAd.Multiline = false;
             ctbMalzemeGrupAd.Name = "ctbMalzemeGrupAd";
-            ctbMalzemeGrupAd.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeGrupAd.Padding = new Padding(3);
             ctbMalzemeGrupAd.PasswordChar = false;
             ctbMalzemeGrupAd.PlaceholderColor = Color.DarkGray;
             ctbMalzemeGrupAd.PlaceholderText = "";
@@ -130,7 +130,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeGrupKod.Margin = new Padding(1);
             ctbMalzemeGrupKod.Multiline = false;
             ctbMalzemeGrupKod.Name = "ctbMalzemeGrupKod";
-            ctbMalzemeGrupKod.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeGrupKod.Padding = new Padding(3);
             ctbMalzemeGrupKod.PasswordChar = false;
             ctbMalzemeGrupKod.PlaceholderColor = Color.DarkGray;
             ctbMalzemeGrupKod.PlaceholderText = "";
@@ -145,6 +145,7 @@ namespace YektamakDesktop.Formlar.Genel
             // fcbStokGrup
             // 
             fcbStokGrup.BorderColor = Color.Silver;
+            fcbStokGrup.BorderRadius = 8;
             fcbStokGrup.BorderSize = 1;
             fcbStokGrup.DisplayMember = "ad";
             fcbStokGrup.Font = new Font("Segoe UI", 8F);
@@ -153,6 +154,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(6, 4, 6, 4);
             fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.ReadOnly = false;
             fcbStokGrup.Size = new Size(223, 25);
             fcbStokGrup.TabIndex = 8;
             fcbStokGrup.ValueMember = "Id";
@@ -170,38 +172,13 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonSave1
             // 
-            customButtonSave1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            customButtonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             customButtonSave1.BackColor = Color.Transparent;
-            customButtonSave1.Location = new Point(376, 488);
+            customButtonSave1.Location = new Point(455, 29);
             customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new Size(106, 46);
+            customButtonSave1.Size = new Size(38, 40);
             customButtonSave1.TabIndex = 10;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
-            // 
-            // roundedButton1
-            // 
-            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            roundedButton1.BackgroundColor = Color.Firebrick;
-            roundedButton1.BorderColor = Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 10;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.ForeColor = Color.White;
-            roundedButton1.GradientColor1 = Color.DodgerBlue;
-            roundedButton1.GradientColor2 = Color.MidnightBlue;
-            roundedButton1.HoverColor1 = Color.RoyalBlue;
-            roundedButton1.HoverColor2 = Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new Point(33, 488);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new Size(105, 40);
-            roundedButton1.TabIndex = 11;
-            roundedButton1.Text = "YENİ KAYIT";
-            roundedButton1.TextColor = Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
             // 
             // headerPanel1
             // 
@@ -219,9 +196,9 @@ namespace YektamakDesktop.Formlar.Genel
             // universalGrid1
             // 
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new Point(33, 156);
+            universalGrid1.Location = new Point(33, 157);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(449, 326);
+            universalGrid1.Size = new Size(449, 258);
             universalGrid1.TabIndex = 13;
             // 
             // contextMenuStrip1
@@ -237,14 +214,23 @@ namespace YektamakDesktop.Formlar.Genel
             malzemeGrubunuSilToolStripMenuItem.Text = "Malzeme Grubunu Sil";
             malzemeGrubunuSilToolStripMenuItem.Click += malzemeGrubunuSilToolStripMenuItem_Click;
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            customButtonNewRecord1.Location = new Point(455, 97);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new Size(38, 40);
+            customButtonNewRecord1.TabIndex = 14;
+            customButtonNewRecord1.Click += roundedButton1_Click;
+            // 
             // MalzemeGrupTanimFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(527, 540);
+            ClientSize = new Size(527, 427);
+            Controls.Add(customButtonNewRecord1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
-            Controls.Add(roundedButton1);
             Controls.Add(customButtonSave1);
             Controls.Add(label4);
             Controls.Add(fcbStokGrup);
@@ -282,10 +268,10 @@ namespace YektamakDesktop.Formlar.Genel
         private CustomControls.FilterableComboBox fcbStokGrup;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomButtonSave customButtonSave1;
-        private CustomControls.RoundedButton roundedButton1;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem malzemeGrubunuSilToolStripMenuItem;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
     }
 }

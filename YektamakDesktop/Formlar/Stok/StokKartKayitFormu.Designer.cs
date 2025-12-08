@@ -109,7 +109,6 @@ namespace YektamakDesktop.Formlar.Stok
             ctbProjeAdet = new CustomTextBoxSayisal();
             lblProjeAdet = new Label();
             fcbBoyut = new FilterableComboBox();
-            roundedButton1 = new RoundedButton();
             ctxSagClickMenu = new ContextMenuStrip(components);
             stokGrupTanımlamaToolStripMenuItem = new ToolStripMenuItem();
             malzemeGrupTanımlarıToolStripMenuItem = new ToolStripMenuItem();
@@ -124,6 +123,8 @@ namespace YektamakDesktop.Formlar.Stok
             label3 = new Label();
             chkTalasli = new CheckBox();
             chkBukum = new CheckBox();
+            customButtonNewRecord1 = new CustomButtonNewRecord();
+            roundedButton1 = new RoundedButton();
             ctxSagClickMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -702,7 +703,7 @@ namespace YektamakDesktop.Formlar.Stok
             rButtonKaydet.BackColor = Color.Transparent;
             rButtonKaydet.Location = new Point(769, 624);
             rButtonKaydet.Name = "rButtonKaydet";
-            rButtonKaydet.Size = new Size(106, 46);
+            rButtonKaydet.Size = new Size(36, 36);
             rButtonKaydet.TabIndex = 76;
             rButtonKaydet.SaveButtonClick += rButtonKaydet_Click;
             // 
@@ -889,31 +890,6 @@ namespace YektamakDesktop.Formlar.Stok
             fcbBoyut.TabIndex = 14;
             fcbBoyut.ValueMember = "Id";
             // 
-            // roundedButton1
-            // 
-            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            roundedButton1.BackgroundColor = Color.Firebrick;
-            roundedButton1.BorderColor = Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 10;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.ForeColor = Color.White;
-            roundedButton1.GradientColor1 = Color.DodgerBlue;
-            roundedButton1.GradientColor2 = Color.MidnightBlue;
-            roundedButton1.HoverColor1 = Color.RoyalBlue;
-            roundedButton1.HoverColor2 = Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new Point(22, 622);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new Size(117, 40);
-            roundedButton1.TabIndex = 88;
-            roundedButton1.Text = "YENİ KAYIT";
-            roundedButton1.TextColor = Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
-            // 
             // ctxSagClickMenu
             // 
             ctxSagClickMenu.Items.AddRange(new ToolStripItem[] { stokGrupTanımlamaToolStripMenuItem, malzemeGrupTanımlarıToolStripMenuItem, malzemeAltGrupTanımlamaToolStripMenuItem, malzemeAltGrup2TanımlamaToolStripMenuItem });
@@ -1077,11 +1053,46 @@ namespace YektamakDesktop.Formlar.Stok
             chkBukum.Text = "Büküm";
             chkBukum.UseVisualStyleBackColor = true;
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            customButtonNewRecord1.Location = new Point(40, 624);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new Size(36, 36);
+            customButtonNewRecord1.TabIndex = 97;
+            customButtonNewRecord1.Click += roundedButton1_Click;
+            // 
+            // roundedButton1
+            // 
+            roundedButton1.BackgroundColor = Color.Firebrick;
+            roundedButton1.BorderColor = Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = FlatStyle.Flat;
+            roundedButton1.ForeColor = Color.White;
+            roundedButton1.GradientColor1 = Color.DodgerBlue;
+            roundedButton1.GradientColor2 = Color.MidnightBlue;
+            roundedButton1.HoverColor1 = Color.RoyalBlue;
+            roundedButton1.HoverColor2 = Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new Point(364, 624);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Size = new Size(111, 40);
+            roundedButton1.TabIndex = 98;
+            roundedButton1.Text = "Ham Excel Verisi";
+            roundedButton1.TextColor = Color.White;
+            roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Click += roundedButton1_Click_1;
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(891, 698);
+            Controls.Add(roundedButton1);
+            Controls.Add(customButtonNewRecord1);
             Controls.Add(chkBukum);
             Controls.Add(chkTalasli);
             Controls.Add(label3);
@@ -1090,7 +1101,6 @@ namespace YektamakDesktop.Formlar.Stok
             Controls.Add(ctbStokKartId);
             Controls.Add(label30);
             Controls.Add(ctbTedarikciKod);
-            Controls.Add(roundedButton1);
             Controls.Add(fcbBoyut);
             Controls.Add(lblProjeAdet);
             Controls.Add(ctbProjeAdet);
@@ -1233,7 +1243,6 @@ namespace YektamakDesktop.Formlar.Stok
         private CustomTextBoxSayisal ctbProjeAdet;
         private Label lblProjeAdet;
         private FilterableComboBox fcbBoyut;
-        private RoundedButton roundedButton1;
         private ContextMenuStrip ctxSagClickMenu;
         private ToolStripMenuItem malzemeGrupTanımlarıToolStripMenuItem;
         private ContextMenuStrip ctxMalzeme;
@@ -1248,5 +1257,7 @@ namespace YektamakDesktop.Formlar.Stok
         private Label label3;
         private CheckBox chkTalasli;
         private CheckBox chkBukum;
+        private CustomButtonNewRecord customButtonNewRecord1;
+        private RoundedButton roundedButton1;
     }
 }

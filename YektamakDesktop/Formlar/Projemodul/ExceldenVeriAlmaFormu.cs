@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -98,6 +99,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         string klasor;
         private async Task ProcessExcelFileAsync()
         {
+            this.Enabled = false;
             string filePath = ctbDosyaYolu.TextCustom;
             UpdateProgressText("İşlem başlatılıyor...");
             var proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) };
@@ -160,6 +162,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 FileName = logDosyasi,
                 UseShellExecute = true // Varsayılan uygulama ile açar
             });
+            this.Enabled = true;
         }
         private IWorkbook CreateWorkbook(FileStream fileStream, string filePath)
         {
@@ -184,6 +187,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 adet = excelData.adet,
                 miktar = excelData.miktar,
                 no = excelData.no,
+                hamVeri = JsonConvert.SerializeObject(excelData),
                 stokKart ={
                     stokTip = { Id=excelData.stokTip },
                     stokGrup = { Id = excelData.stokGrup },

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Models
 {
-    public class ExcelFormat
+    public class ExcelFormat:IEntity
     {
         public string no { get; set; }
         public string kod { get; set; }

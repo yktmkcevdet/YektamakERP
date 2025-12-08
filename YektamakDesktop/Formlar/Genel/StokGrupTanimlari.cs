@@ -72,6 +72,7 @@ namespace YektamakDesktop.Formlar.Genel
                             stokGrupTanimFormu.TopLevel = false;
                             stokGrupTanimFormu.Dock = DockStyle.Fill;
                             stokGrupTanimFormu.AfterSave += StokGrupTanimFormu_AfterSave;
+                            stokGrupTanimFormu.headerPanel1.Visible = false;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(stokGrupTanimFormu);
                             stokGrupTanimFormu.Show();
@@ -79,6 +80,7 @@ namespace YektamakDesktop.Formlar.Genel
                             ExcelGrupParametre excelGrupParametre = new ExcelGrupParametre { stokGrupId = int.Parse(node.Name) };
                             excelGrupParametreForm.TopLevel = false;
                             excelGrupParametreForm.Dock = DockStyle.Fill;
+                            excelGrupParametreForm.headerPanel1.Visible = false;
                             panel2.Controls.Clear();
                             panel2.Controls.Add(excelGrupParametreForm);
                             excelGrupParametreForm.Show();
@@ -93,6 +95,7 @@ namespace YektamakDesktop.Formlar.Genel
                             malzemeGrupTanimFormu.TopLevel = false;
                             malzemeGrupTanimFormu.Dock = DockStyle.Fill;
                             malzemeGrupTanimFormu.AfterSave += MalzemeGrupTanimFormu_AfterSave;
+                            malzemeGrupTanimFormu.headerPanel1.Visible = false;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(malzemeGrupTanimFormu);
                             malzemeGrupTanimFormu.Show();
@@ -100,6 +103,7 @@ namespace YektamakDesktop.Formlar.Genel
                             ExcelGrupParametre excelGrupParametre = new ExcelGrupParametre { malzemeGrupId = int.Parse(node.Name) };
                             excelGrupParametreForm.TopLevel=false;
                             excelGrupParametreForm.Dock = DockStyle.Fill;
+                            excelGrupParametreForm.headerPanel1.Visible = false;
                             panel2.Controls.Clear();
                             panel2.Controls.Add(excelGrupParametreForm);
                             excelGrupParametreForm.Show();
@@ -114,6 +118,7 @@ namespace YektamakDesktop.Formlar.Genel
                             malzemeAltGrupTanimFormu.TopLevel = false;
                             malzemeAltGrupTanimFormu.Dock = DockStyle.Fill;
                             malzemeAltGrupTanimFormu.AfterSave += MalzemeAltGrupTanimFormu_AfterSave;
+                            malzemeAltGrupTanimFormu.headerPanel1.Visible = false;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(malzemeAltGrupTanimFormu);
                             malzemeAltGrupTanimFormu.Show();
@@ -121,6 +126,7 @@ namespace YektamakDesktop.Formlar.Genel
                             ExcelGrupParametre excelGrupParametre = new ExcelGrupParametre { malzemeAltGrupId = int.Parse(node.Name) };
                             excelGrupParametreForm.TopLevel = false;
                             excelGrupParametreForm.Dock = DockStyle.Fill;
+                            excelGrupParametreForm.headerPanel1.Visible = false;
                             panel2.Controls.Clear();
                             panel2.Controls.Add(excelGrupParametreForm);
                             excelGrupParametreForm.Show();
@@ -135,6 +141,7 @@ namespace YektamakDesktop.Formlar.Genel
                             malzemeAltGrup2TanimFormu.TopLevel = false;
                             malzemeAltGrup2TanimFormu.Dock = DockStyle.Fill;
                             malzemeAltGrup2TanimFormu.AfterSave += MalzemeAltGrup2TanimFormu_AfterSave;
+                            malzemeAltGrup2TanimFormu.headerPanel1.Visible = false;
                             panel1.Controls.Clear();
                             panel1.Controls.Add(malzemeAltGrup2TanimFormu);
                             malzemeAltGrup2TanimFormu.Show();
@@ -142,6 +149,7 @@ namespace YektamakDesktop.Formlar.Genel
                             ExcelGrupParametre excelGrupParametre = new ExcelGrupParametre { malzemeAltGrup2Id = int.Parse(node.Name) };
                             excelGrupParametreForm.TopLevel = false;
                             excelGrupParametreForm.Dock = DockStyle.Fill;
+                            excelGrupParametreForm.headerPanel1.Visible = false;
                             panel2.Controls.Clear();
                             panel2.Controls.Add(excelGrupParametreForm);
                             excelGrupParametreForm.Show();

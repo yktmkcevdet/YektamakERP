@@ -55,13 +55,13 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeStandart = new YektamakDesktop.CustomControls.FilterableComboBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             koşuluSilToolStripMenuItem = new ToolStripMenuItem();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             chkTalasli = new CheckBox();
             button1 = new Button();
             ctbCount = new YektamakDesktop.CustomControls.CustomTextBoxSayisal();
-            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
-            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             chkBukum = new CheckBox();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,13 +77,13 @@ namespace YektamakDesktop.Formlar.Genel
             ctbExcelSutunAd.Margin = new Padding(1);
             ctbExcelSutunAd.Multiline = false;
             ctbExcelSutunAd.Name = "ctbExcelSutunAd";
-            ctbExcelSutunAd.Padding = new Padding(7, 5, 7, 5);
+            ctbExcelSutunAd.Padding = new Padding(3);
             ctbExcelSutunAd.PasswordChar = false;
             ctbExcelSutunAd.PlaceholderColor = Color.DarkGray;
             ctbExcelSutunAd.PlaceholderText = "";
             ctbExcelSutunAd.ReadOnly = false;
             ctbExcelSutunAd.SelectionStart = 0;
-            ctbExcelSutunAd.Size = new Size(171, 29);
+            ctbExcelSutunAd.Size = new Size(171, 25);
             ctbExcelSutunAd.TabIndex = 1;
             ctbExcelSutunAd.TextAlignment = HorizontalAlignment.Left;
             ctbExcelSutunAd.TextCustom = "";
@@ -102,6 +102,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbKarsilastirmaOperator.Name = "fcbKarsilastirmaOperator";
             fcbKarsilastirmaOperator.Padding = new Padding(6, 4, 6, 4);
             fcbKarsilastirmaOperator.PlaceholderText = "Seçiniz...";
+            fcbKarsilastirmaOperator.ReadOnly = false;
             fcbKarsilastirmaOperator.Size = new Size(102, 25);
             fcbKarsilastirmaOperator.TabIndex = 2;
             fcbKarsilastirmaOperator.ValueMember = "";
@@ -119,13 +120,13 @@ namespace YektamakDesktop.Formlar.Genel
             ctbAnahtarKelime.Margin = new Padding(1);
             ctbAnahtarKelime.Multiline = false;
             ctbAnahtarKelime.Name = "ctbAnahtarKelime";
-            ctbAnahtarKelime.Padding = new Padding(7, 5, 7, 5);
+            ctbAnahtarKelime.Padding = new Padding(3);
             ctbAnahtarKelime.PasswordChar = false;
             ctbAnahtarKelime.PlaceholderColor = Color.DarkGray;
             ctbAnahtarKelime.PlaceholderText = "";
             ctbAnahtarKelime.ReadOnly = false;
             ctbAnahtarKelime.SelectionStart = 0;
-            ctbAnahtarKelime.Size = new Size(171, 29);
+            ctbAnahtarKelime.Size = new Size(171, 25);
             ctbAnahtarKelime.TabIndex = 3;
             ctbAnahtarKelime.TextAlignment = HorizontalAlignment.Left;
             ctbAnahtarKelime.TextCustom = "";
@@ -143,6 +144,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(6, 4, 6, 4);
             fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.ReadOnly = false;
             fcbStokGrup.Size = new Size(172, 25);
             fcbStokGrup.TabIndex = 4;
             fcbStokGrup.ValueMember = "Id";
@@ -161,6 +163,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeGrup.ReadOnly = false;
             fcbMalzemeGrup.Size = new Size(172, 25);
             fcbMalzemeGrup.TabIndex = 5;
             fcbMalzemeGrup.ValueMember = "Id";
@@ -179,6 +182,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup.Name = "fcbMalzemeAltGrup";
             fcbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeAltGrup.ReadOnly = false;
             fcbMalzemeAltGrup.Size = new Size(172, 25);
             fcbMalzemeAltGrup.TabIndex = 6;
             fcbMalzemeAltGrup.ValueMember = "Id";
@@ -197,6 +201,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup2.Name = "fcbMalzemeAltGrup2";
             fcbMalzemeAltGrup2.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
+            fcbMalzemeAltGrup2.ReadOnly = false;
             fcbMalzemeAltGrup2.Size = new Size(172, 25);
             fcbMalzemeAltGrup2.TabIndex = 7;
             fcbMalzemeAltGrup2.ValueMember = "Id";
@@ -273,12 +278,12 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonSave1
             // 
-            customButtonSave1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            customButtonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             customButtonSave1.BackColor = Color.Transparent;
-            customButtonSave1.Location = new Point(549, 362);
+            customButtonSave1.Location = new Point(624, 110);
             customButtonSave1.Margin = new Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new Size(106, 46);
+            customButtonSave1.Size = new Size(36, 36);
             customButtonSave1.TabIndex = 15;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
             // 
@@ -305,13 +310,13 @@ namespace YektamakDesktop.Formlar.Genel
             ctbId.Margin = new Padding(1);
             ctbId.Multiline = false;
             ctbId.Name = "ctbId";
-            ctbId.Padding = new Padding(7, 5, 7, 5);
+            ctbId.Padding = new Padding(3);
             ctbId.PasswordChar = false;
             ctbId.PlaceholderColor = Color.DarkGray;
             ctbId.PlaceholderText = "";
             ctbId.ReadOnly = false;
             ctbId.SelectionStart = 0;
-            ctbId.Size = new Size(66, 29);
+            ctbId.Size = new Size(66, 25);
             ctbId.TabIndex = 16;
             ctbId.TextAlignment = HorizontalAlignment.Left;
             ctbId.TextCustom = "";
@@ -339,6 +344,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbStokTip.Name = "fcbStokTip";
             fcbStokTip.Padding = new Padding(6, 4, 6, 4);
             fcbStokTip.PlaceholderText = "Seçiniz...";
+            fcbStokTip.ReadOnly = false;
             fcbStokTip.Size = new Size(172, 25);
             fcbStokTip.TabIndex = 18;
             fcbStokTip.ValueMember = "Id";
@@ -365,6 +371,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeStandart.Name = "fcbMalzemeStandart";
             fcbMalzemeStandart.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeStandart.PlaceholderText = "Seçiniz...";
+            fcbMalzemeStandart.ReadOnly = false;
             fcbMalzemeStandart.Size = new Size(172, 25);
             fcbMalzemeStandart.TabIndex = 20;
             fcbMalzemeStandart.ValueMember = "Id";
@@ -381,31 +388,6 @@ namespace YektamakDesktop.Formlar.Genel
             koşuluSilToolStripMenuItem.Size = new Size(125, 22);
             koşuluSilToolStripMenuItem.Text = "Koşulu Sil";
             koşuluSilToolStripMenuItem.Click += koşuluSilToolStripMenuItem_Click;
-            // 
-            // roundedButton1
-            // 
-            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            roundedButton1.BackgroundColor = Color.Firebrick;
-            roundedButton1.BorderColor = Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 20;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.ForeColor = Color.White;
-            roundedButton1.GradientColor1 = Color.DodgerBlue;
-            roundedButton1.GradientColor2 = Color.MidnightBlue;
-            roundedButton1.HoverColor1 = Color.RoyalBlue;
-            roundedButton1.HoverColor2 = Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new Point(25, 362);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new Size(89, 46);
-            roundedButton1.TabIndex = 22;
-            roundedButton1.Text = "Yeni Kayıt";
-            roundedButton1.TextColor = Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
             // 
             // chkTalasli
             // 
@@ -436,31 +418,11 @@ namespace YektamakDesktop.Formlar.Genel
             ctbCount.Margin = new Padding(1);
             ctbCount.Name = "ctbCount";
             ctbCount.OndalikBasamak = 0;
-            ctbCount.Padding = new Padding(7, 5, 7, 5);
-            ctbCount.Size = new Size(39, 29);
+            ctbCount.Padding = new Padding(3);
+            ctbCount.Size = new Size(25, 25);
             ctbCount.TabIndex = 25;
             ctbCount.TextCustom = "0";
             ctbCount.Visible = false;
-            // 
-            // universalGrid1
-            // 
-            universalGrid1.Location = new Point(13, 192);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(642, 164);
-            universalGrid1.TabIndex = 27;
-            // 
-            // headerPanel1
-            // 
-            headerPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            headerPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            headerPanel1.BackColor = Color.SteelBlue;
-            headerPanel1.Baslik = "Excel Veri Alma Grup Parametreli";
-            headerPanel1.Location = new Point(0, 0);
-            headerPanel1.Margin = new Padding(1);
-            headerPanel1.Name = "headerPanel1";
-            headerPanel1.Padding = new Padding(1);
-            headerPanel1.Size = new Size(679, 25);
-            headerPanel1.TabIndex = 28;
             // 
             // chkBukum
             // 
@@ -472,18 +434,48 @@ namespace YektamakDesktop.Formlar.Genel
             chkBukum.Text = "Büküm";
             chkBukum.UseVisualStyleBackColor = true;
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            customButtonNewRecord1.Location = new Point(624, 35);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new Size(31, 31);
+            customButtonNewRecord1.TabIndex = 30;
+            customButtonNewRecord1.Click += roundedButton1_Click;
+            // 
+            // headerPanel1
+            // 
+            headerPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = Color.SteelBlue;
+            headerPanel1.Baslik = "Excel Veri Alma Grup Parametreleri";
+            headerPanel1.Location = new Point(0, 0);
+            headerPanel1.Margin = new Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new Padding(1);
+            headerPanel1.Size = new Size(678, 25);
+            headerPanel1.TabIndex = 33;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new Point(20, 201);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new Size(635, 207);
+            universalGrid1.TabIndex = 34;
+            // 
             // ExcelGrupParametreForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(677, 420);
-            Controls.Add(chkBukum);
-            Controls.Add(headerPanel1);
             Controls.Add(universalGrid1);
+            Controls.Add(headerPanel1);
+            Controls.Add(customButtonNewRecord1);
+            Controls.Add(chkBukum);
             Controls.Add(ctbCount);
             Controls.Add(button1);
             Controls.Add(chkTalasli);
-            Controls.Add(roundedButton1);
             Controls.Add(label10);
             Controls.Add(fcbMalzemeStandart);
             Controls.Add(label9);
@@ -516,15 +508,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
 
         #endregion
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
-                Color.Black, 1, ButtonBorderStyle.Solid,
-                Color.Black, 1, ButtonBorderStyle.Solid,
-                Color.Black, 1, ButtonBorderStyle.Solid,
-                Color.Black, 1, ButtonBorderStyle.Solid);
-        }
+
         private CustomControls.CustomTextBox ctbExcelSutunAd;
         private CustomControls.FilterableComboBox fcbKarsilastirmaOperator;
         private CustomControls.CustomTextBox ctbAnahtarKelime;
@@ -548,12 +532,12 @@ namespace YektamakDesktop.Formlar.Genel
         private CustomControls.FilterableComboBox fcbMalzemeStandart;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem koşuluSilToolStripMenuItem;
-        private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.CheckBox chkTalasli;
         private System.Windows.Forms.Button button1;
         private CustomControls.CustomTextBoxSayisal ctbCount;
-        private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.HeaderPanel headerPanel1;
         private CheckBox chkBukum;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
+        public CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

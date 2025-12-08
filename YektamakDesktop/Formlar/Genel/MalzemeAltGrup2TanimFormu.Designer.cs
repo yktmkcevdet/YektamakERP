@@ -51,7 +51,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
             contextMenuStrip1.SuspendLayout();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
@@ -69,7 +69,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeAltGrup2Id.Margin = new Padding(1);
             ctbMalzemeAltGrup2Id.Multiline = false;
             ctbMalzemeAltGrup2Id.Name = "ctbMalzemeAltGrup2Id";
-            ctbMalzemeAltGrup2Id.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Id.Padding = new Padding(3);
             ctbMalzemeAltGrup2Id.PasswordChar = false;
             ctbMalzemeAltGrup2Id.PlaceholderColor = Color.DarkGray;
             ctbMalzemeAltGrup2Id.PlaceholderText = "";
@@ -113,7 +113,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeAltGrup2Ad.Margin = new Padding(1);
             ctbMalzemeAltGrup2Ad.Multiline = false;
             ctbMalzemeAltGrup2Ad.Name = "ctbMalzemeAltGrup2Ad";
-            ctbMalzemeAltGrup2Ad.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Ad.Padding = new Padding(3);
             ctbMalzemeAltGrup2Ad.PasswordChar = false;
             ctbMalzemeAltGrup2Ad.PlaceholderColor = Color.DarkGray;
             ctbMalzemeAltGrup2Ad.PlaceholderText = "";
@@ -147,7 +147,7 @@ namespace YektamakDesktop.Formlar.Genel
             ctbMalzemeAltGrup2Kod.Margin = new Padding(1);
             ctbMalzemeAltGrup2Kod.Multiline = false;
             ctbMalzemeAltGrup2Kod.Name = "ctbMalzemeAltGrup2Kod";
-            ctbMalzemeAltGrup2Kod.Padding = new Padding(7, 5, 7, 5);
+            ctbMalzemeAltGrup2Kod.Padding = new Padding(3);
             ctbMalzemeAltGrup2Kod.PasswordChar = false;
             ctbMalzemeAltGrup2Kod.PlaceholderColor = Color.DarkGray;
             ctbMalzemeAltGrup2Kod.PlaceholderText = "";
@@ -162,6 +162,7 @@ namespace YektamakDesktop.Formlar.Genel
             // fcbStokGrup
             // 
             fcbStokGrup.BorderColor = Color.Silver;
+            fcbStokGrup.BorderRadius = 8;
             fcbStokGrup.BorderSize = 1;
             fcbStokGrup.DisplayMember = "ad";
             fcbStokGrup.Font = new Font("Segoe UI", 8F);
@@ -170,6 +171,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(6, 4, 6, 4);
             fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.ReadOnly = false;
             fcbStokGrup.Size = new Size(225, 25);
             fcbStokGrup.TabIndex = 8;
             fcbStokGrup.ValueMember = "Id";
@@ -187,11 +189,11 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonSave1
             // 
-            customButtonSave1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            customButtonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             customButtonSave1.BackColor = Color.Transparent;
-            customButtonSave1.Location = new Point(427, 509);
+            customButtonSave1.Location = new Point(479, 140);
             customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new Size(106, 46);
+            customButtonSave1.Size = new Size(36, 36);
             customButtonSave1.TabIndex = 10;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
             // 
@@ -208,6 +210,7 @@ namespace YektamakDesktop.Formlar.Genel
             // fcbMalzemeAltGrup
             // 
             fcbMalzemeAltGrup.BorderColor = Color.Silver;
+            fcbMalzemeAltGrup.BorderRadius = 8;
             fcbMalzemeAltGrup.BorderSize = 1;
             fcbMalzemeAltGrup.DisplayMember = "ad";
             fcbMalzemeAltGrup.Font = new Font("Segoe UI", 8F);
@@ -216,6 +219,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup.Name = "fcbMalzemeAltGrup";
             fcbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeAltGrup.ReadOnly = false;
             fcbMalzemeAltGrup.Size = new Size(225, 25);
             fcbMalzemeAltGrup.TabIndex = 11;
             fcbMalzemeAltGrup.ValueMember = "Id";
@@ -259,6 +263,7 @@ namespace YektamakDesktop.Formlar.Genel
             // fcbMalzemeGrup
             // 
             fcbMalzemeGrup.BorderColor = Color.Silver;
+            fcbMalzemeGrup.BorderRadius = 8;
             fcbMalzemeGrup.BorderSize = 1;
             fcbMalzemeGrup.DisplayMember = "ad";
             fcbMalzemeGrup.Font = new Font("Segoe UI", 8F);
@@ -267,6 +272,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeGrup.ReadOnly = false;
             fcbMalzemeGrup.Size = new Size(225, 25);
             fcbMalzemeGrup.TabIndex = 13;
             fcbMalzemeGrup.ValueMember = "Id";
@@ -290,40 +296,23 @@ namespace YektamakDesktop.Formlar.Genel
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             universalGrid1.Location = new Point(33, 207);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(500, 296);
+            universalGrid1.Size = new Size(500, 218);
             universalGrid1.TabIndex = 16;
             // 
-            // roundedButton1
+            // customButtonNewRecord1
             // 
-            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            roundedButton1.BackgroundColor = Color.Firebrick;
-            roundedButton1.BorderColor = Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 10;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = FlatStyle.Flat;
-            roundedButton1.ForeColor = Color.White;
-            roundedButton1.GradientColor1 = Color.DodgerBlue;
-            roundedButton1.GradientColor2 = Color.MidnightBlue;
-            roundedButton1.HoverColor1 = Color.RoyalBlue;
-            roundedButton1.HoverColor2 = Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new Point(33, 509);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new Size(120, 40);
-            roundedButton1.TabIndex = 17;
-            roundedButton1.Text = "YENİ KAYIT";
-            roundedButton1.TextColor = Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
+            customButtonNewRecord1.Location = new Point(479, 51);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new Size(36, 36);
+            customButtonNewRecord1.TabIndex = 18;
+            customButtonNewRecord1.Click += roundedButton1_Click;
             // 
             // MalzemeAltGrup2TanimFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(558, 562);
-            Controls.Add(roundedButton1);
+            ClientSize = new Size(558, 437);
+            Controls.Add(customButtonNewRecord1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             Controls.Add(label6);
@@ -377,8 +366,8 @@ namespace YektamakDesktop.Formlar.Genel
         private System.Windows.Forms.ToolStripMenuItem formuTemizleToolStripMenuItem;
         private System.Windows.Forms.Label label6;
         private CustomControls.FilterableComboBox fcbMalzemeGrup;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.RoundedButton roundedButton1;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
     }
 }

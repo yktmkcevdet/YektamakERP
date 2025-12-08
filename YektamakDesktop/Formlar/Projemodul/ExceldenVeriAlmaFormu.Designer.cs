@@ -47,7 +47,7 @@
             ctbDosyaYolu.BorderColor = System.Drawing.Color.Silver;
             ctbDosyaYolu.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbDosyaYolu.BorderSize = 1;
-            ctbDosyaYolu.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            ctbDosyaYolu.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbDosyaYolu.ForeColor = System.Drawing.Color.Black;
             ctbDosyaYolu.Location = new System.Drawing.Point(143, 135);
             ctbDosyaYolu.Margin = new System.Windows.Forms.Padding(1);
@@ -59,7 +59,7 @@
             ctbDosyaYolu.PlaceholderText = "Dosya Yolu";
             ctbDosyaYolu.ReadOnly = false;
             ctbDosyaYolu.SelectionStart = 0;
-            ctbDosyaYolu.Size = new System.Drawing.Size(388, 33);
+            ctbDosyaYolu.Size = new System.Drawing.Size(388, 29);
             ctbDosyaYolu.TabIndex = 0;
             ctbDosyaYolu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbDosyaYolu.TextCustom = "";
@@ -137,7 +137,8 @@
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbProjeKodu.PlaceholderText = "Proje Kodu";
-            clbProjeKodu.Size = new System.Drawing.Size(211, 29);
+            clbProjeKodu.ReadOnly = false;
+            clbProjeKodu.Size = new System.Drawing.Size(211, 25);
             clbProjeKodu.TabIndex = 105;
             clbProjeKodu.ValueMember = "Id";
             // 
@@ -185,7 +186,7 @@
         private System.Windows.Forms.Label transferredCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label totalCount;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.FilterableComboBox clbProjeKodu;
         private System.Windows.Forms.CheckBox chkProjeDosyaSil;
     }

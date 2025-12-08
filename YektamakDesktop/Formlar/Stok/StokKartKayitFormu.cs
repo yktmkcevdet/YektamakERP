@@ -29,7 +29,7 @@ namespace YektamakDesktop.Formlar.Stok
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
         private readonly IConvertHelper _convertHelper;
-        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper, 
+        public StokKartKayitFormu(ICache cache, IDataTableMapper dataTableHelper, IJsonConverter jsonConvertHelper,
             IStokService stokService, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper)
         {
             _cache = cache;
@@ -317,13 +317,28 @@ namespace YektamakDesktop.Formlar.Stok
             // Eğer birden fazla dosya bırakıldıysa ilkini al
             string sourceFile = files[0];
             var d = File.ReadAllBytes(sourceFile);
-            customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().stokKartDosya=new StokKartDosya{ 
+            customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().stokKartDosya = new StokKartDosya
+            {
                 dosyaAd = Path.GetFileNameWithoutExtension(sourceFile),
-                dosyaUzanti= Path.GetExtension(sourceFile).Replace(".", ""),
+                dosyaUzanti = Path.GetExtension(sourceFile).Replace(".", ""),
                 dosyaTip = new DosyaTip { Id = _cache.dosyaTipList.FirstOrDefault(dt => dt.ad.Equals(Path.GetExtension(sourceFile).Replace(".", ""), StringComparison.OrdinalIgnoreCase))?.Id ?? 0 },
                 dosya = d
             };
             customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().dosyaVeri = d;
+        }
+
+        private void roundedButton1_Click_1(object sender, EventArgs e)
+        {
+            var stokKartHamVeriForm = FormFactory.CreateForm<StokKartHamVeri>();
+            if (projeStokKart.hamVeri == null)
+            {
+                stokKartHamVeriForm.UpdateMode(JsonConvert.DeserializeObject<ExcelFormat>(JsonConvert.SerializeObject(new ExcelFormat())));
+            }
+            else
+            {
+                stokKartHamVeriForm.UpdateMode(JsonConvert.DeserializeObject<ExcelFormat>(projeStokKart.hamVeri));
+            }
+            stokKartHamVeriForm.ShowDialog();
         }
     }
     public class DataControlStokKartDosya : DataControl, IEntity

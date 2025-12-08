@@ -82,6 +82,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<SatinalmaTekliflerFormu>();
             services.AddTransient<StokGrupTanimFormu>();
             services.AddTransient<StokGrupTanimlari>();
+            services.AddTransient<StokKartHamVeri>();
             services.AddTransient<StokKartKayitFormu>();
             services.AddTransient<StokKartGridForm>();
             services.AddTransient<UniversalGrid>();
