@@ -7,10 +7,11 @@ namespace Api.Controllers
     public class FileController : Controller
     {
         private readonly IWebHostEnvironment _env;
-        private readonly string _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+        private readonly string _contentRootUploadPath;
         public FileController(IWebHostEnvironment env)
         {
             _env = env;
+            _contentRootUploadPath = Path.Combine(_env.ContentRootPath, "Uploads");
         }
 
         [HttpPost("ProcessDirectory")]
@@ -50,10 +51,9 @@ namespace Api.Controllers
                 return BadRequest("Dosya boş olamaz.");
 
             // Uygulama dizini altına "Uploads" klasörüne kaydediyoruz
-            var uploadsPath = Path.Combine(_env.ContentRootPath, "Uploads");
-            Directory.CreateDirectory(uploadsPath);
+            Directory.CreateDirectory(_contentRootUploadPath);
 
-            var filePath = Path.Combine(uploadsPath, file.FileName);
+            var filePath = Path.Combine(_contentRootUploadPath, file.FileName);
 
             // Dosyayı sunucuya kaydet
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -66,7 +66,9 @@ namespace Api.Controllers
         [HttpGet("download/{fileName}")]
         public IActionResult DownloadFile(string fileName)
         {
-            var filePath = Path.Combine(_env.ContentRootPath, "uploads", fileName);
+            Directory.CreateDirectory(_contentRootUploadPath);
+
+            var filePath = Path.Combine(_contentRootUploadPath, fileName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound("Dosya bulunamadı.");
