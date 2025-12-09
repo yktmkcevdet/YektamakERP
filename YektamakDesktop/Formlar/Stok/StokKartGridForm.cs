@@ -202,7 +202,7 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void StokKartGridForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
 
         private async Task StokKartGridForm_Load(object sender, EventArgs e)

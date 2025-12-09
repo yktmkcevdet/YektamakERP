@@ -152,7 +152,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void MalzemeAltGrup2TanimFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
     }
 }

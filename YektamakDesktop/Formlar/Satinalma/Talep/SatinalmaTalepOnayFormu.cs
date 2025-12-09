@@ -75,7 +75,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         
         private void SatinalmaTalepOnayFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
         private async void SatinalmaTalepOnayFormu_Load(object sender, EventArgs e)
         {

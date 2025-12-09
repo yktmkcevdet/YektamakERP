@@ -243,7 +243,7 @@ namespace YektamakDesktop.CustomControls
             var columns = await ConfigureColumns<T>(key, isCheck);
             await DIContainer.GetService<GridSettingsManager>().Load(_cache.kullanici.Id, key, columns, dataGridView1);
         }
-        public async Task SaveSettings() => await DIContainer.GetService<GridSettingsManager>().Save(_cache.kullanici.Id, _formName, dataGridView1);
+        public async Task SaveGridSettings() => await DIContainer.GetService<GridSettingsManager>().Save(_cache.kullanici.Id, _formName, dataGridView1);
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1 && e.ColumnIndex == 0 && _isCheck)

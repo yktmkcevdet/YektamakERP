@@ -50,7 +50,7 @@ namespace Models
     public class ExcelGrupParametre:IEntity
     {
         [GridDisplay(Header = "Id")] public int? Id { get; set; }
-        [GridDisplay(Header = "Excel Sütun Adı")]public string sutunAdi { get; set; }
+        [GridDisplay(Header = "Excel Sütun Adı")]public ExcelSutunlari? sutunAdi { get; set; }
         [GridDisplay(Header = "Koşul Metni")] public string kosulMetni { get; set; }
         [GridDisplay(Header = "Stok Tipi",Tip ="Liste",ListName ="stokTips",ListVisibleColumnName ="ad")] public int? stokTipId { get; set; }
         [GridDisplay(Header = "Stok Grup", Tip = "Liste", ListName = "stokGrups", ListVisibleColumnName = "ad")] public int? stokGrupId {  get; set; }
@@ -71,6 +71,20 @@ namespace Models
         StartsWith=2,
         EndsWith=3,
         Count=4
+    }
+    public enum ExcelSutunlari
+    {
+        aciklama=0,
+        boyut=1,
+        parcaAdi=2,
+        no =3,
+        kod =4,
+        miktar=5,
+        adet=6,
+        fark=7,
+        uzunluk=8,
+        malzeme=9,
+        agirlik=10
     }
 }
     

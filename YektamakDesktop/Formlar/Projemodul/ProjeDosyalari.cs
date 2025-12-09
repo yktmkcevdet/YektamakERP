@@ -297,7 +297,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         private async Task ProjeDosyalari_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await universalGrid1.SaveSettings();
+            await universalGrid1.SaveGridSettings();
         }
 
         private bool ValidationFilterFields()

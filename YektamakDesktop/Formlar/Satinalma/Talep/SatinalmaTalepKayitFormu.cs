@@ -4,6 +4,7 @@ using Models.DTO;
 using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using QuestPDF.Fluent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,6 +105,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
+            var rapor = new MalzemeTalepRaporu(satinalmaTalep);
+            rapor.GeneratePdf($"MalzemeTalepFormu_{satinalmaTalep.satinalmaTalepNo}.pdf");
             this.Enabled = false;
             try
             {
@@ -126,7 +129,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                         TalepOnaylandi?.Invoke(this, _convertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
                     }
                 }
-                await HandleSaveResult(jsonResult);
+                //await HandleSaveResult(jsonResult);
             }
             catch (Exception ex)
             {
@@ -279,7 +282,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private async Task SatinalmaTalepKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await universalGrid1.SaveSettings();
+            await universalGrid1.SaveGridSettings();
         }
 
         private async void SatinalmaTalepKayitFormu_Load(object sender, EventArgs e)

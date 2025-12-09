@@ -53,8 +53,11 @@
     <PackageReference Include="netDxf" Version="2023.11.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NPOI" Version="2.7.5" />
+    <PackageReference Include="QuestPDF" Version="2025.7.4" />
     <PackageReference Include="RtfPipe" Version="2.0.7677.4303" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="SkiaSharp" Version="3.119.1" />
+    <PackageReference Include="SkiaSharp.Skottie" Version="3.119.1" />
     <PackageReference Include="Spire.PDF" Version="11.10.4" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.9" />
     <PackageReference Include="Visiativ.SOLIDWORKS.DocumentManager.Interop" Version="33.0.0" />

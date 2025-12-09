@@ -329,6 +329,10 @@
               "target": "Package",
               "version": "[13.0.4, )"
             },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2025.7.4, )"
+            },
             "RtfPipe": {
               "target": "Package",
               "version": "[2.0.7677.4303, )"
@@ -336,6 +340,14 @@
             "SixLabors.ImageSharp": {
               "target": "Package",
               "version": "[3.1.12, )"
+            },
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[3.119.1, )"
+            },
+            "SkiaSharp.Skottie": {
+              "target": "Package",
+              "version": "[3.119.1, )"
             },
             "Spire.PDF": {
               "target": "Package",

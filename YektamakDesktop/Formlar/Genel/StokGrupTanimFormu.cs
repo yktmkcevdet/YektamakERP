@@ -123,7 +123,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void StokGrupTanimFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
     }
 }

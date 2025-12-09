@@ -112,7 +112,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void MalzemeGrupTanimFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
             AfterSave?.Invoke(this, e);
         }
 

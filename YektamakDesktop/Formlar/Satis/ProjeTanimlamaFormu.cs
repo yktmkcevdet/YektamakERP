@@ -147,7 +147,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void ProjeTanimlamaFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
     }
     public class DataControlProjeDosya : DataControl, IEntity, IAltForm

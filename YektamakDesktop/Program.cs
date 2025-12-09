@@ -1,3 +1,4 @@
+using QuestPDF.Infrastructure;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -18,6 +19,8 @@ namespace YektamakDesktop
         [STAThread]
         static void Main()
         {
+            QuestPDF.Settings.License = LicenseType.Community; // ? Ücretsiz lisans
+            QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = false;
             CultureInfo culture = new CultureInfo("tr-TR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;

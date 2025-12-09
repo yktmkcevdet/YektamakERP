@@ -93,7 +93,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 
         private void SatinalmaSiparisKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
 
         private async void customButtonSave1_SaveButtonClick(object sender, System.EventArgs e)

@@ -91,7 +91,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async Task SatinalmaTeklifTaleplerFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await universalGrid1.SaveSettings();
+            await universalGrid1.SaveGridSettings();
         }
 
         private void teklifiGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)

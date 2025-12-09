@@ -48,6 +48,8 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
             fcbKarsilastirmaOperator.SetDataSource(Enum.GetValues(typeof(KarsilastirmaOperatoru)).Cast<KarsilastirmaOperatoru>()
                 .ToList());
+            fcbExcelSutunAd.SetDataSource(Enum.GetValues(typeof(ExcelSutunlari)).Cast<ExcelSutunlari>()
+                .ToList());
             Binding();
         }
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
@@ -67,7 +69,8 @@ namespace YektamakDesktop.Formlar.Genel
             BindHelper.BindData(fcbMalzemeAltGrup, excelGrupParametre, nameof(excelGrupParametre.malzemeAltGrupId));
             BindHelper.BindData(fcbMalzemeAltGrup2, excelGrupParametre, nameof(excelGrupParametre.malzemeAltGrup2Id));
             BindHelper.BindData(ctbAnahtarKelime, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaKelimesi));
-            BindHelper.BindData(ctbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
+            //BindHelper.BindData(ctbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
+            BindHelper.BindDataEnum(fcbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
             BindHelper.BindDataEnum(fcbKarsilastirmaOperator, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaOperatoru));
             BindHelper.BindData(ctbId, excelGrupParametre, nameof(excelGrupParametre.Id));
             BindHelper.BindData(chkTalasli, excelGrupParametre, nameof(excelGrupParametre.isTalasli));
@@ -116,7 +119,7 @@ namespace YektamakDesktop.Formlar.Genel
             bool result = true;
             result &= CheckFieldHelper.CheckField("*", fcbKarsilastirmaOperator);
             result &= CheckFieldHelper.CheckField("*", ctbAnahtarKelime);
-            result &= CheckFieldHelper.CheckField("*", ctbExcelSutunAd);
+            result &= CheckFieldHelper.CheckField("*", fcbExcelSutunAd);
             return result;
         }
 
@@ -176,7 +179,7 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(p=>p==\"{excelGrupParametre.karsilastirmaKelimesi}\")=={ctbCount.TextCustom} && ";
-                ctbExcelSutunAd.TextCustom = null;
+                fcbExcelSutunAd.SelectedItem = null;
                 fcbKarsilastirmaOperator.SelectedIndex = -1;
                 ctbAnahtarKelime.TextCustom = null;
             }
@@ -184,7 +187,7 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(\"{excelGrupParametre.karsilastirmaKelimesi}\", StringComparison.OrdinalIgnoreCase) && ";
-                ctbExcelSutunAd.TextCustom = null;
+                fcbExcelSutunAd.SelectedItem = null;
                 fcbKarsilastirmaOperator.SelectedIndex = -1;
                 ctbAnahtarKelime.TextCustom = null;
             }
@@ -204,6 +207,11 @@ namespace YektamakDesktop.Formlar.Genel
             {
                 ctbCount.Visible = false;
             }
+        }
+
+        private void ExcelGrupParametreForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
         }
     }
 }

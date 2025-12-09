@@ -131,7 +131,7 @@ namespace YektamakDesktop.Formlar.Genel
 
         private void MalzemeAltGrupTanimFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
 
         private void malzemeGrubunuSilToolStripMenuItem_Click(object sender, EventArgs e)

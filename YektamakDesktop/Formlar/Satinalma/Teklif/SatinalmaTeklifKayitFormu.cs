@@ -146,7 +146,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
 
         private async void SatinalmaTeklifKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await universalGrid1.SaveSettings();
+            await universalGrid1.SaveGridSettings();
         }
 
         private async void btnSipariseDonustur_Click(object sender, EventArgs e)

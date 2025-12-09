@@ -179,7 +179,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         }
         private void YetkiTanimlari_FormClosing(object sender, FormClosingEventArgs e)
         {
-            universalGrid1.SaveSettings();
+            universalGrid1.SaveGridSettings();
         }
         private AlanYetkiDTO alanYetki { get; set; } = new();
         private List<AlanYetkiDTO> list { get; set; }

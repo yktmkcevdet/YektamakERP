@@ -32,7 +32,6 @@ namespace YektamakDesktop.Formlar.Genel
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ctbExcelSutunAd = new YektamakDesktop.CustomControls.CustomTextBox();
             fcbKarsilastirmaOperator = new YektamakDesktop.CustomControls.FilterableComboBox();
             ctbAnahtarKelime = new YektamakDesktop.CustomControls.CustomTextBox();
             fcbStokGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
@@ -62,32 +61,9 @@ namespace YektamakDesktop.Formlar.Genel
             customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            fcbExcelSutunAd = new YektamakDesktop.CustomControls.FilterableComboBox();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // ctbExcelSutunAd
-            // 
-            ctbExcelSutunAd.BackColor = Color.White;
-            ctbExcelSutunAd.BorderColor = Color.Silver;
-            ctbExcelSutunAd.BorderFocusColor = Color.HotPink;
-            ctbExcelSutunAd.BorderSize = 1;
-            ctbExcelSutunAd.Font = new Font("Segoe UI", 8F);
-            ctbExcelSutunAd.ForeColor = Color.Black;
-            ctbExcelSutunAd.Location = new Point(128, 57);
-            ctbExcelSutunAd.Margin = new Padding(1);
-            ctbExcelSutunAd.Multiline = false;
-            ctbExcelSutunAd.Name = "ctbExcelSutunAd";
-            ctbExcelSutunAd.Padding = new Padding(3);
-            ctbExcelSutunAd.PasswordChar = false;
-            ctbExcelSutunAd.PlaceholderColor = Color.DarkGray;
-            ctbExcelSutunAd.PlaceholderText = "";
-            ctbExcelSutunAd.ReadOnly = false;
-            ctbExcelSutunAd.SelectionStart = 0;
-            ctbExcelSutunAd.Size = new Size(171, 25);
-            ctbExcelSutunAd.TabIndex = 1;
-            ctbExcelSutunAd.TextAlignment = HorizontalAlignment.Left;
-            ctbExcelSutunAd.TextCustom = "";
-            ctbExcelSutunAd.UnderlinedStyle = false;
             // 
             // fcbKarsilastirmaOperator
             // 
@@ -278,9 +254,8 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonSave1
             // 
-            customButtonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             customButtonSave1.BackColor = Color.Transparent;
-            customButtonSave1.Location = new Point(624, 110);
+            customButtonSave1.Location = new Point(646, 126);
             customButtonSave1.Margin = new Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new Size(36, 36);
@@ -436,8 +411,7 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonNewRecord1
             // 
-            customButtonNewRecord1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            customButtonNewRecord1.Location = new Point(624, 35);
+            customButtonNewRecord1.Location = new Point(646, 44);
             customButtonNewRecord1.Name = "customButtonNewRecord1";
             customButtonNewRecord1.Size = new Size(31, 31);
             customButtonNewRecord1.TabIndex = 30;
@@ -453,7 +427,7 @@ namespace YektamakDesktop.Formlar.Genel
             headerPanel1.Margin = new Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new Padding(1);
-            headerPanel1.Size = new Size(678, 25);
+            headerPanel1.Size = new Size(865, 25);
             headerPanel1.TabIndex = 33;
             // 
             // universalGrid1
@@ -461,14 +435,32 @@ namespace YektamakDesktop.Formlar.Genel
             universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             universalGrid1.Location = new Point(20, 201);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(635, 207);
+            universalGrid1.Size = new Size(832, 261);
             universalGrid1.TabIndex = 34;
+            // 
+            // fcbExcelSutunAd
+            // 
+            fcbExcelSutunAd.BorderColor = Color.Silver;
+            fcbExcelSutunAd.BorderRadius = 8;
+            fcbExcelSutunAd.BorderSize = 1;
+            fcbExcelSutunAd.DisplayMember = "";
+            fcbExcelSutunAd.Font = new Font("Segoe UI", 8F);
+            fcbExcelSutunAd.Location = new Point(128, 57);
+            fcbExcelSutunAd.Margin = new Padding(1);
+            fcbExcelSutunAd.Name = "fcbExcelSutunAd";
+            fcbExcelSutunAd.Padding = new Padding(3);
+            fcbExcelSutunAd.PlaceholderText = "Seçiniz...";
+            fcbExcelSutunAd.ReadOnly = false;
+            fcbExcelSutunAd.Size = new Size(129, 25);
+            fcbExcelSutunAd.TabIndex = 35;
+            fcbExcelSutunAd.ValueMember = "";
             // 
             // ExcelGrupParametreForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(677, 420);
+            ClientSize = new Size(864, 474);
+            Controls.Add(fcbExcelSutunAd);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             Controls.Add(customButtonNewRecord1);
@@ -496,11 +488,11 @@ namespace YektamakDesktop.Formlar.Genel
             Controls.Add(fcbStokGrup);
             Controls.Add(ctbAnahtarKelime);
             Controls.Add(fcbKarsilastirmaOperator);
-            Controls.Add(ctbExcelSutunAd);
             Font = new Font("Segoe UI", 8F);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ExcelGrupParametreForm";
             Text = "ExcelGrupParametreForm";
+            FormClosing += ExcelGrupParametreForm_FormClosing;
             Load += ExcelGrupParametre_Load;
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
@@ -508,8 +500,6 @@ namespace YektamakDesktop.Formlar.Genel
         }
 
         #endregion
-
-        private CustomControls.CustomTextBox ctbExcelSutunAd;
         private CustomControls.FilterableComboBox fcbKarsilastirmaOperator;
         private CustomControls.CustomTextBox ctbAnahtarKelime;
         private CustomControls.FilterableComboBox fcbStokGrup;
@@ -539,5 +529,6 @@ namespace YektamakDesktop.Formlar.Genel
         private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
         public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
+        private CustomControls.FilterableComboBox fcbExcelSutunAd;
     }
 }
