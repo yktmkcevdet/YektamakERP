@@ -6,6 +6,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 public class MalzemeTalepRaporu : IDocument
 {
@@ -36,69 +37,132 @@ public class MalzemeTalepRaporu : IDocument
 
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeContent);
-                page.Footer().AlignCenter().Text(x =>
-                {
-                    x.Span("Bu belge Yektamak ERP tarafından otomatik oluşturulmuştur. ")
-                     .FontSize(8).Italic();
-                });
+                page.Footer().Element(ComposeFooter);
             });
+    }
+
+    private void ComposeFooter(IContainer container)
+    {
+        container.Table(table =>
+        {
+            table.ColumnsDefinition(c =>
+            {
+                c.RelativeColumn(5);
+                c.RelativeColumn(5);
+                c.RelativeColumn(5);
+            });
+            table.Cell().Row(1).Column(1).Element(e => calibri_12_bold(e, "Satın Alma Şekli :"));
+            table.Cell().Row(1).Column(2).Element(e => calibri_12_bold(e, "Satın alma Komisyonu ile : ☐"));
+            table.Cell().Row(1).Column(3).Element(e => calibri_12_bold(e, "Doğrudan Satınalma ile: ☐"));
+        });
     }
 
     private void ComposeHeader(IContainer container)
     {
-        container.Row(row =>
+        container.Table(table =>
         {
-            row.Spacing(5);
-
-            // --- 1. Sütun (26%) - Logo ---
-            row.RelativeItem(2).Column(col =>
+            // 4 sütunlu sabit yapı
+            table.ColumnsDefinition(c =>
             {
-                col.Item().Height(60).Image("logo.png", ImageScaling.FitWidth);
+                c.RelativeColumn(26);   // 1. sütun (logo)
+                c.RelativeColumn(27);   // 2. sütun (başlığın ilk yarısı)
+                c.RelativeColumn(28);   // 3. sütun (başlığın ikinci yarısı)
+                c.RelativeColumn(19);   // 4. sütun (sağ mini tablo)
             });
 
-            // --- 2. Sütun (55%) - Orta Başlık ---
-            row.RelativeItem(7).AlignCenter().Column(col =>
-            {
-                col.Item().Height(60).Text("MALZEME TALEP FORMU")
-                    .FontSize(18)
-                    .Bold()
-                    .AlignCenter();
-            });
+            // ===== 1. SATIR =====
+            // 1. sütun: logo
+            table.Cell().Row(1).Column(1).Element(Header_LogoCell);
 
-            // --- 3. Sütun (19%) - 3 satır x 2 sütun tablo ---
-            row.RelativeItem(3).Column(col =>
-            {
-                col.Item().Height(60).Table(table =>
-                {
-                    table.ColumnsDefinition(c =>
-                    {
-                        c.RelativeColumn();
-                        c.RelativeColumn();
-                    });
+            // 2+3. sütunlar: başlık (iki sütunu birleştiriyoruz)
+            table.Cell().Row(1).Column(2).ColumnSpan(2).Element(Header_TitleCell);
 
-                    // 3 satır
-                    HeaderRightCell(table, "Talep Eden:", "Berat Vayni");
-                    HeaderRightCell(table, "Tarih:", DateTime.Now.ToShortDateString());
-                    HeaderRightCell(table, "Talep Nedeni:", "Sarf");
-                    HeaderRightCell(table, "Talep blablabla blablabla:", "Sarf");
-                });
-            });
+            // 4. sütun: sağ mini tablo
+            table.Cell().Row(1).Column(4).Element(Header_RightMiniTable);
+
+            // ===== 2. SATIR (tek hücre, 4 sütunu birleştiriyoruz) =====
+            table.Cell().Row(2).Column(1).ColumnSpan(4)
+                .Padding(5).BorderBottom(0.5f)
+                .Text("Bu alana tek satırlık açıklama veya üst bilgi yazılabilir.")
+                .FontSize(10);
+
+            // ===== 3. SATIR (4 sütun) =====
+            for (uint col = 1; col <= 4; col++)
+            {
+                table.Cell().Row(3).Column(col)
+                     .Padding(3).Border(0.5f)
+                     .Text($"3. Satır – Sütun {col}")
+                     .FontSize(9);
+            }
+
+            // ===== 4. SATIR (4 sütun) =====
+            for (uint col = 1; col <= 4; col++)
+            {
+                table.Cell().Row(4).Column(col)
+                     .Padding(3).Border(0.5f)
+                     .Text($"4. Satır – Sütun {col}")
+                     .FontSize(9);
+            }
         });
     }
-    void HeaderRightCell(TableDescriptor table, string left, string right)
-    {
-        table.Cell()
-             .Border(0.3f)
-             .Padding(2)
-             .AlignLeft()
-             .Text(left).FontSize(9);
 
-        table.Cell()
-             .Border(0.3f)
-             .Padding(2)
-             .AlignLeft()
-             .Text(right).FontSize(9);
+    private void Header_LogoCell(IContainer container)
+    {
+        container
+            .Padding(3)
+            .Width(120)      // TAM SABİT GENİŞLİK
+            .Height(60)      // TAM SABİT YÜKSEKLİK
+            .Image("logo.png", ImageScaling.FitArea);
     }
+    private void calibri_12_bold(IContainer container, string text)
+    {
+        container
+        .Background("#FAFAFA")
+        .Border(0.5f)
+        .Padding(4)
+        .AlignMiddle()
+        .AlignLeft()
+        .Text(text)
+        .FontSize(12)
+        .FontFamily("Calibri")
+        .Bold()
+        .LineHeight(1)
+        .ClampLines(1);
+    }
+    private void Header_TitleCell(IContainer container)
+    {
+        container
+            .Padding(3)
+            .AlignCenter()
+            .AlignMiddle()
+            .Height(60)
+            .Text("MALZEME TALEP FORMU")
+            .FontSize(20)
+            .Bold();
+    }
+    private void Header_RightMiniTable(IContainer container)
+    {
+        container.Table(t =>
+        {
+            t.ColumnsDefinition(c =>
+            {
+                c.RelativeColumn();
+                c.RelativeColumn();
+            });
+
+            HeaderRightRow(t, "Döküman No:", "PR-10-F-11");
+            HeaderRightRow(t, "Yürürlük Tarihi:", "20.03.2023");
+            HeaderRightRow(t, "Rev. No:", "1");
+            HeaderRightRow(t, "Rev. Tarihi:", "20.01.2025");
+        });
+    }
+
+    private void HeaderRightRow(TableDescriptor table, string left, string right)
+    {
+        table.Cell().Border(0.3f).Padding(2).Text(left).FontSize(9);
+        table.Cell().Border(0.3f).Padding(2).Text(right).FontSize(9);
+    }
+    
     private void ComposeContent(IContainer container)
     {
         BuildTable(container,Model.satinalmaTalepDetays);
