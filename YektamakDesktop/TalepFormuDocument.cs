@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using iTextSharp.text;
+using Models;
 using Models.DTO;
 using NPOI.SS.Formula.Functions;
 using QuestPDF.Fluent;
@@ -47,14 +48,78 @@ public class MalzemeTalepRaporu : IDocument
         {
             table.ColumnsDefinition(c =>
             {
-                c.RelativeColumn(5);
-                c.RelativeColumn(5);
-                c.RelativeColumn(5);
+                c.RelativeColumn(39) ;
+                c.RelativeColumn(164.25f);
+                c.RelativeColumn(57);
+                c.RelativeColumn(30);
+                c.RelativeColumn(48);
+                c.RelativeColumn(48);
+                c.RelativeColumn(25.5f);
+                c.RelativeColumn(25);
+                c.RelativeColumn(48);
+                c.RelativeColumn(26.25f);
+                c.RelativeColumn(26.25f);
+                c.RelativeColumn(15.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(51); 
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(39.75f);
+                c.RelativeColumn(106.5f);
             });
-            table.Cell().Row(1).Column(1).Element(e => calibri_12_bold(e, "Satın Alma Şekli :"));
-            table.Cell().Row(1).Column(2).Element(e => calibri_12_bold(e, "Satın alma Komisyonu ile : ☐"));
-            table.Cell().Row(1).Column(3).Element(e => calibri_12_bold(e, "Doğrudan Satınalma ile: ☐"));
+            table.Cell().Row(1).Column(1).ColumnSpan(4).Height(30).Element(e => MidBold(e, "Satın Alma Şekli :","#FAFAFA",0.5f,"calibri",12,1));
+            table.Cell().Row(1).Column(5).ColumnSpan(10).Height(30).Element(e => MidBold(e, "Satın alma Komisyonu ile : ☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(1).Column(15).ColumnSpan(8).Height(30).Element(e => MidBold(e, "Doğrudan Satınalma ile: ☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            
+            table.Cell().Row(2).Column(1).ColumnSpan(8).Height(20).Element(e => MidBold(e, "Talep Sahibi", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(2).Column(9).ColumnSpan(7).Height(20).Element(e => MidBold(e, "Birim Amiri Onayı", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(2).Column(16).ColumnSpan(7).Height(20).Element(e => MidBold(e, "Yönetici Onayı", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(3).Column(1).ColumnSpan(8).Height(20).Element(e => MidBold(e, "Görevi :", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(3).Column(9).ColumnSpan(7).Height(20).Element(e => MidBold(e, "", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(3).Column(16).ColumnSpan(7).Height(20).Element(e => MidBold(e, "", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(4).Column(1).ColumnSpan(8).Height(20).Element(e => MidBold(e, "İmza :", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(4).Column(9).ColumnSpan(7).Height(20).Element(e => MidBold(e, "", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(4).Column(16).ColumnSpan(7).Height(20).Element(e => MidBold(e, "", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(5).Column(1).ColumnSpan(22).Height(80).Element(e => MidBold(e, "Not :\r\n         *  İmzalanan formlar taranarak satın alma birimine soft copy olarak gönderilir.\r\n         *  Islak İmzalı formlar ilgili birimde arşivlenir.\r\n         *  Satın alma grubu gerekli inceleme sonrası LOGO programı üzerinden satınalma sürecini başlatır.", "#FFFFFF", 0.5f, "calibri", 12, 4));
+
+            table.Cell().Row(6).Column(1).ColumnSpan(22).Height(20).Element(e => MidNormal(e, "Komisyon için İlgili Birimler:", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(7).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Kalite", "#FFFFFF", 0, "calibri", 12, 1));
+            table.Cell().Row(7).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0, "calibri", 12, 2));
+            table.Cell().Row(7).Column(5).ColumnSpan(18).Height(20).Element(e => MidBold(e, "☐", "#FFFFFF", 0, "calibri", 12, 1));
+
+            table.Cell().Row(8).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Ar-Ge", "#FFFFFF", 0.5f, "calibri", 12,1));
+            table.Cell().Row(8).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(8).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(9).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Finans/Muhasebe", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(9).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(9).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(10).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "İnsan Kaynakları", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(10).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(10).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(11).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Üretim", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(11).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(11).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(12).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Satın Alma ", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(12).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(12).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
+
+            table.Cell().Row(13).Column(1).ColumnSpan(3).Height(20).Element(e => MidNormal(e, "Genel Müdür", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(13).Column(4).ColumnSpan(1).Height(20).Element(e => MidNormal(e, ":", "#FFFFFF", 0.5f, "calibri", 12, 1));
+            table.Cell().Row(13).Column(5).ColumnSpan(18).Height(20).Element(e => MidNormal(e, "☐", "#FFFFFF", 0.5f, "calibri", 12, 1));
         });
+
     }
 
     private void ComposeHeader(IContainer container)
@@ -114,20 +179,32 @@ public class MalzemeTalepRaporu : IDocument
             .Height(60)      // TAM SABİT YÜKSEKLİK
             .Image("logo.png", ImageScaling.FitArea);
     }
-    private void calibri_12_bold(IContainer container, string text)
+    private void MidBold(IContainer container, string text,string color,float border,string fontFamily,float fontSize,int clampLines)
     {
         container
-        .Background("#FAFAFA")
-        .Border(0.5f)
+        .Background(color)
+        .Border(border).BorderRight(0).BorderTop(0)
         .Padding(4)
         .AlignMiddle()
-        .AlignLeft()
         .Text(text)
-        .FontSize(12)
-        .FontFamily("Calibri")
+        .FontSize(fontSize)
+        .FontFamily(fontFamily)
         .Bold()
         .LineHeight(1)
-        .ClampLines(1);
+        .ClampLines(clampLines);
+    }
+    private void MidNormal(IContainer container, string text, string color, float border, string fontFamily, float fontSize, int clampLines)
+    {
+        container
+        .Background(color)
+        .Border(border)
+        .Padding(4)
+        .AlignMiddle()
+        .Text(text)
+        .FontSize(fontSize)
+        .FontFamily(fontFamily)
+        .LineHeight(1)
+        .ClampLines(clampLines);
     }
     private void Header_TitleCell(IContainer container)
     {

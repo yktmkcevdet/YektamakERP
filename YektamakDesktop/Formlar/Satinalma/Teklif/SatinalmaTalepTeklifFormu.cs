@@ -36,9 +36,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IAnaVeriService _anaVeriService;
         private readonly IStokService _stokService;
         private readonly IProjeService _projeService;
+        private readonly IFileService _fileService;
         private ExpandableGridAnimator mgr;
         public SatinalmaTalepTeklifFormu(IConvertHelper convertHelper, ISatinalmaTalepService satinalmaService, IConfigurationService configurationService,
-            ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService)
+            ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService, IFileService fileService)
         {
             _convertHelper = convertHelper;
             _satinalmaService = satinalmaService;
@@ -47,6 +48,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             _anaVeriService = anaVeriService;
             _stokService = stokService;
             _projeService = projeService;
+            _fileService = fileService;
             InitializeComponent();
             Initialize();
             Load += async (s, e) => await SatinalmaTalepTeklifFormu_Load(s, e);
@@ -295,18 +297,20 @@ namespace YektamakDesktop.Formlar.Satinalma
                 {
                     foreach (var dosyalamaYapisi in dosyalamaYapisiList)
                     {
+                        bool bukum1 = dosyalamaYapisi.isBukum;
+                        bool bukum2 = row.projeStokKartstokKartisBukum ?? false;
                         if (row.projeStokKartstokKartmalzemeGrupId == dosyalamaYapisi.malzemeGrupId
                             && (dosyalamaYapisi.malzemeAltGrupId is null || dosyalamaYapisi.malzemeAltGrupId == row.projeStokKartstokKartmalzemeAltGrupId)
                             && (dosyalamaYapisi.boyutId is null || dosyalamaYapisi.boyutId == row.projeStokKartstokKartboyutTanimId)
-                            && dosyalamaYapisi.isBukum == row.projeStokKartstokKartisBukum
+                            && bukum1 == bukum2
                             )
                         {
                             if (dosyalamaYapisi.pdf && skd.dosyaTip.Id == 1)
-                                SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                             if (dosyalamaYapisi.dxf && skd.dosyaTip.Id == 2)
-                                SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                             if (dosyalamaYapisi.step && skd.dosyaTip.Id == 3)
-                                SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                         }
                     }
                 }
@@ -322,11 +326,11 @@ namespace YektamakDesktop.Formlar.Satinalma
                             if (row.projeStokKartstokKartmalzemeGrupId == dosyalamaYapisi.malzemeGrupId)
                             {
                                 if (dosyalamaYapisi.pdf && skd.dosyaTip.Id == 1)
-                                    SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                                 if (dosyalamaYapisi.dxf && skd.dosyaTip.Id == 2)
-                                    SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                                 if (dosyalamaYapisi.step && skd.dosyaTip.Id == 3)
-                                    SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
                             }
                         }
                     }
@@ -346,7 +350,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             return File.ReadAllBytes(zipPath); // byte[] olarak oku
         }
-        private void SaveMaterialFile(StokKartDosya skd, string path)
+        private async Task SaveMaterialFile(StokKartDosya skd, string path)
         {
             string fileName = $"Malzeme Talep Formu {DateTime.Now:yyyy-MM-dd HH-mm-ss}.xlsx";
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), path, $"{skd.dosyaAd}.{skd.dosyaUzanti}");
@@ -356,7 +360,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            File.WriteAllBytes(filePath, skd.dosya);
+            File.WriteAllBytes(filePath, await _fileService.GetFile(skd.dosyaFullPath));
         }
         
         
@@ -495,9 +499,9 @@ namespace YektamakDesktop.Formlar.Satinalma
                 .Select(s => new { Id = s.projeStokKartstokKartmalzemeAltGrupId, _cache.malzemeAltGrups.Where(m => m.Id == s.projeStokKartstokKartmalzemeAltGrupId).First().ad })
                 .DistinctBy(b => b.Id)
                 .ToList());
-            fcbBoyut.SetDataSource((await _projeService.GetProjeStokKart(new ProjeStokKart ()))
-                .Where(s => s.stokKart.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString())
-                .Select(s => s.stokKart.boyutTanim)
+            fcbBoyut.SetDataSource((satinalmaTalepDetayDTOs.CastToEntity<SatinalmaTalepDetay>(_convertHelper))
+                .Where(s => s.projeStokKart.stokKart.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString())
+                .Select(s => s.projeStokKart.stokKart.boyutTanim)
                 .DistinctBy(b => b.Id)
                 .ToList());
             universalGrid1.Filtrele(filter);

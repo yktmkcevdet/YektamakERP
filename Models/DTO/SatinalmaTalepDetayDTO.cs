@@ -23,6 +23,7 @@ namespace Models.DTO
         [GridDisplay(Header = StokKartIdHeader, Tip = "Liste", ListName = "stokKartList", ListVisibleColumnName = "ad")]public int? projeStokKartstokKartId { get; set; }
         [GridDisplay(Header = OlcuBirimIdHeader, Tip = "Liste", ListName = "olcuBirims", ListVisibleColumnName = "ad")] public int? projeStokKartstokKartolcuBirimId { get; set; }
         [GridDisplay(Header = BoyutTanimIdHeader, Tip = "Liste", ListName = "boyutList", ListVisibleColumnName = "ad")] public int? projeStokKartstokKartboyutTanimId { get; set; }
+        public string projeStokKartstokKartboyutTanimad { get; set; }
         [GridDisplay(Header = StokKartKoduHeader)]public string projeStokKartstokKartkod { get; set; }
         [GridDisplay(Header = StokKartAdHeader)] public string projeStokKartstokKartad { get; set; }
         [GridDisplay(Header = StokKartBoyutHeader)] public string projeStokKartstokKartboyut { get; set; }
