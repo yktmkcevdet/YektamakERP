@@ -6,7 +6,7 @@ namespace ApiService.Interfaces
     {
         public Task<string> GetStokKartAsync(StokKart stokKart=null);
         public string GetStokKart(StokKart stokKart = null);
-        public string GetStokKartPdf(StokKart stokKart);
+        public List<StokKart> GetStokKartPdf(StokKart stokKart);
         public string GetStokGrup(StokGrup stokGrup);
         public string SaveStokGrup(StokGrup stokGrup);
         public string DeleteStokGrup(StokGrup stokGrup);

@@ -37,9 +37,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IStokService _stokService;
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
+        private readonly IDosyalamaService _dosyalamaService;
         private ExpandableGridAnimator mgr;
         public SatinalmaTalepTeklifFormu(IConvertHelper convertHelper, ISatinalmaTalepService satinalmaService, IConfigurationService configurationService,
-            ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService, IFileService fileService)
+            ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService, IFileService fileService, IDosyalamaService dosyalamaService)
         {
             _convertHelper = convertHelper;
             _satinalmaService = satinalmaService;
@@ -49,6 +50,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             _stokService = stokService;
             _projeService = projeService;
             _fileService = fileService;
+            _dosyalamaService = dosyalamaService;
             InitializeComponent();
             Initialize();
             Load += async (s, e) => await SatinalmaTalepTeklifFormu_Load(s, e);
@@ -224,7 +226,13 @@ namespace YektamakDesktop.Formlar.Satinalma
                     Directory.Delete(directoryPath, true);
                 }
                 Directory.CreateDirectory(directoryPath);
-                await CreateOrderFile();
+                List<SatinalmaTalepDetay> satinalmaTalepDetays = new List<SatinalmaTalepDetay>();
+                satinalmaTalepDetays = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>().CastToEntity<SatinalmaTalepDetay>(_convertHelper).ToList();
+                await _dosyalamaService.CreateOrderFile(satinalmaTalepDetays.Select(s=>s.projeStokKart).ToList());
+                foreach (var satinalmaTalepSatirDetayList in satinalmaTalepDetays.Select(s=>s.satinalmaTalepSatirDetays))
+                {
+                    await _dosyalamaService.CreateOrderFile(satinalmaTalepSatirDetayList.Select(d=>d.projeStokKart).ToList());
+                }
                 SaveExcelFile(workbook, directoryPath, out fileName);
                 string filePath = Path.Combine(directoryPath, fileName);
                 byte[] excelFileData = File.ReadAllBytes(filePath);
@@ -283,61 +291,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             isValid &= CheckFieldHelper.CheckField("En az bir firma seçilmelidir.", customDataGrid);
             return isValid;
         }
-        private async Task CreateOrderFile()
-        {
-            string jsonResult = await _configurationService.GetDosyalamaYapisi(new DosyalamaYapisi());
-            var dosyalamaYapisiList = JsonConvert.DeserializeObject<List<DosyalamaYapisi>>(jsonResult);
-            var selectedRows = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>();
-            foreach (var row in selectedRows)
-            {
-                StokKart stokKart = new StokKart { Id = row.projeStokKartstokKartId };
-                jsonResult = _stokService.GetStokKartPdf(stokKart);
-                stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
-                foreach (var skd in stokKart.dosyaList)
-                {
-                    foreach (var dosyalamaYapisi in dosyalamaYapisiList)
-                    {
-                        bool bukum1 = dosyalamaYapisi.isBukum;
-                        bool bukum2 = row.projeStokKartstokKartisBukum ?? false;
-                        if (row.projeStokKartstokKartmalzemeGrupId == dosyalamaYapisi.malzemeGrupId
-                            && (dosyalamaYapisi.malzemeAltGrupId is null || dosyalamaYapisi.malzemeAltGrupId == row.projeStokKartstokKartmalzemeAltGrupId)
-                            && (dosyalamaYapisi.boyutId is null || dosyalamaYapisi.boyutId == row.projeStokKartstokKartboyutTanimId)
-                            && bukum1 == bukum2
-                            )
-                        {
-                            if (dosyalamaYapisi.pdf && skd.dosyaTip.Id == 1)
-                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                            if (dosyalamaYapisi.dxf && skd.dosyaTip.Id == 2)
-                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                            if (dosyalamaYapisi.step && skd.dosyaTip.Id == 3)
-                                await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                        }
-                    }
-                }
-                foreach (var satinalmaTalepSatirDetay in row.satinalmaTalepSatirDetays)
-                {
-                    stokKart = new StokKart { Id = row.projeStokKartstokKartId };
-                    jsonResult = _stokService.GetStokKartPdf(stokKart);
-                    stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
-                    foreach (var skd in stokKart.dosyaList)
-                    {
-                        foreach (var dosyalamaYapisi in dosyalamaYapisiList)
-                        {
-                            if (row.projeStokKartstokKartmalzemeGrupId == dosyalamaYapisi.malzemeGrupId)
-                            {
-                                if (dosyalamaYapisi.pdf && skd.dosyaTip.Id == 1)
-                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                                if (dosyalamaYapisi.dxf && skd.dosyaTip.Id == 2)
-                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                                if (dosyalamaYapisi.step && skd.dosyaTip.Id == 3)
-                                    await SaveMaterialFile(skd, Path.Combine(dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
+        
         public byte[] ZipDirectoryAndRead(string directoryPath, string zipFileName)
         {
             zipFileName = Path.GetFileName(directoryPath.TrimEnd(Path.DirectorySeparatorChar)) + ".zip";
@@ -349,18 +303,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             ZipFile.CreateFromDirectory(directoryPath, zipPath, CompressionLevel.Fastest, includeBaseDirectory: true);
 
             return File.ReadAllBytes(zipPath); // byte[] olarak oku
-        }
-        private async Task SaveMaterialFile(StokKartDosya skd, string path)
-        {
-            string fileName = $"Malzeme Talep Formu {DateTime.Now:yyyy-MM-dd HH-mm-ss}.xlsx";
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), path, $"{skd.dosyaAd}.{skd.dosyaUzanti}");
-            string directoryPath = Path.GetDirectoryName(filePath);
-            // Dizin yoksa oluştur
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-            File.WriteAllBytes(filePath, await _fileService.GetFile(skd.dosyaFullPath));
         }
         
         

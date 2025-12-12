@@ -7,6 +7,6 @@ namespace ApiService.Interfaces
     {
         public Task<string> SaveGridSettings(GridSettings gridSettings);
         public Task<string> GetGridSettings(GridSettings gridSettings);
-        public Task<string> GetDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi);
+        public Task<List<DosyalamaYapisi>> GetDosyalamaYapisi(DosyalamaYapisi dosyalamaYapisi);
     }
 }

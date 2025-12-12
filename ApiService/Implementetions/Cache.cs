@@ -526,7 +526,7 @@ namespace ApiService.Implementations
             {
                 if (_dosyalamaYapisiList == null)
                 {
-                    _dosyalamaYapisiList = GetModelListAsync<DosyalamaYapisi>(async()=>{ return await _configurationService.GetDosyalamaYapisi(new DosyalamaYapisi()); });
+                    _dosyalamaYapisiList= _configurationService.GetDosyalamaYapisi(new DosyalamaYapisi());
                 }
                 return _dosyalamaYapisiList;
             }

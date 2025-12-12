@@ -37,6 +37,7 @@ namespace ApiService
             services.AddSingleton<ISatinalmaSiparisService, SatinalmaSiparisService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ICache, Cache>();
+            services.AddSingleton<IDosyalamaService, DosyalamaService>();
             return services;
         }
     }

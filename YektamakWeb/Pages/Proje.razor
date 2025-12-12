@@ -231,8 +231,7 @@ else
     {
         StokKart stokKart = new();
         stokKart.Id = stokKartId;
-        string jsonResult = stokService.GetStokKartPdf(stokKart);
-        stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult).FirstOrDefault();
+        stokKart = stokService.GetStokKartPdf(stokKart).FirstOrDefault();
         
         if (pdfViewer != null)
         {

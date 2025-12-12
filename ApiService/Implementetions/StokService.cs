@@ -1,6 +1,8 @@
 ﻿using ApiService.Common;
 using ApiService.Interfaces;
 using Models;
+using Models.DTO;
+using Newtonsoft.Json;
 using System.Data;
 
 namespace ApiService.Implementations
@@ -91,9 +93,17 @@ namespace ApiService.Implementations
             return _apiService.Post(stokKart, $"GetStokKart/");
         }
 
-        public string GetStokKartPdf(StokKart stokKart)
+        public List<StokKart> GetStokKartPdf(StokKart stokKart)
         {
-            return _apiService.Post(stokKart, "GetStokKartPdf");
+            var jsonResult = _apiService.Post(stokKart, "GetStokKartPdf");
+            if (jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(jsonResult))
+            {
+                throw new Exception(jsonResult);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<List<StokKart>>(jsonResult);
+            }
         }
 
         public async Task<string> GetStokKartPdfAsync(ProjeStokKart stokKart)

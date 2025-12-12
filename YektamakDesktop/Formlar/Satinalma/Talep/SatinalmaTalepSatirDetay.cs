@@ -95,12 +95,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             var satinalmaTalepSatirDetayDTO = (SatinalmaTalepSatirDetayDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
             SatinalmaTalepSatirDetay satinalmaTalepSatirDetay = _convertHelper.ToEntity<SatinalmaTalepSatirDetay>(satinalmaTalepSatirDetayDTO);
             ProjeStokKart projeStokKart = satinalmaTalepSatirDetay.projeStokKart;
-            string jsonResult=_stokService.GetStokKartPdf(projeStokKart.stokKart);
             StokKart stokKart = new StokKart();
-            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
-            {
-                stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
-            }
+            stokKart = _stokService.GetStokKartPdf(stokKart)[0];
             byte[] dosyaVeri = stokKart.dosyaList[0].dosya;
             string tempFilePath = Path.GetTempFileName() + "." + "pdf";
             if (dosyaVeri != null)

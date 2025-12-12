@@ -51,7 +51,13 @@ namespace Models.DTO
         [GridDisplay(Header = "Teklif Sayısı")] public int? teklifSayisi { get; set; }
         [GridDisplay(Header = isTeklifHeader, Visible = false)]public bool? isTeklif { get; set; }
         [GridDisplay(Header = isBukumHeader, Visible = false)] public bool? projeStokKartstokKartisBukum { get; set; }
-
+        private List<StokKartDosya> _projeStokKartstokKartdosyaList;
+        [GridDisplay(Header = "Proje Stok Kart Dosyaları", Visible = false)]
+        public List<StokKartDosya> projeStokKartstokKartdosyaList
+        {
+            get { if (_projeStokKartstokKartdosyaList == null) _projeStokKartstokKartdosyaList = new List<StokKartDosya>(); return _projeStokKartstokKartdosyaList; }
+            set { _projeStokKartstokKartdosyaList = value; }
+        }
         private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         [GridDisplay(Header = "Satır Detay", Visible = false)]
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
