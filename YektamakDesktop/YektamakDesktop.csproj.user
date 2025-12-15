@@ -92,6 +92,9 @@
     <Compile Update="Formlar\LogoEntegrasyon.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

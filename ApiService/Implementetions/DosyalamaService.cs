@@ -19,6 +19,7 @@ namespace ApiService.Implementations
         {
             if(string.IsNullOrEmpty(filePath))
                 filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            
             foreach (var row in projeStokKartList)
             {
                 foreach (var skd in row.stokKart.dosyaList)
@@ -34,7 +35,18 @@ namespace ApiService.Implementations
                             && bukum1 == bukum2
                             )
                         {
-                            await SaveMaterialFile(skd, Path.Combine(filePath,dosyalamaYapisi.path));
+                            if (dosyalamaYapisi.pdf == true && skd.dosyaTip.Id==1)
+                            {
+                                await SaveMaterialFile(skd, Path.Combine(filePath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                            }
+                            if (dosyalamaYapisi.dxf == true && skd.dosyaTip.Id == 2)
+                            {
+                                await SaveMaterialFile(skd, Path.Combine(filePath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                            }
+                            if (dosyalamaYapisi.step == true && skd.dosyaTip.Id == 3)
+                            {
+                                await SaveMaterialFile(skd, Path.Combine(filePath, dosyalamaYapisi.path, dosyalamaYapisi.klasorAd));
+                            }
                         }
                     }
                 }
@@ -49,7 +61,7 @@ namespace ApiService.Implementations
             {
                 Directory.CreateDirectory(filePath);
             }
-            File.WriteAllBytes(Path.Combine(filePath,skd.dosyaAd), await _fileService.GetFile(skd.dosyaFullPath));
+            File.WriteAllBytes(Path.Combine(filePath,skd.dosyaAd+Path.GetExtension(skd.dosyaFullPath)), await _fileService.GetFile(skd.dosyaFullPath));
         }
     }
 }

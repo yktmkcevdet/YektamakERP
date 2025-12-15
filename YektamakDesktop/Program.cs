@@ -42,7 +42,7 @@ namespace YektamakDesktop
                 if (loginForm.loginStatus)
                 {
                     
-                    MainWindow mainForm = FormFactory.CreateForm<MainWindow>();
+                    MainForm mainForm = FormFactory.CreateForm<MainForm>();
                     Application.Run(mainForm);
                     // mainForm kapanýnca döngü tekrar baþa dönecek
                 }

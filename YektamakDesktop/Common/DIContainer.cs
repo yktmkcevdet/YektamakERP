@@ -55,6 +55,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<MailAyarlarim>();
             services.AddTransient<MailGonder>();
             services.AddTransient<MainWindow>();
+            services.AddTransient<MainForm>();
             services.AddTransient<MalzemeAltGrupTanimFormu>();
             services.AddTransient<MalzemeAltGrup2TanimFormu>();
             services.AddTransient<MalzemeGrupTanimFormu>();

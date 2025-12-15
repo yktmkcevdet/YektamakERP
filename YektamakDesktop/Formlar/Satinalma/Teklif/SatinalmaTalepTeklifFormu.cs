@@ -219,8 +219,8 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 FillExcelData(sheet, selectedRows);
                 string fileName;
-                string directoryPath = clbMalzemeGrupId.SelectedItem.GetType().GetProperty("ad").GetValue(clbMalzemeGrupId.SelectedItem).ToString().Trim();
-                directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), directoryPath);
+                string directoryPath = clbProjeKod.SelectedItem.GetType().GetProperty("kod").GetValue(clbProjeKod.SelectedItem).ToString().Trim();
+                directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), directoryPath+"_Dosyalar");
                 if (Directory.Exists(directoryPath))
                 {
                     Directory.Delete(directoryPath, true);
@@ -228,7 +228,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 Directory.CreateDirectory(directoryPath);
                 List<SatinalmaTalepDetay> satinalmaTalepDetays = new List<SatinalmaTalepDetay>();
                 satinalmaTalepDetays = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>().CastToEntity<SatinalmaTalepDetay>(_convertHelper).ToList();
-                await _dosyalamaService.CreateOrderFile(satinalmaTalepDetays.Select(s=>s.projeStokKart).ToList());
+                await _dosyalamaService.CreateOrderFile(satinalmaTalepDetays.Select(s=>s.projeStokKart).ToList(),directoryPath);
                 foreach (var satinalmaTalepSatirDetayList in satinalmaTalepDetays.Select(s=>s.satinalmaTalepSatirDetays))
                 {
                     await _dosyalamaService.CreateOrderFile(satinalmaTalepSatirDetayList.Select(d=>d.projeStokKart).ToList());
