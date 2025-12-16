@@ -489,7 +489,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBox ctbId;
         private CustomControls.FilterableComboBox fcbProjeTip;
         private CustomControls.FilterableComboBox fcbMarka;

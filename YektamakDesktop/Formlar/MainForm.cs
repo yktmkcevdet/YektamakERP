@@ -1,6 +1,12 @@
-﻿using System;
+﻿using ApiService.Interfaces;
+using FontAwesome.Sharp;
+using Models;
+using Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using YektamakDesktop.Formlar.Satinalma;
 
@@ -8,17 +14,32 @@ namespace YektamakDesktop.Formlar
 {
     public partial class MainForm : Form, ITabInfoProvider
     {
+        private readonly ICache _cache;
         private bool _isDirty;
         private int _recordCount;
         private int _dragTabIndex = -1;
         private ContextMenuStrip tabsListMenu = new ContextMenuStrip();
         private const int LeftMenuExpandedWidth = 220;
-        private const int LeftMenuCollapsedWidth = 48;
+        private const int LeftMenuCollapsedWidth = 30;
         private bool _isLeftMenuExpanded = true;
+        private ImageList menuImages;
+        private bool _isHoverExpanded = false;
+        private Timer _collapseTimer;
+        private HashSet<string> _expandedNodePaths = new();
 
-        public MainForm()
+        public MainForm(ICache cache)
         {
+            _cache = cache;
             InitializeComponent();
+            menuImages = new ImageList
+            {
+                ImageSize = new Size(16, 16),
+                ColorDepth = ColorDepth.Depth32Bit
+            };
+            menuImages.Images.Add("satinalma", Properties.Resources.pngegg);
+            menuImages.Images.Add("stok", Properties.Resources.save);
+
+            treeMenu.ImageList = menuImages;
             tabMain.DrawMode = TabDrawMode.OwnerDrawFixed; // şimdilik kalsın (ileride kapatma butonu için lazım)
             tabMain.Padding = new Point(20, 4);   // ❌ için alan
             
@@ -32,8 +53,71 @@ namespace YektamakDesktop.Formlar
             tabMain.DrawItem += TabMain_DrawItem;
             tabMain.MouseDown += TabMain_MouseDown;
             tabMain.MouseMove += tabMain_MouseMove;
+            treeMenu.NodeMouseHover += treeMenu_NodeMouseHover;
+            treeMenu.AfterExpand += treeMenu_AfterExpand;
+            treeMenu.AfterCollapse += treeMenu_AfterCollapse;
             btnTabs.Click += BtnTabs_Click;
             treeMenu.NodeMouseDoubleClick += treeMenu_NodeMouseDoubleClick;
+            treeMenu.BeforeExpand += (s, e) =>
+            {
+                if (e.Node.Tag is MenuNodeInfo info &&
+                    info.FormFactory != null)
+                {
+                    e.Cancel = true;
+                }
+            };
+            _collapseTimer = new Timer
+            {
+                Interval = 300 
+            };
+
+            _collapseTimer.Tick += (_, _) =>
+            {
+                _collapseTimer.Stop();
+                ToggleLeftMenu();
+            };
+        }
+        private void treeMenu_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            _expandedNodePaths.Add(e.Node.FullPath);
+        }
+
+        private void treeMenu_AfterCollapse(object sender, TreeViewEventArgs e)
+        {
+            _expandedNodePaths.Remove(e.Node.FullPath);
+        }
+        private void treeMenu_MouseEnter(object sender, EventArgs e)
+        {
+            _collapseTimer.Stop();
+            if (!_isHoverExpanded && !_isLeftMenuExpanded)
+            {
+                _isHoverExpanded = true;
+                ToggleLeftMenu();
+            }
+        }
+        private void RestoreExpandedState()
+        {
+            foreach (TreeNode node in treeMenu.Nodes)
+            {
+                RestoreNode(node);
+            }
+        }
+
+        private void RestoreNode(TreeNode node)
+        {
+            if (_expandedNodePaths.Contains(node.FullPath))
+                node.Expand();
+
+            foreach (TreeNode child in node.Nodes)
+                RestoreNode(child);
+        }
+        private void treeMenu_MouseLeave(object sender, EventArgs e)
+        {
+            if (_isHoverExpanded && _isLeftMenuExpanded)
+            {
+                _isHoverExpanded = false;
+                _collapseTimer.Start();
+            }
         }
         private void btnToggleMenu_Click(object sender, EventArgs e)
         {
@@ -42,12 +126,52 @@ namespace YektamakDesktop.Formlar
         private void ToggleLeftMenu()
         {
             _isLeftMenuExpanded = !_isLeftMenuExpanded;
-            tableLayoutPanel1.ColumnStyles[0].Width = _isLeftMenuExpanded
-                ? LeftMenuExpandedWidth
-                : LeftMenuCollapsedWidth;
-
             treeMenu.ShowLines = _isLeftMenuExpanded;
             treeMenu.ShowPlusMinus = _isLeftMenuExpanded;
+            if (_isLeftMenuExpanded)
+            {
+                tableLayoutPanel1.ColumnStyles[0].Width = LeftMenuExpandedWidth;
+            }
+            else
+            {
+                tableLayoutPanel1.ColumnStyles[0].Width = LeftMenuCollapsedWidth;
+            }
+            RestoreExpandedState();
+            UpdateTreeTextVisibility();
+        }
+        void UpdateTreeTextVisibility()
+        {
+            foreach (TreeNode node in treeMenu.Nodes)
+            {
+                UpdateNodeText(node);
+            }
+        }
+
+        void UpdateNodeText(TreeNode node)
+        {
+            if (_isLeftMenuExpanded)
+            {
+                if (node.Tag is MenuNodeInfo info)
+                    node.Text = info.Text;
+            }
+            else
+            {
+                //node.Text = ""; // sadece ikon kalır
+                //node.Collapse();
+            }
+
+            foreach (TreeNode child in node.Nodes)
+                UpdateNodeText(child);
+        }
+        private void treeMenu_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
+            if (_isLeftMenuExpanded)
+                return;
+
+            if (e.Node?.Tag is Menu info)
+            {
+                toolTip1.SetToolTip(treeMenu, info.ad);
+            }
         }
         private void BtnTabs_Click(object? sender, EventArgs e)
         {
@@ -108,60 +232,6 @@ namespace YektamakDesktop.Formlar
             tabsListMenu.Items.Add(new ToolStripSeparator());
 
             RebuildTabItems(""); // ilk yükleme
-        }
-
-        private void tabMain_MouseDown(object sender, MouseEventArgs e)
-        {
-            for (int i = 0; i < tabMain.TabPages.Count; i++)
-            {
-                if (tabMain.GetTabRect(i).Contains(e.Location))
-                {
-                    _dragTabIndex = i;
-                    break;
-                }
-            }
-        }
-        private void LoadData()
-        {
-            // data yükle
-            _recordCount = 12;
-            UpdateTabTitle();
-        }
-        private void txtAciklama_TextChanged(object sender, EventArgs e)
-        {
-            _isDirty = true;
-            UpdateTabTitle();
-        }
-
-        private void btnKaydet_Click(object sender, EventArgs e)
-        {
-            _isDirty = false;
-            UpdateTabTitle();
-        }
-        public void UpdateTabTitle()
-        {
-            if (this.Parent is TabPage tab &&
-                tab.Parent is TabControl tabControl &&
-                tabControl.FindForm() is MainForm main)
-            {
-                main.RefreshTabTitle(this);
-            }
-        }
-        public void RefreshTabTitle(Form frm)
-        {
-            foreach (TabPage tab in tabMain.TabPages)
-            {
-                if (tab.Controls.Count > 0 &&
-                    ReferenceEquals(tab.Controls[0], frm))
-                {
-                    if (frm is ITabInfoProvider info)
-                        tab.Text = info.GetTabTitle();
-                    else
-                        tab.Text = frm.Text;
-
-                    break;
-                }
-            }
         }
         public string GetTabTitle()
         {
@@ -251,28 +321,35 @@ namespace YektamakDesktop.Formlar
                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
             );
         }
-        public void OpenFormInTab(MenuItemInfo item)
+        public void OpenFormInTab(Menu item)
         {
             foreach (TabPage page in tabMain.TabPages)
             {
-                if (page.Tag is Type t && t == item.FormType)
+                if (page.Tag is Type t && t == Type.GetType(item.formAd))
                 {
                     tabMain.SelectedTab = page;
                     return;
                 }
             }
-
-            var form = item.FormFactory();
             
-            var tabPage = new TabPage(item.Text)
+            var form = FormFactory.CreateFormByName(item.formAd);
+            var field = form.GetType()
+                .GetField("headerPanel1",
+                          BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            if (field?.GetValue(form) is Control panel)
             {
-                Tag = item.FormType
+                panel.Visible = false;
+            }
+            var tabPage = new TabPage(item.ad)
+            {
+                Tag = item
             };
 
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
-
+            
             tabPage.Controls.Add(form);
             tabMain.TabPages.Add(tabPage);
             tabMain.SelectedTab = tabPage;
@@ -352,106 +429,55 @@ namespace YektamakDesktop.Formlar
 
             tabMain.TabPages.RemoveAt(index);
         }
-        void LoadTopMenu(Modul modul)
-        {
-            flowTopMenu.Controls.Clear();
-
-            var menuItems = MenuProvider.GetMenu(modul);
-
-            foreach (var item in menuItems)
-            {
-                //if (!YetkiVarMi(item.YetkiKodu))
-                //    continue;
-
-                var btn = CreateTopMenuButton(item);
-                
-                flowTopMenu.Controls.Add(btn);
-            }
-        }
-        Button CreateTopMenuButton(MenuItemInfo item)
-        {
-            var btn = new Button
-            {
-                Width = 150,
-                Height = 42,
-                Text = "  " + item.Text,
-                Image = item.Icon,
-                ImageAlign = ContentAlignment.MiddleLeft,
-                TextAlign = ContentAlignment.MiddleCenter,
-                FlatStyle = FlatStyle.Flat,
-                BackColor = Color.FromArgb(245, 245, 245),
-                Tag = item
-            };
-
-            btn.FlatAppearance.BorderSize = 0;
-            btn.Click += TopMenuButton_Click;
-
-            return btn;
-        }
-        private void TopMenuButton_Click(object? sender, EventArgs e)
-        {
-            if (sender is Button btn && btn.Tag is MenuItemInfo item)
-            {
-                OpenFormInTab(item);
-            }
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabMain.SelectedTab?.Controls.Count == 0)
-                return;
-
-            if (tabMain.SelectedTab.Controls[0] is not Form activeForm)
-                return;
-
-            HighlightTopMenu(activeForm.GetType());
-        }
-        void HighlightTopMenu(Type activeFormType)
-        {
-            foreach (Control ctrl in flowTopMenu.Controls)
-            {
-                if (ctrl is Button btn && btn.Tag is MenuItemInfo item)
-                {
-                    bool isActive =
-                        item.FormFactory().GetType() == activeFormType;
-
-                    btn.BackColor = isActive
-                        ? Color.FromArgb(200, 230, 255)
-                        : Color.FromArgb(245, 245, 245);
-                }
-            }
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //LoadTopMenu(Modul.Satinalma);
             BuildTreeMenu();
         }
         void BuildTreeMenu()
         {
             treeMenu.Nodes.Clear();
-
-            var menuTree = MenuProvider.GetTreeMenu();
-
-            foreach (var root in menuTree)
+            foreach (AnaMenuDTO anaMenu in _cache.anaMenuList.OrderBy(a => a.siraNo))
             {
-                //if (!YetkiVarMi(root.YetkiKodu))
-                //    continue;
-
-                var rootNode = CreateTreeNode(root);
+                var rootNode = CreateHeaderTreeNode(anaMenu);
+                foreach (Yetki yetki in _cache.yetkiList.OrderBy(y => y.ekran.Id))
+                {
+                    if (yetki.menu.ad.ToString() == anaMenu.ad)
+                    {
+                        var iconChar = (IconChar)Enum.Parse(typeof(IconChar), yetki.ekran.menu.icon);
+                        var icon = FaImageHelper.Create(iconChar);
+                        menuImages.Images.Add(iconChar.ToString(), icon);
+                        rootNode.Nodes.Add(new TreeNode(yetki.ekran.ekranAdi)
+                        {
+                            Tag = yetki.ekran.menu,
+                            ImageKey = yetki.ekran.menu.icon,
+                            SelectedImageKey = yetki.ekran.menu.icon
+                        });
+                    }
+                }
                 treeMenu.Nodes.Add(rootNode);
             }
+        }
+        TreeNode CreateHeaderTreeNode(AnaMenuDTO anaMenu)
+        {
+            var iconChar = (IconChar)Enum.Parse(typeof(IconChar), anaMenu.icon);
+            var icon = FaImageHelper.Create(iconChar);
+            menuImages.Images.Add(iconChar.ToString(), icon);
+            var node = new TreeNode(anaMenu.ad)
+            {
+                Tag = anaMenu,
+                ImageKey = anaMenu.icon,
+                SelectedImageKey = anaMenu.icon
+            };
+            return node;
+
         }
         TreeNode CreateTreeNode(MenuNodeInfo info)
         {
             var node = new TreeNode(info.Text)
             {
-                Tag = info
+                Tag = info,
+                ImageKey = info.IconKey,
+                SelectedImageKey = info.IconKey
             };
 
             foreach (var child in info.Children)
@@ -464,98 +490,18 @@ namespace YektamakDesktop.Formlar
 
             return node;
         }
+
         private void treeMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node?.Tag is MenuNodeInfo info &&
-                info.FormFactory != null)
+            if (e.Node?.Tag is Menu info)
             {
-                OpenFormInTab(new MenuItemInfo
-                {
-                    Text = info.Text,
-                    FormType = info.FormType!,
-                    FormFactory = info.FormFactory
-                });
+                OpenFormInTab(info);
             }
         }
         
 
     }
-    public class MenuItemInfo
-    {
-        public string Text { get; set; } = "";
-        public string YetkiKodu { get; set; } = "";
-        public Func<Form> FormFactory { get; set; } = null!;
-        public Image? Icon { get; set; }
-        public Type FormType { get; set; } = null!;
-        public Modul Modul { get; set; }
-    }
-    public static class MenuProvider
-    {
-        public static List<MenuNodeInfo> GetTreeMenu()
-        {
-            return new()
-            {
-                new MenuNodeInfo
-                {
-                    Text = "Satınalma",
-                    YetkiKodu = "MOD_SATINALMA",
-                    Children =
-                    {
-                        new MenuNodeInfo
-                        {
-                            Text = "Satınalma Talepler",
-                            YetkiKodu = "SAT_TALEP",
-                            FormType = typeof(SatinalmaTalepler),
-                            FormFactory = () => FormFactory.CreateForm<SatinalmaTalepler>()
-                        },
-                        new MenuNodeInfo
-                        {
-                            Text = "Teklifler",
-                            YetkiKodu = "SAT_TEKLIF",
-                            FormType = typeof(SatinalmaTalepTeklifFormu),
-                            FormFactory = () => FormFactory.CreateForm<SatinalmaTalepTeklifFormu>()
-                        }
-                    }
-                }
-            };
-        }
-        public static List<MenuItemInfo> GetMenu(Modul modul)
-        {
-            return modul switch
-            {
-                Modul.Satinalma => new()
-            {
-                new MenuItemInfo
-                {
-                    Text = "Satınalma Talep",
-                    YetkiKodu = "SAT_TALEP",
-                    FormType = typeof(SatinalmaTalepler),
-                    FormFactory = () => FormFactory.CreateForm<SatinalmaTalepler>()
-                },
-                new MenuItemInfo
-                {
-                    Text = "Teklif Toplama",
-                    YetkiKodu = "SAT_TEKLIF",
-                    FormType = typeof(SatinalmaTeklifTaleplerFormu),
-                    FormFactory = () => FormFactory.CreateForm<SatinalmaTeklifTaleplerFormu>()
-                }
-            },
-                _ => new()
-            };
-        }
-    }
-
-    public enum Modul
-    {
-        Satis,
-        Satinalma,
-        Stok,
-        Proje,
-        Planlama,
-        Imalat,
-        Sevk,
-        Kurulum
-    }
+    
     public interface ITabInfoProvider
     {
         string GetTabTitle();   // Sekme başlığı
@@ -564,6 +510,7 @@ namespace YektamakDesktop.Formlar
     {
         public string Text { get; set; } = "";
         public string YetkiKodu { get; set; } = "";
+        public string? IconKey { get; set; }
         public Type? FormType { get; set; }
         public Func<Form>? FormFactory { get; set; }
         public List<MenuNodeInfo> Children { get; set; } = new();

@@ -69,7 +69,7 @@
         }
 
         #endregion
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
     }
 }

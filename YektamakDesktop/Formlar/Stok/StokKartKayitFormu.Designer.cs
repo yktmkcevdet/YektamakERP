@@ -1230,7 +1230,7 @@ namespace YektamakDesktop.Formlar.Stok
         private CheckBox checkBoxIsFromExcel;
         private CheckBox checkBoxIsStep;
         private CheckBox checkBoxIsDxf;
-        private HeaderPanel headerPanel1;
+        public HeaderPanel headerPanel1;
         private CustomButtonSave rButtonKaydet;
         private FilterableComboBox clbProjeKod;
         private FilterableComboBox clbStokTip;

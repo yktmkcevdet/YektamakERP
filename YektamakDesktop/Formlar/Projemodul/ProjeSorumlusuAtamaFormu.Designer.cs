@@ -206,7 +206,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.FilterableComboBox fcbProje;
         private CustomControls.FilterableComboBox fcbPersonel;
         private System.Windows.Forms.Label label1;

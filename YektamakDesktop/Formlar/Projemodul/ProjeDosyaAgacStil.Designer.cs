@@ -167,7 +167,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.TreeView treeView1;
         private CustomControls.FilterableComboBox fcbProjeKod;
         private CustomControls.RoundedButton roundedButton1;

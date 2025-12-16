@@ -296,7 +296,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBox ctbMailId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

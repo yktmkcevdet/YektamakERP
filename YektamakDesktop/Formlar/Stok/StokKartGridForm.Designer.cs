@@ -361,7 +361,7 @@ namespace YektamakDesktop.Formlar.Stok
         private System.Windows.Forms.Button buttonSatisSiparisTeklifTalepEkle;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private UniversalGrid universalGrid1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem stokKartınıGörüntüleToolStripMenuItem;

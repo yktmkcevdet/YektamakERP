@@ -413,7 +413,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private CustomControls.CustomTextBox ctbPersonelSoyad;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.Label label3;
         private CustomControls.CustomTextBox ctbTelefon;
         private System.Windows.Forms.Label label4;

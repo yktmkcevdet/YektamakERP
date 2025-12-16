@@ -416,7 +416,7 @@
         private System.Windows.Forms.Label labelUyariSifreTekrar;
         private System.Windows.Forms.Label labelUyariPersonel;
         private System.Windows.Forms.Label labelUyariRol;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomButtonSave btnSave;
         private CustomControls.CustomTextBox ctbKullaniciAd;
         private CustomControls.CustomTextBox ctbSifre;

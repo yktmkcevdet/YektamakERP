@@ -240,7 +240,7 @@ namespace YektamakDesktop.Formlar
 
         private CustomTextBox ctbKullaniciAdi;
         private CustomTextBox ctbSifre;
-        private HeaderPanel headerPanel1;
+        public HeaderPanel headerPanel1;
         private RoundedIconButton btnSifreDegistir;
     }
     

@@ -639,7 +639,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         public string mail { get { return _mail; } set { _mail = value; } }
         public DataControlFirma(ICache cache)
         {
-            Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id" };
+            Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id",Anchor = AnchorStyles.Left|AnchorStyles.Right|AnchorStyles.Top };
             Id.PlaceholderText = "Firma Seçiniz";
 
             Id.SelectedIndexChanged += Id_SelectedIndexChanged;

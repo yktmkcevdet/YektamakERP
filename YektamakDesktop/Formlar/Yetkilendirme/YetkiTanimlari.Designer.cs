@@ -184,7 +184,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuEkle;
         private System.Windows.Forms.ToolStripMenuItem menuSilToolStripMenuItem;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.FilterableComboBox cbxKullanici;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem menuChangeAuth;

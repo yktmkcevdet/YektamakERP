@@ -229,7 +229,7 @@ namespace YektamakDesktop
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panelAnaMenu;
         private System.Windows.Forms.Panel panelMenu;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.Panel panelState;
         private System.Windows.Forms.Panel panelExit;
         private System.Windows.Forms.Label lblKullanici;

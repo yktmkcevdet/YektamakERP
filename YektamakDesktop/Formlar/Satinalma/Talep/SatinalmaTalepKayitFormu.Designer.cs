@@ -383,7 +383,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.Label label7;
         private CustomControls.CustomTextBoxTarih ctbTalepTarihi;
         private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBoxSayisal ctbSetAdet;
         private System.Windows.Forms.Label label8;
         private CustomControls.CustomButtonSave customButtonSave1;

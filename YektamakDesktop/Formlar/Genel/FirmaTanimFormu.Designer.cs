@@ -451,7 +451,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.CustomTextBoxSayisal ctbFirmaId;
         private System.Windows.Forms.Label label1;

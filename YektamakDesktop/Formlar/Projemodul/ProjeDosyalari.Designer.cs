@@ -538,7 +538,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private System.Windows.Forms.Label label7;
         private CustomTextBox ctbParcaAd;
         private System.Windows.Forms.Label label8;
-        private HeaderPanel headerPanel1;
+        public HeaderPanel headerPanel1;
         private UniversalGrid universalGrid1;
     }
 }

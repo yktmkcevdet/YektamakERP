@@ -99,6 +99,6 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         
         private IconButton iconButtonAdd;
-        private HeaderPanel headerPanel1;
+        public HeaderPanel headerPanel1;
     }
 }

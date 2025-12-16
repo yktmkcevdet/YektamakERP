@@ -384,7 +384,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBox ctbId;
         private CustomControls.CustomTextBoxTarih ctbSiparisTarihi;
         private CustomControls.CustomTextBoxTarih ctbTeslimTarihi;

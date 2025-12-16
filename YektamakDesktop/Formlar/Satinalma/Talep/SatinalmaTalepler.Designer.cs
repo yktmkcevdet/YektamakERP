@@ -237,7 +237,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem talebiOnaylaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem talebiReddetToolStripMenuItem;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.ToolStripMenuItem görüntüleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;

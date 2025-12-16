@@ -394,7 +394,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomTextBoxSayisal ctbAdresId;
         private CustomControls.CustomTextBox ctbUlke;
         private System.Windows.Forms.Label label1;

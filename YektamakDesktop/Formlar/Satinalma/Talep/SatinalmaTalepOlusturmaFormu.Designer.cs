@@ -356,7 +356,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomComboListBox clbProjeKod;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

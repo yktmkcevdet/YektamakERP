@@ -140,7 +140,7 @@
         #endregion
 
         private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kaydıAlToolStripMenuItem;

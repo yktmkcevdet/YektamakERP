@@ -31,13 +31,14 @@
             components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pnlLeftMenu = new System.Windows.Forms.Panel();
-            btnToggleMenu = new System.Windows.Forms.Button();
             treeMenu = new System.Windows.Forms.TreeView();
             pnlTopMenu = new System.Windows.Forms.Panel();
             flowTopMenu = new System.Windows.Forms.FlowLayoutPanel();
             tabMain = new System.Windows.Forms.TabControl();
+            btnToggleMenu = new System.Windows.Forms.Button();
             btnTabs = new System.Windows.Forms.Button();
             tabContextMenu = new System.Windows.Forms.ContextMenuStrip(components);
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
             tableLayoutPanel1.SuspendLayout();
             pnlLeftMenu.SuspendLayout();
             pnlTopMenu.SuspendLayout();
@@ -48,55 +49,45 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(pnlLeftMenu, 0, 1);
-            tableLayoutPanel1.Controls.Add(pnlTopMenu, 1, 0);
-            tableLayoutPanel1.Controls.Add(tabMain, 1, 1);
-            tableLayoutPanel1.Controls.Add(btnTabs, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlLeftMenu, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlTopMenu, 1, 1);
+            tableLayoutPanel1.Controls.Add(tabMain, 1, 0);
+            tableLayoutPanel1.Controls.Add(btnToggleMenu, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1162, 727);
             tableLayoutPanel1.TabIndex = 0;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
             // pnlLeftMenu
             // 
-            pnlLeftMenu.Controls.Add(btnToggleMenu);
             pnlLeftMenu.Controls.Add(treeMenu);
             pnlLeftMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlLeftMenu.Location = new System.Drawing.Point(3, 53);
+            pnlLeftMenu.Location = new System.Drawing.Point(3, 3);
             pnlLeftMenu.Name = "pnlLeftMenu";
-            pnlLeftMenu.Size = new System.Drawing.Size(194, 671);
+            pnlLeftMenu.Size = new System.Drawing.Size(194, 691);
             pnlLeftMenu.TabIndex = 0;
-            // 
-            // btnToggleMenu
-            // 
-            btnToggleMenu.Location = new System.Drawing.Point(165, 0);
-            btnToggleMenu.Name = "btnToggleMenu";
-            btnToggleMenu.Size = new System.Drawing.Size(26, 23);
-            btnToggleMenu.TabIndex = 1;
-            btnToggleMenu.Text = "☰";
-            btnToggleMenu.UseVisualStyleBackColor = true;
-            btnToggleMenu.Click += btnToggleMenu_Click;
             // 
             // treeMenu
             // 
             treeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             treeMenu.Location = new System.Drawing.Point(0, 0);
             treeMenu.Name = "treeMenu";
-            treeMenu.Size = new System.Drawing.Size(194, 671);
+            treeMenu.Size = new System.Drawing.Size(194, 691);
             treeMenu.TabIndex = 0;
+            treeMenu.MouseEnter += treeMenu_MouseEnter;
+            treeMenu.MouseLeave += treeMenu_MouseLeave;
             // 
             // pnlTopMenu
             // 
             pnlTopMenu.Controls.Add(flowTopMenu);
             pnlTopMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlTopMenu.Location = new System.Drawing.Point(203, 3);
+            pnlTopMenu.Location = new System.Drawing.Point(203, 700);
             pnlTopMenu.Name = "pnlTopMenu";
-            pnlTopMenu.Size = new System.Drawing.Size(956, 44);
+            pnlTopMenu.Size = new System.Drawing.Size(956, 24);
             pnlTopMenu.TabIndex = 1;
             // 
             // flowTopMenu
@@ -105,25 +96,35 @@
             flowTopMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             flowTopMenu.Location = new System.Drawing.Point(0, 0);
             flowTopMenu.Name = "flowTopMenu";
-            flowTopMenu.Size = new System.Drawing.Size(956, 44);
+            flowTopMenu.Size = new System.Drawing.Size(956, 24);
             flowTopMenu.TabIndex = 0;
             flowTopMenu.WrapContents = false;
             // 
             // tabMain
             // 
             tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabMain.Location = new System.Drawing.Point(203, 53);
+            tabMain.Location = new System.Drawing.Point(203, 3);
             tabMain.Name = "tabMain";
             tabMain.SelectedIndex = 0;
-            tabMain.Size = new System.Drawing.Size(956, 671);
+            tabMain.Size = new System.Drawing.Size(956, 691);
             tabMain.TabIndex = 2;
-            tabMain.SelectedIndexChanged += tabMain_SelectedIndexChanged;
+            // 
+            // btnToggleMenu
+            // 
+            btnToggleMenu.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnToggleMenu.Location = new System.Drawing.Point(171, 700);
+            btnToggleMenu.Name = "btnToggleMenu";
+            btnToggleMenu.Size = new System.Drawing.Size(26, 23);
+            btnToggleMenu.TabIndex = 1;
+            btnToggleMenu.Text = "☰";
+            btnToggleMenu.UseVisualStyleBackColor = true;
+            btnToggleMenu.Click += btnToggleMenu_Click;
             // 
             // btnTabs
             // 
             btnTabs.Location = new System.Drawing.Point(3, 3);
             btnTabs.Name = "btnTabs";
-            btnTabs.Size = new System.Drawing.Size(146, 23);
+            btnTabs.Size = new System.Drawing.Size(108, 23);
             btnTabs.TabIndex = 3;
             btnTabs.Text = "Açık Sekmeler";
             btnTabs.UseVisualStyleBackColor = true;
@@ -159,5 +160,6 @@
         private System.Windows.Forms.Button btnTabs;
         private System.Windows.Forms.TreeView treeMenu;
         private System.Windows.Forms.Button btnToggleMenu;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

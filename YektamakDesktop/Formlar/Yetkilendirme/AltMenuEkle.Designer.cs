@@ -166,7 +166,7 @@
         private System.Windows.Forms.Label labelUyariAnaMenu;
         private System.Windows.Forms.Label labelUyariFormAdi;
         private System.Windows.Forms.Label labelUyariMenuAdi;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private CustomControls.CustomButtonSave rButtonKaydet;

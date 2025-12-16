@@ -267,7 +267,7 @@
         #endregion
         private CustomControls.CustomTextBox ctbMenuAd;
         private CustomControls.RoundedIconButton roundedIconButton1;
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomButtonSave rButtonKaydet;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

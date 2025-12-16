@@ -478,7 +478,7 @@
 
         #endregion
 
-        private CustomControls.HeaderPanel headerPanel1;
+        public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.Label label1;
         private CustomControls.CustomTextBox ctbNo;
         private CustomControls.CustomTextBox ctbKod;
