@@ -44,13 +44,13 @@
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             label4 = new System.Windows.Forms.Label();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             clbPersonel = new YektamakDesktop.CustomControls.FilterableComboBox();
             clbRol = new YektamakDesktop.CustomControls.FilterableComboBox();
-            fcbMailAdres = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbMailAdres = new YektamakDesktop.CustomControls.FilterableComboBox();
             label5 = new System.Windows.Forms.Label();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
             SuspendLayout();
             // 
             // labelUyariKulllaniciAdi
@@ -119,9 +119,9 @@
             // btnSave
             // 
             btnSave.BackColor = System.Drawing.Color.Transparent;
-            btnSave.Location = new System.Drawing.Point(480, 178);
+            btnSave.Location = new System.Drawing.Point(531, 268);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(106, 46);
+            btnSave.Size = new System.Drawing.Size(39, 36);
             btnSave.TabIndex = 98;
             btnSave.SaveButtonClick += rButtonKullaniciKaydet_Click;
             btnSave.Click += rButtonKullaniciKaydet_Click;
@@ -256,30 +256,6 @@
             universalGrid1.Size = new System.Drawing.Size(693, 362);
             universalGrid1.TabIndex = 107;
             // 
-            // roundedButton1
-            // 
-            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderColor = System.Drawing.Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 20;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(442, 53);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new System.Drawing.Size(78, 40);
-            roundedButton1.TabIndex = 108;
-            roundedButton1.Text = "Yeni Kayıt";
-            roundedButton1.TextColor = System.Drawing.Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -327,6 +303,7 @@
             clbPersonel.Name = "clbPersonel";
             clbPersonel.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbPersonel.PlaceholderText = "Seçiniz...";
+            clbPersonel.ReadOnly = false;
             clbPersonel.Size = new System.Drawing.Size(231, 25);
             clbPersonel.TabIndex = 111;
             clbPersonel.ValueMember = "Id";
@@ -343,25 +320,27 @@
             clbRol.Name = "clbRol";
             clbRol.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             clbRol.PlaceholderText = "Seçiniz...";
+            clbRol.ReadOnly = false;
             clbRol.Size = new System.Drawing.Size(179, 25);
             clbRol.TabIndex = 112;
             clbRol.ValueMember = "Id";
             // 
-            // fcbMailAdres
+            // clbMailAdres
             // 
-            fcbMailAdres.BorderColor = System.Drawing.Color.Silver;
-            fcbMailAdres.BorderRadius = 8;
-            fcbMailAdres.BorderSize = 1;
-            fcbMailAdres.DisplayMember = "adres";
-            fcbMailAdres.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbMailAdres.Location = new System.Drawing.Point(124, 226);
-            fcbMailAdres.Margin = new System.Windows.Forms.Padding(1);
-            fcbMailAdres.Name = "fcbMailAdres";
-            fcbMailAdres.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            fcbMailAdres.PlaceholderText = "Seçiniz...";
-            fcbMailAdres.Size = new System.Drawing.Size(179, 25);
-            fcbMailAdres.TabIndex = 114;
-            fcbMailAdres.ValueMember = "Id";
+            clbMailAdres.BorderColor = System.Drawing.Color.Silver;
+            clbMailAdres.BorderRadius = 8;
+            clbMailAdres.BorderSize = 1;
+            clbMailAdres.DisplayMember = "adres";
+            clbMailAdres.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbMailAdres.Location = new System.Drawing.Point(124, 226);
+            clbMailAdres.Margin = new System.Windows.Forms.Padding(1);
+            clbMailAdres.Name = "clbMailAdres";
+            clbMailAdres.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMailAdres.PlaceholderText = "Seçiniz...";
+            clbMailAdres.ReadOnly = false;
+            clbMailAdres.Size = new System.Drawing.Size(179, 25);
+            clbMailAdres.TabIndex = 114;
+            clbMailAdres.ValueMember = "Id";
             // 
             // label5
             // 
@@ -373,18 +352,26 @@
             label5.TabIndex = 113;
             label5.Text = "Mail Adres";
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.Location = new System.Drawing.Point(45, 268);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new System.Drawing.Size(36, 36);
+            customButtonNewRecord1.TabIndex = 115;
+            customButtonNewRecord1.Click += roundedButton1_Click;
+            // 
             // KullaniciKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(693, 673);
-            Controls.Add(fcbMailAdres);
+            Controls.Add(customButtonNewRecord1);
+            Controls.Add(clbMailAdres);
             Controls.Add(label5);
             Controls.Add(clbRol);
             Controls.Add(clbPersonel);
             Controls.Add(label4);
             Controls.Add(ctbId);
-            Controls.Add(roundedButton1);
             Controls.Add(universalGrid1);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -427,12 +414,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private CustomControls.UniversalGrid universalGrid1;
-        private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Label label4;
         private CustomControls.CustomTextBox ctbId;
         private CustomControls.FilterableComboBox clbPersonel;
         private CustomControls.FilterableComboBox clbRol;
-        private CustomControls.FilterableComboBox fcbMailAdres;
+        private CustomControls.FilterableComboBox clbMailAdres;
         private System.Windows.Forms.Label label5;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
     }
 }

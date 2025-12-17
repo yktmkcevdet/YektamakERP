@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pnlLeftMenu = new System.Windows.Forms.Panel();
             treeMenu = new System.Windows.Forms.TreeView();
@@ -140,8 +141,9 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1162, 727);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "MainForm";
+            Text = "Yektamak ERP";
             Load += MainForm_Load;
             tableLayoutPanel1.ResumeLayout(false);
             pnlLeftMenu.ResumeLayout(false);

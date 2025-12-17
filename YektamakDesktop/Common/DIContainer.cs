@@ -36,6 +36,7 @@ namespace YektamakDesktop.Common
             services.AddTransient(typeof(AnaVeriTanimlamaFormu<>));
             services.AddTransient<AdresTanimlamaFormu>();
             services.AddTransient<AltMenuEkleForm>();
+            services.AddTransient<BoyutTanimFormu>();
             services.AddTransient<DataControl>();
             services.AddTransient<DataControlFirma>();
             services.AddTransient<DataControlMenu>();

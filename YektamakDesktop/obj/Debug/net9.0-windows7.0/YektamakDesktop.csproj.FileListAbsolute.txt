@@ -261,3 +261,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.MainForm.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.BoyutTanimFormu.resources

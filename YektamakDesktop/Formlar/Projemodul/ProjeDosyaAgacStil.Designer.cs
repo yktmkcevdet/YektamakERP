@@ -46,15 +46,16 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1219, 25);
+            headerPanel1.Size = new System.Drawing.Size(1091, 25);
             headerPanel1.TabIndex = 0;
             // 
             // treeView1
             // 
+            treeView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             treeView1.CheckBoxes = true;
             treeView1.Location = new System.Drawing.Point(36, 83);
             treeView1.Name = "treeView1";
-            treeView1.Size = new System.Drawing.Size(429, 600);
+            treeView1.Size = new System.Drawing.Size(392, 607);
             treeView1.TabIndex = 1;
             treeView1.AfterCheck += treeView1_AfterCheck;
             // 
@@ -70,6 +71,7 @@
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbProjeKod.PlaceholderText = "Proje Kodu ";
+            fcbProjeKod.ReadOnly = false;
             fcbProjeKod.Size = new System.Drawing.Size(167, 25);
             fcbProjeKod.TabIndex = 2;
             fcbProjeKod.ValueMember = "Id";
@@ -77,6 +79,7 @@
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton1.BorderColor = System.Drawing.Color.Black;
             roundedButton1.BorderSize = 0;
@@ -90,7 +93,7 @@
             roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(36, 723);
+            roundedButton1.Location = new System.Drawing.Point(36, 710);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(150, 40);
             roundedButton1.TabIndex = 3;
@@ -101,6 +104,7 @@
             // 
             // roundedButton2
             // 
+            roundedButton2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             roundedButton2.BackgroundColor = System.Drawing.Color.Firebrick;
             roundedButton2.BorderColor = System.Drawing.Color.Black;
             roundedButton2.BorderSize = 0;
@@ -114,7 +118,7 @@
             roundedButton2.HoverColor2 = System.Drawing.Color.Navy;
             roundedButton2.Icon = null;
             roundedButton2.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton2.Location = new System.Drawing.Point(315, 723);
+            roundedButton2.Location = new System.Drawing.Point(278, 710);
             roundedButton2.Name = "roundedButton2";
             roundedButton2.Size = new System.Drawing.Size(150, 40);
             roundedButton2.TabIndex = 4;
@@ -125,12 +129,12 @@
             // 
             // ctbParcaKodu
             // 
-            ctbParcaKodu.BackColor = System.Drawing.SystemColors.Window;
+            ctbParcaKodu.BackColor = System.Drawing.Color.White;
             ctbParcaKodu.BorderColor = System.Drawing.Color.Silver;
             ctbParcaKodu.BorderFocusColor = System.Drawing.Color.HotPink;
             ctbParcaKodu.BorderSize = 1;
             ctbParcaKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbParcaKodu.ForeColor = System.Drawing.Color.DimGray;
+            ctbParcaKodu.ForeColor = System.Drawing.Color.Black;
             ctbParcaKodu.Location = new System.Drawing.Point(222, 48);
             ctbParcaKodu.Margin = new System.Windows.Forms.Padding(1);
             ctbParcaKodu.Multiline = false;
@@ -141,7 +145,7 @@
             ctbParcaKodu.PlaceholderText = "Parça Kodu İle Ara";
             ctbParcaKodu.ReadOnly = false;
             ctbParcaKodu.SelectionStart = 0;
-            ctbParcaKodu.Size = new System.Drawing.Size(243, 25);
+            ctbParcaKodu.Size = new System.Drawing.Size(206, 25);
             ctbParcaKodu.TabIndex = 5;
             ctbParcaKodu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbParcaKodu.TextCustom = "";
@@ -152,7 +156,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1218, 775);
+            ClientSize = new System.Drawing.Size(1090, 782);
             Controls.Add(ctbParcaKodu);
             Controls.Add(roundedButton2);
             Controls.Add(roundedButton1);

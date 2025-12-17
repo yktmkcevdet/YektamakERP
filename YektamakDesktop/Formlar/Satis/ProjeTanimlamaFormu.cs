@@ -46,7 +46,7 @@ namespace YektamakDesktop.Formlar.Satis
             int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom |  AnchorStyles.Left | AnchorStyles.Right;
             universalGrid1.Location = new Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
@@ -152,11 +152,11 @@ namespace YektamakDesktop.Formlar.Satis
     }
     public class DataControlProjeDosya : DataControl, IEntity, IAltForm
     {
-        public CustomTextBoxSayisal ctbId { get; set; } = new() { TabIndex = 3, Width = 0, Visible = false, Tag = "Id" };
-        public CustomTextBoxSayisal ctbProjeId { get; set; } = new() { TabIndex = 4, Width = 0, Visible = false, Tag = "ProjeId" };
-        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 200, Visible = true, Tag = "Dosya Tanımı" };
-        public CustomTextBox ctbDosyaYolu { get; set; } = new() { TabIndex = 6, Width = 300, Visible = true, Tag = "Dosya Yolu" };
-        public CustomTextBox ctbDosyaUzanti { get; set; } = new() { TabIndex = 6, Width = 50, Visible = true, Tag = "Uzantı" };
+        public CustomTextBoxSayisal ctbId { get; set; } = new() { TabIndex = 3, Width = 0, Visible = false, Tag = "Id"};
+        public CustomTextBoxSayisal ctbProjeId { get; set; } = new() { TabIndex = 4, Width = 0, Visible = false, Tag = "ProjeId"};
+        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 200, Visible = true, Tag = "Dosya Tanımı"};
+        public CustomTextBox ctbDosyaYolu { get; set; } = new() {TabIndex = 6, Width = 300, Visible = true, Tag = "Dosya Yolu" };
+        public CustomTextBox ctbDosyaUzanti { get; set; } = new() {TabIndex = 6, Width = 50, Visible = true, Tag = "Uzantı" };
         public RoundedIconButton btnAdd { get; set; }
         public RoundedIconButton btnView { get; set; }
         public byte[] dosyaVeri { get; set; }
@@ -194,7 +194,7 @@ namespace YektamakDesktop.Formlar.Satis
                 BackgroundImage = Resources.ekle,
                 BackColor = Color.Transparent,
                 BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
-                CornerRadius = 5
+                CornerRadius = 5,
             };
             btnAdd.Click += ButtonDosyaEkle_Click;
             btnView = new()
@@ -206,7 +206,7 @@ namespace YektamakDesktop.Formlar.Satis
                 BackgroundImage = Resources.pngegg,
                 BackColor = Color.Transparent,
                 BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
-                CornerRadius = 5
+                CornerRadius = 5,
             };
             btnView.Click += ButtonDosyaGoruntule_Click;
             buttonSil.Click += ButtonSil_Click;

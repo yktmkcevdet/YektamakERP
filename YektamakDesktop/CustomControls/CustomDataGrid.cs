@@ -48,8 +48,9 @@ namespace YektamakDesktop.CustomControls
 					_detailPanel = new Panel();
 					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + headerPanel.Height);
 					_detailPanel.Size = _detailSize;
-					_detailPanel.AutoScroll = true;
-					_detailPanel.Scroll += DetailPanel_Scroll;
+                    _detailPanel.AutoScroll = true;
+                    _detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left  ;
+                    _detailPanel.Scroll += DetailPanel_Scroll;
 					AddDataRow(DIContainer.GetService<T>());
 				}
 				return _detailPanel;

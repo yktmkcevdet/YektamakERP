@@ -325,7 +325,7 @@ namespace YektamakDesktop.Formlar
         {
             foreach (TabPage page in tabMain.TabPages)
             {
-                if (page.Tag is Type t && t == Type.GetType(item.formAd))
+                if (page.Tag is Type t && t.Name == item.formAd)
                 {
                     tabMain.SelectedTab = page;
                     return;
@@ -343,7 +343,7 @@ namespace YektamakDesktop.Formlar
             }
             var tabPage = new TabPage(item.ad)
             {
-                Tag = item
+                Tag = form.GetType()
             };
 
             form.TopLevel = false;

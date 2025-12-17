@@ -51,7 +51,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             universalGrid1.SetData(new List<KullaniciDTO>(), this.Name);
             clbRol.SetDataSource(_cache.rolList);
             clbPersonel.SetDataSource(_cache.personelList);
-            clbPersonel.SetDataSource(await _cache.mailAdresList);
+            clbMailAdres.SetDataSource(await _cache.mailAdresList);
         }
 
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
@@ -85,7 +85,7 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             BindHelper.BindData(ctbSifre, kullanici, nameof(kullanici.sifre));
             BindHelper.BindData(clbPersonel, kullanici.personel, nameof(kullanici.personel.Id));
             BindHelper.BindData(clbRol, kullanici.rol, nameof(kullanici.rol.Id));
-            BindHelper.BindData(fcbMailAdres, kullanici.mailAdres, nameof(kullanici.mailAdres.Id));
+            BindHelper.BindData(clbMailAdres, kullanici.mailAdres, nameof(kullanici.mailAdres.Id));
         }
         private async void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
         {

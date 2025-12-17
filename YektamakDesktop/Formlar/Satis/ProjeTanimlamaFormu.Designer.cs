@@ -57,9 +57,9 @@ namespace YektamakDesktop.Formlar.Satis
             label8 = new System.Windows.Forms.Label();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             projeSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            roundedButton1 = new RoundedButton();
             panel1 = new System.Windows.Forms.Panel();
             ctbVersiyon = new CustomTextBox();
+            customButtonNewRecord1 = new CustomButtonNewRecord();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,6 +78,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // ctbId
             // 
+            ctbId.AutoSize = true;
             ctbId.BackColor = System.Drawing.Color.White;
             ctbId.BorderColor = System.Drawing.Color.Silver;
             ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
@@ -103,6 +104,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // fcbProjeTip
             // 
+            fcbProjeTip.AutoSize = true;
             fcbProjeTip.BorderColor = System.Drawing.Color.Silver;
             fcbProjeTip.BorderRadius = 8;
             fcbProjeTip.BorderSize = 1;
@@ -120,6 +122,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // fcbMarka
             // 
+            fcbMarka.AutoSize = true;
             fcbMarka.BorderColor = System.Drawing.Color.Silver;
             fcbMarka.BorderRadius = 8;
             fcbMarka.BorderSize = 1;
@@ -137,6 +140,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // fcbMarkaAltGrup
             // 
+            fcbMarkaAltGrup.AutoSize = true;
             fcbMarkaAltGrup.BorderColor = System.Drawing.Color.Silver;
             fcbMarkaAltGrup.BorderRadius = 8;
             fcbMarkaAltGrup.BorderSize = 1;
@@ -165,6 +169,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // ctbAd
             // 
+            ctbAd.AutoSize = true;
             ctbAd.BackColor = System.Drawing.Color.White;
             ctbAd.BorderColor = System.Drawing.Color.Silver;
             ctbAd.BorderFocusColor = System.Drawing.Color.HotPink;
@@ -233,6 +238,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // ctbAciklama
             // 
+            ctbAciklama.AutoSize = true;
             ctbAciklama.BackColor = System.Drawing.Color.White;
             ctbAciklama.BorderColor = System.Drawing.Color.Silver;
             ctbAciklama.BorderFocusColor = System.Drawing.Color.HotPink;
@@ -257,6 +263,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // fcbMarkaAltGrupKategori
             // 
+            fcbMarkaAltGrupKategori.AutoSize = true;
             fcbMarkaAltGrupKategori.BorderColor = System.Drawing.Color.Silver;
             fcbMarkaAltGrupKategori.BorderRadius = 8;
             fcbMarkaAltGrupKategori.BorderSize = 1;
@@ -274,6 +281,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // fcbMirasProje
             // 
+            fcbMirasProje.AutoSize = true;
             fcbMirasProje.BorderColor = System.Drawing.Color.Silver;
             fcbMirasProje.BorderRadius = 8;
             fcbMirasProje.BorderSize = 1;
@@ -324,14 +332,15 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // customButtonSave1
             // 
-            customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            customButtonSave1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(730, 578);
+            customButtonSave1.Location = new System.Drawing.Point(757, 248);
             customButtonSave1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new System.Drawing.Size(106, 40);
+            customButtonSave1.Size = new System.Drawing.Size(36, 38);
             customButtonSave1.TabIndex = 17;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
+            customButtonSave1.Click += roundedButton1_Click;
             // 
             // universalGrid1
             // 
@@ -339,11 +348,12 @@ namespace YektamakDesktop.Formlar.Satis
             universalGrid1.Location = new System.Drawing.Point(37, 292);
             universalGrid1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(799, 280);
+            universalGrid1.Size = new System.Drawing.Size(799, 326);
             universalGrid1.TabIndex = 18;
             // 
             // ctbProjeNo
             // 
+            ctbProjeNo.AutoSize = true;
             ctbProjeNo.BackColor = System.Drawing.Color.White;
             ctbProjeNo.BorderColor = System.Drawing.Color.Silver;
             ctbProjeNo.BorderFocusColor = System.Drawing.Color.HotPink;
@@ -390,41 +400,18 @@ namespace YektamakDesktop.Formlar.Satis
             projeSilToolStripMenuItem.Text = "Proje Sil";
             projeSilToolStripMenuItem.Click += projeSilToolStripMenuItem_Click;
             // 
-            // roundedButton1
-            // 
-            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderColor = System.Drawing.Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 10;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(37, 578);
-            roundedButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new System.Drawing.Size(84, 35);
-            roundedButton1.TabIndex = 21;
-            roundedButton1.Text = "YENİ KAYIT";
-            roundedButton1.TextColor = System.Drawing.Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += roundedButton1_Click;
-            // 
             // panel1
             // 
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.AutoScroll = true;
             panel1.Location = new System.Drawing.Point(348, 120);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(488, 156);
+            panel1.Size = new System.Drawing.Size(488, 112);
             panel1.TabIndex = 22;
             // 
             // ctbVersiyon
             // 
+            ctbVersiyon.AutoSize = true;
             ctbVersiyon.BackColor = System.Drawing.Color.White;
             ctbVersiyon.BorderColor = System.Drawing.Color.Silver;
             ctbVersiyon.BorderFocusColor = System.Drawing.Color.HotPink;
@@ -447,14 +434,21 @@ namespace YektamakDesktop.Formlar.Satis
             ctbVersiyon.TextCustom = "";
             ctbVersiyon.UnderlinedStyle = false;
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.Location = new System.Drawing.Point(45, 250);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new System.Drawing.Size(36, 36);
+            customButtonNewRecord1.TabIndex = 24;
+            // 
             // ProjeTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(859, 630);
+            Controls.Add(customButtonNewRecord1);
             Controls.Add(ctbVersiyon);
             Controls.Add(panel1);
-            Controls.Add(roundedButton1);
             Controls.Add(label8);
             Controls.Add(ctbProjeNo);
             Controls.Add(universalGrid1);
@@ -512,8 +506,8 @@ namespace YektamakDesktop.Formlar.Satis
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem projeSilToolStripMenuItem;
-        private CustomControls.RoundedButton roundedButton1;
         private System.Windows.Forms.Panel panel1;
         private CustomTextBox ctbVersiyon;
+        private CustomButtonNewRecord customButtonNewRecord1;
     }
 }
