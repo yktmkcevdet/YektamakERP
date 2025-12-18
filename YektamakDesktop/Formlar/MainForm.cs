@@ -355,7 +355,7 @@ namespace YektamakDesktop.Formlar
             tabMain.SelectedTab = tabPage;
             tabPage.Text = form is ITabInfoProvider info
                 ? info.GetTabTitle()
-                : form.Text;
+                : item.ad;
             form.Show();
         }
         private void TabMain_MouseDown(object? sender, MouseEventArgs e)

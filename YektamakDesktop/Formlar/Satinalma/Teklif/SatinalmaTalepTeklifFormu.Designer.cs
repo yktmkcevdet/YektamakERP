@@ -296,7 +296,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             // dgv
             // 
             dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.Location = new System.Drawing.Point(719, 55);
             dgv.Name = "dgv";

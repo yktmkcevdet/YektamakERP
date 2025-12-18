@@ -156,11 +156,11 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         
         
-        private List<SatinalmaTalepForMusteri> GetData()
+        private List<SatinalmaTalepForProje> GetData()
         {
             return satinalmaTalepDetayDTOs.GroupBy(s =>
                 s.projekod
-            ).Select(g => new SatinalmaTalepForMusteri {projeKod= g.First().projekod,satirSayisi = g.Count(),teklifSayisi=g.Where(x=>x.isTeklif==true).Count()}).ToList();
+            ).Select(g => new SatinalmaTalepForProje {projeKod= g.First().projekod,satirSayisi = g.Count(),teklifSayisi=g.Where(x=>x.isTeklif==true).Count()}).ToList();
         }
         private List<SatinalmaTalepForGrup> GetGrupData(string projeKod)
         {
@@ -496,7 +496,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void BukumFiltrele()
         {
             // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.binding.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
+            var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
             if (data == null) return;
 
             // 2. Filtre uygula
@@ -602,7 +602,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {filtered.Count()}";
         }
     }
-    public class SatinalmaTalepForMusteri
+    public class SatinalmaTalepForProje
     {
         public string projeKod { get; set; }
         public int satirSayisi { get; set; }

@@ -250,6 +250,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(34, 37);
             btnSave.TabIndex = 14;
+            btnSave.SaveButtonClick += btnSave_Click;
             // 
             // btnNew
             // 
@@ -257,6 +258,7 @@
             btnNew.Name = "btnNew";
             btnNew.Size = new System.Drawing.Size(36, 36);
             btnNew.TabIndex = 15;
+            btnNew.Click += btnNew_Click;
             // 
             // ctbKlasor
             // 
@@ -354,6 +356,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "BoyutTanimFormu";
             Text = "BoyutTanimFormu";
+            Load += BoyutTanimFormu_Load;
             ResumeLayout(false);
             PerformLayout();
         }

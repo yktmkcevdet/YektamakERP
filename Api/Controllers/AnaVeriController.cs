@@ -95,6 +95,11 @@ namespace Api.Controllers
         {
            return _dataAccessLayer.GetObject("spGetProjeTip");
         }
+        [HttpPost, Route("api/SaveBoyut")]
+        public string SaveBoyut([FromBody] Boyut boyut)
+        {
+            return _dataAccessLayer.SaveObject(boyut, "spSaveBoyut");
+        }
         [HttpGet, Route("api/GetBoyut")]
         public string GetBoyut()
         {

@@ -19,12 +19,12 @@ public class ExpandableGridAnimator
     {
         dgv = grid;
         dgv.Columns.Clear();
-        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.projeKod), "Proje");
-        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.satirSayisi), "Talep");
-        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.teklifSayisi), "Teklif");
-        dgv.Columns.Add(nameof(SatinalmaTalepForMusteri.yuzde), "%");
-        dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dgv.Columns[nameof(SatinalmaTalepForMusteri.yuzde)].DefaultCellStyle.Format = "N2";
+        dgv.Columns.Add(nameof(SatinalmaTalepForProje.projeKod), "Proje");
+        dgv.Columns.Add(nameof(SatinalmaTalepForProje.satirSayisi), "Talep");
+        dgv.Columns.Add(nameof(SatinalmaTalepForProje.teklifSayisi), "Teklif");
+        dgv.Columns.Add(nameof(SatinalmaTalepForProje.yuzde), "%");
+        dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Format = "N2";
 
         dgv.Scroll += (s, e) => RepositionAll();
         dgv.SizeChanged += (s, e) => RepositionAll();
@@ -255,14 +255,21 @@ public class ExpandableGridAnimator
     {
         if (exp.Panel == null) return;
 
-        var rect = dgv.GetCellDisplayRectangle(-1, exp.Row.Index-1, true);
+        var rect = dgv.GetCellDisplayRectangle(-1, exp.Row.Index, false);
+        if (rect.Bottom==0) // Görünür değil
+        {
+            exp.Panel.Visible = false;
+            return;
+        }; 
 
+        
         exp.Panel.Location = new Point(
             rect.Left + TargetPanelPadding,
-            rect.Bottom + offsetY
+            rect.Bottom - rect.Height + offsetY
         );
 
         exp.Panel.Width = dgv.Width - 60;
+        exp.Panel.Visible = true;
     }
 
     private void RepositionAll()

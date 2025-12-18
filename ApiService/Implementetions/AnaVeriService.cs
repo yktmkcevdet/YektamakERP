@@ -65,6 +65,10 @@ namespace ApiService.Implementations
         {
             return _apiService.Get("GetTalepNeden");
         }
+        public string SaveBoyut(Boyut boyut)
+        {
+            return _apiService.Post(boyut,"SaveBoyut");
+        }
         public string GetBoyut()
         {
             return _apiService.Get("GetBoyut");
