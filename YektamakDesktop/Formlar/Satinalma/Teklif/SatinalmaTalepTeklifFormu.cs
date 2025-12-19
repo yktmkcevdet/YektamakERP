@@ -113,7 +113,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 }
                 return _filter;
             }
-            set { _filter = value; }
+            set { _filter = value; Binding(); }
         }
         List<SatinalmaTalepDetayDTO> _satinalmaTalepDetayDTOs;
         List<SatinalmaTalepDetayDTO> satinalmaTalepDetayDTOs
@@ -139,10 +139,12 @@ namespace YektamakDesktop.Formlar.Satinalma
                         Grup = grup.projeKod,
                         satirSayisi = grup.satirSayisi,
                         teklifSayisi = grup.teklifSayisi,
-                        Details = detayList
+                        Details = detayList,
+                        Filtrele =(e)=> FiltreGrid(detayList[(int)e].projeId, detayList[(int)e].malzemeGrupId)
                     };
 
                     int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde());
+                    
                     mgr.BindRow(dgv.Rows[rowIndex], gorunumModel);
                 }
 
@@ -153,20 +155,34 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             }
         }
+        private void FiltreGrid(int? projeId, int? malzemeGrupId)
+        {
+            filter = new SatinalmaTalepDetayDTO { projeId = projeId, projeStokKartstokKartmalzemeGrupId=malzemeGrupId};
+            universalGrid1.Filtrele(filter);
+        }
 
-        
-        
+
         private List<SatinalmaTalepForProje> GetData()
         {
             return satinalmaTalepDetayDTOs.GroupBy(s =>
                 s.projekod
-            ).Select(g => new SatinalmaTalepForProje {projeKod= g.First().projekod,satirSayisi = g.Count(),teklifSayisi=g.Where(x=>x.isTeklif==true).Count()}).ToList();
+            ).Select(g => new SatinalmaTalepForProje {
+                projeKod= g.First().projekod,
+                satirSayisi = g.Count(),
+                teklifSayisi=g.Where(x=>x.isTeklif==true).Count()
+            }).ToList();
         }
         private List<SatinalmaTalepForGrup> GetGrupData(string projeKod)
         {
             return satinalmaTalepDetayDTOs.Where(s=>s.projekod== projeKod).GroupBy(s =>
                 s.projeStokKartstokKartmalzemeGrupId
-            ).Select(g => new SatinalmaTalepForGrup { Grup = _cache.malzemeGrups.Where(m=>m.Id==g.First().projeStokKartstokKartmalzemeGrupId).First().ad, satirSayisi = g.Count(), teklifSayisi = g.Where(x => x.isTeklif == true).Count() }).ToList();
+            ).Select(g => new SatinalmaTalepForGrup { 
+                Grup = _cache.malzemeGrups.Where(m=>m.Id==g.First().projeStokKartstokKartmalzemeGrupId).First().ad,
+                projeId = g.First().projeId,
+                malzemeGrupId = g.First().projeStokKartstokKartmalzemeGrupId, 
+                satirSayisi = g.Count(), 
+                teklifSayisi = g.Where(x => x.isTeklif == true).Count()
+            }).ToList();
         }
         private async Task GridDoldur()
         {
@@ -182,12 +198,14 @@ namespace YektamakDesktop.Formlar.Satinalma
                 satinalmaTalepDetayDTOs = satinalmaTalepDetayList.CastToDTO<SatinalmaTalepDetayDTO>(_convertHelper).ToList();
                 await universalGrid1.SetData(satinalmaTalepDetayDTOs, this.Name, true);
             }
+            universalGrid1.Filtrele(filter);
         }
         private async Task Binding()
         {
             BindHelper.BindData(clbProjeKod, filter, nameof(filter.projeId));
             BindHelper.BindData(clbStokGrupId, filter, nameof(filter.projeStokKartstokKartstokGrupId));
             BindHelper.BindData(clbMalzemeGrupId, filter, nameof(filter.projeStokKartstokKartmalzemeGrupId));
+            BindHelper.BindData(chkBukum, filter, nameof(filter.projeStokKartstokKartisBukum));
             //BindHelper.BindData(fcbBoyut, filter, nameof(filter.stokKartboyutTanimId));
             await universalGrid1.SetData(satinalmaTalepDetayDTOs, this.Name, true);
         }
@@ -473,6 +491,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void fccMalzemeAltGrupId_ItemsChanged(object sender, EventArgs e)
         {
+            universalGrid1.Filtrele(filter);
             MalzemeAltGrupFiltrele();
             //fcbBoyut.SetDataSource(_cache.boyutList.
             //    Where(m => { foreach (var id in fccMalzemeAltGrupId.SelectedValues.Cast<int>()) { if (m.malzemeAltGrupId == id) { return true; } } return false; }).ToList());
@@ -488,35 +507,37 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            BukumFiltrele();
             universalGrid1.Filtrele(filter);
             MalzemeAltGrupFiltrele();
             MalzemeAltGrup2Filtrele();
-            BukumFiltrele();
         }
         private void BukumFiltrele()
         {
-            // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
-            if (data == null) return;
+            filter.projeStokKartstokKartisBukum = chkBukum.CheckState == CheckState.Indeterminate ? (bool?)null :
+                (chkBukum.CheckState == CheckState.Checked ? true : false);
+            //// 1. DataSource'u doğru tipe cast et
+            //var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
+            //if (data == null) return;
 
-            // 2. Filtre uygula
-            IEnumerable<SatinalmaTalepDetayDTO> filtered = data;
-            if (chkBukum.CheckState == CheckState.Checked)
-            {
-                filtered = data.Where(x => x.projeStokKartstokKartisBukum == true);
-            }
-            else if (chkBukum.CheckState == CheckState.Unchecked)
-            {
-                filtered = data.Where(x => x.projeStokKartstokKartisBukum == false);
-            }
+            //// 2. Filtre uygula
+            //IEnumerable<SatinalmaTalepDetayDTO> filtered = data;
+            //if (chkBukum.CheckState == CheckState.Checked)
+            //{
+            //    filtered = data.Where(x => x.projeStokKartstokKartisBukum == true);
+            //}
+            //else if (chkBukum.CheckState == CheckState.Unchecked)
+            //{
+            //    filtered = data.Where(x => x.projeStokKartstokKartisBukum == false);
+            //}
 
-            // 3. BindingSource oluştur ve ata
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = new SortableBindingList<SatinalmaTalepDetayDTO>(filtered.ToList());
+            //// 3. BindingSource oluştur ve ata
+            //var bindingSource = new BindingSource();
+            //bindingSource.DataSource = new SortableBindingList<SatinalmaTalepDetayDTO>(filtered.ToList());
 
-            universalGrid1.Grid.DataSource = bindingSource;
-            universalGrid1.lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {filtered.Count()}";
-            return;
+            //universalGrid1.Grid.DataSource = bindingSource;
+            //universalGrid1.lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {filtered.Count()}";
+            //return;
         }
         private bool BoyutFiltrele()
         {
@@ -556,7 +577,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 return;
             }
             // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.binding.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
+            var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
             if (data == null) return;
 
             // 2. Filtre uygula
@@ -607,19 +628,23 @@ namespace YektamakDesktop.Formlar.Satinalma
         public string projeKod { get; set; }
         public int satirSayisi { get; set; }
         public int teklifSayisi { get; set; }
+        
         public decimal yuzde ()=> teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2);
     }
 
     public class SatinalmaTalepForGrup
     {
+        public int? projeId { get; set; }
         public string projeKod { get; set; }
         public List<SatinalmaTalepForGrup> Details { get; set; }
         public DataGridView DetailGrid { get; set; }
         public bool IsExpanded { get; set; }
         public string Grup { get; set; }
+        public int? malzemeGrupId { get; set; }
         public int satirSayisi { get; set; }
         public int teklifSayisi { get; set; }
         public decimal yuzde ()=> teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2);
+        public Action<int> Filtrele { get; set; }
     }
     public class Filter : SatinalmaTalepDetayDTO
     {

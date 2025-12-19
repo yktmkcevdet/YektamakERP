@@ -8,6 +8,8 @@ using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 
 public class MalzemeTalepRaporu : IDocument
 {
@@ -170,14 +172,13 @@ public class MalzemeTalepRaporu : IDocument
             }
         });
     }
-
     private void Header_LogoCell(IContainer container)
     {
         container
             .Padding(3)
-            .Width(120)      // TAM SABİT GENİŞLİK
-            .Height(60)      // TAM SABİT YÜKSEKLİK
-            .Image("logo.png", ImageScaling.FitArea);
+            .Width(120)
+            .Height(60)
+            .Image("logo");
     }
     private void MidBold(IContainer container, string text,string color,float border,string fontFamily,float fontSize,int clampLines)
     {
@@ -298,5 +299,20 @@ public class MalzemeTalepRaporu : IDocument
             .AlignMiddle()        // Dikey ortalama
             .AlignLeft()
             .DefaultTextStyle(x => x.FontSize(9));   // TÜM Text için font;         // Yatay hizalama
+    }
+}
+public static class PdfAssets
+{
+    public static byte[] Logo => Load("logo.png");
+
+    private static byte[] Load(string name)
+    {
+        var asm = Assembly.GetExecutingAssembly();
+        var res = $"{asm.GetName().Name}.Resources.{name}";
+
+        using var s = asm.GetManifestResourceStream(res);
+        using var ms = new MemoryStream();
+        s.CopyTo(ms);
+        return ms.ToArray();
     }
 }

@@ -32,7 +32,7 @@ namespace ApiService.Implementations
                         if (row.stokKart.malzemeGrup.Id == dosyalamaYapisi.malzemeGrupId
                             && (dosyalamaYapisi.malzemeAltGrupId is null || dosyalamaYapisi.malzemeAltGrupId == row.stokKart.malzemeAltGrup.Id)
                             && (dosyalamaYapisi.boyutId is null || dosyalamaYapisi.boyutId == row.stokKart.boyutTanim.Id)
-                            && bukum1 == bukum2
+                            && (bukum1 == false || bukum1 == bukum2)
                             )
                         {
                             if (dosyalamaYapisi.pdf == true && skd.dosyaTip.Id==1)

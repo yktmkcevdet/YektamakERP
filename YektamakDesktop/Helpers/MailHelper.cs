@@ -17,7 +17,7 @@ namespace YektamakDesktop.Helpers
                 string senderPassword = "Yod43257";
                 mail.From = new MailAddress(senderEmail);
                 mail.To.Add(to);
-                mail.CC.Add(cc);
+                if(!string.IsNullOrEmpty(cc))mail.CC.Add(cc);
                 mail.Subject = subject;
                 mail.Body = body;
                 mail.Bcc.Add("cevdet.oguz@yektamak.com.tr");

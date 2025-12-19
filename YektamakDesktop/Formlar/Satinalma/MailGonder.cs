@@ -170,7 +170,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 this.Enabled = false;
                 mail.To = tbxMailTo.TextCustom;
                 mail.Subject = tbxKonu.TextCustom;
-                mail.Cc= "";
+                mail.Cc= tbxMailCc.TextCustom;
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // rtf'yi html'e döndürmek için gerekli
                 mail.Body = RtfPipe.Rtf.ToHtml(rtbBody.Rtf);
                 string jsonResult =await _satinalmaTeklifService.SaveSatinalmaTeklif(satinalmaTeklifBaslik);

@@ -53,6 +53,7 @@ public class ExpandableGridAnimator
         public bool AnimClosing;   // Kapanıyor mu?
 
         public Stopwatch Stopwatch = new Stopwatch();
+        public Action ApplyFilter;
     }
 
     // Bu satıra expand özelliği bağlanır
@@ -64,7 +65,7 @@ public class ExpandableGridAnimator
             Tag = tag,
             CollapsedHeight = row.Height
         };
-
+       
         expandList.Add(exp);
     }
     private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -231,9 +232,15 @@ public class ExpandableGridAnimator
         sub.Columns.Add("Talep", "Talep");
         sub.Columns.Add("Teklif", "Teklif");
         sub.Columns.Add("Yuzde", "%");
+        sub.CellDoubleClick += (s, e) =>
+        {
+            info.Filtrele(e.RowIndex);
+        };
 
         foreach (var d in info.Details)
+        {
             sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
+        }
 
         // Panel yüksekliği
         panel.Height = sub.Rows.Count * 35 + 25;
@@ -255,21 +262,42 @@ public class ExpandableGridAnimator
     {
         if (exp.Panel == null) return;
 
-        var rect = dgv.GetCellDisplayRectangle(-1, exp.Row.Index, false);
-        if (rect.Bottom==0) // Görünür değil
+        int firstRow = dgv.FirstDisplayedScrollingRowIndex;
+        if (firstRow < 0) return;
+
+        // Satır viewport dışında mı?
+        int relativeIndex = exp.Row.Index - firstRow;
+
+        // Satır üstte tamamen çıkmış
+        if (relativeIndex < 0)
         {
             exp.Panel.Visible = false;
             return;
-        }; 
+        }
 
-        
+        // Y konumunu MANUEL hesapla
+        int y = dgv.ColumnHeadersHeight;
+
+        for (int i = firstRow; i < exp.Row.Index; i++)
+        {
+            y += dgv.Rows[i].Height;
+        }
+
+        // Alt sınır kontrolü
+        if (y > dgv.ClientSize.Height)
+        {
+            exp.Panel.Visible = false;
+            return;
+        }
+
+        exp.Panel.Visible = true;
+
         exp.Panel.Location = new Point(
-            rect.Left + TargetPanelPadding,
-            rect.Bottom - rect.Height + offsetY
+            TargetPanelPadding,
+            y + 25 + offsetY
         );
 
-        exp.Panel.Width = dgv.Width - 60;
-        exp.Panel.Visible = true;
+        exp.Panel.Width = dgv.ClientSize.Width - TargetPanelPadding - 10;
     }
 
     private void RepositionAll()
