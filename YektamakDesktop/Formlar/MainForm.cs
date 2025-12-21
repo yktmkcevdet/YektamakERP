@@ -57,7 +57,7 @@ namespace YektamakDesktop.Formlar
             treeMenu.AfterExpand += treeMenu_AfterExpand;
             treeMenu.AfterCollapse += treeMenu_AfterCollapse;
             btnTabs.Click += BtnTabs_Click;
-            treeMenu.NodeMouseDoubleClick += treeMenu_NodeMouseDoubleClick;
+            treeMenu.NodeMouseClick += treeMenu_NodeMouseDoubleClick;
             treeMenu.BeforeExpand += (s, e) =>
             {
                 if (e.Node.Tag is MenuNodeInfo info &&
@@ -77,6 +77,7 @@ namespace YektamakDesktop.Formlar
                 ToggleLeftMenu();
             };
         }
+
         private void treeMenu_AfterExpand(object sender, TreeViewEventArgs e)
         {
             _expandedNodePaths.Add(e.Node.FullPath);
@@ -388,7 +389,27 @@ namespace YektamakDesktop.Formlar
         }
         private void tabMain_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_dragTabIndex < 0)
+            for (int i = 0; i < tabMain.TabPages.Count; i++)
+            {
+                var rect = tabMain.GetTabRect(i);
+
+                var closeRect = new Rectangle(
+                    rect.Right - 18,
+                    rect.Top + 6,
+                    12,
+                    12
+                );
+
+                if (closeRect.Contains(e.Location))
+                {
+                    tabMain.Cursor = Cursors.Hand;
+                }
+                else
+                {
+                    tabMain.Cursor = Cursors.Default;
+                }
+            }
+                if (_dragTabIndex < 0)
                 return;
 
             if ((e.Button & MouseButtons.Left) != MouseButtons.Left)
@@ -435,6 +456,7 @@ namespace YektamakDesktop.Formlar
         }
         void BuildTreeMenu()
         {
+            menuImages.ImageSize = new Size(24, 24);
             treeMenu.Nodes.Clear();
             foreach (AnaMenuDTO anaMenu in _cache.anaMenuList.OrderBy(a => a.siraNo))
             {
@@ -450,7 +472,8 @@ namespace YektamakDesktop.Formlar
                         {
                             Tag = yetki.ekran.menu,
                             ImageKey = yetki.ekran.menu.icon,
-                            SelectedImageKey = yetki.ekran.menu.icon
+                            SelectedImageKey = yetki.ekran.menu.icon,
+                            
                         });
                     }
                 }
@@ -470,25 +493,6 @@ namespace YektamakDesktop.Formlar
             };
             return node;
 
-        }
-        TreeNode CreateTreeNode(MenuNodeInfo info)
-        {
-            var node = new TreeNode(info.Text)
-            {
-                Tag = info,
-                ImageKey = info.IconKey,
-                SelectedImageKey = info.IconKey
-            };
-
-            foreach (var child in info.Children)
-            {
-                //if (!YetkiVarMi(child.YetkiKodu))
-                //    continue;
-
-                node.Nodes.Add(CreateTreeNode(child));
-            }
-
-            return node;
         }
 
         private void treeMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

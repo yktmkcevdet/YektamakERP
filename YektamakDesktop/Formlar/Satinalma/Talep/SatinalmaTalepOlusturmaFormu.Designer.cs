@@ -217,12 +217,13 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbProjeKod.Name = "fcbProjeKod";
             fcbProjeKod.Padding = new Padding(7, 5, 7, 5);
             fcbProjeKod.PlaceholderText = "Seçiniz...";
+            fcbProjeKod.ReadOnly = false;
             fcbProjeKod.Size = new System.Drawing.Size(203, 25);
             fcbProjeKod.TabIndex = 23;
             fcbProjeKod.ValueMember = "Id";
             fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
             // 
-            // clbMalzemeGrup
+            // fcbMalzemeGrup
             // 
             fcbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
             fcbMalzemeGrup.BorderRadius = 8;
@@ -231,15 +232,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbMalzemeGrup.Location = new System.Drawing.Point(160, 201);
             fcbMalzemeGrup.Margin = new Padding(1);
-            fcbMalzemeGrup.Name = "clbMalzemeGrup";
+            fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
             fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            fcbMalzemeGrup.ReadOnly = false;
             fcbMalzemeGrup.Size = new System.Drawing.Size(203, 25);
             fcbMalzemeGrup.TabIndex = 24;
             fcbMalzemeGrup.ValueMember = "Id";
             fcbMalzemeGrup.SelectedIndexChanged += clbMalzemeGrup_SelectedIndexChanged;
             // 
-            // clbStokTip
+            // fcbStokTip
             // 
             fcbStokTip.BorderColor = System.Drawing.Color.Silver;
             fcbStokTip.BorderRadius = 8;
@@ -248,15 +250,16 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbStokTip.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbStokTip.Location = new System.Drawing.Point(160, 147);
             fcbStokTip.Margin = new Padding(1);
-            fcbStokTip.Name = "clbStokTip";
+            fcbStokTip.Name = "fcbStokTip";
             fcbStokTip.Padding = new Padding(7, 5, 7, 5);
             fcbStokTip.PlaceholderText = "Seçiniz...";
+            fcbStokTip.ReadOnly = false;
             fcbStokTip.Size = new System.Drawing.Size(203, 25);
             fcbStokTip.TabIndex = 25;
             fcbStokTip.ValueMember = "Id";
             fcbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
             // 
-            // clbStokGrup
+            // fcbStokGrup
             // 
             fcbStokGrup.BorderColor = System.Drawing.Color.Silver;
             fcbStokGrup.BorderRadius = 8;
@@ -265,9 +268,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbStokGrup.Location = new System.Drawing.Point(160, 174);
             fcbStokGrup.Margin = new Padding(1);
-            fcbStokGrup.Name = "clbStokGrup";
+            fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(7, 5, 7, 5);
             fcbStokGrup.PlaceholderText = "Seçiniz...";
+            fcbStokGrup.ReadOnly = false;
             fcbStokGrup.Size = new System.Drawing.Size(203, 25);
             fcbStokGrup.TabIndex = 26;
             fcbStokGrup.ValueMember = "Id";
@@ -285,6 +289,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbTalepNeden.Name = "fcbTalepNeden";
             fcbTalepNeden.Padding = new Padding(7, 5, 7, 5);
             fcbTalepNeden.PlaceholderText = "Seçiniz...";
+            fcbTalepNeden.ReadOnly = false;
             fcbTalepNeden.Size = new System.Drawing.Size(203, 25);
             fcbTalepNeden.TabIndex = 27;
             fcbTalepNeden.ValueMember = "Id";

@@ -74,7 +74,9 @@
             // 
             // treeMenu
             // 
+            treeMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             treeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            treeMenu.Font = new System.Drawing.Font("Segoe UI", 10F);
             treeMenu.Location = new System.Drawing.Point(0, 0);
             treeMenu.Name = "treeMenu";
             treeMenu.Size = new System.Drawing.Size(194, 691);
