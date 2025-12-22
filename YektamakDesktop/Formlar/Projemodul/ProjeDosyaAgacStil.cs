@@ -137,7 +137,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
                     if (string.IsNullOrEmpty(fileName)) continue;
 
-                    var pdfBytes = await _fileService.GetFile(fileName);
+                    var pdfBytes = await _fileService.GetFileDecompress(fileName);
                     if (pdfBytes == null) continue;
 
                     using (var reader = new iTextSharp.text.pdf.PdfReader(pdfBytes))

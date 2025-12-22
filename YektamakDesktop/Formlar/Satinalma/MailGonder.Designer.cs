@@ -92,7 +92,7 @@
             btnSendMail.FlatAppearance.BorderSize = 0;
             btnSendMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSendMail.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            btnSendMail.IconChar = FontAwesome.Sharp.IconChar.MailBulk;
+            btnSendMail.IconChar = FontAwesome.Sharp.IconChar.EnvelopesBulk;
             btnSendMail.IconColor = System.Drawing.Color.DeepSkyBlue;
             btnSendMail.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSendMail.IconSize = 24;

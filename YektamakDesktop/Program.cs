@@ -1,7 +1,15 @@
+using ApiService.Implementations;
+using ApiService.Interfaces;
+using Models.Models.Configuration;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.Cmp;
 using QuestPDF.Infrastructure;
 using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YektamakDesktop.Common;
 using YektamakDesktop.Formlar;
@@ -12,6 +20,8 @@ namespace YektamakDesktop
 {
     internal static class Program
     {
+        static IUpdateService updateService;
+
 
         /// <summary>
         ///  The main entry point for the application.
@@ -19,6 +29,7 @@ namespace YektamakDesktop
         [STAThread]
         static void Main()
         {
+            
             QuestPDF.Settings.License = LicenseType.Community; // ? Ücretsiz lisans
             QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = false;
             CultureInfo culture = new CultureInfo("tr-TR");
@@ -35,7 +46,22 @@ namespace YektamakDesktop
                 DIContainer.ConfigureServices();
                 DIContainer.GetService<PermissionManager>();
                 DIContainer.GetService<DataControlMenu>();
+                updateService = DIContainer.GetService<IUpdateService>();
+                var localVersion = Assembly.GetExecutingAssembly()
+                    .GetName()
+                    .Version;
+                var info = JsonConvert.DeserializeObject<UpdateInfo>(updateService.CheckForUpdate());
+                var remoteVersion = Version.Parse(info.Version);
+                if (remoteVersion > localVersion)
+                {
+                    var result = MessageBox.Show(
+                        $"Yeni sürüm mevcut ({remoteVersion}).\n\nGüncellemek ister misiniz?",
+                        "Güncelleme",
+                        MessageBoxButtons.YesNo);
 
+                    if (result == DialogResult.Yes)
+                        Application.Run(FormFactory.CreateForm<UpdateVersion>());
+                }
                 UserLogin loginForm = FormFactory.CreateForm<UserLogin>();
                 Application.Run(loginForm);
                 
@@ -52,6 +78,8 @@ namespace YektamakDesktop
                 }
             }
             Application.Exit();
+            
+
         }
     }
 }

@@ -30,11 +30,13 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IProjeService _projeService;
         private readonly IAnaVeriService _anaVeriService;
         private readonly IConvertHelper _convertHelper;
-        public SatinalmaTalepKayitFormu(ICache cache, ISatinalmaTalepService satinalmaTalepService, 
+        private readonly IFileService _fileService;
+        public SatinalmaTalepKayitFormu(ICache cache, ISatinalmaTalepService satinalmaTalepService,IFileService fileService,
             IJsonConverter jsonConverter, IProjeService projeService, IAnaVeriService anaVeriService, IConvertHelper convertHelper)
         {
             _cache = cache;
             _satinalmaTalepService = satinalmaTalepService;
+            _fileService = fileService;
             _jsonConverter = jsonConverter;
             _projeService = projeService;
             _anaVeriService = anaVeriService;
@@ -105,7 +107,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void roundedButton4_Click(object sender, EventArgs e)
         {
-            var rapor = new MalzemeTalepRaporu(satinalmaTalep);
+            var rapor = new MalzemeTalepRaporu(satinalmaTalep,_fileService);
             rapor.GeneratePdf($"MalzemeTalepFormu_{satinalmaTalep.satinalmaTalepNo}.pdf");
             this.Enabled = false;
             try

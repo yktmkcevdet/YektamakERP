@@ -53,13 +53,12 @@ namespace Api
             builder.Services.AddSingleton<TokenService>(sp => new TokenService(jwtSettings["SecretKey"]));
 
             var app = builder.Build();
-
+            
             // Middleware ayarlarý
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers(); // Controller'larý kullanabilmek için
-
             app.Run();
         }
     }

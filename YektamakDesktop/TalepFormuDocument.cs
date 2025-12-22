@@ -1,22 +1,22 @@
-﻿using iTextSharp.text;
+﻿using ApiService.Interfaces;
 using Models;
-using Models.DTO;
-using NPOI.SS.Formula.Functions;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
 public class MalzemeTalepRaporu : IDocument
 {
+    private readonly IFileService _fileService;
     public SatinalmaTalep Model { get; }
 
-    public MalzemeTalepRaporu(SatinalmaTalep model)
+    public MalzemeTalepRaporu(SatinalmaTalep model,IFileService fileService)
     {
+        _fileService = fileService;
         Model = model;
     }
 
@@ -174,11 +174,12 @@ public class MalzemeTalepRaporu : IDocument
     }
     private void Header_LogoCell(IContainer container)
     {
+        var logoPath = Path.Combine(AppContext.BaseDirectory, "Logo.png");
         container
             .Padding(3)
             .Width(120)
             .Height(60)
-            .Image("logo");
+            .Image(logoPath);
     }
     private void MidBold(IContainer container, string text,string color,float border,string fontFamily,float fontSize,int clampLines)
     {
@@ -301,18 +302,4 @@ public class MalzemeTalepRaporu : IDocument
             .DefaultTextStyle(x => x.FontSize(9));   // TÜM Text için font;         // Yatay hizalama
     }
 }
-public static class PdfAssets
-{
-    public static byte[] Logo => Load("logo.png");
 
-    private static byte[] Load(string name)
-    {
-        var asm = Assembly.GetExecutingAssembly();
-        var res = $"{asm.GetName().Name}.Resources.{name}";
-
-        using var s = asm.GetManifestResourceStream(res);
-        using var ms = new MemoryStream();
-        s.CopyTo(ms);
-        return ms.ToArray();
-    }
-}

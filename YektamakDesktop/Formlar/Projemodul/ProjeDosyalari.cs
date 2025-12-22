@@ -95,7 +95,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1))
                     {
                         string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosyaFullPath;
-                        var pdfBytes = await _fileService.GetFile(filePath);
+                        var pdfBytes = await _fileService.GetFileDecompress(filePath);
                         pdfPopup.GetInstance(pdfBytes);
                         pdfPopup.FormBorderStyle = FormBorderStyle.None;
                         pdfPopup.StartPosition = FormStartPosition.Manual;

@@ -1,4 +1,5 @@
 ﻿using ApiService.Interfaces;
+using System.Net.Http;
 using Utilities.Interfaces;
 
 namespace ApiService.Implementations
@@ -7,6 +8,7 @@ namespace ApiService.Implementations
     {
         private readonly IApiService _apiService;
         private readonly IFileHelper _fileHelper;
+        private readonly HttpClient _httpClient = new HttpClient();
 
         public FileService(IApiService apiService, IFileHelper fileHelper)
         {
@@ -18,10 +20,16 @@ namespace ApiService.Implementations
         {
             var response = _apiService.PostAsync(_fileHelper.Compress(data,fileName), "upload");
         }
-        public async Task<byte[]> GetFile(string fileId)
+        public async Task<byte[]> GetFileDecompress(string fileId)
         {
             var pdfBytes = await _apiService.GetAsyncByte($"download/{fileId}");
             return _fileHelper.Decompress(pdfBytes);
         }
+        public async Task<byte[]> GetFile(string fileId)
+        {
+            var pdfBytes = await _apiService.GetAsyncByte($"download/{fileId}");
+            return pdfBytes;
+        }
+
     }
 }

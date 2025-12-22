@@ -1,4 +1,5 @@
 ﻿using ApiService;
+using ApiService.Implementations;
 using ApiService.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Configuration;
@@ -88,6 +89,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<StokKartKayitFormu>();
             services.AddTransient<StokKartGridForm>();
             services.AddTransient<UniversalGrid>();
+            services.AddTransient<UpdateVersion>();
             services.AddTransient<UserLogin>();
             services.AddTransient<YetkiTanimlari>();
             services.Configure<PasswordHashingOptions>(options =>

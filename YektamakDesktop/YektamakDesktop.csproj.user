@@ -179,6 +179,9 @@
     <Compile Update="Formlar\Stok\StokKartKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\UpdateVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\UserLogin.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -233,7 +233,7 @@ namespace YektamakDesktop.Formlar.Satis
                 return;
             ProjeStokKart stokKart = new ProjeStokKart() { Id = int.Parse(ctbId.TextCustom) };
 
-            dosyaVeri = await _fileService.GetFile(ctbDosyaYolu.TextCustom);
+            dosyaVeri = await _fileService.GetFileDecompress(ctbDosyaYolu.TextCustom);
 
             string tempFilePath = Path.GetTempFileName() + "." + ctbDosyaUzanti.TextCustom;
             if (dosyaVeri != null)

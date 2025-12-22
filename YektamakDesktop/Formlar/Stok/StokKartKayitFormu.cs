@@ -475,7 +475,7 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
             }
 
-            dosyaVeri = await _fileService.GetFile(stokKart.dosyaList.First(d => d.Id == int.Parse(ctbId.TextCustom)).dosyaFullPath);
+            dosyaVeri = await _fileService.GetFileDecompress(stokKart.dosyaList.First(d => d.Id == int.Parse(ctbId.TextCustom)).dosyaFullPath);
             //dosyaVeri = stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosya;
 
             string tempFilePath = Path.GetTempFileName() + "." + ctbDosyaUzanti.TextCustom;

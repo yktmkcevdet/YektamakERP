@@ -38,6 +38,7 @@ namespace ApiService
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ICache, Cache>();
             services.AddSingleton<IDosyalamaService, DosyalamaService>();
+            services.AddSingleton<IUpdateService, UpdateService>();
             return services;
         }
     }

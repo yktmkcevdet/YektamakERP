@@ -61,7 +61,7 @@ namespace ApiService.Implementations
             {
                 Directory.CreateDirectory(filePath);
             }
-            File.WriteAllBytes(Path.Combine(filePath,skd.dosyaAd+Path.GetExtension(skd.dosyaFullPath)), await _fileService.GetFile(skd.dosyaFullPath));
+            File.WriteAllBytes(Path.Combine(filePath,skd.dosyaAd+Path.GetExtension(skd.dosyaFullPath)), await _fileService.GetFileDecompress(skd.dosyaFullPath));
         }
     }
 }
