@@ -5,7 +5,7 @@ public static class FaImageHelper
 {
     public static Bitmap Create(
         IconChar icon,
-        int size = 32,
+        int size = 24,
         Color? color = null)
     {
         var iconPictureBox = new IconPictureBox

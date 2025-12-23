@@ -20,6 +20,10 @@ namespace ApiService.Implementations
         {
             var response = _apiService.PostAsync(_fileHelper.Compress(data,fileName), "upload");
         }
+        public async Task DeleteFile(string filePath)
+        {
+            await _apiService.DeleteAsync($"delete/{filePath}");
+        }
         public async Task<byte[]> GetFileDecompress(string fileId)
         {
             var pdfBytes = await _apiService.GetAsyncByte($"download/{fileId}");

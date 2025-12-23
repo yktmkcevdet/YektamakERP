@@ -20,13 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
   </PropertyGroup>
-	<PropertyGroup>
-		<VersionPrefix>1.3</VersionPrefix>
-		<VersionSuffix>$(BuildNumber)</VersionSuffix>
-		<Version>$(VersionPrefix).$(VersionSuffix)</Version>
-		<AssemblyVersion>$(Version)</AssemblyVersion>
-		<FileVersion>$(Version)</FileVersion>
-	</PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="GlobalData\**" />
     <Compile Remove="Resimler\**" />
@@ -115,6 +109,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

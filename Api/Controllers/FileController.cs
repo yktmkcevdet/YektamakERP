@@ -77,6 +77,14 @@ namespace Api.Controllers
             var contentType = "application/octet-stream";
             return File(fileBytes, contentType, fileName);
         }
+        [HttpDelete("delete/{filePath}")]
+        public async Task<IActionResult> Delete(string filePath)
+        {
+            filePath = Path.Combine(_contentRootUploadPath, filePath);
 
+            System.IO.File.Delete(filePath);
+
+            return Ok(new { message = "Dosya başarıyla yüklendi.", path = filePath });
+        }
     }
 }

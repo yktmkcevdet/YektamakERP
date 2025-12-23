@@ -46,22 +46,22 @@ namespace YektamakDesktop
                 DIContainer.ConfigureServices();
                 DIContainer.GetService<PermissionManager>();
                 DIContainer.GetService<DataControlMenu>();
-                updateService = DIContainer.GetService<IUpdateService>();
-                var localVersion = Assembly.GetExecutingAssembly()
-                    .GetName()
-                    .Version;
-                var info = JsonConvert.DeserializeObject<UpdateInfo>(updateService.CheckForUpdate());
-                var remoteVersion = Version.Parse(info.Version);
-                if (remoteVersion > localVersion)
-                {
-                    var result = MessageBox.Show(
-                        $"Yeni sürüm mevcut ({remoteVersion}).\n\nGüncellemek ister misiniz?",
-                        "Güncelleme",
-                        MessageBoxButtons.YesNo);
+                //updateService = DIContainer.GetService<IUpdateService>();
+                //var localVersion = Assembly.GetExecutingAssembly()
+                //    .GetName()
+                //    .Version;
+                //var info = JsonConvert.DeserializeObject<UpdateInfo>(updateService.CheckForUpdate());
+                //var remoteVersion = Version.Parse(info.Version);
+                //if (remoteVersion > localVersion)
+                //{
+                //    var result = MessageBox.Show(
+                //        $"Yeni sürüm mevcut ({remoteVersion}).\n\nGüncellemek ister misiniz?",
+                //        "Güncelleme",
+                //        MessageBoxButtons.YesNo);
 
-                    if (result == DialogResult.Yes)
-                        Application.Run(FormFactory.CreateForm<UpdateVersion>());
-                }
+                //    if (result == DialogResult.Yes)
+                //        Application.Run(FormFactory.CreateForm<UpdateVersion>());
+                //}
                 UserLogin loginForm = FormFactory.CreateForm<UserLogin>();
                 Application.Run(loginForm);
                 

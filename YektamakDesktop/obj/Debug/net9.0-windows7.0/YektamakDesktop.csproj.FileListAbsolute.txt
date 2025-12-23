@@ -264,3 +264,4 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\ref\YektamakDesktop.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\Resources\logo1.png
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.UpdateVersion.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\logo.png

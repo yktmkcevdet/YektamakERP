@@ -48,7 +48,7 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(pnlLeftMenu, 0, 0);
             tableLayoutPanel1.Controls.Add(pnlTopMenu, 1, 1);
@@ -60,7 +60,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(1162, 727);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1339, 727);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // pnlLeftMenu
@@ -69,17 +69,17 @@
             pnlLeftMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             pnlLeftMenu.Location = new System.Drawing.Point(3, 3);
             pnlLeftMenu.Name = "pnlLeftMenu";
-            pnlLeftMenu.Size = new System.Drawing.Size(194, 691);
+            pnlLeftMenu.Size = new System.Drawing.Size(244, 691);
             pnlLeftMenu.TabIndex = 0;
             // 
             // treeMenu
             // 
             treeMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             treeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeMenu.Font = new System.Drawing.Font("Segoe UI", 10F);
+            treeMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
             treeMenu.Location = new System.Drawing.Point(0, 0);
             treeMenu.Name = "treeMenu";
-            treeMenu.Size = new System.Drawing.Size(194, 691);
+            treeMenu.Size = new System.Drawing.Size(244, 691);
             treeMenu.TabIndex = 0;
             treeMenu.MouseEnter += treeMenu_MouseEnter;
             treeMenu.MouseLeave += treeMenu_MouseLeave;
@@ -88,9 +88,9 @@
             // 
             pnlTopMenu.Controls.Add(flowTopMenu);
             pnlTopMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlTopMenu.Location = new System.Drawing.Point(203, 700);
+            pnlTopMenu.Location = new System.Drawing.Point(253, 700);
             pnlTopMenu.Name = "pnlTopMenu";
-            pnlTopMenu.Size = new System.Drawing.Size(956, 24);
+            pnlTopMenu.Size = new System.Drawing.Size(1083, 24);
             pnlTopMenu.TabIndex = 1;
             // 
             // flowTopMenu
@@ -99,23 +99,23 @@
             flowTopMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             flowTopMenu.Location = new System.Drawing.Point(0, 0);
             flowTopMenu.Name = "flowTopMenu";
-            flowTopMenu.Size = new System.Drawing.Size(956, 24);
+            flowTopMenu.Size = new System.Drawing.Size(1083, 24);
             flowTopMenu.TabIndex = 0;
             flowTopMenu.WrapContents = false;
             // 
             // tabMain
             // 
             tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabMain.Location = new System.Drawing.Point(203, 3);
+            tabMain.Location = new System.Drawing.Point(253, 3);
             tabMain.Name = "tabMain";
             tabMain.SelectedIndex = 0;
-            tabMain.Size = new System.Drawing.Size(956, 691);
+            tabMain.Size = new System.Drawing.Size(1083, 691);
             tabMain.TabIndex = 2;
             // 
             // btnToggleMenu
             // 
             btnToggleMenu.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnToggleMenu.Location = new System.Drawing.Point(171, 700);
+            btnToggleMenu.Location = new System.Drawing.Point(221, 700);
             btnToggleMenu.Name = "btnToggleMenu";
             btnToggleMenu.Size = new System.Drawing.Size(26, 23);
             btnToggleMenu.TabIndex = 1;
@@ -141,7 +141,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1162, 727);
+            ClientSize = new System.Drawing.Size(1339, 727);
             Controls.Add(tableLayoutPanel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";

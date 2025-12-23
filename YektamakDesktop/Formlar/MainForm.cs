@@ -33,11 +33,9 @@ namespace YektamakDesktop.Formlar
             InitializeComponent();
             menuImages = new ImageList
             {
-                ImageSize = new Size(16, 16),
+                ImageSize = new Size(24, 24),
                 ColorDepth = ColorDepth.Depth32Bit
             };
-            menuImages.Images.Add("satinalma", Properties.Resources.pngegg);
-            menuImages.Images.Add("stok", Properties.Resources.save);
 
             treeMenu.ImageList = menuImages;
             tabMain.DrawMode = TabDrawMode.OwnerDrawFixed; // şimdilik kalsın (ileride kapatma butonu için lazım)
@@ -461,7 +459,7 @@ namespace YektamakDesktop.Formlar
             foreach (AnaMenuDTO anaMenu in _cache.anaMenuList.OrderBy(a => a.siraNo))
             {
                 var rootNode = CreateHeaderTreeNode(anaMenu);
-                foreach (Yetki yetki in _cache.yetkiList.OrderBy(y => y.ekran.Id))
+                foreach (Yetki yetki in _cache.yetkiList.OrderBy(y => y.ekran.siraNo))
                 {
                     if (yetki.menu.ad.ToString() == anaMenu.ad)
                     {

@@ -47,7 +47,9 @@ namespace YektamakDesktop.CustomControls
 				{
 					_detailPanel = new Panel();
 					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + headerPanel.Height);
-					_detailPanel.Size = _detailSize;
+                    //_detailPanel.Size = _detailSize;
+                    _detailPanel.AutoSize = true;
+                    _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                     _detailPanel.AutoScroll = true;
                     _detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left  ;
                     _detailPanel.Scroll += DetailPanel_Scroll;
@@ -69,7 +71,9 @@ namespace YektamakDesktop.CustomControls
                 {
                     _headerPanel = new Panel();
                     _headerPanel.Location = _headerLocation;
-                    _headerPanel.Size = new Size(_detailSize.Width, 30);
+                    _headerPanel.AutoSize = true;
+                    _headerPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    _headerPanel.Height = 30;
                 }
                 return _headerPanel;
             }
@@ -218,6 +222,7 @@ namespace YektamakDesktop.CustomControls
 					label.Visible = labelVisible;
 					label.Width = labelWidth;
                     label.Height = headerPanel.Height;
+                    label.AutoSize = true;
 					label.Font = new Font("Segoe UI", 9, FontStyle.Bold, GraphicsUnit.Point);
 					controlPointX = controlPointX + Convert.ToInt32(labelWidth) + _columnSpace;
 					headerPanel.Controls.Add(label);

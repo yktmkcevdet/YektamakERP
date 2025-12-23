@@ -28,50 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            roundedIconButton1 = new RoundedIconButton();
+            ıconButton1 = new FontAwesome.Sharp.IconButton();
             SuspendLayout();
             // 
-            // roundedIconButton1
+            // ıconButton1
             // 
-            roundedIconButton1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            roundedIconButton1.AutoSize = true;
-            roundedIconButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            roundedIconButton1.BackColor = System.Drawing.Color.Cyan;
-            roundedIconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            roundedIconButton1.FlatAppearance.BorderSize = 0;
-            roundedIconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
-            roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedIconButton1.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
-            roundedIconButton1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            roundedIconButton1.ForeColor = System.Drawing.Color.Purple;
-            roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.Save;
-            roundedIconButton1.IconColor = System.Drawing.Color.Purple;
-            roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            roundedIconButton1.IconSize = 30;
-            roundedIconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedIconButton1.Location = new System.Drawing.Point(0, 0);
-            roundedIconButton1.Name = "roundedIconButton1";
-            roundedIconButton1.Size = new System.Drawing.Size(36, 36);
-            roundedIconButton1.TabIndex = 0;
-            roundedIconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            roundedIconButton1.UseVisualStyleBackColor = false;
-            roundedIconButton1.CornerRadius = 6;
-            roundedIconButton1.Click += roundedIconButton1_Click;
+            ıconButton1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            ıconButton1.BackColor = System.Drawing.Color.FromArgb(0, 192, 0);
+            ıconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            ıconButton1.FlatAppearance.BorderSize = 0;
+            ıconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            ıconButton1.IconChar = FontAwesome.Sharp.IconChar.Save;
+            ıconButton1.IconColor = System.Drawing.Color.White;
+            ıconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ıconButton1.IconSize = 36;
+            ıconButton1.Location = new System.Drawing.Point(0, 0);
+            ıconButton1.Margin = new System.Windows.Forms.Padding(0);
+            ıconButton1.Name = "ıconButton1";
+            ıconButton1.Size = new System.Drawing.Size(36, 36);
+            ıconButton1.TabIndex = 0;
+            ıconButton1.UseVisualStyleBackColor = false;
+            ıconButton1.Click += roundedIconButton1_Click;
             // 
             // CustomButtonSave
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Transparent;
-            Controls.Add(roundedIconButton1);
+            Controls.Add(ıconButton1);
             Name = "CustomButtonSave";
-            Size = new System.Drawing.Size(46, 46);
+            Size = new System.Drawing.Size(36, 36);
+            Load += CustomButtonSave_Load;
+            Click += roundedIconButton1_Click;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private RoundedIconButton roundedIconButton1;
+        private FontAwesome.Sharp.IconButton ıconButton1;
     }
 }

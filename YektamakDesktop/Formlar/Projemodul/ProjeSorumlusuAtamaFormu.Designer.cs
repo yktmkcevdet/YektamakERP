@@ -33,11 +33,11 @@
             fcbPersonel = new YektamakDesktop.CustomControls.FilterableComboBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
             universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             label3 = new System.Windows.Forms.Label();
-            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
+            customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
             SuspendLayout();
             // 
             // headerPanel1
@@ -105,15 +105,6 @@
             label2.TabIndex = 4;
             label2.Text = "Personel";
             // 
-            // customButtonSave1
-            // 
-            customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            customButtonSave1.BackColor = System.Drawing.Color.Transparent;
-            customButtonSave1.Location = new System.Drawing.Point(266, 191);
-            customButtonSave1.Name = "customButtonSave1";
-            customButtonSave1.Size = new System.Drawing.Size(106, 46);
-            customButtonSave1.TabIndex = 5;
-            // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
@@ -156,40 +147,49 @@
             label3.TabIndex = 8;
             label3.Text = "Id";
             // 
-            // roundedButton1
+            // customButtonSave1
             // 
-            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
-            roundedButton1.BorderColor = System.Drawing.Color.Black;
-            roundedButton1.BorderSize = 0;
-            roundedButton1.CornerRadius = 10;
-            roundedButton1.FlatAppearance.BorderSize = 0;
-            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButton1.ForeColor = System.Drawing.Color.White;
-            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
-            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
-            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
-            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
-            roundedButton1.Icon = null;
-            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(23, 191);
-            roundedButton1.Name = "roundedButton1";
-            roundedButton1.Size = new System.Drawing.Size(84, 40);
-            roundedButton1.TabIndex = 9;
-            roundedButton1.Text = "YENİ KAYIT";
-            roundedButton1.TextColor = System.Drawing.Color.White;
-            roundedButton1.UseVisualStyleBackColor = true;
-            roundedButton1.Click += RoundedButton1_Click;
+            customButtonSave1.BackColor = System.Drawing.Color.Transparent;
+            customButtonSave1.BorderColor = System.Drawing.Color.Black;
+            customButtonSave1.BorderSize = 0;
+            customButtonSave1.CornerRadius = 6;
+            customButtonSave1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonSave1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonSave1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonSave1.HoverColor2 = System.Drawing.Color.Navy;
+            customButtonSave1.Location = new System.Drawing.Point(303, 191);
+            customButtonSave1.Name = "customButtonSave1";
+            customButtonSave1.Size = new System.Drawing.Size(36, 36);
+            customButtonSave1.TabIndex = 10;
+            // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.BorderColor = System.Drawing.Color.Empty;
+            customButtonNewRecord1.BorderSize = 0;
+            customButtonNewRecord1.CausesValidation = false;
+            customButtonNewRecord1.CornerRadius = 6;
+            customButtonNewRecord1.ForeColor = System.Drawing.Color.FromArgb(192, 64, 0);
+            customButtonNewRecord1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonNewRecord1.GradientColor2 = System.Drawing.Color.FromArgb(192, 64, 0);
+            customButtonNewRecord1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonNewRecord1.HoverColor2 = System.Drawing.Color.Navy;
+            customButtonNewRecord1.Location = new System.Drawing.Point(42, 191);
+            customButtonNewRecord1.Margin = new System.Windows.Forms.Padding(0);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new System.Drawing.Size(36, 36);
+            customButtonNewRecord1.TabIndex = 11;
+            customButtonNewRecord1.Click += RoundedButton1_Click;
             // 
             // ProjeSorumlusuAtamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(484, 614);
-            Controls.Add(roundedButton1);
+            Controls.Add(customButtonNewRecord1);
+            Controls.Add(customButtonSave1);
             Controls.Add(label3);
             Controls.Add(ctbId);
             Controls.Add(universalGrid1);
-            Controls.Add(customButtonSave1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(fcbPersonel);
@@ -211,10 +211,10 @@
         private CustomControls.FilterableComboBox fcbPersonel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private CustomControls.CustomButtonSave customButtonSave1;
         private CustomControls.UniversalGrid universalGrid1;
         private CustomControls.CustomTextBox ctbId;
         private System.Windows.Forms.Label label3;
-        private CustomControls.RoundedButton roundedButton1;
+        private CustomControls.CustomButtonSave customButtonSave1;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
     }
 }

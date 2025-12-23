@@ -29,7 +29,7 @@ namespace YektamakDesktop
                     return CreateFormByType(type);
             }
 
-            throw new InvalidOperationException($"Form tipi bulunamadı: {formTypeName}");
+             throw new InvalidOperationException($"Form tipi bulunamadı: {formTypeName}");
         }
 
         public static T CreateForm<T>() where T : Form

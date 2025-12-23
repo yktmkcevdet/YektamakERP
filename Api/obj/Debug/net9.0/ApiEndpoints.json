@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "Api.Controllers.FileController",
+    "Method": "Delete",
+    "RelativePath": "api/delete/{filePath}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.FileController",
     "Method": "DownloadFile",
     "RelativePath": "api/download/{fileName}",
     "HttpMethod": "GET",
@@ -111,6 +127,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.VersionControl",
+    "Method": "Version",
+    "RelativePath": "api/version",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -28,39 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            roundedIconButton1 = new RoundedIconButton();
+            ıconButton1 = new FontAwesome.Sharp.IconButton();
             SuspendLayout();
             // 
-            // roundedIconButton1
+            // ıconButton1
             // 
-            roundedIconButton1.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
-            roundedIconButton1.FlatAppearance.BorderSize = 0;
-            roundedIconButton1.CornerRadius = 6;
-            roundedIconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedIconButton1.ForeColor = System.Drawing.Color.FromArgb(255, 255, 192);
-            roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.StarOfLife;
-            roundedIconButton1.IconColor = System.Drawing.Color.Green;
-            roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            roundedIconButton1.IconSize = 24;
-            roundedIconButton1.Location = new System.Drawing.Point(0, 0);
-            roundedIconButton1.Name = "roundedIconButton1";
-            roundedIconButton1.Size = new System.Drawing.Size(36, 36);
-            roundedIconButton1.TabIndex = 0;
-            roundedIconButton1.UseVisualStyleBackColor = false;
+            ıconButton1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            ıconButton1.BackColor = System.Drawing.Color.FromArgb(192, 64, 0);
+            ıconButton1.FlatAppearance.BorderSize = 0;
+            ıconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            ıconButton1.IconChar = FontAwesome.Sharp.IconChar.Asterisk;
+            ıconButton1.IconColor = System.Drawing.Color.Yellow;
+            ıconButton1.IconFont = FontAwesome.Sharp.IconFont.Brands;
+            ıconButton1.IconSize = 24;
+            ıconButton1.Location = new System.Drawing.Point(0, 0);
+            ıconButton1.Margin = new System.Windows.Forms.Padding(0);
+            ıconButton1.Name = "ıconButton1";
+            ıconButton1.Size = new System.Drawing.Size(36, 36);
+            ıconButton1.TabIndex = 1;
+            ıconButton1.UseVisualStyleBackColor = false;
             // 
             // CustomButtonNewRecord
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(roundedIconButton1);
+            Controls.Add(ıconButton1);
+            Cursor = System.Windows.Forms.Cursors.Hand;
+            ForeColor = System.Drawing.Color.White;
+            Margin = new System.Windows.Forms.Padding(0);
             Name = "CustomButtonNewRecord";
             Size = new System.Drawing.Size(36, 36);
-            Load += CustomButtonNewRecord_Load;
             ResumeLayout(false);
         }
 
         #endregion
-
-        private RoundedIconButton roundedIconButton1;
+        private FontAwesome.Sharp.IconButton ıconButton1;
     }
 }

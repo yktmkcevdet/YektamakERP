@@ -334,13 +334,19 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             customButtonSave1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
+            customButtonSave1.BorderColor = System.Drawing.Color.Black;
+            customButtonSave1.BorderSize = 0;
+            customButtonSave1.CornerRadius = 6;
+            customButtonSave1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonSave1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonSave1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonSave1.HoverColor2 = System.Drawing.Color.Navy;
             customButtonSave1.Location = new System.Drawing.Point(757, 248);
             customButtonSave1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(36, 38);
             customButtonSave1.TabIndex = 17;
             customButtonSave1.SaveButtonClick += customButtonSave1_SaveButtonClick;
-            customButtonSave1.Click += roundedButton1_Click;
             // 
             // universalGrid1
             // 
@@ -436,10 +442,20 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             // customButtonNewRecord1
             // 
+            customButtonNewRecord1.BorderColor = System.Drawing.Color.Black;
+            customButtonNewRecord1.BorderSize = 0;
+            customButtonNewRecord1.CornerRadius = 6;
+            customButtonNewRecord1.ForeColor = System.Drawing.Color.White;
+            customButtonNewRecord1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonNewRecord1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonNewRecord1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonNewRecord1.HoverColor2 = System.Drawing.Color.Navy;
             customButtonNewRecord1.Location = new System.Drawing.Point(45, 250);
+            customButtonNewRecord1.Margin = new System.Windows.Forms.Padding(0);
             customButtonNewRecord1.Name = "customButtonNewRecord1";
             customButtonNewRecord1.Size = new System.Drawing.Size(36, 36);
             customButtonNewRecord1.TabIndex = 24;
+            customButtonNewRecord1.Click += roundedButton1_Click;
             // 
             // ProjeTanimlamaFormu
             // 

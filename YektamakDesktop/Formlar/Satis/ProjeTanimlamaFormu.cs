@@ -34,8 +34,8 @@ namespace YektamakDesktop.Formlar.Satis
             _convertHelper = convertHelper;
             InitializeComponent();
             customDataGrid = new CustomDataGrid<DataControlProjeDosya>(2, 30, new Point(0, 0), new Size(990, 300));
-            panel1.Controls.Add(customDataGrid.headerPanel);
             panel1.Controls.Add(customDataGrid.detailPanel);
+            panel1.Controls.Add(customDataGrid.headerPanel);
             Initialize();
         }
         private void Initialize()
@@ -46,7 +46,7 @@ namespace YektamakDesktop.Formlar.Satis
             int locationX = universalGrid1.Location.X;
             Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom |  AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             universalGrid1.Location = new Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
@@ -56,7 +56,7 @@ namespace YektamakDesktop.Formlar.Satis
 
             universalGrid1.SetData(new List<ProjeDTO>(), this.Name);
             universalGrid1.SetData(_cache.projeList
-                .GroupBy(p =>  p.Id )
+                .GroupBy(p => p.Id)
                 .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             fcbProjeTip.SetDataSource(_cache.projeTipList);
             fcbMarka.SetDataSource(_cache.markaList);
@@ -93,10 +93,22 @@ namespace YektamakDesktop.Formlar.Satis
             BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
             BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
             BindHelper.BindData(ctbVersiyon, proje, nameof(proje.versiyon));
-
+            List<DataControlProjeDosya> dataControlProjeDosyas = new();
+            foreach (var projeDosya in proje.projeDosyaList)
+            {
+                DataControlProjeDosya dataControlProjeDosya = DIContainer.GetService<DataControlProjeDosya>();
+                dataControlProjeDosya.projeDosya = projeDosya;
+                dataControlProjeDosyas.Add(dataControlProjeDosya);
+            }
+            customDataGrid.dataSource = dataControlProjeDosyas;
         }
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
+            foreach (var dc in customDataGrid.dataSource.Where(d => d.newRec == false))
+            {
+                dc.projeDosya.projeId = int.Parse(ctbId.TextCustom);
+                proje.projeDosyaList.Add(dc.projeDosya);
+            }
             string jsonResultMarka = _projeService.GetMarka();
             proje.marka = _jsonConverter.DeserializeObject<List<Marka>>(jsonResultMarka).FirstOrDefault(m => m.Id == proje.marka.Id);
             string jsonResult = _projeService.SaveProje(proje);
@@ -110,7 +122,7 @@ namespace YektamakDesktop.Formlar.Satis
                 proje = JsonConvert.DeserializeObject<List<Proje>>(jsonResult)[0];
                 _cache.projeList.Add(proje);
                 universalGrid1.SetData(_cache.projeList
-                    .GroupBy(p =>  p.Id )
+                    .GroupBy(p => p.Id)
                     .Select(g => _convertHelper.ToDTO<ProjeDTO>(g.First())).ToList(), this.Name);
             }
         }
@@ -150,13 +162,13 @@ namespace YektamakDesktop.Formlar.Satis
             universalGrid1.SaveGridSettings();
         }
     }
-    public class DataControlProjeDosya : DataControl, IEntity, IAltForm
+    public class DataControlProjeDosya : DataControl, IEntity
     {
-        public CustomTextBoxSayisal ctbId { get; set; } = new() { TabIndex = 3, Width = 0, Visible = false, Tag = "Id"};
+        public CustomTextBox ctbId { get; set; } = new() { TabIndex = 3, Width = 0, Visible = false, Tag = "Id"};
         public CustomTextBoxSayisal ctbProjeId { get; set; } = new() { TabIndex = 4, Width = 0, Visible = false, Tag = "ProjeId"};
-        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 200, Visible = true, Tag = "Dosya Tanımı"};
-        public CustomTextBox ctbDosyaYolu { get; set; } = new() {TabIndex = 6, Width = 300, Visible = true, Tag = "Dosya Yolu" };
-        public CustomTextBox ctbDosyaUzanti { get; set; } = new() {TabIndex = 6, Width = 50, Visible = true, Tag = "Uzantı" };
+        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 180, Visible = true, Tag = "Dosya Tanımı"};
+        public CustomTextBox ctbDosyaYolu { get; set; } = new() {TabIndex = 6, Width = 280, Visible = true, Tag = "Dosya Yolu" };
+        public CustomTextBox ctbDosyaUzanti { get; set; } = new() {TabIndex = 7, Width = 30, Visible = true, Tag = "Uzantı" };
         public RoundedIconButton btnAdd { get; set; }
         public RoundedIconButton btnView { get; set; }
         public byte[] dosyaVeri { get; set; }
@@ -168,6 +180,7 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_projeDosya == null)
                 {
                     _projeDosya = new();
+                    Binding();
                 }
                 return _projeDosya;
             }
@@ -180,6 +193,9 @@ namespace YektamakDesktop.Formlar.Satis
         private readonly IProjeService _projeService;
         private readonly IFileHelper _fileHelper;
         private readonly IFileService _fileService;
+        public DataControlProjeDosya()
+        {
+        }
         public DataControlProjeDosya(IProjeService projeService, IFileHelper fileHelper, IFileService fileService)
         {
             _projeService = projeService;
@@ -187,7 +203,7 @@ namespace YektamakDesktop.Formlar.Satis
             _fileService = fileService;
             btnAdd = new()
             {
-                TabIndex = 6,
+                TabIndex = 8,
                 Width = 35,
                 Height = 25,
                 Tag = " Ekle",
@@ -199,7 +215,7 @@ namespace YektamakDesktop.Formlar.Satis
             btnAdd.Click += ButtonDosyaEkle_Click;
             btnView = new()
             {
-                TabIndex = 7,
+                TabIndex = 9,
                 Width = 35,
                 Height = 25,
                 Tag = "Göster",
@@ -210,16 +226,15 @@ namespace YektamakDesktop.Formlar.Satis
             };
             btnView.Click += ButtonDosyaGoruntule_Click;
             buttonSil.Click += ButtonSil_Click;
+
         }
 
-        public DataControlProjeDosya()
-        {
-        }
+
 
         private void ButtonSil_Click(object sender, EventArgs e)
         {
-            ProjeDosya projeDosya = new();
             if (ctbId.TextCustom != "") projeDosya.Id = Convert.ToInt32(ctbId.TextCustom.Replace(".", ""));
+            _fileService.DeleteFile(projeDosya.dosyaFullPath);
             string jsonResult = _projeService.DeleteProjeFile(projeDosya);
             if (!string.IsNullOrEmpty(jsonResult))
             {
@@ -233,7 +248,7 @@ namespace YektamakDesktop.Formlar.Satis
                 return;
             ProjeStokKart stokKart = new ProjeStokKart() { Id = int.Parse(ctbId.TextCustom) };
 
-            dosyaVeri = await _fileService.GetFileDecompress(ctbDosyaYolu.TextCustom);
+            dosyaVeri = await _fileService.GetFileDecompress(projeDosya.dosyaFullPath);
 
             string tempFilePath = Path.GetTempFileName() + "." + ctbDosyaUzanti.TextCustom;
             if (dosyaVeri != null)
@@ -250,24 +265,20 @@ namespace YektamakDesktop.Formlar.Satis
             }
         }
 
-        private void ButtonDosyaEkle_Click(object sender, EventArgs e)
+        private async void ButtonDosyaEkle_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //projeDosya.tanim = File.ReadAllBytes(openFileDialog.FileName);
                 projeDosya.tanim = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 projeDosya.dosyaYolu = openFileDialog.FileName;
                 projeDosya.uzanti = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+                var content = await _fileHelper.ReadFileAsBinaryAsync(openFileDialog.FileName);
+                if (content == null) return;
+                projeDosya.dosyaFullPath = Path.Combine(Guid.NewGuid() + Path.GetExtension(openFileDialog.FileName));
+                _fileService.SaveFile(content, projeDosya.dosyaFullPath);
                 Binding();
-                //dosyaAdControl.TextCustom = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                //dosyaUzantiControl.TextCustom = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
             }
-        }
-
-        public void UstFormuBagla(IUstForm ustForm)
-        {
-            throw new System.NotImplementedException();
         }
         private void Binding()
         {
