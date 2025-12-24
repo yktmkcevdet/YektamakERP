@@ -109,7 +109,7 @@ namespace YektamakDesktop.Formlar.Satis
             }
             //string jsonResultMarka = _projeService.GetMarka();
             //proje.marka = _jsonConverter.DeserializeObject<List<Marka>>(jsonResultMarka).FirstOrDefault(m => m.Id == proje.marka.Id);
-            string jsonResult = _projeService.SaveProje(_convertHelper.ToEntity<Proje>(proje));
+            string jsonResult = _projeService.SaveProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show($"Kaydederken hata: {jsonResult}");
@@ -134,16 +134,15 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void projeSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var projeDTO = (ProjeDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            string jsonResult = _projeService.DeleteProje(_convertHelper.ToEntity<Proje>(proje));
+            proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            string jsonResult = _projeService.DeleteProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Sonuç boş geldi.");
             }
             else
             {
-                proje = new();
-                universalGrid1.binding.Remove(projeDTO);
+                universalGrid1.binding.Remove(proje);
                 _cache.projeList.Remove(_cache.projeList.FirstOrDefault(p => p.Id == proje.Id));
             }
         }

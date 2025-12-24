@@ -622,7 +622,14 @@ namespace YektamakDesktop.CustomControls
                 ctl.DisplayMember = this.DisplayMember;
                 ctl.ValueMember = this.ValueMember;
                 ctl.SetDataSource(ItemsSource);
-                ctl.SelectedValue = this.Value; // Eğer hücrede bir değer varsa, göster
+                if(this.Value is IEntity)
+                {
+                    ctl.SelectedItem = this.Value; // Eğer hücrede bir değer varsa, göster
+                }
+                else
+                {
+                    ctl.SelectedValue = this.Value;
+                }
             }
         }
         protected override object GetFormattedValue(object value,
@@ -640,6 +647,12 @@ namespace YektamakDesktop.CustomControls
                     {
                         dynamic dynItem = x;
                         var val = GetPropValue(dynItem, this.ValueMember);
+                        if(value is IEntity)
+                        {
+                            bool rr = val != null && val.Equals(value);
+                            var res = Comparer<object>.Default.Compare(JsonConvert.SerializeObject(value), JsonConvert.SerializeObject(dynItem));
+                            return val != null && res == 0;
+                        }
                         return val != null && val.Equals(value);
                     }
                     catch
@@ -652,6 +665,10 @@ namespace YektamakDesktop.CustomControls
                 {
                     var dispProp = item.GetType().GetProperty(this.DisplayMember);
                     return dispProp?.GetValue(item)?.ToString() ?? base.GetFormattedValue(value, rowIndex, ref cellStyle, valueTypeConverter, formattedValueTypeConverter, context);
+                }
+                else
+                {
+                    return null;
                 }
             }
 
