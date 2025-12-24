@@ -410,6 +410,7 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.AutoScroll = true;
+            panel1.AutoSize = true;
             panel1.Location = new System.Drawing.Point(348, 120);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(488, 112);

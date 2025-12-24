@@ -34,7 +34,7 @@
             // ıconButton1
             // 
             ıconButton1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            ıconButton1.BackColor = System.Drawing.Color.FromArgb(192, 64, 0);
+            ıconButton1.BackColor = System.Drawing.Color.MediumTurquoise;
             ıconButton1.FlatAppearance.BorderSize = 0;
             ıconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             ıconButton1.IconChar = FontAwesome.Sharp.IconChar.Asterisk;

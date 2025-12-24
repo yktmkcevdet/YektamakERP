@@ -30,7 +30,7 @@ namespace YektamakDesktop.CustomControls
             set
             {
                 _dataSource = value;
-                FillDataRows();
+                if(_dataSource.Count>0)FillDataRows();
             }
         }
         int controlPointY;
@@ -38,31 +38,7 @@ namespace YektamakDesktop.CustomControls
         int _rowSpace;
         public Point _headerLocation;
         public Size _detailSize;
-		private Panel _detailPanel;
-		public Panel detailPanel
-		{
-			get
-			{
-				if (_detailPanel == null)
-				{
-					_detailPanel = new Panel();
-					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + headerPanel.Height);
-                    //_detailPanel.Size = _detailSize;
-                    _detailPanel.AutoSize = true;
-                    _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                    _detailPanel.AutoScroll = true;
-                    _detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left  ;
-                    _detailPanel.Scroll += DetailPanel_Scroll;
-					AddDataRow(DIContainer.GetService<T>());
-				}
-				return _detailPanel;
-			}
-			set
-			{
-				_detailPanel = value;
-			}
-		}
-		private Panel _headerPanel;
+        private Panel _headerPanel;
         public Panel headerPanel
         {
             get
@@ -82,6 +58,32 @@ namespace YektamakDesktop.CustomControls
                 _headerPanel = value;
             }
         }
+        private Panel _detailPanel;
+		public Panel detailPanel
+		{
+			get
+			{
+				if (_detailPanel == null)
+				{
+					_detailPanel = new Panel();
+					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + 30);
+                    //_detailPanel.Size = _detailSize;
+                    _detailPanel.AutoSize = true;
+                    _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    _detailPanel.AutoScroll = true;
+                    _detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left  ;
+                    _detailPanel.Scroll += DetailPanel_Scroll;
+                    _detailPanel.Height = _detailPanel.Height + 30;
+					AddDataRow(DIContainer.GetService<T>());
+				}
+				return _detailPanel;
+			}
+			set
+			{
+				_detailPanel = value;
+			}
+		}
+		
         public CustomDataGrid(int columnSpace, int rowSpace, Point headerLocation, Size detailSize, T entity = null)
         {
             _columnSpace = columnSpace;
@@ -218,10 +220,10 @@ namespace YektamakDesktop.CustomControls
 					var isim = control.Tag;
 					label.Text = isim.ToString();
 					int labelWidth = Convert.ToInt32(control.Width);
-					bool labelVisible = control.Visible;
+					bool labelVisible = labelWidth==0?false:control.Visible;
 					label.Visible = labelVisible;
 					label.Width = labelWidth;
-                    label.Height = headerPanel.Height;
+                    //label.Height = headerPanel.Height;
                     label.AutoSize = true;
 					label.Font = new Font("Segoe UI", 9, FontStyle.Bold, GraphicsUnit.Point);
 					controlPointX = controlPointX + Convert.ToInt32(labelWidth) + _columnSpace;

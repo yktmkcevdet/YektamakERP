@@ -121,11 +121,12 @@ namespace YektamakDesktop.CustomControls
 
                     if (listValue is IEnumerable<object> rawList)
                     {
-                        var dataSource = rawList.Select(x => new
-                        {
-                            Id = x.GetType().GetProperty("Id")?.GetValue(x),
-                            ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
-                        }).ToList();
+                        var dataSource = rawList;
+                        //.Select(x => new
+                        //{
+                        //    Id = x.GetType().GetProperty("Id")?.GetValue(x),
+                        //    ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
+                        //}).ToList();
                         var comboColumn = new FilterableComboBoxColumn
                         {
                             DataPropertyName = pair.Property.Name,

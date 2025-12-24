@@ -18,6 +18,8 @@ namespace Models.DTO
         [GridDisplay(Header = "Proje Tip Kod")] public string projeTipkod { get; set; }
         [GridDisplay(Header ="Sipariş No")]public int? satisSiparisId { get; set; }
         [GridDisplay(Header ="Miras Alına Proje", Tip ="Liste", ListName = "projes", ListVisibleColumnName ="kod")]public int? mirasProjeId { get; set; }
-        public List<ProjeDosya> projeDosyaList { get; set; }
+        private List<ProjeDosya> _projeDosyaList;
+        public List<ProjeDosya> projeDosyaList { get => _projeDosyaList ??= new List<ProjeDosya>(); set => _projeDosyaList = value;
+        }
     }
 }

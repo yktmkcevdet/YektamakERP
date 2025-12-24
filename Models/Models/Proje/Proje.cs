@@ -62,7 +62,7 @@ namespace Models
         private List<ProjeSorumlu> _sorumluList;
         public List<ProjeSorumlu> sorumluList { get { if (_sorumluList == null) { _sorumluList = new(); } return _sorumluList; } set { _sorumluList = value; } }
         private ProjeTip _projeTip;
-        [GridDisplay(Header = "Proje Tipi", Tip = "Liste", ListName = "projeTipList",ListVisibleColumnName ="ad",readOnly =false)]
+        [GridDisplay(Header = "Proje Tipi", Tip = "Liste", ListName = "projeTipList", ListVisibleColumnName ="ad",readOnly =false)]
         public ProjeTip projeTip { get { if (_projeTip == null) { _projeTip = new(); } return _projeTip; } set { _projeTip = value; } }
         
         public int? satisSiparisId { get; set; }

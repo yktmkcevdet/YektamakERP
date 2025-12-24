@@ -14,6 +14,7 @@ namespace Models
         public string dosyaYolu { get; set; }
         public string uzanti { get; set; }
         public string dosyaFullPath { get; set; }
+        public bool active { get; set; }
         public DateTime yuklenmeTarihi { get; set; }
         private Kullanici _yukleyenKullanici;
         public Kullanici yukleyenKullanici
