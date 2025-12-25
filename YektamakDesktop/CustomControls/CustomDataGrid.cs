@@ -30,7 +30,7 @@ namespace YektamakDesktop.CustomControls
             set
             {
                 _dataSource = value;
-                if(_dataSource.Count>0)FillDataRows();
+                FillDataRows();
             }
         }
         int controlPointY;
@@ -48,7 +48,8 @@ namespace YektamakDesktop.CustomControls
                     _headerPanel = new Panel();
                     _headerPanel.Location = _headerLocation;
                     _headerPanel.AutoSize = true;
-                    _headerPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    //_headerPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    //_headerPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
                     _headerPanel.Height = 30;
                 }
                 return _headerPanel;
@@ -69,11 +70,11 @@ namespace YektamakDesktop.CustomControls
 					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + 30);
                     //_detailPanel.Size = _detailSize;
                     _detailPanel.AutoSize = true;
-                    _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                   // _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                     _detailPanel.AutoScroll = true;
-                    _detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left  ;
+                    //_detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom ;
                     _detailPanel.Scroll += DetailPanel_Scroll;
-                    _detailPanel.Height = _detailPanel.Height + 30;
+                    //_detailPanel.Height = _detailPanel.Height + 30;
 					AddDataRow(DIContainer.GetService<T>());
 				}
 				return _detailPanel;
@@ -164,7 +165,7 @@ namespace YektamakDesktop.CustomControls
                     Control control = (Control)propertyInfo.GetValue(dataCtl);
                     if (control != null)
                     {
-                        if ((string)control.Tag == "No")
+                        if ((string)control.Tag == "#")
                         {
                             control.TextChanged -= ControlValueChange;
                             control.Text = orderNr++.ToString();
@@ -211,9 +212,9 @@ namespace YektamakDesktop.CustomControls
         {
             int controlPointX = 7;
             if(headerPanel.Controls.Count>0) return;
-            foreach (Control control in listControl.Where(p=>p!=null).OrderBy(p => p.TabIndex))
+            foreach (Control control in listControl.Where(p=>p!=null && p.Visible).OrderBy(p => p.TabIndex))
             {
-				if (control.Tag != null)
+				if (control.Tag != null && control.Tag!="Sil") 
 				{
 					Label label = new Label();
 					label.Location = new Point(controlPointX, 0);
@@ -314,9 +315,9 @@ namespace YektamakDesktop.CustomControls
             int leftPadding = 7;
             controlPointY =controlPointY - detailPanel.VerticalScroll.Value;
             leftPadding=leftPadding - detailPanel.HorizontalScroll.Value;
-            foreach (Control control in  listControl.Where(p=>p!=null).OrderBy(p=>p.TabIndex))
+            foreach (Control control in  listControl.Where(p=>p!=null && p.Visible).OrderBy(p=>p.TabIndex))
             {
-                if((string)control.Tag == "No")
+                if((string)control.Tag == "#")
                 {
                     control.TextChanged -= ControlValueChange;
                     control.Text = orderNr++.ToString();

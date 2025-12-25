@@ -60,7 +60,10 @@ namespace YektamakDesktop.Formlar.Satis
             panel1 = new System.Windows.Forms.Panel();
             ctbVersiyon = new CustomTextBox();
             customButtonNewRecord1 = new CustomButtonNewRecord();
+            label9 = new System.Windows.Forms.Label();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
             contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // headerPanel1
@@ -73,7 +76,7 @@ namespace YektamakDesktop.Formlar.Satis
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(859, 22);
+            headerPanel1.Size = new System.Drawing.Size(891, 22);
             headerPanel1.TabIndex = 0;
             // 
             // ctbId
@@ -101,6 +104,7 @@ namespace YektamakDesktop.Formlar.Satis
             ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbId.TextCustom = "";
             ctbId.UnderlinedStyle = false;
+            ctbId.TextChanged += ctbId_TextChanged;
             // 
             // fcbProjeTip
             // 
@@ -341,7 +345,7 @@ namespace YektamakDesktop.Formlar.Satis
             customButtonSave1.GradientColor2 = System.Drawing.Color.MidnightBlue;
             customButtonSave1.HoverColor1 = System.Drawing.Color.RoyalBlue;
             customButtonSave1.HoverColor2 = System.Drawing.Color.Navy;
-            customButtonSave1.Location = new System.Drawing.Point(757, 248);
+            customButtonSave1.Location = new System.Drawing.Point(295, 248);
             customButtonSave1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(36, 38);
@@ -354,7 +358,7 @@ namespace YektamakDesktop.Formlar.Satis
             universalGrid1.Location = new System.Drawing.Point(37, 292);
             universalGrid1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(799, 326);
+            universalGrid1.Size = new System.Drawing.Size(831, 326);
             universalGrid1.TabIndex = 18;
             // 
             // ctbProjeNo
@@ -410,10 +414,10 @@ namespace YektamakDesktop.Formlar.Satis
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.AutoScroll = true;
-            panel1.AutoSize = true;
-            panel1.Location = new System.Drawing.Point(348, 120);
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Location = new System.Drawing.Point(347, 161);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(488, 112);
+            panel1.Size = new System.Drawing.Size(520, 121);
             panel1.TabIndex = 22;
             // 
             // ctbVersiyon
@@ -458,11 +462,34 @@ namespace YektamakDesktop.Formlar.Satis
             customButtonNewRecord1.TabIndex = 24;
             customButtonNewRecord1.Click += roundedButton1_Click;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            label9.ForeColor = System.Drawing.Color.Red;
+            label9.Location = new System.Drawing.Point(366, 138);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(87, 19);
+            label9.TabIndex = 25;
+            label9.Text = "Ek Dosyalar";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.icons8_attachment_24;
+            pictureBox1.Location = new System.Drawing.Point(347, 140);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(22, 18);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 26;
+            pictureBox1.TabStop = false;
+            // 
             // ProjeTanimlamaFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(859, 630);
+            ClientSize = new System.Drawing.Size(891, 630);
+            Controls.Add(pictureBox1);
+            Controls.Add(label9);
             Controls.Add(customButtonNewRecord1);
             Controls.Add(ctbVersiyon);
             Controls.Add(panel1);
@@ -494,6 +521,7 @@ namespace YektamakDesktop.Formlar.Satis
             Text = "ProjeTanimlamaFormu";
             FormClosing += ProjeTanimlamaFormu_FormClosing;
             contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -526,5 +554,7 @@ namespace YektamakDesktop.Formlar.Satis
         private System.Windows.Forms.Panel panel1;
         private CustomTextBox ctbVersiyon;
         private CustomButtonNewRecord customButtonNewRecord1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

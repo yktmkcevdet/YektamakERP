@@ -13,15 +13,20 @@ using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Properties;
+using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace YektamakDesktop.Formlar.Satis
 {
-    public partial class ProjeTanimlamaFormu : Form
+    public partial class ProjeTanimlamaFormu : Form, IUstForm
     {
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
         private readonly IJsonConverter _jsonConverter;
         private readonly IConvertHelper _convertHelper;
+        public event EventHandler<object> VeriDegisti;
+        private string _initialStateJson;
+
         private CustomDataGrid<DataControlProjeDosya> customDataGrid;
         public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter, IConvertHelper convertHelper)
         {
@@ -30,13 +35,12 @@ namespace YektamakDesktop.Formlar.Satis
             _jsonConverter = jsonConverter;
             _convertHelper = convertHelper;
             InitializeComponent();
-            customDataGrid = new CustomDataGrid<DataControlProjeDosya>(2, 30, new Point(0, 0), new Size(990, 300));
-            panel1.Controls.Add(customDataGrid.detailPanel);
-            panel1.Controls.Add(customDataGrid.headerPanel);
             Initialize();
         }
         private void Initialize()
         {
+            InitializeCustomGrid();
+
             int sizeX = universalGrid1.Size.Width;
             int sizeY = universalGrid1.Size.Height;
             int locationY = universalGrid1.Location.Y;
@@ -62,7 +66,8 @@ namespace YektamakDesktop.Formlar.Satis
             Binding();
         }
         private Proje _proje;
-        private Proje proje
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Proje proje
         {
             get
             {
@@ -74,19 +79,31 @@ namespace YektamakDesktop.Formlar.Satis
             }
             set
             {
-                _proje = value;
+                _proje=value;
+                _initialStateJson = JsonConvert.SerializeObject(proje);
                 Binding();
             }
         }
+
+        private void InitializeCustomGrid()
+        {
+            int dataControlHeight = panel1.Height;
+            int dataControlWidth = panel1.Width;
+            customDataGrid = new CustomDataGrid<DataControlProjeDosya>(2, 27, new Point(0, 0), new Size(dataControlWidth, dataControlHeight));
+            customDataGrid.SetUstForm(this);
+            panel1.Controls.Add(customDataGrid.detailPanel);
+            panel1.Controls.Add(customDataGrid.headerPanel);
+        }
+
         private void Binding()
         {
             BindHelper.BindData(ctbId, proje, nameof(proje.Id));
-            BindHelper.BindData(fcbProjeTip, proje, p=>p.projeTip);
+            BindHelper.BindData(fcbProjeTip, proje, p => p.projeTip);
             BindHelper.BindData(fcbMarka, proje, p => p.marka);
             BindHelper.BindData(ctbProjeNo, proje, nameof(proje.projeNo));
             BindHelper.BindData(fcbMirasProje, proje, nameof(proje.mirasProjeId));
-            BindHelper.BindData(fcbMarkaAltGrup, proje, p=>p.markaAltGrup);
-            BindHelper.BindData(fcbMarkaAltGrupKategori, proje, p=>p.markaAltGrupKategori);
+            BindHelper.BindData(fcbMarkaAltGrup, proje, p => p.markaAltGrup);
+            BindHelper.BindData(fcbMarkaAltGrupKategori, proje, p => p.markaAltGrupKategori);
             BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
             BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
             BindHelper.BindData(ctbVersiyon, proje, nameof(proje.versiyon));
@@ -94,7 +111,6 @@ namespace YektamakDesktop.Formlar.Satis
             foreach (var projeDosya in proje.projeDosyaList.Where(p => p.active == true))
             {
                 DataControlProjeDosya dataControlProjeDosya = DIContainer.GetService<DataControlProjeDosya>();
-                dataControlProjeDosya.proje = proje;
                 dataControlProjeDosya.projeDosya = projeDosya;
                 dataControlProjeDosyas.Add(dataControlProjeDosya);
             }
@@ -125,6 +141,7 @@ namespace YektamakDesktop.Formlar.Satis
         }
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
+            SaveControl(new FormClosingEventArgs(CloseReason.UserClosing, false));
             proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
             if (e.Button == MouseButtons.Right)
             {
@@ -154,18 +171,56 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void ProjeTanimlamaFormu_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveControl(e);
             universalGrid1.SaveGridSettings();
         }
 
+        private void SaveControl(FormClosingEventArgs e)
+        {
+            bool isDirty = _initialStateJson != JsonConvert.SerializeObject(proje);
+            if (isDirty)
+            {
+                var result = MessageBox.Show("Yapılan değişiklikler kaydedilmedi. Kaydetmek ister misiniz?", "Değişiklikler Kaydedilmedi", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    customButtonSave1_SaveButtonClick(this, EventArgs.Empty);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true; // Formun kapanmasını iptal et
+                }
+            }
+        }
+        private void SaveControl(MouseEventArgs e)
+        {
+            bool isDirty = _initialStateJson != JsonConvert.SerializeObject(proje);
+            if (isDirty)
+            {
+                var result = MessageBox.Show("Yapılan değişiklikler kaydedilmedi. Kaydetmek ister misiniz?", "Değişiklikler Kaydedilmedi", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    customButtonSave1_SaveButtonClick(this, EventArgs.Empty);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    //e. = true; // Formun kapanmasını iptal et
+                }
+            }
+        }
+        private void ctbId_TextChanged(object sender, EventArgs e)
+        {
+            VeriDegisti?.Invoke(this, proje);
+        }
     }
-    public class DataControlProjeDosya : DataControl, IEntity
+    public class DataControlProjeDosya : DataControl, IEntity, IAltForm
     {
-        public Proje proje;
+        public Proje _proje;
         public CustomTextBoxSayisal ctbId { get; set; } = new() { TabIndex = 3, Width = 0, Visible = true, Tag = "Id"};
         public CustomTextBoxSayisal ctbProjeId { get; set; } = new() { TabIndex = 4, Width = 0, Visible = true, Tag = "ProjeId"};
-        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 180, Visible = true, Tag = "Dosya Tanımı"};
-        public CustomTextBox ctbDosyaYolu { get; set; } = new() {TabIndex = 6, Width = 280, Visible = true, Tag = "Dosya Yolu" };
+        public CustomTextBox ctbTanim { get; set; } = new() { TabIndex = 5, Width = 300, Visible = true, Tag = "Dosya Tanımı"};
+        public CustomTextBox ctbDosyaYolu { get; set; } = new() {TabIndex = 6, Width = 280, Visible = false, Tag = "Dosya Yolu" };
         public CustomTextBox ctbDosyaUzanti { get; set; } = new() {TabIndex = 7, Width = 30, Visible = true, Tag = "Uzantı" };
+        public CustomTextBox ctbDosyaFullPath { get; set; } = new() { TabIndex = 7, Width = 30, Visible = false, Tag = "Uzantı" };
         public RoundedIconButton btnAdd { get; set; }
         public RoundedIconButton btnView { get; set; }
         public byte[] dosyaVeri { get; set; }
@@ -205,7 +260,7 @@ namespace YektamakDesktop.Formlar.Satis
                 TabIndex = 8,
                 Width = 35,
                 Height = 25,
-                Tag = " Ekle",
+                Tag = "",
                 BackgroundImage = Resources.ekle,
                 BackColor = Color.Transparent,
                 BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
@@ -217,7 +272,7 @@ namespace YektamakDesktop.Formlar.Satis
                 TabIndex = 9,
                 Width = 35,
                 Height = 25,
-                Tag = "Göster",
+                Tag = "",
                 BackgroundImage = Resources.pngegg,
                 BackColor = Color.Transparent,
                 BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
@@ -235,7 +290,7 @@ namespace YektamakDesktop.Formlar.Satis
             string jsonResult = _projeService.DeleteProjeFile(projeDosya);
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
             {
-                proje.projeDosyaList.RemoveAll(p=>p.Id==projeDosya.Id);
+                _proje.projeDosyaList.RemoveAll(p=>p.Id==projeDosya.Id);
                 MessageBox.Show(jsonResult);
             }
         }
@@ -265,6 +320,11 @@ namespace YektamakDesktop.Formlar.Satis
 
         private async void ButtonDosyaEkle_Click(object sender, EventArgs e)
         {
+            if(_proje?.Id==null)
+            {
+                MessageBox.Show("Dosya eklemek için önce projeyi kaydetmelisiniz");
+                return;
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -289,6 +349,19 @@ namespace YektamakDesktop.Formlar.Satis
             BindHelper.BindData(ctbTanim, projeDosya, nameof(projeDosya.tanim));
             BindHelper.BindData(ctbDosyaYolu, projeDosya, nameof(projeDosya.dosyaYolu));
             BindHelper.BindData(ctbDosyaUzanti, projeDosya, nameof(projeDosya.uzanti));
+            BindHelper.BindData(ctbDosyaFullPath, projeDosya, nameof(projeDosya.dosyaFullPath));
+        }
+
+        public void UstFormuBagla(IUstForm ustForm)
+        {
+            ustForm.VeriDegisti += UstForm_VeriDegisti;
+            var t = ustForm.GetType().GetProperty("proje");
+            _proje = (Proje)t.GetValue(ustForm);
+        }
+
+        private void UstForm_VeriDegisti(object sender, object e)
+        {
+            _proje=(Proje)e;
         }
     }
 }

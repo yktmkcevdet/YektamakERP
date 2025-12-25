@@ -22,8 +22,8 @@ namespace YektamakDesktop.Abstracts
 			{
 				_buttonSil = value;
 				_buttonSil.Tag = "Sil";
-				_buttonSil.Width = 35;
-				_buttonSil.Height = 28;
+                _buttonSil.Width = 30;
+				_buttonSil.Height = 25;
 				_buttonSil.TabIndex = 99;
 				_buttonSil.CornerRadius = 5;
 				_buttonSil.BackColor = Color.Transparent;
@@ -43,7 +43,7 @@ namespace YektamakDesktop.Abstracts
 				_order.Width = 40;
 				_order.Height = 28;
 				_order.TabIndex = 0;
-				_order.Tag = "No";
+				_order.Tag = "#";
 			}
 		}
 		public DataControl()

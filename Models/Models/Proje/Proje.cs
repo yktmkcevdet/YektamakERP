@@ -12,7 +12,7 @@ namespace Models
         private string _kod;
         [GridDisplay(Header = "Kod")] public string kod { get { if (_kod == null) { _kod = ProjeKodString(); } return _kod; } set { _kod = value; } }
         private Marka _marka;
-        [GridDisplay(Header = "Marka", Tip = "Liste", ListName = "markaList", ListVisibleColumnName = "ad", readOnly = false)]
+        [GridDisplay(Header = "Marka", Tip = "Liste", ListName = "markaList", ListVisibleColumnName = "ad", readOnly = true)]
         public Marka marka { get { if (_marka == null) { _marka = new(); } return _marka; } set { _marka = value; } }
         public string ProjeKodString()
         {
@@ -48,11 +48,11 @@ namespace Models
        
         
         private MarkaAltGrup _markaAltGrup;
-        [GridDisplay(Header = "Marka Alt Grup", Tip = "Liste", ListName = "markaAltGrupList", ListVisibleColumnName = "ad", readOnly = false)]
+        [GridDisplay(Header = "Marka Alt Grup", Tip = "Liste", ListName = "markaAltGrupList", ListVisibleColumnName = "ad", readOnly = true)]
         public MarkaAltGrup markaAltGrup { get { if (_markaAltGrup == null) { _markaAltGrup = new(); } return _markaAltGrup; } set { _markaAltGrup = value; } }
 
         private MarkaAltGrupKategori _markaAltGrupKategori;
-        [GridDisplay(Header = "Marka Alt Grup Kategori", Tip = "Liste", ListName = "markaAltGrupKategori", ListVisibleColumnName = "ad", readOnly = false)]
+        [GridDisplay(Header = "Marka Alt Grup Kategori", Tip = "Liste", ListName = "markaAltGrupKategori", ListVisibleColumnName = "ad", readOnly = true)]
         public MarkaAltGrupKategori markaAltGrupKategori { get { if (_markaAltGrupKategori == null) { _markaAltGrupKategori = new(); } return _markaAltGrupKategori; } set { _markaAltGrupKategori = value; } }
 
 
