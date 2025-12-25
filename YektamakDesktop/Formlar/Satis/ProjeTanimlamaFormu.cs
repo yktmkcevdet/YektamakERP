@@ -74,6 +74,7 @@ namespace YektamakDesktop.Formlar.Satis
                 if (_proje == null)
                 {
                     _proje = new();
+                    _initialStateJson = JsonConvert.SerializeObject(proje);
                 }
                 return _proje;
             }
@@ -107,6 +108,11 @@ namespace YektamakDesktop.Formlar.Satis
             BindHelper.BindData(ctbAd, proje, nameof(proje.ad));
             BindHelper.BindData(ctbAciklama, proje, nameof(proje.aciklama));
             BindHelper.BindData(ctbVersiyon, proje, nameof(proje.versiyon));
+            BindFiles();
+        }
+
+        private void BindFiles()
+        {
             List<DataControlProjeDosya> dataControlProjeDosyas = new();
             foreach (var projeDosya in proje.projeDosyaList.Where(p => p.active == true))
             {
@@ -116,15 +122,10 @@ namespace YektamakDesktop.Formlar.Satis
             }
             customDataGrid.dataSource = dataControlProjeDosyas;
         }
+
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            foreach (var dc in customDataGrid.dataSource.Where(d => d.newRec == false))
-            {
-                dc.projeDosya.projeId = int.Parse(ctbId.TextCustom);
-                proje.projeDosyaList.Add(dc.projeDosya);
-            }
-            //string jsonResultMarka = _projeService.GetMarka();
-            //proje.marka = _jsonConverter.DeserializeObject<List<Marka>>(jsonResultMarka).FirstOrDefault(m => m.Id == proje.marka.Id);
+            ProjeDosyaList();
             string jsonResult = _projeService.SaveProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -139,10 +140,23 @@ namespace YektamakDesktop.Formlar.Satis
                     .Select(g => (g.First())).ToList(), this.Name);
             }
         }
+
+        private void ProjeDosyaList()
+        {
+            proje.projeDosyaList.Clear();
+            foreach (var dc in customDataGrid.dataSource.Where(d => d.newRec == false))
+            {
+                proje.projeDosyaList.Add(dc.projeDosya);
+            }
+        }
+
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
+            ProjeDosyaList();
             SaveControl(new FormClosingEventArgs(CloseReason.UserClosing, false));
             proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            proje.projeDosyaList.RemoveAll(d => d.active == false);
+            _initialStateJson = JsonConvert.SerializeObject(proje);
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
@@ -177,7 +191,8 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void SaveControl(FormClosingEventArgs e)
         {
-            bool isDirty = _initialStateJson != JsonConvert.SerializeObject(proje);
+            var currentData = JsonConvert.SerializeObject(proje);          
+            bool isDirty = _initialStateJson != currentData;
             if (isDirty)
             {
                 var result = MessageBox.Show("Yapılan değişiklikler kaydedilmedi. Kaydetmek ister misiniz?", "Değişiklikler Kaydedilmedi", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -290,7 +305,7 @@ namespace YektamakDesktop.Formlar.Satis
             string jsonResult = _projeService.DeleteProjeFile(projeDosya);
             if (!string.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
             {
-                _proje.projeDosyaList.RemoveAll(p=>p.Id==projeDosya.Id);
+                //_proje.projeDosyaList.RemoveAll(p=>p.Id==projeDosya.Id);
                 MessageBox.Show(jsonResult);
             }
         }
@@ -354,7 +369,6 @@ namespace YektamakDesktop.Formlar.Satis
 
         public void UstFormuBagla(IUstForm ustForm)
         {
-            ustForm.VeriDegisti += UstForm_VeriDegisti;
             var t = ustForm.GetType().GetProperty("proje");
             _proje = (Proje)t.GetValue(ustForm);
         }

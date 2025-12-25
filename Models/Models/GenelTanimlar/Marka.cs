@@ -12,8 +12,8 @@
         public int? Id { get; set; }
         public string ad { get; set; }
         public string kod { get; set; }
-        public Marka _marka;
-        public Marka markaAltGrupKategori
+        private Marka _marka;
+        public Marka marka
         {
             get { if (_marka == null) { _marka = new(); } return _marka; }
             set { _marka= value; }
