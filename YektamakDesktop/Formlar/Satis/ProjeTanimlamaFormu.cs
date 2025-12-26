@@ -23,17 +23,17 @@ namespace YektamakDesktop.Formlar.Satis
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
         private readonly IJsonConverter _jsonConverter;
-        private readonly IConvertHelper _convertHelper;
+        private readonly IFileService _fileService;
         public event EventHandler<object> VeriDegisti;
         private string _initialStateJson;
 
         private CustomDataGrid<DataControlProjeDosya> customDataGrid;
-        public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter, IConvertHelper convertHelper)
+        public ProjeTanimlamaFormu(ICache cache, IProjeService projeService, IJsonConverter jsonConverter, IFileService fileService)
         {
             _cache = cache;
             _projeService = projeService;
             _jsonConverter = jsonConverter;
-            _convertHelper = convertHelper;
+            _fileService = fileService;
             InitializeComponent();
             Initialize();
         }
@@ -125,7 +125,7 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
-            ProjeDosyaList();
+            AddProjeDosyaList();
             string jsonResult = _projeService.SaveProje(proje);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
@@ -140,10 +140,13 @@ namespace YektamakDesktop.Formlar.Satis
                     .Select(g => (g.First())).ToList(), this.Name);
             }
         }
-
-        private void ProjeDosyaList()
+        /// <summary>
+        /// Proje nesnesinin dosya listesi datagriddeki kayıtlara göre günceller. 
+        /// Pasif olan dosyalar gride yüklenmediği için pasif olanlara dokunulmaz.
+        /// </summary>
+        private void AddProjeDosyaList()
         {
-            proje.projeDosyaList.Clear();
+            proje.projeDosyaList.RemoveAll(d=>d.active==true);
             foreach (var dc in customDataGrid.dataSource.Where(d => d.newRec == false))
             {
                 proje.projeDosyaList.Add(dc.projeDosya);
@@ -152,17 +155,15 @@ namespace YektamakDesktop.Formlar.Satis
 
         private void universalGrid1_CellClick(object sender, MouseEventArgs e)
         {
-            ProjeDosyaList();
+            AddProjeDosyaList();
             SaveControl(new FormClosingEventArgs(CloseReason.UserClosing, false));
             proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            proje.projeDosyaList.RemoveAll(d => d.active == false);
-            _initialStateJson = JsonConvert.SerializeObject(proje);
+            
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(universalGrid1.Grid, e.Location);
             }
         }
-
         private void projeSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             proje = (Proje)universalGrid1.Grid.CurrentRow.DataBoundItem;
@@ -202,7 +203,18 @@ namespace YektamakDesktop.Formlar.Satis
                 }
                 else if (result == DialogResult.Cancel)
                 {
+                    foreach (var projeDosya in proje.projeDosyaList.Where(d => d.Id == null))
+                    {
+                        _fileService.DeleteFile(projeDosya.dosyaFullPath);
+                    }
                     e.Cancel = true; // Formun kapanmasını iptal et
+                }
+                else
+                {
+                    foreach (var projeDosya in proje.projeDosyaList.Where(d => d.Id == null))
+                    {
+                        _fileService.DeleteFile(projeDosya.dosyaFullPath);
+                    }
                 }
             }
         }

@@ -145,16 +145,16 @@ namespace YektamakDesktop.CustomControls
             }
             AddDataRow(DIContainer.GetService<T>());
         }
-        public void UstFormBagla(IUstForm ustForm)
-        {
-            foreach (var dataControl in dataSource)
-            {
-                if (dataControl is IAltForm altForm)
-                {
-                    altForm.UstFormuBagla(ustForm);
-                }
-            }
-        }
+        //public void UstFormBagla(IUstForm ustForm)
+        //{
+        //    foreach (var dataControl in dataSource)
+        //    {
+        //        if (dataControl is IAltForm altForm)
+        //        {
+        //            altForm.UstFormuBagla(ustForm);
+        //        }
+        //    }
+        //}
         private void RePlaceControls(T dataControl)
         {
             orderNr = int.Parse(dataControl.order.Text);
@@ -258,11 +258,11 @@ namespace YektamakDesktop.CustomControls
                 CreateLabels();
                 PlaceControls();
                 SetControlEvents();
+                dataSource.Add(dataRow);
                 if (dataRow is IAltForm altForm && _ustForm != null)
                 {
                     altForm.UstFormuBagla(_ustForm);
                 }
-                dataSource.Add(dataRow);
                 return true;
             }
             else
