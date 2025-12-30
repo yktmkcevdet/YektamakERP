@@ -34,6 +34,7 @@
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
             ctbParcaKodu = new YektamakDesktop.CustomControls.CustomTextBox();
+            panel1 = new System.Windows.Forms.Panel();
             SuspendLayout();
             // 
             // headerPanel1
@@ -55,9 +56,10 @@
             treeView1.CheckBoxes = true;
             treeView1.Location = new System.Drawing.Point(36, 83);
             treeView1.Name = "treeView1";
-            treeView1.Size = new System.Drawing.Size(392, 607);
+            treeView1.Size = new System.Drawing.Size(306, 607);
             treeView1.TabIndex = 1;
             treeView1.AfterCheck += treeView1_AfterCheck;
+            treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
             // fcbProjeKod
             // 
@@ -72,7 +74,7 @@
             fcbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             fcbProjeKod.PlaceholderText = "Proje Kodu ";
             fcbProjeKod.ReadOnly = false;
-            fcbProjeKod.Size = new System.Drawing.Size(167, 25);
+            fcbProjeKod.Size = new System.Drawing.Size(129, 25);
             fcbProjeKod.TabIndex = 2;
             fcbProjeKod.ValueMember = "Id";
             fcbProjeKod.SelectedIndexChanged += fcbProjeKod_SelectedIndexChanged;
@@ -118,7 +120,7 @@
             roundedButton2.HoverColor2 = System.Drawing.Color.Navy;
             roundedButton2.Icon = null;
             roundedButton2.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton2.Location = new System.Drawing.Point(278, 710);
+            roundedButton2.Location = new System.Drawing.Point(192, 710);
             roundedButton2.Name = "roundedButton2";
             roundedButton2.Size = new System.Drawing.Size(150, 40);
             roundedButton2.TabIndex = 4;
@@ -135,7 +137,7 @@
             ctbParcaKodu.BorderSize = 1;
             ctbParcaKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbParcaKodu.ForeColor = System.Drawing.Color.Black;
-            ctbParcaKodu.Location = new System.Drawing.Point(222, 48);
+            ctbParcaKodu.Location = new System.Drawing.Point(167, 48);
             ctbParcaKodu.Margin = new System.Windows.Forms.Padding(1);
             ctbParcaKodu.Multiline = false;
             ctbParcaKodu.Name = "ctbParcaKodu";
@@ -145,18 +147,27 @@
             ctbParcaKodu.PlaceholderText = "Parça Kodu İle Ara";
             ctbParcaKodu.ReadOnly = false;
             ctbParcaKodu.SelectionStart = 0;
-            ctbParcaKodu.Size = new System.Drawing.Size(206, 25);
+            ctbParcaKodu.Size = new System.Drawing.Size(175, 25);
             ctbParcaKodu.TabIndex = 5;
             ctbParcaKodu.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbParcaKodu.TextCustom = "";
             ctbParcaKodu.UnderlinedStyle = false;
             ctbParcaKodu.KeyDown += ctbParcaKodu_KeyDown;
             // 
+            // panel1
+            // 
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Location = new System.Drawing.Point(357, 85);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(693, 605);
+            panel1.TabIndex = 6;
+            // 
             // ProjeDosyaAgacStil
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1090, 782);
+            Controls.Add(panel1);
             Controls.Add(ctbParcaKodu);
             Controls.Add(roundedButton2);
             Controls.Add(roundedButton1);
@@ -177,5 +188,6 @@
         private CustomControls.RoundedButton roundedButton1;
         private CustomControls.RoundedButton roundedButton2;
         private CustomControls.CustomTextBox ctbParcaKodu;
+        private System.Windows.Forms.Panel panel1;
     }
 }

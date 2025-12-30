@@ -1,6 +1,10 @@
 ﻿using ApiService.Interfaces;
 using Microsoft.Win32;
 using Models;
+using netDxf;
+using netDxf.Entities;
+using NPOI.HPSF;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,6 +26,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IConfigurationService _configurationService;
         private readonly IFileService _fileService;
         private readonly IDosyalamaService _dosyalamaService;
+        private DxfDocument dxfDoc;
         public ProjeDosyaAgacStil(ICache cache, IProjeService projeService, IStokService stokService, IConfigurationService configurationService, IFileService fileService, IDosyalamaService dosyalamaService)
         {
             _cache = cache;
@@ -188,7 +193,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                         Directory.Delete(selectedPath, true);
                     }
                 }
-                await _dosyalamaService.CreateOrderFile(projeStokKarts,selectedPath);
+                await _dosyalamaService.CreateOrderFile(projeStokKarts, selectedPath);
                 this.Enabled = true;
             }
             else
@@ -265,5 +270,72 @@ namespace YektamakDesktop.Formlar.Projemodul
                     n.BackColor = Color.White;
         }
 
+        private async void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var bom = (ProjeBom)e.Node.Tag;
+            if (bom.Id != null)
+            {
+                foreach (var dosya in bom.projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 2))
+                {
+                    var dxfDosya = await _fileService.GetFileDecompress(dosya.dosyaFullPath);
+                    dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
+                    pictureBox1_Paint();
+                }
+            }
+        }
+        private void pictureBox1_Paint()
+        {
+            if (dxfDoc == null) return;
+
+            int x0;
+            int y0;
+
+            //Graphics g = e.Graphics;
+            //g.Clear(Color.White);
+            //Pen pen = new Pen(Color.Black, 1);
+            using (var g = panel1.CreateGraphics())
+            {
+                foreach (var line in dxfDoc.Entities.Lines)
+                {
+                    g.DrawLine(
+                        Pens.Black,
+                        (float)line.StartPoint.X,
+                        (float)line.StartPoint.Y,
+                        (float)line.EndPoint.X,
+                        (float)line.EndPoint.Y
+                    );
+                }
+                foreach (Circle circle in dxfDoc.Entities.Circles)
+                {
+                    g.DrawEllipse(
+                        Pens.Black,
+                        (float)(circle.Center.X - circle.Radius),
+                        (float)(circle.Center.Y - circle.Radius),
+                        (float)(2 * circle.Radius),
+                        (float)(2 * circle.Radius)
+                    );
+                }
+                foreach (Arc arc in dxfDoc.Entities.Arcs)
+                {
+                    float x = (float)arc.Center.X + 200;
+                    float y = (float)arc.Center.Y + 200;
+                    float radius = (float)arc.Radius;
+                    float startAngle = (float)arc.StartAngle;
+                    float endAngle = (float)arc.EndAngle;
+
+                    // Açıyı saat yönüne çevirme
+                    float sweepAngle = endAngle - startAngle;
+                    if (sweepAngle < 0)
+                        sweepAngle += 360;
+
+                    // Dikdörtgensel çerçeveyi hesapla
+                    float topLeftX = x - radius;
+                    float topLeftY = y - radius;
+                    float diameter = 2 * radius;
+
+                    g.DrawArc(Pens.Black, topLeftX, topLeftY, diameter, diameter, startAngle, sweepAngle);
+                }
+            }
+        }
     }
 }
