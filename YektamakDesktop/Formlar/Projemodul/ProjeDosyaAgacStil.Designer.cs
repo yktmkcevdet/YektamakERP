@@ -52,7 +52,7 @@
             // 
             // treeView1
             // 
-            treeView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            treeView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             treeView1.CheckBoxes = true;
             treeView1.Location = new System.Drawing.Point(36, 83);
             treeView1.Name = "treeView1";
@@ -157,10 +157,16 @@
             // panel1
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.BackColor = System.Drawing.Color.White;
             panel1.Location = new System.Drawing.Point(357, 85);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(693, 605);
             panel1.TabIndex = 6;
+            panel1.Paint += panel1_Paint;
+            panel1.MouseClick += panel1_MouseClick;
+            panel1.MouseDown += panel1_MouseDown;
+            panel1.MouseMove += panel1_MouseMove;
+            panel1.MouseUp += panel1_MouseUp;
             // 
             // ProjeDosyaAgacStil
             // 
@@ -177,6 +183,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "ProjeDosyaAgacStil";
             Text = "ProjeDosyaAgacStil";
+            KeyDown += ProjeDosyaAgacStil_KeyDown;
             ResumeLayout(false);
         }
 
