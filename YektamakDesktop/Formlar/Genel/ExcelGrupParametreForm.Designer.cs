@@ -81,7 +81,7 @@ namespace YektamakDesktop.Formlar.Genel
             fcbKarsilastirmaOperator.ReadOnly = false;
             fcbKarsilastirmaOperator.Size = new Size(102, 25);
             fcbKarsilastirmaOperator.TabIndex = 2;
-            fcbKarsilastirmaOperator.ValueMember = "";
+            fcbKarsilastirmaOperator.ValueMember = "value___";
             fcbKarsilastirmaOperator.SelectedIndexChanged += fcbKarsilastirmaOperator_SelectedIndexChanged;
             // 
             // ctbAnahtarKelime
@@ -255,6 +255,13 @@ namespace YektamakDesktop.Formlar.Genel
             // customButtonSave1
             // 
             customButtonSave1.BackColor = Color.Transparent;
+            customButtonSave1.BorderColor = Color.Black;
+            customButtonSave1.BorderSize = 0;
+            customButtonSave1.CornerRadius = 6;
+            customButtonSave1.GradientColor1 = Color.DodgerBlue;
+            customButtonSave1.GradientColor2 = Color.MidnightBlue;
+            customButtonSave1.HoverColor1 = Color.RoyalBlue;
+            customButtonSave1.HoverColor2 = Color.Navy;
             customButtonSave1.Location = new Point(646, 126);
             customButtonSave1.Margin = new Padding(4, 3, 4, 3);
             customButtonSave1.Name = "customButtonSave1";
@@ -411,7 +418,16 @@ namespace YektamakDesktop.Formlar.Genel
             // 
             // customButtonNewRecord1
             // 
+            customButtonNewRecord1.BorderColor = Color.Black;
+            customButtonNewRecord1.BorderSize = 0;
+            customButtonNewRecord1.CornerRadius = 6;
+            customButtonNewRecord1.ForeColor = Color.White;
+            customButtonNewRecord1.GradientColor1 = Color.DodgerBlue;
+            customButtonNewRecord1.GradientColor2 = Color.MidnightBlue;
+            customButtonNewRecord1.HoverColor1 = Color.RoyalBlue;
+            customButtonNewRecord1.HoverColor2 = Color.Navy;
             customButtonNewRecord1.Location = new Point(646, 44);
+            customButtonNewRecord1.Margin = new Padding(0);
             customButtonNewRecord1.Name = "customButtonNewRecord1";
             customButtonNewRecord1.Size = new Size(31, 31);
             customButtonNewRecord1.TabIndex = 30;

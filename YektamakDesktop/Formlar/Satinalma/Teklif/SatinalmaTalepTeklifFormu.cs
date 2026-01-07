@@ -23,6 +23,7 @@ using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
 
 namespace YektamakDesktop.Formlar.Satinalma
@@ -63,13 +64,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups);
             clbProjeKod.SetDataSource(_cache.projeList.GroupBy(p => p.Id).Select(g => g.First()).ToList());
             fcbBoyut.SetDataSource(_cache.boyutList);
-            customDataGrid = new CustomDataGrid<DataControlFirma>(2, 30, new Point(0, 0), new Size(650, 300));
-            this.panel1.Controls.Add(customDataGrid.headerPanel);
-            this.panel1.Controls.Add(customDataGrid.detailPanel);
-            customDataGrid.dataSource = dataControlFirmas;
         }
         private void Initialize()
         {
+            InitializeCustomGrid();
+
             int sizeX = universalGrid1.Size.Width;
             int sizeY = universalGrid1.Size.Height;
             int locationY = universalGrid1.Location.Y;
@@ -85,7 +84,15 @@ namespace YektamakDesktop.Formlar.Satinalma
             universalGrid1.SetData(new List<SatinalmaTalepDetayDTO>(), this.Name, true);
             universalGrid1.MouseDown1 += universalGrid1_MouseDown;
         }
-
+        private void InitializeCustomGrid()
+        {
+            int dataControlHeight = panel1.Height;
+            int dataControlWidth = panel1.Width;
+            customDataGrid = new CustomDataGrid<DataControlFirma>(2, 27, new Point(0, 0), new Size(dataControlWidth, dataControlHeight));
+            panel1.Controls.Add(customDataGrid.detailPanel);
+            panel1.Controls.Add(customDataGrid.headerPanel);
+            customDataGrid.dataSource = dataControlFirmas;
+        }
         CustomDataGrid<DataControlFirma> customDataGrid;
 
         private static SatinalmaTalepTeklifFormu _satinalmaTalepTeklifFormu;
@@ -451,6 +458,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void cbxStokGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
             universalGrid1.Filtrele(filter);
+            clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups.Where(m=>m.stokGrup.Id== int.Parse(clbStokGrupId.SelectedValue.ToString())).ToList());
         }
         private async void cbxMalzemeGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -460,7 +468,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 .DistinctBy(b => b.Id)
                 .ToList());
             fcbBoyut.SetDataSource((satinalmaTalepDetayDTOs.CastToEntity<SatinalmaTalepDetay>(_convertHelper))
-                .Where(s => s.projeStokKart.stokKart.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString())
+                .Where(s => s.projeStokKart.stokKart.malzemeGrup.Id.ToString() == clbMalzemeGrupId.SelectedValue?.ToString() && s.proje.Id == int.Parse(clbProjeKod.SelectedValue.ToString()))
                 .Select(s => s.projeStokKart.stokKart.boyutTanim)
                 .DistinctBy(b => b.Id)
                 .ToList());
@@ -550,7 +558,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 return true;
             }
             // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.binding.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
+            var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
             if (data == null) return false;
 
             // 2. Filtre uygula
@@ -664,7 +672,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         public string mail { get { return _mail; } set { _mail = value; } }
         public DataControlFirma(ICache cache)
         {
-            Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id",Anchor = AnchorStyles.Left|AnchorStyles.Right|AnchorStyles.Top };
+            Id = new() { TabIndex = 1, Width = 300, Visible = true, Tag = "Id" };
             Id.PlaceholderText = "Firma Seçiniz";
 
             Id.SelectedIndexChanged += Id_SelectedIndexChanged;
@@ -675,6 +683,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void Id_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(Id.SelectedValue == null) return;
             mail = _cache.firmaList.First(f => f.Id == int.Parse(Id.SelectedValue.ToString())).mail;
             //newRec = false; // Yeni kayıt değil, var olan bir firma seçildiğinde
         }

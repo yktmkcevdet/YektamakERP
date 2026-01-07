@@ -97,6 +97,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         string logDosyasi;
         string klasor;
+        Dictionary<string, ProjeStokKart> satirList = new Dictionary<string, ProjeStokKart>();
         private async Task ProcessExcelFileAsync()
         {
             this.Enabled = false;
@@ -133,20 +134,39 @@ namespace YektamakDesktop.Formlar.ProjeModul
             for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
             {
                 var rowData = sheet.GetRow(rowIndex);
-                if (rowData == null) continue;
-
                 var projeStokKart = CreateStokKartFromRow(rowData);
+                if (satirList.ContainsKey(projeStokKart.stokKart.kod))
+                {
+                    satirList[projeStokKart.stokKart.kod].miktar += projeStokKart.miktar;
+                }
+                else
+                {
+                    satirList.Add(projeStokKart.stokKart.kod, projeStokKart);
+                }
+            }
+            UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");
+
+            int i = 0;
+            foreach (var satir in satirList)
+            {
+                //var rowData = sheet.GetRow(rowIndex);
+                //if (rowData == null) continue;
+
+                //var projeStokKart = CreateStokKartFromRow(rowData);
+                var projeStokKart = (ProjeStokKart)satir.Value;
                 await AttachFilesToStokKart(projeStokKart);
 
                 projeStokKarts.Add(projeStokKart);
                 // Batch size'a ulaştığında veya son satırda kaydet
                 
-                if (projeStokKarts.Count >= batchSize || rowIndex == totalRows)
+                if (projeStokKarts.Count >= batchSize) // || rowIndex == totalRows)
                 {
                     
                     await SaveStokKartBatch();
-                    UpdateProgressText($"{totalRows}");
-                    UpdateTransferCount(rowIndex);
+                    //UpdateProgressText($"{totalRows}");
+                    //UpdateTransferCount(rowIndex);
+                    i++;
+                    UpdateTransferCount(i);
 
                     projeStokKarts.Clear();
 

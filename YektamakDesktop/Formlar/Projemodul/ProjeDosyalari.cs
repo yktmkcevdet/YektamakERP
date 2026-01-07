@@ -200,12 +200,26 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private async Task fcbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             await GridYenile();
-            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(mg => mg.stokGrup.Id == Convert.ToInt32(fcbStokGrup.SelectedValue.ToString())).ToList());
+            if(fcbStokGrup.SelectedValue == null)
+            {
+                fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
+            }
+            else
+            {
+                fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(mg => mg.stokGrup.Id == Convert.ToInt32(fcbStokGrup.SelectedValue.ToString())).ToList());
+            }
         }
         private async Task fcbMalzemeGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             await GridYenile();
-            fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups.Where(mag => mag.malzemeGrup.Id == Convert.ToInt32(fcbMalzemeGrup.SelectedValue.ToString())).ToList());
+            if (fcbMalzemeGrup.SelectedValue == null)
+            {
+                fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
+            }
+            else
+            {
+                fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups.Where(mag => mag.malzemeGrup.Id == Convert.ToInt32(fcbMalzemeGrup.SelectedValue.ToString())).ToList());
+            }
         }
         private async Task parcaAdi_KeyDown(object sender, KeyEventArgs e)
         {
@@ -369,6 +383,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         }
                         else
                         {
+                            foreach(var dosya in item.stokKartdosyaList.Select(d => d.dosyaFullPath).ToList())
+                            {
+                                await _fileService.DeleteFile(dosya);
+                            }
                             universalGrid1.binding.Remove(item);
                         }
                     }

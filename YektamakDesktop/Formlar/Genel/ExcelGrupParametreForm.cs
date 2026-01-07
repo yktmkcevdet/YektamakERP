@@ -48,8 +48,8 @@ namespace YektamakDesktop.Formlar.Genel
             fcbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
             fcbKarsilastirmaOperator.SetDataSource(Enum.GetValues(typeof(KarsilastirmaOperatoru)).Cast<KarsilastirmaOperatoru>()
                 .ToList());
-            fcbExcelSutunAd.SetDataSource(Enum.GetValues(typeof(ExcelSutunlari)).Cast<ExcelSutunlari>()
-                .ToList());
+            var d = Enum.GetValues(typeof(ExcelSutunlari)).Cast<ExcelSutunlari>();
+            fcbExcelSutunAd.SetDataSource(d.ToList());
             Binding();
         }
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
@@ -71,7 +71,7 @@ namespace YektamakDesktop.Formlar.Genel
             BindHelper.BindData(ctbAnahtarKelime, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaKelimesi));
             //BindHelper.BindData(ctbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
             BindHelper.BindDataEnum(fcbExcelSutunAd, excelGrupParametre, nameof(excelGrupParametre.sutunAdi));
-            BindHelper.BindDataEnum(fcbKarsilastirmaOperator, excelGrupParametre, nameof(excelGrupParametre.karsilastirmaOperatoru));
+            BindHelper.BindData(fcbKarsilastirmaOperator, excelGrupParametre, e=>e.karsilastirmaOperatoru);
             BindHelper.BindData(ctbId, excelGrupParametre, nameof(excelGrupParametre.Id));
             BindHelper.BindData(chkTalasli, excelGrupParametre, nameof(excelGrupParametre.isTalasli));
             BindHelper.BindData(chkBukum, excelGrupParametre, nameof(excelGrupParametre.isBukum));

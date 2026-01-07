@@ -337,7 +337,14 @@ namespace YektamakDesktop.CustomControls
                 var id = value.GetType().GetProperty(ValueMember)?.GetValue(value);
                 if(id == null)
                 {
-                    comboBox1.SelectedIndex = -1;
+                    if (value.ToString() == "")
+                    {
+                        comboBox1.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        comboBox1.SelectedItem = value;
+                    }
                     return;
                 }
                 comboBox1.SelectedValue = id;
