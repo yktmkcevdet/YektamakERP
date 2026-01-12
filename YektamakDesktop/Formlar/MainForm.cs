@@ -55,7 +55,7 @@ namespace YektamakDesktop.Formlar
             treeMenu.AfterExpand += treeMenu_AfterExpand;
             treeMenu.AfterCollapse += treeMenu_AfterCollapse;
             btnTabs.Click += BtnTabs_Click;
-            treeMenu.NodeMouseClick += treeMenu_NodeMouseDoubleClick;
+            treeMenu.NodeMouseClick += treeMenu_NodeMouseClick;
             treeMenu.BeforeExpand += (s, e) =>
             {
                 if (e.Node.Tag is MenuNodeInfo info &&
@@ -493,7 +493,7 @@ namespace YektamakDesktop.Formlar
 
         }
 
-        private void treeMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeMenu_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node?.Tag is Menu info)
             {

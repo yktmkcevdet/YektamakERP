@@ -1270,6 +1270,36 @@
           "lib/net6.0/NSax.dll": {}
         }
       },
+      "PDFium.x64/4648.0.0": {
+        "type": "package",
+        "build": {
+          "Build/pdfium.x64.props": {}
+        }
+      },
+      "PdfiumViewer.Updated/2.14.5": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/PdfiumViewer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/PdfiumViewer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ],
+        "resource": {
+          "lib/net6.0-windows7.0/de/PdfiumViewer.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0-windows7.0/nl/PdfiumViewer.resources.dll": {
+            "locale": "nl"
+          }
+        }
+      },
       "QuestPDF/2025.7.4": {
         "type": "package",
         "compile": {
@@ -5134,6 +5164,46 @@
         "lib/netstandard2.1/NSax.dll",
         "nsax.1.0.2.nupkg.sha512",
         "nsax.nuspec"
+      ]
+    },
+    "PDFium.x64/4648.0.0": {
+      "sha512": "zo2GDGNjjfmuJIw7/XOtg1ss4MbN0fsW/B4JgnrqimAW0jHuqEaHY7AYOIkexqkT9hV9MDUrtwEcciSxlbHEoQ==",
+      "type": "package",
+      "path": "pdfium.x64/4648.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Build/pdfium.x64.props",
+        "Build/x64/pdfium.dll",
+        "pdfium.x64.4648.0.0.nupkg.sha512",
+        "pdfium.x64.nuspec"
+      ]
+    },
+    "PdfiumViewer.Updated/2.14.5": {
+      "sha512": "oFJyeZBsOkjcWfl++VZh5cPG4M6mbCeSgSnrNiEEKr4eBsY8g9OjeoNKlO8b7/SXAeC9nKXdVPhgNztEeFT0ig==",
+      "type": "package",
+      "path": "pdfiumviewer.updated/2.14.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/PdfiumViewer.dll",
+        "lib/net20/PdfiumViewer.xml",
+        "lib/net20/de/PdfiumViewer.resources.dll",
+        "lib/net20/nl/PdfiumViewer.resources.dll",
+        "lib/net45/PdfiumViewer.dll",
+        "lib/net45/PdfiumViewer.xml",
+        "lib/net45/de/PdfiumViewer.resources.dll",
+        "lib/net45/nl/PdfiumViewer.resources.dll",
+        "lib/net6.0-windows7.0/PdfiumViewer.dll",
+        "lib/net6.0-windows7.0/PdfiumViewer.xml",
+        "lib/net6.0-windows7.0/de/PdfiumViewer.resources.dll",
+        "lib/net6.0-windows7.0/nl/PdfiumViewer.resources.dll",
+        "lib/netcoreapp3.1/PdfiumViewer.dll",
+        "lib/netcoreapp3.1/PdfiumViewer.xml",
+        "lib/netcoreapp3.1/de/PdfiumViewer.resources.dll",
+        "lib/netcoreapp3.1/nl/PdfiumViewer.resources.dll",
+        "pdfiumviewer.updated.2.14.5.nupkg.sha512",
+        "pdfiumviewer.updated.nuspec"
       ]
     },
     "QuestPDF/2025.7.4": {
@@ -9860,6 +9930,8 @@
       "Microsoft.VisualStudio.Services.Client >= 19.225.1",
       "NPOI >= 2.7.5",
       "Newtonsoft.Json >= 13.0.4",
+      "PDFium.x64 >= 4648.0.0",
+      "PdfiumViewer.Updated >= 2.14.5",
       "QuestPDF >= 2025.7.4",
       "RtfPipe >= 2.0.7677.4303",
       "SixLabors.ImageSharp >= 3.1.12",
@@ -9959,6 +10031,14 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.4, )"
+          },
+          "PDFium.x64": {
+            "target": "Package",
+            "version": "[4648.0.0, )"
+          },
+          "PdfiumViewer.Updated": {
+            "target": "Package",
+            "version": "[2.14.5, )"
           },
           "QuestPDF": {
             "target": "Package",

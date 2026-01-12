@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "O+9m4xAJYSM=",
+  "dgSpecHash": "2DKrOvTzGqY=",
   "success": true,
   "projectFilePath": "C:\\Users\\yektamak-118\\source\\repos\\YektamakErp\\YektamakDesktop\\YektamakDesktop.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,8 @@
     "C:\\Users\\yektamak-118\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\npoi\\2.7.5\\npoi.2.7.5.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\nsax\\1.0.2\\nsax.1.0.2.nupkg.sha512",
+    "C:\\Users\\yektamak-118\\.nuget\\packages\\pdfium.x64\\4648.0.0\\pdfium.x64.4648.0.0.nupkg.sha512",
+    "C:\\Users\\yektamak-118\\.nuget\\packages\\pdfiumviewer.updated\\2.14.5\\pdfiumviewer.updated.2.14.5.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\questpdf\\2025.7.4\\questpdf.2025.7.4.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\rtfpipe\\2.0.7677.4303\\rtfpipe.2.0.7677.4303.nupkg.sha512",
     "C:\\Users\\yektamak-118\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

@@ -12,8 +12,10 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YektamakDesktop.Formlar.Ortak;
 
 namespace YektamakDesktop.Formlar.Projemodul
 {
@@ -35,6 +37,10 @@ namespace YektamakDesktop.Formlar.Projemodul
             _fileService = fileService;
             _dosyalamaService = dosyalamaService;
             InitializeComponent();
+            pdfPopup.Dock = DockStyle.Fill;
+            pdfPopup.TopLevel = false;
+            tabControl1.TabPages[0].Controls.Add(pdfPopup);
+            pdfPopup.Show();
             panel1.MouseWheel += panel1_MouseWheel;
             this.KeyPreview = true;
             fcbProjeKod.SetDataSource(_cache.projeList.GroupBy(p => p.Id).Select(p => p.First()).ToList());
@@ -276,6 +282,12 @@ namespace YektamakDesktop.Formlar.Projemodul
             var bom = (ProjeBom)e.Node.Tag;
             if (bom.Id != null)
             {
+                pdfPopup.GetInstance(
+                    await _fileService.GetFileDecompress(
+                        bom.projeStokKart.stokKart.dosyaList
+                            .FirstOrDefault(d => d.dosyaTip.Id == 1)?.dosyaFullPath
+                    )
+                );
                 foreach (var dosya in bom.projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 2))
                 {
                     var dxfDosya = await _fileService.GetFileDecompress(dosya.dosyaFullPath);
@@ -283,7 +295,19 @@ namespace YektamakDesktop.Formlar.Projemodul
                     BuildSplineCache();
                     FitToScreen();
                 }
+
+
             }
+            else
+            {
+                splineSegments.Clear();
+            }
+        }
+        private PdfGoruntuleme _pdfPopup;
+        private PdfGoruntuleme pdfPopup
+        {
+            get { if (_pdfPopup == null || _pdfPopup.IsDisposed) { _pdfPopup = FormFactory.CreateForm<PdfGoruntuleme>(); } return _pdfPopup; }
+            set { _pdfPopup = value; }
         }
         PointF ArcPoint(Arc arc, double angleDeg)
         {
@@ -504,7 +528,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             if (dxfDoc == null) return;
-            if (isMeasuring) 
+            if (isMeasuring)
             {
                 DrawSnap(e.Graphics);
                 return;
@@ -551,7 +575,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             if (measureStart != null && measureEnd != null)
                 DrawMeasurement(g, measureStart.Value, measureEnd.Value);
-            
+
             //foreach (var seg in splineCache)
             //{
             //    for (int i = 0; i < seg.Count - 1; i++)
@@ -883,10 +907,15 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private void ProjeDosyaAgacStil_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F5)
+            if (e.KeyCode == Keys.F5)
             {
                 StartMeasure();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
     enum SnapType

@@ -1,13 +1,15 @@
-﻿using Spire.Pdf;
-using System.Drawing;
+﻿using PdfiumViewer;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using System;
+using System.IO;
 using System.Windows.Forms;
-using Utilities.Interfaces;
+
 
 namespace YektamakDesktop.Formlar.Ortak
 {
     public partial class PdfGoruntuleme : Form
     {
-        private PdfDocument pdfViewer = new PdfDocument();
 
         public PdfGoruntuleme()
         {
@@ -15,17 +17,30 @@ namespace YektamakDesktop.Formlar.Ortak
 
             this.Width = 800;
             this.Height = 600;
-            
-            
         }
-        public void GetInstance(byte[] base64Pdf)
+        
+        public void GetInstance(byte[]? base64Pdf)
         {
-            this.WindowState = FormWindowState.Normal;
-            pdfViewer.LoadFromBytes(base64Pdf);
-            Image img = pdfViewer.SaveAsImage(0);
-            pictureBox1.Image = img;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                
+            pdfViewer1.Document?.Dispose();
+            pdfViewer1.Document = PdfDocument.Load(new MemoryStream(base64Pdf ?? GetEmptyPdf()));
+
+        }
+        byte[] GetEmptyPdf()
+        {
+            return Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(40);
+                    page.Content()
+                        .AlignMiddle()
+                        .AlignCenter()
+                        .Text("Gösterilecek PDF bulunamadı")
+                        .FontSize(16)
+                        .FontColor(Colors.Grey.Medium);
+                });
+            }).GeneratePdf();
         }
     }
 }

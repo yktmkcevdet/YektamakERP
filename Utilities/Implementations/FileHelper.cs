@@ -12,6 +12,8 @@ namespace Utilities.Implementations
     {
         public byte[] Decompress(byte[] compressedData)
         {
+            if (compressedData == null || compressedData.Length == 0)
+                return compressedData;
             using (var input = new MemoryStream(compressedData))
             using (var gzip = new GZipStream(input, CompressionMode.Decompress))
             using (var output = new MemoryStream())

@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.Formlar.Projemodul;
 
 namespace YektamakDesktop.Formlar.ProjeModul
 {
@@ -146,25 +147,37 @@ namespace YektamakDesktop.Formlar.ProjeModul
             }
             UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");
 
+            var kayitliStokKods = new List<ProjeStokKart>();
+            kayitliStokKods = await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) } });
+            int existsCount = 0;
+            foreach (var satir in satirList)
+            {
+                if (kayitliStokKods.Any(x => x.stokKart.kod == satir.Key))
+                {
+                    existsCount++;
+                } 
+            }
+            int secim;
             int i = 0;
             foreach (var satir in satirList)
             {
-                //var rowData = sheet.GetRow(rowIndex);
-                //if (rowData == null) continue;
-
-                //var projeStokKart = CreateStokKartFromRow(rowData);
+                if(existsCount>0)
+                {
+                    var form = FormFactory.CreateForm<ExceldenVeriAlmaCakisanKodlar>();
+                    form.SetData(kayitliStokKods);
+                    form.SecimYapildi += (s, e) => {                         
+                        secim = e;
+                    };
+                    form.ShowDialog();
+                }
                 var projeStokKart = (ProjeStokKart)satir.Value;
                 await AttachFilesToStokKart(projeStokKart);
 
                 projeStokKarts.Add(projeStokKart);
-                // Batch size'a ulaştığında veya son satırda kaydet
-                
-                if (projeStokKarts.Count >= batchSize) // || rowIndex == totalRows)
+                if (projeStokKarts.Count >= batchSize)
                 {
                     
                     await SaveStokKartBatch();
-                    //UpdateProgressText($"{totalRows}");
-                    //UpdateTransferCount(rowIndex);
                     i++;
                     UpdateTransferCount(i);
 

@@ -107,6 +107,9 @@
     <Compile Update="Formlar\Ortak\DxfViewer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Projemodul\ExceldenVeriAlmaCakisanKodlar.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Projemodul\ExceldenVeriAlmaFormu.cs">
       <SubType>Form</SubType>
     </Compile>

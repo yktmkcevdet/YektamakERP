@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pdfViewer1 = new PdfiumViewer.PdfViewer();
             SuspendLayout();
             // 
-            // pictureBox1
+            // pdfViewer1
             // 
-            pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBox1.Location = new System.Drawing.Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(948, 678);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pdfViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            pdfViewer1.Location = new System.Drawing.Point(0, 0);
+            pdfViewer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pdfViewer1.Name = "pdfViewer1";
+            pdfViewer1.ShowBookmarks = false;
+            pdfViewer1.ShowToolbar = false;
+            pdfViewer1.Size = new System.Drawing.Size(948, 678);
+            pdfViewer1.TabIndex = 0;
             // 
             // PdfGoruntuleme
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(948, 678);
-            Controls.Add(pictureBox1);
+            Controls.Add(pdfViewer1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "PdfGoruntuleme";
             Text = "PdfGoruntuleme";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private static System.Windows.Forms.PictureBox pictureBox1;
+        private PdfiumViewer.PdfViewer pdfViewer1;
     }
 }

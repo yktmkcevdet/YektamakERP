@@ -55,6 +55,10 @@ namespace ApiService.Implementations
         public async Task<byte[]> GetAsyncByte(string apiAdres)
         {
             var response = await _httpClient.GetAsync($"/api/{apiAdres}");
+            if(response.StatusCode== System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
             response.EnsureSuccessStatusCode();
 
 

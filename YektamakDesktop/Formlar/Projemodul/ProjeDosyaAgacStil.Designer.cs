@@ -35,6 +35,14 @@
             roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
             ctbParcaKodu = new YektamakDesktop.CustomControls.CustomTextBox();
             panel1 = new System.Windows.Forms.Panel();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            button2 = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // headerPanel1
@@ -47,7 +55,7 @@
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
             headerPanel1.Name = "headerPanel1";
             headerPanel1.Padding = new System.Windows.Forms.Padding(1);
-            headerPanel1.Size = new System.Drawing.Size(1091, 25);
+            headerPanel1.Size = new System.Drawing.Size(1324, 25);
             headerPanel1.TabIndex = 0;
             // 
             // treeView1
@@ -158,9 +166,9 @@
             // 
             panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             panel1.BackColor = System.Drawing.Color.White;
-            panel1.Location = new System.Drawing.Point(357, 85);
+            panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(693, 605);
+            panel1.Size = new System.Drawing.Size(962, 668);
             panel1.TabIndex = 6;
             panel1.Paint += panel1_Paint;
             panel1.MouseClick += panel1_MouseClick;
@@ -168,12 +176,67 @@
             panel1.MouseMove += panel1_MouseMove;
             panel1.MouseUp += panel1_MouseUp;
             // 
+            // tabControl1
+            // 
+            tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new System.Drawing.Point(348, 48);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(976, 702);
+            tabControl1.TabIndex = 7;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(button2);
+            tabPage1.Controls.Add(button1);
+            tabPage1.Location = new System.Drawing.Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            tabPage1.Size = new System.Drawing.Size(968, 674);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Pdf";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            button2.Location = new System.Drawing.Point(926, 627);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(20, 23);
+            button2.TabIndex = 1;
+            button2.Text = "✗";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            button1.Location = new System.Drawing.Point(899, 628);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(21, 23);
+            button1.TabIndex = 0;
+            button1.Text = "✓";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(panel1);
+            tabPage2.Location = new System.Drawing.Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            tabPage2.Size = new System.Drawing.Size(968, 674);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Dxf";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // ProjeDosyaAgacStil
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1090, 782);
-            Controls.Add(panel1);
+            ClientSize = new System.Drawing.Size(1323, 782);
+            Controls.Add(tabControl1);
             Controls.Add(ctbParcaKodu);
             Controls.Add(roundedButton2);
             Controls.Add(roundedButton1);
@@ -184,6 +247,9 @@
             Name = "ProjeDosyaAgacStil";
             Text = "ProjeDosyaAgacStil";
             KeyDown += ProjeDosyaAgacStil_KeyDown;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -196,5 +262,10 @@
         private CustomControls.RoundedButton roundedButton2;
         private CustomControls.CustomTextBox ctbParcaKodu;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
