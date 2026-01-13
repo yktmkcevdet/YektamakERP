@@ -110,6 +110,7 @@
             Controls.Add(universalGrid1);
             Name = "ExceldenVeriAlmaCakisanKodlar";
             Text = "ExceldenVeriAlmaCakisanKodlar";
+            FormClosing += ExceldenVeriAlmaCakisanKodlar_FormClosing;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

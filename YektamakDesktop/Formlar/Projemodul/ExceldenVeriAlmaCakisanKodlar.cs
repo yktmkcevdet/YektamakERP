@@ -49,8 +49,13 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SecimYapildi?.Invoke(this, groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r=>r.Checked).TabIndex);
+            SecimYapildi?.Invoke(this, groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).TabIndex);
             this.Close();
+        }
+
+        private void ExceldenVeriAlmaCakisanKodlar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
         }
     }
 }

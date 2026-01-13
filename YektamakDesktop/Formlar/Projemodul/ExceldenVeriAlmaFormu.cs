@@ -98,6 +98,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         string logDosyasi;
         string klasor;
+        List<ProjeStokKart> kayitliStokKods = new List<ProjeStokKart>();
+        int secim;
         Dictionary<string, ProjeStokKart> satirList = new Dictionary<string, ProjeStokKart>();
         private async Task ProcessExcelFileAsync()
         {
@@ -147,7 +149,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             }
             UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");
 
-            var kayitliStokKods = new List<ProjeStokKart>();
+            
             kayitliStokKods = await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) } });
             int existsCount = 0;
             foreach (var satir in satirList)
@@ -157,7 +159,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     existsCount++;
                 } 
             }
-            int secim;
+            
             int i = 0;
             foreach (var satir in satirList)
             {
@@ -358,8 +360,28 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
         private async Task SaveStokKartBatch()
         {
+            
             foreach (var projeStokKart in projeStokKarts)
             {
+                var existingStokKart = kayitliStokKods.FirstOrDefault(s => s.stokKart.kod == projeStokKart.stokKart.kod);
+                if (!string.IsNullOrEmpty(existingStokKart.stokKart.kod))
+                {
+                    if (secim == 1)
+                    {
+                        continue;
+                    }
+                    else if (secim == 2)
+                    {
+                        if (JsonConvert.SerializeObject(projeStokKart.stokKart) != JsonConvert.SerializeObject(existingStokKart.stokKart))
+                        {
+                            // Form açılacak ve kullanıcıya gösterilecek
+                        }
+                    }
+                    else if (secim == 3)
+                    {
+                        _projeService.DeleteProjeStokKart(projeStokKart);
+                    }
+                }
                 string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
                 if (jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
                 {
