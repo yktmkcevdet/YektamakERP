@@ -113,6 +113,9 @@
     <Compile Update="Formlar\Projemodul\ExceldenVeriAlmaFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Projemodul\ExcelVeriAlmaCakisanOnayFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Projemodul\ProfilOptimizasyon.cs">
       <SubType>Form</SubType>
     </Compile>

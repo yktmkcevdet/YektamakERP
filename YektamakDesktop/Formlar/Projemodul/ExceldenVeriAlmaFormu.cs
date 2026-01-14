@@ -375,6 +375,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         if (JsonConvert.SerializeObject(projeStokKart.stokKart) != JsonConvert.SerializeObject(existingStokKart.stokKart))
                         {
                             // Form açılacak ve kullanıcıya gösterilecek
+                            var form = FormFactory.CreateForm<ExcelVeriAlmaCakisanOnayFormu>(); 
+                            form.UpdateMode(projeStokKart, existingStokKart);
+                            form.ShowDialog();
                         }
                     }
                     else if (secim == 3)

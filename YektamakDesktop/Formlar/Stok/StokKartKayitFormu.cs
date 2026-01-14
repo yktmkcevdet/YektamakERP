@@ -374,7 +374,6 @@ namespace YektamakDesktop.Formlar.Stok
             _fileService = fileService;
             InitializeComponents();
         }
-
         private void Binding()
         {
             BindHelper.BindData(ctbId,stokKartDosya,nameof(stokKartDosya.Id));
@@ -383,12 +382,10 @@ namespace YektamakDesktop.Formlar.Stok
             BindHelper.BindData(ctbDosyaAd, stokKartDosya, nameof(stokKartDosya.dosyaAd));
             BindHelper.BindData(fcbDosyaTip, stokKartDosya.dosyaTip, nameof(stokKartDosya.dosyaTip.Id));
         }
-
         public DataControlStokKartDosya()
         {
             InitializeComponents();
         }
-
         public CustomTextBox ctbId { get; set; }
         public CustomTextBox ctbStokKartId { get; set; }
         private FilterableComboBox _dosyaTipControl;
@@ -399,8 +396,6 @@ namespace YektamakDesktop.Formlar.Stok
         public byte[] dosyaVeri { get; set; }
         public RoundedIconButton iconButton { get; set; }
         public RoundedIconButton iconButtonView { get; set; }
-
-
         private void InitializeComponents()
         {
             ctbId = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
@@ -442,7 +437,6 @@ namespace YektamakDesktop.Formlar.Stok
 
             _dosyaTipControl.SetDataSource(_cache.dosyaTipList);
         }
-
         private void ButtonDosyaEkle_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -484,7 +478,40 @@ namespace YektamakDesktop.Formlar.Stok
                 using (MemoryStream ms = new MemoryStream(dosyaVeri))
                 {
                     File.WriteAllBytes(tempFilePath, ms.ToArray());
-                    Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+                    try
+                    {
+                        Process.Start(new ProcessStartInfo(tempFilePath)
+                        {
+                            UseShellExecute = true
+                        });
+                    }
+                    catch (Win32Exception)
+                    {
+                        var result = MessageBox.Show(
+                            "Bu dosya için varsayılan bir uygulama bulunamadı.\n" +
+                            "Birlikte Aç penceresi açılsın mı?",
+                            "Uygulama Seç",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo
+                                {
+                                    FileName = "rundll32.exe",
+                                    Arguments = $"shell32.dll,OpenAs_RunDLL \"{tempFilePath}\"",
+                                    UseShellExecute = true
+                                });
+                            }
+                            catch (Win32Exception ex)
+                            {
+                                MessageBox.Show($"Hata: {ex.Message}\nNativeErrorCode: {ex.NativeErrorCode}");
+                            }
+                        }
+                    }
                 }
             }
             else

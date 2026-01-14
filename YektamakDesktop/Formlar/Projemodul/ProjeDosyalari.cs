@@ -261,7 +261,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             bool result = true;
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
-            MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
+            MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue?.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
             if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList,proje,malzemeGrup);
         }
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
