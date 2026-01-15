@@ -43,12 +43,14 @@ namespace YektamakDesktop.Formlar.Stok
             clbOlcuBirim.SetDataSource(_cache.olcuBirims);
             clbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
             clbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
+            
             clbStokGrup.SetDataSource(_cache.stokGrups);
             clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
+            
             _fileService = fileService;
             _convertHelper = convertHelper;
         }
@@ -177,7 +179,10 @@ namespace YektamakDesktop.Formlar.Stok
 
         private void StokKartTanimlamaFormu_Load(object sender, EventArgs e)
         {
-
+            if (_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList().Count == 1)
+            {
+                clbProjeKod.SelectedValue = _cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).First().Id;
+            }
         }
         private void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {

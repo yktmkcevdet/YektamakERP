@@ -265,3 +265,13 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\ref\YektamakDesktop.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\x64\pdfium.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\PdfiumViewer.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\de\PdfiumViewer.resources.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\nl\PdfiumViewer.resources.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.Formlar.Projemodul.ExceldenVeriAlmaCakisanKodlar.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.Formlar.Projemodul.ExcelVeriAlmaCakisanOnayFormu.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\YektamakDesktop.dll.manifest
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\YektamakDesktop.application
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.dll.manifest
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.application

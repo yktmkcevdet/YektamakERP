@@ -1,4 +1,5 @@
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\YektamakDesktop.exe
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\x64\pdfium.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\logo.png
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\Resources\logo1.png
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\LatoFont\Lato-Black.ttf
@@ -80,6 +81,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\NPOI.OpenXml4Net.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\NPOI.OpenXmlFormats.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\NSax.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\PdfiumViewer.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\QuestPDF.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\RtfPipe.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\Serilog.dll
@@ -142,6 +144,8 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\tr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\zh-Hans\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\zh-Hant\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\de\PdfiumViewer.resources.dll
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\nl\PdfiumViewer.resources.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\runtimes\osx\native\libHarfBuzzSharp.dylib
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\runtimes\win-arm64\native\libHarfBuzzSharp.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\runtimes\win-x64\native\libHarfBuzzSharp.dll

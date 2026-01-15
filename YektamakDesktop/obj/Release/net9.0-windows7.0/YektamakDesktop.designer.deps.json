@@ -855,6 +855,22 @@
           }
         }
       },
+      "PdfiumViewer.Updated/2.14.5": {
+        "runtime": {
+          "lib/net6.0-windows7.0/PdfiumViewer.dll": {
+            "assemblyVersion": "2.14.5.0",
+            "fileVersion": "2.14.5.0"
+          }
+        },
+        "resources": {
+          "lib/net6.0-windows7.0/de/PdfiumViewer.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0-windows7.0/nl/PdfiumViewer.resources.dll": {
+            "locale": "nl"
+          }
+        }
+      },
       "QuestPDF/2025.7.4": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
@@ -2422,6 +2438,13 @@
       "sha512": "sha512-7txlId2RJTQBL3YdSGO7x70+r3HUOCw725lu0OoBgThRl/e3RhAZ2QKYxW2y9dPRtqbFZYHVa8siIeB8+L//Cg==",
       "path": "nsax/1.0.2",
       "hashPath": "nsax.1.0.2.nupkg.sha512"
+    },
+    "PdfiumViewer.Updated/2.14.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oFJyeZBsOkjcWfl++VZh5cPG4M6mbCeSgSnrNiEEKr4eBsY8g9OjeoNKlO8b7/SXAeC9nKXdVPhgNztEeFT0ig==",
+      "path": "pdfiumviewer.updated/2.14.5",
+      "hashPath": "pdfiumviewer.updated.2.14.5.nupkg.sha512"
     },
     "QuestPDF/2025.7.4": {
       "type": "package",
