@@ -54,6 +54,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fccMalzemeAltGrup2 = new FilterableCheckedComboBox();
             dgv = new System.Windows.Forms.DataGridView();
             chkBukum = new System.Windows.Forms.CheckBox();
+            roundedButton1 = new RoundedButton();
             contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
@@ -80,10 +81,17 @@ namespace YektamakDesktop.Formlar.Satinalma
             // btnTeklif
             // 
             btnTeklif.BackColor = System.Drawing.Color.FromArgb(128, 255, 128);
+            btnTeklif.BorderColor = System.Drawing.Color.Black;
+            btnTeklif.BorderSize = 0;
+            btnTeklif.CornerRadius = 6;
             btnTeklif.Cursor = System.Windows.Forms.Cursors.Hand;
             btnTeklif.FlatAppearance.BorderSize = 0;
             btnTeklif.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnTeklif.ForeColor = System.Drawing.SystemColors.ControlText;
+            btnTeklif.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnTeklif.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnTeklif.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnTeklif.HoverColor2 = System.Drawing.Color.Navy;
             btnTeklif.IconChar = FontAwesome.Sharp.IconChar.CommentDollar;
             btnTeklif.IconColor = System.Drawing.Color.Black;
             btnTeklif.IconFont = FontAwesome.Sharp.IconFont.Solid;
@@ -314,11 +322,36 @@ namespace YektamakDesktop.Formlar.Satinalma
             chkBukum.UseVisualStyleBackColor = true;
             chkBukum.CheckStateChanged += checkBox1_CheckedChanged;
             // 
+            // roundedButton1
+            // 
+            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
+            roundedButton1.BorderColor = System.Drawing.Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedButton1.ForeColor = System.Drawing.Color.White;
+            roundedButton1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            roundedButton1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            roundedButton1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            roundedButton1.HoverColor2 = System.Drawing.Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new System.Drawing.Point(358, 318);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Size = new System.Drawing.Size(150, 40);
+            roundedButton1.TabIndex = 29;
+            roundedButton1.Text = "SİPARİŞ OLUŞTUR";
+            roundedButton1.TextColor = System.Drawing.Color.White;
+            roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Click += roundedButton1_Click;
+            // 
             // SatinalmaTalepTeklifFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1096, 745);
+            Controls.Add(roundedButton1);
             Controls.Add(chkBukum);
             Controls.Add(dgv);
             Controls.Add(fccMalzemeAltGrup2);
@@ -371,5 +404,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private FilterableCheckedComboBox fccMalzemeAltGrup2;
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.CheckBox chkBukum;
+        private RoundedButton roundedButton1;
     }
 }

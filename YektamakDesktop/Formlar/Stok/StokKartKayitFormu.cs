@@ -10,12 +10,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Forms;
 using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Genel;
+using YektamakDesktop.Helpers;
 using YektamakDesktop.Properties;
 
 namespace YektamakDesktop.Formlar.Stok
@@ -43,14 +45,14 @@ namespace YektamakDesktop.Formlar.Stok
             clbOlcuBirim.SetDataSource(_cache.olcuBirims);
             clbMalzemeStandart.SetDataSource(_cache.malzemeStandarts);
             clbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
-            
+
             clbStokGrup.SetDataSource(_cache.stokGrups);
             clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             clbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
             clbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
             fcbBoyut.SetDataSource(_cache.boyutList);
             Binding();
-            
+
             _fileService = fileService;
             _convertHelper = convertHelper;
         }
@@ -162,6 +164,7 @@ namespace YektamakDesktop.Formlar.Stok
             BindHelper.BindData(fcbBoyut, projeStokKart.stokKart.boyutTanim, nameof(projeStokKart.stokKart.boyutTanim.Id));
             BindHelper.BindData(chkTalasli, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isTalasli));
             BindHelper.BindData(chkBukum, projeStokKart.stokKart, nameof(projeStokKart.stokKart.isBukum));
+            BindHelper.BindData(ctb_internalReference, projeStokKart.stokKart, nameof(projeStokKart.stokKart.INTERNAL_REFERENCE));
             List<DataControlStokKartDosya> dataControlStokKartDosyaList = new List<DataControlStokKartDosya>();
             for (int i = 0; i < projeStokKart.stokKart.dosyaList.Count; i++)
             {
@@ -344,6 +347,30 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKartHamVeriForm.UpdateMode(JsonConvert.DeserializeObject<ExcelFormat>(projeStokKart.hamVeri));
             }
             stokKartHamVeriForm.ShowDialog();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            LogoItem logoItem = new LogoItem
+            {
+                CARD_TYPE = 1,
+                CODE = projeStokKart.stokKart.kod,
+                NAME = projeStokKart.stokKart.ad,
+                USEF_PURCHASING = 1,
+                USEF_SALES = 1,
+                USEF_MM = 1,
+                VAT = 20,
+                AUTOINCSL = 1,
+                LOTS_DIVISIBLE = 1,
+                UNITSETREF = 23,
+                UNITSET_CODE = "05",
+                SELVAT = 20,
+                RETURNVAT = 20,
+                SELPRVAT = 20,
+                RETURNPRVAT = 20,
+            };
+            
+            string response = await LogoHelper.HttpPostAsync(LogoHelper.logoApiUrl + "items", JsonConvert.SerializeObject(logoItem));
         }
     }
     public class DataControlStokKartDosya : DataControl, IEntity

@@ -42,7 +42,7 @@ namespace YektamakDesktop.Formlar
             universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
-            universalGrid1.SetData(new List<LogoClCard>(), this.Name);
+            universalGrid1.SetData(new List<LogoItem>(), this.Name);
         }
 
         private LogoClCard _logoClCard;
@@ -63,13 +63,13 @@ namespace YektamakDesktop.Formlar
         string token = "";
         private async void roundedButton1_Click(object sender, EventArgs e)
         {
-            token = await LogoHelper.GetAccessTokenAsync("http://172.16.9.132:32001/api/v1/token", "OBJE", "OBJE", "226");
+            //token = await LogoHelper.GetAccessTokenAsync("http://172.16.9.132:32001/api/v1/token", "OBJE", "OBJE", "226");
 
             string postUrl = "http://172.16.9.132:32001/api/v1/queries/unsafe";
 
-            string JSSqlText = "\"SELECT * FROM LG_226_CLCARD\"";
+            string JSSqlText = "\"SELECT * FROM LG_226_ITEMS\"";
 
-            string result = await LogoHelper.HttpPostAsync(postUrl, JSSqlText, token);
+            string result = await LogoHelper.HttpPostAsync(postUrl, JSSqlText);
             dynamic resJSON = JsonConvert.DeserializeObject(result.ToString());
 
             //string itemListJSON = await LogoHelper.HttpGetAsync("http://172.16.9.132:32001/api/v1/items?limit=10",token);
@@ -77,7 +77,7 @@ namespace YektamakDesktop.Formlar
 
             JsonElement root = doc.RootElement;
             JsonElement items = root.GetProperty("items");
-            var list = _jsonConverter.DeserializeObject<List<LogoClCard>>(items.GetRawText());
+            var list = _jsonConverter.DeserializeObject<List<LogoItem>>(items.GetRawText());
             universalGrid1.SetData(list, this.Name);
         }
 
@@ -105,7 +105,7 @@ namespace YektamakDesktop.Formlar
             if (e.KeyCode == Keys.Enter)
             {
                 universalGrid1.Focus();
-                universalGrid1.Filtrele(new LogoClCard { DEFINITION_=ctbDefinition.TextCustom});
+                universalGrid1.Filtrele(new LogoItem { NAME=ctbDefinition.TextCustom});
             }
         }
     }

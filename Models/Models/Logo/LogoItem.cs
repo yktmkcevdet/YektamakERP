@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class LogoItems:IEntity
+    public class LogoItem:IEntity
     {
         [GridDisplay(Header = "INTERNAL_REFERENCE")] public int? INTERNAL_REFERENCE { get; set; }
         [GridDisplay(Header = "RECORD_STATUS")] public int? RECORD_STATUS { get; set; }
         [GridDisplay(Header = "CARD_TYPE")] public int? CARD_TYPE { get; set; }
         [GridDisplay(Header = "CODE")] public string CODE { get; set; }
+        [GridDisplay(Header = "NAME")] public string NAME { get; set; }
+        [GridDisplay(Header = "UNITSET_CODE")] public string UNITSET_CODE { get; set; }
         [GridDisplay(Header = "CLASS_TYPE")] public int? CLASS_TYPE { get; set; }
         [GridDisplay(Header = "USEF_PURCHASING")] public int? USEF_PURCHASING { get; set; }
         [GridDisplay(Header = "USEF_SALES")] public int? USEF_SALES { get; set; }

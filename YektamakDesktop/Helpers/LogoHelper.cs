@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq.Dynamic.Core.Tokenizer;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,6 +12,7 @@ namespace YektamakDesktop.Helpers
     public static class LogoHelper
     {
         public static string clientSecret = "REFUQU1FUjptNVFQWDJIZjE3Sm1NaXVVMC93NlBnR1FlQzE0MDBLbnZaZWk1V2J6UGF3PQ=="; // Logo Client ID
+        public static string logoApiUrl = "http://172.16.9.132:32001/api/v1/"; // Logo API URL
         public static async Task<string> GetAccessTokenAsync(string url,  string userName, string password, string firmNr)
         {
             using (var http = new HttpClient())
@@ -48,10 +50,11 @@ namespace YektamakDesktop.Helpers
                 new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        public static async Task<string> HttpPostAsync(string url, string param, string accessToken)
+        public static async Task<string> HttpPostAsync(string url, string param)
         {
             try
             {
+                string accessToken = await GetAccessTokenAsync("http://172.16.9.132:32001/api/v1/token", "OBJE", "OBJE", "226");
                 SetAuthorization(accessToken);
 
                 var content = new StringContent(param, Encoding.UTF8, "application/json");

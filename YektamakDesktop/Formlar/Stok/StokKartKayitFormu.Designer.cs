@@ -125,6 +125,9 @@ namespace YektamakDesktop.Formlar.Stok
             chkBukum = new CheckBox();
             customButtonNewRecord1 = new CustomButtonNewRecord();
             roundedButton1 = new RoundedButton();
+            ctb_internalReference = new CustomTextBox();
+            label5 = new Label();
+            button1 = new Button();
             ctxSagClickMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -701,6 +704,13 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             rButtonKaydet.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             rButtonKaydet.BackColor = Color.Transparent;
+            rButtonKaydet.BorderColor = Color.Black;
+            rButtonKaydet.BorderSize = 0;
+            rButtonKaydet.CornerRadius = 6;
+            rButtonKaydet.GradientColor1 = Color.DodgerBlue;
+            rButtonKaydet.GradientColor2 = Color.MidnightBlue;
+            rButtonKaydet.HoverColor1 = Color.RoyalBlue;
+            rButtonKaydet.HoverColor2 = Color.Navy;
             rButtonKaydet.Location = new Point(769, 624);
             rButtonKaydet.Name = "rButtonKaydet";
             rButtonKaydet.Size = new Size(36, 36);
@@ -1056,7 +1066,16 @@ namespace YektamakDesktop.Formlar.Stok
             // customButtonNewRecord1
             // 
             customButtonNewRecord1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            customButtonNewRecord1.BorderColor = Color.Black;
+            customButtonNewRecord1.BorderSize = 0;
+            customButtonNewRecord1.CornerRadius = 6;
+            customButtonNewRecord1.ForeColor = Color.White;
+            customButtonNewRecord1.GradientColor1 = Color.DodgerBlue;
+            customButtonNewRecord1.GradientColor2 = Color.MidnightBlue;
+            customButtonNewRecord1.HoverColor1 = Color.RoyalBlue;
+            customButtonNewRecord1.HoverColor2 = Color.Navy;
             customButtonNewRecord1.Location = new Point(40, 624);
+            customButtonNewRecord1.Margin = new Padding(0);
             customButtonNewRecord1.Name = "customButtonNewRecord1";
             customButtonNewRecord1.Size = new Size(36, 36);
             customButtonNewRecord1.TabIndex = 97;
@@ -1086,11 +1105,58 @@ namespace YektamakDesktop.Formlar.Stok
             roundedButton1.UseVisualStyleBackColor = true;
             roundedButton1.Click += roundedButton1_Click_1;
             // 
+            // ctb_internalReference
+            // 
+            ctb_internalReference.BackColor = Color.White;
+            ctb_internalReference.BorderColor = Color.Silver;
+            ctb_internalReference.BorderFocusColor = Color.HotPink;
+            ctb_internalReference.BorderSize = 1;
+            ctb_internalReference.Font = new Font("Segoe UI", 8F);
+            ctb_internalReference.ForeColor = Color.Black;
+            ctb_internalReference.Location = new Point(310, 35);
+            ctb_internalReference.Margin = new Padding(1);
+            ctb_internalReference.Multiline = false;
+            ctb_internalReference.Name = "ctb_internalReference";
+            ctb_internalReference.Padding = new Padding(3);
+            ctb_internalReference.PasswordChar = false;
+            ctb_internalReference.PlaceholderColor = Color.DarkGray;
+            ctb_internalReference.PlaceholderText = "";
+            ctb_internalReference.ReadOnly = false;
+            ctb_internalReference.SelectionStart = 0;
+            ctb_internalReference.Size = new Size(165, 25);
+            ctb_internalReference.TabIndex = 99;
+            ctb_internalReference.TextAlignment = HorizontalAlignment.Left;
+            ctb_internalReference.TextCustom = "";
+            ctb_internalReference.UnderlinedStyle = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.Location = new Point(250, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(56, 15);
+            label5.TabIndex = 100;
+            label5.Text = "LOGO ID";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(587, 636);
+            button1.Name = "button1";
+            button1.Size = new Size(76, 28);
+            button1.TabIndex = 101;
+            button1.Text = "Logo'ya Kaydet";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // StokKartKayitFormu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(891, 698);
+            Controls.Add(button1);
+            Controls.Add(label5);
+            Controls.Add(ctb_internalReference);
             Controls.Add(roundedButton1);
             Controls.Add(customButtonNewRecord1);
             Controls.Add(chkBukum);
@@ -1259,5 +1325,8 @@ namespace YektamakDesktop.Formlar.Stok
         private CheckBox chkBukum;
         private CustomButtonNewRecord customButtonNewRecord1;
         private RoundedButton roundedButton1;
+        private CustomTextBox ctb_internalReference;
+        private Label label5;
+        private Button button1;
     }
 }

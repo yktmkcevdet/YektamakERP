@@ -12,7 +12,7 @@ namespace Models
         public Hammadde hammadde { get { if (_hammadde == null) { _hammadde = new(); } return _hammadde; } set { _hammadde = value; } }
         public string parcaKod { get; set; }
         [GridDisplay(Header = "Stok Kodu", Visible = false)] public string kod { get; set; }
-        public string logoKod { get; set; }
+        public string INTERNAL_REFERENCE { get; set; }
         public string tedarikciKod { get; set; }
         [GridDisplay(Header = "Stok Adı")] public string ad { get; set; }
         [GridDisplay(Header = "Boyut")] public string boyut { get; set; }
