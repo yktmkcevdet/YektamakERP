@@ -155,16 +155,16 @@ namespace YektamakDesktop.Formlar.Satinalma.Teklif
             {
                 return;
             }
-            SatinalmaSiparis satinalmaSiparis = new SatinalmaSiparis();
+            SatinalmaSiparisDTO satinalmaSiparis = new SatinalmaSiparisDTO();
             satinalmaSiparis.siparisTarihi = DateTime.Today;
             satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
-            satinalmaSiparis.firma = satinalmaTeklifBaslik.teklifFirma;
+            satinalmaSiparis.firmaId = satinalmaTeklifBaslik.teklifFirma.Id;
             satinalmaSiparis.aciklama = satinalmaTeklifBaslik.aciklama;
-            satinalmaSiparis.vade = satinalmaTeklifBaslik.vade;
+            satinalmaSiparis.vadeId = satinalmaTeklifBaslik.vade.Id;
             satinalmaSiparis.tutar = satinalmaTeklifBaslik.teklifTutar;
-            satinalmaSiparis.dovizCinsi = satinalmaTeklifBaslik.dovizCinsi;
+            satinalmaSiparis.dovizCinsiId = satinalmaTeklifBaslik.dovizCinsi.Id;
             satinalmaSiparis.teslimTarihi = DateTime.Today.AddDays(Convert.ToDouble(satinalmaTeklifBaslik.terminSuresi));
-            satinalmaSiparis.kdv.Id = 1; 
+            satinalmaSiparis.kdvId = 1; 
             foreach (var item in satinalmaTeklifBaslik.satinalmaTeklifDetayList)
             {
                 SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();

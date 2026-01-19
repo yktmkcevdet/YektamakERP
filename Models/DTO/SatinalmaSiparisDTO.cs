@@ -1,4 +1,5 @@
 ﻿using Models.Attributes;
+using System.ComponentModel;
 
 namespace Models
 {
@@ -20,5 +21,6 @@ namespace Models
         [GridDisplay(Header = "Açıklama")] public string aciklama { get; set; }
         [GridDisplay(Header = "Teklif Id")] public int? satinalmaTeklifId { get; set; }
         [GridDisplay(Header = "Sipariş Detay")] public List<SatinalmaSiparisDetay> satinalmaSiparisDetay { get; set; }
+
     }
 }

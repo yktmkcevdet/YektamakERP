@@ -76,13 +76,10 @@ namespace YektamakDesktop.CustomControls
         }
         private void roundedButton4_Click(object sender, EventArgs e)
         {
-            parentForm = this.FindForm();
-            if (parentForm is Form form)
-            {
-                form.Close();
-                form.Dispose();
-                form = null;
-            }
+            var form = FindForm();
+            if (form == null) return;
+
+            form.Close();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)

@@ -31,6 +31,8 @@ namespace YektamakDesktop.CustomControls
             {
                 _dataSource = value;
                 FillDataRows();
+                _detailPanel.AutoScroll = true;
+                _detailPanel.Scroll += DetailPanel_Scroll;
             }
         }
         int controlPointY;
@@ -48,8 +50,6 @@ namespace YektamakDesktop.CustomControls
                     _headerPanel = new Panel();
                     _headerPanel.Location = _headerLocation;
                     _headerPanel.AutoSize = true;
-                    //_headerPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                    //_headerPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
                     _headerPanel.Height = 30;
                 }
                 return _headerPanel;
@@ -68,14 +68,8 @@ namespace YektamakDesktop.CustomControls
 				{
 					_detailPanel = new Panel();
 					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + 30);
-                    //_detailPanel.Size = _detailSize;
-                    _detailPanel.AutoSize = true;
-                   // _detailPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                    _detailPanel.AutoScroll = true;
-                    //_detailPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom ;
-                    _detailPanel.Scroll += DetailPanel_Scroll;
-                    //_detailPanel.Height = _detailPanel.Height + 30;
-					AddDataRow(DIContainer.GetService<T>());
+                    _detailPanel.Size = _detailSize;
+                    AddDataRow(DIContainer.GetService<T>());
 				}
 				return _detailPanel;
 			}
@@ -315,7 +309,7 @@ namespace YektamakDesktop.CustomControls
             int leftPadding = 7;
             controlPointY =controlPointY - detailPanel.VerticalScroll.Value;
             leftPadding=leftPadding - detailPanel.HorizontalScroll.Value;
-            foreach (Control control in  listControl.Where(p=>p!=null && p.Visible).OrderBy(p=>p.TabIndex))
+            foreach (Control control in  listControl.Where(c=>c!=null && c.Visible).OrderBy(c=>c.TabIndex))
             {
                 if((string)control.Tag == "#")
                 {

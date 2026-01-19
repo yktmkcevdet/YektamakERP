@@ -1,8 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.Configuration;
 using Models.DTO;
-using Models.Models;
 using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -14,17 +12,14 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.TextFormatting;
 using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Abstracts;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 using YektamakDesktop.Formlar.Satinalma.Siparis;
-using YektamakDesktop.Formlar.Satis;
 using YektamakDesktop.Formlar.Stok;
 
 namespace YektamakDesktop.Formlar.Satinalma
@@ -135,26 +130,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             {
                 await Binding();
                 await GridDoldur();
-                mgr = new ExpandableGridAnimator(dgv);
-                var grupList = GetData();
-
-                foreach (var grup in grupList)
-                {
-                    var detayList = GetGrupData(grup.projeKod);
-
-                    var gorunumModel = new SatinalmaTalepForGrup
-                    {
-                        Grup = grup.projeKod,
-                        satirSayisi = grup.satirSayisi,
-                        teklifSayisi = grup.teklifSayisi,
-                        Details = detayList,
-                        Filtrele = (e) => FiltreGrid(detayList[(int)e].projeId, detayList[(int)e].malzemeGrupId)
-                    };
-
-                    int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde());
-
-                    mgr.BindRow(dgv.Rows[rowIndex], gorunumModel);
-                }
+                GrupGridDoldur();
 
             }
             catch (Exception ex)
@@ -163,6 +139,31 @@ namespace YektamakDesktop.Formlar.Satinalma
 
             }
         }
+
+        private void GrupGridDoldur()
+        {
+            mgr = new ExpandableGridAnimator(dgv);
+            var grupList = GetData();
+
+            foreach (var grup in grupList)
+            {
+                var detayList = GetGrupData(grup.projeKod);
+
+                var gorunumModel = new SatinalmaTalepForGrup
+                {
+                    Grup = grup.projeKod,
+                    satirSayisi = grup.satirSayisi,
+                    teklifSayisi = grup.teklifSayisi,
+                    Details = detayList,
+                    Filtrele = (e) => FiltreGrid(detayList[(int)e].projeId, detayList[(int)e].malzemeGrupId)
+                };
+
+                int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde());
+
+                mgr.BindRow(dgv.Rows[rowIndex], gorunumModel);
+            }
+        }
+
         private void FiltreGrid(int? projeId, int? malzemeGrupId)
         {
             filter = new SatinalmaTalepDetayDTO { projeId = projeId, projeStokKartstokKartmalzemeGrupId = malzemeGrupId };
@@ -461,6 +462,11 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void cbxStokGrupId_SelectedIndexChanged(object sender, EventArgs e)
         {
             universalGrid1.Filtrele(filter);
+            if(clbStokGrupId.SelectedValue == null)
+            {
+                clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups);
+                return;
+            }
             clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id == int.Parse(clbStokGrupId.SelectedValue.ToString())).ToList());
         }
         private async void cbxMalzemeGrupId_SelectedIndexChanged(object sender, EventArgs e)
@@ -496,9 +502,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             BoyutFiltrele();
         }
-        private void isTeklif_CheckedChanged(object sender, EventArgs e)
+        private async Task isTeklif_CheckedChanged(object sender, EventArgs e)
         {
-            GridDoldur();
+            await GridDoldur();
+            GrupGridDoldur();
         }
         private void fccMalzemeAltGrupId_ItemsChanged(object sender, EventArgs e)
         {
@@ -641,10 +648,10 @@ namespace YektamakDesktop.Formlar.Satinalma
                 return;
             }
             Firma firma = (Firma)dataControlFirmas.First(dc => dc.newRec == false).Id.SelectedItem;
-            SatinalmaSiparis satinalmaSiparis = new SatinalmaSiparis();
+            SatinalmaSiparisDTO satinalmaSiparis = new SatinalmaSiparisDTO();
             satinalmaSiparis.siparisTarihi = DateTime.Today;
-            satinalmaSiparis.firma = firma;
-            satinalmaSiparis.kdv.Id = 1;
+            satinalmaSiparis.firmaId = firma.Id;
+            satinalmaSiparis.kdvId = 1;
             foreach (var item in satinalmaTalepDetayDTOs.CastToEntity<SatinalmaTalepDetay>(_convertHelper))
             {
                 SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();

@@ -43,10 +43,13 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
         {
             iconButtonAdd = new IconButton();
             headerPanel1 = new HeaderPanel();
+            panel1 = new Panel();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // iconButtonAdd
             // 
+            iconButtonAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             iconButtonAdd.AutoEllipsis = true;
             iconButtonAdd.BackColor = SystemColors.ActiveCaption;
             iconButtonAdd.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 128);
@@ -55,12 +58,12 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             iconButtonAdd.FlatAppearance.MouseOverBackColor = Color.Yellow;
             iconButtonAdd.FlatStyle = FlatStyle.Popup;
             iconButtonAdd.ForeColor = Color.FromArgb(192, 0, 192);
-            iconButtonAdd.IconChar = IconChar.Plus;
+            iconButtonAdd.IconChar = IconChar.Add;
             iconButtonAdd.IconColor = Color.OliveDrab;
             iconButtonAdd.IconFont = IconFont.Auto;
             iconButtonAdd.IconSize = 20;
             iconButtonAdd.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonAdd.Location = new Point(549, 56);
+            iconButtonAdd.Location = new Point(703, 20);
             iconButtonAdd.Name = "iconButtonAdd";
             iconButtonAdd.Size = new Size(57, 29);
             iconButtonAdd.TabIndex = 0;
@@ -81,24 +84,35 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             headerPanel1.Size = new Size(798, 25);
             headerPanel1.TabIndex = 1;
             // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(iconButtonAdd);
+            panel1.Location = new Point(0, 26);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(798, 565);
+            panel1.TabIndex = 2;
+            // 
             // Menuler
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(798, 592);
+            Controls.Add(panel1);
             Controls.Add(headerPanel1);
-            Controls.Add(iconButtonAdd);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Menuler";
             Text = "Menuler";
             Load += Menuler_Load;
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        
+
         private IconButton iconButtonAdd;
         public HeaderPanel headerPanel1;
+        private Panel panel1;
     }
 }

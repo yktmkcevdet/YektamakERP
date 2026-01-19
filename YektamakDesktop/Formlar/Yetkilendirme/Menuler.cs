@@ -23,9 +23,9 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             _kullaniciYetkiService = kullaniciYetkiService;
             InitializeComponent();
             var dataC=new DataControlMenu(new Menu());
-            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300),dataC);
-            this.Controls.Add(customDataGrid.headerPanel);
-            this.Controls.Add(customDataGrid.detailPanel);
+            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(0, 0), new Size(panel1.Width, panel1.Height-30),dataC);
+            panel1.Controls.Add(customDataGrid.headerPanel);
+            panel1.Controls.Add(customDataGrid.detailPanel);
         }
         private void buttonClose_Click(object sender, EventArgs e)
         {

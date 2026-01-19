@@ -25,8 +25,8 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
             Binding();
             _convertHelper = convertHelper;
         }
-        private SatinalmaSiparis _satinalmaSiparis;
-        private SatinalmaSiparis satinalmaSiparis
+        private SatinalmaSiparisDTO _satinalmaSiparis;
+        private SatinalmaSiparisDTO satinalmaSiparis
         {
             get { if (_satinalmaSiparis == null) { _satinalmaSiparis = new(); } return _satinalmaSiparis; }
             set { _satinalmaSiparis = value; Binding(); }
@@ -47,15 +47,18 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 
         private void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
         {
-            var satinalmaSiparisDTO = (SatinalmaSiparisDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            satinalmaSiparis = _convertHelper.ToEntity<SatinalmaSiparis>(satinalmaSiparisDTO);
-            contextMenuStrip1.Show(universalGrid1, e.Location);
+            satinalmaSiparis = (SatinalmaSiparisDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1, e.Location);
+            }
+            return;
         }
 
         private void Binding()
         {
-            BindHelper.BindData(fcbProjeKod, satinalmaSiparis.proje, nameof(satinalmaSiparis.proje.Id));
-            BindHelper.BindData(fcbFirma, satinalmaSiparis.firma, nameof(satinalmaSiparis.firma.Id));
+            BindHelper.BindData(fcbProjeKod, satinalmaSiparis, nameof(satinalmaSiparis.projeId));
+            BindHelper.BindData(fcbFirma, satinalmaSiparis, nameof(satinalmaSiparis.firmaId));
         }
         private async void SatinalmaSiparisler_Load(object sender, System.EventArgs e)
         {
@@ -75,7 +78,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
 
         private async void siparişiSilToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            string jsonResult = await _satinalmaSiparisService.DeleteSatinalmaSiparis(satinalmaSiparis);
+            string jsonResult = await _satinalmaSiparisService.DeleteSatinalmaSiparis(_convertHelper.ToEntity<SatinalmaSiparis>(satinalmaSiparis));
             if (!string.IsNullOrWhiteSpace(jsonResult) && !jsonResult.Contains("error",StringComparison.OrdinalIgnoreCase))
             {
                 universalGrid1.binding.Remove(universalGrid1.Grid.CurrentRow);
