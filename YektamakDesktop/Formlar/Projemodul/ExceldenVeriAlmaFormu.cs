@@ -364,7 +364,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             foreach (var projeStokKart in projeStokKarts)
             {
                 var existingStokKart = kayitliStokKods.FirstOrDefault(s => s.stokKart.kod == projeStokKart.stokKart.kod);
-                if (!string.IsNullOrEmpty(existingStokKart.stokKart.kod))
+                if (!string.IsNullOrEmpty(existingStokKart?.stokKart.kod))
                 {
                     if (secim == 1)
                     {
