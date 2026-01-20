@@ -1,12 +1,17 @@
 ﻿using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using SolidWorks.Interop.sldworks;
+using SolidWorks.Interop.swconst;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
@@ -200,7 +205,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private async Task fcbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
             await GridYenile();
-            if(fcbStokGrup.SelectedValue == null)
+            if (fcbStokGrup.SelectedValue == null)
             {
                 fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             }
@@ -262,7 +267,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue?.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
-            if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList,proje,malzemeGrup);
+            if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
         }
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -383,7 +388,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                         }
                         else
                         {
-                            foreach(var dosya in item.stokKartdosyaList.Select(d => d.dosyaFullPath).ToList())
+                            foreach (var dosya in item.stokKartdosyaList.Select(d => d.dosyaFullPath).ToList())
                             {
                                 await _fileService.DeleteFile(dosya);
                             }
@@ -399,5 +404,284 @@ namespace YektamakDesktop.Formlar.ProjeModul
             await GridYenile();
         }
 
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            using var fbd = new FolderBrowserDialog
+            {
+                Description = "PDF'e dönüştürülecek SLDDrw dosyalarının bulunduğu klasörü seçin",
+                UseDescriptionForTitle = true
+            };
+
+            if (fbd.ShowDialog() != DialogResult.OK)
+                return;
+            var sw = Stopwatch.StartNew();
+            ExportSldPrtFilesToStep(fbd);
+            bool flowControl = ExportSldDrwFilesToPdf(fbd);
+            if (!flowControl)
+            {
+                return;
+            }
+            sw.Stop();
+
+            TimeSpan gecenSure = sw.Elapsed;
+            MessageBox.Show($"İşlem tamamlandı. Geçen süre: {gecenSure.TotalSeconds} saniye.");
+        }
+
+        private static bool ExportSldDrwFilesToPdf(FolderBrowserDialog fbd)
+        {
+            SldWorks swApp = null;
+
+            try
+            {
+                string folder = fbd.SelectedPath;
+                var drwFiles = Directory.GetFiles(folder, "*.slddrw", SearchOption.TopDirectoryOnly);
+
+                if (drwFiles.Length == 0)
+                {
+                    MessageBox.Show("Seçilen klasörde .slddrw bulunamadı.");
+                    return false;
+                }
+
+                // SolidWorks başlat (arka planda)
+                swApp = Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application")) as SldWorks;
+                if (swApp == null)
+                {
+                    MessageBox.Show("SolidWorks bulunamadı veya başlatılamadı.");
+                    return false;
+                }
+
+                // İstersen SolidWorks UI görünmesin:
+                swApp.Visible = false;
+                swApp.UserControl = false;
+
+                int success = 0, fail = 0;
+
+                foreach (var drwPath in drwFiles)
+                {
+                    ModelDoc2 model = null;
+
+                    try
+                    {
+                        int errors = 0, warnings = 0;
+
+                        model = swApp.OpenDoc6(
+                            drwPath,
+                            (int)swDocumentTypes_e.swDocDRAWING,
+                            (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                            "",
+                            ref errors,
+                            ref warnings
+                        );
+
+                        if (model == null)
+                        {
+                            fail++;
+                            continue;
+                        }
+
+                        // PDF çıktı yolu
+                        Directory.CreateDirectory(Path.Combine(
+                            folder,"PDF_files"
+                        ));
+                        string outPdf = Path.Combine(
+                            folder, "PDF_files",
+                            Path.GetFileNameWithoutExtension(drwPath) + ".pdf"
+                        );
+
+                        // Export ayarı
+                        var exportData = (ExportPdfData)swApp.GetExportFileData((int)swExportDataFileType_e.swExportPdfData);
+
+                        // ExportAllSheets her interop'ta yok, bu yüzden SetSheets ile tüm sheet'leri seçiyoruz
+                        var draw = (DrawingDoc)model;
+                        var sheetNamesObj = (object[])draw.GetSheetNames();
+                        var sheetNames = sheetNamesObj?.Cast<string>().ToArray();
+
+                        if (sheetNames != null && sheetNames.Length > 0)
+                        {
+                            exportData.SetSheets(
+                                (int)swExportDataSheetsToExport_e.swExportData_ExportSpecifiedSheets,
+                                sheetNames
+                            );
+                            exportData.ViewPdfAfterSaving = false;
+                        }
+
+                        int saveErrors = 0, saveWarnings = 0;
+
+                        bool ok = model.Extension.SaveAs(
+                            outPdf,
+                            (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                            (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                            exportData,
+                            ref saveErrors,
+                            ref saveWarnings
+                        );
+
+                        if (ok) success++;
+                        else fail++;
+                    }
+                    catch
+                    {
+                        fail++;
+                    }
+                    finally
+                    {
+                        // Dokümanı kapat (RAM şişmesin)
+                        try
+                        {
+                            if (model != null)
+                                swApp.CloseDoc(model.GetTitle());
+                        }
+                        catch { }
+
+                        try { if (model != null) Marshal.FinalReleaseComObject(model); } catch { }
+                    }
+                }
+
+                // MessageBox.Show($"Bitti.\nBaşarılı: {success}\nHatalı: {fail}");
+            }
+            catch (COMException ex)
+            {
+                MessageBox.Show($"COM Hatası:\n{ex.Message}\nHResult: 0x{ex.HResult:X}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata:\n{ex.Message}");
+            }
+            finally
+            {
+                try
+                {
+                    if (swApp != null)
+                    {
+                        // İstersen SolidWorks'ü kapat:
+                        //swApp.ExitApp();
+                        Marshal.FinalReleaseComObject(swApp);
+                    }
+                }
+                catch { }
+            }
+
+            return true;
+        }
+        private void ExportSldPrtFilesToStep(FolderBrowserDialog fbd)
+        {
+            SldWorks swApp = null;
+
+            try
+            {
+                string folder = fbd.SelectedPath;
+
+                var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
+                    .Where(f =>
+                    {
+                        var ext = Path.GetExtension(f).ToLowerInvariant();
+                        return ext == ".sldprt" || ext == ".sldasm";
+                    })
+                    .ToArray();
+
+                if (files.Length == 0)
+                {
+                    MessageBox.Show("Seçilen klasörde .sldprt veya .sldasm bulunamadı.");
+                    return;
+                }
+
+                swApp = Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application")) as SldWorks;
+                if (swApp == null)
+                {
+                    MessageBox.Show("SolidWorks bulunamadı veya başlatılamadı.");
+                    return;
+                }
+
+                swApp.Visible = false;
+                swApp.UserControl = false;
+
+                int success = 0, fail = 0;
+
+                foreach (var srcPath in files)
+                {
+                    ModelDoc2 model = null;
+
+                    try
+                    {
+                        int errors = 0, warnings = 0;
+                        int docType = GetSwDocTypeFromPath(srcPath);
+
+                        model = swApp.OpenDoc6(
+                            srcPath,
+                            docType,
+                            (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                            "",
+                            ref errors,
+                            ref warnings
+                        );
+
+                        if (model == null)
+                        {
+                            fail++;
+                            continue;
+                        }
+                        Directory.CreateDirectory(Path.Combine(
+                            folder, "STEP_files"
+                        ));
+                        string outStep = Path.Combine(
+                            folder, "STEP_files",
+                            Path.GetFileNameWithoutExtension(srcPath) + ".step"
+                        );
+
+                        int saveErrors = 0, saveWarnings = 0;
+
+                        bool ok = model.Extension.SaveAs(
+                            outStep,
+                            (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                            (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                            null,
+                            ref saveErrors,
+                            ref saveWarnings
+                        );
+
+                        if (ok) success++;
+                        else fail++;
+                    }
+                    catch
+                    {
+                        fail++;
+                    }
+                    finally
+                    {
+                        // RAM şişmesin diye her dosyadan sonra kapat
+                        try
+                        {
+                            if (model != null)
+                                swApp.CloseDoc(model.GetTitle());
+                        }
+                        catch { }
+
+                        try { if (model != null) Marshal.FinalReleaseComObject(model); } catch { }
+                    }
+                }
+
+                MessageBox.Show($"Bitti.\nBaşarılı: {success}\nHatalı: {fail}");
+            }
+            catch (COMException ex)
+            {
+                MessageBox.Show($"COM Hatası:\n{ex.Message}\nHResult: 0x{ex.HResult:X}");
+            }
+            finally
+            {
+                // SolidWorks'ü kapatmıyoruz (ExitApp yok)
+                try { if (swApp != null) Marshal.FinalReleaseComObject(swApp); } catch { }
+            }
+        }
+        private int GetSwDocTypeFromPath(string path)
+        {
+            string ext = Path.GetExtension(path).ToLowerInvariant();
+            return ext switch
+            {
+                ".sldprt" => (int)swDocumentTypes_e.swDocPART,
+                ".sldasm" => (int)swDocumentTypes_e.swDocASSEMBLY,
+                _ => throw new NotSupportedException("Sadece .sldprt ve .sldasm destekleniyor.")
+            };
+        }
     }
 }
+   

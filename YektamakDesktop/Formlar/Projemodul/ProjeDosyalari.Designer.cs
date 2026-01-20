@@ -63,6 +63,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             label8 = new Label();
             headerPanel1 = new HeaderPanel();
             universalGrid1 = new UniversalGrid();
+            roundedButton1 = new RoundedButton();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -270,11 +271,18 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // roundedIconButton1
             // 
             roundedIconButton1.BackColor = Color.Cyan;
+            roundedIconButton1.BorderColor = Color.Black;
+            roundedIconButton1.BorderSize = 0;
+            roundedIconButton1.CornerRadius = 6;
             roundedIconButton1.Cursor = Cursors.Hand;
             roundedIconButton1.FlatAppearance.BorderSize = 0;
             roundedIconButton1.FlatStyle = FlatStyle.Flat;
             roundedIconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             roundedIconButton1.ForeColor = Color.Purple;
+            roundedIconButton1.GradientColor1 = Color.DodgerBlue;
+            roundedIconButton1.GradientColor2 = Color.MidnightBlue;
+            roundedIconButton1.HoverColor1 = Color.RoyalBlue;
+            roundedIconButton1.HoverColor2 = Color.Navy;
             roundedIconButton1.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             roundedIconButton1.IconColor = Color.Purple;
             roundedIconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -306,7 +314,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbProjeKod.TabIndex = 126;
             fcbProjeKod.ValueMember = "Id";
             // 
-            // clbStokGrup
+            // fcbStokGrup
             // 
             fcbStokGrup.BorderColor = Color.Silver;
             fcbStokGrup.BorderRadius = 8;
@@ -316,7 +324,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbStokGrup.ForeColor = Color.Gray;
             fcbStokGrup.Location = new Point(110, 102);
             fcbStokGrup.Margin = new Padding(1);
-            fcbStokGrup.Name = "clbStokGrup";
+            fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(6, 4, 6, 4);
             fcbStokGrup.PlaceholderText = "Seçiniz...";
             fcbStokGrup.ReadOnly = false;
@@ -324,7 +332,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbStokGrup.TabIndex = 127;
             fcbStokGrup.ValueMember = "Id";
             // 
-            // clbMalzemeGrup
+            // fcbMalzemeGrup
             // 
             fcbMalzemeGrup.BorderColor = Color.Silver;
             fcbMalzemeGrup.BorderRadius = 8;
@@ -334,7 +342,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeGrup.ForeColor = Color.Gray;
             fcbMalzemeGrup.Location = new Point(423, 42);
             fcbMalzemeGrup.Margin = new Padding(1);
-            fcbMalzemeGrup.Name = "clbMalzemeGrup";
+            fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeGrup.PlaceholderText = "Seçiniz...";
             fcbMalzemeGrup.ReadOnly = false;
@@ -342,7 +350,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeGrup.TabIndex = 128;
             fcbMalzemeGrup.ValueMember = "Id";
             // 
-            // clbMalzemeAltGrup
+            // fcbMalzemeAltGrup
             // 
             fcbMalzemeAltGrup.BorderColor = Color.Silver;
             fcbMalzemeAltGrup.BorderRadius = 8;
@@ -352,7 +360,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeAltGrup.ForeColor = Color.Gray;
             fcbMalzemeAltGrup.Location = new Point(423, 72);
             fcbMalzemeAltGrup.Margin = new Padding(1);
-            fcbMalzemeAltGrup.Name = "clbMalzemeAltGrup";
+            fcbMalzemeAltGrup.Name = "fcbMalzemeAltGrup";
             fcbMalzemeAltGrup.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeAltGrup.PlaceholderText = "Seçiniz...";
             fcbMalzemeAltGrup.ReadOnly = false;
@@ -360,7 +368,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeAltGrup.TabIndex = 129;
             fcbMalzemeAltGrup.ValueMember = "Id";
             // 
-            // clbMalzemeAltGrup2
+            // fcbMalzemeAltGrup2
             // 
             fcbMalzemeAltGrup2.BorderColor = Color.Silver;
             fcbMalzemeAltGrup2.BorderRadius = 8;
@@ -370,7 +378,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeAltGrup2.ForeColor = Color.Gray;
             fcbMalzemeAltGrup2.Location = new Point(423, 100);
             fcbMalzemeAltGrup2.Margin = new Padding(1);
-            fcbMalzemeAltGrup2.Name = "clbMalzemeAltGrup2";
+            fcbMalzemeAltGrup2.Name = "fcbMalzemeAltGrup2";
             fcbMalzemeAltGrup2.Padding = new Padding(6, 4, 6, 4);
             fcbMalzemeAltGrup2.PlaceholderText = "Seçiniz...";
             fcbMalzemeAltGrup2.ReadOnly = false;
@@ -461,11 +469,36 @@ namespace YektamakDesktop.Formlar.ProjeModul
             universalGrid1.Size = new Size(1089, 475);
             universalGrid1.TabIndex = 136;
             // 
+            // roundedButton1
+            // 
+            roundedButton1.BackgroundColor = Color.Firebrick;
+            roundedButton1.BorderColor = Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = FlatStyle.Flat;
+            roundedButton1.ForeColor = Color.White;
+            roundedButton1.GradientColor1 = Color.DodgerBlue;
+            roundedButton1.GradientColor2 = Color.MidnightBlue;
+            roundedButton1.HoverColor1 = Color.RoyalBlue;
+            roundedButton1.HoverColor2 = Color.Navy;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new Point(779, 42);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Size = new Size(150, 40);
+            roundedButton1.TabIndex = 137;
+            roundedButton1.Text = "roundedButton1";
+            roundedButton1.TextColor = Color.White;
+            roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Click += roundedButton1_Click;
+            // 
             // ProjeDosyalari
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1103, 699);
+            Controls.Add(roundedButton1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             Controls.Add(ctbParcaAd);
@@ -540,5 +573,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private System.Windows.Forms.Label label8;
         public HeaderPanel headerPanel1;
         private UniversalGrid universalGrid1;
+        private RoundedButton roundedButton1;
     }
 }

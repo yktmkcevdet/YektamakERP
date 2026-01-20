@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.35" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.43" publicKeyToken="0c54c1db6b1078af" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="16384">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="17376">
       <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DLyXtgpfNPUC77h9sTBXBPcbEoIOanIvFgMm8BnYI5c=</dsig:DigestValue>
+        <dsig:DigestValue>7RVLY4ZaDHizuJafEQOYe1QDsEUhNLoVg7A/CEUrfrs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -69,7 +69,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>b9X93xuAEyoNv4E/lY9IRggkTuJXoK++3pLcz+1gNtQ=</dsig:DigestValue>
+      <dsig:DigestValue>mYl7Jrtc5QuxZH9xYB6wdXgBNxjUNFfv+i6fe6jIb1c=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BouncyCastle.Cryptography.dll" size="7072536">
@@ -699,7 +699,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>lWVkOzGasoh+Ze/i6nYzLrwmDwpoGUspIk/EX86fpxg=</dsig:DigestValue>
+      <dsig:DigestValue>YF0RHq1nTL6KJ4tK231RMCchEYsfFsgZEhPAf4GDOwY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="netDxf.dll" size="767488">
@@ -1419,7 +1419,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>lKyUXLOO1ja/t4OeLFVPvoTP8/kUY4ka2iRxoADH+nc=</dsig:DigestValue>
+      <dsig:DigestValue>QDTae1IFzML/fblmfrS+FDrdzwpdilBRdzucdjJ/WjM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="x64\pdfium.dll" size="4600832">
@@ -1440,13 +1440,13 @@
       <dsig:DigestValue>DHGvtsnv+bNqqBRaGTSRNsopulVpKgstzbmuM65r93M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.dll" size="1085440">
+  <file name="YektamakDesktop.dll" size="1090528">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>48hi9dZlkTUWBOtkKL4XlKCVi38a3fGi6a9JoKbuKOY=</dsig:DigestValue>
+      <dsig:DigestValue>MXOuazVLj7LzQPA8jO78evNYb+c80qIArw9Nuf+BEGQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.dll.config" size="838">
@@ -1458,13 +1458,13 @@
       <dsig:DigestValue>KV8eAeWS1EisgFKs1Zl5gTo5hMan931y0J7AyXNQ6Bw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YektamakDesktop.exe" size="173568">
+  <file name="YektamakDesktop.exe" size="174048">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>MdlxiChbkMG9F49HVtD13aswD0k/93V46RUwttZlR0k=</dsig:DigestValue>
+      <dsig:DigestValue>MZtqfo0pkYo3kWUXdY3AptHVIvk7TTyeq2j7wEAn9WI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.runtimeconfig.json" size="516">
@@ -1539,4 +1539,4 @@
       <dsig:DigestValue>G5pqDNFwWNJ3bmNO4S6Q7TdYd6KB/9jirVkR9U09AN8=</dsig:DigestValue>
     </hash>
   </file>
-</asmv1:assembly>
+<publisherIdentity name="CN=YEKTAMAK\YEKTAMAK-118" issuerKeyHash="29bd5a422a7d3bfeae3d5eeb806d06034ef4ac87" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>TQn02xfIhpvUWQrTzEf3yCHzeTAWb4c81WBJFi18Fk4=</DigestValue></Reference></SignedInfo><SignatureValue>nDWLDk5hVBsUOYa3lduXBmdpbrhwfE6VdGtzvdJ+JMKPm796iNI2XVd4PPFOyaQJBwHvBBxAvDIWDXj9S/5knEhxCY5mbnsP03QAQD0Kql3ko3BCbbhdrJiNsSHyW2mcP8pfx+ucxNfHIOCqTmtQcWTLNpiseQTcmunG9x8PUSs=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>tFPWENdHwYe8/J37dwooQk4xNWlx4q3c2XiM8BEMS1h9apgSxt7lo/+vwFXSGUkSTclYnI3qklL7Gxd4Ewxh8o7syIak9XSpk2E+XoskdHxxlIpTonczCLD9WhbI2OugCt9c21xUGX+jSo3D7I83A7gIJEsms0727O5k17u5gFE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="4e167c2d164960d53c876f163079f321c8f747ccd30a59d49b86c817dbf4094d" Description="" Url=""><as:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.43" publicKeyToken="0c54c1db6b1078af" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=YEKTAMAK\YEKTAMAK-118</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>6YmjcJyHhgN1dQxmm6NEsLavzt3Yr4hBOeRzrJXxGJM=</DigestValue></Reference></SignedInfo><SignatureValue>sjd1uO3zTlNVbgJc4gZZe2/Yss65nwdR1qlvLpPHrYPWhkIkk0DJdyNvkFGa9hFqRGG+1xvFOM1vXJjeMTImpXHaPZrF47sx3MTl0oqp+O23tprmDL/Xis1wNlfjjJctvyGjQAKH2/0VRGOgVaw4UF8X5Vjgp/r0W9O/6HYcWTM=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tFPWENdHwYe8/J37dwooQk4xNWlx4q3c2XiM8BEMS1h9apgSxt7lo/+vwFXSGUkSTclYnI3qklL7Gxd4Ewxh8o7syIak9XSpk2E+XoskdHxxlIpTonczCLD9WhbI2OugCt9c21xUGX+jSo3D7I83A7gIJEsms0727O5k17u5gFE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQPpG9YAJg6Y1Eg6DqopYUrDANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioAWQBFAEsAVABBAE0AQQBLAFwAWQBFAEsAVABBAE0AQQBLAC0AMQAxADgwHhcNMjUwODI4MDg1MjMxWhcNMjYwODI4MTQ1MjMxWjA1MTMwMQYDVQQDHioAWQBFAEsAVABBAE0AQQBLAFwAWQBFAEsAVABBAE0AQQBLAC0AMQAxADgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALRT1hDXR8GHvPyd+3cKKEJOMTVpceKt3Nl4jPARDEtYfWqYEsbe5aP/r8BV0hlJEk3JWJyN6pJS+xsXeBMMYfKO7MiGpPV0qZNhPl6LJHR8cZSKU6J3Mwiw/VoWyNjroArfXNtcVBl/o0qNw+yPNwO4CCRLJrNO9uzuZNe7uYBRAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAn5c6l5Xg+0kKRrza/omvx6XZBeu+N65uvsL4d7yZ+E+dPCKn/UbWVGviYEb/KwyYzBTDULI/+2mTtb4ngjdb3pkH3qIkDNMB7Bx540RtLsR6nasyYJocTW8FZ3y7cyXiHKZ/OeIx8p7ASR9oLty/lLf+29bqJnriGUUw4Ogtp2w=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
