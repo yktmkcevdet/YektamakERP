@@ -361,9 +361,8 @@ namespace YektamakDesktop.Formlar.Projemodul
                 for (int j = degree; j >= r; j--)
                 {
                     int idx = k - degree + j;
-                    double alpha =
-                        (t - knots[idx]) /
-                        (knots[idx + degree - r + 1] - knots[idx]);
+                    double denom = (knots[idx + degree - r + 1] - knots[idx]);
+                    double alpha = denom == 0 ? 0 : (t - knots[idx]) / denom;
 
                     d[j] = (1 - alpha) * d[j - 1] + alpha * d[j];
                 }
@@ -388,7 +387,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             for (int i = 0; i <= segments; i++)
             {
-                double t = t0 + (t1 - t0) * i / segments;
+                double t = (i == segments) ? t1 : (t0 + (t1 - t0) * i / segments);
 
                 int k = FindKnotSpan(t, U, p, n);   // ✅ doğru aralıkta k
                 var v = DeBoor(k, p, t, ctrl, U);
@@ -560,12 +559,22 @@ namespace YektamakDesktop.Formlar.Projemodul
                 var c = ToScreen(arc.Center.X, arc.Center.Y);
                 float r = (float)(arc.Radius * scale);
 
-                float start = -(float)arc.StartAngle;
-                float sweep = -(float)(arc.EndAngle - arc.StartAngle);
-                if (sweep < 0) sweep += 360;
+                // DXF CCW: start -> end
+                float a0 = (float)arc.StartAngle;
+                float a1 = (float)arc.EndAngle;
+
+                // CCW sweep'i [0,360) aralığına al
+                float ccw = a1 - a0;
+                if (ccw < 0) ccw += 360f;
+
+                // Ekranda Y aşağı olduğu için yön tersine döner:
+                // start'ı negate et, sweep'i de negate et (CW çizsin)
+                float start = -a0;
+                float sweep = -ccw;
 
                 g.DrawArc(Pens.Black, c.X - r, c.Y - r, r * 2, r * 2, start, sweep);
             }
+
             RebuildScreenCache();
             foreach (var arr in splineScreenCache)
                 g.DrawLines(Pens.Black, arr);
@@ -583,19 +592,19 @@ namespace YektamakDesktop.Formlar.Projemodul
             //            ToScreen(seg[i].X, seg[i].Y),
             //            ToScreen(seg[i + 1].X, seg[i + 1].Y));
             //}
-            //foreach (var spline in dxfDoc.Entities.Splines)
-            //{
-            //    var poly = spline.ToPolyline2D(20);
+            foreach (var spline in dxfDoc.Entities.Splines)
+            {
+                var poly = spline.ToPolyline2D(20);
 
-            //    var verts = poly.Vertexes;
+                var verts = poly.Vertexes;
 
-            //    for (int i = 0; i < verts.Count - 1; i++)
-            //    {
-            //        var p1 = ToScreen(verts[i].Position.X, verts[i].Position.Y);
-            //        var p2 = ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
-            //        g.DrawLine(Pens.Black, p1, p2);
-            //    }
-            //}
+                for (int i = 0; i < verts.Count - 1; i++)
+                {
+                    var p1 = ToScreen(verts[i].Position.X, verts[i].Position.Y);
+                    var p2 = ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
+                    g.DrawLine(Pens.Black, p1, p2);
+                }
+            }
         }
         float DistancePointToSegment(PointF p, PointF a, PointF b)
         {

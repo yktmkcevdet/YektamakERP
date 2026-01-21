@@ -101,7 +101,7 @@ namespace YektamakDesktop.Formlar.Genel
             }
             else
             {
-                excelGrupParametre.kosulMetni = $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
+                excelGrupParametre.kosulMetni += $"{excelGrupParametre.sutunAdi}.{excelGrupParametre.karsilastirmaOperatoru}" +
                 $"(\"{excelGrupParametre.karsilastirmaKelimesi}\", StringComparison.OrdinalIgnoreCase)";
             }
             string jsonResult = _stokService.SaveExcelGrupParametre(excelGrupParametre);

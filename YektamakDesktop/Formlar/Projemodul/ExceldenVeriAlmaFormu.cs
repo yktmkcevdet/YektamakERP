@@ -134,9 +134,11 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (!Directory.Exists(klasor))
                 Directory.CreateDirectory(klasor);
             File.WriteAllText(logDosyasi, "Eklenemeyen satırlar");
-            for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++)
+            for (int rowIndex = 0; rowIndex <= totalRows; rowIndex++)
             {
                 var rowData = sheet.GetRow(rowIndex);
+                string no = GetCellValueAsString(rowData, 0);
+                if (no.Contains("no",StringComparison.OrdinalIgnoreCase)) continue; // Başlık satırını atla
                 var projeStokKart = CreateStokKartFromRow(rowData);
                 if (satirList.ContainsKey(projeStokKart.stokKart.kod))
                 {
@@ -221,7 +223,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 proje = { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) },
                 adet = excelData.adet,
                 miktar = excelData.miktar,
-                no = excelData.no,
+                no = excelData.no.Replace(",",".").Replace(".\r\n",".").Replace("\r\n.","."),
                 hamVeri = JsonConvert.SerializeObject(excelData),
                 stokKart ={
                     stokTip = { Id=excelData.stokTip },

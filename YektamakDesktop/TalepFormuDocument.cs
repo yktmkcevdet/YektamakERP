@@ -174,7 +174,7 @@ public class MalzemeTalepRaporu : IDocument
     }
     private void Header_LogoCell(IContainer container)
     {
-        var logoPath = Path.Combine(AppContext.BaseDirectory, "Logo.png");
+        var logoPath = Path.Combine(AppContext.BaseDirectory, "\\logo.png");
         container
             .Padding(3)
             .Width(120)
