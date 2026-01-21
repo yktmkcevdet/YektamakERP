@@ -39,6 +39,9 @@
 
   <ItemGroup>
     <Content Include="logo.ico" />
+    <Content Include="logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
  
@@ -135,6 +138,7 @@
 
   <ItemGroup>
     <None Remove="Formlar\Projemodul\Report1.rdlc" />
+    <None Remove="logo.png" />
     <None Remove="Resources\logo.png" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.47" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="YektamakDesktop.exe" version="1.0.0.51" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="logo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -69,7 +69,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>mYl7Jrtc5QuxZH9xYB6wdXgBNxjUNFfv+i6fe6jIb1c=</dsig:DigestValue>
+      <dsig:DigestValue>5djrpA8os3jquBS/m+ZhUP3xw6avORPAoQxxKZkOOU0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BouncyCastle.Cryptography.dll" size="7072536">
@@ -367,6 +367,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>KJQgLAjOBVlkCD2ZPeTicPEtGDxvVwqlaRKmENgA50Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo.png" size="17505">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ehgbcTfz9fMM011D8PWqMPJWg14NEdgGHkgqbJ5I7Bo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MathNet.Numerics.dll" size="1602560">
@@ -699,7 +708,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>YF0RHq1nTL6KJ4tK231RMCchEYsfFsgZEhPAf4GDOwY=</dsig:DigestValue>
+      <dsig:DigestValue>CU35B9ONwxStwfy3Zc04aZ1kM5cgomJjX7X2kLfT1rU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="netDxf.dll" size="767488">
@@ -1419,7 +1428,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QDTae1IFzML/fblmfrS+FDrdzwpdilBRdzucdjJ/WjM=</dsig:DigestValue>
+      <dsig:DigestValue>8hzryCW7UM9S8Y7g4OFsEtqDuGoKZh/Z7f6Q/37/Q1U=</dsig:DigestValue>
     </hash>
   </file>
   <file name="x64\pdfium.dll" size="4600832">
@@ -1446,7 +1455,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>YTbZTDPTnsSvp5cMM0PoD28ZyH5p28d3lQra1YNFppo=</dsig:DigestValue>
+      <dsig:DigestValue>2TCgHMB26fyGz4jAxqysXqwxqrWtLZZYTOUl7cEMZPo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.dll.config" size="838">
@@ -1464,7 +1473,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>pScx2zT2xW4GoYoRlWakYYygqfWUH4rKMnNsJGIKFso=</dsig:DigestValue>
+      <dsig:DigestValue>3Syy7nQVgIlvsqx7gVSCHzGxdZmeGmWxf/xZTzAZl1I=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YektamakDesktop.runtimeconfig.json" size="516">
