@@ -28,11 +28,14 @@ namespace ApiService.Implementations
                     {
                         bool bukum1 = dosyalamaYapisi.isBukum;
                         bool bukum2 = row.stokKart.isBukum ?? false;
+                        bool talasli1 = dosyalamaYapisi.isTalasli;
+                        bool talasli2 = row.stokKart.isTalasli ?? false;
 
                         if (row.stokKart.malzemeGrup.Id == dosyalamaYapisi.malzemeGrupId
                             && (dosyalamaYapisi.malzemeAltGrupId is null || dosyalamaYapisi.malzemeAltGrupId == row.stokKart.malzemeAltGrup.Id)
                             && (dosyalamaYapisi.boyutId is null || dosyalamaYapisi.boyutId == row.stokKart.boyutTanim.Id)
                             && (bukum1 == false || bukum1 == bukum2)
+                            && (talasli1 == false || talasli1 == talasli2)
                             )
                         {
                             if (dosyalamaYapisi.pdf == true && skd.dosyaTip.Id==1)

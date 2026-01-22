@@ -20,7 +20,8 @@ namespace Models
         [GridDisplay(Header = "Firma", ListName = "firmaList", Tip = "Liste", ListVisibleColumnName = "ad")] public int? firmaId { get; set; }
         [GridDisplay(Header = "Açıklama")] public string aciklama { get; set; }
         [GridDisplay(Header = "Teklif Id")] public int? satinalmaTeklifId { get; set; }
-        [GridDisplay(Header = "Sipariş Detay")] public List<SatinalmaSiparisDetay> satinalmaSiparisDetay { get; set; }
+        private List<SatinalmaSiparisDetay> _satinalmaSiparisDetay = new List<SatinalmaSiparisDetay>();
+        [GridDisplay(Header = "Sipariş Detay")] public List<SatinalmaSiparisDetay> satinalmaSiparisDetay { get { if (_satinalmaSiparisDetay == null) { _satinalmaSiparisDetay = new(); } return _satinalmaSiparisDetay; } set { _satinalmaSiparisDetay = value; } }
 
     }
 }

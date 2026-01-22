@@ -51,13 +51,13 @@ namespace YektamakDesktop.Formlar.Projemodul
             this.Enabled = false;
             treeView1.Nodes.Clear();
             TreeNode rootNode = new TreeNode(fcbProjeKod.SelectedDisplayValue.ToString());
-            rootNode.Tag = new ProjeBom { projeStokKart = { no = "0" } };
+            rootNode.Tag = new ProjeBom { no = "0"  };
             treeView1.Nodes.Add(rootNode);
             var projeBomList = await _projeService.GetProjeBomList(
                 new ProjeBom { proje = { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } }
             );
-            var hamList = projeBomList.Select(s => s.projeStokKart.no).ToList();
-            var list = projeBomList.Where(s => s.projeStokKart.no != null).OrderBy(x => x.projeStokKart.no?.Split('.').Select(int.Parse),
+            var hamList = projeBomList.Select(s => s.no).ToList();
+            var list = projeBomList.Where(s => s.no != null).OrderBy(x => x.no?.Split('.').Select(int.Parse),
                 Comparer<IEnumerable<int>>.Create((a, b) =>
                 {
                     var ea = a.GetEnumerator();
@@ -74,7 +74,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                 TreeNodeCollection currentNodes = treeView1.Nodes;
                 string part = string.Empty;
                 TreeNode existingNode;
-                if (!item.projeStokKart.no.Contains("."))
+                if (!item.no.Contains("."))
                 {
                     existingNode = new TreeNode(item.projeStokKart.stokKart.kod);
                     existingNode.Tag = item;
@@ -82,11 +82,18 @@ namespace YektamakDesktop.Formlar.Projemodul
                 }
                 else
                 {
-                    part = item.projeStokKart.no.Substring(0, item.projeStokKart.no.LastIndexOf("."));
+                    part = item.no.Substring(0, item.no.LastIndexOf("."));
                     TreeNode parentNode = NodeTree(part, currentNodes);
                     TreeNode treeNode = new TreeNode(item.projeStokKart.stokKart.kod);
                     treeNode.Tag = item;
-                    parentNode.Nodes.Add(treeNode);
+                    if (parentNode == null)
+                    {
+                        throw new Exception("Parent node not found for part: " + item.no);
+                    }
+                    else
+                    {
+                        parentNode.Nodes.Add(treeNode);
+                    }
                 }
             }
             this.Enabled = true;
@@ -94,7 +101,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private TreeNode NodeTree(string part, TreeNodeCollection treeNodeCollection)
         {
             var existingNode = treeNodeCollection.Cast<TreeNode>()
-                                                .FirstOrDefault(n => ((ProjeBom)n.Tag).projeStokKart.no.ToString() == part);
+                                                .FirstOrDefault(n => ((ProjeBom)n.Tag).no.ToString() == part);
             if (existingNode != null)
             {
                 return existingNode;

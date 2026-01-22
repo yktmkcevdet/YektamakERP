@@ -134,7 +134,7 @@ namespace YektamakDesktop.Formlar.Stok
         {
             BindHelper.BindData(ctbId, projeStokKart, nameof(projeStokKart.Id));
             BindHelper.BindData(ctbStokKartId, projeStokKart.stokKart, nameof(projeStokKart.stokKart.Id));
-            BindHelper.BindData(ctbStokKartNo, projeStokKart, nameof(projeStokKart.no));
+            //BindHelper.BindData(ctbStokKartNo, projeStokKart, nameof(projeStokKart.no));
             BindHelper.BindData(clbProjeKod, projeStokKart.proje, nameof(projeStokKart.proje.Id));
             BindHelper.BindData(ctbKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.kod));
             BindHelper.BindData(ctbTedarikciKod, projeStokKart.stokKart, nameof(projeStokKart.stokKart.tedarikciKod));

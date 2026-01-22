@@ -20,8 +20,8 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         public void UpdateMode(ProjeStokKart projeStokKartNew, ProjeStokKart projeStokKartOld)
         {
-            ctbNoNew.TextCustom = projeStokKartNew.no;
-            ctbNoOld.TextCustom = projeStokKartOld.no;
+            //ctbNoNew.TextCustom = projeStokKartNew.no;
+            //ctbNoOld.TextCustom = projeStokKartOld.no;
             ctbKodNew.TextCustom = projeStokKartNew.stokKart.kod;
             ctbKodOld.TextCustom = projeStokKartOld.stokKart.kod;
             ctbParcaAdiNew.TextCustom = projeStokKartNew.stokKart.ad;

@@ -14,6 +14,7 @@ namespace Models
         private ProjeStokKart _projeStokKart;
         public ProjeStokKart projeStokKart { get { if (_projeStokKart == null) { _projeStokKart = new(); } return _projeStokKart; } set { _projeStokKart = value; } }
         public int? adet { get; set; }
+        public string no { get; set; }
 
     }
 }
