@@ -31,7 +31,7 @@ namespace ApiService.Implementations
                         bool talasli1 = dosyalamaYapisi.isTalasli;
                         bool talasli2 = row.stokKart.isTalasli ?? false;
 
-                        if (row.stokKart.malzemeGrup.Id == dosyalamaYapisi.malzemeGrupId
+                        if ((dosyalamaYapisi.malzemeGrupId is null || row.stokKart.malzemeGrup.Id == dosyalamaYapisi.malzemeGrupId)
                             && (dosyalamaYapisi.malzemeAltGrupId is null || dosyalamaYapisi.malzemeAltGrupId == row.stokKart.malzemeAltGrup.Id)
                             && (dosyalamaYapisi.boyutId is null || dosyalamaYapisi.boyutId == row.stokKart.boyutTanim.Id)
                             && (bukum1 == false || bukum1 == bukum2)

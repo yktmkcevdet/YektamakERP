@@ -104,101 +104,111 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private async Task ProcessExcelFileAsync()
         {
             this.Enabled = false;
-            string filePath = ctbDosyaYolu.TextCustom;
-            UpdateProgressText("İşlem başlatılıyor...");
-            var proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) };
-            if (chkProjeDosyaSil.Checked == true)
+            try
             {
-                UpdateProgressText("Eski dosyalar siliniyor...");
-                string jsonResult = await _projeService.DeleteProjeDosya(proje);
-                if (jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                string filePath = ctbDosyaYolu.TextCustom;
+                UpdateProgressText("İşlem başlatılıyor...");
+                var proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) };
+                if (chkProjeDosyaSil.Checked == true)
                 {
-                    MessageBox.Show(jsonResult);
-                    return;
+                    UpdateProgressText("Eski dosyalar siliniyor...");
+                    string jsonResult = await _projeService.DeleteProjeDosya(proje);
+                    if (jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show(jsonResult);
+                        return;
+                    }
+                    UpdateProgressText($"{jsonResult} adet stok kartı silindi");
                 }
-                UpdateProgressText($"{jsonResult} adet stok kartı silindi");
+                using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                using var workbook = CreateWorkbook(fileStream, filePath);
+                var sheet = workbook.GetSheetAt(0);
+                int totalRows = sheet.LastRowNum;
+
+                //UpdateProgressText($"Toplam {totalRows} satır bulundu");
+
+                // Batch processing için liste
+                var stokKartList = new List<StokKart>();
+                const int batchSize = 1; // Her seferinde * kayıt işle
+                DateTime startTime = DateTime.Now;
+                logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates), @"\Logs\app.log");
+                klasor = Path.GetDirectoryName(logDosyasi);
+                if (!Directory.Exists(klasor))
+                    Directory.CreateDirectory(klasor);
+                File.WriteAllText(logDosyasi, "Eklenemeyen satırlar");
+                for (int rowIndex = 0; rowIndex <= totalRows; rowIndex++)
+                {
+                    var rowData = sheet.GetRow(rowIndex);
+                    string no = GetCellValueAsString(rowData, 0);
+                    if (no.Contains("no", StringComparison.OrdinalIgnoreCase)) continue; // Başlık satırını atla
+                    var projeStokKart = CreateStokKartFromRow(rowData);
+                    if (satirList.ContainsKey(projeStokKart.stokKart.kod))
+                    {
+                        satirList[projeStokKart.stokKart.kod].miktar += projeStokKart.miktar;
+                    }
+                    else
+                    {
+                        satirList.Add(projeStokKart.stokKart.kod, projeStokKart);
+                    }
+                }
+                UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");
+
+
+                kayitliStokKods = await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) } });
+                int existsCount = 0;
+                foreach (var satir in satirList)
+                {
+                    if (kayitliStokKods.Any(x => x.stokKart.kod == satir.Key))
+                    {
+                        existsCount++;
+                    }
+                }
+
+                int i = 0;
+                foreach (var satir in satirList)
+                {
+                    if (existsCount > 0)
+                    {
+                        var form = FormFactory.CreateForm<ExceldenVeriAlmaCakisanKodlar>();
+                        form.SetData(kayitliStokKods);
+                        form.SecimYapildi += (s, e) => {
+                            secim = e;
+                        };
+                        form.ShowDialog();
+                    }
+                    var projeStokKart = (ProjeStokKart)satir.Value;
+                    await AttachFilesToStokKart(projeStokKart);
+
+                    projeStokKarts.Add(projeStokKart);
+                    if (projeStokKarts.Count >= batchSize)
+                    {
+
+                        await SaveStokKartBatch();
+                        i++;
+                        UpdateTransferCount(i);
+
+                        projeStokKarts.Clear();
+
+                        // UI'nin yanıt verebilmesi için kısa bir bekleme
+                        Application.DoEvents();
+                    }
+                }
+                DateTime endTime = DateTime.Now;
+                TimeSpan duration = endTime - startTime;
+                UpdateProgressText($"İşlem tamamlandı. Toplam süre: {duration.TotalSeconds} saniye");
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = logDosyasi,
+                    UseShellExecute = true // Varsayılan uygulama ile açar
+                });
             }
-            using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            using var workbook = CreateWorkbook(fileStream, filePath);
-            var sheet = workbook.GetSheetAt(0);
-            int totalRows = sheet.LastRowNum;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = true;
+                return;
+            }
             
-            //UpdateProgressText($"Toplam {totalRows} satır bulundu");
-
-            // Batch processing için liste
-            var stokKartList = new List<StokKart>();
-            const int batchSize = 1; // Her seferinde * kayıt işle
-            DateTime startTime = DateTime.Now;
-            logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates),@"\Logs\app.log");
-            klasor = Path.GetDirectoryName(logDosyasi);
-            if (!Directory.Exists(klasor))
-                Directory.CreateDirectory(klasor);
-            File.WriteAllText(logDosyasi, "Eklenemeyen satırlar");
-            for (int rowIndex = 0; rowIndex <= totalRows; rowIndex++)
-            {
-                var rowData = sheet.GetRow(rowIndex);
-                string no = GetCellValueAsString(rowData, 0);
-                if (no.Contains("no",StringComparison.OrdinalIgnoreCase)) continue; // Başlık satırını atla
-                var projeStokKart = CreateStokKartFromRow(rowData);
-                if (satirList.ContainsKey(projeStokKart.stokKart.kod))
-                {
-                    satirList[projeStokKart.stokKart.kod].miktar += projeStokKart.miktar;
-                }
-                else
-                {
-                    satirList.Add(projeStokKart.stokKart.kod, projeStokKart);
-                }
-            }
-            UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");
-
-            
-            kayitliStokKods = await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(clbProjeKodu.SelectedValue.ToString()) } });
-            int existsCount = 0;
-            foreach (var satir in satirList)
-            {
-                if (kayitliStokKods.Any(x => x.stokKart.kod == satir.Key))
-                {
-                    existsCount++;
-                } 
-            }
-            
-            int i = 0;
-            foreach (var satir in satirList)
-            {
-                if(existsCount>0)
-                {
-                    var form = FormFactory.CreateForm<ExceldenVeriAlmaCakisanKodlar>();
-                    form.SetData(kayitliStokKods);
-                    form.SecimYapildi += (s, e) => {                         
-                        secim = e;
-                    };
-                    form.ShowDialog();
-                }
-                var projeStokKart = (ProjeStokKart)satir.Value;
-                await AttachFilesToStokKart(projeStokKart);
-
-                projeStokKarts.Add(projeStokKart);
-                if (projeStokKarts.Count >= batchSize)
-                {
-                    
-                    await SaveStokKartBatch();
-                    i++;
-                    UpdateTransferCount(i);
-
-                    projeStokKarts.Clear();
-
-                    // UI'nin yanıt verebilmesi için kısa bir bekleme
-                    Application.DoEvents();
-                }
-            }
-            DateTime endTime = DateTime.Now;
-            TimeSpan duration = endTime - startTime;
-            UpdateProgressText($"İşlem tamamlandı. Toplam süre: {duration.TotalSeconds} saniye");
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = logDosyasi,
-                UseShellExecute = true // Varsayılan uygulama ile açar
-            });
             this.Enabled = true;
         }
         private IWorkbook CreateWorkbook(FileStream fileStream, string filePath)
