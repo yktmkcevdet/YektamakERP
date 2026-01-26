@@ -18,6 +18,12 @@ namespace Api.Controllers
             string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaSiparis");
             return result;
         }
+        [HttpPost, Route("api/GetSatinalmaSiparisDetay")]
+        public string GetSatinalmaSiparisDetay([FromBody] SatinalmaTeklifDetay restData)
+        {
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaSiparisDetay");
+            return result;
+        }
         [HttpPost, Route("api/SaveSatinalmaSiparis")]
         public string SaveSatinalmaSiparis([FromBody] SatinalmaSiparis restData)
         {

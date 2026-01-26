@@ -214,14 +214,14 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             SetCellValue(workbook, sheet, rowIndex, 1, row.projeStokKartstokKartkod?.ToString());
             SetCellValue(workbook, sheet, rowIndex, 2, row.projeStokKartstokKartad?.ToString());
-            SetCellValue(workbook, sheet, rowIndex, 6, row.miktar.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 3, row.miktar.ToString());
             SetCellValue(workbook, sheet, rowIndex, 8, row.projeStokKartstokKartmalzemeStandart?.ToString());
             //SetCellValue(sheet, rowIndex, 10, row.Cells[SatinalmaTalepDetayDTOHeader.ProjeStokKartAdet].FormattedValue?.ToString());
-            SetCellValue(workbook, sheet, rowIndex, 13, row.projeStokKartstokKartboyut?.ToString());
-            SetCellValue(workbook, sheet, rowIndex, 15, row.projeStokKartstokKartuzunluk?.ToString());
-            SetCellValue(workbook, sheet, rowIndex, 17, row.projeStokKartstokKartagirlik?.ToString("N1"));
-            SetCellValue(workbook, sheet, rowIndex, 19, row.agirlik?.ToString("N1"));
-            SetCellValue(workbook, sheet, rowIndex, 21, row.projeStokKartstokKartaciklama?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 6, row.projeStokKartstokKartboyut?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 7, row.projeStokKartstokKartuzunluk?.ToString());
+            SetCellValue(workbook, sheet, rowIndex, 10, row.projeStokKartstokKartagirlik?.ToString("N1"));
+            SetCellValue(workbook, sheet, rowIndex, 11, row.agirlik?.ToString("N1"));
+            SetCellValue(workbook, sheet, rowIndex, 9, row.projeStokKartstokKartaciklama?.ToString());
 
         }
         private void SetCellValue(IWorkbook workbook, ISheet sheet, int rowIndex, int cellIndex, string value)

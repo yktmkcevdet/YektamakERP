@@ -352,6 +352,15 @@ namespace YektamakDesktop.Formlar.ProjeModul
             var stepDosya = await CreateStokKartDosya(projeStokKart.stepFileName(), 3);
             if (stepDosya != null)
                 projeStokKart.stokKart.dosyaList.Add(stepDosya);
+            var drwDosya = await CreateStokKartDosya(projeStokKart.drwFileName(), 4);
+            if (drwDosya != null)
+                projeStokKart.stokKart.dosyaList.Add(drwDosya);
+            var prtDosya = await CreateStokKartDosya(projeStokKart.prtFileName(), 5);
+            if (prtDosya != null)
+                projeStokKart.stokKart.dosyaList.Add(prtDosya);
+            var asmDosya = await CreateStokKartDosya(projeStokKart.asmFileName(), 6);
+            if (asmDosya != null)
+                projeStokKart.stokKart.dosyaList.Add(asmDosya);
         }
         private async Task<StokKartDosya> CreateStokKartDosya(string fileName, int dosyaTipId)
         {

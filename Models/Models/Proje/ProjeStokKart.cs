@@ -31,6 +31,9 @@ namespace Models
             return null;
         }
         public string stepFileName() { return stokKart.parcaKod + ".step"; }
+        public string drwFileName() { return stokKart.parcaKod + ".SLDDRW"; }
+        public string prtFileName() { return stokKart.parcaKod + ".SLDPRT"; }
+        public string asmFileName() { return stokKart.parcaKod + ".SLDASM"; }
         public string dxfAddition()
         {
             string pattern = @"(\d+(?:\.\d+)?)"; // Sayısal kısmı yakalayan desen

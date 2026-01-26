@@ -15,6 +15,7 @@ using YektamakDesktop.Formlar.Ortak;
 using YektamakDesktop.Formlar.Projemodul;
 using YektamakDesktop.Formlar.ProjeModul;
 using YektamakDesktop.Formlar.Satinalma;
+using YektamakDesktop.Formlar.Satinalma.İrsaliye;
 using YektamakDesktop.Formlar.Satinalma.Siparis;
 using YektamakDesktop.Formlar.Satinalma.Talep;
 using YektamakDesktop.Formlar.Satinalma.Teklif;
@@ -52,6 +53,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ExcelVeriAlmaCakisanOnayFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
             services.AddTransient<FirmaTanimFormu>();
+            services.AddTransient<GirisFormu>();
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<KullaniciKayitFormu>();
             services.AddTransient<LogoEntegrasyon>();

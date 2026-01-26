@@ -179,7 +179,7 @@ public class MalzemeTalepRaporu : IDocument
             .Padding(3)
             .Width(120)
             .Height(60)
-            .Image(logoPath);
+            .Image("logo.png");
     }
     private void MidBold(IContainer container, string text,string color,float border,string fontFamily,float fontSize,int clampLines)
     {

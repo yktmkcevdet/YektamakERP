@@ -1,5 +1,6 @@
 ﻿using ApiService.Interfaces;
 using Models;
+using Newtonsoft.Json;
 
 namespace ApiService.Implementations
 {
@@ -15,7 +16,11 @@ namespace ApiService.Implementations
         {
             return await _apiService.PostAsync(satinalmaSiparis, "GetSatinalmaSiparis");
         }
-
+        public async Task<List<SatinalmaSiparisDetay>> GetSatinalmaSiparisDetayAsync(SatinalmaSiparisDetay satinalmaSiparisDetay)
+        {
+            var satinalmaSiparisDetayList = await _apiService.PostAsync(satinalmaSiparisDetay, "GetSatinalmaSiparisDetay");
+            return JsonConvert.DeserializeObject<List<SatinalmaSiparisDetay>>(satinalmaSiparisDetayList);
+        }
         public async Task<string> SaveSatinalmaSiparis(SatinalmaSiparis satinalmaSiparis)
         {
             return await _apiService.PostAsync(satinalmaSiparis, "SaveSatinalmaSiparis");
