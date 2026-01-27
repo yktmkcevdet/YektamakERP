@@ -53,7 +53,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ExcelVeriAlmaCakisanOnayFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
             services.AddTransient<FirmaTanimFormu>();
-            services.AddTransient<GirisFormu>();
+            services.AddTransient<MalzemeGirisFormu>();
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<KullaniciKayitFormu>();
             services.AddTransient<LogoEntegrasyon>();

@@ -1,6 +1,6 @@
 ﻿namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
 {
-    partial class GirisFormu
+    partial class MalzemeGirisFormu
     {
         /// <summary>
         /// Required designer variable.

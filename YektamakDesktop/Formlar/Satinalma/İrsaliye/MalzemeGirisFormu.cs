@@ -18,12 +18,12 @@ using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
 {
-    public partial class GirisFormu : Form
+    public partial class MalzemeGirisFormu : Form
     {
         private readonly ICache _cache;
         private readonly ISatinalmaSiparisService _satinalmaSiparisService;
         private readonly IConvertHelper _convertHelper;
-        public GirisFormu(ICache cache, ISatinalmaSiparisService satinalmaSiparisService, IConvertHelper convertHelper)
+        public MalzemeGirisFormu(ICache cache, ISatinalmaSiparisService satinalmaSiparisService, IConvertHelper convertHelper)
         {
             _convertHelper = convertHelper;
             _cache = cache;
@@ -45,7 +45,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
             universalGrid1.Size = new Size(sizeX, sizeY);
             universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
-            universalGrid1.SetData(new List<Models.DTO.SatinalmaSiparisDetayDTO>(), this.Name);
+            universalGrid1.SetData(new List<SatinalmaSiparisDetayDTO>(), this.Name);
             fcbFirma.SetDataSource(_cache.firmaList);
         }
 

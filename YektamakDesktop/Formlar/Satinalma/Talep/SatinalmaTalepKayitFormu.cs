@@ -183,15 +183,15 @@ namespace YektamakDesktop.Formlar.Satinalma
             SetHeaderData(workbook, sheet, selectedRows.First());
 
             // Satır verilerini doldur
-            int currentRow = 10;
+            int currentRow = 16;
             foreach (var row in selectedRows)
             {
                 SetRowData(workbook, sheet, row, currentRow);
                 currentRow++;
             }
-            if (currentRow < 151)
+            if (currentRow < 133)
             {
-                for (int i = 150; i > currentRow - 1; i--)
+                for (int i = 185; i > currentRow - 1; i--)
                 {
                     IRow row = sheet.GetRow(i);
                     if (row != null)
@@ -204,10 +204,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void SetHeaderData(IWorkbook workbook, ISheet sheet, SatinalmaTalepDetayDTO firstRow)
         {
             // Talep Eden ve Talep Tarihi
-            SetCellValue(workbook, sheet, 5, 4, clbKullaniciId.SelectedDisplayValue.ToString());
-            SetCellValue(workbook, sheet, 6, 4, fcbTalepNeden.SelectedDisplayValue.ToString());
-            SetCellValue(workbook, sheet, 5, 16, DateTime.Parse(ctbTalepTarihi.TextCustom.ToString()).ToShortDateString());
-            SetCellValue(workbook, sheet, 6, 16, clbProjeKodu.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 10, 4, clbKullaniciId.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 12, 4, fcbTalepNeden.SelectedDisplayValue.ToString());
+            SetCellValue(workbook, sheet, 10, 10, ctbTalepTarihi.TextCustom.ToString());
+            SetCellValue(workbook, sheet, 12, 10, clbProjeKodu.SelectedDisplayValue.ToString());
         }
 
         private void SetRowData(IWorkbook workbook, ISheet sheet, SatinalmaTalepDetayDTO row, int rowIndex)
@@ -230,7 +230,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             var cell = row.GetCell(cellIndex) ?? row.CreateCell(cellIndex);
             ICellStyle cellStyle = cell.CellStyle;
             IDataFormat format = workbook.CreateDataFormat();
-            cell.CellStyle.DataFormat = format.GetFormat("0.#");
+            //cell.CellStyle.DataFormat = format.GetFormat("0.0");
             cell.SetCellValue(value ?? string.Empty);
         }
         private async Task HandleSaveResult(string jsonResult)
