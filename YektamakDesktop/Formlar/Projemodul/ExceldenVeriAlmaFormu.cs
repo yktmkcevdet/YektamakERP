@@ -142,13 +142,14 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     string no = GetCellValueAsString(rowData, 0);
                     if (no.Contains("no", StringComparison.OrdinalIgnoreCase)) continue; // Başlık satırını atla
                     var projeStokKart = CreateStokKartFromRow(rowData);
-                    if (satirList.ContainsKey(projeStokKart.stokKart.kod))
+                    var key= $"{projeStokKart.stokKart.kod}{projeStokKart.stokKart.boyut}{projeStokKart.stokKart.malzeme}{projeStokKart.stokKart.aciklama}";
+                    if (satirList.ContainsKey(key))
                     {
-                        satirList[projeStokKart.stokKart.kod].miktar += projeStokKart.miktar;
+                        satirList[key].miktar += projeStokKart.miktar;
                     }
                     else
                     {
-                        satirList.Add(projeStokKart.stokKart.kod, projeStokKart);
+                        satirList.Add(key, projeStokKart);
                     }
                 }
                 UpdateProgressText($"Excel dosyasında toplam {totalRows} satır bulundu {satirList.Count} olarak tekilleştirildi");

@@ -495,12 +495,7 @@ namespace YektamakDesktop.Formlar.Stok
             if (string.IsNullOrWhiteSpace(ctbStokKartId.TextCustom))
                 return;
             StokKart stokKart = new StokKart() { Id = int.Parse(ctbStokKartId.TextCustom) };
-            string jsonResult = _stokService.GetStokKart(stokKart);
-            if (!string.IsNullOrEmpty(jsonResult))
-            {
-                stokKart = JsonConvert.DeserializeObject<List<StokKart>>(jsonResult)[0];
-            }
-
+            stokKart = _stokService.GetStokKart(stokKart)[0];
             dosyaVeri = await _fileService.GetFileDecompress(stokKart.dosyaList.First(d => d.Id == int.Parse(ctbId.TextCustom)).dosyaFullPath);
             //dosyaVeri = stokKart.dosyaList.First(d => d.Id == int.Parse(IdControl.TextCustom)).dosya;
 

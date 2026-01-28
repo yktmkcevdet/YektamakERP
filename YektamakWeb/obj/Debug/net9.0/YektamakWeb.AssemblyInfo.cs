@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YektamakWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf6d5d281e97158be04b38a2a12c665984e92839")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84bc712929dc445756443b060342db9af9e23ad7")]
 [assembly: System.Reflection.AssemblyProductAttribute("YektamakWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YektamakWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

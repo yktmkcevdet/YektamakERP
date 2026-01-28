@@ -88,9 +88,17 @@ namespace ApiService.Implementations
         {
             return await _apiService.PostAsync(stokKart, "GetStokKart");
         }
-        public string GetStokKart(StokKart stokKart)
+        public List<StokKart> GetStokKart(StokKart stokKart)
         {
-            return _apiService.Post(stokKart, $"GetStokKart/");
+            var response = _apiService.Post(stokKart, $"GetStokKart/");
+            if (response.Contains("error", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(response))
+            {
+                throw new Exception(response);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<List<StokKart>>(response);
+            }
         }
 
         public List<StokKart> GetStokKartPdf(StokKart stokKart)
