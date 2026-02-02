@@ -24,5 +24,6 @@ namespace Models
         public byte[] dosya { get; set; }
         [GridDisplay(Header = "Dosya Yolu", Visible = true)]
         public string dosyaFullPath { get; set; }
+        public bool isActive { get; set; }
     }
 }

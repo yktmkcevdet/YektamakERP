@@ -1,3 +1,4 @@
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\logo.png
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\YektamakDesktop.exe
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\x64\pdfium.dll
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\app.publish\Resources\logo1.png

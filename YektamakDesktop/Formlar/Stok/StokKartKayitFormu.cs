@@ -111,11 +111,12 @@ namespace YektamakDesktop.Formlar.Stok
             projeStokKart.stokKart.dosyaList.Clear();
             foreach (var dataControlStokKartDosya in data.Where(s => s.newRec == false))
             {
+                if (dataControlStokKartDosya.stokKartDosya.isActive == false) continue;
                 if (!dataControlStokKartDosya.Validate()) return;
                 projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
                 var filePath = Path.Combine(Guid.NewGuid() + "." + dataControlStokKartDosya.stokKartDosya.dosyaUzanti);
                 dataControlStokKartDosya.stokKartDosya.dosyaFullPath = filePath;
-                _fileService.SaveFile(dataControlStokKartDosya.dosyaVeri, filePath);
+                _fileService.SaveFile(dataControlStokKartDosya.stokKartDosya.dosya, filePath);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
@@ -168,9 +169,12 @@ namespace YektamakDesktop.Formlar.Stok
             List<DataControlStokKartDosya> dataControlStokKartDosyaList = new List<DataControlStokKartDosya>();
             for (int i = 0; i < projeStokKart.stokKart.dosyaList.Count; i++)
             {
-                DataControlStokKartDosya dataControlStokKartDosya = DIContainer.GetService<DataControlStokKartDosya>();
-                dataControlStokKartDosya.stokKartDosya = projeStokKart.stokKart.dosyaList[i];
-                dataControlStokKartDosyaList.Add(dataControlStokKartDosya);
+                if (projeStokKart.stokKart.dosyaList[i].isActive)
+                {
+                    DataControlStokKartDosya dataControlStokKartDosya = DIContainer.GetService<DataControlStokKartDosya>();
+                    dataControlStokKartDosya.stokKartDosya = projeStokKart.stokKart.dosyaList[i];
+                    dataControlStokKartDosyaList.Add(dataControlStokKartDosya);
+                }
             }
             customDataGrid = new CustomDataGrid<DataControlStokKartDosya>(2, 27, new Point(5, 5), new Size(700, 250));
 
@@ -330,9 +334,11 @@ namespace YektamakDesktop.Formlar.Stok
                 dosyaAd = Path.GetFileNameWithoutExtension(sourceFile),
                 dosyaUzanti = Path.GetExtension(sourceFile).Replace(".", ""),
                 dosyaTip = new DosyaTip { Id = _cache.dosyaTipList.FirstOrDefault(dt => dt.ad.Equals(Path.GetExtension(sourceFile).Replace(".", ""), StringComparison.OrdinalIgnoreCase))?.Id ?? 0 },
-                dosya = d
+                dosya = d,
+                isActive=true
             };
             customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().dosyaVeri = d;
+            customDataGrid.dataSource.Where(ds => ds.newRec == true).FirstOrDefault().newRec = false;
         }
 
         private void roundedButton1_Click_1(object sender, EventArgs e)
@@ -477,6 +483,7 @@ namespace YektamakDesktop.Formlar.Stok
                 stokKartDosya.dosya = File.ReadAllBytes(openFileDialog.FileName);
                 stokKartDosya.dosyaAd = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 stokKartDosya.dosyaUzanti = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
+                stokKartDosya.isActive = true;
                 Binding();
             }
         }

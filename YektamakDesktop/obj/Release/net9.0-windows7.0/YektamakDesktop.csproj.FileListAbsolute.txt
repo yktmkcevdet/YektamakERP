@@ -270,7 +270,5 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\ref\YektamakDesktop.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\YektamakDesktop.dll.manifest
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\YektamakDesktop.application
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.dll.manifest
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.application
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Release\net9.0-windows7.0\logo.png
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Release\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.İrsaliye.MalzemeGirisFormu.resources

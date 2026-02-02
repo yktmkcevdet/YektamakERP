@@ -289,7 +289,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void MalzemeAltGrupTanimFormu_AfterSave(object sender, object e)
         {
-            var malzemeAltGrup = (MalzemeAltGrupDTO)e;
+            var malzemeAltGrup = (MalzemeAltGrup)e;
             foreach (var existNode in treeView1.Nodes.Find(malzemeAltGrup.Id.ToString(), true))
             {
                 if (existNode.Level == 1)

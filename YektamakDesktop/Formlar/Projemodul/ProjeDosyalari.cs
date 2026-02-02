@@ -97,9 +97,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     pdfPopup?.Close();
                     var projeStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.Rows[e.RowIndex].DataBoundItem;
                     var projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(projeStokKartDTO);
-                    if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1))
+                    if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1 && d.isActive==true))
                     {
-                        string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1).FirstOrDefault()?.dosyaFullPath;
+                        string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1 && d.isActive==true).FirstOrDefault()?.dosyaFullPath;
                         var pdfBytes = await _fileService.GetFileDecompress(filePath);
                         pdfPopup.GetInstance(pdfBytes);
                         pdfPopup.FormBorderStyle = FormBorderStyle.None;
@@ -287,6 +287,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             {
                 liste.Add(_convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
             }
+            else
+            {
+                liste[index] = _convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
+            }
         }
 
         private async Task fcbMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
@@ -362,6 +366,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             bool result = true;
             result = CheckFieldHelper.CheckField("Stok grubu seçilmelidir", fcbStokGrup) && result;
             result = CheckFieldHelper.CheckField("Malzeme grubu seçilmelidir", fcbMalzemeGrup) && result;
+            if (!result) return;
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
