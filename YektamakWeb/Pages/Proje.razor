@@ -147,6 +147,7 @@ else
     @inject IStokService stokService
     @inject IProjeService _projeService
     @inject IConvertHelper _convertHelper
+    @inject IFileService _fileService
     private NavigationManager? navigation { get; set; }
     private PdfView pdfViewer;
     private string message;
@@ -227,17 +228,21 @@ else
             .ToList();
     }
 
-    private void PdfGoster(int? stokKartId)
+    private async void PdfGoster(int? stokKartId)
     {
-        StokKart stokKart = new();
-        stokKart.Id = stokKartId;
-        stokKart = stokService.GetStokKartPdf(stokKart).FirstOrDefault();
+        ProjeStokKart projeStokKart = new();
+        projeStokKart.stokKart.Id = stokKartId;
+        projeStokKart = (await _projeService.GetProjeStokKart(projeStokKart)).FirstOrDefault();
         
         if (pdfViewer != null)
         {
             //await JSRuntime.InvokeVoidAsync("openPdfBlob", stokKart.pdf);
             //pdfViewer.Open($"data:application/pdf;base64,{Convert.ToBase64String(stokKart.pdf)}");
-            pdfViewer.OpenModal(stokKart.dosyaList.Where(d => d.dosyaUzanti.Equals("PDF",StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.dosya);
+            if (projeStokKart.stokKart.dosyaList.Where(d => d.isActive == true && d.dosyaTip.Id == 1).Any())
+            {
+                var dosya = await _fileService.GetFileDecompress(projeStokKart.stokKart.dosyaList.Where(d => d.isActive == true && d.dosyaTip.Id == 1).FirstOrDefault().dosyaFullPath);
+                pdfViewer.OpenModal(dosya);
+            }
         }
         
         //dialogFragment.ShowDialog();

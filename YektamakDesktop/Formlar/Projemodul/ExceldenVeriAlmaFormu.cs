@@ -342,7 +342,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // DXF dosyası ekle
             var dxfDosya = await CreateStokKartDosya(projeStokKart.dxfFileName(), 2);
             string jsonResult = _stokService.GetMalzemeStandart(projeStokKart.stokKart.malzemeStandart);
-            MalzemeStandart malzemeStandart = _jsonConverter.DeserializeObject<List<MalzemeStandart>>(jsonResult).FirstOrDefault();
+            MalzemeStandart malzemeStandart = _jsonConverter.DeserializeObject<List<MalzemeStandart>>(jsonResult).Where(m=>m.Id==projeStokKart.stokKart.malzemeStandart.Id).FirstOrDefault();
             if (dxfDosya != null)
             {
                 dxfDosya.dosyaAd = $"{projeStokKart.stokKart.kod}_{malzemeStandart.ad}_{projeStokKart.dxfAddition()}mm_{projeStokKart.miktar}adet";

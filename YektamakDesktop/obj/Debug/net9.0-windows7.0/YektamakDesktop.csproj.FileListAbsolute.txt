@@ -20,6 +20,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\LatoFont\Lato-ThinItalic.ttf
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\LatoFont\OFL.txt
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\YektamakDesktop.exe
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\logo.png
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\YektamakDesktop.dll.config
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\YektamakDesktop.deps.json
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\YektamakDesktop.runtimeconfig.json
@@ -244,6 +245,7 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.Teklif.SatinalmaTeklifKayitFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.SatinalmaTekliflerFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.SatinalmaTeklifTaleplerFormu.resources
+C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.İrsaliye.MalzemeGirisFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.Monday.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satis.ProjeTanimlamaFormu.resources
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.MalzemeGrubu.resources
@@ -270,5 +272,3 @@ C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.pdb
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\ref\YektamakDesktop.dll
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\bin\Debug\net9.0-windows7.0\logo.png
-C:\Users\yektamak-118\source\repos\YektamakErp\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Satinalma.İrsaliye.MalzemeGirisFormu.resources

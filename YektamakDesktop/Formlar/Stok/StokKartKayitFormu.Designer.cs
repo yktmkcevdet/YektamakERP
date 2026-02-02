@@ -1083,6 +1083,7 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // roundedButton1
             // 
+            roundedButton1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             roundedButton1.BackgroundColor = Color.Firebrick;
             roundedButton1.BorderColor = Color.Black;
             roundedButton1.BorderSize = 0;
@@ -1141,12 +1142,14 @@ namespace YektamakDesktop.Formlar.Stok
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             button1.Location = new Point(587, 636);
             button1.Name = "button1";
             button1.Size = new Size(76, 28);
             button1.TabIndex = 101;
             button1.Text = "Logo'ya Kaydet";
             button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
             button1.Click += button1_Click;
             // 
             // StokKartKayitFormu
