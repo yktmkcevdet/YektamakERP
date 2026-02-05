@@ -119,6 +119,9 @@
     <Compile Update="Formlar\Projemodul\ProfilOptimizasyon.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Projemodul\ProjeBelgeOnay.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Projemodul\ProjeDosyaAgacStil.cs">
       <SubType>Form</SubType>
     </Compile>

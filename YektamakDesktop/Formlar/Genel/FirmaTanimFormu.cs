@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Media.TextFormatting;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Helpers;
 
 namespace YektamakDesktop.Formlar.Genel
 {
@@ -27,18 +28,7 @@ namespace YektamakDesktop.Formlar.Genel
         }
         private void Initialize()
         {
-            int sizeX = universalGrid1.Size.Width;
-            int sizeY = universalGrid1.Size.Height;
-            int locationY = universalGrid1.Location.Y;
-            int locationX = universalGrid1.Location.X;
-            Controls.Remove(universalGrid1);
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new Point(locationX, locationY);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new Size(sizeX, sizeY);
-            universalGrid1.TabIndex = 13;
-            Controls.Add(universalGrid1);
+            UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.SetData(new List<Firma>(), this.Name);
             fcbAdres.SetDataSource(_firmaService.GetAdres(new Adres()));
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;

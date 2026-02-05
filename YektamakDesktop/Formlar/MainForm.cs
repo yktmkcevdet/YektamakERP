@@ -20,7 +20,7 @@ namespace YektamakDesktop.Formlar
         private int _dragTabIndex = -1;
         private ContextMenuStrip tabsListMenu = new ContextMenuStrip();
         private const int LeftMenuExpandedWidth = 220;
-        private const int LeftMenuCollapsedWidth = 30;
+        private const int LeftMenuCollapsedWidth = 26;
         private bool _isLeftMenuExpanded = true;
         private ImageList menuImages;
         private bool _isHoverExpanded = false;

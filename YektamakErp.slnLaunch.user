@@ -3,9 +3,9 @@
     "Name": "Yeni Profil",
     "Projects": [
       {
-        "Path": "YektamakWeb\\YektamakWeb.csproj",
+        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
         "Action": "Start",
-        "DebugTarget": "https"
+        "DebugTarget": "FinansalTakipDesktop"
       }
     ]
   }

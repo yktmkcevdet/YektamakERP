@@ -70,6 +70,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<PdfGoruntuleme>();
             services.AddTransient<PermissionManager>();
             services.AddTransient<PersonelKayitFormu>();
+            services.AddTransient<ProjeBelgeOnay>();
             services.AddTransient<ProjeDosyalari>();
             services.AddTransient<ProjeDosyaAgacStil>();
             services.AddTransient<ProjeSorumlusuAtamaFormu>();

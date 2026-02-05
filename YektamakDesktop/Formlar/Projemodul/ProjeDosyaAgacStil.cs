@@ -28,6 +28,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IFileService _fileService;
         private readonly IDosyalamaService _dosyalamaService;
         private DxfDocument dxfDoc;
+        private ProjeBom selectedProjeBom;
         public ProjeDosyaAgacStil(ICache cache, IProjeService projeService, IStokService stokService, IConfigurationService configurationService, IFileService fileService, IDosyalamaService dosyalamaService)
         {
             _cache = cache;
@@ -51,7 +52,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             this.Enabled = false;
             treeView1.Nodes.Clear();
             TreeNode rootNode = new TreeNode(fcbProjeKod.SelectedDisplayValue.ToString());
-            rootNode.Tag = new ProjeBom { no = "0"  };
+            rootNode.Tag = new ProjeBom { no = "0" };
             treeView1.Nodes.Add(rootNode);
             var projeBomList = await _projeService.GetProjeBomList(
                 new ProjeBom { proje = { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } }
@@ -286,24 +287,22 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private async void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            var bom = (ProjeBom)e.Node.Tag;
-            if (bom.Id != null)
+            selectedProjeBom = (ProjeBom)e.Node.Tag;
+            if (selectedProjeBom.Id != null)
             {
                 pdfPopup.GetInstance(
                     await _fileService.GetFileDecompress(
-                        bom.projeStokKart.stokKart.dosyaList
+                        selectedProjeBom.projeStokKart.stokKart.dosyaList
                             .FirstOrDefault(d => d.dosyaTip.Id == 1)?.dosyaFullPath
                     )
                 );
-                foreach (var dosya in bom.projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 2))
+                foreach (var dosya in selectedProjeBom.projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 2))
                 {
                     var dxfDosya = await _fileService.GetFileDecompress(dosya.dosyaFullPath);
                     dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
                     BuildSplineCache();
                     FitToScreen();
                 }
-
-
             }
             else
             {
@@ -932,6 +931,14 @@ namespace YektamakDesktop.Formlar.Projemodul
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            selectedProjeBom.projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.dosyaTip.Id == 1).kontrolEdenKullaniciId = _cache.kullanici.Id;
+            selectedProjeBom.projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.dosyaTip.Id == 1).kontrolSonucu = true;
+            selectedProjeBom.projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.dosyaTip.Id == 1).kontrolTarihi = DateTime.Now;
+            _projeService.SaveProjeStokKart(selectedProjeBom.projeStokKart);
         }
     }
     enum SnapType
