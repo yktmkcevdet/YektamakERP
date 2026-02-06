@@ -5,6 +5,7 @@ using Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Implementations;
@@ -21,21 +22,29 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IProjeService _projeService;
         private readonly IConvertHelper _convertHelper;
         private readonly IFileService _fileService;
-        public ProjeBelgeOnay(ICache cache, IProjeService projeService, IConvertHelper convertHelper,IFileService fileService)
+        private readonly IStokService _stokService;
+        private StokKartDosyaDTO skd;
+        public ProjeBelgeOnay(ICache cache, IProjeService projeService, IConvertHelper convertHelper, IFileService fileService, IStokService stokService)
         {
             _cache = cache;
             _projeService = projeService;
             _convertHelper = convertHelper;
             _fileService = fileService;
+            _stokService = stokService;
             InitializeComponent();
             Initialize();
             Binding();
+            pdfPopup.Dock = DockStyle.Fill;
+            pdfPopup.TopLevel = false;
+            panel1.Controls.Add(pdfPopup);
+            pdfPopup.Show();
         }
         private void Initialize()
         {
             UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
-            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name);
+            universalGrid1.Grid.RowPrePaint += dataGridView1_RowPrePaint;
+            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, true);
             fcbProjeKod.SetDataSource(_cache.projeList);
         }
 
@@ -43,13 +52,10 @@ namespace YektamakDesktop.Formlar.Projemodul
         {
             if (e.Button == MouseButtons.Left)
             {
-                var skd = (StokKartDosyaDTO)universalGrid1.binding.Current;
+                skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
                 if (skd.dosyaTipId == 1)
                 {
-                    pdfPopup.Dock = DockStyle.Fill;
-                    pdfPopup.TopLevel = false;
-                    panel1.Controls.Add(pdfPopup);
-                    pdfPopup.Show();
+
                     pdfPopup.GetInstance(
                             await _fileService.GetFileDecompress(skd.dosyaFullPath)
                         );
@@ -66,7 +72,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         }
         private void Binding()
         {
-            BindHelper.BindData(fcbDosyaTip, stokKartDosya,nameof(stokKartDosya.dosyaTipId));
+            BindHelper.BindData(fcbDosyaTip, stokKartDosya, nameof(stokKartDosya.dosyaTipId));
         }
 
         private void fcbStokGrup_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -89,7 +95,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
             }
-            universalGrid1.SetData(stokKartDosyaDTOs, this.Name);
+            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
         }
 
         private void ProjeBelgeOnay_FormClosing(object sender, FormClosingEventArgs e)
@@ -102,6 +108,42 @@ namespace YektamakDesktop.Formlar.Projemodul
             universalGrid1.Filtrele(stokKartDosya);
         }
         private PdfGoruntuleme _pdfPopup;
+
+        private async void roundedButton1_Click(object sender, EventArgs e)
+        {
+            skd.kontrolEdenKullaniciId = _cache.kullanici.Id;
+            skd.kontrolSonucu = true;
+            skd.kontrolTarihi = DateTime.Now;
+            _stokService.SaveStokKartDosya(_convertHelper.ToEntity<StokKartDosya>(skd));
+            int i = universalGrid1.Grid.CurrentRow.Index;
+
+            if (i < universalGrid1.Grid.Rows.Count - 1)
+            {
+                universalGrid1.Grid.CurrentCell =
+                universalGrid1.Grid.Rows[i + 1].Cells[0];
+                skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+                if (skd.dosyaTipId == 1)
+                {
+
+                    pdfPopup.GetInstance(
+                            await _fileService.GetFileDecompress(skd.dosyaFullPath)
+                        );
+                }
+            }
+        }
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var row = universalGrid1.Grid.Rows[e.RowIndex];
+
+            if (row.Cells["Kontrol Durumu"].Value == null)
+                return;
+
+            bool isActive = Convert.ToBoolean(row.Cells["Kontrol Durumu"].Value);
+
+            row.DefaultCellStyle.BackColor =
+                isActive ? Color.LightGreen : Color.LightGray;
+        }
+
         private PdfGoruntuleme pdfPopup
         {
             get { if (_pdfPopup == null || _pdfPopup.IsDisposed) { _pdfPopup = FormFactory.CreateForm<PdfGoruntuleme>(); } return _pdfPopup; }

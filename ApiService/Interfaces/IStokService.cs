@@ -28,6 +28,7 @@ namespace ApiService.Interfaces
         public Task<string> SaveStokKart(StokKart stokKart);
         public Task<string> SaveProjeStokKart(ProjeStokKart projeStokKart);
         public Task<string> SaveStokKartHammadde(ProjeStokKart stokKart);
+        public Task<string> SaveStokKartDosya(StokKartDosya stokKartDosya);
         public Task<string> GetStokGrupKriter();
         public string GetExcelGrupParametre(ExcelGrupParametre excelGrupParametre);
         public string SaveExcelGrupParametre(ExcelGrupParametre excelGrupParametre);

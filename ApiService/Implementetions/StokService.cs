@@ -161,5 +161,9 @@ namespace ApiService.Implementations
         {
             return await _apiService.PostAsync(projeStokKart, "SaveProjeStokKart");
         }
+        public async Task<string> SaveStokKartDosya(StokKartDosya stokKartDosya)
+        {
+            return await _apiService.PostAsync(stokKartDosya, "SaveStokKartDosya");
+        }
     }
 }

@@ -35,6 +35,8 @@
             fcbProjeKod = new YektamakDesktop.CustomControls.FilterableComboBox();
             fcbDosyaTip = new YektamakDesktop.CustomControls.FilterableComboBox();
             panel1 = new System.Windows.Forms.Panel();
+            roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
+            roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
             SuspendLayout();
             // 
             // headerPanel1
@@ -130,16 +132,68 @@
             // 
             // panel1
             // 
-            panel1.Location = new System.Drawing.Point(463, 48);
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel1.Location = new System.Drawing.Point(463, 101);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(807, 699);
+            panel1.Size = new System.Drawing.Size(807, 646);
             panel1.TabIndex = 6;
+            // 
+            // roundedButton1
+            // 
+            roundedButton1.BackgroundColor = System.Drawing.Color.Firebrick;
+            roundedButton1.BorderColor = System.Drawing.Color.Black;
+            roundedButton1.BorderSize = 0;
+            roundedButton1.CornerRadius = 10;
+            roundedButton1.FlatAppearance.BorderSize = 0;
+            roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedButton1.Font = new System.Drawing.Font("Segoe UI", 16F);
+            roundedButton1.ForeColor = System.Drawing.Color.White;
+            roundedButton1.GradientColor1 = System.Drawing.Color.Green;
+            roundedButton1.GradientColor2 = System.Drawing.Color.LimeGreen;
+            roundedButton1.HoverColor1 = System.Drawing.Color.Green;
+            roundedButton1.HoverColor2 = System.Drawing.Color.LimeGreen;
+            roundedButton1.Icon = null;
+            roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            roundedButton1.Location = new System.Drawing.Point(537, 47);
+            roundedButton1.Name = "roundedButton1";
+            roundedButton1.Size = new System.Drawing.Size(37, 35);
+            roundedButton1.TabIndex = 7;
+            roundedButton1.Text = "✓";
+            roundedButton1.TextColor = System.Drawing.Color.White;
+            roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Click += roundedButton1_Click;
+            // 
+            // roundedButton2
+            // 
+            roundedButton2.BackgroundColor = System.Drawing.Color.Firebrick;
+            roundedButton2.BorderColor = System.Drawing.Color.Black;
+            roundedButton2.BorderSize = 0;
+            roundedButton2.CornerRadius = 10;
+            roundedButton2.FlatAppearance.BorderSize = 0;
+            roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            roundedButton2.Font = new System.Drawing.Font("Segoe UI", 16F);
+            roundedButton2.ForeColor = System.Drawing.Color.White;
+            roundedButton2.GradientColor1 = System.Drawing.Color.FromArgb(192, 0, 0);
+            roundedButton2.GradientColor2 = System.Drawing.Color.Red;
+            roundedButton2.HoverColor1 = System.Drawing.Color.FromArgb(192, 64, 0);
+            roundedButton2.HoverColor2 = System.Drawing.Color.FromArgb(192, 0, 0);
+            roundedButton2.Icon = null;
+            roundedButton2.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            roundedButton2.Location = new System.Drawing.Point(1206, 47);
+            roundedButton2.Name = "roundedButton2";
+            roundedButton2.Size = new System.Drawing.Size(40, 40);
+            roundedButton2.TabIndex = 8;
+            roundedButton2.Text = "✗";
+            roundedButton2.TextColor = System.Drawing.Color.White;
+            roundedButton2.UseVisualStyleBackColor = true;
             // 
             // ProjeBelgeOnay
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1279, 768);
+            Controls.Add(roundedButton2);
+            Controls.Add(roundedButton1);
             Controls.Add(panel1);
             Controls.Add(fcbDosyaTip);
             Controls.Add(fcbProjeKod);
@@ -163,5 +217,7 @@
         private CustomControls.FilterableComboBox fcbProjeKod;
         private CustomControls.FilterableComboBox fcbDosyaTip;
         private System.Windows.Forms.Panel panel1;
+        private CustomControls.RoundedButton roundedButton1;
+        private CustomControls.RoundedButton roundedButton2;
     }
 }

@@ -16,6 +16,7 @@ namespace Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySqlLocal>();
+            builder.Services.AddScoped<IStokService, StokService>();
             builder.Services.AddScoped<IProjeStokKartService, ProjeStokKartService>();
 
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin

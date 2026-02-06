@@ -6,10 +6,12 @@ namespace Api.Controllers
     public class StokKartController:Controller
 	{
         private readonly Business.IDataAccessLayer _dataAccessLayer;
+        private readonly Business.IStokService _stokService;
 
-        public StokKartController(Business.IDataAccessLayer dataAccessLayer)
+        public StokKartController(Business.IDataAccessLayer dataAccessLayer, Business.IStokService stokService)
         {
             _dataAccessLayer = dataAccessLayer;
+            _stokService = stokService;
         }
 
         [HttpPost,Route("api/GetStokKart")]
@@ -34,6 +36,12 @@ namespace Api.Controllers
         public string DeleteStokKart([FromBody] StokKart restData)
         {
             string result = _dataAccessLayer.DeleteObject(restData, "spDeleteStokKart");
+            return result;
+        }
+        [HttpPost, Route("api/SaveStokKartDosya")]
+        public async Task<string> SaveStokKartDosya([FromBody] StokKartDosya restData)
+        {
+            string result = await _stokService.SaveStokKartDosya(restData);
             return result;
         }
         [HttpPost, Route("api/DeleteStokKartDosya")]
