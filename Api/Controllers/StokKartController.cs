@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Factory;
+using Microsoft.AspNetCore.Connections;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace Api.Controllers
@@ -7,11 +9,12 @@ namespace Api.Controllers
 	{
         private readonly Business.IDataAccessLayer _dataAccessLayer;
         private readonly Business.IStokService _stokService;
-
-        public StokKartController(Business.IDataAccessLayer dataAccessLayer, Business.IStokService stokService)
+        private readonly IDbConnectionFactory _connectionFactory;
+        public StokKartController(Business.IDataAccessLayer dataAccessLayer, Business.IStokService stokService, IDbConnectionFactory connectionFactory)
         {
             _dataAccessLayer = dataAccessLayer;
             _stokService = stokService;
+            _connectionFactory = connectionFactory;
         }
 
         [HttpPost,Route("api/GetStokKart")]
@@ -41,7 +44,10 @@ namespace Api.Controllers
         [HttpPost, Route("api/SaveStokKartDosya")]
         public async Task<string> SaveStokKartDosya([FromBody] StokKartDosya restData)
         {
-            string result = await _stokService.SaveStokKartDosya(restData);
+            using var connection = _connectionFactory.Create();
+            using var transacton = connection.BeginTransaction();
+            var result = await _stokService.SaveStokKartDosya(restData,connection,transacton);
+            transacton.Commit();
             return result;
         }
         [HttpPost, Route("api/DeleteStokKartDosya")]

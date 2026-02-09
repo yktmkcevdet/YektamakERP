@@ -1,5 +1,6 @@
 using Api.Business;
 using Api.Converters;
+using Api.Factory;
 using Api.Interfaces;
 using Api.TokenJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,8 +16,9 @@ namespace Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddScoped<IDbConnectionFactory, MySqlConnectionFactory>();
             builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySqlLocal>();
-            builder.Services.AddScoped<IStokService, StokService>();
+            builder.Services.AddScoped<IStokService, StokKartRepository>();
             builder.Services.AddScoped<IProjeStokKartService, ProjeStokKartService>();
 
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin

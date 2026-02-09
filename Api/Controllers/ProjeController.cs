@@ -1,5 +1,7 @@
 ﻿using Api.Business;
+using Api.Factory;
 using Api.Interfaces;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -8,12 +10,14 @@ namespace Api.Controllers
     public class ProjeController:Controller
     {
         private readonly IDataAccessLayer _dataAccessLayer;
-        private readonly IProjeStokKartService _projeStokKartService;
+        private readonly IStokService _stokService;
+        private readonly IDbConnectionFactory _connectionFactory;
 
-        public ProjeController(IDataAccessLayer dataAccessLayer, IProjeStokKartService projeStokKartService)
+        public ProjeController(IDataAccessLayer dataAccessLayer, IStokService stokService, IDbConnectionFactory connectionFactory)
         {
             _dataAccessLayer = dataAccessLayer;
-            _projeStokKartService = projeStokKartService;
+            _stokService = stokService;
+            _connectionFactory = connectionFactory;
         }
         [HttpPost, Route("api/SaveProje")]
         public string SaveProje([FromBody] Proje proje)
@@ -52,10 +56,11 @@ namespace Api.Controllers
             return result;
         }
         [HttpPost, Route("api/SaveProjeStokKart")]
-        public string SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
+        public Task<string> SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {
-            //return await _projeStokKartService.SaveProjeStokKartAsync(projeStokKart);
-            string result = _dataAccessLayer.SaveObject(projeStokKart, "spSaveProjeStokKart");
+            using var connection = _connectionFactory.Create();
+            using var transacton = connection.BeginTransaction();
+            var result = _stokService.SaveProjeStokKart(projeStokKart,connection,transacton);
             return result;
         }
         [HttpPost, Route("api/GetProjeStokKart")]

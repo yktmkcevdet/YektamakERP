@@ -114,7 +114,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             skd.kontrolEdenKullaniciId = _cache.kullanici.Id;
             skd.kontrolSonucu = true;
             skd.kontrolTarihi = DateTime.Now;
-            _stokService.SaveStokKartDosya(_convertHelper.ToEntity<StokKartDosya>(skd));
+            await _stokService.SaveStokKartDosya(_convertHelper.ToEntity<StokKartDosya>(skd));
             int i = universalGrid1.Grid.CurrentRow.Index;
 
             if (i < universalGrid1.Grid.Rows.Count - 1)
