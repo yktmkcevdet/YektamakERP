@@ -2,15 +2,15 @@
   {
     "ContainingType": "Api.Controllers.FileController",
     "Method": "Delete",
-    "RelativePath": "api/delete",
-    "HttpMethod": "POST",
+    "RelativePath": "api/delete/{filePath}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "filePath",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

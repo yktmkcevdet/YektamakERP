@@ -43,6 +43,8 @@
             fcbMalzemeGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
             label6 = new System.Windows.Forms.Label();
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
+            ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
+            label7 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // headerPanel1
@@ -65,7 +67,7 @@
             fcbFirma.BorderSize = 1;
             fcbFirma.DisplayMember = "ad";
             fcbFirma.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbFirma.Location = new System.Drawing.Point(179, 126);
+            fcbFirma.Location = new System.Drawing.Point(179, 156);
             fcbFirma.Margin = new System.Windows.Forms.Padding(1);
             fcbFirma.Name = "fcbFirma";
             fcbFirma.Padding = new System.Windows.Forms.Padding(3);
@@ -74,16 +76,16 @@
             fcbFirma.Size = new System.Drawing.Size(213, 25);
             fcbFirma.TabIndex = 4;
             fcbFirma.ValueMember = "Id";
-            fcbFirma.SelectedIndexChanged += fcbFirma_SelectedIndexChanged;
+            fcbFirma.SelectedItemChanged += fcbFirma_SelectedValueChanged;
             // 
             // fcbProjeKodu
             // 
             fcbProjeKodu.BorderColor = System.Drawing.Color.Silver;
             fcbProjeKodu.BorderRadius = 8;
             fcbProjeKodu.BorderSize = 1;
-            fcbProjeKodu.DisplayMember = "ad";
+            fcbProjeKodu.DisplayMember = "kod";
             fcbProjeKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbProjeKodu.Location = new System.Drawing.Point(179, 99);
+            fcbProjeKodu.Location = new System.Drawing.Point(179, 129);
             fcbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
             fcbProjeKodu.Name = "fcbProjeKodu";
             fcbProjeKodu.Padding = new System.Windows.Forms.Padding(3);
@@ -100,7 +102,7 @@
             fcbStokGrup.BorderSize = 1;
             fcbStokGrup.DisplayMember = "ad";
             fcbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbStokGrup.Location = new System.Drawing.Point(179, 153);
+            fcbStokGrup.Location = new System.Drawing.Point(179, 183);
             fcbStokGrup.Margin = new System.Windows.Forms.Padding(1);
             fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new System.Windows.Forms.Padding(3);
@@ -109,13 +111,14 @@
             fcbStokGrup.Size = new System.Drawing.Size(213, 25);
             fcbStokGrup.TabIndex = 5;
             fcbStokGrup.ValueMember = "Id";
+            fcbStokGrup.SelectedIndexChanged += fcbStokGrup_SelectedIndexChanged;
             // 
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(12, 229);
+            universalGrid1.Location = new System.Drawing.Point(12, 305);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(989, 364);
+            universalGrid1.Size = new System.Drawing.Size(989, 288);
             universalGrid1.TabIndex = 13;
             // 
             // ctbIrsaliyeNo
@@ -126,7 +129,7 @@
             ctbIrsaliyeNo.BorderSize = 1;
             ctbIrsaliyeNo.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbIrsaliyeNo.ForeColor = System.Drawing.Color.Black;
-            ctbIrsaliyeNo.Location = new System.Drawing.Point(179, 45);
+            ctbIrsaliyeNo.Location = new System.Drawing.Point(179, 75);
             ctbIrsaliyeNo.Margin = new System.Windows.Forms.Padding(1);
             ctbIrsaliyeNo.Multiline = false;
             ctbIrsaliyeNo.Name = "ctbIrsaliyeNo";
@@ -141,12 +144,13 @@
             ctbIrsaliyeNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbIrsaliyeNo.TextCustom = "";
             ctbIrsaliyeNo.UnderlinedStyle = false;
+            ctbIrsaliyeNo.Leave += ctbIrsaliyeNo_Leave;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label1.Location = new System.Drawing.Point(79, 55);
+            label1.Location = new System.Drawing.Point(79, 85);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(65, 15);
             label1.TabIndex = 7;
@@ -156,7 +160,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label2.Location = new System.Drawing.Point(79, 136);
+            label2.Location = new System.Drawing.Point(79, 166);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(38, 15);
             label2.TabIndex = 10;
@@ -166,7 +170,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label3.Location = new System.Drawing.Point(79, 109);
+            label3.Location = new System.Drawing.Point(79, 139);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(68, 15);
             label3.TabIndex = 9;
@@ -176,7 +180,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label4.Location = new System.Drawing.Point(79, 163);
+            label4.Location = new System.Drawing.Point(79, 193);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(71, 15);
             label4.TabIndex = 11;
@@ -186,7 +190,7 @@
             // 
             ctbTarih.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ctbTarih.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbTarih.Location = new System.Drawing.Point(179, 72);
+            ctbTarih.Location = new System.Drawing.Point(179, 102);
             ctbTarih.Margin = new System.Windows.Forms.Padding(1);
             ctbTarih.Name = "ctbTarih";
             ctbTarih.Padding = new System.Windows.Forms.Padding(3);
@@ -197,7 +201,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label5.Location = new System.Drawing.Point(79, 82);
+            label5.Location = new System.Drawing.Point(79, 112);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(34, 15);
             label5.TabIndex = 8;
@@ -210,7 +214,7 @@
             fcbMalzemeGrup.BorderSize = 1;
             fcbMalzemeGrup.DisplayMember = "ad";
             fcbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbMalzemeGrup.Location = new System.Drawing.Point(179, 180);
+            fcbMalzemeGrup.Location = new System.Drawing.Point(179, 210);
             fcbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
             fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new System.Windows.Forms.Padding(3);
@@ -224,7 +228,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label6.Location = new System.Drawing.Point(79, 190);
+            label6.Location = new System.Drawing.Point(79, 220);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(96, 15);
             label6.TabIndex = 12;
@@ -245,13 +249,50 @@
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(36, 36);
             customButtonSave1.TabIndex = 14;
-            customButtonSave1.Click += customButtonSave1_Click;
+            customButtonSave1.SaveButtonClick += customButtonSave1_Click;
+            // 
+            // ctbId
+            // 
+            ctbId.BackColor = System.Drawing.Color.White;
+            ctbId.BorderColor = System.Drawing.Color.Silver;
+            ctbId.BorderFocusColor = System.Drawing.Color.HotPink;
+            ctbId.BorderSize = 1;
+            ctbId.Enabled = false;
+            ctbId.Font = new System.Drawing.Font("Segoe UI", 8F);
+            ctbId.ForeColor = System.Drawing.Color.Black;
+            ctbId.Location = new System.Drawing.Point(179, 48);
+            ctbId.Margin = new System.Windows.Forms.Padding(1);
+            ctbId.Multiline = false;
+            ctbId.Name = "ctbId";
+            ctbId.Padding = new System.Windows.Forms.Padding(3);
+            ctbId.PasswordChar = false;
+            ctbId.PlaceholderColor = System.Drawing.Color.DarkGray;
+            ctbId.PlaceholderText = "";
+            ctbId.ReadOnly = false;
+            ctbId.SelectionStart = 0;
+            ctbId.Size = new System.Drawing.Size(91, 25);
+            ctbId.TabIndex = 15;
+            ctbId.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbId.TextCustom = "";
+            ctbId.UnderlinedStyle = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label7.Location = new System.Drawing.Point(79, 58);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(18, 15);
+            label7.TabIndex = 16;
+            label7.Text = "Id";
             // 
             // MalzemeGirisFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1013, 657);
+            Controls.Add(label7);
+            Controls.Add(ctbId);
             Controls.Add(customButtonSave1);
             Controls.Add(label6);
             Controls.Add(fcbMalzemeGrup);
@@ -293,5 +334,7 @@
         private CustomControls.FilterableComboBox fcbMalzemeGrup;
         private System.Windows.Forms.Label label6;
         private CustomControls.CustomButtonSave customButtonSave1;
+        private CustomControls.CustomTextBox ctbId;
+        private System.Windows.Forms.Label label7;
     }
 }

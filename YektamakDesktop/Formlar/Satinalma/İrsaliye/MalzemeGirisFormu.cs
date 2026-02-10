@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 using YektamakDesktop.Helpers;
 
 namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
@@ -35,6 +36,8 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
             UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.SetData(new List<SatinalmaIrsaliyeDetayDTO>(), this.Name);
             fcbFirma.SetDataSource(_cache.firmaList);
+            fcbProjeKodu.SetDataSource(_cache.projeList);
+            fcbStokGrup.SetDataSource(_cache.stokGrups);
         }
         private SatinalmaIrsaliyeBaslik _satinalmaIrsaliyeBaslik;
         private SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik
@@ -44,7 +47,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
                 if (_satinalmaIrsaliyeBaslik == null) { _satinalmaIrsaliyeBaslik = new(); Binding(); }
                 return _satinalmaIrsaliyeBaslik;
             }
-            set { _satinalmaIrsaliyeBaslik = value; }
+            set { _satinalmaIrsaliyeBaslik = value; Binding(); }
         }
         private async void GirisFormu_Load(object sender, EventArgs e)
         {
@@ -65,9 +68,9 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
                     SatinalmaIrsaliyeDetayDTO satinalmaIrsaliyeDetayDTO = new SatinalmaIrsaliyeDetayDTO();
                     satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetayMiktar = satinalmaSiparisDetay.miktar;
                     satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetayId = satinalmaSiparisDetay.Id;
-                    satinalmaIrsaliyeDetayDTO.satinalmaSiparisprojeStokKartId = satinalmaSiparisDetay.projeStokKart.Id;
-                    satinalmaIrsaliyeDetayDTO.satinalmaSiparisprojeStokKartstokKartkod = satinalmaSiparisDetay.projeStokKart.stokKart.kod;
-                    satinalmaIrsaliyeDetayDTO.satinalmaSiparisprojeStokKartstokKartad = satinalmaSiparisDetay.projeStokKart.stokKart.ad;
+                    satinalmaIrsaliyeDetayDTO.projeStokKartId = satinalmaSiparisDetay.projeStokKart.Id;
+                    satinalmaIrsaliyeDetayDTO.projeStokKartstokKartkod = satinalmaSiparisDetay.projeStokKart.stokKart.kod;
+                    satinalmaIrsaliyeDetayDTO.projeStokKartstokKartad = satinalmaSiparisDetay.projeStokKart.stokKart.ad;
                     satinalmaIrsaliyeDetayDTO.satinalmaSiparisprojeStokKartstokKartolcuBrimId = satinalmaSiparisDetay.projeStokKart.stokKart.olcuBirim.Id;
                     satinalmaIrsaliyeDetayDTOs.Add(satinalmaIrsaliyeDetayDTO);
                 }
@@ -77,11 +80,13 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
 
         private void Binding()
         {
+            BindHelper.BindData(ctbId, satinalmaIrsaliyeBaslik, nameof(satinalmaIrsaliyeBaslik.Id));
             BindHelper.BindData(ctbIrsaliyeNo, satinalmaIrsaliyeBaslik, nameof(satinalmaIrsaliyeBaslik.irsaliyeNo));
             BindHelper.BindData(ctbTarih, satinalmaIrsaliyeBaslik, nameof(satinalmaIrsaliyeBaslik.tarih));
             BindHelper.BindData(fcbFirma, satinalmaIrsaliyeBaslik.firma, nameof(satinalmaIrsaliyeBaslik.firma.Id));
             BindHelper.BindData(fcbStokGrup, satinalmaIrsaliyeBaslik.stokGrup, nameof(satinalmaIrsaliyeBaslik.stokGrup.Id));
             BindHelper.BindData(fcbMalzemeGrup, satinalmaIrsaliyeBaslik.malzemeGrup, nameof(satinalmaIrsaliyeBaslik.malzemeGrup.Id));
+            BindHelper.BindData(fcbProjeKodu, satinalmaIrsaliyeBaslik.proje, nameof(satinalmaIrsaliyeBaslik.proje.Id));
         }
 
         private void MalzemeGirisFormu_FormClosing(object sender, FormClosingEventArgs e)
@@ -89,14 +94,28 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
             universalGrid1.SaveGridSettings();
         }
 
-        private void fcbFirma_SelectedIndexChanged(object sender, EventArgs e)
+        private void fcbFirma_SelectedValueChanged(object sender, EventArgs e)
         {
-            GridLoad();
+            if(string.IsNullOrEmpty(ctbId.TextCustom)) GridLoad();
         }
 
-        private void customButtonSave1_Click(object sender, EventArgs e)
+        private async void customButtonSave1_Click(object sender, EventArgs e)
         {
+            var satinalmaIrsaliyeDetayDTOs = (SortableBindingList<SatinalmaIrsaliyeDetayDTO>)universalGrid1.binding.DataSource;
+            satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList = satinalmaIrsaliyeDetayDTOs.CastToEntity<SatinalmaIrsaliyeDetay>(_convertHelper).ToList();
+            var jsonstring = await _satinalmaIrsaliyeService.SaveSatinalmaIrsaliye(satinalmaIrsaliyeBaslik);
+        }
 
+        private void fcbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var stokGrupId = int.Parse(fcbStokGrup.SelectedValue.ToString());
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id == stokGrupId).ToList());
+        }
+
+        private async void ctbIrsaliyeNo_Leave(object sender, EventArgs e)
+        {
+            satinalmaIrsaliyeBaslik = (await _satinalmaIrsaliyeService.GetSatinalmaIrsaliye(satinalmaIrsaliyeBaslik)).FirstOrDefault();
+            universalGrid1.SetData(satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList.CastToDTO<SatinalmaIrsaliyeDetayDTO>(_convertHelper).ToList(),this.Name);
         }
     }
 }

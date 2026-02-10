@@ -9,6 +9,7 @@ namespace ApiService.Interfaces
 {
     public interface ISatinalmaIrsaliyeService
     {
-        public Task<string> SaveSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik); 
+        public Task<string> SaveSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik);
+        public Task<List<SatinalmaIrsaliyeBaslik>> GetSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik);
     }
 }
