@@ -20,28 +20,35 @@ namespace Api.Business
         {
             const string sql = @"
                                 INSERT t01_stokkartdosya
-                                    (stokKartId,dosyaTipId,dosyaAd,dosyaUzanti,isActive,dosyaFullPath,kontrolEdenKullaniciId,kontrolTarihi,kontrolSonucu)
+                                    (stokKartId,dosyaTipId,dosyaAd,dosyaUzanti,dosyaFullPath,kontrolEdenKullaniciId,kontrolTarihi,kontrolSonucu)
                                 VALUES
-                                    (@stokKartId,@dosyaTipId,@dosyaAd,@dosyaUzanti,@isActive,@dosyaFullPath,@kontrolEdenKullaniciId,@kontrolTarihi,@kontrolSonucu);
+                                    (@stokKartId,@dosyaTipId,@dosyaAd,@dosyaUzanti,@dosyaFullPath,@kontrolEdenKullaniciId,@kontrolTarihi,@kontrolSonucu)
                                 ON DUPLICATE KEY UPDATE
                                     stokKartId = VALUES(stokKartId),
                                     dosyaTipId = VALUES(dosyaTipId),
                                     dosyaAd = VALUES(dosyaAd),
                                     dosyaUzanti = VALUES(dosyaUzanti),
-                                    isActive = VALUES(isActive),
                                     dosyaFullPath = VALUES(dosyaFullPath),
                                     kontrolEdenKullaniciId = VALUES(kontrolEdenKullaniciId),
                                     kontrolTarihi = VALUES(kontrolTarihi),
                                     kontrolSonucu = VALUES(kontrolSonucu),
                                 Id = LAST_INSERT_ID(Id);
                                 SELECT *
-                                FROM t02_projestokkart
-                                WHERE Id = LAST_INSERT_ID()";
+                                FROM t01_stokkartdosya WHERE Id = LAST_INSERT_ID()";
 
 
             var savedStokKartDosya = await dbConnection.QuerySingleAsync<StokKartDosya>(
                 sql,
-                stokKartDosya,
+                new { 
+                    stokKartDosya.stokKartId,
+                    dosyaTipId = stokKartDosya.dosyaTip.Id,
+                    stokKartDosya.dosyaAd,
+                    stokKartDosya.dosyaUzanti,
+                    stokKartDosya.dosyaFullPath,
+                    stokKartDosya.kontrolEdenKullaniciId,
+                    stokKartDosya.kontrolTarihi,
+                    stokKartDosya.kontrolSonucu
+                },
                 dbTransaction
             );
 
@@ -55,7 +62,7 @@ namespace Api.Business
                                 INSERT INTO t02_projestokkart
                                     (projeId,stokKartId,miktar,adet,hamVeri)
                                 VALUES
-                                    (projeId,stokKartId,miktar,adet,hamVeri);
+                                    (@projeId,@stokKartId,@miktar,@adet,@hamVeri)
                                 ON DUPLICATE KEY UPDATE
                                     projeId = VALUES(projeId),
                                     stokKartId = VALUES(stokKartId),
@@ -70,7 +77,13 @@ namespace Api.Business
             
             var savedProjeStokKart = await dbConnection.QuerySingleAsync<ProjeStokKart>(
                 sql,
-                projeStokKart,
+                new {
+                    projeId = projeStokKart.proje.Id,
+                    stokKartId = projeStokKart.stokKart.Id,
+                    projeStokKart.miktar,
+                    projeStokKart.adet,
+                    projeStokKart.hamVeri
+                },
                 dbTransaction
             );
 
@@ -85,18 +98,18 @@ namespace Api.Business
                 var boyut = new Boyut { ad = stokKart.boyut };
                 boyut = await SaveBoyut(boyut, dbConnection, dbTransaction);
                 stokKart.boyutTanim.Id = boyut.Id;
-
+                
                 // 2️⃣ StokKart
                 const string sql = @"
             INSERT INTO t01_stokkart
-            (kod, parcaKod, ad, stokTipId, stokGrupId,
+            (kod, parcaKod, ad, hammaddeId,stokTipId, stokGrupId,
              malzemeGrupId, malzemeAltGrupId, malzemeAltGrup2Id,
              parcaAdi, boyut, uzunluk, malzeme, aciklama,
              agirlik, olcuBirimId, boy, en, yukseklik,
              cap, etKalinligi, malzemeStandartId,
              isTalasli, isBukum, isFromExcel, boyutId, tedarikciKod)
             VALUES
-            (@kod, @parcaKod, @ad, @stokTipId, @stokGrupId,
+            (@kod, @parcaKod, @ad, @hammaddeId ,@stokTipId, @stokGrupId,
              @malzemeGrupId, @malzemeAltGrupId, @malzemeAltGrup2Id,
              @parcaAdi, @boyut, @uzunluk, @malzeme, @aciklama,
              @agirlik, @olcuBirimId, @boy, @en, @yukseklik,
@@ -110,7 +123,56 @@ namespace Api.Business
 
             SELECT * FROM t01_stokkart WHERE Id = LAST_INSERT_ID();
         ";
+                if (stokKart.malzemeGrup.Id == 29)
+                {
+                    const string indSql = "SELECT MAX(S.kod) FROM t01_stokkart S INNER JOIN t01_stoktip ST ON ST.Id=S.stoktipId WHERE S.stokGrupId=@stokGrupId AND S.malzemeGrupId=@malzemeGrupId AND IFNULL(@malzemeAltGrupId,0)=IFNULL(S.malzemeAltGrupId,0) AND IFNULL(@malzemeAltGrup2Id,0)=IFNULL(S.malzemeAltGrup2Id,0);";
+                    var ind = await dbConnection.QuerySingleAsync<string>(indSql, 
+                        new { 
+                            stokGrupId=stokKart.stokGrup.Id,
+                            malzemeGrupId = stokKart.malzemeGrup.Id,
+                            malzemeAltGrupId = stokKart.malzemeAltGrup.Id,
+                            malzemeAltGrup2Id = stokKart.malzemeAltGrup2.Id
+                        },
+                        dbTransaction);
 
+                    var mag = string.IsNullOrEmpty(stokKart.malzemeAltGrup.kod) ? "0" : stokKart.malzemeAltGrup.kod;
+                    var savedHammadde = await dbConnection.QuerySingleAsync<StokKart>(
+                        sql,
+                        new
+                        {
+                        
+                            kod = $"{stokKart.stokGrup.kod}_{stokKart.malzemeGrup.kod}_{mag.PadLeft(4,'0')}_{ind.Substring(14,3).PadLeft(3,'0')}",
+                            stokKart.parcaKod,
+                            stokKart.ad,
+                            hammaddeId = stokKart.hammadde.Id,
+                            stokTipId = stokKart.stokTip.Id,
+                            stokGrupId = stokKart.stokGrup.Id,
+                            malzemeGrupId = stokKart.malzemeGrup.Id,
+                            malzemeAltGrupId = stokKart.malzemeAltGrup.Id,
+                            malzemeAltGrup2Id = stokKart.malzemeAltGrup2.Id,
+                            stokKart.parcaAdi,
+                            stokKart.boyut,
+                            stokKart.uzunluk,
+                            stokKart.malzeme,
+                            stokKart.aciklama,
+                            stokKart.agirlik,
+                            olcuBirimId = stokKart.olcuBirim.Id,
+                            stokKart.boy,
+                            stokKart.en,
+                            stokKart.yukseklik,
+                            stokKart.cap,
+                            stokKart.etKalinligi,
+                            malzemeStandartId = stokKart.malzemeStandart.Id,
+                            stokKart.isTalasli,
+                            stokKart.isBukum,
+                            stokKart.isFromExcel,
+                            boyutId = stokKart.boyutTanim.Id,
+                            stokKart.tedarikciKod
+                        },
+                        dbTransaction
+                    );
+                    stokKart.hammadde.Id = savedHammadde.Id;
+                }
                 var savedStokKart = await dbConnection.QuerySingleAsync<StokKart>(
                     sql,
                     new
@@ -118,6 +180,7 @@ namespace Api.Business
                         stokKart.kod,
                         stokKart.parcaKod,
                         stokKart.ad,
+                        hammaddeId = stokKart.hammadde.Id,
                         stokTipId = stokKart.stokTip.Id,
                         stokGrupId = stokKart.stokGrup.Id,
                         malzemeGrupId = stokKart.malzemeGrup.Id,
@@ -155,7 +218,6 @@ namespace Api.Business
                     savedStokKart.dosyaList.Add(JsonConvert.DeserializeObject<StokKartDosya>(savedDosya));
                 }
 
-                dbTransaction.Commit();
                 return savedStokKart;
             }
             catch

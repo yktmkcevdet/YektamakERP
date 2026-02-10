@@ -12,9 +12,10 @@ namespace ApiService.Implementations
         {
             _apiService = apiService;
         }
-        public async Task<string> GetSatinalmaSiparisAsync(SatinalmaSiparis satinalmaSiparis)
+        public async Task<List<SatinalmaSiparis>> GetSatinalmaSiparisAsync(SatinalmaSiparis satinalmaSiparis)
         {
-            return await _apiService.PostAsync(satinalmaSiparis, "GetSatinalmaSiparis");
+            var satinalmaSiparisList = await _apiService.PostAsync(satinalmaSiparis, "GetSatinalmaSiparis");
+            return JsonConvert.DeserializeObject<List<SatinalmaSiparis>>(satinalmaSiparisList);
         }
         public async Task<List<SatinalmaSiparisDetay>> GetSatinalmaSiparisDetayAsync(SatinalmaSiparisDetay satinalmaSiparisDetay)
         {

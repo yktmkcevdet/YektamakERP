@@ -56,11 +56,9 @@ namespace Api.Controllers
             return result;
         }
         [HttpPost, Route("api/SaveProjeStokKart")]
-        public Task<string> SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
+        public string SaveProjeStokKart([FromBody] ProjeStokKart projeStokKart)
         {
-            using var connection = _connectionFactory.Create();
-            using var transacton = connection.BeginTransaction();
-            var result = _stokService.SaveProjeStokKart(projeStokKart,connection,transacton);
+            string result = _dataAccessLayer.SaveObject(projeStokKart, "spSaveProjeStokKart");
             return result;
         }
         [HttpPost, Route("api/GetProjeStokKart")]

@@ -116,7 +116,7 @@ namespace YektamakDesktop.Formlar.Stok
                 projeStokKart.stokKart.dosyaList.Add(dataControlStokKartDosya.stokKartDosya);
                 var filePath = Path.Combine(Guid.NewGuid() + "." + dataControlStokKartDosya.stokKartDosya.dosyaUzanti);
                 dataControlStokKartDosya.stokKartDosya.dosyaFullPath = filePath;
-                _fileService.SaveFile(dataControlStokKartDosya.stokKartDosya.dosya, filePath);
+                _fileService.SaveFile(dataControlStokKartDosya.dosyaVeri, filePath);
             }
             string jsonResult = await _projeService.SaveProjeStokKart(projeStokKart);
             if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))

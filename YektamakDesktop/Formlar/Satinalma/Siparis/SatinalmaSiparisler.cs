@@ -62,10 +62,7 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         }
         private async void SatinalmaSiparisler_Load(object sender, System.EventArgs e)
         {
-            string jsonData = await _satinalmaSiparisService.GetSatinalmaSiparisAsync(new SatinalmaSiparis());
-            var data = _jsonConverter.DeserializeObject<List<SatinalmaSiparis>>(jsonData);
-            if (data == null)
-                data = new List<SatinalmaSiparis>();
+            var data = await _satinalmaSiparisService.GetSatinalmaSiparisAsync(new SatinalmaSiparis());
             await universalGrid1.SetData(data.CastToDTO<SatinalmaSiparisDTO>(_convertHelper).ToList(), this.Name);
         }
 

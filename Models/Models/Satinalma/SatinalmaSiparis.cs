@@ -42,7 +42,8 @@
     {
         public int? Id { get; set; }
         public int? satinalmaSiparisBaslikId { get; set; }
-        public ProjeStokKart projeStokKart { get; set; }
+        private ProjeStokKart _projeStokKart;
+        public ProjeStokKart projeStokKart { get { if (_projeStokKart == null) { _projeStokKart = new(); } return _projeStokKart; } set { _projeStokKart = value; } }
         public double? miktar { get; set; }
         public double? birimFiyat { get; set; }
         private DovizCinsi _dovizCinsi;

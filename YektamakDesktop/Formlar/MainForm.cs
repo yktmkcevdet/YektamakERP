@@ -87,12 +87,12 @@ namespace YektamakDesktop.Formlar
         }
         private void treeMenu_MouseEnter(object sender, EventArgs e)
         {
-            _collapseTimer.Stop();
-            if (!_isHoverExpanded && !_isLeftMenuExpanded)
-            {
-                _isHoverExpanded = true;
-                ToggleLeftMenu();
-            }
+            //_collapseTimer.Stop();
+            //if (!_isHoverExpanded && !_isLeftMenuExpanded)
+            //{
+            //    _isHoverExpanded = true;
+            //    ToggleLeftMenu();
+            //}
         }
         private void RestoreExpandedState()
         {
@@ -112,11 +112,11 @@ namespace YektamakDesktop.Formlar
         }
         private void treeMenu_MouseLeave(object sender, EventArgs e)
         {
-            if (_isHoverExpanded && _isLeftMenuExpanded)
-            {
-                _isHoverExpanded = false;
-                _collapseTimer.Start();
-            }
+            //if (_isHoverExpanded && _isLeftMenuExpanded)
+            //{
+            //    _isHoverExpanded = false;
+            //    _collapseTimer.Start();
+            //}
         }
         private void btnToggleMenu_Click(object sender, EventArgs e)
         {

@@ -35,6 +35,7 @@ namespace ApiService
             services.AddSingleton<IVadeService, VadeService>();
             services.AddSingleton<IConfigurationService, ConfigurationService>();
             services.AddSingleton<ISatinalmaSiparisService, SatinalmaSiparisService>();
+            services.AddSingleton<ISatinalmaIrsaliyeService, SatinalmaIrsaliyeService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ICache, Cache>();
             services.AddSingleton<IDosyalamaService, DosyalamaService>();
