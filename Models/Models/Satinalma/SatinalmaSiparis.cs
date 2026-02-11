@@ -45,6 +45,8 @@
         private ProjeStokKart _projeStokKart;
         public ProjeStokKart projeStokKart { get { if (_projeStokKart == null) { _projeStokKart = new(); } return _projeStokKart; } set { _projeStokKart = value; } }
         public double? miktar { get; set; }
+        public double? gelenMiktar { get; set; }
+        public double? kalanMiktar { get; set; }
         public double? birimFiyat { get; set; }
         private DovizCinsi _dovizCinsi;
         public DovizCinsi dovizCinsi { get { if (_dovizCinsi == null) { _dovizCinsi = new(); } return _dovizCinsi; } set { _dovizCinsi=value; } }

@@ -63,7 +63,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
                 foreach (var satinalmaSiparisDetay in satinalmaSiparisList[i].satinalmaSiparisDetay)
                 {
                     SatinalmaIrsaliyeDetayDTO satinalmaIrsaliyeDetayDTO = new SatinalmaIrsaliyeDetayDTO();
-                    satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetayMiktar = satinalmaSiparisDetay.miktar;
+                    satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetaymiktar = satinalmaSiparisDetay.kalanMiktar;
                     satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetayId = satinalmaSiparisDetay.Id;
                     satinalmaIrsaliyeDetayDTO.projeStokKartId = satinalmaSiparisDetay.projeStokKart.Id;
                     satinalmaIrsaliyeDetayDTO.projeStokKartstokKartkod = satinalmaSiparisDetay.projeStokKart.stokKart.kod;
@@ -99,7 +99,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
         private async void customButtonSave1_Click(object sender, EventArgs e)
         {
             var satinalmaIrsaliyeDetayDTOs = (SortableBindingList<SatinalmaIrsaliyeDetayDTO>)universalGrid1.binding.DataSource;
-            satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList = satinalmaIrsaliyeDetayDTOs.CastToEntity<SatinalmaIrsaliyeDetay>(_convertHelper).ToList();
+            satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList = satinalmaIrsaliyeDetayDTOs.CastToEntity<SatinalmaIrsaliyeDetay>(_convertHelper).Where(i=>i.miktar>0).ToList();
             var jsonstring = await _satinalmaIrsaliyeService.SaveSatinalmaIrsaliye(satinalmaIrsaliyeBaslik);
         }
 

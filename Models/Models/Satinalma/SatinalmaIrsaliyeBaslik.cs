@@ -26,7 +26,7 @@ namespace Models.Models.Satinalma
     {
         public int? Id { get; set; }
         private SatinalmaIrsaliyeBaslik _satinalmaIrsaliyeBaslik;
-        public SatinalmaIrsaliyeBaslik satinalmaIrsaliye { get { if (_satinalmaIrsaliyeBaslik == null) { _satinalmaIrsaliyeBaslik = new(); } return _satinalmaIrsaliyeBaslik; } set { _satinalmaIrsaliyeBaslik = value; } }
+        public SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik { get { if (_satinalmaIrsaliyeBaslik == null) { _satinalmaIrsaliyeBaslik = new(); } return _satinalmaIrsaliyeBaslik; } set { _satinalmaIrsaliyeBaslik = value; } }
         private SatinalmaSiparisDetay _satinalmaSiparisDetay;
         public SatinalmaSiparisDetay satinalmaSiparisDetay{ get { if (_satinalmaSiparisDetay == null) { _satinalmaSiparisDetay = new(); } return _satinalmaSiparisDetay; } set{ _satinalmaSiparisDetay = value; } }
         private ProjeStokKart _projeStokKart;

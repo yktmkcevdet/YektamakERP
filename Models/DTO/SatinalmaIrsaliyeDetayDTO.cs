@@ -7,7 +7,7 @@ namespace Models.DTO
         [GridDisplay(Header ="Id")]public int? Id { get; set; }
         [GridDisplay(Header = "Başlık Id")] public int? satinalmaIrsaliyeBaslikId { get; set; }
         [GridDisplay(Header = "Sipariş Detay Id")] public int? satinalmaSiparisDetayId { get; set; }
-        [GridDisplay(Header = "Sipariş Miktar")] public double? satinalmaSiparisDetayMiktar { get; set; }
+        [GridDisplay(Header = "Sipariş Miktar")] public double? satinalmaSiparisDetaymiktar { get; set; }
         [GridDisplay(Header = "Proje StokKart Id")] public int? projeStokKartId { get; set; }
         [GridDisplay(Header = "Stok Kodu")] public string projeStokKartstokKartkod { get; set; }
         [GridDisplay(Header = "Stok Adı")] public string projeStokKartstokKartad { get; set; }
