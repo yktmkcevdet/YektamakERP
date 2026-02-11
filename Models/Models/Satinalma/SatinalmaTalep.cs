@@ -111,7 +111,8 @@ namespace Models
 		public string talepEdenPersonelad { get; set; }
 		public bool? onayDurum { get; set; }
 		public bool? isTeklif { get; set; }
-		public int? teklifSayisi { get; set; }
+        public bool? isSiparis { get; set; }
+        public int? teklifSayisi { get; set; }
         private List<SatinalmaTalepSatirDetay> _satinalmaTalepSatirDetays;
         public List<SatinalmaTalepSatirDetay> satinalmaTalepSatirDetays
         {

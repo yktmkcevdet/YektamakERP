@@ -15,5 +15,6 @@ namespace Models.DTO
         [GridDisplay(Header = "Açıklama")] public string aciklama { get; set; }
         [GridDisplay(Header = "KDV", Tip = "Liste", ListName = "kdvList", ListVisibleColumnName = "oran")] public double? kdv { get; set; }
         [GridDisplay(Header ="Teklif Id")] public int? satinalmaTeklifDetayId { get; set; }
+        [GridDisplay(Header = "Talep Id")] public int? satinalmaTalepDetayId { get; set; }
     }
 }

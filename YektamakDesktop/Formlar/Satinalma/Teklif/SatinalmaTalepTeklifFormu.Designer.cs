@@ -277,7 +277,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             isTeklif.TabIndex = 24;
             isTeklif.Text = "Teklif İstenenleri Göster";
             isTeklif.UseVisualStyleBackColor = true;
-            isTeklif.CheckStateChanged += async(s,e)=>await isTeklif_CheckedChanged(s,e);
+            
             // 
             // fccMalzemeAltGrupId
             // 

@@ -50,6 +50,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             _dosyalamaService = dosyalamaService;
             InitializeComponent();
             Initialize();
+            isTeklif.CheckStateChanged += async (s, e) => await isTeklif_CheckedChanged(s, e);
             Load += async (s, e) => await SatinalmaTalepTeklifFormu_Load(s, e);
             ctbBeginTalepTarihi.textBox.PlaceholderText = "Başlangıç Talep Tarihi";
             ctbEndTalepTarihi.textBox.PlaceholderText = "Bitiş Talep Tarihi";
@@ -652,7 +653,10 @@ namespace YektamakDesktop.Formlar.Satinalma
             satinalmaSiparis.siparisTarihi = DateTime.Today;
             satinalmaSiparis.firmaId = firma.Id;
             satinalmaSiparis.kdvId = 1;
-            foreach (var item in satinalmaTalepDetayDTOs.CastToEntity<SatinalmaTalepDetay>(_convertHelper))
+            satinalmaSiparis.projeId = int.Parse(clbProjeKod.SelectedValue.ToString());
+            satinalmaSiparis.malzemeGrupId = int.Parse(clbMalzemeGrupId.SelectedValue.ToString());
+            var detays = universalGrid1.GetCheckedRows<SatinalmaTalepDetayDTO>().CastToEntity<SatinalmaTalepDetay>(_convertHelper);
+            foreach (var item in detays)
             {
                 SatinalmaSiparisDetay satinalmaSiparisDetay = new SatinalmaSiparisDetay();
                 satinalmaSiparisDetay.miktar = item.miktar;

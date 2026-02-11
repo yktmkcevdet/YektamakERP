@@ -50,6 +50,7 @@ namespace Models.DTO
         [GridDisplay(Header = TalepEdenHeader)]public string talepEdenPersonelad { get; set; }
         [GridDisplay(Header = "Teklif Sayısı")] public int? teklifSayisi { get; set; }
         [GridDisplay(Header = isTeklifHeader, Visible = false)]public bool? isTeklif { get; set; }
+        [GridDisplay(Header = isSiparisHeader, Visible = false)] public bool? isSiparis { get; set; }
         [GridDisplay(Header = isBukumHeader, Visible = false)] public bool? projeStokKartstokKartisBukum { get; set; }
         private List<StokKartDosya> _projeStokKartstokKartdosyaList;
         [GridDisplay(Header = "Proje Stok Kart Dosyaları", Visible = false)]
@@ -90,6 +91,7 @@ namespace Models.DTO
         public const string AciklamaHeader = "Talep Detay Açıklama";
         public const string AgirlikHeader = "Ağırlık";
         public const string isTeklifHeader = "Teklif?";
+        public const string isSiparisHeader = "Sipariş?";
         public const string isBukumHeader = "Büküm?";
         public const string TalepNedenIdHeader = "Talep Neden Id";
         public const string TalepNedenHeader = "Talep Nedeni";

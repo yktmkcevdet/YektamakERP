@@ -30,6 +30,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
             _satinalmaIrsaliyeService = satinalmaIrsaliyeService;
             InitializeComponent();
             Initialize();
+            Binding();
         }
         private void Initialize()
         {
@@ -44,15 +45,11 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
         {
             get
             {
-                if (_satinalmaIrsaliyeBaslik == null) { _satinalmaIrsaliyeBaslik = new(); Binding(); }
+                if (_satinalmaIrsaliyeBaslik == null) { _satinalmaIrsaliyeBaslik = new();  }
                 return _satinalmaIrsaliyeBaslik;
             }
             set { _satinalmaIrsaliyeBaslik = value; Binding(); }
         }
-        private async void GirisFormu_Load(object sender, EventArgs e)
-        {
-        }
-
         private async Task GridLoad()
         {
             List<SatinalmaIrsaliyeDetayDTO> satinalmaIrsaliyeDetayDTOs = new List<SatinalmaIrsaliyeDetayDTO>();
@@ -61,9 +58,9 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
             satinalmaSiparis1.proje.Id = satinalmaIrsaliyeBaslik.proje.Id;
             satinalmaSiparis1.malzemeGrup.Id = satinalmaIrsaliyeBaslik.malzemeGrup.Id;
             var satinalmaSiparisList = await _satinalmaSiparisService.GetSatinalmaSiparisAsync(satinalmaSiparis1);
-            foreach (var satinalmaSiparis in satinalmaSiparisList)
+            for (int i = 0; i < satinalmaSiparisList.Count; i++)
             {
-                foreach (var satinalmaSiparisDetay in satinalmaSiparis.satinalmaSiparisDetay)
+                foreach (var satinalmaSiparisDetay in satinalmaSiparisList[i].satinalmaSiparisDetay)
                 {
                     SatinalmaIrsaliyeDetayDTO satinalmaIrsaliyeDetayDTO = new SatinalmaIrsaliyeDetayDTO();
                     satinalmaIrsaliyeDetayDTO.satinalmaSiparisDetayMiktar = satinalmaSiparisDetay.miktar;
@@ -96,7 +93,7 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
 
         private void fcbFirma_SelectedValueChanged(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(ctbId.TextCustom)) GridLoad();
+            
         }
 
         private async void customButtonSave1_Click(object sender, EventArgs e)
@@ -108,14 +105,44 @@ namespace YektamakDesktop.Formlar.Satinalma.İrsaliye
 
         private void fcbStokGrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var stokGrupId = int.Parse(fcbStokGrup.SelectedValue.ToString());
+            int? stokGrupId = int.TryParse(fcbStokGrup.SelectedValue?.ToString(), out int Id) ? Id : null;
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id == stokGrupId).ToList());
         }
 
-        private async void ctbIrsaliyeNo_Leave(object sender, EventArgs e)
+        private async void ctbIrsaliyeNo_KeyDown(object sender, KeyEventArgs e)
         {
-            satinalmaIrsaliyeBaslik = (await _satinalmaIrsaliyeService.GetSatinalmaIrsaliye(satinalmaIrsaliyeBaslik)).FirstOrDefault();
-            universalGrid1.SetData(satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList.CastToDTO<SatinalmaIrsaliyeDetayDTO>(_convertHelper).ToList(),this.Name);
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(ctbIrsaliyeNo.TextCustom))
+                {
+                    satinalmaIrsaliyeBaslik = (await _satinalmaIrsaliyeService.GetSatinalmaIrsaliye(satinalmaIrsaliyeBaslik)).FirstOrDefault();
+                    universalGrid1.SetData(satinalmaIrsaliyeBaslik.satinalmaIrsaliyeDetayList.CastToDTO<SatinalmaIrsaliyeDetayDTO>(_convertHelper).ToList(), this.Name);
+                }
+            }
+        }
+
+        private void fcbMalzemeGrup_SelectedValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnSiparisleriGetir_Click(object sender, EventArgs e)
+        {
+            if (Validate())
+            {
+                GridLoad();
+            }
+
+        }
+        private bool Validate()
+        {
+            bool valid = true;
+            valid &= CheckFieldHelper.CheckField("İrsaliye No girilmelidir", ctbIrsaliyeNo);
+            valid &= CheckFieldHelper.CheckField("Tarih girilmelidir", ctbTarih);
+            valid &= CheckFieldHelper.CheckField("Proje Kodu seçilmelidir", fcbProjeKodu);
+            valid &= CheckFieldHelper.CheckField("Firma seçilmelidir", fcbFirma);
+            valid &= CheckFieldHelper.CheckField("Stok Grubu seçilmelidir", fcbStokGrup);
+            valid &= CheckFieldHelper.CheckField("Malzeme Grubu seçilmelidir", fcbMalzemeGrup);
+            return valid;
         }
     }
 }

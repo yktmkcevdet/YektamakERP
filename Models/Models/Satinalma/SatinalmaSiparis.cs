@@ -53,5 +53,7 @@
         public KDV kdv { get { if (_kdv == null) { _kdv = new(); } return _kdv; } set { _kdv = value; } }
         private SatinalmaTeklifDetay _satinalmaTeklifDetay;
         public SatinalmaTeklifDetay satinalmaTeklifDetay { get { if (_satinalmaTeklifDetay == null) { _satinalmaTeklifDetay = new(); } return _satinalmaTeklifDetay; } set { _satinalmaTeklifDetay = value; } }
+        private SatinalmaTalepDetay _satinalmaTalepDetay;
+        public SatinalmaTalepDetay satinalmaTalepDetay { get { if (_satinalmaTalepDetay == null) { _satinalmaTalepDetay = new(); } return _satinalmaTalepDetay; } set { _satinalmaTalepDetay = value; } }
     }
 }

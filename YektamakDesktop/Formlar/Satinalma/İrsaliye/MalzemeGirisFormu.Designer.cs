@@ -45,6 +45,7 @@
             customButtonSave1 = new YektamakDesktop.CustomControls.CustomButtonSave();
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             label7 = new System.Windows.Forms.Label();
+            btnSiparisleriGetir = new YektamakDesktop.CustomControls.RoundedButton();
             SuspendLayout();
             // 
             // headerPanel1
@@ -144,7 +145,7 @@
             ctbIrsaliyeNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             ctbIrsaliyeNo.TextCustom = "";
             ctbIrsaliyeNo.UnderlinedStyle = false;
-            ctbIrsaliyeNo.Leave += ctbIrsaliyeNo_Leave;
+            ctbIrsaliyeNo.KeyDown += ctbIrsaliyeNo_KeyDown;
             // 
             // label1
             // 
@@ -223,6 +224,7 @@
             fcbMalzemeGrup.Size = new System.Drawing.Size(213, 25);
             fcbMalzemeGrup.TabIndex = 6;
             fcbMalzemeGrup.ValueMember = "Id";
+            fcbMalzemeGrup.SelectedValueChanged += fcbMalzemeGrup_SelectedValueChanged;
             // 
             // label6
             // 
@@ -286,11 +288,36 @@
             label7.TabIndex = 16;
             label7.Text = "Id";
             // 
+            // btnSiparisleriGetir
+            // 
+            btnSiparisleriGetir.BackgroundColor = System.Drawing.Color.Firebrick;
+            btnSiparisleriGetir.BorderColor = System.Drawing.Color.Black;
+            btnSiparisleriGetir.BorderSize = 0;
+            btnSiparisleriGetir.CornerRadius = 10;
+            btnSiparisleriGetir.FlatAppearance.BorderSize = 0;
+            btnSiparisleriGetir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSiparisleriGetir.ForeColor = System.Drawing.Color.White;
+            btnSiparisleriGetir.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            btnSiparisleriGetir.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            btnSiparisleriGetir.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            btnSiparisleriGetir.HoverColor2 = System.Drawing.Color.Navy;
+            btnSiparisleriGetir.Icon = null;
+            btnSiparisleriGetir.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnSiparisleriGetir.Location = new System.Drawing.Point(537, 220);
+            btnSiparisleriGetir.Name = "btnSiparisleriGetir";
+            btnSiparisleriGetir.Size = new System.Drawing.Size(88, 40);
+            btnSiparisleriGetir.TabIndex = 17;
+            btnSiparisleriGetir.Text = "Siparişleri Getir";
+            btnSiparisleriGetir.TextColor = System.Drawing.Color.White;
+            btnSiparisleriGetir.UseVisualStyleBackColor = true;
+            btnSiparisleriGetir.Click += btnSiparisleriGetir_Click;
+            // 
             // MalzemeGirisFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1013, 657);
+            Controls.Add(btnSiparisleriGetir);
             Controls.Add(label7);
             Controls.Add(ctbId);
             Controls.Add(customButtonSave1);
@@ -312,7 +339,6 @@
             Name = "MalzemeGirisFormu";
             Text = "MalzemeGirisFormu";
             FormClosing += MalzemeGirisFormu_FormClosing;
-            Load += GirisFormu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -336,5 +362,6 @@
         private CustomControls.CustomButtonSave customButtonSave1;
         private CustomControls.CustomTextBox ctbId;
         private System.Windows.Forms.Label label7;
+        private CustomControls.RoundedButton btnSiparisleriGetir;
     }
 }

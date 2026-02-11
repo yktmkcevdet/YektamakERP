@@ -53,6 +53,8 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
             fcbKdv.SetDataSource(_cache.kdvList);
             fcbVadeId.SetDataSource(_cache.vadeList);
             fcbDovizCinsi.SetDataSource(_cache.dovizCinsiList);
+            fcbProjeKod.SetDataSource(_cache.projeList);
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             universalGrid1.SetData(new List<SatinalmaSiparisDetayDTO>(),this.Name);
             Binding();
         }
@@ -80,10 +82,11 @@ namespace YektamakDesktop.Formlar.Satinalma.Siparis
         {
             BindHelper.BindData(ctbId, satinalmaSiparis, nameof(satinalmaSiparis.Id));
             BindHelper.BindData(ctbSiparisNo, satinalmaSiparis, nameof(satinalmaSiparis.siparisNo));
+            BindHelper.BindData(fcbProjeKod, satinalmaSiparis, nameof(satinalmaSiparis.projeId));
+            BindHelper.BindData(fcbMalzemeGrup, satinalmaSiparis, nameof(satinalmaSiparis.malzemeGrupId));
             BindHelper.BindData(fcbFirmaId, satinalmaSiparis, nameof(satinalmaSiparis.firmaId));
             BindHelper.BindData(fcbKdv, satinalmaSiparis, nameof(satinalmaSiparis.kdvId));
             BindHelper.BindData(fcbVadeId, satinalmaSiparis, nameof(satinalmaSiparis.vadeId));
-            BindHelper.BindData(ctbSiparisNo, satinalmaSiparis, nameof(satinalmaSiparis.siparisNo));
             BindHelper.BindData(ctbSiparisTarihi, satinalmaSiparis, nameof(satinalmaSiparis.siparisTarihi));
             BindHelper.BindData(ctbTeslimTarihi, satinalmaSiparis, nameof(satinalmaSiparis.teslimTarihi));
             BindHelper.BindData(ctbAciklama, satinalmaSiparis, nameof(satinalmaSiparis.aciklama));
