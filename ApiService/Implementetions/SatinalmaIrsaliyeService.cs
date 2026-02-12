@@ -1,11 +1,5 @@
 ﻿using ApiService.Interfaces;
 using Models;
-using Models.Models.Satinalma;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities.Interfaces;
 
 namespace ApiService.Implementations
@@ -39,6 +33,11 @@ namespace ApiService.Implementations
         {
             string result = await _apiService.PostAsync(satinalmaIrsaliyeBaslik, "GetSatinalmaIrsaliye");
             return _jsonConverter.DeserializeObject<List<SatinalmaIrsaliyeBaslik>>(result);
+        }
+        public async Task<string> DeleteSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik)
+        {
+            string result = await _apiService.PostAsync(satinalmaIrsaliyeBaslik, "DeleteSatinalmaIrsaliye");
+            return result;
         }
     }
 }

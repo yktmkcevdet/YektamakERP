@@ -13,6 +13,7 @@ using Utilities.Implementations;
 using Utilities.Interfaces;
 using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
+using YektamakDesktop.Helpers;
 
 namespace YektamakDesktop.Formlar.Projemodul
 {
@@ -31,18 +32,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         }
         private void Initialize()
         {
-            int sizeX = universalGrid1.Size.Width;
-            int sizeY = universalGrid1.Size.Height;
-            int locationY = universalGrid1.Location.Y;
-            int locationX = universalGrid1.Location.X;
-            Controls.Remove(universalGrid1);
-            universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
-            universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
-            universalGrid1.TabIndex = 13;
-            Controls.Add(universalGrid1);
+            UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.SetData(new List<ProjeSorumluDTO>(), this.Name);
             Load += async (s, e) => await ProjeSorumlusuAtama_Load(s, e);
             universalGrid1.Grid.MouseClick += Grid_MouseClick;

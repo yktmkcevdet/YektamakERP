@@ -173,6 +173,9 @@
     <Compile Update="Formlar\Satinalma\Teklif\SatinalmaTeklifTaleplerFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Satinalma\İrsaliye\IrsaliyeListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Satinalma\İrsaliye\MalzemeGirisFormu.cs">
       <SubType>Form</SubType>
     </Compile>

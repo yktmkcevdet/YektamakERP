@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
             fcbFirma = new YektamakDesktop.CustomControls.FilterableComboBox();
             fcbProjeKodu = new YektamakDesktop.CustomControls.FilterableComboBox();
@@ -46,6 +47,8 @@
             ctbId = new YektamakDesktop.CustomControls.CustomTextBox();
             label7 = new System.Windows.Forms.Label();
             btnSiparisleriGetir = new YektamakDesktop.CustomControls.RoundedButton();
+            customButtonNewRecord1 = new YektamakDesktop.CustomControls.CustomButtonNewRecord();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             SuspendLayout();
             // 
             // headerPanel1
@@ -303,7 +306,7 @@
             btnSiparisleriGetir.HoverColor2 = System.Drawing.Color.Navy;
             btnSiparisleriGetir.Icon = null;
             btnSiparisleriGetir.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSiparisleriGetir.Location = new System.Drawing.Point(537, 220);
+            btnSiparisleriGetir.Location = new System.Drawing.Point(304, 250);
             btnSiparisleriGetir.Name = "btnSiparisleriGetir";
             btnSiparisleriGetir.Size = new System.Drawing.Size(88, 40);
             btnSiparisleriGetir.TabIndex = 17;
@@ -312,11 +315,34 @@
             btnSiparisleriGetir.UseVisualStyleBackColor = true;
             btnSiparisleriGetir.Click += btnSiparisleriGetir_Click;
             // 
+            // customButtonNewRecord1
+            // 
+            customButtonNewRecord1.BorderColor = System.Drawing.Color.Black;
+            customButtonNewRecord1.BorderSize = 0;
+            customButtonNewRecord1.CornerRadius = 6;
+            customButtonNewRecord1.ForeColor = System.Drawing.Color.White;
+            customButtonNewRecord1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonNewRecord1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonNewRecord1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonNewRecord1.HoverColor2 = System.Drawing.Color.Navy;
+            customButtonNewRecord1.Location = new System.Drawing.Point(30, 609);
+            customButtonNewRecord1.Margin = new System.Windows.Forms.Padding(0);
+            customButtonNewRecord1.Name = "customButtonNewRecord1";
+            customButtonNewRecord1.Size = new System.Drawing.Size(36, 36);
+            customButtonNewRecord1.TabIndex = 18;
+            customButtonNewRecord1.Click += customButtonNewRecord1_Click;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 26);
+            // 
             // MalzemeGirisFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1013, 657);
+            Controls.Add(customButtonNewRecord1);
             Controls.Add(btnSiparisleriGetir);
             Controls.Add(label7);
             Controls.Add(ctbId);
@@ -363,5 +389,7 @@
         private CustomControls.CustomTextBox ctbId;
         private System.Windows.Forms.Label label7;
         private CustomControls.RoundedButton btnSiparisleriGetir;
+        private CustomControls.CustomButtonNewRecord customButtonNewRecord1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.Models.Satinalma;
 
 namespace Api.Controllers
 {
@@ -23,6 +22,12 @@ namespace Api.Controllers
         public string GetSatinalmaIrsaliye([FromBody] SatinalmaIrsaliyeBaslik restData)
         {
             string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaIrsaliye");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteSatinalmaIrsaliye")]
+        public string DeleteSatinalmaIrsaliye([FromBody] SatinalmaIrsaliyeBaslik restData)
+        {
+            string result = _dataAccesLayer.GetObject(restData, "spDeleteSatinalmaIrsaliye");
             return result;
         }
     }

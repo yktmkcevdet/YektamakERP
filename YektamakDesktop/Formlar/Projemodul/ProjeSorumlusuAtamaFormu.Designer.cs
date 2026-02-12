@@ -58,7 +58,7 @@
             fcbProje.BorderColor = System.Drawing.Color.Silver;
             fcbProje.BorderRadius = 8;
             fcbProje.BorderSize = 1;
-            fcbProje.DisplayMember = "ad";
+            fcbProje.DisplayMember = "kod";
             fcbProje.Font = new System.Drawing.Font("Segoe UI", 8F);
             fcbProje.Location = new System.Drawing.Point(135, 100);
             fcbProje.Margin = new System.Windows.Forms.Padding(1);

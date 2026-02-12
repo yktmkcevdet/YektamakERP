@@ -1,9 +1,4 @@
-﻿using Models.Models.Satinalma;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Models;
 
 namespace ApiService.Interfaces
 {
@@ -11,5 +6,6 @@ namespace ApiService.Interfaces
     {
         public Task<List<SatinalmaIrsaliyeBaslik>> SaveSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik);
         public Task<List<SatinalmaIrsaliyeBaslik>> GetSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik);
+        public Task<string> DeleteSatinalmaIrsaliye(SatinalmaIrsaliyeBaslik satinalmaIrsaliyeBaslik);
     }
 }
