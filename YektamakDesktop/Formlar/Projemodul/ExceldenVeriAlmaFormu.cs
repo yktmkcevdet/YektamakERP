@@ -412,7 +412,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 {
                     using (var sw = new StreamWriter(logDosyasi, append: true))
                     {
-                        sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad} {Environment.NewLine} {jsonResult}");
+                        sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad} - {projeStokKart.stokKart.boyut} {Environment.NewLine} {jsonResult}");
                     }
                 }
                 else
@@ -421,7 +421,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     {
                         using (var sw = new StreamWriter(logDosyasi, append: true))
                         {
-                            sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad}");
+                            sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad} - {projeStokKart.stokKart.boyut}");
                         }
                     }
                 }

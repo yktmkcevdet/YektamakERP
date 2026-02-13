@@ -64,6 +64,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             headerPanel1 = new HeaderPanel();
             universalGrid1 = new UniversalGrid();
             roundedButton1 = new RoundedButton();
+            roundedButton2 = new RoundedButton();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -484,20 +485,46 @@ namespace YektamakDesktop.Formlar.ProjeModul
             roundedButton1.HoverColor2 = Color.Navy;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new Point(779, 42);
+            roundedButton1.Location = new Point(941, 96);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new Size(150, 40);
             roundedButton1.TabIndex = 137;
             roundedButton1.Text = "roundedButton1";
             roundedButton1.TextColor = Color.White;
             roundedButton1.UseVisualStyleBackColor = true;
+            roundedButton1.Visible = false;
             roundedButton1.Click += roundedButton1_Click;
+            // 
+            // roundedButton2
+            // 
+            roundedButton2.BackgroundColor = Color.Firebrick;
+            roundedButton2.BorderColor = Color.Black;
+            roundedButton2.BorderSize = 0;
+            roundedButton2.CornerRadius = 10;
+            roundedButton2.FlatAppearance.BorderSize = 0;
+            roundedButton2.FlatStyle = FlatStyle.Flat;
+            roundedButton2.ForeColor = Color.White;
+            roundedButton2.GradientColor1 = Color.DodgerBlue;
+            roundedButton2.GradientColor2 = Color.MidnightBlue;
+            roundedButton2.HoverColor1 = Color.RoyalBlue;
+            roundedButton2.HoverColor2 = Color.Navy;
+            roundedButton2.Icon = null;
+            roundedButton2.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButton2.Location = new Point(774, 38);
+            roundedButton2.Name = "roundedButton2";
+            roundedButton2.Size = new Size(150, 40);
+            roundedButton2.TabIndex = 138;
+            roundedButton2.Text = "Dosyaları Klasöre Aktar";
+            roundedButton2.TextColor = Color.White;
+            roundedButton2.UseVisualStyleBackColor = true;
+            roundedButton2.Click += roundedButton2_Click;
             // 
             // ProjeDosyalari
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1103, 699);
+            Controls.Add(roundedButton2);
             Controls.Add(roundedButton1);
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
@@ -574,5 +601,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
         public HeaderPanel headerPanel1;
         private UniversalGrid universalGrid1;
         private RoundedButton roundedButton1;
+        private RoundedButton roundedButton2;
     }
 }

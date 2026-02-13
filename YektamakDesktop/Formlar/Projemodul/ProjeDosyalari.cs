@@ -1,4 +1,6 @@
-﻿using ApiService.Interfaces;
+﻿using ApiService.Implementations;
+using ApiService.Interfaces;
+using Microsoft.Win32;
 using Models;
 using Models.DTO;
 using SolidWorks.Interop.sldworks;
@@ -30,13 +32,16 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IFileService _fileService;
         private readonly IConvertHelper _convertHelper;
         private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
-        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper, ISatinalmaTalepHelper satinalmaTalepHelper)
+        private readonly IDosyalamaService _dosyalamaService;
+        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper, 
+            ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService)
         {
             _cache = cache;
             _projeService = projeService;
             _fileService = fileService;
             _convertHelper = convertHelper;
             _satinalmaTalepHelper = satinalmaTalepHelper;
+            _dosyalamaService = dosyalamaService;
             InitializeComponent();
             Initialize();
         }
@@ -97,9 +102,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
                     pdfPopup?.Close();
                     var projeStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.Rows[e.RowIndex].DataBoundItem;
                     var projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(projeStokKartDTO);
-                    if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1 && d.isActive==true))
+                    if (projeStokKart.stokKart.dosyaList.Any(d => d.dosyaTip.Id == 1 && d.isActive == true))
                     {
-                        string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1 && d.isActive==true).FirstOrDefault()?.dosyaFullPath;
+                        string filePath = projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 1 && d.isActive == true).FirstOrDefault()?.dosyaFullPath;
                         var pdfBytes = await _fileService.GetFileDecompress(filePath);
                         pdfPopup.GetInstance(pdfBytes);
                         pdfPopup.FormBorderStyle = FormBorderStyle.None;
@@ -486,7 +491,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
                         // PDF çıktı yolu
                         Directory.CreateDirectory(Path.Combine(
-                            folder,"PDF_files"
+                            folder, "PDF_files"
                         ));
                         string outPdf = Path.Combine(
                             folder, "PDF_files",
@@ -686,6 +691,33 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 ".sldasm" => (int)swDocumentTypes_e.swDocASSEMBLY,
                 _ => throw new NotSupportedException("Sadece .sldprt ve .sldasm destekleniyor.")
             };
+        }
+
+        private async void roundedButton2_Click(object sender, EventArgs e)
+        {
+            OpenFolderDialog openFolderDialog = new OpenFolderDialog();
+            if (openFolderDialog.ShowDialog() == true)
+            {
+                this.Enabled = false;
+                string selectedPath = openFolderDialog.FolderName;
+                var selectedRows = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
+                List<ProjeStokKartDTO> projeStokKartDTOs = selectedRows.Cast<ProjeStokKartDTO>().ToList();
+                if (Directory.Exists(selectedPath))
+                {
+                    var onay = MessageBox.Show("Seçilen klasör içeriğini temizlemek istiyor musunuz?", "Onay", MessageBoxButtons.YesNo);
+                    if (onay == DialogResult.Yes)
+                    {
+                        Directory.Delete(selectedPath, true);
+                    }
+                }
+                await _dosyalamaService.CreateOrderFile(projeStokKartDTOs.CastToEntity<ProjeStokKart>(_convertHelper).ToList(), selectedPath);
+                this.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Lütfen bir klasör seçin.");
+                return;
+            }
         }
     }
 }

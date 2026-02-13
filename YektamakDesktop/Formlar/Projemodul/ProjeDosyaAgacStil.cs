@@ -89,7 +89,9 @@ namespace YektamakDesktop.Formlar.Projemodul
                     treeNode.Tag = item;
                     if (parentNode == null)
                     {
-                        throw new Exception("Parent node not found for part: " + item.no);
+                        treeNode.Nodes.Add(parentNode);
+                        parentNode.Nodes.Add(treeNode);
+                        //throw new Exception("Parent node not found for part: " + item.no);
                     }
                     else
                     {

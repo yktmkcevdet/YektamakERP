@@ -253,10 +253,9 @@ namespace YektamakDesktop.Formlar.Stok
             if (dialogResult == DialogResult.Yes)
             {
                 List<ProjeStokKartDTO> projeStokKartDTOs = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
-                for (int i = 0; i < projeStokKartDTOs.Count; i++)
+                foreach (var item in  projeStokKartDTOs)
                 {
-                    var item = projeStokKartDTOs[i];
-                    if (!_cache.projeList.Any(p => p.sorumluList.Where(s=>s.Id == _cache.kullanici.personel.Id).Count()>0 && p.Id == item.projeId))
+                    if (!_cache.projeList.Any(p => p.Id==item.projeId && p.sorumluList.Where(s=>s.personel.Id == _cache.kullanici.personel.Id).Count()>0 && p.Id == item.projeId))
                     {
                         File.AppendAllText(logDosyasi, $"{item.stokKartkod} koduna ait stok kartını silemezsiniz\r\n");
                     }
