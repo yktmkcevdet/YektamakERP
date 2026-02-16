@@ -123,10 +123,10 @@ namespace YektamakDesktop.CustomControls
                     {
                         var dataSource = rawList
                         .Select(x => new
-                         {
-                             Id = x.GetType().GetProperty("Id")?.GetValue(x),
-                             ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
-                         }).ToList();
+                        {
+                            Id = x.GetType().GetProperty("Id")?.GetValue(x),
+                            ad = x.GetType().GetProperty(pair.Attribute.ListVisibleColumnName)?.GetValue(x)?.ToString()
+                        }).ToList();
                         var comboColumn = new FilterableComboBoxColumn
                         {
                             DataPropertyName = pair.Property.Name,
@@ -214,8 +214,8 @@ namespace YektamakDesktop.CustomControls
 
             list1 = liste.Cast<object>().ToList();
             dataGridView1.DataSource = binding;
-            if(binding.Count==0)
-            await LoadSettings<T>(formName, isCheck);
+            if (binding.Count == 0)
+                await LoadSettings<T>(formName, isCheck);
 
             lblToplamKayitSayisi.Text = $"Toplam Kayıt Sayısı : {binding.Count.ToString()}";
         }
@@ -353,6 +353,7 @@ namespace YektamakDesktop.CustomControls
             else
             {
                 if (hit.RowIndex == null || hit.RowIndex == -1) return;
+                Grid.Rows[hit.RowIndex].Selected= true;
                 MouseDown1?.Invoke(this, e);
             }
 
@@ -471,6 +472,22 @@ namespace YektamakDesktop.CustomControls
         {
             base.OnMouseDown(e);
             mouseDown(e);
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                foreach (DataGridViewRow row in Grid.SelectedRows)
+                {
+                    var cell = row.Cells["sec"];
+
+                    bool currentValue = cell.Value as bool? ?? false;
+                    cell.Value = !currentValue;
+                }
+
+                e.SuppressKeyPress = true; // space'in default davranışını engeller
+            }
         }
 
     }

@@ -71,6 +71,7 @@ namespace YektamakDesktop.CustomControls
             dataGridView1.CellPainting += dataGridView1_CellPainting;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             dataGridView1.CurrentCellDirtyStateChanged += dataGridView1_CurrentCellDirtyStateChanged;
+            dataGridView1.KeyDown += dataGridView1_KeyDown;
             dataGridView1.MouseClick += dataGridView1_MouseClick;
             // 
             // columnMenu

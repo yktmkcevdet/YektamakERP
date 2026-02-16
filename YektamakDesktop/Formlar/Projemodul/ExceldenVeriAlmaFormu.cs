@@ -412,6 +412,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 {
                     using (var sw = new StreamWriter(logDosyasi, append: true))
                     {
+                        var json = JsonConvert.SerializeObject(projeStokKart.stokKart);
                         sw.WriteLine($"{Environment.NewLine}{projeStokKart.stokKart.kod} - {projeStokKart.stokKart.ad} - {projeStokKart.stokKart.boyut} {Environment.NewLine} {jsonResult}");
                     }
                 }

@@ -695,29 +695,30 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         private async void roundedButton2_Click(object sender, EventArgs e)
         {
-            OpenFolderDialog openFolderDialog = new OpenFolderDialog();
-            if (openFolderDialog.ShowDialog() == true)
+            try
             {
-                this.Enabled = false;
-                string selectedPath = openFolderDialog.FolderName;
-                var selectedRows = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
-                List<ProjeStokKartDTO> projeStokKartDTOs = selectedRows.Cast<ProjeStokKartDTO>().ToList();
-                if (Directory.Exists(selectedPath))
+                OpenFolderDialog openFolderDialog = new OpenFolderDialog();
+                if (openFolderDialog.ShowDialog() == true)
                 {
-                    var onay = MessageBox.Show("Seçilen klasör içeriğini temizlemek istiyor musunuz?", "Onay", MessageBoxButtons.YesNo);
-                    if (onay == DialogResult.Yes)
-                    {
-                        Directory.Delete(selectedPath, true);
-                    }
+                    this.Enabled = false;
+                    string selectedPath = openFolderDialog.FolderName;
+                    var selectedRows = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
+                    List<ProjeStokKartDTO> projeStokKartDTOs = selectedRows.Cast<ProjeStokKartDTO>().ToList();
+
+                    await _dosyalamaService.CreateOrderFile(projeStokKartDTOs.CastToEntity<ProjeStokKart>(_convertHelper).ToList(), selectedPath);
+                    this.Enabled = true;
+                    MessageBox.Show("Dosyaların aktarımı tamamlandı");
                 }
-                await _dosyalamaService.CreateOrderFile(projeStokKartDTOs.CastToEntity<ProjeStokKart>(_convertHelper).ToList(), selectedPath);
-                this.Enabled = true;
+                else
+                {
+                    MessageBox.Show("Lütfen bir klasör seçin.");
+                    return;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Lütfen bir klasör seçin.");
-                return;
-            }
+                MessageBox.Show(ex.ToString());
+            }                
         }
     }
 }

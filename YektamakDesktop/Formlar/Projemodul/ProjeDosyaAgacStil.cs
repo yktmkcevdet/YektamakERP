@@ -204,11 +204,11 @@ namespace YektamakDesktop.Formlar.Projemodul
                 List<ProjeStokKart> projeStokKarts = selectedRows.Cast<ProjeBom>().Select(s => s.projeStokKart).ToList();
                 if (Directory.Exists(selectedPath))
                 {
-                    var onay = MessageBox.Show("Seçilen klasör içeriğini temizlemek istiyor musunuz?", "Onay", MessageBoxButtons.YesNo);
-                    if (onay == DialogResult.Yes)
-                    {
-                        Directory.Delete(selectedPath, true);
-                    }
+                    //var onay = MessageBox.Show("Seçilen klasör içeriğini temizlemek istiyor musunuz?", "Onay", MessageBoxButtons.YesNo);
+                    //if (onay == DialogResult.Yes)
+                    //{
+                    //    Directory.Delete(selectedPath, true);
+                    //}
                 }
                 await _dosyalamaService.CreateOrderFile(projeStokKarts, selectedPath);
                 this.Enabled = true;
