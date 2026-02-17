@@ -33,7 +33,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IConvertHelper _convertHelper;
         private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
         private readonly IDosyalamaService _dosyalamaService;
-        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper, 
+        public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper,
             ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService)
         {
             _cache = cache;
@@ -60,7 +60,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             universalGrid1.TabIndex = 13;
             Controls.Add(universalGrid1);
             universalGrid1.MouseDown1 += universalGrid1_MouseClick;
-            fcbStokTip.SetDataSource(_cache.stokTips);
             Load += async (s, e) => await form_Load(s, e);
             fcbProjeKod.SelectedIndexChanged += async (s, e) => await fcbProjeKod_SelectedIndexChanged(s, e);
             fcbStokGrup.SelectedIndexChanged += async (s, e) => await fcbStokGrup_SelectedIndexChanged(s, e);
@@ -83,7 +82,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private PdfGoruntuleme _pdfPopup;
         private PdfGoruntuleme pdfPopup
         {
-            get { if (_pdfPopup == null || _pdfPopup.IsDisposed) { _pdfPopup = FormFactory.CreateForm<PdfGoruntuleme>(); } return _pdfPopup; }
+            get { if (_pdfPopup == null || _pdfPopup.IsDisposed) { _pdfPopup = FormFactory.CreateForm<PdfGoruntuleme>(); _pdfPopup.WindowState = FormWindowState.Normal; } return _pdfPopup; }
             set { _pdfPopup = value; }
         }
 
@@ -163,7 +162,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private async Task Binding()
         {
             BindHelper.BindData(fcbProjeKod, projeStokKartFilter.proje, nameof(projeStokKartFilter.proje.Id));
-            BindHelper.BindData(fcbStokTip, projeStokKartFilter.stokKart.stokTip, nameof(projeStokKartFilter.stokKart.stokTip.Id));
             BindHelper.BindData(fcbMalzemeGrup, projeStokKartFilter.stokKart.malzemeGrup, nameof(projeStokKartFilter.stokKart.malzemeGrup.Id));
             BindHelper.BindData(fcbStokGrup, projeStokKartFilter.stokKart.stokGrup, nameof(projeStokKartFilter.stokKart.stokGrup.Id));
             BindHelper.BindData(fcbMalzemeAltGrup, projeStokKartFilter.stokKart.malzemeAltGrup, nameof(projeStokKartFilter.stokKart.malzemeAltGrup.Id));
@@ -181,7 +179,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (projeStokKartFilter.proje.Id == null || projeStokKartFilter.proje.Id == -1) return;
             this.Enabled = false;
 
-            List<ProjeStokKart> projeStokKarts = await _projeService.GetProjeStokKart(projeStokKartFilter);
+            List<ProjeStokKart> projeStokKarts = (await _projeService.GetProjeStokKart(projeStokKartFilter)).Where(p=>p.stokKart.isFromExcel==true).ToList();
             projeStokKartDTOs = projeStokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).ToList();
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
             this.Enabled = true;
@@ -718,7 +716,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }                
+            }
+        }
+
+        private void ProjeDosyalari_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

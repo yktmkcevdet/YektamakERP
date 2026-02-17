@@ -106,6 +106,7 @@
             // tabMain
             // 
             tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabMain.Font = new System.Drawing.Font("Segoe UI", 9F);
             tabMain.Location = new System.Drawing.Point(253, 3);
             tabMain.Name = "tabMain";
             tabMain.SelectedIndex = 0;

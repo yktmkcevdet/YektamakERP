@@ -305,16 +305,16 @@ namespace YektamakDesktop.Formlar
 
             // ❌ butonu
             var closeRect = new Rectangle(
-                rect.Right - 18,
-                rect.Top + 6,
-                12,
-                12
+                rect.Right - 24,
+                rect.Top + 3,
+                24,
+                18
             );
 
             TextRenderer.DrawText(
                 e.Graphics,
-                "x",
-                tabMain.Font,
+                "❌",
+                new Font("Segoe UI", 12F,FontStyle.Bold),
                 closeRect,
                 Color.DarkRed,
                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
