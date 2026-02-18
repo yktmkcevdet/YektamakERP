@@ -42,25 +42,23 @@ namespace YektamakDesktop.Formlar.Projemodul
         private void Initialize()
         {
             UniversalGridHelper.Replace(ref universalGrid1, this);
-            universalGrid1.MouseDown1 += UniversalGrid1_MouseDown1;
+            universalGrid1.Grid.SelectionChanged += UniversalGrid1_SelectionChanged;
             universalGrid1.Grid.RowPrePaint += dataGridView1_RowPrePaint;
             universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, true);
             fcbProjeKod.SetDataSource(_cache.projeList);
         }
 
-        private async void UniversalGrid1_MouseDown1(object sender, MouseEventArgs e)
+        private async void UniversalGrid1_SelectionChanged(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            if (skd.dosyaTipId == 1)
             {
-                skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-                if (skd.dosyaTipId == 1)
-                {
 
-                    pdfPopup.GetInstance(
-                            await _fileService.GetFileDecompress(skd.dosyaFullPath)
-                        );
-                }
+                pdfPopup.GetInstance(
+                        await _fileService.GetFileDecompress(skd.dosyaFullPath)
+                    );
             }
+            else { pdfPopup.GetInstance(null); }
         }
 
         private StokKartDosyaDTO _stokKartDosya;

@@ -19,6 +19,8 @@ namespace Models
         public int? adet { get; set; }
         public double? miktar { get; set; }
         public string hamVeri { get; set; }
+        public string excelKod { get; set; }
+        public string excelAd { get; set; }
         public string pdfFileName() { return stokKart.parcaKod + ".pdf"; }
         public string dxfFileName()
         {

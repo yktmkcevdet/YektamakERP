@@ -236,6 +236,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
                 miktar = excelData.miktar,
                 no = excelData.no.Replace(",",".").Replace(".\r\n",".").Replace("\r\n.","."),
                 hamVeri = JsonConvert.SerializeObject(excelData),
+                excelKod = excelData.kod,
+                excelAd = excelData.parcaAdi,
                 stokKart ={
                     stokTip = _cache.stokTips.FirstOrDefault(s=>s.Id==excelData.stokTip),
                     stokGrup = _cache.stokGrups.FirstOrDefault(s=>s.Id== excelData.stokGrup),

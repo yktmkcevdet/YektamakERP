@@ -15,6 +15,7 @@ using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YektamakDesktop.Common;
 using YektamakDesktop.Formlar.Ortak;
 
 namespace YektamakDesktop.Formlar.Projemodul
@@ -302,13 +303,13 @@ namespace YektamakDesktop.Formlar.Projemodul
                 {
                     var dxfDosya = await _fileService.GetFileDecompress(dosya.dosyaFullPath);
                     dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
-                    BuildSplineCache();
-                    FitToScreen();
+                    DxfDrawHelper.BuildSplineCache(dxfDoc);
+                    DxfDrawHelper.FitToScreen(dxfDoc,panel1);
                 }
             }
             else
             {
-                splineSegments.Clear();
+                //splineSegments.Clear();
             }
         }
         private PdfGoruntuleme _pdfPopup;
@@ -336,76 +337,76 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             return angle >= start && angle <= end;
         }
-        static int FindKnotSpan(double t, List<double> U, int degree, int n)
-        {
-            // U: knot vector, n: last control point index (ctrl.Count - 1)
+        //static int FindKnotSpan(double t, List<double> U, int degree, int n)
+        //{
+        //    // U: knot vector, n: last control point index (ctrl.Count - 1)
 
-            // t en sondaysa span = n
-            if (t >= U[n + 1]) return n;
-            if (t <= U[degree]) return degree;
+        //    // t en sondaysa span = n
+        //    if (t >= U[n + 1]) return n;
+        //    if (t <= U[degree]) return degree;
 
-            int low = degree;
-            int high = n + 1;
-            int mid = (low + high) / 2;
+        //    int low = degree;
+        //    int high = n + 1;
+        //    int mid = (low + high) / 2;
 
-            // U[mid] <= t < U[mid+1] arıyoruz
-            while (t < U[mid] || t >= U[mid + 1])
-            {
-                if (t < U[mid]) high = mid;
-                else low = mid;
-                mid = (low + high) / 2;
-            }
-            return mid;
-        }
-        Vector2 DeBoor(int k, int degree, double t, List<Vector2> ctrl, List<double> knots)
-        {
-            var d = new Vector2[degree + 1];
+        //    // U[mid] <= t < U[mid+1] arıyoruz
+        //    while (t < U[mid] || t >= U[mid + 1])
+        //    {
+        //        if (t < U[mid]) high = mid;
+        //        else low = mid;
+        //        mid = (low + high) / 2;
+        //    }
+        //    return mid;
+        //}
+        //Vector2 DeBoor(int k, int degree, double t, List<Vector2> ctrl, List<double> knots)
+        //{
+        //    var d = new Vector2[degree + 1];
 
-            for (int j = 0; j <= degree; j++)
-                d[j] = ctrl[k - degree + j];
+        //    for (int j = 0; j <= degree; j++)
+        //        d[j] = ctrl[k - degree + j];
 
-            for (int r = 1; r <= degree; r++)
-            {
-                for (int j = degree; j >= r; j--)
-                {
-                    int idx = k - degree + j;
-                    double denom = (knots[idx + degree - r + 1] - knots[idx]);
-                    double alpha = denom == 0 ? 0 : (t - knots[idx]) / denom;
+        //    for (int r = 1; r <= degree; r++)
+        //    {
+        //        for (int j = degree; j >= r; j--)
+        //        {
+        //            int idx = k - degree + j;
+        //            double denom = (knots[idx + degree - r + 1] - knots[idx]);
+        //            double alpha = denom == 0 ? 0 : (t - knots[idx]) / denom;
 
-                    d[j] = (1 - alpha) * d[j - 1] + alpha * d[j];
-                }
-            }
-            return d[degree];
-        }
-        List<PointF> SampleSpline(Spline spline, int segments = 50)
-        {
-            var ctrl = spline.ControlPoints
-                .Select(p => new Vector2((float)p.X, (float)p.Y))
-                .ToList();
+        //            d[j] = (1 - alpha) * d[j - 1] + alpha * d[j];
+        //        }
+        //    }
+        //    return d[degree];
+        //}
+        //List<PointF> SampleSpline(Spline spline, int segments = 50)
+        //{
+        //    var ctrl = spline.ControlPoints
+        //        .Select(p => new Vector2((float)p.X, (float)p.Y))
+        //        .ToList();
 
-            var U = spline.Knots.ToList();
-            int p = spline.Degree;
-            int n = ctrl.Count - 1;
+        //    var U = spline.Knots.ToList();
+        //    int p = spline.Degree;
+        //    int n = ctrl.Count - 1;
 
-            // t aralığı: [U[p], U[n+1]]
-            double t0 = U[p];
-            double t1 = U[n + 1];
+        //    // t aralığı: [U[p], U[n+1]]
+        //    double t0 = U[p];
+        //    double t1 = U[n + 1];
 
-            var pts = new List<PointF>(segments + 1);
+        //    var pts = new List<PointF>(segments + 1);
 
-            for (int i = 0; i <= segments; i++)
-            {
-                double t = (i == segments) ? t1 : (t0 + (t1 - t0) * i / segments);
+        //    for (int i = 0; i <= segments; i++)
+        //    {
+        //        double t = (i == segments) ? t1 : (t0 + (t1 - t0) * i / segments);
 
-                int k = FindKnotSpan(t, U, p, n);   // ✅ doğru aralıkta k
-                var v = DeBoor(k, p, t, ctrl, U);
+        //        int k = FindKnotSpan(t, U, p, n);   // ✅ doğru aralıkta k
+        //        var v = DeBoor(k, p, t, ctrl, U);
 
-                pts.Add(new PointF((float)v.X, (float)v.Y));
-            }
+        //        pts.Add(new PointF((float)v.X, (float)v.Y));
+        //    }
 
-            return pts;
-        }
-        List<List<PointF>> splineSegments = new();
+        //    return pts;
+        //}
+        //List<List<PointF>> splineSegments = new();
         bool isMeasuring = false;
         PointF? measureStart = null;
         PointF? measureEnd = null;
@@ -419,89 +420,89 @@ namespace YektamakDesktop.Formlar.Projemodul
             measureEnd = null;
         }
         List<(PointF A, PointF B)> measurements = new();
-        void BuildSplineCache()
-        {
-            splineSegments.Clear();
+        //void BuildSplineCache()
+        //{
+        //    splineSegments.Clear();
 
-            foreach (var spline in dxfDoc.Entities.Splines)
-            {
-                splineSegments.Add(SampleSpline(spline, 40));
-            }
-        }
+        //    foreach (var spline in dxfDoc.Entities.Splines)
+        //    {
+        //        splineSegments.Add(SampleSpline(spline, 40));
+        //    }
+        //}
         static float scale = 1f;
         PointF pan = new PointF(0, 0);
 
         bool isPanning = false;
         System.Drawing.Point lastMouse;
-        RectangleF GetDxfBounds()
-        {
-            float minX = float.MaxValue;
-            float minY = float.MaxValue;
-            float maxX = float.MinValue;
-            float maxY = float.MinValue;
+        //RectangleF GetDxfBounds()
+        //{
+        //    float minX = float.MaxValue;
+        //    float minY = float.MaxValue;
+        //    float maxX = float.MinValue;
+        //    float maxY = float.MinValue;
 
-            void Include(PointF p)
-            {
-                minX = Math.Min(minX, p.X);
-                minY = Math.Min(minY, p.Y);
-                maxX = Math.Max(maxX, p.X);
-                maxY = Math.Max(maxY, p.Y);
-            }
+        //    void Include(PointF p)
+        //    {
+        //        minX = Math.Min(minX, p.X);
+        //        minY = Math.Min(minY, p.Y);
+        //        maxX = Math.Max(maxX, p.X);
+        //        maxY = Math.Max(maxY, p.Y);
+        //    }
 
-            foreach (var l in dxfDoc.Entities.Lines)
-            {
-                Include(new PointF((float)l.StartPoint.X, (float)l.StartPoint.Y));
-                Include(new PointF((float)l.EndPoint.X, (float)l.EndPoint.Y));
-            }
+        //    foreach (var l in dxfDoc.Entities.Lines)
+        //    {
+        //        Include(new PointF((float)l.StartPoint.X, (float)l.StartPoint.Y));
+        //        Include(new PointF((float)l.EndPoint.X, (float)l.EndPoint.Y));
+        //    }
 
-            foreach (var c in dxfDoc.Entities.Circles)
-            {
-                Include(new PointF((float)(c.Center.X - c.Radius), (float)(c.Center.Y - c.Radius)));
-                Include(new PointF((float)(c.Center.X + c.Radius), (float)(c.Center.Y + c.Radius)));
-            }
+        //    foreach (var c in dxfDoc.Entities.Circles)
+        //    {
+        //        Include(new PointF((float)(c.Center.X - c.Radius), (float)(c.Center.Y - c.Radius)));
+        //        Include(new PointF((float)(c.Center.X + c.Radius), (float)(c.Center.Y + c.Radius)));
+        //    }
 
-            foreach (var arc in dxfDoc.Entities.Arcs)
-            {
-                double start = arc.StartAngle;
-                double end = arc.EndAngle;
-                if (end < start) end += 360;
+        //    foreach (var arc in dxfDoc.Entities.Arcs)
+        //    {
+        //        double start = arc.StartAngle;
+        //        double end = arc.EndAngle;
+        //        if (end < start) end += 360;
 
-                // Start & End noktaları
-                Include(ArcPoint(arc, arc.StartAngle));
-                Include(ArcPoint(arc, arc.EndAngle));
+        //        // Start & End noktaları
+        //        Include(ArcPoint(arc, arc.StartAngle));
+        //        Include(ArcPoint(arc, arc.EndAngle));
 
-                // Kritik açılar
-                double[] criticalAngles = { 0, 90, 180, 270 };
-                foreach (var a in criticalAngles)
-                {
-                    if (AngleInArc(a, start, end))
-                        Include(ArcPoint(arc, a));
-                }
-            }
-            foreach (var pts in splineSegments)
-            {
-                foreach (var p in pts)
-                    Include(p);
-            }
-            return RectangleF.FromLTRB(minX, minY, maxX, maxY);
-        }
-        Polyline2D SplineToPolyline(Spline spline)
-        {
-            return spline.ToPolyline2D(50); // segment sayısı
-        }
-        void FitToScreen()
-        {
-            var bounds = GetDxfBounds();
+        //        // Kritik açılar
+        //        double[] criticalAngles = { 0, 90, 180, 270 };
+        //        foreach (var a in criticalAngles)
+        //        {
+        //            if (AngleInArc(a, start, end))
+        //                Include(ArcPoint(arc, a));
+        //        }
+        //    }
+        //    foreach (var pts in splineSegments)
+        //    {
+        //        foreach (var p in pts)
+        //            Include(p);
+        //    }
+        //    return RectangleF.FromLTRB(minX, minY, maxX, maxY);
+        //}
+        //Polyline2D SplineToPolyline(Spline spline)
+        //{
+        //    return spline.ToPolyline2D(50); // segment sayısı
+        //}
+        //void FitToScreen()
+        //{
+        //    var bounds = GetDxfBounds();
 
-            float scaleX = panel1.Width / bounds.Width;
-            float scaleY = panel1.Height / bounds.Height;
-            scale = Math.Min(scaleX, scaleY) * 0.9f;
+        //    float scaleX = panel1.Width / bounds.Width;
+        //    float scaleY = panel1.Height / bounds.Height;
+        //    scale = Math.Min(scaleX, scaleY) * 0.9f;
 
-            pan.X = panel1.Width / 2f - (bounds.Left + bounds.Width / 2f) * scale;
-            pan.Y = panel1.Height / 2f + (bounds.Top + bounds.Height / 2f) * scale;
+        //    pan.X = panel1.Width / 2f - (bounds.Left + bounds.Width / 2f) * scale;
+        //    pan.Y = panel1.Height / 2f + (bounds.Top + bounds.Height / 2f) * scale;
 
-            panel1.Invalidate();
-        }
+        //    panel1.Invalidate();
+        //}
         PointF ToScreen(double x, double y)
         {
             return new PointF(
@@ -511,19 +512,19 @@ namespace YektamakDesktop.Formlar.Projemodul
         }
         List<PointF[]> splineScreenCache = new();
 
-        void RebuildScreenCache()
-        {
-            splineScreenCache.Clear();
+        //void RebuildScreenCache()
+        //{
+        //    splineScreenCache.Clear();
 
-            foreach (var pts in splineSegments)
-            {
-                var arr = new PointF[pts.Count];
-                for (int i = 0; i < pts.Count; i++)
-                    arr[i] = ToScreen(pts[i].X, pts[i].Y);
+        //    foreach (var pts in splineSegments)
+        //    {
+        //        var arr = new PointF[pts.Count];
+        //        for (int i = 0; i < pts.Count; i++)
+        //            arr[i] = ToScreen(pts[i].X, pts[i].Y);
 
-                splineScreenCache.Add(arr);
-            }
-        }
+        //        splineScreenCache.Add(arr);
+        //    }
+        //}
         PointF ScreenToWorld(System.Drawing.Point p)
         {
             return new PointF(
@@ -537,7 +538,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             if (dxfDoc == null) return;
             if (isMeasuring)
             {
-                DrawSnap(e.Graphics);
+                DxfDrawHelper.DrawSnap(e.Graphics);
                 return;
             }
             var g = e.Graphics;
@@ -545,8 +546,8 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             foreach (var line in dxfDoc.Entities.Lines)
             {
-                var p1 = ToScreen(line.StartPoint.X, line.StartPoint.Y);
-                var p2 = ToScreen(line.EndPoint.X, line.EndPoint.Y);
+                var p1 = DxfDrawHelper.ToScreen(line.StartPoint.X, line.StartPoint.Y);
+                var p2 = DxfDrawHelper.ToScreen(line.EndPoint.X, line.EndPoint.Y);
                 g.DrawLine(Pens.Black, p1, p2);
                 if (line == selectedLine)
                     g.DrawLine(Pens.Red, p1, p2);
@@ -556,7 +557,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             foreach (var circle in dxfDoc.Entities.Circles)
             {
-                var c = ToScreen(circle.Center.X, circle.Center.Y);
+                var c = DxfDrawHelper.ToScreen(circle.Center.X, circle.Center.Y);
                 float r = (float)(circle.Radius * scale);
 
                 g.DrawEllipse(Pens.Black, c.X - r, c.Y - r, r * 2, r * 2);
@@ -564,7 +565,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             foreach (var arc in dxfDoc.Entities.Arcs)
             {
-                var c = ToScreen(arc.Center.X, arc.Center.Y);
+                var c = DxfDrawHelper.ToScreen(arc.Center.X, arc.Center.Y);
                 float r = (float)(arc.Radius * scale);
 
                 // DXF CCW: start -> end
@@ -583,15 +584,15 @@ namespace YektamakDesktop.Formlar.Projemodul
                 g.DrawArc(Pens.Black, c.X - r, c.Y - r, r * 2, r * 2, start, sweep);
             }
 
-            RebuildScreenCache();
+            DxfDrawHelper.RebuildScreenCache();
             foreach (var arr in splineScreenCache)
                 g.DrawLines(Pens.Black, arr);
 
             foreach (var m in measurements)
-                DrawMeasurement(g, m.A, m.B);
+                DxfDrawHelper.DrawMeasurement(g, m.A, m.B);
 
             if (measureStart != null && measureEnd != null)
-                DrawMeasurement(g, measureStart.Value, measureEnd.Value);
+                DxfDrawHelper.DrawMeasurement(g, measureStart.Value, measureEnd.Value);
 
             //foreach (var seg in splineCache)
             //{
@@ -608,8 +609,8 @@ namespace YektamakDesktop.Formlar.Projemodul
 
                 for (int i = 0; i < verts.Count - 1; i++)
                 {
-                    var p1 = ToScreen(verts[i].Position.X, verts[i].Position.Y);
-                    var p2 = ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
+                    var p1 = DxfDrawHelper.ToScreen(verts[i].Position.X, verts[i].Position.Y);
+                    var p2 = DxfDrawHelper.ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
                     g.DrawLine(Pens.Black, p1, p2);
                 }
             }
@@ -753,10 +754,10 @@ namespace YektamakDesktop.Formlar.Projemodul
             }
             if (!isMeasuring) return;
 
-            PointF world = ScreenToWorld(e.Location);
+            PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
 
             // Snap varsa burası snap’ten dönen nokta olur
-            PointF p = GetSnapPoint(world) ?? world;
+            PointF p = DxfDrawHelper.GetSnapPoint(world,dxfDoc) ?? world;
 
             if (measureStart == null)
             {
@@ -774,20 +775,20 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             panel1.Invalidate();
         }
-        PointF? GetSnapPoint(PointF mouseWorld)
-        {
-            float tol = 5f / scale;
+        //PointF? GetSnapPoint(PointF mouseWorld)
+        //{
+        //    float tol = 5f / scale;
 
-            foreach (var line in dxfDoc.Entities.Lines)
-            {
-                var p1 = new PointF((float)line.StartPoint.X, (float)line.StartPoint.Y);
-                var p2 = new PointF((float)line.EndPoint.X, (float)line.EndPoint.Y);
+        //    foreach (var line in dxfDoc.Entities.Lines)
+        //    {
+        //        var p1 = new PointF((float)line.StartPoint.X, (float)line.StartPoint.Y);
+        //        var p2 = new PointF((float)line.EndPoint.X, (float)line.EndPoint.Y);
 
-                if (Distance(mouseWorld, p1) < tol) return p1;
-                if (Distance(mouseWorld, p2) < tol) return p2;
-            }
-            return null;
-        }
+        //        if (Distance(mouseWorld, p1) < tol) return p1;
+        //        if (Distance(mouseWorld, p2) < tol) return p2;
+        //    }
+        //    return null;
+        //}
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isPanning)
@@ -799,8 +800,8 @@ namespace YektamakDesktop.Formlar.Projemodul
             }
             if (!isMeasuring) return;
 
-            PointF world = ScreenToWorld(e.Location);
-            measureEnd = GetSnapPoint(world) ?? world;
+            PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
+            measureEnd = DxfDrawHelper.GetSnapPoint(world,dxfDoc) ?? world;
 
             panel1.Invalidate();
             if (!isMeasuring) return;
@@ -837,24 +838,24 @@ namespace YektamakDesktop.Formlar.Projemodul
                     break;
             }
         }
-        void DrawMeasurement(Graphics g, PointF a, PointF b)
-        {
-            var sa = ToScreen(a.X, a.Y);
-            var sb = ToScreen(b.X, b.Y);
+        //void DrawMeasurement(Graphics g, PointF a, PointF b)
+        //{
+        //    var sa = ToScreen(a.X, a.Y);
+        //    var sb = ToScreen(b.X, b.Y);
 
-            using var pen = new Pen(Color.Blue, 1) { DashStyle = DashStyle.Dash };
-            g.DrawLine(pen, sa, sb);
+        //    using var pen = new Pen(Color.Blue, 1) { DashStyle = DashStyle.Dash };
+        //    g.DrawLine(pen, sa, sb);
 
-            float dist = Distance(a, b);
+        //    float dist = Distance(a, b);
 
-            // orta nokta
-            var mid = new PointF((sa.X + sb.X) / 2, (sa.Y + sb.Y) / 2);
+        //    // orta nokta
+        //    var mid = new PointF((sa.X + sb.X) / 2, (sa.Y + sb.Y) / 2);
 
-            string text = $"{dist:0.##}";
+        //    string text = $"{dist:0.##}";
 
-            g.FillRectangle(Brushes.White, mid.X - 20, mid.Y - 10, 40, 20);
-            g.DrawString(text, SystemFonts.DefaultFont, Brushes.Blue, mid);
-        }
+        //    g.FillRectangle(Brushes.White, mid.X - 20, mid.Y - 10, 40, 20);
+        //    g.DrawString(text, SystemFonts.DefaultFont, Brushes.Blue, mid);
+        //}
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape && isMeasuring)
@@ -875,15 +876,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         {
             isPanning = false;
         }
-        private void pictureBox1_Paint()
-        {
-
-
-            using (var g = panel1.CreateGraphics())
-            {
-
-            }
-        }
+        
         float pickTolerance = 5f / scale; // ekranda ~5px
 
         Line selectedLine = null;
@@ -897,7 +890,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                 PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
                 PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
 
-                float d = DistancePointToSegment(mouseWorld, a, b);
+                float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, a, b);
 
                 if (d < pickTolerance && d < minDist)
                 {
@@ -905,20 +898,20 @@ namespace YektamakDesktop.Formlar.Projemodul
                     selectedLine = line;
                 }
             }
-            for (int s = 0; s < splineSegments.Count; s++)
-            {
-                var pts = splineSegments[s];
+            //for (int s = 0; s < splineSegments.Count; s++)
+            //{
+            //    var pts = splineSegments[s];
 
-                for (int i = 0; i < pts.Count - 1; i++)
-                {
-                    float d = DistancePointToSegment(mouseWorld, pts[i], pts[i + 1]);
-                    if (d < pickTolerance && d < minDist)
-                    {
-                        minDist = d;
-                        selectedSpline = dxfDoc.Entities.Splines.ToList()[s];
-                    }
-                }
-            }
+            //    for (int i = 0; i < pts.Count - 1; i++)
+            //    {
+            //        float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, pts[i], pts[i + 1]);
+            //        if (d < pickTolerance && d < minDist)
+            //        {
+            //            minDist = d;
+            //            selectedSpline = dxfDoc.Entities.Splines.ToList()[s];
+            //        }
+            //    }
+            //}
             panel1.Invalidate();
         }
 
