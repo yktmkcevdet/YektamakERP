@@ -61,6 +61,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Stok Kart Dosyaları")] public List<StokKartDosya> stokKartdosyaList { get; set; }
         [GridDisplay(Header = "Talaşlı?")] public bool? stokKartisTalasli { get; set; }
         [GridDisplay(Header = "Büküm?")] public bool? stokKartisBukum { get; set; }
+        [GridDisplay(Header = "Excelden Kaydedildi?")] public bool? stokKartisFromExcel { get; set; }
     }
 
 }

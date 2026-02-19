@@ -5,16 +5,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using YektamakDesktop.Formlar.Projemodul;
 
 namespace YektamakDesktop.Common
 {
     public static class DxfDrawHelper
     {
-        private static List<List<PointF>> splineSegments = new();
+        public static List<List<PointF>> splineSegments { get; set; } = new();
         public static void BuildSplineCache(DxfDocument dxfDoc)
         {
             splineSegments.Clear();
@@ -94,8 +91,9 @@ namespace YektamakDesktop.Common
             return d[degree];
         }
 
-        static float scale = 1f;
-        static PointF pan = new PointF(0, 0);
+        public static float pickTolerance = 5f / scale; // ekranda ~5px
+        public static float scale = 1f;
+        public static PointF pan = new PointF(0, 0);
         public static void FitToScreen(DxfDocument dxfDoc, Panel panel1)
         {
             var bounds = GetDxfBounds(dxfDoc);
@@ -180,7 +178,7 @@ namespace YektamakDesktop.Common
             );
         }
 
-        static List<PointF[]> splineScreenCache = new();
+        public static List<PointF[]> splineScreenCache = new();
         public static void RebuildScreenCache()
         {
             splineScreenCache.Clear();
@@ -228,7 +226,7 @@ namespace YektamakDesktop.Common
             float dy = p1.Y - p2.Y;
             return (float)Math.Sqrt(dx * dx + dy * dy);
         }
-        static PointF? activeSnapPoint = null;
+        public static PointF? activeSnapPoint = null;
         static SnapType activeSnapType = SnapType.None;
         public static void DrawSnap(Graphics g)
         {
@@ -287,6 +285,384 @@ namespace YektamakDesktop.Common
             PointF proj = new PointF(a.X + t * dx, a.Y + t * dy);
             return Distance(p, proj);
         }
-        
+
+
+        public static bool isMeasuring = false;
+        public static PointF? measureStart = null;
+        public static PointF? measureEnd = null;
+        static float SnapToleranceWorld => 6f / scale;
+        public static void StartMeasure()
+        {
+            isMeasuring = true;
+            measureStart = null;
+            measureEnd = null;
+        }
+        public static void CancelMeasure()
+        {
+            isMeasuring = false;
+            measureStart = null;
+            measureEnd = null;
+            //panel1.Invalidate();
+        }
+        public static List<(PointF A, PointF B)> measurements = new();
+
+
+
+        public static bool isPanning = false;
+        public static System.Drawing.Point lastMouse;
+        enum SnapType
+        {
+            None,
+            EndPoint,
+            MidPoint,
+            Center,
+            Intersection
+        }
+        public static void UpdateSnap(PointF mouseWorld,DxfDocument dxfDoc)
+        {
+            activeSnapPoint = null;
+            activeSnapType = SnapType.None;
+
+            CheckMidpointSnap(mouseWorld,dxfDoc);
+            if (activeSnapPoint != null) return;
+
+            CheckCenterSnap(mouseWorld, dxfDoc);
+            if (activeSnapPoint != null) return;
+
+            CheckIntersectionSnap(mouseWorld, dxfDoc);
+        }
+        static void CheckMidpointSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        {
+            foreach (var line in dxfDoc.Entities.Lines)
+            {
+                PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
+                PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
+
+                PointF mid = new((a.X + b.X) / 2, (a.Y + b.Y) / 2);
+
+                if (Distance(mouseWorld, mid) < SnapToleranceWorld)
+                {
+                    activeSnapPoint = mid;
+                    activeSnapType = SnapType.MidPoint;
+                    return;
+                }
+            }
+        }
+        static void CheckCenterSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        {
+            foreach (var c in dxfDoc.Entities.Circles)
+            {
+                PointF center = new((float)c.Center.X, (float)c.Center.Y);
+
+                if (Distance(mouseWorld, center) < SnapToleranceWorld)
+                {
+                    activeSnapPoint = center;
+                    activeSnapType = SnapType.Center;
+                    return;
+                }
+            }
+
+            foreach (var a in dxfDoc.Entities.Arcs)
+            {
+                PointF center = new((float)a.Center.X, (float)a.Center.Y);
+
+                if (Distance(mouseWorld, center) < SnapToleranceWorld)
+                {
+                    activeSnapPoint = center;
+                    activeSnapType = SnapType.Center;
+                    return;
+                }
+            }
+        }
+        static void CheckIntersectionSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        {
+            var lines = dxfDoc.Entities.Lines.ToList();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                for (int j = i + 1; j < lines.Count; j++)
+                {
+                    PointF a1 = new((float)lines[i].StartPoint.X, (float)lines[i].StartPoint.Y);
+                    PointF a2 = new((float)lines[i].EndPoint.X, (float)lines[i].EndPoint.Y);
+                    PointF b1 = new((float)lines[j].StartPoint.X, (float)lines[j].StartPoint.Y);
+                    PointF b2 = new((float)lines[j].EndPoint.X, (float)lines[j].EndPoint.Y);
+
+                    if (!TryLineIntersection(a1, a2, b1, b2, out var ip))
+                        continue;
+
+                    if (Distance(mouseWorld, ip) < SnapToleranceWorld)
+                    {
+                        activeSnapPoint = ip;
+                        activeSnapType = SnapType.Intersection;
+                        return;
+                    }
+                }
+            }
+        }
+        static bool TryLineIntersection(PointF a1, PointF a2, PointF b1, PointF b2, out PointF p)
+        {
+            p = default;
+
+            float d = (a1.X - a2.X) * (b1.Y - b2.Y) -
+                      (a1.Y - a2.Y) * (b1.X - b2.X);
+
+            if (Math.Abs(d) < 0.0001f) return false;
+
+            float xi = ((b1.X - b2.X) * (a1.X * a2.Y - a1.Y * a2.X) -
+                        (a1.X - a2.X) * (b1.X * b2.Y - b1.Y * b2.X)) / d;
+
+            float yi = ((b1.Y - b2.Y) * (a1.X * a2.Y - a1.Y * a2.X) -
+                        (a1.Y - a2.Y) * (b1.X * b2.Y - b1.Y * b2.X)) / d;
+
+            p = new PointF(xi, yi);
+            return true;
+        }
+        public static void DrawBlock(Graphics g, Insert ins)
+        {
+            foreach (var entity in ins.Block.Entities)
+            {
+                if (entity is netDxf.Entities.Line line)
+                {
+                    // local block koordinatı
+                    var p1 = TransformPoint(line.StartPoint, ins);
+                    var p2 = TransformPoint(line.EndPoint, ins);
+
+                    var s1 = ToScreen(p1.X, p1.Y);
+                    var s2 = ToScreen(p2.X, p2.Y);
+
+                    using var pen = new Pen(Color.Blue, 1);
+                    g.DrawLine(pen, s1, s2);
+                }
+
+                if (entity is netDxf.Entities.Circle c)
+                {
+                    var center = TransformPoint(c.Center, ins);
+                    var sc = ToScreen(center.X, center.Y);
+
+                    float r = (float)(c.Radius * scale * ins.Scale.X);
+
+                    using var pen = new Pen(Color.Blue, 1);
+                    g.DrawEllipse(pen, sc.X - r, sc.Y - r, r * 2, r * 2);
+                }
+            }
+        }
+        static PointF TransformPoint(netDxf.Vector3 p, Insert ins)
+        {
+            double x = p.X * ins.Scale.X;
+            double y = p.Y * ins.Scale.Y;
+
+            // rotation varsa
+            double angle = ins.Rotation * Math.PI / 180.0;
+
+            double xr = x * Math.Cos(angle) - y * Math.Sin(angle);
+            double yr = x * Math.Sin(angle) + y * Math.Cos(angle);
+
+            return new PointF(
+                (float)(xr + ins.Position.X),
+                (float)(yr + ins.Position.Y)
+            );
+        }
+        public static void DrawEntity(Graphics g, EntityObject e)
+        {
+            switch (e)
+            {
+                case Line line:
+                    DrawLine(g, line);
+                    break;
+
+                case Circle circle:
+                    DrawCircle(g, circle);
+                    break;
+
+                case Arc arc:
+                    DrawArc(g, arc);
+                    break;
+
+                //case Spline spline:
+                //    DrawSpline(g, spline);
+                //    break;
+
+                case Insert insert:
+                    DrawInsert(g, insert);
+                    break;
+            }
+        }
+        static void DrawLine(Graphics g, Line line)
+        {
+            var p1 = ToScreen(line.StartPoint.X, line.StartPoint.Y);
+            var p2 = ToScreen(line.EndPoint.X, line.EndPoint.Y);
+            Color color = line.Color.IsByLayer
+                        ? GetLayerColor(line.Layer)
+                        : AciToColor(line.Color);
+            double width = line.Thickness;
+            using var pen = new Pen(color,1);
+            g.DrawLine(pen, p1, p2);
+                //if (line == selectedLine)
+                //    g.DrawLine(Pens.Red, p1, p2);
+                //else
+                //    g.DrawLine(Pens.Black, p1, p2);
+        }
+        static void DrawArc(Graphics g, Arc arc)
+        {
+            var c = DxfDrawHelper.ToScreen(arc.Center.X, arc.Center.Y);
+            float r = (float)(arc.Radius * DxfDrawHelper.scale);
+
+            // DXF CCW: start -> end
+            float a0 = (float)arc.StartAngle;
+            float a1 = (float)arc.EndAngle;
+
+            // CCW sweep'i [0,360) aralığına al
+            float ccw = a1 - a0;
+            if (ccw < 0) ccw += 360f;
+
+            // Ekranda Y aşağı olduğu için yön tersine döner:
+            // start'ı negate et, sweep'i de negate et (CW çizsin)
+            float start = -a0;
+            float sweep = -ccw;
+
+            Color color = arc.Color.IsByLayer
+                        ? GetLayerColor(arc.Layer)
+                        : AciToColor(arc.Color);
+            double width = arc.Thickness;
+            using var pen = new Pen(color, (float)width);
+            g.DrawArc(pen, c.X - r, c.Y - r, r * 2, r * 2, start, sweep);
+        }
+        static void DrawSpline(Graphics g, Spline spline)
+        {
+            var pts = SampleSpline(spline, 60); // 60 segment yeterince pürüzsüz
+
+            if (pts.Count < 2)
+                return;
+
+            Color color = spline.Color.IsByLayer
+                ? GetLayerColor(spline.Layer)
+                : AciToColor(AciColor.Red);
+            using var pen = new Pen(color, 1);
+
+            for (int i = 0; i < pts.Count - 1; i++)
+            {
+                var s1 = ToScreen(pts[i].X, pts[i].Y);
+                var s2 = ToScreen(pts[i + 1].X, pts[i + 1].Y);
+
+                g.DrawLine(pen, s1, s2);
+            }
+        }
+        static void DrawCircle(Graphics g, Circle circle)
+        {
+            var c = DxfDrawHelper.ToScreen(circle.Center.X, circle.Center.Y);
+            float r = (float)(circle.Radius * DxfDrawHelper.scale);
+
+            Color color = circle.Color.IsByLayer
+                        ? GetLayerColor(circle.Layer)
+                        : AciToColor(circle.Color);
+            double width = circle.Thickness;
+            using var pen = new Pen(color, (float)width);
+            g.DrawEllipse(pen, c.X - r, c.Y - r, r * 2, r * 2);
+        }
+        static void DrawInsert(Graphics g, Insert ins)
+        {
+            foreach (var entity in ins.Block.Entities)
+            {
+                DrawEntityTransformed(g, entity, ins);
+            }
+        }
+        static void DrawEntityTransformed(Graphics g, EntityObject e, Insert ins)
+        {
+            switch (e)
+            {
+                case Line line:
+                    var p1 = TransformPoint(line.StartPoint, ins);
+                    var p2 = TransformPoint(line.EndPoint, ins);
+                    Color color = line.Color.IsByLayer
+                        ? GetLayerColor(line.Layer)
+                        : AciToColor(line.Color);
+                    double width = line.Thickness;
+                    DrawWorldLine(g, p1, p2,color,width);
+                    break;
+
+                case Circle c:
+                    var center = TransformPoint(c.Center, ins);
+                    float r = (float)(c.Radius * ins.Scale.X);
+                    Color ccolor = c.Color.IsByLayer
+                        ? GetLayerColor(c.Layer)
+                        : AciToColor(c.Color);
+                    double cwidth = c.Thickness;
+                    DrawWorldCircle(g, center, r,ccolor, cwidth);
+                    break;
+
+                case Insert nested:
+                    // block içinde block
+                    var nestedInsert = CombineInsert(ins, nested);
+                    DrawInsert(g, nestedInsert);
+                    break;
+            }
+        }
+        static void DrawWorldLine(Graphics g, PointF a, PointF b, Color color, double width)
+        {
+
+            var s1 = ToScreen(a.X, a.Y);
+            var s2 = ToScreen(b.X, b.Y);
+            using var pen = new Pen(Color.Red, (float)width);
+            g.DrawLine(pen, s1, s2);
+        }
+
+        static void DrawWorldCircle(Graphics g, PointF center, float radius,Color color , double width)
+        {
+            var sc = ToScreen(center.X, center.Y);
+            float r = radius * scale;
+            using var pen = new Pen(color, (float)width);
+            g.DrawEllipse(pen, sc.X - r, sc.Y - r, r * 2, r * 2);
+        }
+        static Insert CombineInsert(Insert parent, Insert child)
+        {
+            var combined = (Insert)child.Clone();
+
+            combined.Position = new Vector3(
+                parent.Position.X + child.Position.X,
+                parent.Position.Y + child.Position.Y,
+                0);
+
+            combined.Scale = new Vector3(
+                parent.Scale.X * child.Scale.X,
+                parent.Scale.Y * child.Scale.Y,
+                1);
+
+            combined.Rotation = parent.Rotation + child.Rotation;
+
+            return combined;
+        }
+        static Color AciToColor(AciColor aci)
+        {
+            if (aci == null)
+                return Color.Black;
+
+            // TrueColor varsa onu kullan
+            if (aci.UseTrueColor)
+                return Color.FromArgb(aci.R, aci.G, aci.B);
+
+            return aci.Index switch
+            {
+                1 => Color.Red,
+                2 => Color.Yellow,
+                3 => Color.Green,
+                4 => Color.Cyan,
+                5 => Color.Blue,
+                6 => Color.Magenta,
+                //7 => Color.White,
+                _ => Color.Black
+            };
+        }
+        static Color GetLayerColor(netDxf.Tables.Layer layer)
+        {
+            if (layer == null)
+                return Color.Black;
+
+            var aci = layer.Color;
+
+            if (aci.UseTrueColor)
+                return Color.FromArgb(aci.R, aci.G, aci.B);
+
+            return AciToColor(aci);
+        }
     }
 }

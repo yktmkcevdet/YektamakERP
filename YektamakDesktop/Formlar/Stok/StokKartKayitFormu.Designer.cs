@@ -665,7 +665,6 @@ namespace YektamakDesktop.Formlar.Stok
             checkBoxIsFromExcel.Size = new Size(15, 14);
             checkBoxIsFromExcel.TabIndex = 72;
             checkBoxIsFromExcel.UseVisualStyleBackColor = true;
-            checkBoxIsFromExcel.Visible = false;
             // 
             // checkBoxIsStep
             // 

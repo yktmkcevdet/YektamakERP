@@ -480,7 +480,7 @@ namespace YektamakDesktop.Formlar.Stok
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                stokKartDosya.dosya = File.ReadAllBytes(openFileDialog.FileName);
+                dosyaVeri = File.ReadAllBytes(openFileDialog.FileName);
                 stokKartDosya.dosyaAd = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 stokKartDosya.dosyaUzanti = Path.GetExtension(openFileDialog.FileName).Replace(".", "");
                 stokKartDosya.isActive = true;
