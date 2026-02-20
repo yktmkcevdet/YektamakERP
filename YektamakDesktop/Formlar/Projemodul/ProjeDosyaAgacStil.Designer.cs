@@ -40,6 +40,7 @@
             button2 = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             tabPage2 = new System.Windows.Forms.TabPage();
+            label = new System.Windows.Forms.Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -67,7 +68,7 @@
             treeView1.Size = new System.Drawing.Size(306, 607);
             treeView1.TabIndex = 1;
             treeView1.AfterCheck += treeView1_AfterCheck;
-            treeView1.NodeMouseClick += treeView1_NodeMouseClick;
+            
             // 
             // fcbProjeKod
             // 
@@ -175,6 +176,13 @@
             panel1.MouseDown += panel1_MouseDown;
             panel1.MouseMove += panel1_MouseMove;
             panel1.MouseUp += panel1_MouseUp;
+            //
+            // label
+            //
+            label.Font = new System.Drawing.Font("Microsoft Sans Serif", 16, System.Drawing.FontStyle.Bold);
+            label.ForeColor = System.Drawing.Color.Red;
+            label.Width = 500;
+            panel1.Controls.Add(label);
             // 
             // tabControl1
             // 
@@ -268,5 +276,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label;
+        
     }
 }

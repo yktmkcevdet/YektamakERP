@@ -2,10 +2,14 @@
 using ApiService.Interfaces;
 using Models;
 using Models.DTO;
+using netDxf;
+using netDxf.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Implementations;
@@ -58,7 +62,26 @@ namespace YektamakDesktop.Formlar.Projemodul
                         await _fileService.GetFileDecompress(skd.dosyaFullPath)
                     );
             }
+            else if (skd.dosyaTipId == 2)
+            {
+                var dxfDosya = await _fileService.GetFileDecompress(skd.dosyaFullPath);
+                if (dxfDosya != null)
+                {
+                    label.Text = "";
+                    DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
+                    DxfDrawHelper.BuildSplineCache();
+                    DxfDrawHelper.FitToScreen(panel1);
+                }
+                else
+                {
+                    label.Text = "DXF dosyası bulunamadı";
+                    DxfDrawHelper.dxfDoc = null;
+                    panel1.Invalidate();
+                }
+            }
             else { pdfPopup.GetInstance(null); }
+            
+                            
         }
 
         private StokKartDosyaDTO _stokKartDosya;
@@ -140,6 +163,46 @@ namespace YektamakDesktop.Formlar.Projemodul
 
             row.DefaultCellStyle.BackColor =
                 isActive ? Color.LightGreen : Color.LightGray;
+        }
+        Circle selected;
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            if (DxfDrawHelper.dxfDoc == null) return;
+            if (DxfDrawHelper.isMeasuring)
+            {
+                DxfDrawHelper.DrawSnap(e.Graphics);
+                return;
+            }
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            foreach (var ent in DxfDrawHelper.dxfDoc.Entities.All)
+            {
+                DxfDrawHelper.DrawEntity(g, ent);
+                if (ent.Type == EntityType.Line) continue;
+                if (ent.Type == EntityType.Circle) continue;
+                if (ent.Type == EntityType.Arc) continue;
+                if (ent.Type == EntityType.Spline) continue;
+                if (ent.Type == EntityType.Insert) continue;
+                label.Text = $"{ent.Type.ToString()} çizilemedi";
+            }
+
+            DxfDrawHelper.RebuildScreenCache();
+            foreach (var spl in DxfDrawHelper.splineScreenCache)
+            {
+                using var pen = new Pen(spl.color);
+                g.DrawLines(pen, spl.arr);
+            }
+
+            foreach (var m in DxfDrawHelper.measurements)
+                DxfDrawHelper.DrawMeasurement(g, m.A, m.B);
+
+            if (DxfDrawHelper.measureStart != null && DxfDrawHelper.measureEnd != null)
+                DxfDrawHelper.DrawMeasurement(g, DxfDrawHelper.measureStart.Value, DxfDrawHelper.measureEnd.Value);
+            if (selected != null)
+            {
+                DxfDrawHelper.DrawPlusMarkup(g, selected);
+            }
         }
 
         private PdfGoruntuleme pdfPopup

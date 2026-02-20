@@ -1,4 +1,7 @@
-﻿using netDxf;
+﻿using Models;
+using netDxf;
+using netDxf.Blocks;
+using netDxf.Collections;
 using netDxf.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,17 +14,27 @@ namespace YektamakDesktop.Common
 {
     public static class DxfDrawHelper
     {
-        public static List<List<PointF>> splineSegments { get; set; } = new();
-        public static void BuildSplineCache(DxfDocument dxfDoc)
+        public static DxfDocument dxfDoc;
+        public class Spl
+        {
+            public List<PointF> points { get; set; }
+            public Color color { get; set; }
+        }
+
+        public static List<Spl> splineSegments { get; set; } = new();
+        public static void BuildSplineCache()
         {
             splineSegments.Clear();
 
             foreach (var spline in dxfDoc.Entities.Splines)
             {
-                splineSegments.Add(SampleSpline(spline, 40));
+                Spl spline1 = new Spl();
+                spline1.points = SampleSpline(spline);
+                spline1.color = ResolveColor(spline);
+                splineSegments.Add(spline1);
             }
         }
-        private static List<PointF> SampleSpline(Spline spline, int segments = 50)
+        private static List<PointF> SampleSpline(Spline spline, int segments = 60)
         {
             var ctrl = spline.ControlPoints
                 .Select(p => new Vector2((float)p.X, (float)p.Y))
@@ -94,9 +107,9 @@ namespace YektamakDesktop.Common
         public static float pickTolerance = 5f / scale; // ekranda ~5px
         public static float scale = 1f;
         public static PointF pan = new PointF(0, 0);
-        public static void FitToScreen(DxfDocument dxfDoc, Panel panel1)
+        public static void FitToScreen(Panel panel1)
         {
-            var bounds = GetDxfBounds(dxfDoc);
+            var bounds = GetDxfBounds();
 
             float scaleX = panel1.Width / bounds.Width;
             float scaleY = panel1.Height / bounds.Height;
@@ -107,7 +120,7 @@ namespace YektamakDesktop.Common
 
             panel1.Invalidate();
         }
-        static RectangleF GetDxfBounds(DxfDocument dxfDoc)
+        static RectangleF GetDxfBounds()
         {
             float minX = float.MaxValue;
             float minY = float.MaxValue;
@@ -152,9 +165,9 @@ namespace YektamakDesktop.Common
                         Include(ArcPoint(arc, a));
                 }
             }
-            foreach (var pts in splineSegments)
+            foreach (var spl in splineSegments)
             {
-                foreach (var p in pts)
+                foreach (var p in spl.points)
                     Include(p);
             }
             return RectangleF.FromLTRB(minX, minY, maxX, maxY);
@@ -177,19 +190,25 @@ namespace YektamakDesktop.Common
                 (float)(arc.Center.Y + arc.Radius * Math.Sin(rad))
             );
         }
-
-        public static List<PointF[]> splineScreenCache = new();
+        public class SpCache
+        {
+            public PointF[] arr { get; set; }
+            public Color color { get; set; }
+        }
+        public static List<SpCache> splineScreenCache { get; set; } = new();
         public static void RebuildScreenCache()
         {
             splineScreenCache.Clear();
 
-            foreach (var pts in splineSegments)
+            foreach (var spl in splineSegments)
             {
-                var arr = new PointF[pts.Count];
-                for (int i = 0; i < pts.Count; i++)
-                    arr[i] = ToScreen(pts[i].X, pts[i].Y);
-
-                splineScreenCache.Add(arr);
+                var arr = new PointF[spl.points.Count];
+                for (int i = 0; i < spl.points.Count; i++)
+                    arr[i] = ToScreen(spl.points[i].X, spl.points[i].Y);
+                SpCache spCache = new SpCache();
+                spCache.arr = arr;
+                spCache.color = spl.color;
+                splineScreenCache.Add(spCache);
             }
         }
         public static PointF ToScreen(double x, double y)
@@ -206,7 +225,7 @@ namespace YektamakDesktop.Common
                 -(p.Y - pan.Y) / scale
             );
         }
-        public static PointF? GetSnapPoint(PointF mouseWorld, DxfDocument dxfDoc)
+        public static PointF? GetSnapPoint(PointF mouseWorld)
         {
             float tol = 5f / scale;
 
@@ -297,12 +316,12 @@ namespace YektamakDesktop.Common
             measureStart = null;
             measureEnd = null;
         }
-        public static void CancelMeasure()
+        public static void CancelMeasure(Panel panel)
         {
             isMeasuring = false;
             measureStart = null;
             measureEnd = null;
-            //panel1.Invalidate();
+            panel.Invalidate();
         }
         public static List<(PointF A, PointF B)> measurements = new();
 
@@ -318,20 +337,20 @@ namespace YektamakDesktop.Common
             Center,
             Intersection
         }
-        public static void UpdateSnap(PointF mouseWorld,DxfDocument dxfDoc)
+        public static void UpdateSnap(PointF mouseWorld)
         {
             activeSnapPoint = null;
             activeSnapType = SnapType.None;
 
-            CheckMidpointSnap(mouseWorld,dxfDoc);
+            CheckMidpointSnap(mouseWorld);
             if (activeSnapPoint != null) return;
 
-            CheckCenterSnap(mouseWorld, dxfDoc);
+            CheckCenterSnap(mouseWorld);
             if (activeSnapPoint != null) return;
 
-            CheckIntersectionSnap(mouseWorld, dxfDoc);
+            CheckIntersectionSnap(mouseWorld);
         }
-        static void CheckMidpointSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        static void CheckMidpointSnap(PointF mouseWorld)
         {
             foreach (var line in dxfDoc.Entities.Lines)
             {
@@ -348,7 +367,7 @@ namespace YektamakDesktop.Common
                 }
             }
         }
-        static void CheckCenterSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        static void CheckCenterSnap(PointF mouseWorld)
         {
             foreach (var c in dxfDoc.Entities.Circles)
             {
@@ -374,7 +393,7 @@ namespace YektamakDesktop.Common
                 }
             }
         }
-        static void CheckIntersectionSnap(PointF mouseWorld, DxfDocument dxfDoc)
+        static void CheckIntersectionSnap(PointF mouseWorld)
         {
             var lines = dxfDoc.Entities.Lines.ToList();
 
@@ -478,9 +497,7 @@ namespace YektamakDesktop.Common
                     DrawArc(g, arc);
                     break;
 
-                //case Spline spline:
-                //    DrawSpline(g, spline);
-                //    break;
+                
 
                 case Insert insert:
                     DrawInsert(g, insert);
@@ -491,9 +508,7 @@ namespace YektamakDesktop.Common
         {
             var p1 = ToScreen(line.StartPoint.X, line.StartPoint.Y);
             var p2 = ToScreen(line.EndPoint.X, line.EndPoint.Y);
-            Color color = line.Color.IsByLayer
-                        ? GetLayerColor(line.Layer)
-                        : AciToColor(line.Color);
+            Color color = ResolveColor(line);
             double width = line.Thickness;
             using var pen = new Pen(color,1);
             g.DrawLine(pen, p1, p2);
@@ -520,41 +535,48 @@ namespace YektamakDesktop.Common
             float start = -a0;
             float sweep = -ccw;
 
-            Color color = arc.Color.IsByLayer
-                        ? GetLayerColor(arc.Layer)
-                        : AciToColor(arc.Color);
+            Color color = ResolveColor(arc);
             double width = arc.Thickness;
             using var pen = new Pen(color, (float)width);
             g.DrawArc(pen, c.X - r, c.Y - r, r * 2, r * 2, start, sweep);
         }
-        static void DrawSpline(Graphics g, Spline spline)
+        public static void DrawSplines(Graphics g)
         {
-            var pts = SampleSpline(spline, 60); // 60 segment yeterince pürüzsüz
-
-            if (pts.Count < 2)
-                return;
-
-            Color color = spline.Color.IsByLayer
-                ? GetLayerColor(spline.Layer)
-                : AciToColor(AciColor.Red);
-            using var pen = new Pen(color, 1);
-
-            for (int i = 0; i < pts.Count - 1; i++)
+            //var pts = SampleSpline(spline); // 60 segment yeterince pürüzsüz
+            foreach (var spl in splineSegments)
             {
-                var s1 = ToScreen(pts[i].X, pts[i].Y);
-                var s2 = ToScreen(pts[i + 1].X, pts[i + 1].Y);
 
-                g.DrawLine(pen, s1, s2);
+
+                if (spl.points.Count < 2)
+                    return;
+
+                using var pen = new Pen(spl.color, 1);
+
+                for (int i = 0; i < spl.points.Count - 1; i++)
+                {
+                    var s1 = ToScreen(spl.points[i].X, spl.points[i].Y);
+                    var s2 = ToScreen(spl.points[i + 1].X, spl.points[i + 1].Y);
+
+                    g.DrawLine(pen, s1, s2);
+                }
             }
+            //var poly = spline.ToPolyline2D(60);
+
+            //var verts = poly.Vertexes;
+
+            //for (int i = 0; i < verts.Count - 1; i++)
+            //{
+            //    var p1 = ToScreen(verts[i].Position.X, verts[i].Position.Y);
+            //    var p2 = ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
+            //    g.DrawLine(Pens.Black, p1, p2);
+            //}
         }
         static void DrawCircle(Graphics g, Circle circle)
         {
             var c = DxfDrawHelper.ToScreen(circle.Center.X, circle.Center.Y);
             float r = (float)(circle.Radius * DxfDrawHelper.scale);
 
-            Color color = circle.Color.IsByLayer
-                        ? GetLayerColor(circle.Layer)
-                        : AciToColor(circle.Color);
+            Color color = ResolveColor(circle);
             double width = circle.Thickness;
             using var pen = new Pen(color, (float)width);
             g.DrawEllipse(pen, c.X - r, c.Y - r, r * 2, r * 2);
@@ -573,9 +595,7 @@ namespace YektamakDesktop.Common
                 case Line line:
                     var p1 = TransformPoint(line.StartPoint, ins);
                     var p2 = TransformPoint(line.EndPoint, ins);
-                    Color color = line.Color.IsByLayer
-                        ? GetLayerColor(line.Layer)
-                        : AciToColor(line.Color);
+                    Color color = ResolveColor(line, ins);
                     double width = line.Thickness;
                     DrawWorldLine(g, p1, p2,color,width);
                     break;
@@ -602,7 +622,7 @@ namespace YektamakDesktop.Common
 
             var s1 = ToScreen(a.X, a.Y);
             var s2 = ToScreen(b.X, b.Y);
-            using var pen = new Pen(Color.Red, (float)width);
+            using var pen = new Pen(color, (float)width);
             g.DrawLine(pen, s1, s2);
         }
 
@@ -652,6 +672,28 @@ namespace YektamakDesktop.Common
                 _ => Color.Black
             };
         }
+        static Color ResolveColor(EntityObject entity, Insert parentInsert = null)
+        {
+            var aci = entity.Color;
+
+            // 1️⃣ TrueColor varsa direkt kullan
+            if (aci != null && aci.UseTrueColor)
+                return Color.FromArgb(aci.R, aci.G, aci.B);
+
+            // 2️⃣ ByBlock ise insert'ten al
+            if (aci != null && aci.IsByBlock && parentInsert != null)
+                return ResolveColor(parentInsert);
+
+            // 3️⃣ ByLayer ise layer'dan al
+            if (aci != null && aci.IsByLayer)
+                return GetLayerColor(entity.Layer);
+
+            // 4️⃣ Normal ACI
+            if (aci != null)
+                return AciToColor(aci);
+
+            return Color.Black;
+        }
         static Color GetLayerColor(netDxf.Tables.Layer layer)
         {
             if (layer == null)
@@ -663,6 +705,71 @@ namespace YektamakDesktop.Common
                 return Color.FromArgb(aci.R, aci.G, aci.B);
 
             return AciToColor(aci);
+        }
+        public static Circle FindCircleAt(PointF worldPoint)
+        {
+            double tolerance = 5.0 / scale; // zoom'a bağlı tolerans
+
+            foreach (var c in dxfDoc.Entities.Circles)
+            {
+                var dx = worldPoint.X - c.Center.X;
+                var dy = worldPoint.Y - c.Center.Y;
+
+                var distance = Math.Sqrt(dx * dx + dy * dy);
+
+                if (Math.Abs(distance - c.Radius) < tolerance)
+                    return c;
+            }
+
+            return null;
+        }
+        public static List<PointF> ExtractCircleMarkupCenters()
+        {
+            var list = new List<PointF>();
+
+            foreach (var c in dxfDoc.Entities.Circles)
+            {
+                // Örnek filtre (istersen layer / renk koyabilirsin)
+                var color = ResolveColor(c);
+                if (color != Color.Blue)
+                    continue;
+
+                list.Add(new PointF((float)c.Center.X, (float)c.Center.Y));
+            }
+
+            return list;
+        }
+        public static void DrawPlusMarkup(Graphics g, Circle c)
+        {
+            var screen = ToScreen(c.Center.X, c.Center.Y);
+
+            float worldSize = 5f / scale;
+
+            using var pen = new Pen(Color.Red, 2);
+
+            g.DrawLine(pen,
+                screen.X - worldSize, screen.Y,
+                screen.X + worldSize, screen.Y);
+
+            g.DrawLine(pen,
+                screen.X, screen.Y - worldSize,
+                screen.X, screen.Y + worldSize);
+            var block = new Block("U_MARKUP");
+
+            float size = 5f;
+            Line line = new Line(
+                new Vector3(c.Center.X - size, c.Center.Y, 0),
+                new Vector3(c.Center.X + size, c.Center.Y, 0));
+            line.Color = AciColor.Blue;
+            dxfDoc.Entities.Add(line);
+            Line line2 = new Line(
+                new Vector3(c.Center.X, c.Center.Y - size, 0),
+                new Vector3(c.Center.X, c.Center.Y + size, 0));
+            line2.Color = AciColor.Blue;
+            dxfDoc.Entities.Add(line2);
+            dxfDoc.Entities.Remove(c);
+
+            dxfDoc.Save("output.dxf");
         }
     }
 }

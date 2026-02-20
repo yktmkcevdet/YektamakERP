@@ -37,6 +37,14 @@
             panel1 = new System.Windows.Forms.Panel();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            panel2 = new System.Windows.Forms.Panel();
+            label = new System.Windows.Forms.Label();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // headerPanel1
@@ -132,10 +140,10 @@
             // 
             // panel1
             // 
-            panel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            panel1.Location = new System.Drawing.Point(463, 101);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(807, 646);
+            panel1.Size = new System.Drawing.Size(814, 635);
             panel1.TabIndex = 6;
             // 
             // roundedButton1
@@ -154,7 +162,7 @@
             roundedButton1.HoverColor2 = System.Drawing.Color.LimeGreen;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(537, 47);
+            roundedButton1.Location = new System.Drawing.Point(651, 64);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(37, 35);
             roundedButton1.TabIndex = 7;
@@ -179,7 +187,7 @@
             roundedButton2.HoverColor2 = System.Drawing.Color.FromArgb(192, 0, 0);
             roundedButton2.Icon = null;
             roundedButton2.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton2.Location = new System.Drawing.Point(1206, 47);
+            roundedButton2.Location = new System.Drawing.Point(783, 61);
             roundedButton2.Name = "roundedButton2";
             roundedButton2.Size = new System.Drawing.Size(40, 40);
             roundedButton2.TabIndex = 8;
@@ -187,15 +195,63 @@
             roundedButton2.TextColor = System.Drawing.Color.White;
             roundedButton2.UseVisualStyleBackColor = true;
             // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new System.Drawing.Point(451, 98);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(828, 669);
+            tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(panel1);
+            tabPage1.Location = new System.Drawing.Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            tabPage1.Size = new System.Drawing.Size(820, 641);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Pdf";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(panel2);
+            tabPage2.Location = new System.Drawing.Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            tabPage2.Size = new System.Drawing.Size(820, 641);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Dxf";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(814, 635);
+            panel2.TabIndex = 0;
+            panel2.Paint += panel2_Paint;
+            //
+            // label
+            //
+            label.Font = new System.Drawing.Font("Microsoft Sans Serif", 16, System.Drawing.FontStyle.Bold);
+            label.ForeColor = System.Drawing.Color.Red;
+            label.Width = 500;
+            panel1.Controls.Add(label);
+            // 
             // ProjeBelgeOnay
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1279, 768);
+            Controls.Add(tabControl1);
             Controls.Add(roundedButton2);
-            Controls.Add(roundedButton1);
-            Controls.Add(panel1);
             Controls.Add(fcbDosyaTip);
+            Controls.Add(roundedButton1);
             Controls.Add(fcbProjeKod);
             Controls.Add(fcbMalzemeGrup);
             Controls.Add(fcbStokGrup);
@@ -205,6 +261,9 @@
             Name = "ProjeBelgeOnay";
             Text = "ProjeBelgeOnay";
             FormClosing += ProjeBelgeOnay_FormClosing;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -219,5 +278,10 @@
         private System.Windows.Forms.Panel panel1;
         private CustomControls.RoundedButton roundedButton1;
         private CustomControls.RoundedButton roundedButton2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label;
     }
 }

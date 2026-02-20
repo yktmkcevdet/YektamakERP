@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using Models;
 using netDxf;
 using netDxf.Entities;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using YektamakDesktop.Common;
 using YektamakDesktop.Formlar.Ortak;
@@ -28,7 +30,6 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IConfigurationService _configurationService;
         private readonly IFileService _fileService;
         private readonly IDosyalamaService _dosyalamaService;
-        private DxfDocument dxfDoc = new DxfDocument();
         private ProjeBom selectedProjeBom;
         public ProjeDosyaAgacStil(ICache cache, IProjeService projeService, IStokService stokService, IConfigurationService configurationService, IFileService fileService, IDosyalamaService dosyalamaService)
         {
@@ -39,6 +40,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             _fileService = fileService;
             _dosyalamaService = dosyalamaService;
             InitializeComponent();
+            treeView1.NodeMouseClick += async(s,e)=> await treeView1_NodeMouseClick(s,e);
             pdfPopup.Dock = DockStyle.Fill;
             pdfPopup.TopLevel = false;
             tabControl1.TabPages[0].Controls.Add(pdfPopup);
@@ -280,7 +282,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     n.BackColor = Color.White;
         }
 
-        private async void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private async Task treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             selectedProjeBom = (ProjeBom)e.Node.Tag;
             if (selectedProjeBom.Id != null)
@@ -291,27 +293,28 @@ namespace YektamakDesktop.Formlar.Projemodul
                             .FirstOrDefault(d => d.dosyaTip.Id == 1)?.dosyaFullPath
                     )
                 );
-                foreach (var dosya in selectedProjeBom.projeStokKart.stokKart.dosyaList.Where(d => d.dosyaTip.Id == 2))
+                var dxfDosya = await _fileService.GetFileDecompress(
+                        selectedProjeBom.projeStokKart.stokKart.dosyaList
+                            .FirstOrDefault(d => d.dosyaTip.Id == 2)?.dosyaFullPath
+                            );
+                if(dxfDosya != null)
                 {
-                    var dxfDosya = await _fileService.GetFileDecompress(dosya.dosyaFullPath);
-                    if (dxfDoc != null)
-                    {
-                        dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
-                        DxfDrawHelper.BuildSplineCache(dxfDoc);
-                        DxfDrawHelper.FitToScreen(dxfDoc, panel1);
-                    }
-                    else
-                    {
-                        Label label = new Label();
-                        label.Text = "DXF dosyası bulunamadı";
-                        label.Width = 500;
-                        panel1.Controls.Add(label);
-                    }
+                    label.Text = "";
+                    DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
+                    DxfDrawHelper.BuildSplineCache();
+                    DxfDrawHelper.FitToScreen(panel1);
+                }
+                else
+                {
+                    label.Text = "DXF dosyası bulunamadı";
+                    DxfDrawHelper.dxfDoc = null;
+                    panel1.Invalidate();
                 }
             }
             else
             {
-                DxfDrawHelper.splineSegments.Clear();
+                DxfDrawHelper.dxfDoc = null;
+                panel1.Invalidate();
             }
         }
         private PdfGoruntuleme _pdfPopup;
@@ -534,10 +537,10 @@ namespace YektamakDesktop.Formlar.Projemodul
         //        -(p.Y - pan.Y) / scale
         //    );
         //}
-
+        Circle selected;
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            if (dxfDoc == null) return;
+            if (DxfDrawHelper.dxfDoc == null) return;
             if (DxfDrawHelper.isMeasuring)
             {
                 DxfDrawHelper.DrawSnap(e.Graphics);
@@ -545,28 +548,34 @@ namespace YektamakDesktop.Formlar.Projemodul
             }
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            foreach (var ent in dxfDoc.Entities.All)
+            
+            foreach (var ent in DxfDrawHelper.dxfDoc.Entities.All)
             {
                 DxfDrawHelper.DrawEntity(g, ent);
                 if (ent.Type == EntityType.Line) continue;
                 if (ent.Type == EntityType.Circle) continue;
                 if (ent.Type == EntityType.Arc) continue;
-                Label label = new Label();
-                label.Width = 500;
+                if (ent.Type == EntityType.Spline) continue;
+                if (ent.Type == EntityType.Insert) continue;
                 label.Text = $"{ent.Type.ToString()} çizilemedi";
-                panel1.Controls.Add(label);
             }
 
             DxfDrawHelper.RebuildScreenCache();
-            foreach (var arr in DxfDrawHelper.splineScreenCache)
-                g.DrawLines(Pens.Black, arr);
+            foreach (var spl in DxfDrawHelper.splineScreenCache) 
+            {
+                using var pen = new Pen(spl.color);
+                g.DrawLines(pen, spl.arr); 
+            }
 
             foreach (var m in DxfDrawHelper.measurements)
                 DxfDrawHelper.DrawMeasurement(g, m.A, m.B);
 
             if (DxfDrawHelper.measureStart != null && DxfDrawHelper.measureEnd != null)
                 DxfDrawHelper.DrawMeasurement(g, DxfDrawHelper.measureStart.Value, DxfDrawHelper.measureEnd.Value);
-
+            if (selected != null)
+            {
+                DxfDrawHelper.DrawPlusMarkup(g, selected);
+            }
             //foreach (var seg in splineCache)
             //{
             //    for (int i = 0; i < seg.Count - 1; i++)
@@ -574,19 +583,19 @@ namespace YektamakDesktop.Formlar.Projemodul
             //            DxfDrawHelper.ToScreen(seg[i].X, seg[i].Y),
             //            DxfDrawHelper.ToScreen(seg[i + 1].X, seg[i + 1].Y));
             //}
-            foreach (var spline in dxfDoc.Entities.Splines)
-            {
-                var poly = spline.ToPolyline2D(20);
+            //foreach (var spline in dxfDoc.Entities.Splines)
+            //{
+            //    var poly = spline.ToPolyline2D(20);
 
-                var verts = poly.Vertexes;
+            //    var verts = poly.Vertexes;
 
-                for (int i = 0; i < verts.Count - 1; i++)
-                {
-                    var p1 = DxfDrawHelper.ToScreen(verts[i].Position.X, verts[i].Position.Y);
-                    var p2 = DxfDrawHelper.ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
-                    g.DrawLine(Pens.Black, p1, p2);
-                }
-            }
+            //    for (int i = 0; i < verts.Count - 1; i++)
+            //    {
+            //        var p1 = DxfDrawHelper.ToScreen(verts[i].Position.X, verts[i].Position.Y);
+            //        var p2 = DxfDrawHelper.ToScreen(verts[i + 1].Position.X, verts[i + 1].Position.Y);
+            //        g.DrawLine(Pens.Black, p1, p2);
+            //    }
+            //}
         }
         //float DistancePointToSegment(PointF p, PointF a, PointF b)
         //{
@@ -725,29 +734,39 @@ namespace YektamakDesktop.Formlar.Projemodul
                 DxfDrawHelper.isPanning = true;
                 DxfDrawHelper.lastMouse = e.Location;
             }
-            if (!DxfDrawHelper.isMeasuring) return;
-
             PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
-
-            // Snap varsa burası snap’ten dönen nokta olur
-            PointF p = DxfDrawHelper.GetSnapPoint(world,dxfDoc) ?? world;
-
-            if (DxfDrawHelper.measureStart == null)
+            if (DxfDrawHelper.isMeasuring)
             {
-                DxfDrawHelper.measureStart = p;
+                PointF p = DxfDrawHelper.GetSnapPoint(world) ?? world;
+
+                if (DxfDrawHelper.measureStart == null)
+                {
+                    DxfDrawHelper.measureStart = p;
+                }
+                else
+                {
+                    DxfDrawHelper.measureEnd = p;
+                    DxfDrawHelper.measurements.Add((DxfDrawHelper.measureStart.Value, DxfDrawHelper.measureEnd.Value));
+
+                    // yeni ölçüye hazır
+                    DxfDrawHelper.measureStart = null;
+                    DxfDrawHelper.measureEnd = null;
+                }
             }
             else
             {
-                DxfDrawHelper.measureEnd = p;
-                DxfDrawHelper.measurements.Add((DxfDrawHelper.measureStart.Value, DxfDrawHelper.measureEnd.Value));
+                selected = DxfDrawHelper.FindCircleAt(world);
 
-                // yeni ölçüye hazır
-                DxfDrawHelper.measureStart = null;
-                DxfDrawHelper.measureEnd = null;
+                
             }
+
+
+            // Snap varsa burası snap’ten dönen nokta olur
+            
 
             panel1.Invalidate();
         }
+
         //PointF? GetSnapPoint(PointF mouseWorld)
         //{
         //    float tol = 5f / scale;
@@ -774,13 +793,10 @@ namespace YektamakDesktop.Formlar.Projemodul
             if (!DxfDrawHelper.isMeasuring) return;
 
             PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
-            DxfDrawHelper.measureEnd = DxfDrawHelper.GetSnapPoint(world,dxfDoc) ?? world;
+            DxfDrawHelper.measureEnd = DxfDrawHelper.GetSnapPoint(world) ?? world;
 
-            panel1.Invalidate();
-            if (!DxfDrawHelper.isMeasuring) return;
 
-            world = DxfDrawHelper.ScreenToWorld(e.Location);
-            DxfDrawHelper.UpdateSnap(world,dxfDoc);
+            DxfDrawHelper.UpdateSnap(world);
 
             DxfDrawHelper.measureEnd = DxfDrawHelper.activeSnapPoint ?? world;
             panel1.Invalidate();
@@ -833,7 +849,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         {
             if (keyData == Keys.Escape && DxfDrawHelper.isMeasuring)
             {
-                DxfDrawHelper.CancelMeasure();
+                DxfDrawHelper.CancelMeasure(panel1);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -858,7 +874,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
             PointF mouseWorld = DxfDrawHelper.ScreenToWorld(e.Location);
-            foreach (var line in dxfDoc.Entities.Lines)
+            foreach (var line in DxfDrawHelper.dxfDoc.Entities.Lines)
             {
                 PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
                 PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
@@ -873,15 +889,15 @@ namespace YektamakDesktop.Formlar.Projemodul
             }
             for (int s = 0; s < DxfDrawHelper.splineSegments.Count; s++)
             {
-                var pts = DxfDrawHelper.splineSegments[s];
+                var spl = DxfDrawHelper.splineSegments[s];
 
-                for (int i = 0; i < pts.Count - 1; i++)
+                for (int i = 0; i < spl.points.Count - 1; i++)
                 {
-                    float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, pts[i], pts[i + 1]);
+                    float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, spl.points[i], spl.points[i + 1]);
                     if (d < DxfDrawHelper.pickTolerance && d < minDist)
                     {
                         minDist = d;
-                        selectedSpline = dxfDoc.Entities.Splines.ToList()[s];
+                        selectedSpline = DxfDrawHelper.dxfDoc.Entities.Splines.ToList()[s];
                     }
                 }
             }
@@ -893,6 +909,10 @@ namespace YektamakDesktop.Formlar.Projemodul
             if (e.KeyCode == Keys.F5)
             {
                 DxfDrawHelper.StartMeasure();
+            }
+            if (e.KeyCode == Keys.Escape && DxfDrawHelper.isMeasuring)
+            {
+                DxfDrawHelper.CancelMeasure(panel1);
             }
         }
 
