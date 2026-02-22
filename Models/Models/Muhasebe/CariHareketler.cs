@@ -8,11 +8,15 @@ namespace Domain.Models.Models
 {
     public class CariHareketler
     {
-        public DateTime FaturaTarihi;
-        public DateTime VadeTarihi;
-        public string FisDurumu;
-        public string Aciklama;
-        public double BorcTutari;
-        public double AlacakTutari;
+        public DateTime FaturaTarihi { get; set; }
+        public DateTime VadeTarihi { get; set; }
+        public string FisDurumu { get; set; }
+        public string Aciklama { get; set; }
+        public double BorcTutari { get; set; }
+        public double AlacakTutari { get; set; }
+    }
+    public class ListCariHareketler
+    {
+        public List<CariHareketler> cariHareketlers { get; set; }
     }
 }

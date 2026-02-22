@@ -80,8 +80,8 @@ namespace YektamakDesktop.Formlar.Projemodul
                 }
             }
             else { pdfPopup.GetInstance(null); }
-            
-                            
+
+
         }
 
         private StokKartDosyaDTO _stokKartDosya;
@@ -202,6 +202,18 @@ namespace YektamakDesktop.Formlar.Projemodul
             if (selected != null)
             {
                 DxfDrawHelper.DrawPlusMarkup(g, selected);
+            }
+        }
+
+        private void roundedButton2_Click(object sender, EventArgs e)
+        {
+            using (var frm = new ProjeBelgeRedSebep())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    string reason = frm.Reason;
+                    // kaydet
+                }
             }
         }
 
