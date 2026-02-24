@@ -1,69 +1,46 @@
-﻿using Patagames.Pdf.Net.Controls.WinForms;
-using Patagames.Pdf.Net.Controls.WinForms.ToolBars;
+﻿using PdfiumViewer;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
 using System;
+using System.IO;
 using System.Windows.Forms;
+
 
 namespace YektamakDesktop.Formlar.Ortak
 {
     public partial class PdfGoruntuleme : Form
     {
-        private string _pdfFilePath;
-        public string pdfFilePath 
-        { 
-            get { return _pdfFilePath; } 
-            set 
-            {
-                _pdfFilePath = value;
-                InitializePdfViewer();
 
-            }
-        }
         public PdfGoruntuleme()
         {
             InitializeComponent();
+
+            this.Width = 800;
+            this.Height = 600;
         }
-        private static PdfGoruntuleme _pdfGoruntuleme;
-        public static PdfGoruntuleme pdfGoruntuleme { get { if (_pdfGoruntuleme == null) _pdfGoruntuleme = new PdfGoruntuleme(); return _pdfGoruntuleme; } }
         
-        private void InitializePdfViewer()
+        public void GetInstance(byte[]? base64Pdf)
         {
-            PdfViewer pdfViewer = new PdfViewer
+            pdfViewer1.Document?.Dispose();
+            pdfViewer1.Document = PdfDocument.Load(new MemoryStream(base64Pdf ?? GetEmptyPdf()));
+
+        }
+        byte[] GetEmptyPdf()
+        {
+            return Document.Create(container =>
             {
-                Dock = DockStyle.Fill
-            };
-            pdfViewer.LoadDocument(_pdfFilePath);
-            
-            Controls.Add(pdfViewer);
-        }   
-
-        private void OpenPdfButton_Click(string pdfFilePath)
-        {
-            //try
-            //{
-            //    //pdfViewer.LoadFromFile(Path.Combine(Application.StartupPath, pdfFilePath));
-            //    pdfViewer.LoadFromFile(pdfFilePath);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Error opening PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
-        private void CloseForm()
-        {
-            Close();
-            GlobalData.RemoveLastForm();
-            _pdfGoruntuleme = null;
-        }
-
-        private void PdfGoruntuleme_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            GlobalData.RemoveLastForm();
-            _pdfGoruntuleme = null;
-        }
-
-        private void PdfGoruntuleme_Load(object sender, EventArgs e)
-        {
-            OpenPdfButton_Click(_pdfFilePath);
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(40);
+                    page.Content()
+                        .AlignMiddle()
+                        .AlignCenter()
+                        .Text("Gösterilecek PDF bulunamadı")
+                        .FontSize(16)
+                        .FontColor(Colors.Grey.Medium);
+                });
+            }).GeneratePdf();
         }
     }
 }

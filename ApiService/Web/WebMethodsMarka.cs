@@ -6,9 +6,13 @@
         {
             return await GetAsyncMethod("TumMarkaVeAltGruplar");
         }
-        public async Task<string> GetAllMarka()
+        public static string GetMarka()
         {
-            return await GetAsyncMethod("GetAllMarka");
+            return Get("GetMarka");
+        }
+        public static string GetMarkaAltGrup()
+        {
+            return Get("GetMarkaAltGrup");
         }
     }
 }

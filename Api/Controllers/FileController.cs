@@ -3,14 +3,15 @@
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("api/File")]
+    [Route("api/")]
     public class FileController : Controller
     {
         private readonly IWebHostEnvironment _env;
-
+        private readonly string _contentRootUploadPath;
         public FileController(IWebHostEnvironment env)
         {
             _env = env;
+            _contentRootUploadPath = Path.Combine(_env.ContentRootPath, "Uploads");
         }
 
         [HttpPost("ProcessDirectory")]
@@ -42,6 +43,48 @@ namespace Api.Controllers
             }
 
             return Ok(new { message = "PDF files processed successfully.", pdfCount = pdfFiles.Length });
+        }
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("Dosya boş olamaz.");
+
+            // Uygulama dizini altına "Uploads" klasörüne kaydediyoruz
+            Directory.CreateDirectory(_contentRootUploadPath);
+
+            var filePath = Path.Combine(_contentRootUploadPath, file.FileName);
+
+            // Dosyayı sunucuya kaydet
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(new { message = "Dosya başarıyla yüklendi.", path = filePath });
+        }
+        [HttpGet("download/{fileName}")]
+        public IActionResult DownloadFile(string fileName)
+        {
+            Directory.CreateDirectory(_contentRootUploadPath);
+
+            var filePath = Path.Combine(_contentRootUploadPath, fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("Dosya bulunamadı.");
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            var contentType = "application/octet-stream";
+            return File(fileBytes, contentType, fileName);
+        }
+        [HttpDelete("delete/{filePath}")]
+        public async Task<IActionResult> Delete(string filePath)
+        {
+            filePath = Path.Combine(_contentRootUploadPath, filePath);
+
+            System.IO.File.Delete(filePath);
+
+            return Ok(new { message = "Dosya başarıyla yüklendi.", path = filePath });
         }
     }
 }

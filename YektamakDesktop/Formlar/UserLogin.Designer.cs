@@ -33,113 +33,45 @@ namespace YektamakDesktop.Formlar
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserLogin));
             roundedButtonLogin = new RoundedButton();
-            buttonClose = new RoundedButton();
-            panelHeader = new System.Windows.Forms.Panel();
-            buttonHelp = new RoundedButton();
-            labelHeader = new System.Windows.Forms.Label();
             labelUyariKullaniciAdi = new System.Windows.Forms.Label();
             labelUyariSifre = new System.Windows.Forms.Label();
-            customTextBoxKullaniciAdi = new CustomTextBox();
-            customTextBoxSifre = new CustomTextBox();
-            panelHeader.SuspendLayout();
+            ctbKullaniciAdi = new CustomTextBox();
+            ctbSifre = new CustomTextBox();
+            headerPanel1 = new HeaderPanel();
+            btnSifreDegistir = new RoundedIconButton();
             SuspendLayout();
             // 
             // roundedButtonLogin
             // 
+            roundedButtonLogin.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             roundedButtonLogin.BackColor = Color.FromArgb(128, 64, 64);
-            roundedButtonLogin.BackgroundColor = Color.FromArgb(128, 64, 64);
-            roundedButtonLogin.BorderColor = SystemColors.InactiveBorder;
-            roundedButtonLogin.BorderRadius = 20;
-            roundedButtonLogin.BorderSize = 3;
+            roundedButtonLogin.BackgroundColor = Color.Firebrick;
+            roundedButtonLogin.BorderColor = Color.Black;
+            roundedButtonLogin.BorderSize = 0;
+            roundedButtonLogin.CornerRadius = 10;
             roundedButtonLogin.FlatAppearance.BorderSize = 0;
             roundedButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            roundedButtonLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            roundedButtonLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             roundedButtonLogin.ForeColor = Color.White;
-            roundedButtonLogin.Location = new Point(131, 137);
+            roundedButtonLogin.GradientColor1 = Color.DodgerBlue;
+            roundedButtonLogin.GradientColor2 = Color.MidnightBlue;
+            roundedButtonLogin.HoverColor1 = Color.RoyalBlue;
+            roundedButtonLogin.HoverColor2 = Color.Navy;
+            roundedButtonLogin.Icon = null;
+            roundedButtonLogin.IconAlign = ContentAlignment.MiddleLeft;
+            roundedButtonLogin.Location = new Point(112, 121);
             roundedButtonLogin.Name = "roundedButtonLogin";
-            roundedButtonLogin.Size = new Size(135, 39);
+            roundedButtonLogin.Size = new Size(95, 29);
             roundedButtonLogin.TabIndex = 22;
             roundedButtonLogin.Text = "GİRİŞ";
             roundedButtonLogin.TextColor = Color.White;
             roundedButtonLogin.UseVisualStyleBackColor = false;
             roundedButtonLogin.Click += roundedButtonLogin_Click;
             // 
-            // buttonClose
-            // 
-            buttonClose.BackColor = Color.Red;
-            buttonClose.BackgroundColor = Color.Red;
-            buttonClose.BorderColor = Color.LavenderBlush;
-            buttonClose.BorderRadius = 10;
-            buttonClose.BorderSize = 2;
-            buttonClose.FlatAppearance.BorderSize = 0;
-            buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonClose.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonClose.ForeColor = Color.White;
-            buttonClose.Location = new Point(380, 2);
-            buttonClose.Margin = new System.Windows.Forms.Padding(0);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            buttonClose.Size = new Size(35, 39);
-            buttonClose.TabIndex = 98;
-            buttonClose.Text = "x";
-            buttonClose.TextAlign = ContentAlignment.TopCenter;
-            buttonClose.TextColor = Color.White;
-            buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
-            // 
-            // panelHeader
-            // 
-            panelHeader.BackColor = Color.Red;
-            panelHeader.Controls.Add(buttonHelp);
-            panelHeader.Controls.Add(buttonClose);
-            panelHeader.Controls.Add(labelHeader);
-            panelHeader.Location = new Point(0, 0);
-            panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(423, 45);
-            panelHeader.TabIndex = 99;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
-            // 
-            // buttonHelp
-            // 
-            buttonHelp.BackColor = Color.Red;
-            buttonHelp.BackgroundColor = Color.Red;
-            buttonHelp.BorderColor = Color.LavenderBlush;
-            buttonHelp.BorderRadius = 10;
-            buttonHelp.BorderSize = 2;
-            buttonHelp.FlatAppearance.BorderSize = 0;
-            buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonHelp.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonHelp.ForeColor = Color.White;
-            buttonHelp.Location = new Point(340, 3);
-            buttonHelp.Margin = new System.Windows.Forms.Padding(0);
-            buttonHelp.Name = "buttonHelp";
-            buttonHelp.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            buttonHelp.Size = new Size(40, 38);
-            buttonHelp.TabIndex = 103;
-            buttonHelp.Text = "?";
-            buttonHelp.TextColor = Color.White;
-            buttonHelp.UseVisualStyleBackColor = false;
-            // 
-            // labelHeader
-            // 
-            labelHeader.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            labelHeader.AutoSize = true;
-            labelHeader.BackColor = Color.Red;
-            labelHeader.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHeader.ForeColor = SystemColors.ControlLightLight;
-            labelHeader.Location = new Point(7, 10);
-            labelHeader.Name = "labelHeader";
-            labelHeader.Size = new Size(44, 21);
-            labelHeader.TabIndex = 0;
-            labelHeader.Text = "Giriş";
-            labelHeader.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // labelUyariKullaniciAdi
             // 
             labelUyariKullaniciAdi.AutoSize = true;
-            labelUyariKullaniciAdi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelUyariKullaniciAdi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             labelUyariKullaniciAdi.ForeColor = Color.Red;
             labelUyariKullaniciAdi.Location = new Point(351, 71);
             labelUyariKullaniciAdi.Name = "labelUyariKullaniciAdi";
@@ -149,72 +81,108 @@ namespace YektamakDesktop.Formlar
             // labelUyariSifre
             // 
             labelUyariSifre.AutoSize = true;
-            labelUyariSifre.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelUyariSifre.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             labelUyariSifre.ForeColor = Color.Red;
             labelUyariSifre.Location = new Point(351, 108);
             labelUyariSifre.Name = "labelUyariSifre";
             labelUyariSifre.Size = new Size(0, 15);
             labelUyariSifre.TabIndex = 102;
             // 
-            // customTextBoxKullaniciAdi
+            // ctbKullaniciAdi
             // 
-            customTextBoxKullaniciAdi.BackColor = Color.White;
-            customTextBoxKullaniciAdi.BorderColor = Color.Silver;
-            customTextBoxKullaniciAdi.BorderFocusColor = Color.HotPink;
-            customTextBoxKullaniciAdi.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBoxKullaniciAdi.ForeColor = Color.Black;
-            customTextBoxKullaniciAdi.isPlaceHolder = true;
-            customTextBoxKullaniciAdi.Location = new Point(55, 61);
-            customTextBoxKullaniciAdi.Multiline = false;
-            customTextBoxKullaniciAdi.Name = "customTextBoxKullaniciAdi";
-            customTextBoxKullaniciAdi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            customTextBoxKullaniciAdi.PasswordChar = false;
-            customTextBoxKullaniciAdi.PlaceholderColor = Color.DarkGray;
-            customTextBoxKullaniciAdi.PlaceholderText = "Kullanıcı Adı";
-            customTextBoxKullaniciAdi.ReadOnly = false;
-            customTextBoxKullaniciAdi.SelectionStart = 0;
-            customTextBoxKullaniciAdi.Size = new Size(290, 32);
-            customTextBoxKullaniciAdi.TabIndex = 103;
-            customTextBoxKullaniciAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            customTextBoxKullaniciAdi.TextCustom = "";
-            customTextBoxKullaniciAdi.UnderlinedStyle = false;
-            customTextBoxKullaniciAdi.KeyPress += KullaniciGiris_KeyPress;
+            ctbKullaniciAdi.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            ctbKullaniciAdi.BackColor = Color.White;
+            ctbKullaniciAdi.BorderColor = Color.Silver;
+            ctbKullaniciAdi.BorderFocusColor = Color.HotPink;
+            ctbKullaniciAdi.BorderSize = 1;
+            ctbKullaniciAdi.Font = new Font("Segoe UI", 8F);
+            ctbKullaniciAdi.ForeColor = Color.Black;
+            ctbKullaniciAdi.Location = new Point(58, 46);
+            ctbKullaniciAdi.Margin = new System.Windows.Forms.Padding(1);
+            ctbKullaniciAdi.Multiline = false;
+            ctbKullaniciAdi.Name = "ctbKullaniciAdi";
+            ctbKullaniciAdi.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            ctbKullaniciAdi.PasswordChar = false;
+            ctbKullaniciAdi.PlaceholderColor = Color.DarkGray;
+            ctbKullaniciAdi.PlaceholderText = "Kullanıcı Adı";
+            ctbKullaniciAdi.ReadOnly = false;
+            ctbKullaniciAdi.SelectionStart = 0;
+            ctbKullaniciAdi.Size = new Size(225, 33);
+            ctbKullaniciAdi.TabIndex = 103;
+            ctbKullaniciAdi.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbKullaniciAdi.TextCustom = "";
+            ctbKullaniciAdi.UnderlinedStyle = false;
+            ctbKullaniciAdi.KeyPress += KullaniciGiris_KeyPress;
             // 
-            // customTextBoxSifre
+            // ctbSifre
             // 
-            customTextBoxSifre.BackColor = Color.White;
-            customTextBoxSifre.BorderColor = Color.Silver;
-            customTextBoxSifre.BorderFocusColor = Color.HotPink;
-            customTextBoxSifre.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBoxSifre.ForeColor = Color.Black;
-            customTextBoxSifre.isPlaceHolder = true;
-            customTextBoxSifre.Location = new Point(55, 99);
-            customTextBoxSifre.Multiline = false;
-            customTextBoxSifre.Name = "customTextBoxSifre";
-            customTextBoxSifre.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            customTextBoxSifre.PasswordChar = true;
-            customTextBoxSifre.PlaceholderColor = Color.DarkGray;
-            customTextBoxSifre.PlaceholderText = "Şifre";
-            customTextBoxSifre.ReadOnly = false;
-            customTextBoxSifre.SelectionStart = 0;
-            customTextBoxSifre.Size = new Size(290, 32);
-            customTextBoxSifre.TabIndex = 104;
-            customTextBoxSifre.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            customTextBoxSifre.TextCustom = "";
-            customTextBoxSifre.UnderlinedStyle = false;
-            customTextBoxSifre.KeyPress += KullaniciGiris_KeyPress;
+            ctbSifre.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            ctbSifre.BackColor = Color.White;
+            ctbSifre.BorderColor = Color.Silver;
+            ctbSifre.BorderFocusColor = Color.HotPink;
+            ctbSifre.BorderSize = 1;
+            ctbSifre.Font = new Font("Segoe UI", 8F);
+            ctbSifre.ForeColor = Color.Black;
+            ctbSifre.Location = new Point(58, 84);
+            ctbSifre.Margin = new System.Windows.Forms.Padding(1);
+            ctbSifre.Multiline = false;
+            ctbSifre.Name = "ctbSifre";
+            ctbSifre.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            ctbSifre.PasswordChar = true;
+            ctbSifre.PlaceholderColor = Color.DarkGray;
+            ctbSifre.PlaceholderText = "Şifre";
+            ctbSifre.ReadOnly = false;
+            ctbSifre.SelectionStart = 0;
+            ctbSifre.Size = new Size(225, 33);
+            ctbSifre.TabIndex = 104;
+            ctbSifre.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            ctbSifre.TextCustom = "";
+            ctbSifre.UnderlinedStyle = false;
+            ctbSifre.KeyPress += KullaniciGiris_KeyPress;
+            // 
+            // headerPanel1
+            // 
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = Color.Firebrick;
+            headerPanel1.Baslik = "Kullanıcı Giriş";
+            headerPanel1.Location = new Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new Size(293, 25);
+            headerPanel1.TabIndex = 105;
+            // 
+            // btnSifreDegistir
+            // 
+            btnSifreDegistir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnSifreDegistir.BackColor = Color.Transparent;
+            btnSifreDegistir.FlatAppearance.BorderSize = 0;
+            btnSifreDegistir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSifreDegistir.ForeColor = Color.White;
+            btnSifreDegistir.IconChar = FontAwesome.Sharp.IconChar.Key;
+            btnSifreDegistir.IconColor = Color.White;
+            btnSifreDegistir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSifreDegistir.IconSize = 36;
+            btnSifreDegistir.Location = new Point(12, 41);
+            btnSifreDegistir.Name = "btnSifreDegistir";
+            btnSifreDegistir.Size = new Size(40, 38);
+            btnSifreDegistir.TabIndex = 106;
+            btnSifreDegistir.UseVisualStyleBackColor = false;
+            btnSifreDegistir.Click += btnSifreDegistir_Click;
             // 
             // UserLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(421, 202);
-            Controls.Add(customTextBoxSifre);
-            Controls.Add(customTextBoxKullaniciAdi);
+            ClientSize = new Size(293, 159);
+            Controls.Add(btnSifreDegistir);
+            Controls.Add(headerPanel1);
+            Controls.Add(ctbSifre);
+            Controls.Add(ctbKullaniciAdi);
             Controls.Add(labelUyariSifre);
             Controls.Add(labelUyariKullaniciAdi);
-            Controls.Add(panelHeader);
             Controls.Add(roundedButtonLogin);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -223,18 +191,12 @@ namespace YektamakDesktop.Formlar
             Text = "KullaniciGiris";
             Load += UserLogin_Load;
             KeyPress += KullaniciGiris_KeyPress;
-            panelHeader.ResumeLayout(false);
-            panelHeader.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private CustomControls.RoundedButton roundedButtonLogin;
-        private CustomControls.RoundedButton buttonClose;
-        private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.Label labelHeader;
-        private CustomControls.RoundedButton buttonHelp;
         private System.Windows.Forms.Label labelUyariSifre;
         private System.Windows.Forms.Label labelUyariKullaniciAdi;
 		private CustomTextBox customTextBoxYeniSifre;
@@ -250,14 +212,14 @@ namespace YektamakDesktop.Formlar
 			newPasswordMode = true;
 			this.Height = this.Height + 126;
 			customTextBoxYeniSifre.PlaceholderText = "Yeni Şifre";
-			customTextBoxYeniSifre.Location = new Point(customTextBoxSifre.Location.X, customTextBoxSifre.Location.Y + 42);
-			customTextBoxYeniSifre.Width = customTextBoxSifre.Width;
+			customTextBoxYeniSifre.Location = new Point(ctbSifre.Location.X, ctbSifre.Location.Y + 42);
+			customTextBoxYeniSifre.Width = ctbSifre.Width;
 			customTextBoxYeniSifre.TextChanged += PasswordChar;
 			this.Controls.Add(customTextBoxYeniSifre);
 
 			customTextBoxYeniSifreTekrar.PlaceholderText = "Yeni Şifre tekrar";
 			customTextBoxYeniSifreTekrar.Location = new Point(customTextBoxYeniSifre.Location.X, customTextBoxYeniSifre.Location.Y + 42);
-			customTextBoxYeniSifreTekrar.Width = customTextBoxSifre.Width;
+			customTextBoxYeniSifreTekrar.Width = ctbSifre.Width;
 			customTextBoxYeniSifreTekrar.TextChanged += PasswordChar;
 			this.Controls.Add(customTextBoxYeniSifreTekrar);
 
@@ -276,8 +238,10 @@ namespace YektamakDesktop.Formlar
 			this.Controls.Add(labelUyariYeniSifreTekrar);
         }
 
-        private CustomTextBox customTextBoxKullaniciAdi;
-        private CustomTextBox customTextBoxSifre;
+        private CustomTextBox ctbKullaniciAdi;
+        private CustomTextBox ctbSifre;
+        public HeaderPanel headerPanel1;
+        private RoundedIconButton btnSifreDegistir;
     }
     
 }

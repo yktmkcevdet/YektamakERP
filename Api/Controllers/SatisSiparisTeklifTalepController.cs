@@ -1,20 +1,42 @@
-﻿using Api.DatabaseJobs;
-using Models;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
-
+using Models;
+using static Api.Controllers.GeneralMethods;
 namespace Api.Controllers
 {
     public class SatisSiparisTeklifTalepController
     {
-        [HttpPost, Route("api/SaveSatisSiparisTeklifTalep")]
-        public string SaveSatisSiparis([FromBody] string restData)
+        private readonly IDataAccessLayer _dataAccessLayer;
+
+        public SatisSiparisTeklifTalepController(IDataAccessLayer dataAccessLayer)
         {
-            return GeneralMethods.ResultData<SatisSiparisTeklifTalep>(restData, DataBaseJobsSatisSiparisTeklifTalep.SaveSatisSiparisTeklifTalep);
+            _dataAccessLayer = dataAccessLayer;
         }
-        [HttpPost, Route("api/GetFilteredSatisSiparisTeklifTalep")]
-        public string GetFilteredSatisSiparisTeklifTalep([FromBody] string restData)
+
+        [HttpPost, Route("api/SaveSatisSiparisTeklifTalep")]
+        public string SaveSatisSiparis([FromBody] string siparisTeklifTalep)
         {
-            return GeneralMethods.ResultData<SatisSiparisTeklifTalep>(restData, DataBaseJobsSatisSiparisTeklifTalep.GetFilteredSatisSiparisTeklifTalep);
+            string result = _dataAccessLayer.SaveObject(JsonStringToModel<SatisTeklifTalep>(siparisTeklifTalep), "spSaveSatisSiparisTeklifTalep");
+            return result;
+        }
+        [HttpPost, Route("api/GetSatisTeklifTalep")]
+        public string GetSatisTeklifTalep([FromBody] string siparisTeklifTalep)
+        {
+            string result = _dataAccessLayer.GetObject(JsonStringToModel<SatisTeklifTalep>(siparisTeklifTalep), "spGetSatisSiparisTeklifTalep");
+            return result;
+        }
+        [HttpGet, Route("api/GetSiparisTeklifTalep/{teklifTalepId}")]
+        public string GetSatisSiparisTeklifTalepWithId(string teklifTalepId)
+        {
+            string result  = _dataAccessLayer.GetObject(teklifTalepId, "spGetSatisSiparisTeklifTalep");
+            return result;
+        }
+        [HttpDelete, Route("api/DeleteSatisSiparisTeklifTalep/{teklifTalepId}")]
+        public string DeleteSatisTeklifTalep(string teklifTalepId)
+        {
+            SatisTeklifTalep satisTeklifTalep = new SatisTeklifTalep();
+            satisTeklifTalep.Id = int.Parse(teklifTalepId);
+            return _dataAccessLayer.DeleteObject(satisTeklifTalep, "spDeleteSatisSiparisTeklifTalep");
         }
     }
 }

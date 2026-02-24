@@ -1,10 +1,11 @@
 ﻿@page "/ProjeDosyalari/" 
 
+@using ApiService.Interfaces
 @using BlazorApp1.Features.Commands.Account.Login
 @using Models
 @using ApiService
 @using System.Data
-@using Utilities;
+@using Utilities.Interfaces;
 
 <h3>Deneme</h3>
 <PageTitle>Proje Dosyaları</PageTitle>
@@ -14,7 +15,7 @@
     </button>
     <select class="form-control" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
         <option value="">Seçim Yapınız</option>
-        @foreach (var item in _constants.Projes())
+        @foreach (var item in _cache.projeList)
         {
             <option value="@item.Id">@item.kod</option>
         }
@@ -50,7 +51,6 @@ else
             {
                 <tr>
                     <td>@stokKart.Id</td>
-                    <td>@stokKart.proje.kod</td>
                     <td>@stokKart.kod</td>
                     <td>@stokKart.ad</td>
                     <td class="image-cell" @onclick="()=>PdfGoster(stokKart)" style="cursor: pointer;">
@@ -72,5 +72,5 @@ else
 @code {
 
     @inject UserSession _userSession
-    private ProgramConst _constants;
+    @inject ICache _cache;
 }

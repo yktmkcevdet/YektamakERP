@@ -1,0 +1,196 @@
+﻿namespace YektamakDesktop.Formlar.Satinalma
+{
+    partial class SatinalmaTekliflerFormu
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            teklifiSiparişeDönüştürToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            teklifiGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            clbProjeKod = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbStokGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
+            clbMalzemeGrup = new YektamakDesktop.CustomControls.FilterableComboBox();
+            contextMenuStrip1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // headerPanel1
+            // 
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Caption";
+            headerPanel1.Location = new System.Drawing.Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new System.Drawing.Size(959, 25);
+            headerPanel1.TabIndex = 0;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(0, 200);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(959, 473);
+            universalGrid1.TabIndex = 1;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { teklifiSiparişeDönüştürToolStripMenuItem, teklifiGörüntüleToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(200, 48);
+            // 
+            // teklifiSiparişeDönüştürToolStripMenuItem
+            // 
+            teklifiSiparişeDönüştürToolStripMenuItem.Name = "teklifiSiparişeDönüştürToolStripMenuItem";
+            teklifiSiparişeDönüştürToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            teklifiSiparişeDönüştürToolStripMenuItem.Text = "Teklifi Siparişe Dönüştür";
+            // 
+            // teklifiGörüntüleToolStripMenuItem
+            // 
+            teklifiGörüntüleToolStripMenuItem.Name = "teklifiGörüntüleToolStripMenuItem";
+            teklifiGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            teklifiGörüntüleToolStripMenuItem.Text = "Teklifi Görüntüle";
+            teklifiGörüntüleToolStripMenuItem.Click += teklifiGörüntüleToolStripMenuItem_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(48, 55);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(65, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Proje Kodu";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(48, 91);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(66, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Stok Grubu";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(48, 127);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(91, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Malzeme Grubu";
+            // 
+            // clbProjeKod
+            // 
+            clbProjeKod.BorderColor = System.Drawing.Color.Silver;
+            clbProjeKod.BorderRadius = 8;
+            clbProjeKod.BorderSize = 1;
+            clbProjeKod.DisplayMember = "ad";
+            clbProjeKod.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbProjeKod.Location = new System.Drawing.Point(145, 51);
+            clbProjeKod.Margin = new System.Windows.Forms.Padding(1);
+            clbProjeKod.Name = "clbProjeKod";
+            clbProjeKod.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbProjeKod.PlaceholderText = "Seçiniz...";
+            clbProjeKod.Size = new System.Drawing.Size(175, 29);
+            clbProjeKod.TabIndex = 9;
+            clbProjeKod.ValueMember = "Id";
+            // 
+            // clbStokGrup
+            // 
+            clbStokGrup.BorderColor = System.Drawing.Color.Silver;
+            clbStokGrup.BorderRadius = 8;
+            clbStokGrup.BorderSize = 1;
+            clbStokGrup.DisplayMember = "ad";
+            clbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbStokGrup.Location = new System.Drawing.Point(145, 86);
+            clbStokGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbStokGrup.Name = "clbStokGrup";
+            clbStokGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbStokGrup.PlaceholderText = "Seçiniz...";
+            clbStokGrup.Size = new System.Drawing.Size(175, 29);
+            clbStokGrup.TabIndex = 10;
+            clbStokGrup.ValueMember = "Id";
+            // 
+            // clbMalzemeGrup
+            // 
+            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrup.BorderRadius = 8;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbMalzemeGrup.Location = new System.Drawing.Point(145, 121);
+            clbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrup.Name = "clbMalzemeGrup";
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.Size = new System.Drawing.Size(175, 29);
+            clbMalzemeGrup.TabIndex = 11;
+            clbMalzemeGrup.ValueMember = "Id";
+            // 
+            // SatinalmaTekliflerFormu
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(959, 674);
+            Controls.Add(clbMalzemeGrup);
+            Controls.Add(clbStokGrup);
+            Controls.Add(clbProjeKod);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(universalGrid1);
+            Controls.Add(headerPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Name = "SatinalmaTekliflerFormu";
+            Text = "SatinalmaTeklifTaleplerFormu";
+            contextMenuStrip1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        public CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.UniversalGrid universalGrid1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem teklifiSiparişeDönüştürToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private CustomControls.FilterableComboBox clbProjeKod;
+        private CustomControls.FilterableComboBox clbStokGrup;
+        private CustomControls.FilterableComboBox clbMalzemeGrup;
+        private System.Windows.Forms.ToolStripMenuItem teklifiGörüntüleToolStripMenuItem;
+    }
+}

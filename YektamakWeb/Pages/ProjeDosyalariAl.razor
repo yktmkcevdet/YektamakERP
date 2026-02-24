@@ -10,6 +10,7 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Utilities.Implementations
 @using Utilities.Interfaces
+@using ApiService.Interfaces
 @inject IJSRuntime JS
 <h3>ProjeDosyalariAl</h3>
 <form method="post" enctype="multipart/form-data">
@@ -17,7 +18,7 @@
         <label for="comboBox">Projeler</label>
         <select id="comboBox" name="ComboBoxValue" @onchange="OnProjeChanged">
             <option value="">Seçim Yapınız</option>
-            @foreach (var item in _constants.Projes())
+            @foreach (var item in _cache.projeList)
             {
                 <option value="@item.Id">@item.kod</option>
             }
@@ -46,8 +47,10 @@
 
 @code {
     [Inject] IHttpContextAccessor? _httpContextAccessor { get; set; }
-    [Inject] ProgramConst? _constants { get; set; }
-
+    [Inject] IProjeService _projeService { get; set; }
+    [Inject] IStokService _stokService { get; set; }
+    [Inject] IDataTableMapper _dataTableMapper { get; set; }
+    @inject ICache _cache
     private List<string> selectedFiles = new();
     private ElementReference inputElement; // HTML input öğesine referans
     private string? resultMessage; // Sonuç mesajı
@@ -124,7 +127,7 @@
                 resultMessage = "Dosya boyutu çok büyük. Maksimum izin verilen boyut: 10 MB.";
                 return;
             }
-            resultMessage = await WebMethods.DeleteProjeDosya(proje);
+            resultMessage = await _projeService.DeleteProjeDosya(proje);
             Dictionary<int,string> fileDict = new Dictionary<int,string>();
 
             // foreach (File file in uploadedFile)
@@ -157,17 +160,12 @@
                 StokKart stokKart = new StokKart();
                 MalzemeGrup malzemeGrup = new MalzemeGrup();
                 malzemeGrup.ad = rowData.GetCell(9)?.ToString() ?? "";
-                IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
-                IDataTableHelper dataTableConverter = new DataTableHelper();
-                malzemeGrup = dataTableConverter.DataRowToModel<MalzemeGrup>(jsonConvertHelper.JsonStringToDataSet(WebMethods.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
-                stokKart.parcaGrup.Id = malzemeGrup.parcaGrupId;
+                IJsonConverter jsonConvertHelper = new JsonConverter();
+                malzemeGrup = _dataTableMapper.MapToEntity<MalzemeGrup>(jsonConvertHelper.DeserializeToDataSet(_stokService.GetMalzemeGrup(malzemeGrup)).Tables[0].Rows[0]);
                 stokKart.malzemeGrup.Id = malzemeGrup.Id;
-                stokKart.proje.Id = proje.Id;
-                stokKart.kod = rowData.GetCell(1)?.ToString() ?? "";
+                stokKart.parcaKod = rowData.GetCell(1)?.ToString() ?? "";
                 stokKart.ad = rowData.GetCell(2)?.ToString() ?? "";
                 stokKart.parcaAdi = rowData.GetCell(2)?.ToString() ?? "";
-                stokKart.miktar = Convert.ToInt32(rowData.GetCell(3)?.ToString() ?? "");
-                stokKart.adet = Convert.ToInt32(rowData.GetCell(4)?.ToString() ?? "");
                 stokKart.fark = Convert.ToInt32(rowData.GetCell(5)?.ToString() ?? "");
                 stokKart.boyut = rowData.GetCell(6)?.ToString() ?? "";
                 resultMessage = rowData.GetCell(7)?.ToString() ?? "0";
@@ -177,12 +175,12 @@
                 stokKart.agirlik = Convert.ToDouble(rowData.GetCell(10)?.ToString() ?? "");
                 stokKart.olcuBirim.Id = 1;
                 stokKart.isFromExcel = true;
-                stokKart.parcaAltGrup.Id = 1;
+                stokKart.malzemeAltGrup.Id = 1;
                 stokKart.stokTip.Id = 1;
                 stokKart.profilTipId = 1;
-                var pdfFiles = files.First(file => file.Contains(stokKart.kod+".pdf"));
+                var pdfFiles = files.First(file => file.Contains(stokKart.parcaKod+".pdf"));
                 byte[] pdfContent = ReadPdfAsBinary(pdfFiles);
-                resultMessage=await WebMethods.SaveStokKart(stokKart);
+                resultMessage = await _stokService.SaveStokKart(stokKart);
             }
         }
         catch (Exception ex)
@@ -208,7 +206,7 @@
     }
     private string StokKoduOlustur(StokKart stokKart)
     {
-        if (stokKart.ad=="" || stokKart.kod=="")
+        if (stokKart.ad=="" || stokKart.parcaKod=="")
         {
             resultMessage = "kod veya parça adı alanı dolu omalıdır";
         }

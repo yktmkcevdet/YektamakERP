@@ -1,62 +1,52 @@
-﻿using Api.DatabaseJobs;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
+using static Api.Controllers.GeneralMethods;
 namespace Api.Controllers
 {
-    public class FirmaController : Controller
+    public class FirmaController:Controller
     {
-        private static JsonConverter[] jsonConverters;
-        private JsonSerializerSettings jsonSerializerSettings;
+        private readonly IDataAccessLayer _dataAccessLayer;
 
-        static FirmaController()
+        public FirmaController(IDataAccessLayer dataAccessLayer)
         {
-            IsoDateTimeConverter converter1 = new IsoDateTimeConverter();
-            converter1.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-            jsonConverters = new JsonConverter[] { converter1 };
+            _dataAccessLayer = dataAccessLayer;
         }
-
-        public FirmaController()
+        [HttpPost, Route("api/SaveFirma")]
+        public string SaveFirma([FromBody] Firma firma)
         {
-            JsonSerializerSettings settings1 = new JsonSerializerSettings();
-            settings1.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            settings1.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            settings1.Converters = jsonConverters;
-            this.jsonSerializerSettings = settings1;
+            string result = _dataAccessLayer.SaveObject(firma, "spSaveFirma");
+            return result;
         }
-
-
-        [HttpPost, Route("api/SaveFirma/")]
-        public string SaveFirma([FromBody] string restData)
+        [HttpPost, Route("api/GetFirma")]
+        public string GetFirma([FromBody] Firma firma)
         {
-            return GeneralMethods.ResultData<Firma>(restData, DataBaseJobsFirma.SaveFirma);
+            string result = _dataAccessLayer.GetObject(firma, "spGetFirma");
+            return result;
         }
-
-
-        [HttpPost, Route("api/FirmaGuncelle/")]
-        public string FirmaGuncelle([FromBody] string restData)
+        [HttpGet, Route("api/GetFirma")]
+        public string GetFirma()
         {
-			return GeneralMethods.ResultData<Firma>(restData, DataBaseJobsFirma.UpdateFirma);
+            string result = _dataAccessLayer.GetObject("spGetFirma");
+            return result;
         }
-
-        [HttpPost, Route("api/GetFilteredFirma/")]
-        public string GetFilteredFirma([FromBody] string restData)
+        [HttpPost, Route("api/GetAdres")]
+        public string GetAdres([FromBody] Adres adres)
         {
-            return GeneralMethods.ResultData<Firma>(restData, DataBaseJobsFirma.GetFilteredFirma);
-		}
-
-        [HttpPost, Route("api/DeleteFirma/")]
-        public string DeleteFirma([FromBody] string restData)
-        {
-            return GeneralMethods.ResultData<Firma>(restData, DataBaseJobsFirma.DeleteFirma);
+            string result = _dataAccessLayer.GetObject(adres, "spGetAdres");
+            return result;
         }
-
-        [HttpPost, Route("api/DetayliFirma/")]
-        public string DetaylıFirma([FromBody] string restData)
+        [HttpPost, Route("api/SaveAdres")]
+        public string SaveAdres([FromBody] Adres adres)
         {
-            return GeneralMethods.ResultData<Firma>(restData, DataBaseJobsFirma.GetDetailedFirmaFromFirmaId);
+            string result = _dataAccessLayer.SaveObject(adres, "spSaveAdres");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteAdres")]
+        public string DeleteAdres([FromBody] Adres adres)
+        {
+            string result = _dataAccessLayer.DeleteObject(adres, "spDeleteAdres");
+            return result;
         }
     }
 }

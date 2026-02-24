@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using ApiService.Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,26 +13,24 @@ namespace YektamakDesktop.Abstracts
 {
     public class DataControl:IDisposable
 	{
-		private readonly IDataTableHelper dataTableConverter;
-		private readonly IJsonConvertHelper jsonConverter;
-
-		public bool newRec = true;
-		private RoundedButton _buttonSil;
-		public RoundedButton buttonSil
+        public bool newRec = true;
+		private RoundedIconButton _buttonSil;
+		public RoundedIconButton buttonSil
 		{
 			get => _buttonSil;
 			set
 			{
 				_buttonSil = value;
-				_buttonSil.Tag = "  Sil";
-				_buttonSil.Width = 35;
-				_buttonSil.Height = 28;
+				_buttonSil.Tag = "Sil";
+                _buttonSil.Width = 30;
+				_buttonSil.Height = 25;
 				_buttonSil.TabIndex = 99;
-				_buttonSil.BorderRadius = 5;
+				_buttonSil.CornerRadius = 5;
 				_buttonSil.BackColor = Color.Transparent;
-				_buttonSil.BackgroundImage = Resources.delete_icon;
-				_buttonSil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			}
+				_buttonSil.BackgroundImage = Resources.sil;
+				_buttonSil.BackgroundImageLayout = ImageLayout.Zoom;
+				_buttonSil.Cursor = Cursors.Hand;
+            }
 		}
 		private Label _order;
 		public Label order 
@@ -44,35 +43,23 @@ namespace YektamakDesktop.Abstracts
 				_order.Width = 40;
 				_order.Height = 28;
 				_order.TabIndex = 0;
-				_order.Tag = "No";
+				_order.Tag = "#";
 			}
 		}
 		public DataControl()
 		{
-			buttonSil = new RoundedButton();
+			buttonSil = new RoundedIconButton();
 			order=new Label();
 		}
 
-        public DataControl(IDataTableHelper dataTableConverter, IJsonConvertHelper jsonConverter)
-        {
-            this.dataTableConverter = dataTableConverter;
-            this.jsonConverter = jsonConverter;
-        }
 
-        public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()
-		{
-			T filterData = new T();
-			string result = method(filterData);
-			DataSet dataSet = jsonConverter.JsonStringToDataSet(result);
-			List<T> listEntity = new List<T>();
-			foreach (DataRow dataRow in dataSet.Tables[0].Rows)
-			{
-				T entity = new T();
-				entity = dataTableConverter.DataRowToModel<T>(dataRow);
-				listEntity.Add(entity);
-			}
-			return listEntity;
-		}
+  //      public List<T> ListEntity<T>(Func<T, string> method) where T : IEntity,new()
+		//{
+		//	T filterData = new T();
+		//	string result = method(filterData);
+  //          List<T> listEntity = _jsonConverter.DeserializeToModelList<T>(result);
+		//	return listEntity;
+		//}
 		public virtual void FillComboBoxListFromDataSet(CustomComboListBox customComboListBox, DataSet dataSet)
 		{
 			if (dataSet != null)
@@ -83,7 +70,6 @@ namespace YektamakDesktop.Abstracts
 				}
 			}
 		}
-
         public void Dispose()
         {
             

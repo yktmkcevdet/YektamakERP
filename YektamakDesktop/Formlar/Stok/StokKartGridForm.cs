@@ -1,114 +1,283 @@
-﻿using Models;
-using ApiService;
+﻿using ApiService.Interfaces;
+using Models;
+using Models.DTO;
+using Models.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+using YektamakDesktop.Formlar.Genel;
 
 namespace YektamakDesktop.Formlar.Stok
 {
     public partial class StokKartGridForm : Form
     {
-        private static StokKartGridForm _stokKartGridForm;
-        public static StokKartGridForm stokKartGridForm 
-        { 
-            get 
-            {
-                if (_stokKartGridForm == null)
-                { 
-                    _stokKartGridForm = new StokKartGridForm(); 
-                    GlobalData.Yetki(ref _stokKartGridForm); 
-                } 
-                return _stokKartGridForm; 
-            } 
-            set 
-            { 
-                _stokKartGridForm = value; 
-            } 
-        }
-        public StokKartGridForm()
+        private readonly IStokService _stokService;
+        private readonly ICache _cache;
+        private readonly IConvertHelper _convertHelper;
+        private readonly IProjeService _projeService;
+        public StokKartGridForm(ICache cache, IConvertHelper convertHelper, IStokService stokService, IProjeService projeService)
         {
+            _stokService = stokService;
+            _cache = cache;
+            _convertHelper = convertHelper;
+            _projeService = projeService;
             InitializeComponent();
+            InitializeGridForm();
         }
-        #region MouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        private void InitializeGridForm()
         {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
+            Controls.Add(universalGrid1);
+            universalGrid1.MouseDown1 += universalGrid1_MouseDown1;
+            fcbProjeKodu.SetDataSource(_cache.projeList.Select(p => new { p.Id, p.kod}).Distinct().ToList());
+            fcbStokGrup.SetDataSource(_cache.stokGrups);
+            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
+            fcbMalzemeAltGrup.SetDataSource(_cache.malzemeAltGrups);
+            fcbMalzemeAltGrup2.SetDataSource(_cache.malzemeAltGrup2List);
+            fcbStokTip.SetDataSource(_cache.stokTips);
+            Binding();
+            Load += async (s, e) => await StokKartGridForm_Load(s, e);
+            fcbProjeKodu.SelectedIndexChanged += async (s, e) => await projeKodu_SelectedIndexChanged(s, e);
+            stokKartınıSilToolStripMenuItem.Click += async (s, e) => await stokKartınıSilToolStripMenuItem_Click(s,e);
+
+            ctbParcaAdi.TextChanged += ctbParcaAdi_TextChanged;
         }
 
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
+        private void ctbParcaAdi_TextChanged(object s, EventArgs e)
         {
-            if (mouseDown)
+            if (ctbParcaAdi.TextCustom.Length > 2)
             {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
+                stokKartFilter.stokKart.ad = ctbParcaAdi.TextCustom;
+                //stokKartFilter.stokKart.parcaAdi = ctbParcaAdi.TextCustom;
+                //stokKartFilter.stokKart.boyut = ctbParcaAdi.TextCustom;
+            }
+            else
+            {
+                stokKartFilter.stokKart.ad = null;
+                //stokKartFilter.stokKart.parcaAdi = String.Empty;
+                //stokKartFilter.stokKart.boyut = String.Empty;
+            }
+            GridYenile();
+        }
+
+        private List<ProjeStokKartDTO> _stokKartDTOs;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public List<ProjeStokKartDTO> stokKartDTOs
+        {
+            get
+            {
+                if (_stokKartDTOs == null)
+                {
+                    _stokKartDTOs = new List<ProjeStokKartDTO>();
+                }
+                return _stokKartDTOs;
+            }
+            set
+            {
+                _stokKartDTOs = value;
             }
         }
 
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
+        private List<ProjeStokKart> _stokKarts;
+        private List<ProjeStokKart> stokKarts
         {
-            mouseDown = false;
-        }
-        #endregion MouseDrag
-        private void buttonTumKayitlariGetir_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Rows.Clear();
-            string jsonString = WebMethods.GetStokKart(new StokKart());
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(jsonString);
-            //GlobalData.FillDataGrid(dataSet.Tables[0],dataGridView1, new StokKart());
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            StokKart stokKart = new();
-            
-            if (e.ColumnIndex == dataGridView1.Rows[e.RowIndex].Cells["Guncelle"].ColumnIndex)
+            get
             {
-                
+                if (_stokKarts == null)
+                {
+                    _stokKarts = new List<ProjeStokKart>();
+                }
+                return _stokKarts;
             }
-            if (e.ColumnIndex == dataGridView1.Rows[e.RowIndex].Cells["Sil"].ColumnIndex)
+            set
             {
-                
+                _stokKarts = value;
             }
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private ProjeStokKart _stokKartFilter;
+        private ProjeStokKart stokKartFilter
         {
-            CloseForm();
-        }
-        private void CloseForm()
-        {
-            GlobalData.RemoveLastForm();
-            stokKartGridForm = null;
-            this.Close();
-        }
-
-        private void teklifOlusturToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dataGridView1_CellClick(null, null);
+            get
+            {
+                if (_stokKartFilter == null)
+                {
+                    _stokKartFilter = new ProjeStokKart();
+                }
+                return _stokKartFilter;
+            }
+            set { _stokKartFilter = value; }
         }
 
-        private void rButtonCikis_Click(object sender, EventArgs e)
+        private async Task GridDoldur()
         {
-            CloseForm();
+            this.Enabled = false;
+            stokKarts.Clear();
+            stokKarts = await _projeService.GetProjeStokKart(stokKartFilter); 
+            List<ProjeStokKartDTO> pskDTOs = new List<ProjeStokKartDTO>();
+            stokKartDTOs = stokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).ToList();
+            await universalGrid1.SetData(stokKartDTOs, this.Name, true);
+            this.Enabled = true;
+        }
+        private void malzemeGrubu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridYenile();
         }
 
-        private void buttonSatisSiparisEkle_Click(object sender, EventArgs e)
+        private void GridYenile()
         {
-            
+            ProjeStokKartDTO stokKartDTO = _convertHelper.ToDTO<ProjeStokKartDTO>(stokKartFilter);
+            universalGrid1.Filtrele(stokKartDTO);
+        }
+
+        public void buttonEkle_Click(object sender, EventArgs e)
+        {
+            StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+            stokKartKayitFormu.AfterSave += StokKartKayitFormu_AfterSave;
+            if (fcbMalzemeGrup.SelectedIndex != -1) stokKartKayitFormu.projeStokKart.stokKart.malzemeGrup.Id = int.Parse(fcbMalzemeGrup.SelectedValue.ToString());
+            if (fcbMalzemeAltGrup.SelectedIndex != -1) stokKartKayitFormu.projeStokKart.stokKart.malzemeAltGrup.Id = int.Parse(fcbMalzemeAltGrup.SelectedValue.ToString());
+            if (fcbMalzemeAltGrup2.SelectedIndex != -1) stokKartKayitFormu.projeStokKart.stokKart.malzemeAltGrup2.Id = int.Parse(fcbMalzemeAltGrup2.SelectedValue.ToString());
+            if (stokKartKayitFormu != null)
+            {
+                stokKartKayitFormu.Show();
+            }
+        }
+        private void Binding()
+        {
+            BindHelper.BindData(fcbProjeKodu, stokKartFilter.proje, nameof(stokKartFilter.proje.Id));
+            BindHelper.BindData(fcbStokGrup, stokKartFilter.stokKart.stokGrup, nameof(stokKartFilter.stokKart.stokGrup.Id));
+            BindHelper.BindData(fcbMalzemeGrup, stokKartFilter.stokKart.malzemeGrup, nameof(stokKartFilter.stokKart.malzemeGrup.Id));
+            BindHelper.BindData(fcbMalzemeAltGrup, stokKartFilter.stokKart.malzemeAltGrup, nameof(stokKartFilter.stokKart.malzemeAltGrup.Id));
+            BindHelper.BindData(fcbMalzemeAltGrup2, stokKartFilter.stokKart.malzemeAltGrup2, nameof(stokKartFilter.stokKart.malzemeAltGrup2.Id));
+            BindHelper.BindData(fcbStokTip, stokKartFilter.stokKart.stokTip, nameof(stokKartFilter.stokKart.stokTip.Id));
+            BindHelper.BindData(ctbParcaAdi, stokKartFilter.stokKart, nameof(stokKartFilter.stokKart.ad));
+        }
+        private async Task projeKodu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await GridDoldur();
+        }
+
+        private void cbxStokGrup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridYenile();
+        }
+
+        private void cbxMalzemeAltGrup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridYenile();
+        }
+
+        private void cbxMalzemeAltGrup2_DoubleClick(object sender, EventArgs e)
+        {
+            DIContainer.GetService<AnaVeriTanimlamaFormu<MalzemeAltGrup2>>();
+            AnaVeriTanimlamaFormu<MalzemeAltGrup2> anaVeriTanimlamaFormu = FormFactory.CreateForm<AnaVeriTanimlamaFormu<MalzemeAltGrup2>>();
+            if (anaVeriTanimlamaFormu != null) anaVeriTanimlamaFormu.Show();
+        }
+
+        private void cbxStokTip_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridYenile();
+        }
+
+        private void StokKartGridForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
+        }
+
+        private async Task StokKartGridForm_Load(object sender, EventArgs e)
+        {
+            await universalGrid1.SetData(stokKartDTOs, this.Name, true);
+        }
+
+        private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var proejStokKartDTO = (ProjeStokKartDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+            ProjeStokKart projeStokKart = _convertHelper.ToEntity<ProjeStokKart>(proejStokKartDTO);
+            StokKartKayitFormu stokKartKayitFormu = FormFactory.CreateForm<StokKartKayitFormu>();
+            stokKartKayitFormu.AfterSave += StokKartKayitFormu_AfterSave;
+            stokKartKayitFormu.UpdateMode(projeStokKart);
+            stokKartKayitFormu.Show();
+        }
+
+        private void StokKartKayitFormu_AfterSave(object sender, object e)
+        {
+            var liste = (BindingList<ProjeStokKartDTO>)universalGrid1.binding.DataSource;
+            var index = liste.ToList().FindIndex(s => s.Id == ((ProjeStokKart)e).Id);
+            if (index == -1)
+            {
+                liste.Add(_convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e));
+            }
+            else
+            {
+                liste[index] = _convertHelper.ToDTO<ProjeStokKartDTO>((ProjeStokKart)e);
+            }
+        }
+
+        private void universalGrid1_MouseDown1(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(universalGrid1, e.Location);
+            }
+        }
+
+        private async Task stokKartınıSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show($"Seçilen kayıtlar silinecektir. Onaylıyor musunuz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string logDosyasi = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonTemplates), @"\Logs\app.log");
+            string klasor = Path.GetDirectoryName(logDosyasi);
+            if (!Directory.Exists(klasor))
+                Directory.CreateDirectory(klasor);
+            File.WriteAllText(logDosyasi, "Silinemeyen satırlar");
+            if (dialogResult == DialogResult.Yes)
+            {
+                List<ProjeStokKartDTO> projeStokKartDTOs = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
+                foreach (var item in  projeStokKartDTOs)
+                {
+                    if (!_cache.projeList.Any(p => p.Id==item.projeId && p.sorumluList.Where(s=>s.personel.Id == _cache.kullanici.personel.Id).Count()>0 && p.Id == item.projeId))
+                    {
+                        File.AppendAllText(logDosyasi, $"{item.stokKartkod} koduna ait stok kartını silemezsiniz\r\n");
+                    }
+                    else
+                    {
+                        string jsonResult = await _projeService.DeleteProjeStokKart(_convertHelper.ToEntity<ProjeStokKart>(item));
+                        if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                        {
+                            File.AppendAllText(logDosyasi, $"{item.stokKartkod} {jsonResult}\r\n");
+                        }
+                        else
+                        {
+                            universalGrid1.binding.Remove(item);
+                        }
+                    }
+                }
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = logDosyasi,
+                    UseShellExecute = true
+                });
+            }
         }
     }
-
 }

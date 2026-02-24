@@ -1,210 +1,172 @@
-﻿using Models;
-using ApiService;
+﻿using ApiService.Interfaces;
+using Models;
+using Models.Attributes;
+using Models.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
-    public partial class YetkiTanimlari : Form, IForm
+    public partial class YetkiTanimlari : Form
     {
-        private static YetkiTanimlari _yetkiTanimlari;
-        public static YetkiTanimlari yetkiTanimlari
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly ICache _cache;
+        private readonly IConvertHelper _convertHelper;
+        public YetkiTanimlari(IKullaniciYetkiService kullaniciYetkiService, ICache cache, IConvertHelper convertHelper)
         {
-            get
-            {
-                if (_yetkiTanimlari == null)
-                {
-                    _yetkiTanimlari = new YetkiTanimlari();
-                    GlobalData.Yetki(ref _yetkiTanimlari);
-                }
-                return _yetkiTanimlari;
-            }
-        }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        public YetkiTanimlari()
-        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+            _cache = cache;
             InitializeComponent();
-            controlsToDisable = new List<Control>()
-            {
-                treeView1,
-                comboListBoxRol
-            };
-            foreach (Rol rol in Enum.GetValues(typeof(Rol)))
-            {
-                comboListBoxRol.AddDataRow((int)rol, rol.ToString());
-            }
+            Initialize();
+            treeView1.AfterCheck += async (s, e) => await treeView1_AfterCheck(s, e);
+            comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
+            _convertHelper = convertHelper;
         }
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        private void Initialize()
         {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Location = new System.Drawing.Point(355, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(428, 421);
+            universalGrid1.TabIndex = 56;
+            Controls.Add(universalGrid1);
+            universalGrid1.Grid.MouseDown += universalGrid1_MouseDown;
         }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
-
         private void comboListBoxRol_SelectedIndexChanged(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
             Kullanici kullanici = new Kullanici();
-            kullanici.rolId = comboListBoxRol.selectedDataRowId;
-            string httpResult = WebMethods.GetKullaniciYetki(kullanici);
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(httpResult);
-            TreeNode treeNode;
-            foreach (DataRow dataRow in dataSet.Tables[0].Select("rolId=1")) //RolId=1 yazılmasının sebebi menü başlıklarının admin rolü için tanımlanmış olduğundan dolayı.
+            kullanici.rol.Id = int.Parse(comboListBoxRol.SelectedValue.ToString());
+            string jsonResult = _kullaniciYetkiService.GetKullaniciYetki(kullanici);
+            List<KullaniciYetki> kullaniciYetkiList = JsonConvert.DeserializeObject<List<KullaniciYetki>>(jsonResult);
+            TreeNodes(kullaniciYetkiList);
+            cbxKullanici.SetDataSource(_cache.kullaniciList.Where(k => k.rol.Id.ToString() == comboListBoxRol.SelectedValue.ToString()).ToList());
+        }
+        bool isLoading=false;
+        private void TreeNodes(List<KullaniciYetki> kullaniciYetkiList)
+        {
+            isLoading = true;
+            
+            foreach (KullaniciYetki yetki in kullaniciYetkiList.OrderBy(k => k.menu.Id).ThenBy(k=>k.altMenu.Id)) 
             {
-                treeNode = new TreeNode(dataRow["ad"].ToString());
-                treeNode.Checked = true;
-                treeNode.Name = dataRow["Id"].ToString();
-                // İkinci tablodan verileri kullanarak alt düğümleri oluştur
-                foreach (DataRow dr in dataSet.Tables[1].Select("rolId=" + comboListBoxRol.selectedDataRowId + " or rolId is null"))
+                var nodes=treeView1.Nodes.Find(yetki.menu.Id.ToString(),true);
+                if (nodes.Count()>0)
                 {
-                    if (dr["Id"].ToString() == dataRow["Id"].ToString() && !string.IsNullOrEmpty(dr["AltMenuId"].ToString()))
+                    TreeNode node = new TreeNode(yetki.altMenu.ad);
+                    node.Name = yetki.altMenu.Id.ToString();
+                    if (yetki.rol.Id != null)
                     {
-                        TreeNode node = new TreeNode(dr["EkranAdi"].ToString());
-                        node.Name = dr["AltMenuId"].ToString();
-                        foreach(DataRow dr1 in dataSet.Tables[1].Select("rolId=" + comboListBoxRol.selectedDataRowId + " or rolId is null"))
-                        {
-                            if (dr1["Id"].ToString() == dr["AltMenuId"].ToString())
-                            {
-                                TreeNode node1 = new TreeNode(dr1["EkranAdi"].ToString());
-                                node1.Name = dr1["AltMenuId"].ToString();
-                                foreach (DataRow dr2 in dataSet.Tables[1].Select("rolId=" + comboListBoxRol.selectedDataRowId + " or rolId is null"))
-                                {
-                                    if (dr2["Id"].ToString() == dr1["AltMenuId"].ToString())
-                                    {
-                                        TreeNode node2 = new TreeNode(dr2["EkranAdi"].ToString());
-                                        node2.Name = dr2["AltMenuId"].ToString();
-                                        if (!string.IsNullOrEmpty(dr2["YetkiId"].ToString()))
-                                        {
-                                            node2.Checked = true;
-                                        }
-                                        else
-                                        {
-                                            node2.Checked = false;
-                                        }
-                                        node1.Nodes.Add(node2);
-                                    }
-                                }
-                                if (!string.IsNullOrEmpty(dr1["YetkiId"].ToString()))
-                                {
-                                    node1.Checked = true;
-                                }
-                                else
-                                {
-                                    node1.Checked = false;
-                                }
-                                node.Nodes.Add(node1);
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(dr["YetkiId"].ToString()))
-                        {
-                            node.Checked = true;
-                        }
-                        else
-                        {
-                            treeNode.Checked = false;
-                        }
-                        treeNode.Nodes.Add(node);
+                        node.Checked = true;
+                    }
+                    nodes[0].Nodes.Add(node);
+                }
+                else if(kullaniciYetkiList.Any(k => k.altMenu.Id == yetki.menu.Id))
+                {
+                    var ytk = kullaniciYetkiList.FirstOrDefault(k => k.altMenu.Id == yetki.menu.Id);
+                    if (ytk != null)
+                    {
+                        TreeNode node = new TreeNode(ytk.menu.ad);
+                        node.Name = ytk.menu.Id.ToString();
+                        TreeNode altNode = new TreeNode(yetki.menu.ad);
+                        altNode.Name = yetki.menu.Id.ToString();
+                        node.Nodes.Add(altNode);
+                        treeView1.Nodes.Add(node);
                     }
                 }
-                treeView1.Nodes.Add(treeNode);
+                else 
+                {
+                    TreeNode node = new TreeNode(yetki.menu.ad);
+                    node.Name = yetki.menu.Id.ToString() ;
+                    
+                    treeView1.Nodes.Add(node);
+                }
+                
             }
+            isLoading = false;
         }
-
-        private async void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        private async Task treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
+            if (isLoading) return;
             Yetki yetki = new Yetki();
-            yetki.rolId = comboListBoxRol.selectedDataRowId;
-            if(e.Node.Parent != null)
+            yetki.rolId = int.Parse(comboListBoxRol.SelectedValue.ToString());
+            if (e.Node.Parent != null)
             {
-				yetki.menu.Id = int.TryParse(e.Node.Parent.Name, out int parentId) ? parentId : yetki.menu.Id;
-				yetki.ekran.altMenuId = int.Parse(e.Node.Name);
-			}
+                yetki.menu.Id = int.TryParse(e.Node.Parent.Name, out int parentId) ? parentId : yetki.menu.Id;
+                yetki.ekran.altMenuId = int.Parse(e.Node.Name);
+            }
             else
             {
-                yetki.menu.Id= int.Parse(e.Node.Name);
+                yetki.menu.Id = int.Parse(e.Node.Name);
             }
 
-			string httpResult = await WebMethods.SaveYetki(yetki);
-            if (httpResult.Contains("error"))
-            {
-                MessageBox.Show(httpResult);
-            }
-            else
-            {
-                MessageBox.Show("Yetki güncellendi");
-            }
+            string jsonResult = await _kullaniciYetkiService.SaveYetki(yetki);
+            MessageBox.Show(jsonResult);
         }
-
-        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        private TreeNode selectedNode;
+        private async void treeView1_MouseClick(object sender, MouseEventArgs e)
         {
-            TreeNode selectedNode = treeView1.HitTest(e.X, e.Y).Node;
+            selectedNode = treeView1.HitTest(e.X, e.Y).Node;
             treeView1.SelectedNode = selectedNode;
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(treeView1, e.X, e.Y);
             }
+            if (e.Button == MouseButtons.Left)
+            {
+                bool flowControl = await SetAlanYetkiList();
+                if (!flowControl)
+                {
+                    return;
+                }
+            }
         }
+        private static Type GetFormInstance(string formName)
+        {
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Type targetType = null;
+            foreach (var assembly in assemblies)
+            {
+                targetType = assembly.GetTypes()
+                    .Where(type => typeof(IEntity).IsAssignableFrom(type) && type.Name == formName)
+                    .FirstOrDefault();
 
+                if (targetType != null)
+                    break;
+            }
+            return targetType;
+        }
         private void menuEkle_Click(object sender, EventArgs e)
         {
             Menu menu = new Menu();
             menu.Id = int.Parse(treeView1.SelectedNode.Name);
-            AltMenuEkle altMenuEkle = AltMenuEkle.altMenuekle;
-            if(altMenuEkle != null )
-            {
-                altMenuEkle.Show();
-                altMenuEkle.SaveMode(menu);
-            }
+            AltMenuEkleForm altMenuEkleForm = FormFactory.CreateForm<AltMenuEkleForm>();
+            altMenuEkleForm.UpdateMode(menu);
+            altMenuEkleForm.Show();
         }
-        private void CloseForm()
-        {
-            this.Close();
-            GlobalData.RemoveLastForm();
-            _yetkiTanimlari = null;
-        }
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm();
-        }
-
-        private void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
         private async void menuSilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ekran ekran = new();
-            ekran.altMenuId = int.Parse(treeView1.SelectedNode.Name);
-            ekran.menu.Id = int.Parse(treeView1.SelectedNode.Parent.Name);
-            string httpResult = await WebMethods.DeleteEkran(ekran);
+            if (treeView1.SelectedNode.Parent == null)
+            {
+                ekran.menu.Id = int.Parse(treeView1.SelectedNode.Name);
+            }
+            else
+            {
+                ekran.menu.Id = int.Parse(treeView1.SelectedNode.Parent.Name);
+                ekran.altMenuId = int.Parse(treeView1.SelectedNode.Name);
+            }
+               
+            string httpResult = await _kullaniciYetkiService.DeleteEkran(ekran);
             if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show(httpResult);
@@ -213,7 +175,185 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
             {
                 MessageBox.Show("Menu başarı ile silindi!");
             }
-            comboListBoxRol_SelectedIndexChanged(null, null);
+            comboListBoxRol_SelectedIndexChanged(sender, e);
+        }
+        private void YetkiTanimlari_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
+        }
+        private AlanYetkiDTO alanYetki { get; set; } = new();
+        private List<AlanYetkiDTO> list { get; set; }
+        private void alanEkleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            universalGrid1.AddRow(list);
+            universalGrid1.SetData(list, this.Name, true);
+        }
+        private async void cbxKullanici_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool flowControl = await SetAlanYetkiList();
+            if (!flowControl)
+            {
+                return;
+            }
+        }
+        private async Task<bool> SetAlanYetkiList()
+        {
+            if (cbxKullanici.SelectedValue == null) return false;
+            if (selectedNode == null) return false;
+            AlanYetki alanYetki = new AlanYetki();
+            alanYetki.kullanici.Id = cbxKullanici.SelectedValue == null ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString());
+            alanYetki.formAd = selectedNode.Text;
+            string jsonResult = await _kullaniciYetkiService.GetAlanYetki(alanYetki);
+            var yetkiListDTO = new List<AlanYetkiDTO>();
+            GetFieldListFromAttribute();
+            if (!String.IsNullOrEmpty(jsonResult) && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                var yetkiList = JsonConvert.DeserializeObject<List<AlanYetki>>(jsonResult);
+                foreach (var yetki in yetkiList)
+                {
+                    yetkiListDTO.Add(_convertHelper.ToDTO<AlanYetkiDTO>(yetki));
+                }
+                yetkiListDTO.RemoveAll(yetkiDTO => !yetkiListDTOFromAttr.Any(y => y.alanAd == yetkiDTO.alanAd));
+
+                var existingAlanAds = yetkiListDTO.Select(y => y.alanAd).ToHashSet();
+                var itemsToAdd = yetkiListDTOFromAttr.Where(yetkiDTO => !existingAlanAds.Contains(yetkiDTO.alanAd));
+                yetkiListDTO.AddRange(itemsToAdd);
+            }
+            else
+            {
+                foreach (var yetkiDTO in yetkiListDTOFromAttr)
+                {
+                    yetkiListDTO.Add(yetkiDTO);
+                }
+            }
+            list = yetkiListDTO;
+            await universalGrid1.SetData(list, this.Name, true);
+            return true;
+        }
+        private static List<AlanYetkiDTO> _yetkiListDTOFromAtrr;
+        private static List<AlanYetkiDTO> yetkiListDTOFromAttr
+        {
+            get
+            {
+                if (_yetkiListDTOFromAtrr == null)
+                {
+                    _yetkiListDTOFromAtrr = new List<AlanYetkiDTO>();
+                }
+                return _yetkiListDTOFromAtrr;
+            }
+        }
+        private void GetFieldListFromAttribute()
+        {
+            yetkiListDTOFromAttr.Clear();
+            string jsonResult = _kullaniciYetkiService.GetMenu(new Menu { ad = selectedNode.Text });
+            Menu menu = JsonConvert.DeserializeObject<List<Menu>>(jsonResult)[0];
+            var d = GetFormInstance(menu.model);
+            if (d != null)
+            {
+                var properties = d.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var property in properties)
+                {
+                    var yetki = new AlanYetkiDTO
+                    {
+                        model = menu.model,
+                        formAd = menu.formAd,
+                        kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString()) == -1 ? 0 : int.Parse(cbxKullanici.SelectedValue.ToString())
+                    };
+                    var attrs = property.GetCustomAttributes(typeof(GridDisplayAttribute), true);
+                    if (attrs.Length > 0 && attrs[0] is GridDisplayAttribute attr)
+                    {
+                        yetki.alanAd = attr.Header;
+                        yetki.yetki = false;
+                        yetkiListDTOFromAttr.Add(yetki);
+                    }
+                }
+            }
+        }
+        private void universalGrid1_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hit = universalGrid1.Grid.HitTest(e.X, e.Y);
+                    int rowIndex = hit.RowIndex;
+                    universalGrid1.Grid.ClearSelection();
+                    if (rowIndex == -1) return;
+                    universalGrid1.Grid.Rows[rowIndex].Selected = true;
+                    alanYetki = list[rowIndex];
+                    contextMenuStrip2.Show(universalGrid1, e.X, e.Y);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private async void menuChangeAuth_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var alanYetkiList = universalGrid1.GetCheckedRows<AlanYetkiDTO>();
+                if (alanYetkiList.Count > 0)
+                {
+                    foreach (var alan in alanYetkiList)
+                    {
+                        alanYetki = alan;
+                        await YetkiTanimla();
+                    }
+                }
+                else
+                {
+                    await YetkiTanimla();
+                }
+                universalGrid1.SetData(list, this.Name, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private async Task YetkiTanimla()
+        {
+            alanYetki.kullaniciId = int.Parse(cbxKullanici.SelectedValue.ToString());
+            alanYetki.yetki = !alanYetki.yetki;
+            alanYetki.formAd = selectedNode.Text;
+            string httpResult = await _kullaniciYetkiService.SaveAlanYetki(_convertHelper.ToEntity<AlanYetki>(alanYetki));
+            if (list.Find(y => y == alanYetki) is { } item)
+            {
+                item.yetki = alanYetki.yetki;
+            }
+        }
+
+        private void YetkiTanimlari_Load(object sender, EventArgs e)
+        {
+            comboListBoxRol.SetDataSource(_cache.rolList);
+        }
+
+        private async void yetkileriSilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var alanYetkiList = universalGrid1.GetCheckedRows<AlanYetkiDTO>();
+                if (alanYetkiList.Count > 0)
+                {
+                    foreach (var alan in alanYetkiList)
+                    {
+                        var alanYetki = _convertHelper.ToEntity<AlanYetki>(alan);
+                        string jsonResult = await _kullaniciYetkiService.DeleteAlanYetki(alanYetki);
+                        universalGrid1.binding.RemoveAt(universalGrid1.Grid.SelectedCells[0].RowIndex);
+                    }
+                        
+                }
+                universalGrid1.SetData(list, this.Name, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -1,41 +1,53 @@
-﻿using Api.DatabaseJobs;
-using Models;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
-using static Api.Controllers.GeneralMethods;
-
+using Models;
+using Models.DTO;
 namespace Api.Controllers
 {
     public class SatinalmaTalepController:Controller
     {
-        [HttpGet,Route("api/GetTalepTipleri")]
-        public string GetTalepTipleri()
+        private readonly IDataAccessLayer _dataAccesLayer;
+
+        public SatinalmaTalepController(IDataAccessLayer dataAccesLayer)
         {
-            return DatabaseJobsSatinalmaTalep.GetTalepTipleri();
+            _dataAccesLayer = dataAccesLayer;
         }
-		[HttpPost, Route("api/SaveSatinalmaTalep")]
-		public string SaveSatinalmaTalep([FromBody] string restData)
-		{
-			return ResultData<SatinalmaTalepBaslik>(restData, DatabaseJobsSatinalmaTalep.SaveSatinalmaTalep);
-		}
-		[HttpPost, Route("api/GetSatinalmaTalep")]
-		public string GetSatinalmaTalep([FromBody] string restData)
-		{
-			return ResultData<SatinalmaTalepBaslik>(restData, DatabaseJobsSatinalmaTalep.GetSatinalmaTalep);
-		}
+
+        [HttpPost, Route("api/SaveSatinalmaTalep")]
+        public string SaveSatinalmaTalep([FromBody] SatinalmaTalep restData)
+        {
+            string result = _dataAccesLayer.SaveObject(restData, "spSaveSatinalmaTalep");
+            return result;
+        }
+        [HttpPost, Route("api/GetSatinalmaTalepDetay")]
+        public string GetSatinalmaTalepDetay([FromBody] SatinalmaTalepDetay restData)
+        {
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalepDetay");
+            return result;
+        }
+        [HttpPost, Route("api/GetSatinalmaTalepSatirDetay")]
+        public string GetSatinalmaTalepSatirDetay([FromBody] SatinalmaTalepSatirDetayDTO restData)
+        {
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalepSatirDetay");
+            return result;
+        }
+        [HttpPost, Route("api/GetSatinalmaTalep")]
+        public string GetSatinalmaTalep([FromBody] SatinalmaTalep restData)
+        {
+            string result = _dataAccesLayer.GetObject(restData, "spGetSatinalmaTalep");
+            return result;
+        }
         [HttpPost, Route("api/DeleteSatinalmaTalep")]
-        public string DeleteSatinalmaTalep([FromBody] string restData)
+        public string DeleteSatinalmaTalep([FromBody] SatinalmaTalep restData)
         {
-            return ResultData<SatinalmaTalepBaslik>(restData, DatabaseJobsSatinalmaTalep.DeleteSatinalmaTalep);
+            string result = _dataAccesLayer.DeleteObject(restData, "spDeleteSatinalmaTalep");
+            return result;
         }
-        [HttpPost, Route("api/GetFilteredSatinalmaTalepDetay")]
-        public string GetFilteredSatinalmaTalepDetay([FromBody] string restData)
+        [HttpPost, Route("api/SatinalmaTalepOnay")]
+        public string SatinalmaTalepOnay([FromBody] SatinalmaTalep restData)
         {
-            return ResultData<SatinalmaTalepDetay>(restData, DatabaseJobsSatinalmaTalep.GetFilteredSatinalmaTalepDetay);
-        }
-        [HttpPost, Route("api/SaveSatinalmaTeklifTalep")]
-        public string SaveSatinalmaTeklifTalep([FromBody] string restData)
-        {
-            return ResultData<List<SatinalmaTalepDetay>>(restData, DatabaseJobsSatinalmaTalep.SaveSatinalmaTeklifTalep);
+            string result = _dataAccesLayer.GetObject(restData, "fnSatinalmaTalepOnay");
+            return result;
         }
     }
 }

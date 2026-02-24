@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -26,10 +22,14 @@ namespace YektamakDesktop.CustomControls
         private bool isPasswordChar = false;
 
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool UnderlinedStyle { get => underlinedStyle; set { underlinedStyle = value; this.Invalidate(); } }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ReadOnly
         {
             get => textBox.ReadOnly;
@@ -48,6 +48,7 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool PasswordChar
         {
             get { return isPasswordChar; }
@@ -58,6 +59,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Multiline
         {
             get { return textBox.Multiline; }
@@ -86,21 +88,33 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string TextCustom
         {
             get
             {
                 if (isPlaceholder) return "";
-                else return textBox.Text;
+                else
+                if (textBox.Text == "")
+                {
+                    return "0";
+                }
+                else
+                {
+                    return textBox.Text;
+                }
             }
             set
             {
-                textBox.Text = value;
+                textBox.Text = value.ToString();
                 SetPlaceHolder();
                 SayiFormati();
+                base.OnTextChanged(null);
             }
         }
+
         private int _ondalikBasamak;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int OndalikBasamak
         {
             get { return _ondalikBasamak; }
@@ -110,7 +124,9 @@ namespace YektamakDesktop.CustomControls
                 
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BorderFocusColor { get => borderFocusColor; set => borderFocusColor = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int BorderRadius
         {
             get => borderRadius;
@@ -124,6 +140,7 @@ namespace YektamakDesktop.CustomControls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color PlaceholderColor
         {
             get => placeholderColor;
@@ -136,6 +153,7 @@ namespace YektamakDesktop.CustomControls
                 }
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PlaceholderText
         {
             get => placeholderText;
@@ -146,6 +164,7 @@ namespace YektamakDesktop.CustomControls
                 SetPlaceHolder();
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectionStart
         {
             get => textBox.SelectionStart;
@@ -155,6 +174,7 @@ namespace YektamakDesktop.CustomControls
         {
             InitializeComponent();
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public HorizontalAlignment TextAlignment
         {
             get => textBox.TextAlign;
@@ -182,7 +202,8 @@ namespace YektamakDesktop.CustomControls
             {
                 isPlaceholder = false;
                 textBox.Text = "";
-                textBox.ForeColor = this.ForeColor;
+                textBox.BackColor = Color.White;
+                textBox.ForeColor = Color.Black;
                 if (isPasswordChar)
                     textBox.UseSystemPasswordChar = true;
             }
@@ -236,11 +257,7 @@ namespace YektamakDesktop.CustomControls
         [Category("Focus")]
         [Description("Occurs when the control is mouse left")]
         public new event EventHandler MouseLeave;
-
-
-
-
-
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -260,7 +277,7 @@ namespace YektamakDesktop.CustomControls
                     this.Region = new Region(pathBorderSmooth);//Set the rounded region of UserControl
                     if (borderRadius > 15) SetTextBoxRoundedRegion();//Set the rounded region of TextBox component
                     graph.SmoothingMode = SmoothingMode.AntiAlias;
-                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+                    penBorder.Alignment = PenAlignment.Center;
                     if (isFocused) penBorder.Color = borderFocusColor;
 
                     if (underlinedStyle)
@@ -287,7 +304,7 @@ namespace YektamakDesktop.CustomControls
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
                     this.Region = new Region(this.ClientRectangle);
-                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+                    penBorder.Alignment = PenAlignment.Inset;
 
                     if (isFocused)
                         penBorder.Color = borderFocusColor;
@@ -331,6 +348,7 @@ namespace YektamakDesktop.CustomControls
 
             return path;
         }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -355,7 +373,7 @@ namespace YektamakDesktop.CustomControls
         {
             if (textBox.Multiline == false)
             {
-                int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 1;
+                int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 6;
                 //Bizim kontrolümüz textBox1'in parent control'ü
                 //textBox.Multiline özelliği false olduğu zamanlarda textbox'ın minimumSize özelliği aktif olmuyor(tek satıra göre otomatik ayarlanıyor)
                 //textBox1'e MinimumSize özelliği atayabilmek için Multiline'ı önce true sonra false yapıyoruz
@@ -383,7 +401,6 @@ namespace YektamakDesktop.CustomControls
             isFocused = false;
             this.Invalidate();
             SetPlaceHolder();
-
             if (this.Leave != null)
                 this.Leave(this, e);
         }
@@ -493,12 +510,12 @@ namespace YektamakDesktop.CustomControls
         }
         private void SayiFormati()
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-                textBox.Text = "0";
-            float sayi = float.TryParse(textBox.Text.ToString(), out sayi) ? sayi : 0;
-            string ondalik = "N" + OndalikBasamak.ToString();
-            textBox.Text = sayi.ToString(ondalik);
+            if (!string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                float sayi = float.TryParse(textBox.Text.ToString(), out sayi) ? sayi : 0;
+                string ondalik = "N" + OndalikBasamak.ToString();
+                textBox.Text = sayi.ToString(ondalik);
+            }
         }
-
     }
 }

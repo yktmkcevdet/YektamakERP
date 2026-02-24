@@ -1,11 +1,9 @@
-﻿using Models;
-using System.Data.SqlClient;
-using System.Data;
+﻿using Api.Converters;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Reflection;
 using Npgsql;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 namespace Api.DatabaseJobs
 {
     public static partial class DataBaseJobsGeneral
@@ -19,7 +17,10 @@ namespace Api.DatabaseJobs
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             DateFormatString = "yyyy-MM-dd HH:mm:ss",
-            Converters = jsonConverters
+            Converters = new List<JsonConverter>
+                {
+                    new MultiFormatDateTimeConverter()
+                }
         };
 
         internal static SqlConnection GetConnection()
@@ -37,7 +38,7 @@ namespace Api.DatabaseJobs
         }
         internal static NpgsqlConnection PostgreSqlConnection()
         {
-            NpgsqlConnection npgsqlConnection = new NpgsqlConnection("Host=127.0.0.1;Username=postgres;Password=1;Database=yktmkdb");
+            NpgsqlConnection npgsqlConnection = new NpgsqlConnection("Host=localhost;Username=postgres;Password=1;Database=yktmkdb");
             try
             {
                 npgsqlConnection.Open();
@@ -61,15 +62,43 @@ namespace Api.DatabaseJobs
                 return null;
             }
         }
-
+        internal static MySqlConnection MySqlConnectionYerel()
+        {
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            //MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
+            try
+            {
+                mySqlConnection.Open();
+                return mySqlConnection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        internal static MySqlConnection MySqlConnectionTest()
+        {
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=172.16.9.160;Database=YektamakDb_test;User ID=YektamakAdmin;Password=Yektamak@dmin;");
+            //MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=YektamakDb;User ID=root;Password=Yektamak@dmin;");
+            try
+            {
+                mySqlConnection.Open();
+                return mySqlConnection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         internal static string SerializeObject(object o)
         {
             string result = "";
             try
             {
                 string firstSerialization = JsonConvert.SerializeObject(o);
-                byte[] data = System.Text.Encoding.UTF8.GetBytes(firstSerialization);
-                result = JsonConvert.SerializeObject(data);
+                //byte[] data = System.Text.Encoding.UTF8.GetBytes(firstSerialization);
+                //result = JsonConvert.SerializeObject(data);
+                result = firstSerialization;
             }
             catch (Exception ex)
             {

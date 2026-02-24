@@ -4,12 +4,14 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Ortak
 {
     public partial class DxfViewer : Form
     {
         private DxfDocument dxfDoc;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string fileName { get; set; }
         public DxfViewer()
         {

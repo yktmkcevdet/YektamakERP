@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Reflection;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
@@ -12,8 +10,10 @@ namespace YektamakDesktop.CustomControls
     /// <summary>
     /// Filtreleme fonksiyonu olan comboboxs
     /// </summary>
-    public partial class CustomComboListBox : UserControl
+    public partial class CustomComboListBox : UserControl,INotifyPropertyChanged
     {
+        public bool isMandatory = false;
+
         private int listBoxVisualSize = 5;
 
         private bool _focusOnTextBox = false;
@@ -58,6 +58,10 @@ namespace YektamakDesktop.CustomControls
         /// <summary>
         /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        /// <summary>
+        /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
+        /// </summary>
         public int ListBoxVisualSize
         {
             get => listBoxVisualSize;
@@ -84,10 +88,13 @@ namespace YektamakDesktop.CustomControls
 
 
 
-        private int _selectedDataRowId = -1;
-        public int selectedDataRowId { get => _selectedDataRowId; }
+        public int? _selectedDataRowId = null;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int? selectedDataRowId { get => _selectedDataRowId; set { SelectDataRowId(value); OnPropertyChanged(); } }
+        
         private string _selectedDataRowValue;
-        public string selectedDataRowValue { get => _selectedDataRowValue; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string selectedDataRowValue { get => _selectedDataRowValue; set { SelectDataRowValue(value);  } }
 
 
         [Browsable(true)]
@@ -110,6 +117,15 @@ namespace YektamakDesktop.CustomControls
         [Description("Occurs when the value of the SelectedIndex property changes.")]
         public event EventHandler SelectedIndexChanged;
 
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Occurs when the double click on the control.")]
+        public new event EventHandler DoubleClick;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public CustomComboListBox()
         {
             InitializeComponent();
@@ -117,7 +133,7 @@ namespace YektamakDesktop.CustomControls
             _listBoxDataRows = new List<ListBoxDataRow>();
         }
 
-        public void AddDataRow(int id, string name)
+        public void AddDataRow(int? id, string name)
         {
             listBox.Items.Add(name);
             _listBoxDataRows.Add(new ListBoxDataRow { id = id, value = name });
@@ -146,7 +162,7 @@ namespace YektamakDesktop.CustomControls
             listBoxTexts.Clear();
             placeHolderText = "";
             textBox.PlaceholderText = placeHolderText;
-            _selectedDataRowId = -1;
+            _selectedDataRowId = null;
             _selectedDataRowValue = "";
             for (int i = 0; i < listBoxDataRows.Count; i++)
             {
@@ -162,7 +178,7 @@ namespace YektamakDesktop.CustomControls
             listBox.Items.Clear();
             _listBoxDataRows.Clear();
             listBoxTexts.Clear();
-            SelectDataRowId(-1);
+            SelectDataRowId(null);
         }
 
         /// <summary>
@@ -261,17 +277,10 @@ namespace YektamakDesktop.CustomControls
             Resize_CustomCheckedComboBox();
             this.BringToFront();
         }
-
-
-
-
-
-
         private void textBox_Enter(object sender, EventArgs e)
         {
             focusOnTextBox = true;
         }
-
         private void textBox_Leave(object sender, EventArgs e)
         {
             focusOnTextBox = false;
@@ -321,8 +330,6 @@ namespace YektamakDesktop.CustomControls
             textBox.TextCustom = textBoxText;
             focusOnTextBox = true;
         }
-
-
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex > -1)
@@ -334,7 +341,7 @@ namespace YektamakDesktop.CustomControls
             {
                 textBox.TextCustom = placeHolderText;
             }
-            _selectedDataRowId = -1;
+            _selectedDataRowId = null;
             try
             {
                 _selectedDataRowId = listBoxDataRows[listBoxDataRows.FindIndex(x => x.value == placeHolderText)].id;
@@ -344,7 +351,7 @@ namespace YektamakDesktop.CustomControls
             {
                 _selectedDataRowValue = placeHolderText;
             }
-            CloseListBox();
+            //CloseListBox();
 
             if (this.SelectedIndexChanged != null)
             {
@@ -408,7 +415,7 @@ namespace YektamakDesktop.CustomControls
         /// </summary>
         /// <param name="dataRowId"></param>
         /// <returns></returns>
-        public int IndexOfDataRowId(int dataRowId)
+        public int IndexOfDataRowId(int? dataRowId)
         {
             int listboxIndex = listBoxDataRows.FindIndex(x => x.id == dataRowId);
             return listboxIndex;
@@ -428,7 +435,7 @@ namespace YektamakDesktop.CustomControls
         /// Verilen dataRowId numaralı kaydı seçer ve listbox'ın SelectedIndexChanged eventini de çağırır
         /// </summary>
         /// <param name="dataRowId"></param>
-        public void SelectDataRowId(int dataRowId)
+        public void SelectDataRowId(int? dataRowId)
         {
             if (dataRowId > -1 && listBox.Items.Count > 0)
             {
@@ -436,26 +443,13 @@ namespace YektamakDesktop.CustomControls
             }
             else
             {
-                _selectedDataRowId = -1;
+                _selectedDataRowId = null;
                 textBox.TextCustom = "";
                 placeHolderText = "";
                 listBox.ClearSelected();
             }
         }
-        public void SelectDataRowId(long dataRowId)
-        {
-            if (dataRowId > -1 && listBox.Items.Count > 0)
-            {
-                Select(IndexOfDataRowId(dataRowId));
-            }
-            else
-            {
-                _selectedDataRowId = -1;
-                textBox.TextCustom = "";
-                placeHolderText = "";
-                listBox.ClearSelected();
-            }
-        }
+
         public void SelectDataRowValue(string dataRowValue)
         {
             if (!string.IsNullOrEmpty(dataRowValue) && listBox.Items.Count >= 0)
@@ -468,12 +462,15 @@ namespace YektamakDesktop.CustomControls
                 else
                 {
                     placeHolderText = dataRowValue;
-                    listBox_SelectedIndexChanged(null, null);
+                    if (this.SelectedIndexChanged != null)
+                    {
+                        this.SelectedIndexChanged(this, null);
+                    }
                 }
             }
             else
             {
-                _selectedDataRowId = -1;
+                _selectedDataRowId = null;
                 textBox.TextCustom = "";
                 placeHolderText = "";
                 listBox.ClearSelected();
@@ -496,13 +493,62 @@ namespace YektamakDesktop.CustomControls
             }
             focusOnTextBox = false;
         }
+
+        private void CustomComboListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.DoubleClick != null)
+            {
+                this.DoubleClick(sender, e);
+            }
+        }
+
+        private void textBox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point screenPoint = listBox.PointToScreen(e.Location);
+            Point clientPoint = listBox.PointToClient(screenPoint);
+            int index = listBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                listBox.SelectedIndex = index;
+                if (listBox.SelectedIndex > -1)
+                {
+                    placeHolderText = listBox.Items[listBox.SelectedIndex].ToString();
+                }
+
+                if (!focusOnTextBox)
+                {
+                    textBox.TextCustom = placeHolderText;
+                }
+                _selectedDataRowId = null;
+                try
+                {
+                    _selectedDataRowId = listBoxDataRows[listBoxDataRows.FindIndex(x => x.value == placeHolderText)].id;
+                }
+                catch { }
+                if (_selectedDataRowId > -1)
+                {
+                    _selectedDataRowValue = placeHolderText;
+                }
+                CloseListBox();
+
+                if (this.SelectedIndexChanged != null)
+                {
+                    this.SelectedIndexChanged(this, e);
+                }
+            }
+        }
     }
     /// <summary>
     /// CheckedListBox verilerini ayrı listelerde klonlayabilmek için kullanıyoruz
     /// </summary>
     public class ListBoxDataRow
     {
-        public int id;
+        public int? id;
         public string value;
     }
 

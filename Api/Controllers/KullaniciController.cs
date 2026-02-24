@@ -1,5 +1,4 @@
-﻿using Api.DatabaseJobs;
-using Microsoft.AspNetCore.Authorization;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.DTO;
@@ -7,73 +6,134 @@ using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
 {
-    [ApiController]
-    public class KullaniciController
+    public class KullaniciController : Controller
     {
+        private readonly IDataAccessLayer _dataAccessLayer;
+
+        public KullaniciController(IDataAccessLayer dataAccessLayer)
+        {
+            _dataAccessLayer = dataAccessLayer;
+        }
+
         [HttpPost, Route("api/SaveKullanici")]
-        public string SaveKullanici([FromBody] string restData)
+        public string SaveKullanici([FromBody] Kullanici restData)
         {
-			return ResultData<Kullanici>(restData, DatabaseJobsKullanici.SaveKullanici);
-		}
-        
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveKullanici");
+            return result;
+        }
+
         [HttpPost, Route("api/GetKullanici")]
-        public string GetKullanici([FromBody] string restData)
+        public string GetKullanici([FromBody] Kullanici restData)
         {
-			return ResultData<Kullanici>(restData, DatabaseJobsKullanici.GetKullanici);
-		}
-        [HttpGet, Route("api/users/{username}")]
+            string result = _dataAccessLayer.GetObject(restData, "spGetKullanici");
+            return result;
+        }
+        [HttpPost, Route("api/GetRol")]
+        public string GetRol([FromBody] Kullanici restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spGetRol");
+            return result;
+        }
+        [HttpGet, Route("api/GetKullanici/{username}")]
         public string GetUser(string username)
         {
-            return DatabaseJobsKullanici.GetKullanici(username);
+            Kullanici kullanici = new Kullanici();
+            kullanici.ad = username;
+            string result = _dataAccessLayer.GetObject(kullanici, "spGetKullanici");
+            return result;
         }
 
         [HttpPost, Route("api/GetKullaniciYetki")]
-        public string GetKullaniciYetki([FromBody] string restData)
+        public string GetKullaniciYetki([FromBody] Kullanici restData)
         {
-			return ResultData<Kullanici>(restData, DatabaseJobsKullanici.GetKullaniciYetki);
-		}
+            string result = _dataAccessLayer.GetObject(restData, "spGetKullaniciYetki");
+            return result;
+        }
 
         [HttpPost, Route("api/SaveEkran")]
-        public string SaveEkran([FromBody] string restData)
+        public string SaveEkran([FromBody] Ekran restData)
         {
-			return ResultData<Ekran>(restData, DatabaseJobsKullanici.SaveEkran);
-		}
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveEkran");
+            return result;
+        }
 
         [HttpPost, Route("api/SaveYetki")]
-        public string SaveYetki([FromBody] string restData)
+        public string SaveYetki([FromBody] Yetki restData)
         {
-			return ResultData<Yetki>(restData, DatabaseJobsKullanici.SaveYetki);
-		}
-
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveYetki");
+            return result;
+        }
+        [HttpPost, Route("api/SaveAlanYetki")]
+        public string SaveAlanYetki([FromBody] AlanYetki restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveAlanYetki");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteAlanYetki")]
+        public string DeleteAlanYetki([FromBody] AlanYetki restData)
+        {
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteAlanYetki");
+            return result;
+        }
         [HttpPost, Route("api/DeleteEkran")]
-        public string DeleteEkran([FromBody] string restData)
+        public string DeleteEkran([FromBody] Ekran restData)
         {
-			return ResultData<Ekran>(restData, DatabaseJobsKullanici.DeleteEkran);
-		}
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteEkran");
+            return result;
+        }
         [HttpPost, Route("api/GetAnaMenu")]
-        public string GetAnaMenu([FromBody] string restData)
+        public string GetAnaMenu([FromBody] AnaMenuDTO restData)
         {
-            return ResultData<AnaMenu>(restData, DatabaseJobsKullanici.GetAnaMenu);
+            string result = _dataAccessLayer.GetObject(restData, "spGetAnaMenu");
+            return result;
         }
         [HttpPost, Route("api/GetYetki")]
-        public string GetYetki([FromBody] string restData)
+        public string GetYetki([FromBody] Yetki restData)
         {
-            return ResultData<Yetki>(restData, DatabaseJobsKullanici.GetYetki);
+            string result = _dataAccessLayer.GetObject(restData, "spGetYetki");
+            return result;
         }
-        [HttpGet, Route("api/GetMenu")]
-        public string GetMenu()
+        [HttpPost, Route("api/GetMenu")]
+        public string GetMenu([FromBody] Menu restData)
         {
-            return DatabaseJobsKullanici.GetMenu();
+            string result = _dataAccessLayer.GetObject(restData, "spGetMenu");
+            return result;
         }
-        [HttpPost,Route("api/SaveMenu")]
-        public string SaveMenu([FromBody] string restData)
+        [HttpPost, Route("api/SaveMenu")]
+        public string SaveMenu([FromBody] Menu restData)
         {
-            return ResultData<Menu>(restData, DatabaseJobsKullanici.SaveMenu);
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMenu");
+            return result;
         }
         [HttpPost, Route("api/DeleteMenu")]
-        public string DeleteMenu([FromBody] string restData)
+        public string DeleteMenu([FromBody] Menu restData)
         {
-            return ResultData<Menu>(restData, DatabaseJobsKullanici.DeleteMenu);
+            string result = _dataAccessLayer.DeleteObject(restData, "spDeleteMenu");
+            return result;
+        }
+        [HttpPost, Route("api/GetAlanYetki")]
+        public string GetAlanYetki([FromBody] AlanYetki restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spGetAlanYetki");
+            return result;
+        }
+        [HttpPost, Route("api/SaveMailAdres")]
+        public string SaveMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.SaveObject(restData, "spSaveMailAdres");
+            return result;
+        }
+        [HttpPost, Route("api/GetMailAdres")]
+        public string GetMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spGetMailAdres");
+            return result;
+        }
+        [HttpPost, Route("api/DeleteMailAdres")]
+        public string DeleteMailAdres([FromBody] MailAdres restData)
+        {
+            string result = _dataAccessLayer.GetObject(restData, "spDeleteMailAdres");
+            return result;
         }
     }
 }

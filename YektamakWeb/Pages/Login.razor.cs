@@ -1,5 +1,6 @@
 ﻿
 using ApiService;
+using ApiService.Interfaces;
 using Models;
 using Utilities.Implementations;
 using Utilities.Interfaces;
@@ -8,12 +9,17 @@ namespace YektamakWeb.Pages
 {
     public partial class Login
     {
-        
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+
         bool newPasswordMode = false;
         private string userName = default!;
         private string password = default!;
         private string? message;
-       
+
+        public Login(IKullaniciYetkiService kullaniciYetkiService)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+        }
 
         public void InitializeComponentsNewPassword() { }
 
@@ -26,14 +32,14 @@ namespace YektamakWeb.Pages
         private void CreateNewPassword(Kullanici kullanici, string newPassWord)
         {
             ILoginHelper LoginHelper = new LoginHelper();
-            string salt = LoginHelper.GenerateSalt();
+            string salt = LoginHelper.GenerateCryptographicSalt();
             string password = newPassWord;
-            string hashedPassword = LoginHelper.HashPassword(password, salt);
+            string hashedPassword = LoginHelper.ComputeHash(password, salt);
 
             kullanici.sifre = hashedPassword;
             kullanici.salt = salt;
             kullanici.isSifreDegisti = true;
-            string httpResult = WebMethods.SaveKullanici(kullanici);
+            string httpResult = _kullaniciYetkiService.SaveKullanici(kullanici);
             if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
                 dialog.Content = "Hata oluştu, şifre kaydedilemedi.";

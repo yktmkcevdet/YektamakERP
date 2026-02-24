@@ -1,20 +1,114 @@
-﻿using Api.DatabaseJobs;
-using Models;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
+using Models;
+using Models.DTO;
+using static Api.Controllers.GeneralMethods;
 
 namespace Api.Controllers
 {
     public class AnaVeriController : Controller
     {
+        private readonly IDataAccessLayer _dataAccessLayer;
+
+        public AnaVeriController(IDataAccessLayer dataAccessLayer)
+        {
+            _dataAccessLayer = dataAccessLayer;
+        }
+
         [HttpGet, Route("api/GetParcaGrupList/")]
         public string GetParcaGrupList()
         {
-            return DataBaseJobsAnaVeri.GetParcaGrupList();
+            string result = _dataAccessLayer.GetObject("spGetParcaGrupList");
+            return result;
         }
         [HttpGet, Route("api/GetParcaAltGrupList/")]
         public string GetParcaAltGrupList()
         {
-            return DataBaseJobsAnaVeri.GetParcaAltGrupList();
+            string result = _dataAccessLayer.GetObject("spGetParcaAltGrupList");
+            return result;
+        }
+        [HttpGet, Route("api/GetReferansKaynak/")]
+        public string GetReferansKaynak()
+        {
+            string result = _dataAccessLayer.GetObject("spGetReferansKaynak");
+            return result;
+        }
+
+        [HttpGet, Route("api/GetMaliyetUnsur/")]
+        public string GetMarka()
+        {
+            return _dataAccessLayer.GetObject("spGetMaliyetUnsur");
+        }
+        [HttpGet, Route("api/GetMaliyetTespitKanal")]
+        public string GetMaliyetTespitKanal()
+        {
+            return _dataAccessLayer.GetObject("spGetMaliyetTespitKanal");
+        }
+        [HttpPost, Route("api/SaveMaliyetUnsur")]
+        public string SaveMaliyetUnsur([FromBody]string restData)
+        {
+            return _dataAccessLayer.SaveObject(JsonStringToModel<MaliyetUnsur>(restData), "spSaveMaliyetUnsur");
+        }
+        [HttpPost, Route("api/SaveMaliyetTespitKanal")]
+        public string SaveMaliyetTespitKanal([FromBody] string restData)
+        {
+            return _dataAccessLayer.SaveObject(JsonStringToModel<MaliyetTespitKanal>(restData), "spSaveMaliyetTespitKanal");
+        }
+        [HttpGet, Route("api/GetDosyaTip")]
+        public string GetDosyaTip()
+        {
+            return _dataAccessLayer.GetObject("spGetDosyaTip");
+        }
+        [HttpGet, Route("api/GetDosyalamayapisi")]
+        public string GetDosyalamaYapisi([FromBody] DosyalamaYapisi dosyalamaYapisi)
+        {
+            return _dataAccessLayer.GetObject(dosyalamaYapisi,"spGetDosyalamaYapisi");
+        }
+        [HttpPost, Route("api/SaveDosyalamaYapisi")]
+        public string SaveDosyalamaYapisi([FromBody] DosyalamaYapisi restData)
+        {
+            return _dataAccessLayer.SaveObject(restData, "spSaveDosyalamaYapisi");
+        }
+        [HttpPost, Route("api/DeleteDosyalamaYapisi")]
+        public string DeleteDosyalamaYapisi([FromBody] DosyalamaYapisi restData)
+        {
+            return _dataAccessLayer.SaveObject(restData, "spDeleteDosyalamaYapisi");
+        }
+        [HttpPost, Route("api/SaveExcelForm")]
+        public string SaveExcelForm([FromBody] ExcelForm restData)
+        {
+            return _dataAccessLayer.SaveObject(restData, "spSaveExcelForm");
+        }
+        
+        [HttpPost, Route("api/GetExcelForm")]
+        public string GetExcelForm([FromBody] ExcelForm excelForm)
+        {
+            return _dataAccessLayer.GetObject(excelForm, "spGetExcelForm");
+        }
+        [HttpGet, Route("api/GetTalepNeden")]
+        public string GetTalepNeden()
+        {
+            return _dataAccessLayer.GetObject("spGetTalepNeden");
+        }
+        [HttpGet, Route("api/GetProjeTip")]
+        public string GetProjeTip()
+        {
+           return _dataAccessLayer.GetObject("spGetProjeTip");
+        }
+        [HttpPost, Route("api/SaveBoyut")]
+        public string SaveBoyut([FromBody] Boyut boyut)
+        {
+            return _dataAccessLayer.SaveObject(boyut, "spSaveBoyut");
+        }
+        [HttpGet, Route("api/GetBoyut")]
+        public string GetBoyut()
+        {
+            return _dataAccessLayer.GetObject("spGetBoyut");
+        }
+        [HttpGet, Route("api/GetKdv")]
+        public string GetKdv()
+        {
+            return _dataAccessLayer.GetObject("spGetKdv");
         }
     }
 }

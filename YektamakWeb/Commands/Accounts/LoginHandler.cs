@@ -32,7 +32,7 @@ namespace BlazorApp1.Features.Commands.Account.Login
             {
                 new Claim(ClaimTypes.Name, user.ad),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim("Role", user.rolId.ToString()),
+                new Claim("Role", user.rol.ToString()),
             };
 
             var token = new JwtSecurityToken(issuer, audience, claims, expires: DateTime.Now.AddMinutes(expirationMinutes), signingCredentials: credentials);

@@ -1,15 +1,18 @@
 using ApiService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Utilities;
+using Utilities.Implementations;
+using Utilities.Interfaces;
 using YektamakWeb.Commands.Accounts;
 using YektamakWeb.Hub;
+using MudBlazor.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,16 +28,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthorization();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddBlazorBootstrap();
-
+builder.Services.AddMudServices();
+builder.Services.AddMudBlazorJsEvent();
 // Dependency Injection
 builder.Services.AddApiServices();
 builder.Services.AddUtilities();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthStateProvider>());
 builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddTransient<YektamakWeb.Commands.Accounts.UserService>();
+builder.Services.AddTransient<UserService>();
 builder.Services.AddScoped<LoginService>();
 
 // JWT Authentication
@@ -69,14 +73,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-.AddCookie() // Çerez tabanlý kimlik doðrulama
-.AddGoogle(googleOptions =>
-{
-    googleOptions.ClientId = "237674586250-37kfov6pqiso417jchbt9huun762nkfg.apps.googleusercontent.com"; // Google Developers Console'dan aldýðýn Client ID
-    googleOptions.ClientSecret = "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"; // Google Developers Console'dan aldýðýn Client Secret
-});
+.AddCookie(); // Çerez tabanlý kimlik doðrulama
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role", "1"));

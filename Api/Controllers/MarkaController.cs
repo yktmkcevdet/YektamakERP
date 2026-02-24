@@ -1,5 +1,6 @@
-﻿using Api.DatabaseJobs;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -7,31 +8,31 @@ namespace Api.Controllers
 {
     public class MarkaController : Controller
     {
-        /// <summary>
-        /// json formatında İki tablolu bir dataset döner. İlki bütün markaların tablosunu ikincisi bütün altgrupların tablosunu içerir.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet, Route("api/TumMarkaVeAltGruplar/")]
-        public string TumMarkaVeAltGruplar()
+        private readonly IDataAccessLayer _dataAccessLayer;
+
+        public MarkaController(IDataAccessLayer dataAccessLayer)
         {
-            string returnValue = "";
-            returnValue = DataBaseJobsMarka.GetAllMarkaAndAltGrup();
-            return returnValue;
+            _dataAccessLayer = dataAccessLayer;
         }
 
-        [HttpGet, Route("api/GetAllMarka/")]
-        public string GetAllMarka()
+        [HttpGet, Route("api/GetMarka/")]
+        public string GetMarka()
         {
-            string returnValue = "";
-            try
-            {
-                returnValue = DataBaseJobsMarka.GetAllMarka();
-            }
-            catch (Exception ex)
-            {
-                returnValue = "error2 Serialization error : " + ex.Message;
-            }
-            return returnValue;
+            string result = _dataAccessLayer.GetObject("spGetMarka");
+            return result;
+        }
+            
+        [HttpGet, Route("api/GetMarkaAltGrup/")]
+        public string GetMarkaAltGrup()
+        {
+            string result = _dataAccessLayer.GetObject("spGetMarkaAltGrup");
+            return result;
+        }
+        [HttpGet, Route("api/GetMarkaAltGrupKategori/")]
+        public string GetMarkaAltGrupKategori()
+        {
+            string result = _dataAccessLayer.GetObject("spGetMarkaAltGrupKategori");
+            return result;
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using YektamakDesktop.Abstracts;
+using YektamakDesktop.Common;
 
 namespace YektamakDesktop.CustomControls
 {
@@ -12,11 +14,12 @@ namespace YektamakDesktop.CustomControls
     /// User controlleri içerebilen datagrid şeklinde bir görünüm oluşturur.
     /// Form üzerinde oluşturulan bir panel üzerine yerleştirilir.
     /// </summary>
-    public class CustomDataGrid<T> : IDisposable where T : Abstracts.DataControl,new()
+    public partial class CustomDataGrid<T>  where T : DataControl,new()
     {
         int orderNr = 1;
         List<Control> listControl = new List<Control>();
         private List<T> _dataSource;
+
         public List<T> dataSource
         {
             get
@@ -27,8 +30,9 @@ namespace YektamakDesktop.CustomControls
             set
             {
                 _dataSource = value;
-                
                 FillDataRows();
+                _detailPanel.AutoScroll = true;
+                _detailPanel.Scroll += DetailPanel_Scroll;
             }
         }
         int controlPointY;
@@ -36,28 +40,7 @@ namespace YektamakDesktop.CustomControls
         int _rowSpace;
         public Point _headerLocation;
         public Size _detailSize;
-		private Panel _detailPanel;
-		public Panel detailPanel
-		{
-			get
-			{
-				if (_detailPanel == null)
-				{
-					_detailPanel = new Panel();
-					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + headerPanel.Height);
-					_detailPanel.Size = _detailSize;
-					_detailPanel.AutoScroll = true;
-					_detailPanel.Scroll += DetailPanel_Scroll;
-					AddDataRow(new T());
-				}
-				return _detailPanel;
-			}
-			set
-			{
-				_detailPanel = value;
-			}
-		}
-		private Panel _headerPanel;
+        private Panel _headerPanel;
         public Panel headerPanel
         {
             get
@@ -66,8 +49,8 @@ namespace YektamakDesktop.CustomControls
                 {
                     _headerPanel = new Panel();
                     _headerPanel.Location = _headerLocation;
-                    _headerPanel.Size = new Size(_detailSize.Width, 30);
-                    //CreateLabels();
+                    _headerPanel.AutoSize = true;
+                    _headerPanel.Height = 30;
                 }
                 return _headerPanel;
             }
@@ -76,13 +59,35 @@ namespace YektamakDesktop.CustomControls
                 _headerPanel = value;
             }
         }
-        
-        public CustomDataGrid(int columnSpace, int rowSpace, Point headerLocation, Size detailSize)
+        private Panel _detailPanel;
+		public Panel detailPanel
+		{
+			get
+			{
+				if (_detailPanel == null)
+				{
+					_detailPanel = new Panel();
+					_detailPanel.Location = new Point(_headerLocation.X, _headerLocation.Y + 30);
+                    _detailPanel.Size = _detailSize;
+                    AddDataRow(DIContainer.GetService<T>());
+				}
+				return _detailPanel;
+			}
+			set
+			{
+				_detailPanel = value;
+			}
+		}
+		
+        public CustomDataGrid(int columnSpace, int rowSpace, Point headerLocation, Size detailSize, T entity = null)
         {
             _columnSpace = columnSpace;
             _rowSpace = rowSpace;
             _headerLocation = headerLocation;
             _detailSize = detailSize;
+        }
+        public CustomDataGrid()
+        {
         }
         private void DetailPanel_Scroll(object sender, ScrollEventArgs e)
         {
@@ -96,10 +101,13 @@ namespace YektamakDesktop.CustomControls
             Control control = (Control)sender;
 
             Type senderType = control.GetType();
-            var propertyValue = senderType.GetProperty("Text")?.GetValue(control);
+            var propertyValue = senderType.GetProperty("TextCustom")?.GetValue(control);
 
             if (propertyValue == null)
-                return;
+            {
+                propertyValue = senderType.GetProperty("SelectedIndex")?.GetValue(control);
+            }
+            if (propertyValue == null) return;
 
             T dataControl = dataSource.SingleOrDefault(dataControl => dataControl.GetType().GetProperties().Any(control => control.GetValue(dataControl) == sender));
 
@@ -110,7 +118,7 @@ namespace YektamakDesktop.CustomControls
             if (newRecProperty == null || !(bool)newRecProperty.GetValue(dataControl))
                 return;
 
-            if(AddDataRow(new T()))
+            if(AddDataRow(DIContainer.GetService<T>()))
             {
                 newRecProperty.SetValue(dataControl, false);
             }
@@ -119,22 +127,53 @@ namespace YektamakDesktop.CustomControls
         public void FillDataRows()
         {
             detailPanel.Controls.Clear();
-            controlPointY = 0;
+            controlPointY = 2;
             CreateLabels();
             orderNr = 1;
             foreach (T dataRow in dataSource)
             {
                 ControlList(dataRow);
-                SetControlEvents();
                 PlaceControls();
+                SetControlEvents();
                 dataRow.newRec = false;
             }
-            AddDataRow(new T());
-            //controlPointY = 0;
+            AddDataRow(DIContainer.GetService<T>());
+        }
+        //public void UstFormBagla(IUstForm ustForm)
+        //{
+        //    foreach (var dataControl in dataSource)
+        //    {
+        //        if (dataControl is IAltForm altForm)
+        //        {
+        //            altForm.UstFormuBagla(ustForm);
+        //        }
+        //    }
+        //}
+        private void RePlaceControls(T dataControl)
+        {
+            orderNr = int.Parse(dataControl.order.Text);
+            foreach (var dataCtl in dataSource.Where(dc=>int.Parse(dc.order.Text)> int.Parse(dataControl.order.Text)))
+            {
+                foreach(PropertyInfo propertyInfo in dataCtl.GetType().GetProperties().Where(p=> typeof(Control).IsAssignableFrom(p.PropertyType)))
+                {
+                    Control control = (Control)propertyInfo.GetValue(dataCtl);
+                    if (control != null)
+                    {
+                        if ((string)control.Tag == "#")
+                        {
+                            control.TextChanged -= ControlValueChange;
+                            control.Text = orderNr++.ToString();
+                        }
+                        control.Location = new Point(control.Location.X, control.Location.Y - _rowSpace);
+                    }
+                }
+            }
+            controlPointY -= _rowSpace;
         }
         public void DeleteRow(object sender, EventArgs e)
         {
             T dataControl = dataSource.SingleOrDefault(x => x.GetType().GetProperties().Any(z => z.GetValue(x) == sender));
+            RePlaceControls(dataControl);
             if (dataControl != null && !(bool)dataControl.GetType().GetField("newRec").GetValue(dataControl))
             {
                 dataSource.Remove(dataControl);
@@ -153,14 +192,6 @@ namespace YektamakDesktop.CustomControls
                     }
                 }
             }
-            controlPointY = 0;
-            orderNr = 1;
-            for (int i=0;i< dataSource.Count;i++)
-            {
-                T dataRow = dataSource[i];
-                ControlList(dataRow);
-                PlaceControls();
-            }
         }
         private void ControlList(T dataRow)
         {
@@ -168,31 +199,50 @@ namespace YektamakDesktop.CustomControls
 			foreach (PropertyInfo propertyInfo in typeof(T).GetProperties())
 			{
 				var control = propertyInfo.GetValue(dataRow) as Control;
-				listControl.Add(control);
+                listControl.Add(control);
 			}
 		}
         private void CreateLabels()
         {
             int controlPointX = 7;
             if(headerPanel.Controls.Count>0) return;
-            foreach (Control control in listControl.OrderBy(p => p.TabIndex))
+            foreach (Control control in listControl.Where(p=>p!=null && p.Visible).OrderBy(p => p.TabIndex))
             {
-				if (control.Tag != null)
+				if (control.Tag != null && control.Tag!="Sil") 
 				{
 					Label label = new Label();
 					label.Location = new Point(controlPointX, 0);
 					var isim = control.Tag;
 					label.Text = isim.ToString();
 					int labelWidth = Convert.ToInt32(control.Width);
-					bool labelVisible = control.Visible;
+					bool labelVisible = labelWidth==0?false:control.Visible;
 					label.Visible = labelVisible;
 					label.Width = labelWidth;
-                    label.Height = headerPanel.Height;
+                    //label.Height = headerPanel.Height;
+                    label.AutoSize = true;
 					label.Font = new Font("Segoe UI", 9, FontStyle.Bold, GraphicsUnit.Point);
 					controlPointX = controlPointX + Convert.ToInt32(labelWidth) + _columnSpace;
 					headerPanel.Controls.Add(label);
 				}
 			}
+        }
+        private IUstForm _ustForm;
+
+        public void SetUstForm(IUstForm ustForm)
+        {
+            _ustForm = ustForm;
+            AltFormlaraBagla(); // daha önce eklenmiş data row’lar varsa onlara da bağla
+        }
+
+        private void AltFormlaraBagla()
+        {
+            foreach (var dataControl in dataSource)
+            {
+                if (dataControl is IAltForm altForm)
+                {
+                    altForm.UstFormuBagla(_ustForm);
+                }
+            }
         }
         public bool AddDataRow(T dataRow)
         {
@@ -200,9 +250,13 @@ namespace YektamakDesktop.CustomControls
             {
                 ControlList(dataRow);
                 CreateLabels();
-                SetControlEvents();
                 PlaceControls();
+                SetControlEvents();
                 dataSource.Add(dataRow);
+                if (dataRow is IAltForm altForm && _ustForm != null)
+                {
+                    altForm.UstFormuBagla(_ustForm);
+                }
                 return true;
             }
             else
@@ -213,24 +267,37 @@ namespace YektamakDesktop.CustomControls
         private bool CheckFields()
         {
             if(orderNr < 2) return true;
+            if(dataSource[orderNr -2].newRec == true) return true;
             ControlList(dataSource[orderNr -2]);
-            foreach (Control control in listControl)
+            foreach (Control control in listControl.Where(p => p != null))
             {
                 FieldInfo fieldInfo = control.GetType().GetField("isMandatory");
 
                 if (fieldInfo!=null && (bool)control.GetType().GetField("isMandatory").GetValue(control) == true)
                 {
-                    FieldInfo propertyInfo = control.GetType().GetField("textBox");
-                    if (string.IsNullOrEmpty(control.GetType().GetProperty("TextCustom").GetValue(control).ToString()))
+                    PropertyInfo propertyInfo = control.GetType().GetProperty("TextCustom");
+                    if (propertyInfo!=null && string.IsNullOrEmpty(propertyInfo.GetValue(control)?.ToString()))
                     {
-                        PropertyInfo property = propertyInfo.GetType().GetProperty("BackColor");
-                        property.SetValue(propertyInfo, Color.Gainsboro);
+                        PropertyInfo property = control.GetType().GetProperty("BackColor");
+                        property.SetValue(control, Color.Gainsboro);
                         return false;
                     }
                     else
                     {
-                        control.BackColor = Color.White;
-                        return true;
+                        propertyInfo = control.GetType().GetProperty("selectedDataRowId");
+                        var s = propertyInfo.GetValue(control)?.ToString();
+                        if (propertyInfo != null && string.IsNullOrEmpty(propertyInfo.GetValue(control)?.ToString()))
+                        {
+                            PropertyInfo property = control.GetType().GetProperty("BackColor");
+                            property.SetValue(control, Color.Gainsboro);
+                            return false;
+                        }
+                        else
+                        {
+                            control.BackColor = Color.White;
+                            return true;
+                        }
+                            
                     }
                 }
             }
@@ -242,9 +309,9 @@ namespace YektamakDesktop.CustomControls
             int leftPadding = 7;
             controlPointY =controlPointY - detailPanel.VerticalScroll.Value;
             leftPadding=leftPadding - detailPanel.HorizontalScroll.Value;
-            foreach (Control control in  listControl.OrderBy(p=>p.TabIndex))
+            foreach (Control control in  listControl.Where(c=>c!=null && c.Visible).OrderBy(c=>c.TabIndex))
             {
-                if((string)control.Tag == "No")
+                if((string)control.Tag == "#")
                 {
                     control.TextChanged -= ControlValueChange;
                     control.Text = orderNr++.ToString();
@@ -257,23 +324,22 @@ namespace YektamakDesktop.CustomControls
             
             controlPointY = controlPointY + _rowSpace;
         }
+       
         private void SetControlEvents()
         {
-            //foreach (PropertyInfo propertyInfo in dataRow.GetType().GetProperties())
-            foreach(Control control in listControl)
+            foreach(Control control in listControl.Where(p=>p!=null))
             {
-				//Type type = propertyInfo.PropertyType;
+                var s = control.Name;
 				Type type = control.GetType();
-				//var control = propertyInfo.GetValue(dataRow) as Control;
-
-				SetControlEventHandler(control, type, "TextChanged", "ControlValueChange");
-                SetControlEventHandler(control, type, "SelectedIndexChanged", "ControlValueChange");
-                if (type.GetProperty("Tag").GetValue(control).ToString().Contains("Sil")) SetControlEventHandler(control, type, "Click", "DeleteRow");
+				SetControlEventHandler(control, type, nameof(control.TextChanged), nameof(ControlValueChange));
+                SetControlEventHandler(control, type, nameof(FilterableComboBox.SelectedIndexChanged), nameof(ControlValueChange));
+                if (type.GetProperty(nameof(control.Tag)).GetValue(control).ToString().Contains("Sil")) SetControlEventHandler(control, type, nameof(control.Click), nameof(DeleteRow));
             }
         }
         public void SetControlEventHandler(object obj, Type fieldType, string eventName, string methodName)
         {
             EventInfo eventInfo = fieldType.GetEvent(eventName);
+            if (eventInfo == null) return;
             if (eventName == "TextChanged")
             {
                 EventHandler handler = GetEventHandler(methodName);
@@ -299,11 +365,16 @@ namespace YektamakDesktop.CustomControls
                 EventHandler handler = GetEventHandler(methodName);
                 if (handler != null) eventInfo.AddEventHandler(obj, handler);
             }
+            if (eventName == "SelectedIndexChanged")
+            {
+                EventHandler handler = GetEventHandler(methodName);
+                if (handler != null) eventInfo.AddEventHandler(obj, handler);
+            }
         }
         public EventHandler GetEventHandler(string methodName)
         {
             Type type = GetType();
-            MethodInfo methodInfo = type.GetMethod(methodName); // İstenen metodun MethodInfo nesnesini alır.
+            MethodInfo methodInfo = type.GetMethod(methodName);
 
             if (methodInfo != null)
             {
@@ -318,8 +389,7 @@ namespace YektamakDesktop.CustomControls
         public KeyPressEventHandler GetKeyPressEventHandler(string methodName)
         {
             Type type = GetType();
-            MethodInfo methodInfo = type.GetMethod(methodName); // İstenen metodun MethodInfo nesnesini alır.
-
+            MethodInfo methodInfo = type.GetMethod(methodName);
             if (methodInfo != null)
             {
                 KeyPressEventHandler handler = (KeyPressEventHandler)Delegate.CreateDelegate(typeof(KeyPressEventHandler), this, methodInfo);

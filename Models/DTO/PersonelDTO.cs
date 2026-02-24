@@ -1,0 +1,21 @@
+﻿using Models.Attributes;
+using System.Drawing;
+namespace Models.DTO
+{
+    public class PersonelDTO: IEntity
+    {
+        [GridDisplay(Header ="ID")] public int? Id { get; set; }
+        [GridDisplay(Header = "Adı")] public string ad { get; set; }
+        [GridDisplay(Header = "Soyadı")] public string soyad { get; set; }
+        [GridDisplay(Header = "Personel İsim")] public string adSoyad { get; set; }
+        [GridDisplay(Header = "Telefon")] public string telefon { get; set; }
+        [GridDisplay(Header = "mail")] public string mail { get; set; }
+        [GridDisplay(Header = "firmaId")] public int? firmaId { get; set; }
+        [GridDisplay(Header = "pozisyonId",Tip ="Liste",ListName = "pozisyonList",ListVisibleColumnName ="ad")] public int? pozisyonId { get; set; }
+        [GridDisplay(Header = "yoneticiId", Tip = "Liste", ListName = "personelList", ListVisibleColumnName = "adSoyad")] public int? yoneticiPersonelId { get; set; }
+        public int? personelResimId { get; set; }
+        public byte[] personelResimdata { get; set; }
+        
+        public string personelResimformat { get; set; }
+    }
+}

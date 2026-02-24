@@ -1,0 +1,18 @@
+﻿@inject IDialogService DialogService
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.body1">@ContentText</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="@Color" OnClick="Close">@ButtonText</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public string ContentText { get; set; } = "";
+    [Parameter] public string ButtonText { get; set; } = "OK";
+    [Parameter] public Color Color { get; set; } = Color.Primary;
+
+    void Close() => MudDialog.Close();
+}

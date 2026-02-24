@@ -1,16 +1,19 @@
-﻿using Api.DatabaseJobs;
+﻿using Api.Business;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     public class DovizCinsiController
     {
-        [HttpGet, Route("api/TumDovizCinsleri/")]
-        public string TumDovizCinsleri()
+        private readonly IDataAccessLayer _dataAccessLayer;
+        public DovizCinsiController(IDataAccessLayer dataAccessLayer)
         {
-            string returnValue = "";
-            returnValue = DataBaseJobsDovizCinsi.GetAllDovizCinsi();
-            return returnValue;
+            _dataAccessLayer = dataAccessLayer;
+        }
+        [HttpGet, Route("api/GetDovizCinsi")]
+        public string GetDovizCinsi()
+        {
+            return _dataAccessLayer.GetObject("spGetDovizCinsi");
         }
     }
 }

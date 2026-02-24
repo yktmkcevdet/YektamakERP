@@ -38,14 +38,13 @@
     private Dialog? dialog;
     private string Content = "<p>Bu bir <strong>HTML içeriğidir</strong>.</p>";
     private string Title = "Başlık";
-    
     private async Task LoginAsync()
     {
         var token = await loginService.LoginAsync(userName, password);
         if (token != null)
         {
+            
             navigationManager.NavigateTo("/Proje/");
-            StateHasChanged();
         }
         else{
             Content = "<p>Kullanıcı girişi başarısız</p>";

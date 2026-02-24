@@ -1,0 +1,29 @@
+﻿using Models;
+using Models.DTO;
+
+namespace ApiService.Interfaces
+{
+    public interface IKullaniciYetkiService
+    {
+        public string GetAnaMenu(AnaMenuDTO anaMenu);
+        public string GetMenu(Menu menu=null);
+        public string GetYetki(Yetki yetki);
+        public Task<string> DeleteAlanYetki(AlanYetki alanYetki);
+        public Task<string> GetKullaniciAsync(Kullanici kullanici);
+        public string GetKullanici(Kullanici kullanici);
+        public string GetRol(Rol rol);
+        public string GetKullanici(string kullanici);
+        public string SaveKullanici(Kullanici kullanici);
+        public Task<string> DeleteMenu(Menu menu);
+        public Task<string> DeleteEkran(Ekran ekran);
+        public Task<string> SaveEkran(Ekran ekran);
+        public Task<string> SaveMenu(Menu menu);
+        public string GetKullaniciYetki(Kullanici kullanici);
+        public Task<string> SaveYetki(Yetki yetki);
+        public Task<string> SaveAlanYetki(AlanYetki alanYetki);
+        public Task<string> GetAlanYetki(AlanYetki alanYetki);
+        public Task<string> SaveMailAdres(MailAdres mail);
+        public Task<string> GetMailAdres(MailAdres mail);
+        public Task<string> DeleteMailAdres(MailAdres mail);
+    }
+}

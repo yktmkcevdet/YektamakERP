@@ -1,11 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <OutputType>WinExe</OutputType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<StartupObject></StartupObject>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Properties\**" />
+    <Content Remove="Controllers\Properties\**" />
+    <EmbeddedResource Remove="Controllers\Properties\**" />
+    <None Remove="Controllers\Properties\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="DatabaseJobs\DatabaseJobKullaniciYetki.cs" />
@@ -17,18 +24,16 @@
     </ItemGroup>
 
 	<ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Npgsql" Version="8.0.3" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.Odbc" Version="8.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Properties\" />
   </ItemGroup>
 
   <ItemGroup>

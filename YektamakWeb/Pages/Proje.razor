@@ -2,13 +2,16 @@
 @using BlazorApp1.Features.Commands.Account.Login
 @using Microsoft.AspNetCore.Components.Rendering
 @using Models
-@using ApiService
+@using ApiService.Interfaces
 @using System.Data
+@using Models.DTO
+@using Newtonsoft.Json
+@using Utilities.Implementations
 @using Utilities.Interfaces
 @using YektamakWeb.Components.Dialogs
+@using MudBlazor
 
-
-<div class="container-fluid">
+<div class="table-responsive">
     <h3>Proje Dosyaları</h3>
     <PageTitle>Proje Dosyaları</PageTitle>
     <div class="row">
@@ -22,15 +25,15 @@
         </div>
     </div>
 
-    <table class="table-responsive">
+    <table class="mud-table mud-table-dense mud-elevation-1">
         <tr>
             <td>
                 <label class="flex-column">Proje Kodu</label>
             </td>
             <td>
                 <select class="flex-column" @bind="selectedProjeId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in _cache.projes)
+                    <option value="0" selected disabled>Seçim Yapınız</option>
+                    @foreach (var item in cache.projeList)
                     {
                         <option value="@item.Id">@item.kod</option>
                     }
@@ -39,12 +42,12 @@
         </tr>
         <tr>
             <td>
-                <label class="flex-column" style="width:max-content">Parça Grubu</label>
+                <label class="flex-column" style="width:max-content">Stok Grubu</label>
             </td>
             <td>
-                <select class="flex-column" @bind="selectedParcaGrupId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
-                    @foreach (var item in parcaGrup)
+                <select class="flex-column" @bind="selectedStokGrupId" @bind:after="Filter">
+                    <option value="0" selected enabled>Seçim Yapınız</option>
+                    @foreach (var item in stokGrup)
                     {
                         <option value="@item.Key">@item.Value</option>
                     }
@@ -56,8 +59,8 @@
                 <label class="flex-column" style="width:max-content">Malzeme Grubu</label>
             </td>
             <td>
-                <select class="flex-column" @bind="selectedMalzemeGrupId" @bind:after="GetProjeDosyalari">
-                    <option value="" selected disabled>Seçim Yapınız</option>
+                <select class="flex-column" @bind="selectedMalzemeGrupId" @bind:after="Filter">
+                    <option value="0" selected enabled>Seçim Yapınız</option>
                     @foreach (var item in malzemeGrup)
                     {
                         <option value="@item.Key">@item.Value</option>
@@ -70,9 +73,7 @@
                 <label class="flex-column" style="width:max-content">Parça Adı</label>
             </td>
             <td>
-                <input class="flex-column" @bind="parcaAdi" @bind:after="GetProjeDosyalari">
-                        
-                </input>
+                <input class="flex-column" @bind="parcaAdi" @bind:after="GetProjeDosyalari" />
             </td>
         </tr>
     </table>
@@ -89,45 +90,40 @@
 {
     <p>Veriler yükleniyor...</p>
 }
-else if (stokKarts.Count<StokKart>() == 0)
+else if (stokKarts.Count<ProjeStokKart>() == 0)
 {
     <p>Gösterilecek veri bulunamadı.</p>
 }
 else
 {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th id="stokKartId">Ürün ID</th>
-                    <th>Proje Kodu</th>
-                    <th>Ürün Kodu</th>
-                    <th>Ürün Adı</th>
-                    <th>pdf</th>
-                    <th>dxf</th>
-                    <th>step</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var stokKart in stokKarts)
-                {
-                    <tr>
-                        <td>@stokKart.Id</td>
-                        <td>@stokKart.proje.kod</td>
-                        <td>@stokKart.kod</td>
-                        <td>@stokKart.ad</td>
-                        <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
-                            <img src="/pdf.png" alt="Default Image" class="default-image" />
-                        </td>
-                        <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
-                            <img src="/pdf.png" alt="Default Image" class="default-image" />
-                        </td>
-                        <td class="image-cell" @onclick="()=>PdfGoster(stokKart.Id)" style="cursor: pointer;">
-                            <img src="/pdf.png" alt="Default Image" class="default-image" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
+        <MudPaper Class="pa-4" style="max-height:500px; overflow-y:auto;">
+            <MudTable Striped="true" Items="filterStokKarts" MultiSelection="true" @bind-SelectedItems="SelectedItems">
+                <HeaderContent>
+                    <MudTh>Proje Kodu</MudTh>
+                    <MudTh>Stok Kodu</MudTh>
+                    <MudTh>Stok Adı</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="ProjeKodu">@context.proje.kod</MudTd>
+                    <MudTd DataLabel="StokKodu">@context.stokKart.kod</MudTd>
+                    <MudTd DataLabel="StokAdi">@context.stokKart.ad</MudTd>
+                    <MudTd Class="image-cell" @onclick="()=>PdfGoster(context.stokKart.Id)" style="cursor: pointer;"><img src="pdf.png" alt="Default Image" class="default-image" /></MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudPaper>
+        <table class="mud-table mud-table-dense mud-elevation-1">
+            <tr>
+                <th>Toplam kayıt sayısı<br/>     </th>
+                <th>Filtrelenen kayıt saysı  </th>
+                <th>Seçilen kayıt saysı      </th>
+            </tr>
+            <tr>
+                <td>@(stokKarts?.Count() ?? 0)</td>
+                <td>@(filterStokKarts?.Count() ?? 0)</td>
+                <td>@(SelectedItems?.Count() ?? 0)</td>
+            </tr>
         </table>
+            
 }
 @if (!string.IsNullOrEmpty(message))
 {
@@ -135,24 +131,35 @@ else
         @message
     </div>
 }
+    
+</div>
+<div class="col-sm-1">
+    <button type="button" class="btn btn-primary flex-column" @onclick="CreateSatinalmaTalep">
+        Satınalma Talebi Oluştur
+    </button>
 </div>
 <PdfView @ref="pdfViewer" />
 <DialogFragment @ref="dialogFragment">@renderFragment()</DialogFragment> 
 @code {
-    @inject IJsonConvertHelper jsonConvertHelper
-    @inject IDataTableHelper dataTableConverter
-    @inject ICache _cache
+    @inject IJsonConverter jsonConvertHelper
+    @inject IDataTableMapper dataTableConverter
+    @inject ICache cache
+    @inject IStokService stokService
+    @inject IProjeService _projeService
+    @inject IConvertHelper _convertHelper
+    @inject IFileService _fileService
     private NavigationManager? navigation { get; set; }
     private PdfView pdfViewer;
     private string message;
     private bool IsLoading;
     private int selectedProjeId;
     private int stokKartId;
-    private int selectedParcaGrupId;
+    private int selectedStokGrupId;
     private int selectedMalzemeGrupId;
+    private HashSet<ProjeStokKart> SelectedItems = new();
     private string parcaAdi=string.Empty;
-    Dictionary<int, string> parcaGrup = new Dictionary<int, string>();
-    Dictionary<int, string> malzemeGrup = new Dictionary<int, string>();
+    Dictionary<int?, string> stokGrup = new Dictionary<int?, string>();
+    Dictionary<int?, string> malzemeGrup = new Dictionary<int?, string>();
     private DialogFragment? dialogFragment;
     private RenderFragment renderFragment() => __builder =>
     {
@@ -163,7 +170,8 @@ else
     {
         dialogFragment?.ShowDialog();
     }
-    public List<StokKart> stokKarts = new List<StokKart>();
+    public List<ProjeStokKart> stokKarts = new List<ProjeStokKart>();
+    public List<ProjeStokKart> filterStokKarts = new List<ProjeStokKart>();
 
     protected override void OnInitialized()
     {
@@ -171,61 +179,70 @@ else
     private async Task GetProjeDosyalari()
     {
         IsLoading = true;
-        stokKarts = new List<StokKart>();
+        stokKarts = new List<ProjeStokKart>();
         try
         {
             // API çağrısı yap
-            StokKart stokKart = new StokKart();
-            stokKart.proje.Id = selectedProjeId;
-            stokKart.parcaGrup.Id = selectedParcaGrupId;
-            stokKart.ad = parcaAdi;
-            stokKart.malzemeGrup.Id = selectedMalzemeGrupId;
-            string serializeString = WebMethods.GetStokKart(stokKart);
-            DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
-            if (dataSet != null)
+            ProjeStokKart projeStokKart = new();
+            projeStokKart.proje.Id = selectedProjeId;
+            projeStokKart.stokKart.stokGrup.Id = selectedStokGrupId;
+            projeStokKart.stokKart.ad = parcaAdi;
+            projeStokKart.stokKart.malzemeGrup.Id = selectedMalzemeGrupId;
+            stokKarts = await _projeService.GetProjeStokKart(projeStokKart);
+            filterStokKarts = stokKarts;
+            foreach (var item in stokKarts)
             {
-                foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+                if (stokGrup.Count(id => id.Key == item.stokKart.stokGrup.Id) == 0)
                 {
-                    stokKart = dataTableConverter.DataRowToModel<StokKart>(dataRow);
-                    stokKarts.Add(stokKart);
-                    if (parcaGrup.Count(id => id.Key == stokKart.parcaGrup.Id) == 0)
-                    {
-                        parcaGrup.Add(stokKart.parcaGrup.Id, stokKart.parcaGrup.kod);
-                    }
-                    if (malzemeGrup.Count(id => id.Key == stokKart.malzemeGrup.Id) == 0)
-                    {
-                        malzemeGrup.Add(stokKart.malzemeGrup.Id, stokKart.malzemeGrup.ad);
-                    }
+                    if (string.IsNullOrEmpty(item.stokKart.stokGrup.Id.ToString())) continue;
+                    stokGrup.Add(item.stokKart.stokGrup.Id, item.stokKart.stokGrup.ad);
+                }
+                if (malzemeGrup.Count(id => id.Key == item.stokKart.malzemeGrup.Id) == 0)
+                {
+                    malzemeGrup.Add(item.stokKart.malzemeGrup.Id, item.stokKart.malzemeGrup.ad);
                 }
             }
             IsLoading = false;
         }
         catch (Exception ex)
         {
-            message = $"Veri çekme hatası: {ex.Message}";
             IsLoading = false;
         }
     }
-
-    private void PdfGoster(int stokKartId)
+    private void Filter()
     {
-        StokKart stokKart = new StokKart();
-        stokKart.Id = stokKartId;
-        string serializeString = WebMethods.GetStokKartPdf(stokKart);
-        DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
-        if (dataSet != null)
-        {
-            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+        filterStokKarts = stokKarts
+        .Where(s => 
             {
-                stokKart = dataTableConverter.DataRowToModel<StokKart>(dataRow);
-            }
-        }
+                bool recOk=true;
+                if (selectedStokGrupId!=0) 
+                { 
+                    recOk = s.stokKart.stokGrup.Id == selectedStokGrupId;
+                }
+                if (selectedMalzemeGrupId!=0)
+                {
+                    recOk =  (s.stokKart.malzemeGrup.Id == selectedMalzemeGrupId) && recOk;
+                }
+                return recOk;
+            })
+            .ToList();
+    }
+
+    private async void PdfGoster(int? stokKartId)
+    {
+        ProjeStokKart projeStokKart = new();
+        projeStokKart.stokKart.Id = stokKartId;
+        projeStokKart = (await _projeService.GetProjeStokKart(projeStokKart)).FirstOrDefault();
         
         if (pdfViewer != null)
         {
             //await JSRuntime.InvokeVoidAsync("openPdfBlob", stokKart.pdf);
             //pdfViewer.Open($"data:application/pdf;base64,{Convert.ToBase64String(stokKart.pdf)}");
-            pdfViewer.OpenModal(stokKart.pdf);
+            if (projeStokKart.stokKart.dosyaList.Where(d => d.isActive == true && d.dosyaTip.Id == 1).Any())
+            {
+                var dosya = await _fileService.GetFileDecompress(projeStokKart.stokKart.dosyaList.Where(d => d.isActive == true && d.dosyaTip.Id == 1).FirstOrDefault().dosyaFullPath);
+                pdfViewer.OpenModal(dosya);
+            }
         }
         
         //dialogFragment.ShowDialog();
@@ -235,5 +252,121 @@ else
     {
         navigation?.NavigateTo(char.ToUpper(page[0]) + page.Substring(1).ToLower());
     }
+    private void CreateSatinalmaTalep()
+    {
+        var talepList = SelectedItems;
+        if (ValidateForm(talepList))
+        {
+            List<SatinalmaTalepDetay> satinalmaTalepDetayList = new List<SatinalmaTalepDetay>();
+            foreach (var item in talepList)
+            {
+                item.Id = null; //projestokKartId satinalmaTalepDetayId olarak aktarılmaması için null yapılıyor
+                SatinalmaTalepDetay satinalmaTalepdetay = new SatinalmaTalepDetay { proje = { Id = int.TryParse(selectedProjeId.ToString(), out int proje) ? proje : null } };
+                SatinalmaTalepSatirDetayDTO satinalmaTalepSatirDetay = new SatinalmaTalepSatirDetayDTO();
+                // Eğer stok kartının hammaddeId'si varsa, ve lazer grubuna ait parça değilse satınalma talep detay listesine hammadde olarak ekle
+                if (item.stokKart.hammadde.Id != null && item.stokKart.malzemeGrup.Id != 28)
+                {
+                    //Hammadde ise ve listeye daha önce eklenmiş mi kontrol et, eklenmişse miktarını güncelle
+                    if (satinalmaTalepDetayList.Any(x => x.projeStokKart.Id == item.stokKart.hammadde.Id))
+                    {
+                        satinalmaTalepdetay = satinalmaTalepDetayList.FirstOrDefault(x => x.projeStokKart.Id == item.stokKart.hammadde.Id);
+                        if (item.stokKart.hammadde.olcuBirim.Id == 2)
+                        {
+                            satinalmaTalepdetay.miktar += item.miktar * item.stokKart.agirlik;
+                        }
+                        else
+                        {
+                            satinalmaTalepdetay.miktar += item.miktar;
+                        }
+                        satinalmaTalepdetay.agirlik += item.miktar * item.stokKart.agirlik;
 
+                        satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(
+                            _convertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
+                    }
+                    // Eğer hammadde olarak eklenmemişse, yeni bir hammadde olarak ekle
+                    else
+                    {
+                        if (satinalmaTalepdetay.projeStokKart.stokKart.hammadde.olcuBirim.Id == 2)
+                        {
+                            satinalmaTalepdetay.miktar = item.miktar * item.stokKart.agirlik;
+                        }
+                        else
+                        {
+                            satinalmaTalepdetay.miktar = item.miktar;
+                        }
+                        satinalmaTalepdetay.agirlik = item.miktar * item.stokKart.agirlik;
+                        satinalmaTalepdetay.satinalmaTalepSatirDetays.Add(_convertHelper.ToEntity<SatinalmaTalepSatirDetay>(item));
+                        satinalmaTalepdetay.projeStokKart = JsonConvert.DeserializeObject<ProjeStokKart>(
+                            JsonConvert.SerializeObject(_convertHelper.ToEntity<ProjeStokKart>(item).stokKart.hammadde));
+                        //satinalmaTalepdetay.stokKart.Id = item.stokKarthammaddeId;
+                        //satinalmaTalepdetay.stokKart.kod = item.stokKarthammaddekod;
+                        //satinalmaTalepdetay.stokKart.ad = item.stokKarthammaddead;
+                        satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                    }
+                }
+                // Eğer stok kartının hammaddeId'si yoksa, satınalma talep detay listesine normal stok kartı olarak ekle
+                else
+                {
+                    satinalmaTalepdetay = _convertHelper.ToEntity<SatinalmaTalepDetay>(item);
+                    satinalmaTalepdetay.miktar = item.miktar;
+                    satinalmaTalepdetay.onaylananMiktar = item.miktar;
+                    satinalmaTalepdetay.agirlik = item.miktar * item.stokKart.agirlik;
+                    satinalmaTalepDetayList.Add(satinalmaTalepdetay);
+                }
+            }
+            SatinalmaTalep satinalmaTalep = new SatinalmaTalep
+            {
+                proje = { Id = int.TryParse(selectedProjeId.ToString(), out int projeId) ? projeId : null },
+                //malzemeGrup = new MalzemeGrup { Id = int.TryParse(clbMalzemeGrup.SelectedValue.ToString(), out int malzemegrupId) ? malzemegrupId : null },
+                talepTarihi = DateTime.Today,
+                teslimTarihi = null,
+                aciklama = "Otomatik oluşturulan satınalma talebi",
+                talepEdenKullanici = cache.kullanici,
+                satinalmaTalepDetays = satinalmaTalepDetayList
+            };
+            
+        }
+
+    }
+    private bool ValidateForm(HashSet<ProjeStokKart> stokKarts)
+    {
+        // Formdaki gerekli alanların dolu olup olmadığını kontrol et
+        if (!stokKarts.Any())
+        {
+            ShowDialog("Satınalma talebi oluşturulacak satırlar seçilmelidir.");
+            return false;
+        }
+        if (stokKarts.Any(x => x.stokKart.isPdf == false))
+        {
+            ShowDialog("PDF dosyası olmayan kayıtlar seçilemez.");
+            return false;
+        }
+        if (stokKarts.Any(x => x.stokKart.isDxf == false))
+        {
+            ShowDialog("DXF dosyası olmayan kayıtlar seçilemez.");
+            return false;
+        }
+        if (stokKarts.Any(x => x.stokKart.isStep == false))
+        {
+            ShowDialog("STEP dosyası olmayan kayıtlar var devam edilsin mi?");
+        }
+        if (stokKarts.Any(x => x.stokKart.isSatinalma == true))
+        {
+            ShowDialog("Satınalma talebi açılmış kayıtlar seçildi. Devam etmek istiyor musunuz?");
+        }
+        return true;
+    }
+    private async Task ShowDialog(string contentText)
+    {
+        var parameters = new DialogParameters
+        {
+            { "ContentText", contentText },
+            { "ButtonText", "Tamam" },
+            { "Color", Color.Error }
+        };
+
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+
+        DialogService.Show<DialogComponent>("Uyarı", parameters, options);
+    }
 }

@@ -1,125 +1,103 @@
-﻿using Models;
+﻿using ApiService.Interfaces;
+using Models;
+using Models.DTO;
 using Newtonsoft.Json;
-using ApiService;
+using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar.Genel
 {
-    public partial class PersonelKayitFormu : Form, IForm
+    public partial class PersonelKayitFormu : Form
     {
-
-        private static PersonelKayitFormu _personelKayitFormu;
-
-        public static PersonelKayitFormu personelKayitFormu
+        private readonly IPersonelService _personelService;
+        private readonly ICache _cache;
+        private readonly IConvertHelper _convertHelper;
+        public PersonelKayitFormu(IPersonelService personelService, ICache cache, IConvertHelper convertHelper)
         {
-            get
-            {
-                if (_personelKayitFormu == null)
-                {
-                    _personelKayitFormu = new PersonelKayitFormu();
-                    GlobalData.Yetki(ref _personelKayitFormu);
-                }
-                return _personelKayitFormu;
-            }
+            _personelService = personelService;
+            _cache = cache;
+            _convertHelper = convertHelper;
+            InitializeComponent();
+            Initialize();
+            Binding();
         }
-        //Firma ekranından + butonuyla yeni eklenen personelin firma bilgisini tutması için
-        private Personel _personelToSave;
-        public Personel personelToSave { get { if (_personelToSave == null) { _personelToSave = new(); } return _personelToSave; } set { _personelToSave = value; } }
-        private Personel _personelToUpdate;
-        public Personel personelToUpdate { get { if (_personelToUpdate == null) { _personelToUpdate = new(); } return _personelToUpdate; } set { _personelToUpdate = value; } }
-
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        private bool yeniResim = false;
-        private byte[] yeniResimBytes;
-        private string yeniResimFormat;
-        #region mouseMove
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        private void Initialize()
         {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
+            Controls.Add(universalGrid1);
+            universalGrid1.SetData(new List<PersonelDTO>(), this.Name);
+            universalGrid1.MouseDown1 += Grid_MouseClick;
+            clbFirma.SetDataSource(_cache.firmaList);
+            clbPozisyon.SetDataSource(_cache.pozisyonList);
+            clbYonetici.SetDataSource(_cache.personelList);
+            //pictureBoxPersonel.DataBindings["Image"].Format += (s, e) =>
+            //{
+            //    if (e.DesiredType == typeof(Image) && e.Value is byte[] bytes && bytes.Length > 0)
+            //    {
+            //        using (var ms = new MemoryStream(bytes))
+            //        {
+            //            e.Value = Image.FromStream(ms);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        e.Value = null; // resim yoksa boş bırak
+            //    }
+            //};
         }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
+        private void Grid_MouseClick(object sender, MouseEventArgs e)
         {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
+            personelDTO = (PersonelDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
         }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
+        private PersonelDTO _personelDTO;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public PersonelDTO personelDTO
         {
-            mouseDown = false;
+            get { if (_personelDTO == null) { _personelDTO = new(); } return _personelDTO; }
+            set{ _personelDTO = value; Binding(); }
         }
-        #endregion mouseMove
         private PersonelKayitFormu()
         {
             InitializeComponent();
-            controlsToDisable = new List<Control>
-            {
-                buttonKapat,
-                buttonPersonelKaydet,
-                buttonPersonelGuncelle,
-                buttonResimSec,
-                textBoxEmail,
-                comboListBoxFirma,
-                textBoxIsim,
-                textBoxPozisyon,
-                textBoxSoyisim,
-                textBoxTelefon
-            };
+            Binding();
         }
-        public void UpdateMode(Personel personel)
+        private void Binding()
         {
-            buttonPersonelGuncelle.Visible = true;
-            personelToUpdate=personel;
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id);
-            textBoxIsim.TextCustom = personel.ad;
-            textBoxSoyisim.TextCustom = personel.soyad;
-            textBoxTelefon.TextCustom = personel.telefon;
-            textBoxEmail.TextCustom = personel.mail;
-            textBoxPozisyon.TextCustom = personel.pozisyon;
-            ImageFormat ımageFormat = ImageWorks.GetImageFormatFromString(personel.personelResim.imageFormat);
-            pictureBoxPersonel.Image = ImageWorks.GetImageFromBytes(personel.personelResim.resimData, ımageFormat);
-            yeniResimBytes = personel.personelResim.resimData;
-            yeniResimFormat=personel.personelResim.imageFormat;
-            GetCurrentPersonel();
-            personelToUpdate = JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personelToSave));
+            BindHelper.BindData(ctbId, personelDTO, nameof(personelDTO.Id));
+            BindHelper.BindData(ctbPersonelAd, personelDTO, nameof(personelDTO.ad));
+            BindHelper.BindData(ctbPersonelSoyad, personelDTO, nameof(personelDTO.soyad));
+            BindHelper.BindData(ctbTelefon, personelDTO, nameof(personelDTO.telefon));
+            BindHelper.BindData(ctbMail, personelDTO, nameof(personelDTO.mail));
+            BindHelper.BindData(clbFirma, personelDTO, nameof(personelDTO.firmaId));
+            BindHelper.BindData(clbPozisyon, personelDTO, nameof(personelDTO.pozisyonId));
+            BindHelper.BindData(clbYonetici, personelDTO, nameof(personelDTO.yoneticiPersonelId));
+            pictureBoxPersonel.DataBindings.Clear();
+            pictureBoxPersonel.DataBindings.Add("Image", personelDTO, nameof(personelDTO.personelResimdata), true, DataSourceUpdateMode.OnPropertyChanged);
         }
-        public void SaveMode()
+        public void UpdateMode(PersonelDTO personelUpdate)
         {
-            buttonPersonelGuncelle.Visible = false;
-            personelToUpdate.firma.Id = -1;
-            personelToUpdate.firma.Id= -1;
-        }
-
-        /// <summary>
-        /// Firma güncelleme penceresinden personel eklemek istenilirse kullanılacak
-        /// </summary>
-        /// <param name="firma"></param>
-        public void SaveMode(Personel personel)
-        {
-            buttonPersonelGuncelle.Visible = false;
-            personelToSave=JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            personelToUpdate= JsonConvert.DeserializeObject<Personel>(JsonConvert.SerializeObject(personel));
-            comboListBoxFirma.SelectDataRowId(personel.firma.Id);
-            comboListBoxFirma.Enabled= false;
+            personelDTO = personelUpdate;
         }
         private void buttonResimSec_Click(object sender, EventArgs e)
         {
@@ -133,38 +111,19 @@ namespace YektamakDesktop.Formlar.Genel
                 if (loadedImage != null)
                 {
                     pictureBoxPersonel.Image = loadedImage;
-                    yeniResim = true;
                     ImageFormat format = ImageWorks.GetImageFileFormatFromPath(openFileDialogResim.FileName);
-                    yeniResimBytes = ImageWorks.GetBytesFromImage(loadedImage, format);
-                    yeniResimFormat = format.ToString();
+                    personelDTO.personelResimdata = ImageWorks.GetBytesFromImage(loadedImage, format);
+                    personelDTO.personelResimformat = format.ToString();
                 }
                 else
                 {
                     pictureBoxPersonel.Image = null;
-                    yeniResim = false;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                yeniResim = false;
+                MessageBox.Show(ex.Message);
             }
-
-
-        }
-        private Personel GetCurrentPersonel()
-        {
-            personelToSave.Id=personelToUpdate.Id;
-            personelToSave.firma.Id = comboListBoxFirma.selectedDataRowId;
-            personelToSave.firma.ad = comboListBoxFirma.selectedDataRowValue;
-            personelToSave.ad = string.IsNullOrEmpty(textBoxIsim.TextCustom)?null: textBoxIsim.TextCustom;
-            personelToSave.soyad = string.IsNullOrEmpty(textBoxSoyisim.TextCustom)?null:textBoxSoyisim.TextCustom;
-            personelToSave.telefon = string.IsNullOrEmpty(textBoxTelefon.TextCustom) ? null : textBoxTelefon.TextCustom;
-            personelToSave.mail = string.IsNullOrEmpty(textBoxEmail.TextCustom) ? null : textBoxEmail.TextCustom;
-            personelToSave.pozisyon = string.IsNullOrEmpty(textBoxPozisyon.TextCustom) ? null : textBoxPozisyon.TextCustom;
-            personelToSave.personelResim.resimData = yeniResimBytes;
-            personelToSave.personelResim.imageFormat = yeniResimFormat;
-
-            return personelToSave;
         }
         /// <summary>
         /// Bütün alanlardaki veriler doğru yazılmış mı onun kontrol yapılacak
@@ -172,90 +131,60 @@ namespace YektamakDesktop.Formlar.Genel
         /// </summary>
         private bool CheckFields()
         {
-            GlobalData.ClearWarningLabels(this);
             bool result = true;
-            result = result & GlobalData.CheckField("*İsim alanı boş bırakılamaz!", this, textBoxIsim);
-            result = result & GlobalData.CheckField("*Soyisim alanı boş bırakılamaz!", this, textBoxSoyisim);
-            result = result & GlobalData.CheckField("*Firma seçimi yapılmalıdır!", this, comboListBoxFirma);
+            result = result & CheckFieldHelper.CheckField("*İsim alanı boş bırakılamaz!",  ctbPersonelAd);
+            result = result & CheckFieldHelper.CheckField("*Soyisim alanı boş bırakılamaz!",  ctbPersonelSoyad);
+            result = result & CheckFieldHelper.CheckField("*Firma seçimi yapılmalıdır!",  clbFirma);
             return result;
         }
-        private void buttonPersonelKaydet_Click(object sender, EventArgs e)
+        private async void buttonPersonelKaydet_Click(object sender, EventArgs e)
         {
             if (CheckFields())
             {
-                personelToSave = GetCurrentPersonel();
-                string result = WebMethods.SavePersonel(personelToSave);
-                this.Enabled = false;
-                if (result.Contains("error", StringComparison.OrdinalIgnoreCase))
+                string jsonResult = await _personelService.SavePersonel(_convertHelper.ToEntity<Personel>(personelDTO));
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(result);
+                    MessageBox.Show(jsonResult,"Personel kaydederken hata");
                 }
                 else
                 {
-                    IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                    DataSet datasetPersonel = jsonConverter.JsonStringToDataSet(result);
-                    int personelId = int.Parse(datasetPersonel.Tables[0].Rows[0][0].ToString());
-                    personelToSave.Id = personelId;
-                    if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(FirmaKayitFormu))//FirmaKayitFormu tarafından çağırılmışsa
+                    var personel = JsonConvert.DeserializeObject<List<Personel>>(jsonResult).FirstOrDefault();
+                    if (!_cache.personelList.Any(p => p.Id == personel.Id))
                     {
-                        FirmaKayitFormu.firmaKayitFormu.AddNewPersonel(personelToSave);
+                        _cache.personelList.Add(personel);
                     }
-                    else if (GlobalData.activeFormStack.Skip(1).First().GetType() == typeof(PersonelGridFormu))
+                    else
                     {
-                        PersonelGridFormu.personelGridFormu.UpdateRow(personelToSave);
+                        var index = _cache.personelList.FindIndex(p => p.Id == personel.Id);
+                        if (index != -1)
+                        {
+                            _cache.personelList[index] = personel;
+                        }
                     }
-                    //GlobalData.personelList.Remove(GlobalData.personelList.Find(x => x.Id == personelToUpdate.Id));
-                    //GlobalData.personelList.Add(personelToUpdate);
-                    personelToUpdate = personelToSave;
-                    MessageBox.Show("Kayıt başarılı");
-                }
-                this.Enabled = true;
-            }
-        }
-        private void buttonKapat_Click(object sender, EventArgs e)
-        {
-            CloseForm(sender, e);
-        }
-
-
-        private void CloseForm(object sender, EventArgs e)
-        {
-            GetCurrentPersonel();
-            if (!GlobalData.CompareClass(personelToSave,personelToUpdate))
-            {
-                DialogResult dialogResult = MessageBox.Show("Formda yapılan değişiklikler kaydedilsin mi","",MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    buttonPersonelKaydet_Click(sender, e);
-                }
-                else
-                {
-                    GlobalData.CloseForm(ref _personelKayitFormu);
+                    List<PersonelDTO> personelList = new();
+                    foreach (var item in _cache.personelList)
+                    {
+                        personelList.Add(_convertHelper.ToDTO<PersonelDTO>(item));
+                    }
+                    universalGrid1.SetData(personelList, this.Name);
                 }
             }
-            else
-            {
-                GlobalData.CloseForm(ref _personelKayitFormu);
-            }
-        }
-
-
-        private void buttomMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            CloseForm(sender, e);
         }
 
         private void PersonelKayitFormu_Load(object sender, EventArgs e)
         {
-            //foreach(Firma firma in GlobalData.firmaUnvanList)
-            //{
-            //    comboListBoxFirma.AddDataRow(firma.Id, firma.unvan);
-            //}
+            List<Personel> personelList = new();
+            universalGrid1.SetData(_cache.personelList.CastToDTO<PersonelDTO>(_convertHelper).ToList(), this.Name);
+        }
+
+        private void PersonelKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
+        }
+
+        private void roundedButton1_Click(object sender, EventArgs e)
+        {
+            personelDTO=new PersonelDTO();
         }
     }
 }

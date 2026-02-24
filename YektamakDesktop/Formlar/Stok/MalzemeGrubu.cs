@@ -22,7 +22,9 @@ namespace YektamakDesktop.Formlar.Stok
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Control> controlsToDisable { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool activeForm { get; set; }
 
         public MalzemeGrubu()

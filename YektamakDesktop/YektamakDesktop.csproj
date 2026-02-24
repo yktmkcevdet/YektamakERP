@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows7.0</TargetFramework>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+	  <EnableMsixTooling>true</EnableMsixTooling>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <PackageIcon>logo.ico</PackageIcon>
     <IncludeSymbols>False</IncludeSymbols>
     <StartupObject></StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,54 +22,27 @@
     <Optimize>False</Optimize>
   </PropertyGroup>
 
- 
-
   <ItemGroup>
-    <None Remove="Reports\CariEkstre.frx" />
+    <Compile Remove="GlobalData\**" />
+    <Compile Remove="Resimler\**" />
+    <EmbeddedResource Remove="GlobalData\**" />
+    <EmbeddedResource Remove="Resimler\**" />
+    <None Remove="GlobalData\**" />
+    <None Remove="Resimler\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>9</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>00020813-0000-0000-c000-000000000046</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Outlook">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>6</VersionMinor>
-      <VersionMajor>9</VersionMajor>
-      <Guid>00062fff-0000-0000-c000-000000000046</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="HHCTRLLib">
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>4</VersionMajor>
-      <Guid>adb880a2-d8ff-11cf-9377-00aa003b7a11</Guid>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="MSHTML">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>4</VersionMajor>
-      <Guid>3050f1c5-98b5-11cf-bb82-00aa00bdce0b</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
+    <Compile Remove="Common\CastExtensions.cs" />
+    <Compile Remove="Common\ConvertHelper.cs" />
+    <Compile Remove="Common\LoadSubForm.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="logo.ico" />
-    <Content Include="Reports\CariEkstre.frx">
+    <Content Include="logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -75,20 +50,29 @@
  
 
   <ItemGroup>
-    <PackageReference Include="FastReport.OpenSource" Version="2024.1.10" />
-    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2024.1.10" />
-    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Azure.Identity" Version="1.17.1" />
+    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.30115.18" />
+    <PackageReference Include="FastReport.OpenSource" Version="2026.1.2" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2026.1.2" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Graph" Version="5.103.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.1" />
     <PackageReference Include="netDxf" Version="2023.11.10" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NPOI" Version="2.7.2" />
-    <PackageReference Include="Pdfium.Net.SDK" Version="4.96.2704" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
-    <ProjectReference Include="..\ApiService\ApiService.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="NPOI" Version="2.7.5" />
+    <PackageReference Include="PDFium.x64" Version="4648.0.0" />
+    <PackageReference Include="PdfiumViewer.Updated" Version="2.14.5" />
+    <PackageReference Include="QuestPDF" Version="2025.7.4" />
+    <PackageReference Include="RtfPipe" Version="2.0.7677.4303" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="SkiaSharp" Version="3.119.1" />
+    <PackageReference Include="SkiaSharp.Skottie" Version="3.119.1" />
+    <PackageReference Include="Spire.PDF" Version="11.10.4" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.9" />
+    <PackageReference Include="Visiativ.SOLIDWORKS.DocumentManager.Interop" Version="33.0.0" />
+    <PackageReference Include="Visiativ.SOLIDWORKS.Interop" Version="33.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -96,70 +80,20 @@
     <Compile Update="CustomControls\CustomTextBoxSayisal.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\MailAyarlarim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\MalzemeAltGrup2TanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\MalzemeAltGrupTanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Genel\MalzemeGrupTanimFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\MainWindow.cs" />
-    <Compile Update="Formlar\Finans\CariKartlarGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\KasaKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\KrediKartiKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\KrediKartlariGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Finans\KasaTanimlariGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Genel\BankaHesabiKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Genel\FirmaKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Genel\FirmaGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaTalepFormuDetay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\TedarikciIadeFaturaKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\TedarikciIadeFaturaGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satinalma\SatinalmaSiparisGridForm.cs" />
-    <Compile Update="Formlar\Satinalma\SatinalmaSiparisKayitFormuOld.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisFaturaGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisSiparisTeklifTalepKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisSiparisTeklifTalepGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\TahsilatPlanKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisSiparisGridForm.cs" />
-    <Compile Update="Formlar\Satis\SatisSiparisKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisProjeKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisProjeGridForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\ProjeSafhaGridFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\SatisFaturaKayitFormu.cs">
+    <Compile Update="Formlar\Satinalma\Teklif\SatinalmaTekliflerFormu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Stok\StokKartGridForm.cs">
@@ -170,39 +104,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Temp\TemplateGridFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Temp\TemplateKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="CustomControls\CustomComboListBox.cs" />
-    <Compile Update="Formlar\Genel\BankaHesabiGridFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\Satis\ProjeKodKayitFormu.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Formlar\Satinalma\SatinalmaSiparisGridForm.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Satis\SatisFaturaGridForm.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Satis\SatisSiparisTeklifTalepGridForm.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\Satis\SatisSiparisGridForm.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -214,6 +124,32 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Resources\logo1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\yektamak-118\.nuget\packages\pdfium.net.sdk\4.96.2704\build\..\content\libpdfium.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\yektamak-118\.nuget\packages\pdfium.net.sdk\4.96.2704\build\..\content\libpdfium.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="Formlar\Projemodul\Report1.rdlc" />
+    <None Remove="logo.png" />
+    <None Remove="Resources\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiService\ApiService.csproj" />
   </ItemGroup>
 
   

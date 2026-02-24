@@ -1,12 +1,17 @@
-﻿using ApiService;
+﻿using ApiService.Interfaces;
+using Microsoft.VisualBasic.ApplicationServices;
 using Models;
+using Newtonsoft.Json;
 using System;
-using System.Data;
-using System.Drawing;
-using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
 using YektamakDesktop.CustomControls;
 
 namespace YektamakDesktop.Formlar
@@ -14,64 +19,59 @@ namespace YektamakDesktop.Formlar
     public partial class UserLogin : Form
     {
         private readonly ICache _cache;
-        public UserLogin(ICache cache)
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly IPasswordService _passwordService;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly IMailService _mailService;
+        public UserLogin(ICache cache, IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, IJsonConverter jsonConverter, IMailService mailService)   
         {
             _cache = cache;
+            _kullaniciYetkiService = kullaniciYetkiService;
+            _passwordService = passwordService;
+            _jsonConverter = jsonConverter;
+            _mailService = mailService;
             InitializeComponent();
+            var s = _cache.kullaniciListAsync();
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(btnSifreDegistir, "Şifre Değiştir");
         }
-        public bool loginStatus { get; private set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool loginStatus { get; set; }
+
         private bool newPasswordMode = false;
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        private Kullanici _user;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Kullanici user
         {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
+            get { if (_user == null) { _user = new(); } return _user; }
+            set
             {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
+                _user = value;
+                Binding();
             }
         }
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
+        private void Binding() 
         {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
+            //ctbKullaniciAdi.DataBindings.Clear();
+            //ctbSifre.DataBindings.Clear();
+            //ctbKullaniciAdi.DataBindings.Add("TextCustom", user, $"{nameof(user.ad)}", true, DataSourceUpdateMode.OnPropertyChanged);
+            //ctbSifre.DataBindings.Add("TextCustom", user, $"{nameof(user.sifre)}", true, DataSourceUpdateMode.OnPropertyChanged);
+        }   
         private void roundedButtonLogin_Click(object sender, EventArgs e)
         {
             LoginProcedures();
         }
-        /// <summary>
-        /// Girilen şifreyi veritabanında kayıtlı olan şifre ile karşılaştırır.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="storedHash"></param>
-        /// <returns></returns>
-        public bool VerifyPassword(Kullanici user, string storedHash)
-        {
-            string hashedPassword = user.sifre;
-            return hashedPassword == storedHash;
-        }
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        
         /// <summary>
         /// Enter'a basıldığında giriş butonuna basılmış gibi işlemleri yapar.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void KullaniciGiris_KeyPress(object sender, KeyPressEventArgs e)
+        private async void KullaniciGiris_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                LoginProcedures();
+                await LoginProcedures();
             }
             if (e.KeyChar == (char)Keys.F1)
             {
@@ -81,42 +81,30 @@ namespace YektamakDesktop.Formlar
         /// Kullanıcı adı ve şifre girildikten sonra giriş işlemlerini yapar. 
         /// Şifre ilk kez kullanılıyorsa şifre yenileme alanlarını görünür yapar.
         /// </summary>
-        private void LoginProcedures()
+        private async Task LoginProcedures()
         {
-            GlobalData.HandleException(async () =>
+            try
             {
                 if (!CheckFields()) return;
                 this.Enabled = false;
-                string storedHashPassword = "";
-                string password = customTextBoxSifre.TextCustom;
-
-				Kullanici user = new Kullanici();
-                user.ad = customTextBoxKullaniciAdi.TextCustom;
-                string jsonString = WebMethods.GetKullanici(user);
-                IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-                DataSet dataSet = jsonConverter.JsonStringToDataSet(jsonString);
-                
-                foreach (DataRow dr in dataSet.Tables[0].Rows)
+                string password = ctbSifre.TextCustom;
+                user =new Kullanici();
+                user.ad = ctbKullaniciAdi.TextCustom;
+                user.sifre= ctbSifre.TextCustom;
+                string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
+                if(String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
-                    storedHashPassword = dataSet.Tables[0].Rows[0]["sifre"].ToString();
-                    user.Id = int.Parse(dr["Id"].ToString());
-                    user.salt = dr["salt"].ToString();
-                    user.sifre= GlobalData.HashPassword(customTextBoxSifre.TextCustom, user.salt);
-                    user.personel = new Personel();
-                    user.personel.Id = int.Parse(dr["personel_Id"].ToString());
-                    user.personel.mail = dr["Mail"].ToString();
-                    user.rolId = int.Parse(dr["rolId"].ToString());
-                    user.isSifreDegisti = int.TryParse(dr["IsSifreDegisti"].ToString(), out int isSifreDegistiInt)
-                             ? isSifreDegistiInt == 1
-                             : false;
+                    MessageBox.Show("Kullanıcı adı ya da şifre hatalı");
+                    return;
                 }
-                if (VerifyPassword(user, storedHashPassword))
+                user = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
+                if (_passwordService.VerifyPassword(password, user.sifre))
                 {
                     if (user.isSifreDegisti == false && newPasswordMode == false)
                     {
                         InitializeComponentsNewPassword();
 
-					}
+                    }
                     else if (newPasswordMode == true)
                     {
                         if (CheckFields())
@@ -134,8 +122,15 @@ namespace YektamakDesktop.Formlar
                 {
                     MessageBox.Show("Kullanıcı adı ya da şifre hatalı");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
                 this.Enabled = true;
-            });
+            }
         }
         /// <summary>
         /// Yeni şifre tanımlamak için program içinde dinamik olarak tanımlanan şifre textbox alanlarının passwordchar olarak gözükmesini sağlar.
@@ -152,11 +147,10 @@ namespace YektamakDesktop.Formlar
         }
         private bool CheckFields()
         {
-            GlobalData.ClearWarningLabels(this);
             bool result = true;
-            result &= GlobalData.CheckField("* Kullanıcı adı girilmelidir!", this, customTextBoxKullaniciAdi);
-            result &= GlobalData.CheckField("* Şifre girilmelidir!", this, customTextBoxSifre);
-            
+            result &= CheckFieldHelper.CheckField("* Kullanıcı adı girilmelidir!", ctbKullaniciAdi);
+            result &= CheckFieldHelper.CheckField("* Şifre girilmelidir!", ctbSifre);
+
             if (newPasswordMode)
             {
                 result &= ValidateField(customTextBoxYeniSifre.TextCustom, "* Yeni şifre girilmelidir!", labelUyariYeniSifre);
@@ -164,9 +158,6 @@ namespace YektamakDesktop.Formlar
                 if (customTextBoxYeniSifre.TextCustom != customTextBoxYeniSifreTekrar.TextCustom)
                     result &= SetErrorLabel("Girilen şifre uyuşmuyor!", labelUyariYeniSifreTekrar);
             }
-
-            if (result == false) AdjustFormSize(result);
-
             return result;
         }
         /// <summary>
@@ -196,27 +187,7 @@ namespace YektamakDesktop.Formlar
             errorLabel.Text = errorMessage;
             return false;
         }
-        /// <summary>
-        /// Şifre değiştirme alanaları gösterilirken form boyutunu ayarlar.
-        /// </summary>
-        /// <param name="validationResult"></param>
-        private void AdjustFormSize(bool validationResult = true)
-        {
-            if (!validationResult)
-            {
-                this.Width += 100;
-                this.panelHeader.Width += 100;
-                this.buttonHelp.Location = new Point(this.buttonHelp.Location.X + 100, this.buttonHelp.Location.Y);
-                this.buttonClose.Location = new Point(this.buttonClose.Location.X + 100, this.buttonClose.Location.Y);
-            }
-            else
-            {
-                this.Width -= 100;
-                this.panelHeader.Width -= 100;
-                this.buttonHelp.Location = new Point(this.buttonHelp.Location.X - 100, this.buttonHelp.Location.Y);
-                this.buttonClose.Location = new Point(this.buttonClose.Location.X - 100, this.buttonClose.Location.Y);
-            }
-        }
+
         /// <summary>
         /// Girilen kullanıcı adını bir dahaki açılış için saklar ve ana menünün açılmaısnı sağlar.
         /// </summary>
@@ -235,29 +206,31 @@ namespace YektamakDesktop.Formlar
         /// <param name="kullanici"></param>
         private void CreateNewPassword(Kullanici kullanici)
         {
-            GlobalData.HandleException(async () =>
+            try
             {
-                string salt = GlobalData.GenerateSalt();
                 string password = customTextBoxYeniSifre.TextCustom;
-                string hashedPassword = GlobalData.HashPassword(password, salt);
+                string salt = _passwordService.HashPassword(password).Hash;
+                string hashedPassword = _passwordService.HashPassword(password).CombinedHash;
 
                 kullanici.sifre = hashedPassword;
                 kullanici.salt = salt;
                 kullanici.isSifreDegisti = true;
-                string httpResult = WebMethods.SaveKullanici(kullanici);
+                string httpResult = _kullaniciYetkiService.SaveKullanici(kullanici);
                 if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(httpResult);
-
                 }
                 else
                 {
                     MessageBox.Show("Şifre değiştirildi");
-                    //MailGonder(kullanici.personel.mail);
+                    _mailService.SendSystemMail(kullanici.personel.mail,"cevdet.oguz@yektamak.com.tr", "Şifre Değişimi", "Şifreniz değiştirilmiştir.");
                     this.Close();
                 }
-
-            });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         /// <summary>
         /// Form yüklenirken eğer daha önce kullanıcı adı ile giriş yapılmışsa daha önce girilmiş kullanıcı adını getirir.
@@ -268,9 +241,26 @@ namespace YektamakDesktop.Formlar
         {
             if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.KullaniciAdi))
             {
-                customTextBoxKullaniciAdi.isPlaceHolder = false;
-                customTextBoxKullaniciAdi.TextCustom = Properties.Settings.Default.KullaniciAdi;
+                ctbKullaniciAdi.isPlaceHolder = false;
+                ctbKullaniciAdi.TextCustom = Properties.Settings.Default.KullaniciAdi;
+                Binding();
             }
+        }
+
+        private async void btnSifreDegistir_Click(object sender, EventArgs e)
+        {
+            if (!CheckFields()) return;
+            string password = ctbSifre.TextCustom;
+            user = new Kullanici();
+            user.ad = ctbKullaniciAdi.TextCustom;
+            user.sifre = ctbSifre.TextCustom;
+            string jsonResult = await _kullaniciYetkiService.GetKullaniciAsync(user);
+            user = JsonConvert.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
+            if (_passwordService.VerifyPassword(password, user.sifre))
+            {
+                InitializeComponentsNewPassword();
+            }
+            
         }
     }
 }

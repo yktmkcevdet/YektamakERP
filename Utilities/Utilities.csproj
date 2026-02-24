@@ -1,19 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Satinalma\**" />
+    <EmbeddedResource Remove="Satinalma\**" />
+    <None Remove="Satinalma\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Implementations\BindHelper.cs" />
+    <Compile Remove="Implementations\Cache.cs" />
+    <Compile Remove="Interfaces\ICache.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.17.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Graph" Version="5.103.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\ApiService\ApiService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\NewFolder\" />
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

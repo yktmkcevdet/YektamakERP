@@ -1,61 +1,32 @@
-﻿using YektamakDesktop.CustomControls;
-using YektamakDesktop.Formlar.Satinalma;
-using YektamakDesktop.Formlar.Satinalma.DataControl;
+﻿using ApiService.Interfaces;
 using Models;
-using ApiService;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Utilities.Implementations;
-using Utilities.Interfaces;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+using YektamakDesktop.Properties;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
     public partial class Menuler : Form
     {
-        private static Menuler _menuler;
-        public static Menuler menuler { get { if (_menuler == null) { _menuler = new(); GlobalData.Yetki(ref _menuler); } return _menuler; } set { _menuler = value; } }
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
         
         CustomDataGrid<DataControlMenu> customDataGrid;
-        private bool mouseDown;
         private Point offset;
-        public Menuler()
+       
+        public Menuler(IKullaniciYetkiService kullaniciYetkiService)
         {
+            _kullaniciYetkiService = kullaniciYetkiService;
             InitializeComponent();
-            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(10, 100), new Size(650, 300));
-            this.Controls.Add(customDataGrid.headerPanel);
-            this.Controls.Add(customDataGrid.detailPanel);
+            var dataC=new DataControlMenu(new Menu());
+            customDataGrid = new CustomDataGrid<DataControlMenu>(2, 30, new Point(0, 0), new Size(panel1.Width, panel1.Height-30),dataC);
+            panel1.Controls.Add(customDataGrid.headerPanel);
+            panel1.Controls.Add(customDataGrid.detailPanel);
         }
-
-        
-        #region mouseDrag
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
         private void buttonClose_Click(object sender, EventArgs e)
         {
             CloseForm();
@@ -63,9 +34,6 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void CloseForm()
         {
-            this.Close();
-            menuler = null;
-            GlobalData.RemoveLastForm();
         }
 
         private void buttomMinimize_Click(object sender, EventArgs e)
@@ -75,28 +43,109 @@ namespace YektamakDesktop.Formlar.Yetkilendirme
 
         private void Menuler_Load(object sender, EventArgs e)
         {
-            IJsonConvertHelper jsonConverter = new JsonConvertHelper();
-            DataSet dataSet = jsonConverter.JsonStringToDataSet(WebMethods.GetMenu());
-            List<DataControlMenu> menuList = new List<DataControlMenu>();
-
-            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            string jsonResult = _kullaniciYetkiService.GetMenu(new Menu());
+            if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
             {
-                IDataTableHelper dataTableConverter = new DataTableHelper();
-                DataRow dataRow = dataSet.Tables[0].Rows[i];
-                menuList.Add(dataTableConverter.DataRowToModel<DataControlMenu>(dataRow));
-                menuList[i].newRec = false;
+                MessageBox.Show("Menüler yüklenemedi: " + jsonResult, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            customDataGrid.dataSource = menuList;
+            List<Menu> menuList = JsonConvert.DeserializeObject<List<Menu>>(jsonResult);
+
+            List<DataControlMenu> dataControlMenus = new List<DataControlMenu>();
+            foreach (var menu in menuList)
+            {
+                DataControlMenu dataControlMenu = new DataControlMenu(menu);
+                dataControlMenus.Add(dataControlMenu);
+            }
+            customDataGrid.dataSource = dataControlMenus;
         }
 
         private void iconButtonAdd_Click(object sender, EventArgs e)
         {
-            EkranEkle.menu = null;
-            EkranEkle ekranEkle = EkranEkle.ekranEkle;
-            if (ekranEkle != null)
+            EkranEkle ekranEkle = FormFactory.CreateForm<EkranEkle>();
+            ekranEkle.Show();
+        }
+    }
+    public class DataControlMenu : Abstracts.DataControl, IEntity
+    {
+        private Menu _menu;
+        private Menu menu
+        {
+            get
             {
-                ekranEkle.Show();
+                if (_menu == null)
+                {
+                    _menu = new Menu();
+                }
+                return _menu;
             }
+            set
+            {
+                _menu = value;
+                newRec = false;
+                Binding();
+            }
+        }
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        public DataControlMenu(IKullaniciYetkiService kullaniciYetkiService)
+        {
+            _kullaniciYetkiService = kullaniciYetkiService;
+            Initialize();
+        }
+        public DataControlMenu(Menu menuCon)
+        {
+            Initialize();
+            menu = menuCon;
+        }
+        public DataControlMenu()
+        {
+            Initialize();
+        }
+        private void Binding()
+        {
+            BindHelper.BindData(menuId, menu, nameof(menu.Id));
+            BindHelper.BindData(menuAdi, menu, nameof(menu.ad));
+            BindHelper.BindData(formAdi, menu, nameof(menu.formAd));
+            BindHelper.BindData(icon, menu, nameof(menu.icon));
+        }
+        private void Initialize()
+        {
+            menuId = new() { TabIndex = 1, Width = 0, Visible = true, Tag = "Id" };
+            menuAdi = new() { TabIndex = 2, Width = 200, Tag = "Menu Adı" };
+            formAdi = new() { TabIndex = 3, Width = 200, Tag = "Form Adı" };
+            icon = new() { TabIndex = 4, Width = 100, Tag = "İkon" };
+            iconButton = new()
+            {
+                TabIndex = 5,
+                Width = 35,
+                Height = 28,
+                Tag = "Güncelle",
+                BackgroundImage = Resources.data_update_icon,
+                BackColor = Color.Transparent,
+                BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
+                CornerRadius = 5
+            };
+            buttonSil.Click += ButtonSil_Click;
+            iconButton.Click += IconButton_Click;
+            Binding();
+        }
+
+        public CustomTextBox menuId { get; set; }
+        public CustomTextBox menuAdi { get; set; }
+        public CustomTextBox formAdi { get; set; }
+        public CustomTextBox icon { get; set; }
+        public RoundedIconButton iconButton { get; set; }
+        private void IconButton_Click(object sender, EventArgs e)
+        {
+            EkranEkle ekranEkle = FormFactory.CreateForm<EkranEkle>();
+            ekranEkle.UpdateMode(menu);
+            ekranEkle.Show();
+        }
+
+        private async void ButtonSil_Click(object sender, EventArgs e)
+        {
+            if (menuId.TextCustom != "") menu.Id = Convert.ToInt32(menuId.TextCustom.Replace(".", ""));
+            await _kullaniciYetkiService.DeleteMenu(menu);
         }
     }
 }

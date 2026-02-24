@@ -5,19 +5,23 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\YEKTAMAK-121\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\yektamak-118\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.13.1</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">7.0.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\YEKTAMAK-121\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\yektamak-118\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)fastreport.opensource\2024.1.10\buildTransitive\FastReport.OpenSource.props" Condition="Exists('$(NuGetPackageRoot)fastreport.opensource\2024.1.10\buildTransitive\FastReport.OpenSource.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets\9.0.1\buildTransitive\net8.0\Microsoft.Extensions.Configuration.UserSecrets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets\9.0.1\buildTransitive\net8.0\Microsoft.Extensions.Configuration.UserSecrets.props')" />
+    <Import Project="$(NuGetPackageRoot)sixlabors.imagesharp\3.1.12\build\SixLabors.ImageSharp.props" Condition="Exists('$(NuGetPackageRoot)sixlabors.imagesharp\3.1.12\build\SixLabors.ImageSharp.props')" />
+    <Import Project="$(NuGetPackageRoot)pdfium.x64\4648.0.0\Build\pdfium.x64.props" Condition="Exists('$(NuGetPackageRoot)pdfium.x64\4648.0.0\Build\pdfium.x64.props')" />
+    <Import Project="$(NuGetPackageRoot)fastreport.opensource\2026.1.2\buildTransitive\FastReport.OpenSource.props" Condition="Exists('$(NuGetPackageRoot)fastreport.opensource\2026.1.2\buildTransitive\FastReport.OpenSource.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgPdfium_Net_SDK Condition=" '$(PkgPdfium_Net_SDK)' == '' ">C:\Users\YEKTAMAK-121\.nuget\packages\pdfium.net.sdk\4.96.2704</PkgPdfium_Net_SDK>
-    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\YEKTAMAK-121\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgVisiativ_SOLIDWORKS_Interop Condition=" '$(PkgVisiativ_SOLIDWORKS_Interop)' == '' ">C:\Users\yektamak-118\.nuget\packages\visiativ.solidworks.interop\33.0.0</PkgVisiativ_SOLIDWORKS_Interop>
+    <PkgVisiativ_SOLIDWORKS_DocumentManager_Interop Condition=" '$(PkgVisiativ_SOLIDWORKS_DocumentManager_Interop)' == '' ">C:\Users\yektamak-118\.nuget\packages\visiativ.solidworks.documentmanager.interop\33.0.0</PkgVisiativ_SOLIDWORKS_DocumentManager_Interop>
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\yektamak-118\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2</PkgMicrosoft_CodeAnalysis_Analyzers>
   </PropertyGroup>
 </Project>

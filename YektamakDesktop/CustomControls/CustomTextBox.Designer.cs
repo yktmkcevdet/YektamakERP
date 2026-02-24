@@ -33,19 +33,20 @@
             // 
             // textBox
             // 
+            textBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            textBox.Location = new System.Drawing.Point(7, 5);
+            textBox.Location = new System.Drawing.Point(3, 4);
             textBox.Margin = new System.Windows.Forms.Padding(0);
             textBox.Name = "textBox";
-            textBox.Size = new System.Drawing.Size(236, 17);
+            textBox.Size = new System.Drawing.Size(257, 15);
             textBox.TabIndex = 0;
             textBox.Click += textBox_Click;
             textBox.TextChanged += textBox_TextChanged;
+            textBox.DoubleClick += TextBox_DoubleClick;
             textBox.Enter += textBox1_Enter;
+            textBox.KeyDown += textBox1_KeyDown;
             textBox.KeyPress += textBox1_KeyPress;
             textBox.KeyUp += textBox1_KeyUp;
-            textBox.KeyDown += textBox1_KeyDown;
             textBox.Leave += textBox1_Leave;
             textBox.LostFocus += textBox_LostFocus;
             textBox.MouseLeave += textBox_MouseLeave;
@@ -55,16 +56,19 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.Window;
             Controls.Add(textBox);
-            Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Font = new System.Drawing.Font("Segoe UI", 8F);
             ForeColor = System.Drawing.Color.DimGray;
+            Margin = new System.Windows.Forms.Padding(1);
             Name = "CustomTextBox";
-            Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            Size = new System.Drawing.Size(250, 27);
+            Padding = new System.Windows.Forms.Padding(3);
+            Size = new System.Drawing.Size(262, 25);
             Enter += CustomTextBox_Enter;
             Leave += CustomTextBox_Leave;
             ResumeLayout(false);
             PerformLayout();
         }
+
+
 
         #endregion
 

@@ -30,18 +30,19 @@
         {
             components = new System.ComponentModel.Container();
             treeView1 = new System.Windows.Forms.TreeView();
-            comboListBoxRol = new CustomControls.CustomComboListBox();
+            comboListBoxRol = new YektamakDesktop.CustomControls.FilterableComboBox();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             menuEkle = new System.Windows.Forms.ToolStripMenuItem();
             menuSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            panelHeader = new System.Windows.Forms.Panel();
-            label1 = new System.Windows.Forms.Label();
-            buttonClose = new CustomControls.RoundedButton();
-            buttonHelp = new CustomControls.RoundedButton();
-            buttomMinimize = new CustomControls.RoundedButton();
-            labelHeader = new System.Windows.Forms.Label();
+            headerPanel1 = new YektamakDesktop.CustomControls.HeaderPanel();
+            cbxKullanici = new YektamakDesktop.CustomControls.FilterableComboBox();
+            contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
+            menuChangeAuth = new System.Windows.Forms.ToolStripMenuItem();
+            alanEkleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            yetkileriSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            universalGrid1 = new YektamakDesktop.CustomControls.UniversalGrid();
             contextMenuStrip1.SuspendLayout();
-            panelHeader.SuspendLayout();
+            contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // treeView1
@@ -51,20 +52,25 @@
             treeView1.Name = "treeView1";
             treeView1.Size = new System.Drawing.Size(277, 381);
             treeView1.TabIndex = 1;
-            treeView1.AfterCheck += treeView1_AfterCheck;
             treeView1.MouseClick += treeView1_MouseClick;
             // 
             // comboListBoxRol
             // 
             comboListBoxRol.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            comboListBoxRol.ListBoxVisualSize = 5;
-            comboListBoxRol.Location = new System.Drawing.Point(37, 81);
+            comboListBoxRol.BorderColor = System.Drawing.Color.Silver;
+            comboListBoxRol.BorderRadius = 8;
+            comboListBoxRol.BorderSize = 1;
+            comboListBoxRol.DisplayMember = "ad";
+            comboListBoxRol.Font = new System.Drawing.Font("Segoe UI", 8F);
+            comboListBoxRol.Location = new System.Drawing.Point(37, 92);
             comboListBoxRol.Margin = new System.Windows.Forms.Padding(1);
             comboListBoxRol.Name = "comboListBoxRol";
             comboListBoxRol.Padding = new System.Windows.Forms.Padding(1);
-            comboListBoxRol.Size = new System.Drawing.Size(277, 36);
+            comboListBoxRol.PlaceholderText = "Seçiniz...";
+            comboListBoxRol.ReadOnly = false;
+            comboListBoxRol.Size = new System.Drawing.Size(237, 25);
             comboListBoxRol.TabIndex = 52;
-            comboListBoxRol.SelectedIndexChanged += comboListBoxRol_SelectedIndexChanged;
+            comboListBoxRol.ValueMember = "Id";
             // 
             // contextMenuStrip1
             // 
@@ -86,141 +92,104 @@
             menuSilToolStripMenuItem.Text = "Menu Sil";
             menuSilToolStripMenuItem.Click += menuSilToolStripMenuItem_Click;
             // 
-            // panelHeader
+            // headerPanel1
             // 
-            panelHeader.BackColor = System.Drawing.Color.Red;
-            panelHeader.Controls.Add(label1);
-            panelHeader.Controls.Add(buttonClose);
-            panelHeader.Controls.Add(buttonHelp);
-            panelHeader.Controls.Add(buttomMinimize);
-            panelHeader.Controls.Add(labelHeader);
-            panelHeader.Location = new System.Drawing.Point(0, 0);
-            panelHeader.Name = "panelHeader";
-            panelHeader.Size = new System.Drawing.Size(674, 54);
-            panelHeader.TabIndex = 53;
-            panelHeader.MouseClick += treeView1_MouseClick;
-            panelHeader.MouseDown += panelHeader_MouseDown;
-            panelHeader.MouseMove += panelHeader_MouseMove;
-            panelHeader.MouseUp += panelHeader_MouseUp;
+            headerPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            headerPanel1.BackColor = System.Drawing.Color.Firebrick;
+            headerPanel1.Baslik = "Kullanıcı ve Rol Yetki Tanımları";
+            headerPanel1.Location = new System.Drawing.Point(0, 0);
+            headerPanel1.Margin = new System.Windows.Forms.Padding(1);
+            headerPanel1.Name = "headerPanel1";
+            headerPanel1.Padding = new System.Windows.Forms.Padding(1);
+            headerPanel1.Size = new System.Drawing.Size(795, 25);
+            headerPanel1.TabIndex = 53;
             // 
-            // label1
+            // cbxKullanici
             // 
-            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.BackColor = System.Drawing.Color.Red;
-            label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            label1.Location = new System.Drawing.Point(19, 12);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(157, 30);
-            label1.TabIndex = 101;
-            label1.Text = "Yetki Tanımları";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            cbxKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            cbxKullanici.BorderColor = System.Drawing.Color.Silver;
+            cbxKullanici.BorderRadius = 8;
+            cbxKullanici.BorderSize = 1;
+            cbxKullanici.DisplayMember = "ad";
+            cbxKullanici.Font = new System.Drawing.Font("Segoe UI", 8F);
+            cbxKullanici.Location = new System.Drawing.Point(355, 96);
+            cbxKullanici.Margin = new System.Windows.Forms.Padding(1);
+            cbxKullanici.Name = "cbxKullanici";
+            cbxKullanici.Padding = new System.Windows.Forms.Padding(1);
+            cbxKullanici.PlaceholderText = "Seçiniz...";
+            cbxKullanici.ReadOnly = false;
+            cbxKullanici.Size = new System.Drawing.Size(214, 25);
+            cbxKullanici.TabIndex = 55;
+            cbxKullanici.ValueMember = "Id";
+            cbxKullanici.SelectedIndexChanged += cbxKullanici_SelectedIndexChanged;
             // 
-            // buttonClose
+            // contextMenuStrip2
             // 
-            buttonClose.BackColor = System.Drawing.Color.Red;
-            buttonClose.BackgroundColor = System.Drawing.Color.Red;
-            buttonClose.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonClose.BorderRadius = 10;
-            buttonClose.BorderSize = 2;
-            buttonClose.FlatAppearance.BorderSize = 0;
-            buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonClose.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttonClose.ForeColor = System.Drawing.Color.White;
-            buttonClose.Location = new System.Drawing.Point(627, 8);
-            buttonClose.Margin = new System.Windows.Forms.Padding(0);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            buttonClose.Size = new System.Drawing.Size(40, 38);
-            buttonClose.TabIndex = 100;
-            buttonClose.Text = "x";
-            buttonClose.TextColor = System.Drawing.Color.White;
-            buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += buttonClose_Click;
+            contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuChangeAuth, alanEkleToolStripMenuItem, yetkileriSilToolStripMenuItem });
+            contextMenuStrip2.Name = "contextMenuStrip2";
+            contextMenuStrip2.Size = new System.Drawing.Size(143, 70);
             // 
-            // buttonHelp
+            // menuChangeAuth
             // 
-            buttonHelp.BackColor = System.Drawing.Color.Red;
-            buttonHelp.BackgroundColor = System.Drawing.Color.Red;
-            buttonHelp.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttonHelp.BorderRadius = 10;
-            buttonHelp.BorderSize = 2;
-            buttonHelp.FlatAppearance.BorderSize = 0;
-            buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttonHelp.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttonHelp.ForeColor = System.Drawing.Color.White;
-            buttonHelp.Location = new System.Drawing.Point(547, 8);
-            buttonHelp.Margin = new System.Windows.Forms.Padding(0);
-            buttonHelp.Name = "buttonHelp";
-            buttonHelp.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            buttonHelp.Size = new System.Drawing.Size(40, 38);
-            buttonHelp.TabIndex = 99;
-            buttonHelp.Text = "?";
-            buttonHelp.TextColor = System.Drawing.Color.White;
-            buttonHelp.UseVisualStyleBackColor = false;
+            menuChangeAuth.Name = "menuChangeAuth";
+            menuChangeAuth.Size = new System.Drawing.Size(142, 22);
+            menuChangeAuth.Text = "Yetki Değiştir";
+            menuChangeAuth.Click += menuChangeAuth_Click;
             // 
-            // buttomMinimize
+            // alanEkleToolStripMenuItem
             // 
-            buttomMinimize.BackColor = System.Drawing.Color.Red;
-            buttomMinimize.BackgroundColor = System.Drawing.Color.Red;
-            buttomMinimize.BorderColor = System.Drawing.Color.LavenderBlush;
-            buttomMinimize.BorderRadius = 10;
-            buttomMinimize.BorderSize = 2;
-            buttomMinimize.FlatAppearance.BorderSize = 0;
-            buttomMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            buttomMinimize.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttomMinimize.ForeColor = System.Drawing.Color.White;
-            buttomMinimize.Location = new System.Drawing.Point(587, 8);
-            buttomMinimize.Margin = new System.Windows.Forms.Padding(0);
-            buttomMinimize.Name = "buttomMinimize";
-            buttomMinimize.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            buttomMinimize.Size = new System.Drawing.Size(40, 38);
-            buttomMinimize.TabIndex = 98;
-            buttomMinimize.Text = "-";
-            buttomMinimize.TextColor = System.Drawing.Color.White;
-            buttomMinimize.UseVisualStyleBackColor = false;
-            buttomMinimize.Click += buttomMinimize_Click;
+            alanEkleToolStripMenuItem.Name = "alanEkleToolStripMenuItem";
+            alanEkleToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            alanEkleToolStripMenuItem.Text = "Alan Ekle";
+            alanEkleToolStripMenuItem.Click += alanEkleToolStripMenuItem_Click;
             // 
-            // labelHeader
+            // yetkileriSilToolStripMenuItem
             // 
-            labelHeader.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            labelHeader.AutoSize = true;
-            labelHeader.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            labelHeader.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            labelHeader.Location = new System.Drawing.Point(19, -13);
-            labelHeader.Name = "labelHeader";
-            labelHeader.Size = new System.Drawing.Size(0, 30);
-            labelHeader.TabIndex = 0;
+            yetkileriSilToolStripMenuItem.Name = "yetkileriSilToolStripMenuItem";
+            yetkileriSilToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            yetkileriSilToolStripMenuItem.Text = "Yetkileri Sil";
+            yetkileriSilToolStripMenuItem.Click += yetkileriSilToolStripMenuItem_Click;
+            // 
+            // universalGrid1
+            // 
+            universalGrid1.Location = new System.Drawing.Point(355, 125);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(428, 421);
+            universalGrid1.TabIndex = 56;
             // 
             // YetkiTanimlari
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(674, 612);
-            Controls.Add(panelHeader);
+            ClientSize = new System.Drawing.Size(795, 612);
+            Controls.Add(universalGrid1);
+            Controls.Add(cbxKullanici);
+            Controls.Add(headerPanel1);
             Controls.Add(comboListBoxRol);
             Controls.Add(treeView1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "YetkiTanimlari";
             Text = "YetkiTanimlari";
+            FormClosing += YetkiTanimlari_FormClosing;
+            Load += YetkiTanimlari_Load;
             contextMenuStrip1.ResumeLayout(false);
-            panelHeader.ResumeLayout(false);
-            panelHeader.PerformLayout();
+            contextMenuStrip2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
         private System.Windows.Forms.TreeView treeView1;
-        private CustomControls.CustomComboListBox comboListBoxRol;
+        private CustomControls.FilterableComboBox comboListBoxRol;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuEkle;
-        private System.Windows.Forms.Panel panelHeader;
-        private CustomControls.RoundedButton buttonClose;
-        private CustomControls.RoundedButton buttonHelp;
-        private CustomControls.RoundedButton buttomMinimize;
-        private System.Windows.Forms.Label labelHeader;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem menuSilToolStripMenuItem;
+        public CustomControls.HeaderPanel headerPanel1;
+        private CustomControls.FilterableComboBox cbxKullanici;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem menuChangeAuth;
+        private System.Windows.Forms.ToolStripMenuItem alanEkleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yetkileriSilToolStripMenuItem;
+        private CustomControls.UniversalGrid universalGrid1;
     }
 }

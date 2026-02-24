@@ -1,15 +1,11 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Api.Business;
+using Api.Converters;
+using Api.Factory;
+using Api.Interfaces;
+using Api.TokenJobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Api.TokenJobs;
 
 namespace Api
 {
@@ -19,6 +15,12 @@ namespace Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddScoped<IDbConnectionFactory, MySqlConnectionFactory>();
+            builder.Services.AddScoped<IDataAccessLayer, DataAccesLayerMySqlLocal>();
+            builder.Services.AddScoped<IStokService, StokKartRepository>();
+            builder.Services.AddScoped<IProjeStokKartService, ProjeStokKartService>();
+
             //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()) // Eðer BasePath yanlýþsa doðru yolu belirtin
             //              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             // JWT Ayarlarýný yapýlandýrma
@@ -42,7 +44,11 @@ namespace Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]))
                 };
             });
-
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new MultiFormatDateTimeConverter());
+                });
             builder.Services.AddAuthorization();
 
             // TokenService'i DI'ye ekleyin
@@ -50,13 +56,12 @@ namespace Api
             builder.Services.AddSingleton<TokenService>(sp => new TokenService(jwtSettings["SecretKey"]));
 
             var app = builder.Build();
-
+            
             // Middleware ayarlarý
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers(); // Controller'larý kullanabilmek için
-
             app.Run();
         }
     }

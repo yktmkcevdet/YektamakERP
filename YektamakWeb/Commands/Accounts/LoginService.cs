@@ -1,15 +1,6 @@
-﻿using ApiService.Implementetions;
-using ApiService.Interfaces;
+﻿using ApiService.Interfaces;
 using BlazorApp1.Features.Commands.Account.Login;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
-using Microsoft.IdentityModel.Tokens;
-using Models;
-using System.Data;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using Utilities.Implementations;
 using Utilities.Interfaces;
 
@@ -21,24 +12,27 @@ namespace YektamakWeb.Commands.Accounts
         private readonly NavigationManager _navigationManager;
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
-        public LoginService(CustomAuthStateProvider authStateProvider, NavigationManager navigationManager, IConfiguration configuration,IUserService userService)
+        private readonly IPasswordService _passwordService;
+        private readonly ICache _cache;
+        public LoginService(CustomAuthStateProvider authStateProvider, NavigationManager navigationManager, IConfiguration configuration,IUserService userService, 
+            IPasswordService passwordService, ICache cache)
         {
             _authStateProvider = authStateProvider;
             _navigationManager = navigationManager;
             _configuration = configuration;
             _userService = userService;
+            _passwordService = passwordService;
+            _cache = cache;
         }
 
         public async Task<string?> LoginAsync(string username, string password)
         {
             ILoginHelper loginHelper = new LoginHelper();
             JwtHelper jwtHelper = new JwtHelper(_configuration);
-            Kullanici user = new Kullanici();
-            user = await _userService.GetKullaniciAsync(username);
-            string sifre = loginHelper.HashPassword(password, user.salt);
-            if (CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(sifre), Encoding.UTF8.GetBytes(user.sifre)))
+            _cache.kullanici = await _userService.GetKullaniciAsync(username);
+            if (_passwordService.VerifyPassword(password, _cache.kullanici.sifre))
             {
-                var jwtToken = new LoginHandler(_configuration).GenerateJwtToken(user);
+                var jwtToken = new LoginHandler(_configuration).GenerateJwtToken(_cache.kullanici);
                 await _authStateProvider.NotifyUserAuthentication(jwtHelper.GetClaimsPrincipalFromToken(jwtToken));
                 return jwtToken;
             }

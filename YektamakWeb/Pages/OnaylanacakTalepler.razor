@@ -1,0 +1,118 @@
+﻿@page "/Onaylanacak Talepler/"
+@using ApiService.Interfaces
+@using Models
+@using Models.DTO
+@using Utilities.Interfaces
+@using YektamakWeb.Components
+@using YektamakWeb.Components.Dialogs
+@using YektamakWeb.Pages.Satinalma
+@inject IJSRuntime JS
+@inject IDialogService DialogService
+<div @oncontextmenu:preventDefault @oncontextmenu:stopPropagation>
+<UniversalGrid TData="SatinalmaTalepDTO" Data="@satinalmaTalepOnayList" Title="Onaylanacak Bekleyen Talepler" OnContextMenu="HandleContextMenu" />
+</div>
+@if (ShowContextMenu)
+{
+    <MudPaper Class="context-menu" Style=@($"position:fixed; top:{MenuYpx}; left:{MenuXpx}; z-index:2000;")>
+        <MudList T="string">
+            <MudListItem @onclick="() => EditOffer(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" /> Düzenle
+            </MudListItem>
+            <MudListItem @onclick="() => DeleteOffer(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Delete" /> Sil
+            </MudListItem>
+            <MudListItem @onclick="() => ViewOffer(SelectedItem)">
+                <MudIcon Icon="@Icons.Material.Filled.Info" /> Detay
+            </MudListItem>
+        </MudList>
+    </MudPaper>
+}
+<SatinalmaTalepOlustur @ref="dialogFragment" />
+@code {
+    @inject ISatinalmaTalepService _satinalmaService
+    @inject IJsonConverter _jsonConverter;
+    @inject IConvertHelper _convertHelper;
+    List<SatinalmaTalepDTO> PurchaseOffers = new();
+    private bool ShowContextMenu;
+    private string MenuXpx;
+    private string MenuYpx;
+    private SatinalmaTalepDTO? SelectedItem;
+    private SatinalmaTalepOlustur? dialogFragment;
+    
+
+    bool HasPermission(string code)
+    {
+        // örnek: gerçek sistemde JWT veya Claims üzerinden kontrol edilir
+        return code != "Offer.ViewVat";
+    }
+    private List<SatinalmaTalepDTO> _satinalmaTalepOnayList;
+    public List<SatinalmaTalepDTO> satinalmaTalepOnayList
+    {
+        get
+        {
+            if (_satinalmaTalepOnayList == null)
+            {
+                _satinalmaTalepOnayList = new List<SatinalmaTalepDTO>();
+            }
+            return _satinalmaTalepOnayList;
+        }
+        set 
+        { 
+            _satinalmaTalepOnayList = value; 
+            
+        }
+    }
+    protected override async void OnInitialized()
+    {
+        List<SatinalmaTalep> satinalmaTalep = (await _satinalmaService.GetSatinalmaTalep(new SatinalmaTalep()));
+        foreach (var item in satinalmaTalep.Where(t => t.onayDurum == null))
+        {
+            satinalmaTalepOnayList.Add(_convertHelper.ToDTO<SatinalmaTalepDTO>(item));
+        }
+        InvokeAsync(StateHasChanged);
+    }
+    
+
+    private void HandleContextMenu((SatinalmaTalepDTO item, MouseEventArgs e) args)
+    {
+        SelectedItem = args.item;
+        MenuXpx = $"{args.e.ClientX}px";
+        MenuYpx = $"{args.e.ClientY}px";
+        ShowContextMenu = true;
+        StateHasChanged();
+    }
+
+    private async void EditOffer(SatinalmaTalepDTO offer)
+    {
+        ShowContextMenu = false;
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            CloseOnEscapeKey = false,     // ESC tuşu kapatsın (isteğe bağlı)
+            BackdropClick = false
+        };
+        
+        var dialog = DialogService.Show<SatinalmaTalepOlustur>("Yeni Talep", options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var yeniTalep = (SatinalmaTalepOlustur)result.Data;
+            // TODO: Kaydı veritabanına gönder
+        }
+        
+    }
+
+    private void DeleteOffer(SatinalmaTalepDTO offer)
+    {
+        Console.WriteLine($"Silinecek teklif: {offer.Id}");
+        ShowContextMenu = false;
+    }
+
+    private void ViewOffer(SatinalmaTalepDTO offer)
+    {
+        Console.WriteLine($"Detay: {offer.Id}");
+        ShowContextMenu = false;
+    }
+}

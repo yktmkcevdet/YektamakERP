@@ -1,22 +1,25 @@
-﻿using System;
+﻿using NPOI.OpenXmlFormats.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace YektamakDesktop.CustomControls
 {
     public partial class CustomCheckedComboBox : UserControl
     {
-
         private int listBoxVisualSize = 5;
         private bool focusOnTextBox = false;
         /// <summary>
         /// Check statüsü filter metodu içinde değişirse ItemCheck olayı etkisiz olsun diye bir parametre
         /// </summary>
         private bool filterMode=false;
+        /// <summary>
+        /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         /// <summary>
         /// ListBox büyüklüğünü görünmesi istenen eleman sayısına göre ayarlar
         /// </summary>
@@ -30,9 +33,7 @@ namespace YektamakDesktop.CustomControls
                 Resize_CustomCheckedComboBox();
             }
         }
-
         public bool isListBoxOpened = false;
-
         private string textBoxText, placeHolderText;        
         private List<CheckedListBoxDataRow> _listBoxDataRows;
         public List<CheckedListBoxDataRow> listBoxDataRows
@@ -43,7 +44,6 @@ namespace YektamakDesktop.CustomControls
         /// Filtreleme için kullanılacak
         /// </summary>
         private List<string> listBoxTexts = new List<string>();
-
         private int _checkedCount;
         public int checkedCount
         {
@@ -64,19 +64,65 @@ namespace YektamakDesktop.CustomControls
         [Category("Key")]
         [Description("Occurs when a key is released.")]
         public event KeyEventHandler Key_Up;
-
+        
         public CustomCheckedComboBox()
         {
             InitializeComponent();
             _listBoxDataRows = new List<CheckedListBoxDataRow>();
             ClearListBox();
         }
-
-        public void AddDataRow(int id, string name)
+        public void AddDataRow(int? id, string name)
         {
             checkedListBox.Items.Add(name, false);
             _listBoxDataRows.Add(new CheckedListBoxDataRow { id = id, value = name, isChecked = false });                       
             listBoxTexts.Add(name);//Filtreleme için kullanılacak
+        }
+        private string _displayMember = "ad"; // Default display member
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DisplayMember
+        {
+            get => _displayMember;
+            set { _displayMember = value; this.checkedListBox.DisplayMember = value; }
+        }
+        private string _valueMember = "Id"; // Default value member
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string ValueMember
+        {
+            get => _valueMember;
+            set { _valueMember = value; this.checkedListBox.ValueMember = value; }
+        }
+        private bool suppressEvents = false;
+        private List<object> allItems = new List<object>();
+        public void SetDataSource<T>(List<T> items)
+        {
+            suppressEvents = true;
+            allItems = items.Cast<object>().ToList();
+
+            checkedListBox.DisplayMember = DisplayMember; // bu değer yukarıdan alınmalı
+            checkedListBox.ValueMember = ValueMember;
+            object value = checkedListBox.SelectedValue; // Seçili indeksi sakla
+            checkedListBox.DataSource = items;
+            if (value == null)
+            {
+                checkedListBox.SelectedIndex = -1; // Seçili öğe yoksa -1 yap
+            }
+            else
+            {
+                checkedListBox.SelectedValue = value; // Seçili öğe varsa onu ayarla
+            }
+            SetPlaceholder();
+            suppressEvents = false;
+        }
+        private string _placeholder = "Seçiniz...";
+        private void SetPlaceholder()
+        {
+            if (checkedListBox.SelectedIndex == -1)
+            {
+                checkedListBox.ForeColor = Color.Gray;
+                checkedListBox.Text = _placeholder;
+            }
         }
         /// <summary>
         /// listBoxDataRows listesindeki duruma göre listBox'ı günceller
@@ -94,7 +140,6 @@ namespace YektamakDesktop.CustomControls
             checkedListBox.Items.Clear();            
             _listBoxDataRows.Clear();
         }
-
         /// <summary>
         /// Checked durumdaki tüm nesneleri unchecked duruma getirir
         /// </summary>
@@ -106,35 +151,27 @@ namespace YektamakDesktop.CustomControls
             //    checkedListBox.SetItemChecked(i, false);
             //}
         }
-
         private void CustomCheckedComboBox_Load(object sender, EventArgs e)
         {
             Resize_CustomCheckedComboBox();
             CloseListBox();
         }
-
-
-
         private void panelDropDownButton_Click(object sender, EventArgs e)
         {
             SwitchListBoxVisibility();
         }
-
         private void CustomCheckedComboBox_MouseLeave(object sender, EventArgs e)
         {
             //CloseListBox();
         }
-
         private void CustomCheckedComboBox_Leave(object sender, EventArgs e)
         {
             CloseListBox();
         }
-
         private void CustomCheckedComboBox_Resize(object sender, EventArgs e)
         {
             Resize_CustomCheckedComboBox();
         }
-
         private void Resize_CustomCheckedComboBox()
         {
             textBox.Width = this.Width - this.Padding.Horizontal;
@@ -154,14 +191,12 @@ namespace YektamakDesktop.CustomControls
 
             this.Height = (this.Padding.Top + this.Padding.Bottom) + textBox.Height + checkedListBox.Height;
         }
-
         private void CustomCheckedComboBox_FontChanged(object sender, EventArgs e)
         {
             textBox.Font = this.Font;
             checkedListBox.Font = this.Font;
             Resize_CustomCheckedComboBox();
         }
-
         private void SwitchListBoxVisibility()
         {
             if (checkedListBox.Visible)
@@ -190,9 +225,6 @@ namespace YektamakDesktop.CustomControls
             Resize_CustomCheckedComboBox();
             this.BringToFront();
         }
-
-        
-
         private void checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!filterMode)
@@ -200,7 +232,6 @@ namespace YektamakDesktop.CustomControls
                 CheckedItemsChanged(e);
             }            
         }
-
         private void CheckedItemsChanged(ItemCheckEventArgs e)
         {
             //filtrelenmiş listede seçim yapıyorsak filtreden geçmemiş seçilenlerin seçimleri etkilenmemeli
@@ -253,18 +284,15 @@ namespace YektamakDesktop.CustomControls
         {
             
         }
-
         private void textBox_Leave(object sender, EventArgs e)
         {
             
         }
-
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             
 
         }
-
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (this.TextChanged != null)
@@ -285,7 +313,6 @@ namespace YektamakDesktop.CustomControls
                 this.Key_Press(this, e);
             }
         }
-
         private void textBox_Key_Up(object sender, KeyEventArgs e)
         {
             if (this.Key_Up!=null)
@@ -308,20 +335,17 @@ namespace YektamakDesktop.CustomControls
                 }
             }            
         }
-
         private void textBox_CustomEnter(object sender, EventArgs e)
         {
             OpenListBox();
             textBox.TextCustom = textBoxText;
             focusOnTextBox = true;
         }
-
         private void textBox_CustomLeave(object sender, EventArgs e)
         {
             textBox.TextCustom = placeHolderText;
             focusOnTextBox = false;
         }
-
         private void FilterListBox()
         {
             filterMode = true;
@@ -337,14 +361,13 @@ namespace YektamakDesktop.CustomControls
             //MessageBox.Show("FilterListBox Called.\r\n filteredList.Count : " + filteredList.Count.ToString());
             filterMode = false;
         }
-        
     }
     /// <summary>
     /// CheckedListBox verilerini ayrı listelerde klonlayabilmek için kullanıyoruz
     /// </summary>
     public class CheckedListBoxDataRow
     {
-        public int id;
+        public int? id;
         public string value;
         public bool isChecked;
     }

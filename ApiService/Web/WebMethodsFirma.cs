@@ -13,9 +13,9 @@ namespace ApiService
         {
             return await PostAsyncMethod(firma, "FirmaGuncelle");
         }
-        public static string GetFilteredFirma(Firma firma)
+        public static string GetFirma(Firma firma)
         {
-            return Post(firma, "GetFilteredFirma");
+            return Post(firma, "GetFirma");
         }
         public static string DeleteFirma(Firma firma)
         {

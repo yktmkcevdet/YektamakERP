@@ -1,223 +1,158 @@
-﻿using YektamakDesktop.Formlar.Ortak;
+﻿using ApiService.Interfaces;
 using Models;
-
+using Models.DTO;
 using Newtonsoft.Json;
-using ApiService;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using YektamakDesktop.Common;
+using YektamakDesktop.CustomControls;
+using System.ComponentModel;
 
 namespace YektamakDesktop.Formlar.Yetkilendirme
 {
-    public partial class KullaniciKayitFormu : Form, IForm
+    public partial class KullaniciKayitFormu : Form
     {
-        private static KullaniciKayitFormu _kullaniciKayitFormu;
-        public static KullaniciKayitFormu kullaniciKayitFormu
+        private readonly IKullaniciYetkiService _kullaniciYetkiService;
+        private readonly IPasswordService _passwordService;
+        private readonly ICache _cache;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly IConvertHelper _convertHelper;
+        private readonly IMailService _mailService;
+        public KullaniciKayitFormu(IKullaniciYetkiService kullaniciYetkiService, IPasswordService passwordService, ICache cache, 
+            IJsonConverter jsonConverter, IConvertHelper convertHelper, IMailService mailService)
         {
-            get
+            _kullaniciYetkiService = kullaniciYetkiService;
+            _passwordService = passwordService;
+            _cache = cache;
+            _jsonConverter = jsonConverter;
+            _convertHelper = convertHelper;
+            _mailService = mailService;
+            InitializeComponent();
+            Initialize();
+        }
+        private async void Initialize()
+        {
+            int sizeX = universalGrid1.Size.Width;
+            int sizeY = universalGrid1.Size.Height;
+            int locationY = universalGrid1.Location.Y;
+            int locationX = universalGrid1.Location.X;
+            Controls.Remove(universalGrid1);
+            universalGrid1 = DIContainer.GetService<UniversalGrid>();
+            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Location = new System.Drawing.Point(locationX, locationY);
+            universalGrid1.Name = "universalGrid1";
+            universalGrid1.Size = new System.Drawing.Size(sizeX, sizeY);
+            universalGrid1.TabIndex = 13;
+            Controls.Add(universalGrid1);
+            universalGrid1.MouseDown1 += universalGrid1_CellClick;
+            universalGrid1.SetData(new List<KullaniciDTO>(), this.Name);
+            clbRol.SetDataSource(_cache.rolList);
+            clbPersonel.SetDataSource(_cache.personelList);
+            clbMailAdres.SetDataSource(await _cache.mailAdresList);
+        }
+
+        private void universalGrid1_CellClick(object sender, MouseEventArgs e)
+        {
+            try
             {
-                if (_kullaniciKayitFormu == null)
-                {
-                    _kullaniciKayitFormu = new KullaniciKayitFormu();
-                    GlobalData.Yetki(ref _kullaniciKayitFormu);
-                }
-                return _kullaniciKayitFormu;
+                KullaniciDTO kullaniciDTO = (KullaniciDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
+                kullanici = _convertHelper.ToEntity<Kullanici>(kullaniciDTO);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private Kullanici _kullanici;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Kullanici kullanici
+        {
+            get { if (_kullanici == null) { _kullanici = new Kullanici(); } return _kullanici; }
             set
             {
-                _kullaniciKayitFormu = value;
+                _kullanici = value;
+                Binding();
             }
         }
-        private List<Control> _controlsToDisable;
-        public List<Control> controlsToDisable { get => _controlsToDisable; set => _controlsToDisable = value; }
-        private bool _activeForm;
-        public bool activeForm { get => _activeForm; set => _activeForm = value; }
-        private int _kullaniciId;
-        public KullaniciKayitFormu()
+        private void Binding()
         {
-            InitializeComponent();
-            //foreach (Personel personel in GlobalData.personelList)
-            //{
-            //    comboListBoxPersonel.AddDataRow(personel.Id, string.Concat(personel.ad, " ", personel.soyad));
-            //}
-            foreach (Rol rol in Enum.GetValues(typeof(Rol)))
+            BindHelper.BindData(ctbId, kullanici, nameof(kullanici.Id));
+            BindHelper.BindData(ctbKullaniciAd, kullanici, nameof(kullanici.ad));
+            BindHelper.BindData(ctbSifre, kullanici, nameof(kullanici.sifre));
+            BindHelper.BindData(clbPersonel, kullanici.personel, nameof(kullanici.personel.Id));
+            BindHelper.BindData(clbRol, kullanici.rol, nameof(kullanici.rol.Id));
+            BindHelper.BindData(clbMailAdres, kullanici.mailAdres, nameof(kullanici.mailAdres.Id));
+        }
+        private async void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
+        {
+            if (!ValidateInputs()) return;
+            try
             {
-                comboListBoxRol.AddDataRow((int)rol, Enum.GetName(rol));
-            }
-        }
-        #region mouseDrag
-        bool mouseDown;
-        private Point offset;
-        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void panelHeader_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point currentScreepPos = PointToScreen(e.Location);
-                Location = new Point(currentScreepPos.X - offset.X, currentScreepPos.Y - offset.Y);
-            }
-        }
-
-        private void panelHeader_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion mouseDrag
-
-        private void CloseForm()
-        {
-            kullaniciKayitFormu = null;
-            this.Close();
-            GlobalData.RemoveLastForm();
-        }
-
-        private void rButtonKullaniciKaydet_Click(object sender, EventArgs e)
-        {
-            if (!CheckFields()) return;
-            GlobalData.HandleException(async () =>
-            {
-                string salt = GlobalData.GenerateSalt();
-                string password = customTextBoxSifre.TextCustom;
-                string kullaniciAdi = textBoxKullaniciAdi.TextCustom;
-                string hashedPassword = GlobalData.HashPassword(password, salt);
-
-                Kullanici kullanici = new Kullanici();
-                kullanici.Id = _kullaniciId;
-                kullanici.ad = kullaniciAdi;
-                kullanici.sifre = hashedPassword;
-                kullanici.salt = salt;
-                kullanici.personel.Id = comboListBoxPersonel.selectedDataRowId;
-                kullanici.rolId = comboListBoxRol.selectedDataRowId;
-                kullanici.isSifreDegisti = false;
-                string httpResult = WebMethods.SaveKullanici(kullanici);
-                if (httpResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(kullanici.sifre))
                 {
-                    MessageBox.Show(httpResult);
+                    string hashedPassword = _passwordService.HashPassword(kullanici.sifre).CombinedHash;
+                    kullanici.sifre = hashedPassword;
+                    kullanici.isSifreDegisti = false;
+                }
+                
+                string jsonResult = _kullaniciYetkiService.SaveKullanici(kullanici);
+                if (String.IsNullOrEmpty(jsonResult) || jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show(jsonResult);
                 }
                 else
                 {
-                    IMailHandler mailHandler = new MailHandler();
-                    mailHandler.SendMail("cevdet.oguz@yektamak.com.tr", "şifre değişti", "");
+                    kullanici = _jsonConverter.DeserializeObject<List<Kullanici>>(jsonResult).FirstOrDefault();
+                    _cache.kullaniciList.Clear();
+                    await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
+                    if (!string.IsNullOrEmpty(kullanici.sifre))
+                    {
+                        _mailService.SendSystemMail(kullanici.personel.mail,"cevdet.oguz@yektamak.com.tr", "ERP şifreniz değiştirildi", "");
+                    }
+                    KullaniciKayitFormu_Load(sender, e);
                     MessageBox.Show("Kayıt başarılı");
                 }
-
-            });
+                kullanici.sifre = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata oluştu: {ex.Message}");
+            }
         }
-
-        private void roundedButton3_Click(object sender, EventArgs e)
+        private bool ValidateInputs()
         {
-            CloseForm();
+            bool isValid = true;
+
+            // Tüm validasyonları çalıştır, kısa devre yapmadan
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", ctbKullaniciAd);
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", clbPersonel);
+            //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifre);
+            //isValid &= GlobalData.CheckField("Bu alan boş olamaz", ctbSifreTekrar);
+            isValid &= CheckFieldHelper.CheckField("Bu alan boş olamaz", clbRol);
+            return isValid;
         }
+        private async void KullaniciKayitFormu_Load(object sender, EventArgs e)
+        {
+            Binding();
+            await universalGrid1.SetData(_cache.kullaniciList.CastToDTO<KullaniciDTO>(_convertHelper).ToList(), this.Name);
+        }
+
+        
+
+        private void KullaniciKayitFormu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            universalGrid1.SaveGridSettings();
+        }
+
         private void roundedButton1_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private async void buttonFiltre_Click(object sender, EventArgs e)
-        {
-            Kullanici kullanici = new Kullanici();
-            kullanici.ad = textBoxKullaniciAdi.TextCustom;
-            kullanici.rolId = comboListBoxRol.selectedDataRowId == -1 ? 0 : comboListBoxRol.selectedDataRowId;
-            int boslukIndex = comboListBoxPersonel.selectedDataRowId == -1 ? 0 : comboListBoxPersonel.selectedDataRowValue.IndexOf(' ');
-            string personelAdi = comboListBoxPersonel.selectedDataRowValue;
-            kullanici.personel.ad = comboListBoxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(0, boslukIndex);
-            kullanici.personel.soyad = comboListBoxPersonel.selectedDataRowId == -1 ? "" : personelAdi.Substring(boslukIndex + 1, personelAdi.Length - boslukIndex - 1);
-            string result = WebMethods.GetKullanici(kullanici);
-            byte[] bytes = JsonConvert.DeserializeObject<byte[]>(result);
-            string json = Encoding.UTF8.GetString(bytes);
-            DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(json);
-            int i = 0;
-            dataGridView1.Rows.Clear();
-            foreach (DataRow dr in dataSet.Tables[0].Rows)
-            {
-                i = dataGridView1.Rows.Count;
-                dataGridView1.Rows.Add();
-                dataGridView1.Rows[i].Cells["KullaniciId"].Value = int.Parse(dr["KullaniciId"].ToString());
-                dataGridView1.Rows[i].Cells["KullaniciAdi"].Value = dr["KullaniciAdi"].ToString();
-                dataGridView1.Rows[i].Cells["RolId"].Value = dr["RolId"].ToString();
-                dataGridView1.Rows[i].Cells["RolAdi"].Value = dr["Rol"].ToString();
-                dataGridView1.Rows[i].Cells["PersonelId"].Value = dr["PersonelId"].ToString();
-                dataGridView1.Rows[i].Cells["PersonelAdi"].Value = dr["PersonelAdi"].ToString();
-            }
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                dataGridView1.Rows[e.RowIndex].Selected = true;
-                _kullaniciId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["KullaniciId"].Value.ToString());
-                textBoxKullaniciAdi.TextCustom = dataGridView1.Rows[e.RowIndex].Cells["KullaniciAdi"].Value.ToString();
-                comboListBoxPersonel.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["PersonelId"].Value.ToString()));
-                comboListBoxRol.SelectDataRowId(int.Parse(dataGridView1.Rows[e.RowIndex].Cells["RolId"].Value.ToString()));
-            }
-        }
-        private bool CheckFields()
-        {
-            labelUyariKulllaniciAdi.Text = "";
-            labelUyariSifre.Text = "";
-            labelUyariSifreTekrar.Text = "";
-            labelUyariPersonel.Text = "";
-            labelUyariRol.Text = "";
-            bool result = true;
-            if (string.IsNullOrWhiteSpace(textBoxKullaniciAdi.TextCustom))
-            {
-                result = false;
-                labelUyariKulllaniciAdi.Text = "Kullanıcı adı girilmelidir!";
-            }
-            if (string.IsNullOrWhiteSpace(customTextBoxSifre.TextCustom))
-            {
-                result = false;
-                labelUyariSifre.Text = "Şifre girilmelidir!";
-            }
-            if (customTextBoxSifre.TextCustom != customTextBoxSifreTekrar.TextCustom)
-            {
-                result = false;
-                labelUyariSifreTekrar.Text = "Şifre uyuşmuyor!";
-            }
-            if (comboListBoxPersonel.selectedDataRowId == -1)
-            {
-                result = false;
-                labelUyariPersonel.Text = "Personel seçilmelidir!";
-            }
-            if (comboListBoxRol.selectedDataRowId == -1)
-            {
-                result = false;
-                labelUyariRol.Text = "Rol seçilmelidir!";
-            }
-            return result;
-        }
-        private void ClearFields()
-        {
-            labelUyariKulllaniciAdi.Text = "";
-            labelUyariSifre.Text = "";
-            labelUyariSifreTekrar.Text = "";
-            labelUyariPersonel.Text = "";
-            labelUyariRol.Text = "";
-            textBoxKullaniciAdi.TextCustom = "";
-            customTextBoxSifre.TextCustom = "";
-            customTextBoxSifreTekrar.TextCustom = "";
-            comboListBoxPersonel.SelectDataRowId(-1);
-            comboListBoxRol.SelectDataRowId(-1);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearFields();
+            kullanici = new Kullanici();
         }
     }
 }

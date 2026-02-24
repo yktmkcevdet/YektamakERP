@@ -1,15 +1,18 @@
-﻿using Models;
-using ApiService;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using Models;
 using System.Data;
-using Utilities;
 using Utilities.Implementations;
 using Utilities.Interfaces;
+using ApiService.Interfaces;
 
 namespace YektamakWeb.Pages
 {
     partial class ProjeDosyalari
     {
+        [Inject]
+        private IStokService _stokService { get; set; }
+        [Inject]
+        IDataTableMapper _dataTableMapper { get; set; }
         public List<StokKart> stokKarts = new List<StokKart>();
         private string message;
         private int selectedProjeId;
@@ -21,16 +24,14 @@ namespace YektamakWeb.Pages
             {
                 // API çağrısı yap
                 StokKart stokKart = new StokKart();
-                stokKart.proje.Id = selectedProjeId;
-                string serializeString = WebMethods.GetStokKart(stokKart);
-                IJsonConvertHelper jsonConvertHelper = new JsonConvertHelper();
-                DataSet dataSet = jsonConvertHelper.JsonStringToDataSet(serializeString);
+                string serializeString = _stokService.GetStokKartAsync(stokKart).Result;
+                IJsonConverter jsonConvertHelper = new JsonConverter();
+                DataSet dataSet = jsonConvertHelper.DeserializeToDataSet(serializeString);
                 if (dataSet != null)
                 {
-                    IDataTableHelper DataTableConverter = new DataTableHelper();
                     foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                     {
-                        stokKart = DataTableConverter.DataRowToModel<StokKart>(dataRow);
+                        stokKart = _dataTableMapper.MapToEntity<StokKart>(dataRow);
                         stokKarts.Add(stokKart);
                     }
                 }

@@ -36,7 +36,7 @@
             roundedButton1.BackColor = System.Drawing.Color.MediumSlateBlue;
             roundedButton1.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
             roundedButton1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            roundedButton1.BorderRadius = 8;
+            roundedButton1.CornerRadius = 8;
             roundedButton1.BorderSize = 0;
             roundedButton1.FlatAppearance.BorderSize = 0;
             roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

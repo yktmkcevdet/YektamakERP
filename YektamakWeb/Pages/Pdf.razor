@@ -1,0 +1,17 @@
+﻿@page "/flipbook"
+@inject IJSRuntime JS
+
+
+
+<div id="book" style="width:1000px; height:800px; margin:auto;"></div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // PDF dosyası wwwroot içine koyulmalı
+            await JS.InvokeVoidAsync("flipBook.init", "/TK25060301.pdf", "book");
+        }
+    }
+}
