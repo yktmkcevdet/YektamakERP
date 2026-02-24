@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Yeni Profil",
+    "Projects": [
+      {
+        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
