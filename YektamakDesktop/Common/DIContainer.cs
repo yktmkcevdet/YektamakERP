@@ -60,6 +60,7 @@ namespace YektamakDesktop.Common
             services.AddTransient<ExcelVeriAlmaCakisanOnayFormu>();
             services.AddTransient<ExceldenVeriAlmaFormu>();
             services.AddTransient<FirmaTanimFormu>();
+            services.AddTransient<GirisOzetEkran>();
             services.AddTransient<GridSettingsManager>();
             services.AddTransient<IrsaliyeListesi>();
             services.AddTransient<KullaniciKayitFormu>();
@@ -69,7 +70,6 @@ namespace YektamakDesktop.Common
             services.AddTransient<MailGonder>();
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
             services.AddTransient<MailService>();
-            services.AddTransient<MainWindow>();
             services.AddTransient<MainForm>();
             services.AddTransient<MalzemeAltGrupTanimFormu>();
             services.AddTransient<MalzemeAltGrup2TanimFormu>();
@@ -104,7 +104,6 @@ namespace YektamakDesktop.Common
             services.AddTransient<StokKartKayitFormu>();
             services.AddTransient<StokKartGridForm>();
             services.AddTransient<UniversalGrid>();
-            services.AddTransient<UpdateVersion>();
             services.AddTransient<UserLogin>();
             services.AddTransient<YetkiTanimlari>();
             services.Configure<PasswordHashingOptions>(options =>

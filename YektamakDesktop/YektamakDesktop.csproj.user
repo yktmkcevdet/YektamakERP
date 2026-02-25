@@ -80,6 +80,9 @@
     <Compile Update="Formlar\Genel\FirmaTanimFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Genel\GirisOzetEkran.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Genel\MailAyarlari.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,9 +102,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Formlar\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Ortak\DxfViewer.cs">
@@ -132,6 +132,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Projemodul\ProjeSorumlusuAtamaFormu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formlar\Rapor\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Satinalma\MailGonder.cs">
@@ -197,9 +200,6 @@
     <Compile Update="Formlar\Stok\StokKartKayitFormu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\UpdateVersion.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Formlar\UserLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,9 +251,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\Genel\ExcelTanimlamaFormu.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Formlar\MainWindow.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Formlar\Ortak\DxfViewer.resx">

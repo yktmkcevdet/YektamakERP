@@ -246,7 +246,6 @@ C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\D
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Loading.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.LogoEntegrasyon.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.MainForm.resources
-C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.MainWindow.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Ortak.DxfViewer.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Ortak.PdfGoruntuleme.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Projemodul.ExceldenVeriAlmaCakisanKodlar.resources
@@ -281,7 +280,6 @@ C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\D
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartGridForm.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartHamVeri.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Stok.StokKartKayitFormu.resources
-C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.UpdateVersion.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.UserLogin.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.AltMenuEkleForm.resources
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Yetkilendirme.EkranEkle.resources
@@ -301,3 +299,4 @@ C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\D
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.pdb
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.genruntimeconfig.cache
 C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\ref\YektamakDesktop.dll
+C:\Users\yektamak-118\source\repos\yktmkcevdet\YektamakERP\YektamakDesktop\obj\Debug\net9.0-windows7.0\YektamakDesktop.Formlar.Genel.GirisOzetEkran.resources

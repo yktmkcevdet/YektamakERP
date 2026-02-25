@@ -92,7 +92,6 @@
     <Compile Update="Formlar\Genel\MalzemeGrupTanimFormu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\MainWindow.cs" />
     <Compile Update="Formlar\Satinalma\Teklif\SatinalmaTekliflerFormu.cs">
       <SubType>Form</SubType>
     </Compile>

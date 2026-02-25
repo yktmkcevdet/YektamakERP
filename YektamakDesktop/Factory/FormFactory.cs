@@ -34,6 +34,21 @@ namespace YektamakDesktop
 
         public static T CreateForm<T>() where T : Form
         {
+            var existingForm = Application.OpenForms
+                                          .OfType<T>()
+                                          .FirstOrDefault();
+
+            if (existingForm != null)
+            {
+                if (existingForm.WindowState == FormWindowState.Minimized)
+                    existingForm.WindowState = FormWindowState.Normal;
+
+                existingForm.BringToFront();
+                existingForm.Focus();
+
+                return existingForm;
+            }
+
             var form = DIContainer.GetService<T>();
             SetupFormDefaults(form);
             return form;

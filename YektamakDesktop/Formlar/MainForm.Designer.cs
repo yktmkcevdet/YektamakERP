@@ -160,7 +160,7 @@
         private System.Windows.Forms.Panel pnlLeftMenu;
         private System.Windows.Forms.Panel pnlTopMenu;
         private System.Windows.Forms.FlowLayoutPanel flowTopMenu;
-        private System.Windows.Forms.TabControl tabMain;
+        public System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.ContextMenuStrip tabContextMenu;
         private System.Windows.Forms.Button btnTabs;
         private System.Windows.Forms.TreeView treeMenu;
