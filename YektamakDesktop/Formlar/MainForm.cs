@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using YektamakDesktop.Formlar.Genel;
 using YektamakDesktop.Formlar.Satinalma;
 
 namespace YektamakDesktop.Formlar
@@ -451,6 +452,12 @@ namespace YektamakDesktop.Formlar
         private void MainForm_Load(object sender, EventArgs e)
         {
             BuildTreeMenu();
+            Menu menuItem = new Menu
+            {
+                formAd = nameof(GirisOzetEkran),
+                ad = "Dashboard"
+            };
+            OpenFormInTab(menuItem);
         }
         void BuildTreeMenu()
         {

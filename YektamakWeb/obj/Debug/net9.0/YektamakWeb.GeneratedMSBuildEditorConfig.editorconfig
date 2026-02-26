@@ -101,6 +101,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2F0aW5hbG1hXFNhdGluYWxtYVRhbGVwT25heS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/yektamak-118/source/repos/yktmkcevdet/YektamakERP/YektamakWeb/Pages/Satinalma/Talep/SatinalmaTalepKayitFormu.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2F0aW5hbG1hXFRhbGVwXFNhdGluYWxtYVRhbGVwS2F5aXRGb3JtdS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yektamak-118/source/repos/yktmkcevdet/YektamakERP/YektamakWeb/Shared/AccessDenied.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFjY2Vzc0RlbmllZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

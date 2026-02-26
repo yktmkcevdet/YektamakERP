@@ -419,6 +419,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
                             form.UpdateMode(projeStokKart, existingStokKart);
                             form.ShowDialog();
                         }
+                        else
+                        {
+                            continue;
+                        }
                     }
                     else if (secim == 3)
                     {

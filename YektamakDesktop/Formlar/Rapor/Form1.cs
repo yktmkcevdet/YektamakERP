@@ -26,5 +26,10 @@ namespace YektamakDesktop.Formlar.Rapor
         {
 
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

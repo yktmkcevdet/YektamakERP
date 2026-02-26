@@ -3,7 +3,7 @@
     "Name": "Yeni Profil",
     "Projects": [
       {
-        "Path": "YektamakDesktop\\YektamakDesktop.csproj",
+        "Path": "YektamakWeb\\YektamakWeb.csproj",
         "Action": "Start"
       }
     ]
