@@ -122,7 +122,7 @@
     <Compile Update="Formlar\Projemodul\ProjeBelgeOnay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formlar\Projemodul\ProjeBelgeRedSebep.cs">
+    <Compile Update="Formlar\Genel\RedSebep.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formlar\Projemodul\ProjeDosyaAgacStil.cs">

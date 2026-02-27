@@ -207,7 +207,7 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private async void roundedButton2_Click(object sender, EventArgs e)
         {
-            using (var frm = new ProjeBelgeRedSebep())
+            using (var frm = new RedSebep())
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {

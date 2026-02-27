@@ -122,7 +122,7 @@ namespace YektamakDesktop.CustomControls
             checkedListBox.DisplayMember = DisplayMember;
             checkedListBox.ValueMember = ValueMember;
             foreach (var item in items)
-                checkedListBox.Items.Add(item, false);
+                checkedListBox.Items.Add(item, true);
         }
 
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)

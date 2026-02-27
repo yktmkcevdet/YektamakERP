@@ -1,5 +1,6 @@
 ﻿using ApiService.Implementations;
 using ApiService.Interfaces;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 using Models;
 using Models.DTO;
 using System;
@@ -85,9 +86,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         private async void talebiOnaylaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            satinalmaTalepFilter = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
-            satinalmaTalepFilter.onayKullanici.Id = _cache.kullanici.Id;
-            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalepFilter);
+            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+            satinalmaTalep.onayKullanici.Id = _cache.kullanici.Id;
+            satinalmaTalep.onayDurum = true;
+            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
             MessageBox.Show(jsonResult);
         }
 
@@ -141,15 +143,23 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private async void talebiReddetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
-            satinalmaTalep.onayKullanici = _cache.kullanici;
-            satinalmaTalep.onayDurum = false;
-            string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
-            if (jsonResult != null && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+            using (var frm = new RedSebep())
             {
-                universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    SatinalmaTalep satinalmaTalep = _convertHelper.ToEntity<SatinalmaTalep>((SatinalmaTalepDTO)universalGrid1.binding.Current);
+                    satinalmaTalep.onayKullanici = _cache.kullanici;
+                    satinalmaTalep.onayDurum = false;
+                    satinalmaTalep.redSebepAciklama = frm.Reason;
+                    string jsonResult = await _satinalmaService.SatinalmaTalepOnay(satinalmaTalep);
+                    if (jsonResult != null && !jsonResult.Contains("error", StringComparison.OrdinalIgnoreCase))
+                    {
+                        universalGrid1.binding.RemoveAt(universalGrid1.Grid.CurrentRow.Index);
+                    }
+                    MessageBox.Show(jsonResult);
+                }
             }
-            MessageBox.Show(jsonResult);
+            
         }
 
         private void chkBenimTaleplerim_CheckStateChanged(object sender, EventArgs e)

@@ -76,7 +76,8 @@ namespace Models
 			get { if (_satinalmaTalepDetays == null) _satinalmaTalepDetays = new List<SatinalmaTalepDetay>(); return _satinalmaTalepDetays; }
 			set { _satinalmaTalepDetays = value; }
 		}
-	}
+		public string redSebepAciklama { get; set; }
+    }
 	public class SatinalmaTalepDetay : IEntity
 	{
 		public int? Id { get; set; }

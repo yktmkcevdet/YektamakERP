@@ -278,9 +278,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         }
         public void UpdateMode(SatinalmaTalep satinalmaTalepUpdate)
         {
-            //var items = (List<Proje>)clbProjeKodu.DataSource;
-            //items.Add(satinalmaTalepUpdate.proje);
-            //clbProjeKodu.SetDataSource(items);
             fcbTalepNeden.ReadOnly = true;
             satinalmaTalep = satinalmaTalepUpdate;
         }

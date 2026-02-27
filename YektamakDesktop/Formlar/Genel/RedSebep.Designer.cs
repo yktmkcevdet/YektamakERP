@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YektamakDesktop.Formlar.Projemodul
+namespace YektamakDesktop.Formlar
 {
-    public partial class ProjeBelgeRedSebep
+    public partial class RedSebep
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@ namespace YektamakDesktop.Formlar.Projemodul
             ctbRedSebep = new YektamakDesktop.CustomControls.CustomTextBox();
             label1 = new System.Windows.Forms.Label();
             btnOk = new YektamakDesktop.CustomControls.RoundedButton();
-            customTextBox2 = new YektamakDesktop.CustomControls.CustomTextBox();
             SuspendLayout();
             // 
             // headerPanel1
@@ -108,41 +107,15 @@ namespace YektamakDesktop.Formlar.Projemodul
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
-            // customTextBox2
-            // 
-            customTextBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            customTextBox2.BackColor = System.Drawing.Color.White;
-            customTextBox2.BorderColor = System.Drawing.Color.Silver;
-            customTextBox2.BorderFocusColor = System.Drawing.Color.HotPink;
-            customTextBox2.BorderSize = 1;
-            customTextBox2.Font = new System.Drawing.Font("Segoe UI", 8F);
-            customTextBox2.ForeColor = System.Drawing.Color.Black;
-            customTextBox2.Location = new System.Drawing.Point(134, 42);
-            customTextBox2.Margin = new System.Windows.Forms.Padding(1);
-            customTextBox2.Multiline = false;
-            customTextBox2.Name = "customTextBox2";
-            customTextBox2.Padding = new System.Windows.Forms.Padding(3);
-            customTextBox2.PasswordChar = false;
-            customTextBox2.PlaceholderColor = System.Drawing.Color.DarkGray;
-            customTextBox2.PlaceholderText = "";
-            customTextBox2.ReadOnly = false;
-            customTextBox2.SelectionStart = 0;
-            customTextBox2.Size = new System.Drawing.Size(416, 25);
-            customTextBox2.TabIndex = 4;
-            customTextBox2.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            customTextBox2.TextCustom = "";
-            customTextBox2.UnderlinedStyle = false;
-            // 
             // ProjeBelgeRedSebep
             // 
             ClientSize = new System.Drawing.Size(582, 301);
-            Controls.Add(customTextBox2);
             Controls.Add(btnOk);
             Controls.Add(label1);
             Controls.Add(ctbRedSebep);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Name = "ProjeBelgeRedSebep";
+            Name = "RedSebep";
             ResumeLayout(false);
             PerformLayout();
 
@@ -151,6 +124,5 @@ namespace YektamakDesktop.Formlar.Projemodul
         private CustomControls.CustomTextBox ctbRedSebep;
         private System.Windows.Forms.Label label1;
         private CustomControls.RoundedButton btnOk;
-        private CustomControls.CustomTextBox customTextBox2;
     }
 }

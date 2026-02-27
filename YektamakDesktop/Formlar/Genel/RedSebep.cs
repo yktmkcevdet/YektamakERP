@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace YektamakDesktop.Formlar.Projemodul
+namespace YektamakDesktop.Formlar
 {
-    public partial class ProjeBelgeRedSebep : Form
+    public partial class RedSebep : Form
     {
         public string Reason { get; private set; }
-        public ProjeBelgeRedSebep()
+        public RedSebep()
         {
             InitializeComponent();
         }

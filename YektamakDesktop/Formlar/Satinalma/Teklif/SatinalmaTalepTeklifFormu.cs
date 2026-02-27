@@ -561,23 +561,23 @@ namespace YektamakDesktop.Formlar.Satinalma
         private bool BoyutFiltrele()
         {
             var seciliBoyutlar = fcbBoyut.SelectedValues.Cast<int>().ToList();
-            if (seciliBoyutlar.Count == 0)
-            {
-                universalGrid1.Filtrele(filter);
-                MalzemeAltGrupFiltrele();
-                MalzemeAltGrup2Filtrele();
-                return true;
-            }
+            //if (seciliBoyutlar.Count == 0)
+            //{
+            //    universalGrid1.Filtrele(filter);
+            //    MalzemeAltGrupFiltrele();
+            //    MalzemeAltGrup2Filtrele();
+            //    return true;
+            //}
             // 1. DataSource'u doğru tipe cast et
             var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
             if (data == null) return false;
 
             // 2. Filtre uygula
             IEnumerable<SatinalmaTalepDetayDTO> filtered = data;
-            if (seciliBoyutlar.Count > 0)
-            {
+            //if (seciliBoyutlar.Count > 0)
+            //{
                 filtered = data.Where(x => seciliBoyutlar.Contains(x.projeStokKartstokKartboyutTanimId ?? 0));
-            }
+            //}
 
             // 3. BindingSource oluştur ve ata
             var bindingSource = new BindingSource();
@@ -662,6 +662,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                 satinalmaSiparisDetay.miktar = item.miktar;
                 satinalmaSiparisDetay.aciklama = item.aciklama;
                 satinalmaSiparisDetay.projeStokKart = item.projeStokKart;
+                satinalmaSiparisDetay.satinalmaTalepDetay.Id = item.Id;
                 satinalmaSiparis.satinalmaSiparisDetay.Add(satinalmaSiparisDetay);
             }
             var satinalmaSiparisKayitFormu = FormFactory.CreateForm<SatinalmaSiparisKayitFormu>();
