@@ -71,6 +71,7 @@ namespace YektamakDesktop.CustomControls
             };
 
             this.Controls.Add(infoLabel);
+            
             checkedListBox.ItemCheck += CheckedListBox_ItemCheck;
             SetPlaceholder();
         }
@@ -111,7 +112,9 @@ namespace YektamakDesktop.CustomControls
         public void SetDataSource<T>(List<T> items)
         {
             allItems = items.Cast<object>().ToList();
+            checkedListBox.ItemCheck -= CheckedListBox_ItemCheck;
             RefreshList(allItems);
+            checkedListBox.ItemCheck += CheckedListBox_ItemCheck;  
             SetPlaceholder();
         }
         public event EventHandler ItemsChanged;
@@ -121,18 +124,35 @@ namespace YektamakDesktop.CustomControls
             checkedListBox.Items.Clear();
             checkedListBox.DisplayMember = DisplayMember;
             checkedListBox.ValueMember = ValueMember;
+            checkedListBox.Items.Add(
+        new MyItem { Id = 0, ad = "Tümünü Seç" },
+        true
+    );
             foreach (var item in items)
                 checkedListBox.Items.Add(item, true);
         }
-
+        public class MyItem
+        {
+            public int Id { get; set; }
+            public string ad { get; set; }
+        }
         private void CheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+
+            if (e.Index == 0) // İlk satır Tümünü Seç
+            {
+                bool isChecked = e.NewValue == CheckState.Checked;
+
+                for (int i = 1; i < checkedListBox.Items.Count; i++)
+                    checkedListBox.SetItemChecked(i, isChecked);
+            }
             this.BeginInvoke((MethodInvoker)delegate
             {
                 UpdateText();
                 ItemsChanged?.Invoke(this, e);
                 infoLabel.Text = $"{checkedListBox.CheckedItems.Count} kayıt seçildi";
             });
+            
         }
 
         private void UpdateText()

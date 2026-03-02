@@ -569,14 +569,14 @@ namespace YektamakDesktop.Formlar.Satinalma
             //    return true;
             //}
             // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.Grid.DataSource as IEnumerable<SatinalmaTalepDetayDTO>;
+            var data = universalGrid1.DataBindings.Cast<SatinalmaTalepDetayDTO>;
             if (data == null) return false;
 
             // 2. Filtre uygula
-            IEnumerable<SatinalmaTalepDetayDTO> filtered = data;
+            SortableBindingList<SatinalmaTalepDetayDTO> filtered = data;
             //if (seciliBoyutlar.Count > 0)
             //{
-                filtered = data.Where(x => seciliBoyutlar.Contains(x.projeStokKartstokKartboyutTanimId ?? 0));
+                filtered = new SortableBindingList<SatinalmaTalepDetayDTO>(data.Where(x => seciliBoyutlar.Contains(x.projeStokKartstokKartboyutTanimId ?? 0)).ToList());
             //}
 
             // 3. BindingSource oluştur ve ata

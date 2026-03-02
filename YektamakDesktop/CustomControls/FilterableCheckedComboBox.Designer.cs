@@ -48,6 +48,7 @@ namespace YektamakDesktop.CustomControls
             dropDown.Name = "dropDown";
             dropDown.Padding = new Padding(0);
             dropDown.Size = new System.Drawing.Size(0, 0);
+  
             // 
             // FilterableCheckedComboBox
             // 
