@@ -569,21 +569,20 @@ namespace YektamakDesktop.Formlar.Satinalma
             //    return true;
             //}
             // 1. DataSource'u doğru tipe cast et
-            var data = universalGrid1.DataBindings.Cast<SatinalmaTalepDetayDTO>;
+            var data = (SortableBindingList<SatinalmaTalepDetayDTO>)universalGrid1.binding.DataSource;
             if (data == null) return false;
 
             // 2. Filtre uygula
-            SortableBindingList<SatinalmaTalepDetayDTO> filtered = data;
+            IEnumerable<SatinalmaTalepDetayDTO> filtered = data;
             //if (seciliBoyutlar.Count > 0)
             //{
-                filtered = new SortableBindingList<SatinalmaTalepDetayDTO>(data.Where(x => seciliBoyutlar.Contains(x.projeStokKartstokKartboyutTanimId ?? 0)).ToList());
+                filtered = data.Where(x => seciliBoyutlar.Contains(x.projeStokKartstokKartboyutTanimId ?? 0));
             //}
 
             // 3. BindingSource oluştur ve ata
-            var bindingSource = new BindingSource();
-            bindingSource.DataSource = new SortableBindingList<SatinalmaTalepDetayDTO>(filtered.ToList());
 
-            universalGrid1.Grid.DataSource = bindingSource;
+
+            universalGrid1.Grid.DataSource = new SortableBindingList<SatinalmaTalepDetayDTO>(filtered.ToList());
             universalGrid1.lblGosterilenKayitSayisi.Text = $"Filtrelenen kayıt sayısı : {filtered.Count()}";
             return true;
         }
