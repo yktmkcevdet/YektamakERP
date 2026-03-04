@@ -48,14 +48,14 @@ namespace YektamakDesktop.Formlar.Genel
                     var mainForm = FormFactory.CreateForm<MainForm>();
                     Menu menuItem = new Menu
                     {
-                        formAd = nameof(SatinalmaTalepler),
-                        ad = "Satınalma Talepleri"
+                        formAd = nameof(SatinalmaTalepOnayFormu),
+                        ad = "SatinalmaTalepOnayFormu"
                     };
                     mainForm.OpenFormInTab(menuItem);
                 };
                 this.Controls.Add(lblSatinalmaTalep);
             }
-            if (satinalmaTaleps.Any(s => s.onayDurum == true))
+            if (satinalmaTaleps.Any(s => s.onayDurum == true) && _cache.kullanici.Id==35)
             {
                 Label lblSatinalmaOnayliTalep = new Label();
                 lblSatinalmaOnayliTalep.Text = $"Onaylanmış Talepler ({satinalmaTaleps.Count.ToString()})";

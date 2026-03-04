@@ -64,7 +64,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(universalGrid1);
             fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
-            clbProjeKodu.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
+            clbProjeKodu.SetDataSource(_cache.projeList);
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             satinalmaTalep.talepTarihi = DateTime.Today;
@@ -152,7 +152,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             isValid &= CheckFieldHelper.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
             isValid &= CheckFieldHelper.CheckField("Talep Nedeni seçilmelidir", fcbTalepNeden);
             isValid &= CheckFieldHelper.CheckField("Set Adet girilmelidir", ctbSetAdet);
-            isValid &= CheckFieldHelper.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
             isValid &= CheckFieldHelper.CheckField("Talep tarihi girilmelidir", ctbTalepTarihi);
             isValid &= CheckFieldHelper.CheckField("Proje kodu seçilmelidir", clbProjeKodu);
             isValid &= CheckFieldHelper.CheckField("Talep eden kullanıcı seçilmelidir", clbKullaniciId);
