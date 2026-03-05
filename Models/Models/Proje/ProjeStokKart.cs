@@ -49,6 +49,6 @@ namespace Models
             }
             return "";
         }
-        
+        public bool? isSatinalma { get;set; }
     }
 }

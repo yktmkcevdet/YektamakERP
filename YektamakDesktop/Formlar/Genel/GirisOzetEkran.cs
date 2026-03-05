@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using YektamakDesktop.Formlar.ProjeModul;
 using YektamakDesktop.Formlar.Satinalma;
 
 namespace YektamakDesktop.Formlar.Genel
@@ -11,11 +12,13 @@ namespace YektamakDesktop.Formlar.Genel
     public partial class GirisOzetEkran : Form
     {
         private readonly ISatinalmaTalepService _satinalmaTalepService;
+        private readonly IProjeService _projeService;
         private readonly ICache _cache;
-        public GirisOzetEkran(ISatinalmaTalepService satinalmaTalepService, ICache cache)
+        public GirisOzetEkran(ISatinalmaTalepService satinalmaTalepService, ICache cache, IProjeService projeService)
         {
             _satinalmaTalepService = satinalmaTalepService;
             _cache = cache;
+            _projeService = projeService;
             InitializeComponent();
         }
         private async void GirisOzetEkran_Load(object sender, EventArgs e)
@@ -24,6 +27,7 @@ namespace YektamakDesktop.Formlar.Genel
             int y = 20;
             this.Controls.Clear();
             var satinalmaTaleps = await _satinalmaTalepService.GetSatinalmaTalep(new SatinalmaTalep());
+            var projeStokKarts = await _projeService.GetProjeStokKart(new ProjeStokKart());
             Label lblHosgeldiniz = new Label();
             lblHosgeldiniz.Text = $"Hoşgeldiniz {_cache.kullanici.personel.adSoyad} ";
             lblHosgeldiniz.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
@@ -76,6 +80,28 @@ namespace YektamakDesktop.Formlar.Genel
                     mainForm.OpenFormInTab(menuItem);
                 };
                 this.Controls.Add(lblSatinalmaOnayliTalep);
+            }
+            if (projeStokKarts.Any(p=> _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id==p.proje.Id) && p.isSatinalma==false))
+            {
+                Label lblProjeDosyalari = new Label();
+                lblProjeDosyalari.Text = $"Satınalma talebi açılacak proje ({projeStokKarts.Where(p => _cache.projeList.Any(l =>l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p=>p.proje.Id).ToList().Count.ToString()})";
+                lblProjeDosyalari.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
+                lblProjeDosyalari.ForeColor = Color.DarkBlue;
+                lblProjeDosyalari.Cursor = Cursors.Hand;
+                lblProjeDosyalari.AutoSize = true;
+                lblProjeDosyalari.Location = new Point(x, y);
+                y = lblProjeDosyalari.Height + 10;
+                lblProjeDosyalari.Click += (s, args) =>
+                {
+                    var mainForm = FormFactory.CreateForm<MainForm>();
+                    Menu menuItem = new Menu
+                    {
+                        formAd = nameof(ProjeDosyalari),
+                        ad = "ProjeDosyalari"
+                    };
+                    mainForm.OpenFormInTab(menuItem);
+                };
+                this.Controls.Add(lblProjeDosyalari);
             }
         }
     }

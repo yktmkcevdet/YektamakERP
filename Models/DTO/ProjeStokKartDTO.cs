@@ -9,6 +9,7 @@ namespace Models.DTO
         [GridDisplay(Header = "Adet")]public int? adet { get; set; }
         [GridDisplay(Header = "Proje", Tip ="Liste", ListVisibleColumnName = "kod",ListName ="projes")]public int? projeId { get; set; }
         [GridDisplay(Header = "Proje Kodu")]public string projekod { get; set; }
+        [GridDisplay(Header = "isSatinalma")] public bool? isSatinalma { get; set; }
         [GridDisplay(Header ="Ham Veri")]public string hamVeri { get; set; }
         [GridDisplay(Header = "Excel Kod")] public string excelKod { get; set; }
         [GridDisplay(Header = "Excel Ad")] public string excelAd { get; set; }

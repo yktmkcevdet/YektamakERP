@@ -68,7 +68,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbMalzemeAltGrup2.SelectedIndexChanged += async (s, e) => await fcbMalzemeAltGrup2_SelectedIndexChanged(s, e);
             ctbParcaKod.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
             ctbParcaAd.KeyDown += async (s, e) => await parcaAdi_KeyDown(s, e);
-            chkSatinalma.CheckedChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
             chkPdf.CheckStateChanged += async (s, e) => await chkPdf_CheckStateChanged(s, e);
             chkDxf.CheckStateChanged += async (s, e) => await chkDxf_CheckedChanged(s, e);
             chkStep.CheckStateChanged += async (s, e) => await chkStep_CheckedChanged(s, e);
@@ -77,7 +76,6 @@ namespace YektamakDesktop.Formlar.ProjeModul
             seçilenKayıtlarıSilToolStripMenuItem.Click += async (s, e) => await seçilenKayıtlarıSilToolStripMenuItem_Click(s, e);
             universalGrid1.Grid.CellMouseEnter += Grid_CellMouseEnter;
             universalGrid1.Grid.CellMouseLeave += Grid_CellMouseLeave;
-
         }
         private PdfGoruntuleme _pdfPopup;
         private PdfGoruntuleme pdfPopup
@@ -157,6 +155,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             fcbStokGrup.SetDataSource(_cache.stokGrups);
             await Binding();
+            chkSatinalma.Checked = false;
         }
 
         private async Task Binding()
@@ -168,7 +167,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             BindHelper.BindData(chkPdf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isPdf));
             BindHelper.BindData(chkDxf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isDxf));
             BindHelper.BindData(chkStep, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isStep));
-            BindHelper.BindData(chkSatinalma, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isSatinalma));
+            BindHelper.BindData(chkSatinalma, projeStokKartFilter, nameof(projeStokKartFilter.isSatinalma));
             BindHelper.BindData(ctbParcaKod, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.kod));
             BindHelper.BindData(ctbParcaAd, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.ad));
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
