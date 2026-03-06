@@ -46,7 +46,7 @@ namespace YektamakDesktop.Formlar.Genel
                 lblSatinalmaTalep.Cursor = Cursors.Hand;
                 lblSatinalmaTalep.AutoSize = true;
                 lblSatinalmaTalep.Location = new Point(x, y);
-                y = lblSatinalmaTalep.Height + 10;
+                y = y + 30;
                 lblSatinalmaTalep.Click += (s, args) =>
                 {
                     var mainForm = FormFactory.CreateForm<MainForm>();
@@ -68,7 +68,7 @@ namespace YektamakDesktop.Formlar.Genel
                 lblSatinalmaOnayliTalep.Cursor = Cursors.Hand;
                 lblSatinalmaOnayliTalep.AutoSize = true;
                 lblSatinalmaOnayliTalep.Location = new Point(x, y);
-                y = lblSatinalmaOnayliTalep.Height + 10;
+                y = y + 30;
                 lblSatinalmaOnayliTalep.Click += (s, args) =>
                 {
                     var mainForm = FormFactory.CreateForm<MainForm>();
@@ -84,24 +84,36 @@ namespace YektamakDesktop.Formlar.Genel
             if (projeStokKarts.Any(p=> _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id==p.proje.Id) && p.isSatinalma==false))
             {
                 Label lblProjeDosyalari = new Label();
-                lblProjeDosyalari.Text = $"Satınalma talebi açılacak proje ({projeStokKarts.Where(p => _cache.projeList.Any(l =>l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p=>p.proje.Id).ToList().Count.ToString()})";
+                lblProjeDosyalari.Text = $"Satınalma talebi açılacak projeler ({projeStokKarts.Where(p => _cache.projeList.Any(l =>l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p=>p.proje.Id).ToList().Count.ToString()})";
                 lblProjeDosyalari.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(162)));
                 lblProjeDosyalari.ForeColor = Color.DarkBlue;
                 lblProjeDosyalari.Cursor = Cursors.Hand;
                 lblProjeDosyalari.AutoSize = true;
                 lblProjeDosyalari.Location = new Point(x, y);
-                y = lblProjeDosyalari.Height + 10;
-                lblProjeDosyalari.Click += (s, args) =>
-                {
-                    var mainForm = FormFactory.CreateForm<MainForm>();
-                    Menu menuItem = new Menu
-                    {
-                        formAd = nameof(ProjeDosyalari),
-                        ad = "ProjeDosyalari"
-                    };
-                    mainForm.OpenFormInTab(menuItem);
-                };
+                y = y + 30;
                 this.Controls.Add(lblProjeDosyalari);
+                foreach (var proje in projeStokKarts.Where(p => _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p => p.proje.Id))
+                {
+                    Label lblProje = new Label();
+                    lblProje.Text = $" - {proje.FirstOrDefault().proje.kod}";
+                    lblProje.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(162)));
+                    lblProje.ForeColor = Color.DarkBlue;
+                    lblProje.Cursor = Cursors.Hand;
+                    lblProje.AutoSize = true;
+                    lblProje.Location = new Point(x + 20, y);
+                    y = y + 30;
+                    lblProje.Click += (s, args) =>
+                    {
+                        var mainForm = FormFactory.CreateForm<MainForm>();
+                        Menu menuItem = new Menu
+                        {
+                            formAd = nameof(ProjeDosyalari),
+                            ad = "ProjeDosyalari"
+                        };
+                        mainForm.OpenFormInTab(menuItem);
+                    };
+                    this.Controls.Add(lblProje);
+                }
             }
         }
     }

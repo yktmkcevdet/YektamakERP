@@ -56,6 +56,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId = new FilterableComboBox();
             fcbTalepNeden = new FilterableComboBox();
             label3 = new System.Windows.Forms.Label();
+            clbMalzemeGrup = new FilterableComboBox();
+            label9 = new System.Windows.Forms.Label();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,7 +86,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label2.Location = new System.Drawing.Point(37, 151);
+            label2.Location = new System.Drawing.Point(397, 43);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(68, 15);
             label2.TabIndex = 16;
@@ -98,7 +100,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbAciklama.BorderSize = 1;
             ctbAciklama.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             ctbAciklama.ForeColor = System.Drawing.Color.Black;
-            ctbAciklama.Location = new System.Drawing.Point(415, 38);
+            ctbAciklama.Location = new System.Drawing.Point(790, 64);
             ctbAciklama.Margin = new System.Windows.Forms.Padding(1);
             ctbAciklama.Multiline = true;
             ctbAciklama.Name = "ctbAciklama";
@@ -118,7 +120,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label4.Location = new System.Drawing.Point(353, 38);
+            label4.Location = new System.Drawing.Point(790, 38);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(57, 15);
             label4.TabIndex = 19;
@@ -128,7 +130,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label5.Location = new System.Drawing.Point(37, 178);
+            label5.Location = new System.Drawing.Point(397, 97);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(115, 15);
             label5.TabIndex = 24;
@@ -192,9 +194,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             // universalGrid1
             // 
             universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            universalGrid1.Location = new System.Drawing.Point(12, 231);
+            universalGrid1.Location = new System.Drawing.Point(12, 158);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(1262, 520);
+            universalGrid1.Size = new System.Drawing.Size(1262, 593);
             universalGrid1.TabIndex = 30;
             universalGrid1.MouseDown1 += universalGrid1_MouseClick;
             // 
@@ -216,7 +218,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             ctbSetAdet.BackColor = System.Drawing.Color.White;
             ctbSetAdet.Font = new System.Drawing.Font("Segoe UI", 8F);
             ctbSetAdet.ForeColor = System.Drawing.Color.Black;
-            ctbSetAdet.Location = new System.Drawing.Point(154, 199);
+            ctbSetAdet.Location = new System.Drawing.Point(514, 119);
             ctbSetAdet.Margin = new System.Windows.Forms.Padding(0);
             ctbSetAdet.Name = "ctbSetAdet";
             ctbSetAdet.OndalikBasamak = 0;
@@ -229,7 +231,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             label8.AutoSize = true;
             label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label8.Location = new System.Drawing.Point(37, 204);
+            label8.Location = new System.Drawing.Point(397, 124);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(56, 15);
             label8.TabIndex = 33;
@@ -239,6 +241,13 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             customButtonSave1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             customButtonSave1.BackColor = System.Drawing.Color.Transparent;
+            customButtonSave1.BorderColor = System.Drawing.Color.Black;
+            customButtonSave1.BorderSize = 0;
+            customButtonSave1.CornerRadius = 6;
+            customButtonSave1.GradientColor1 = System.Drawing.Color.DodgerBlue;
+            customButtonSave1.GradientColor2 = System.Drawing.Color.MidnightBlue;
+            customButtonSave1.HoverColor1 = System.Drawing.Color.RoyalBlue;
+            customButtonSave1.HoverColor2 = System.Drawing.Color.Navy;
             customButtonSave1.Location = new System.Drawing.Point(1116, 766);
             customButtonSave1.Name = "customButtonSave1";
             customButtonSave1.Size = new System.Drawing.Size(106, 46);
@@ -279,7 +288,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbProjeKodu.BorderSize = 1;
             clbProjeKodu.DisplayMember = "kod";
             clbProjeKodu.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbProjeKodu.Location = new System.Drawing.Point(154, 146);
+            clbProjeKodu.Location = new System.Drawing.Point(514, 38);
             clbProjeKodu.Margin = new System.Windows.Forms.Padding(1);
             clbProjeKodu.Name = "clbProjeKodu";
             clbProjeKodu.Padding = new System.Windows.Forms.Padding(3);
@@ -297,7 +306,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             clbKullaniciId.BorderSize = 1;
             clbKullaniciId.DisplayMember = "ad";
             clbKullaniciId.Font = new System.Drawing.Font("Segoe UI", 8F);
-            clbKullaniciId.Location = new System.Drawing.Point(154, 173);
+            clbKullaniciId.Location = new System.Drawing.Point(514, 92);
             clbKullaniciId.Margin = new System.Windows.Forms.Padding(1);
             clbKullaniciId.Name = "clbKullaniciId";
             clbKullaniciId.Padding = new System.Windows.Forms.Padding(3);
@@ -334,6 +343,33 @@ namespace YektamakDesktop.Formlar.Satinalma
             label3.TabIndex = 38;
             label3.Text = "Talep Nedeni";
             // 
+            // clbMalzemeGrup
+            // 
+            clbMalzemeGrup.BorderColor = System.Drawing.Color.Silver;
+            clbMalzemeGrup.BorderRadius = 8;
+            clbMalzemeGrup.BorderSize = 1;
+            clbMalzemeGrup.DisplayMember = "ad";
+            clbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
+            clbMalzemeGrup.Location = new System.Drawing.Point(514, 65);
+            clbMalzemeGrup.Margin = new System.Windows.Forms.Padding(1);
+            clbMalzemeGrup.Name = "clbMalzemeGrup";
+            clbMalzemeGrup.Padding = new System.Windows.Forms.Padding(3);
+            clbMalzemeGrup.PlaceholderText = "Seçiniz...";
+            clbMalzemeGrup.ReadOnly = false;
+            clbMalzemeGrup.Size = new System.Drawing.Size(156, 25);
+            clbMalzemeGrup.TabIndex = 39;
+            clbMalzemeGrup.ValueMember = "Id";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label9.Location = new System.Drawing.Point(397, 70);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(89, 15);
+            label9.TabIndex = 40;
+            label9.Text = "Malzeme Grup";
+            // 
             // SatinalmaTalepKayitFormu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -341,6 +377,8 @@ namespace YektamakDesktop.Formlar.Satinalma
             AutoSize = true;
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ClientSize = new System.Drawing.Size(1286, 838);
+            Controls.Add(label9);
+            Controls.Add(clbMalzemeGrup);
             Controls.Add(label3);
             Controls.Add(fcbTalepNeden);
             Controls.Add(clbKullaniciId);
@@ -395,5 +433,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem stokKartıGörüntüleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seçilenKayıtlarıBirleştirToolStripMenuItem;
+        private FilterableComboBox clbMalzemeGrup;
+        private System.Windows.Forms.Label label9;
     }
 }

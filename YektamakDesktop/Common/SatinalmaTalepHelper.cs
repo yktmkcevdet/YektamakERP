@@ -110,7 +110,7 @@ namespace YektamakDesktop.Common
                 SatinalmaTalep satinalmaTalep = new SatinalmaTalep
                 {
                     proje = proje,
-                    //malzemeGrup = new MalzemeGrup { Id = int.TryParse(clbMalzemeGrup.SelectedValue.ToString(), out int malzemegrupId) ? malzemegrupId : null },
+                    malzemeGrup = new MalzemeGrup { Id = malzemeGrup.Id },
                     talepNeden = new TalepNeden { Id = 1 }, //Varsayılan olarak 1 atanıyor
                     talepTarihi = DateTime.Today,
                     teslimTarihi = null,

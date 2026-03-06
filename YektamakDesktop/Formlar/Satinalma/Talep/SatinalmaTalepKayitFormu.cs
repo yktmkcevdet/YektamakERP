@@ -65,6 +65,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             clbKullaniciId.SetDataSource(_cache.kullaniciList.Select(k => k with { ad = k.personel.adSoyad }).ToList());
             clbProjeKodu.SetDataSource(_cache.projeList);
+            clbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             FormClosing += async (s, e) => await SatinalmaTalepKayitFormu_FormClosing(s, e);
             satinalmaTalep.talepEdenKullanici = _cache.kullanici;
             satinalmaTalep.talepTarihi = DateTime.Today;
@@ -94,6 +95,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             BindHelper.BindData(fcbTalepNeden, satinalmaTalep.talepNeden, "Id");
             BindHelper.BindData(clbProjeKodu, satinalmaTalep.proje, "Id");
+            BindHelper.BindData(clbMalzemeGrup, satinalmaTalep.malzemeGrup, "Id");
             BindHelper.BindData(clbKullaniciId, satinalmaTalep.talepEdenKullanici, "Id");
             BindHelper.BindData(ctbTalepTarihi, satinalmaTalep, "talepTarihi");
             BindHelper.BindData(ctbTeslimTarihi, satinalmaTalep, "teslimTarihi");

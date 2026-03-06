@@ -12,7 +12,7 @@ namespace Models.DTO
         [GridDisplay(Header = ProjeKoduHeader)] public string projekod { get; set; }
         [GridDisplay(Header = "Set Adet")] public int? setAdet { get; set; }
         [GridDisplay(Header = StokGrupIdHeader)] public int? stokGrupId { get; set; }
-        [GridDisplay(Header = MalzemeGrupIdHeader)] public int? malzemeGrupId { get; set; }
+        [GridDisplay(Header = MalzemeGrupIdHeader,Tip ="Liste", ListName ="malzemeGrups", ListVisibleColumnName = "ad")] public int? malzemeGrupId { get; set; }
         [GridDisplay(Header = AciklamaHeader)] public string aciklama { get; set; }
         [GridDisplay(Header = TalepTarihiHeader)] public DateTime? talepTarihi { get; set; }
         [GridDisplay(Header = TeslimTarihiHeader)] public DateTime? teslimTarihi { get; set; }
