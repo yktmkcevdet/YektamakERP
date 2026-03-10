@@ -52,7 +52,7 @@
             // 
             headerPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             headerPanel1.BackColor = System.Drawing.Color.SteelBlue;
-            headerPanel1.Baslik = "Proje Dosya Onay";
+            headerPanel1.Baslik = "Proje Dosya Kontrol";
             headerPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             headerPanel1.Location = new System.Drawing.Point(0, 0);
             headerPanel1.Margin = new System.Windows.Forms.Padding(1);
@@ -63,10 +63,10 @@
             // 
             // universalGrid1
             // 
-            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            universalGrid1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             universalGrid1.Location = new System.Drawing.Point(12, 140);
             universalGrid1.Name = "universalGrid1";
-            universalGrid1.Size = new System.Drawing.Size(297, 600);
+            universalGrid1.Size = new System.Drawing.Size(414, 527);
             universalGrid1.TabIndex = 1;
             // 
             // fcbStokGrup
@@ -146,14 +146,14 @@
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(814, 635);
+            panel1.Size = new System.Drawing.Size(694, 535);
             panel1.TabIndex = 6;
             // 
             // label
             // 
             label.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
             label.ForeColor = System.Drawing.Color.Red;
-            label.Location = new System.Drawing.Point(0, 0);
+            label.Location = new System.Drawing.Point(15, 15);
             label.Name = "label";
             label.Size = new System.Drawing.Size(500, 23);
             label.TabIndex = 0;
@@ -210,13 +210,13 @@
             // 
             // tabControl1
             // 
-            tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new System.Drawing.Point(312, 98);
+            tabControl1.Location = new System.Drawing.Point(432, 98);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(828, 669);
+            tabControl1.Size = new System.Drawing.Size(708, 569);
             tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -225,7 +225,7 @@
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(820, 641);
+            tabPage1.Size = new System.Drawing.Size(700, 541);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pdf";
             tabPage1.UseVisualStyleBackColor = true;
@@ -236,7 +236,7 @@
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(820, 641);
+            tabPage2.Size = new System.Drawing.Size(700, 541);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Dxf";
             tabPage2.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(814, 635);
+            panel2.Size = new System.Drawing.Size(694, 535);
             panel2.TabIndex = 0;
             panel2.Paint += panel2_Paint;
             // 
@@ -254,7 +254,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1140, 768);
+            ClientSize = new System.Drawing.Size(1140, 679);
             Controls.Add(tabControl1);
             Controls.Add(roundedButton2);
             Controls.Add(fcbDosyaTip);

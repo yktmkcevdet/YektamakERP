@@ -20,9 +20,10 @@ namespace YektamakDesktop.Helpers
             int sizeY = universalGrid1.Size.Height;
             int locationY = universalGrid1.Location.Y;
             int locationX = universalGrid1.Location.X;
+            var anchor = universalGrid1.Anchor;
             form.Controls.Remove(universalGrid1);
             universalGrid1 = DIContainer.GetService<UniversalGrid>();
-            universalGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            universalGrid1.Anchor = anchor;
             universalGrid1.Location = new Point(locationX, locationY);
             universalGrid1.Name = "universalGrid1";
             universalGrid1.Size = new Size(sizeX, sizeY);

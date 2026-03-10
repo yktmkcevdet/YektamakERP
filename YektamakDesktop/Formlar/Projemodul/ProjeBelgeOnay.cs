@@ -76,8 +76,8 @@ namespace YektamakDesktop.Formlar.Projemodul
                 {
                     label.Text = "DXF dosyası bulunamadı";
                     DxfDrawHelper.dxfDoc = null;
-                    panel1.Invalidate();
                 }
+                panel1.Invalidate();
             }
             else { pdfPopup.GetInstance(null); }
 

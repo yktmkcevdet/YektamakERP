@@ -254,9 +254,19 @@ namespace YektamakDesktop.Common
                 MessageBox.Show("PDF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
+            if (stokKarts.Any(x => x.stokKartdosyaList.FirstOrDefault(d => d.dosyaTip.Id == 1 && d.isActive == true)?.onaySonucu ==false))
+            {
+                MessageBox.Show("Kontrol onayı verilmemiş PDF dosyaları var.");
+                return false;
+            }
             if (stokKarts.Any(x => x.stokKartisDxf == false))
             {
                 MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
+                return false;
+            }
+            if (stokKarts.Any(x => x.stokKartdosyaList.FirstOrDefault(d => d.dosyaTip.Id == 2 && d.isActive == true)?.onaySonucu == false))
+            {
+                MessageBox.Show("Kontrol onayı verilmemiş DXF dosyaları var.");
                 return false;
             }
             if (stokKarts.Any(x => x.stokKartisStep == false))
@@ -290,9 +300,19 @@ namespace YektamakDesktop.Common
                 MessageBox.Show("PDF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
+            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.First(d=>d.dosyaTip.Id==1).kontrolSonucu != true))
+            {
+                MessageBox.Show("Kontrol onayı verilmemiş PDF dosyaları var.");
+                return false;
+            }
             if (stokKarts.Any(x => x.projeStokKart.stokKart.isDxf == false))
             {
                 MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
+                return false;
+            }
+            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.First(d => d.dosyaTip.Id == 2).kontrolSonucu != true))
+            {
+                MessageBox.Show("Kontrol onayı verilmemiş DXF dosyaları var.");
                 return false;
             }
             if (stokKarts.Any(x => x.projeStokKart.stokKart.isStep == false))
