@@ -20,9 +20,9 @@ namespace Api.Business
         {
             const string sql = @"
                                 INSERT t01_stokkartdosya
-                                    (stokKartId,dosyaTipId,dosyaAd,dosyaUzanti,dosyaFullPath,kontrolEdenKullaniciId,kontrolTarihi,kontrolSonucu,kontrolRedSebepAciklama)
+                                    (stokKartId,dosyaTipId,dosyaAd,dosyaUzanti,dosyaFullPath,kontrolEdenKullaniciId,kontrolTarihi,kontrolSonucu,kontrolRedSebepAciklama,onaylayanKullaniciId,onayTarihi,onaySonucu,onayRedSebepAciklama)
                                 VALUES
-                                    (@stokKartId,@dosyaTipId,@dosyaAd,@dosyaUzanti,@dosyaFullPath,@kontrolEdenKullaniciId,@kontrolTarihi,@kontrolSonucu,@kontrolRedSebepAciklama)
+                                    (@stokKartId,@dosyaTipId,@dosyaAd,@dosyaUzanti,@dosyaFullPath,@kontrolEdenKullaniciId,@kontrolTarihi,@kontrolSonucu,@kontrolRedSebepAciklama,@onaylayanKullaniciId,@onayTarihi,@onaySonucu,@onayRedSebepAciklama)
                                 ON DUPLICATE KEY UPDATE
                                     stokKartId = VALUES(stokKartId),
                                     dosyaTipId = VALUES(dosyaTipId),
@@ -33,6 +33,10 @@ namespace Api.Business
                                     kontrolTarihi = VALUES(kontrolTarihi),
                                     kontrolSonucu = VALUES(kontrolSonucu),
                                     kontrolRedSebepAciklama = VALUES(kontrolRedSebepAciklama),
+                                    onaylayanKullaniciId = VALUES(onaylayanKullaniciId),
+                                    onayTarihi = VALUES(onayTarihi),
+                                    onaySonucu = VALUES(onaySonucu),
+                                    onayRedSebepAciklama = VALUES(onayRedSebepAciklama),
                                 Id = LAST_INSERT_ID(Id);
                                 SELECT *
                                 FROM t01_stokkartdosya WHERE Id = LAST_INSERT_ID()";
@@ -49,7 +53,11 @@ namespace Api.Business
                     stokKartDosya.kontrolEdenKullaniciId,
                     stokKartDosya.kontrolTarihi,
                     stokKartDosya.kontrolSonucu,
-                    stokKartDosya.kontrolRedSebepAciklama
+                    stokKartDosya.kontrolRedSebepAciklama,
+                    stokKartDosya.onaylayanKullaniciId,
+                    stokKartDosya.onayTarihi,
+                    stokKartDosya.onaySonucu,
+                    stokKartDosya.onayRedSebepAciklama
                 },
                 dbTransaction
             );

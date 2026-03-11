@@ -20,7 +20,7 @@ using YektamakDesktop.Helpers;
 
 namespace YektamakDesktop.Formlar.Projemodul
 {
-    public partial class ProjeBelgeOnay : Form
+    public partial class ProjeBelgeKontrol : Form
     {
         private readonly ICache _cache;
         private readonly IProjeService _projeService;
@@ -28,7 +28,7 @@ namespace YektamakDesktop.Formlar.Projemodul
         private readonly IFileService _fileService;
         private readonly IStokService _stokService;
         private StokKartDosyaDTO skd;
-        public ProjeBelgeOnay(ICache cache, IProjeService projeService, IConvertHelper convertHelper, IFileService fileService, IStokService stokService)
+        public ProjeBelgeKontrol(ICache cache, IProjeService projeService, IConvertHelper convertHelper, IFileService fileService, IStokService stokService)
         {
             _cache = cache;
             _projeService = projeService;
@@ -106,7 +106,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             List<StokKartDosyaDTO> stokKartDosyaDTOs = new List<StokKartDosyaDTO>();
             foreach (var psk in projeStokKarts.Where(p => p.stokKart.malzemeGrup.Id == (fcbMalzemeGrup.SelectedValue == null ? p.stokKart.malzemeGrup.Id : int.Parse(fcbMalzemeGrup.SelectedValue.ToString()))))
             {
-                foreach (var stokKartDosya in psk.stokKart.dosyaList.Where(d => d.isActive == true && d.kontrolSonucu == true))
+                foreach (var stokKartDosya in psk.stokKart.dosyaList.Where(d => d.isActive == true))
                 {
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
@@ -114,7 +114,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
         }
 
-        private void ProjeBelgeOnay_FormClosing(object sender, FormClosingEventArgs e)
+        private void ProjeBelgeKontrol_FormClosing(object sender, FormClosingEventArgs e)
         {
             universalGrid1.SaveGridSettings();
         }
@@ -127,9 +127,9 @@ namespace YektamakDesktop.Formlar.Projemodul
 
         private async void roundedButton1_Click(object sender, EventArgs e)
         {
-            skd.onaylayanKullaniciId = _cache.kullanici.Id;
-            skd.onaySonucu = true;
-            skd.onayTarihi = DateTime.Now;
+            skd.kontrolEdenKullaniciId = _cache.kullanici.Id;
+            skd.kontrolSonucu = true;
+            skd.kontrolTarihi = DateTime.Now;
             await _stokService.SaveStokKartDosya(_convertHelper.ToEntity<StokKartDosya>(skd));
             int i = universalGrid1.Grid.CurrentRow.Index;
 
@@ -151,10 +151,10 @@ namespace YektamakDesktop.Formlar.Projemodul
         {
             var row = universalGrid1.Grid.Rows[e.RowIndex];
 
-            if (row.Cells["Onay Durumu"].Value == null)
+            if (row.Cells["Kontrol Durumu"].Value == null)
                 return;
 
-            bool isActive = Convert.ToBoolean(row.Cells["Onay Durumu"].Value);
+            bool isActive = Convert.ToBoolean(row.Cells["Kontrol Durumu"].Value);
 
             row.DefaultCellStyle.BackColor =
                 isActive ? Color.LightGreen : Color.LightGray;
@@ -206,10 +206,10 @@ namespace YektamakDesktop.Formlar.Projemodul
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    skd.onaylayanKullaniciId = _cache.kullanici.Id;
-                    skd.onaySonucu = false;
-                    skd.onayTarihi = DateTime.Now;
-                    skd.onayRedSebepAciklama = frm.Reason;
+                    skd.kontrolEdenKullaniciId = _cache.kullanici.Id;
+                    skd.kontrolSonucu = false;
+                    skd.kontrolTarihi = DateTime.Now;
+                    skd.kontrolRedSebepAciklama = frm.Reason;
                     await _stokService.SaveStokKartDosya(_convertHelper.ToEntity<StokKartDosya>(skd));
                     int i = universalGrid1.Grid.CurrentRow.Index;
 
@@ -234,7 +234,7 @@ namespace YektamakDesktop.Formlar.Projemodul
             List<StokKartDosyaDTO> stokKartDosyaDTOs = new List<StokKartDosyaDTO>();
             foreach (var psk in projeStokKarts.Where(p => p.stokKart.malzemeGrup.Id == (fcbMalzemeGrup.SelectedValue == null ? p.stokKart.malzemeGrup.Id : int.Parse(fcbMalzemeGrup.SelectedValue.ToString()))))
             {
-                foreach (var stokKartDosya in psk.stokKart.dosyaList.Where(d => d.isActive == true && d.kontrolSonucu == true))
+                foreach (var stokKartDosya in psk.stokKart.dosyaList.Where(d => d.isActive == true ))
                 {
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }

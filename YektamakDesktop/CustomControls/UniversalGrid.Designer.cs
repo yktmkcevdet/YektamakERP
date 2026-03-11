@@ -78,6 +78,7 @@ namespace YektamakDesktop.CustomControls
             // 
             columnMenu.Name = "columnMenu";
             columnMenu.Size = new System.Drawing.Size(61, 4);
+            columnMenu.Closing += ColumnMenu_Closing;
             // 
             // lblToplamKayitSayisi
             // 
@@ -119,11 +120,6 @@ namespace YektamakDesktop.CustomControls
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
-        }
-
-        private void DataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
 

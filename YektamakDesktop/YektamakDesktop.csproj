@@ -92,6 +92,9 @@
     <Compile Update="Formlar\Genel\MalzemeGrupTanimFormu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formlar\Projemodul\ProjeBelgeKontrol.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formlar\Satinalma\Teklif\SatinalmaTekliflerFormu.cs">
       <SubType>Form</SubType>
     </Compile>

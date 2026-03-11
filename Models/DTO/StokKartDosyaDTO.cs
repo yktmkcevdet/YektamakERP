@@ -25,5 +25,6 @@ namespace Models.DTO
         [GridDisplay(Header = "Onay Durumu", Visible = true)]
         public bool? onaySonucu { get; set; }
         public string kontrolRedSebepAciklama { get; set; }
+        public string onayRedSebepAciklama { get; set; }
     }
 }

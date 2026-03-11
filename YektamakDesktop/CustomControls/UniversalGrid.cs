@@ -315,7 +315,6 @@ namespace YektamakDesktop.CustomControls
                 foreach (DataGridViewColumn col in dataGridView1.Columns)
                 {
                     // Gizlenebilir olması istenmeyen kolonları atla (örneğin checkbox kolonu)
-                    //if (col.Name == "chk") continue;
                     if (allowedFields.Contains(col.Name))
                     {
                         var item = new ToolStripMenuItem(col.HeaderText)
@@ -357,6 +356,13 @@ namespace YektamakDesktop.CustomControls
                 MouseDown1?.Invoke(this, e);
             }
 
+        }
+        private void ColumnMenu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
+            {
+                e.Cancel = true;
+            }
         }
         public List<T> GetCheckedRows<T>() where T : IEntity
         {

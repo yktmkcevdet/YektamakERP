@@ -1,6 +1,6 @@
 ﻿namespace YektamakDesktop.Formlar.Projemodul
 {
-    partial class ProjeBelgeOnay
+    partial class ProjeBelgeKontrol
     {
         /// <summary>
         /// Required designer variable.
@@ -156,7 +156,7 @@
             roundedButton1.HoverColor2 = System.Drawing.Color.LimeGreen;
             roundedButton1.Icon = null;
             roundedButton1.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton1.Location = new System.Drawing.Point(651, 64);
+            roundedButton1.Location = new System.Drawing.Point(432, 47);
             roundedButton1.Name = "roundedButton1";
             roundedButton1.Size = new System.Drawing.Size(37, 35);
             roundedButton1.TabIndex = 7;
@@ -181,7 +181,7 @@
             roundedButton2.HoverColor2 = System.Drawing.Color.FromArgb(192, 0, 0);
             roundedButton2.Icon = null;
             roundedButton2.IconAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            roundedButton2.Location = new System.Drawing.Point(783, 61);
+            roundedButton2.Location = new System.Drawing.Point(498, 44);
             roundedButton2.Name = "roundedButton2";
             roundedButton2.Size = new System.Drawing.Size(40, 40);
             roundedButton2.TabIndex = 8;
@@ -232,7 +232,7 @@
             panel2.TabIndex = 0;
             panel2.Paint += panel2_Paint;
             // 
-            // ProjeBelgeOnay
+            // ProjeBelgeKontrol
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,9 +246,9 @@
             Controls.Add(universalGrid1);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Name = "ProjeBelgeOnay";
-            Text = "ProjeBelgeOnay";
-            FormClosing += ProjeBelgeOnay_FormClosing;
+            Name = "ProjeBelgeKontrol";
+            Text = "ProjeBelgeKontrol";
+            FormClosing += ProjeBelgeKontrol_FormClosing;
             panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
