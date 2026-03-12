@@ -34,14 +34,12 @@
             fcbProjeKod = new YektamakDesktop.CustomControls.FilterableComboBox();
             fcbDosyaTip = new YektamakDesktop.CustomControls.FilterableComboBox();
             panel1 = new System.Windows.Forms.Panel();
-            label = new System.Windows.Forms.Label();
             roundedButton1 = new YektamakDesktop.CustomControls.RoundedButton();
             roundedButton2 = new YektamakDesktop.CustomControls.RoundedButton();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             tabPage2 = new System.Windows.Forms.TabPage();
             panel2 = new System.Windows.Forms.Panel();
-            panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -124,21 +122,11 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(label);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(694, 535);
             panel1.TabIndex = 6;
-            // 
-            // label
-            // 
-            label.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
-            label.ForeColor = System.Drawing.Color.Red;
-            label.Location = new System.Drawing.Point(15, 15);
-            label.Name = "label";
-            label.Size = new System.Drawing.Size(500, 23);
-            label.TabIndex = 0;
             // 
             // roundedButton1
             // 
@@ -249,7 +237,6 @@
             Name = "ProjeBelgeOnay";
             Text = "ProjeBelgeOnay";
             FormClosing += ProjeBelgeOnay_FormClosing;
-            panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
@@ -270,6 +257,5 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label;
     }
 }

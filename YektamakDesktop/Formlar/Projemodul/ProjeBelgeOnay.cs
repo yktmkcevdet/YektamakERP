@@ -48,41 +48,44 @@ namespace YektamakDesktop.Formlar.Projemodul
             UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.Grid.SelectionChanged += UniversalGrid1_SelectionChanged;
             universalGrid1.Grid.RowPrePaint += dataGridView1_RowPrePaint;
-            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, true);
+            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, false);
             fcbProjeKod.SetDataSource(_cache.projeList);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id == 1).ToList());
         }
 
         private async void UniversalGrid1_SelectionChanged(object sender, EventArgs e)
         {
+            if (universalGrid1.Grid.CurrentRow == null) return;
             skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            if (skd.dosyaTipId == 1)
+            var projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart { proje = { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) }, stokKart = { Id = skd.stokKartId } }))[0];
+            var pdfFullPath = projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.isActive == true && d.dosyaTip.Id == 1)?.dosyaFullPath;
+            var dxffFullPath = projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.isActive == true && d.dosyaTip.Id == 2)?.dosyaFullPath;
+            pdfPopup.GetInstance(
+                    await _fileService.GetFileDecompress(pdfFullPath)
+                );
+            var dxfDosya = await _fileService.GetFileDecompress(dxffFullPath);
+            if (dxfDosya != null)
             {
-
-                pdfPopup.GetInstance(
-                        await _fileService.GetFileDecompress(skd.dosyaFullPath)
-                    );
+                panel2.Controls.Clear();
+                DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
+                DxfDrawHelper.BuildSplineCache();
+                DxfDrawHelper.FitToScreen(panel1);
             }
-            else if (skd.dosyaTipId == 2)
+            else
             {
-                var dxfDosya = await _fileService.GetFileDecompress(skd.dosyaFullPath);
-                if (dxfDosya != null)
-                {
-                    label.Text = "";
-                    DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
-                    DxfDrawHelper.BuildSplineCache();
-                    DxfDrawHelper.FitToScreen(panel1);
-                }
-                else
-                {
-                    label.Text = "DXF dosyası bulunamadı";
-                    DxfDrawHelper.dxfDoc = null;
-                }
-                panel1.Invalidate();
+                panel2.Controls.Clear();
+                Label label = new Label();
+                label.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
+                label.ForeColor = Color.Red;
+                label.Location = new System.Drawing.Point(15, 15);
+                label.Name = "label";
+                label.Size = new Size(500, 23);
+                label.TabIndex = 0;
+                label.Text = "DXF dosyası bulunamadı";
+                panel2.Controls.Add(label);
+                DxfDrawHelper.dxfDoc = null;
             }
-            else { pdfPopup.GetInstance(null); }
-
-
+            panel2.Invalidate();
         }
 
         private StokKartDosyaDTO _stokKartDosya;
@@ -111,7 +114,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
             }
-            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
+            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, false);
         }
 
         private void ProjeBelgeOnay_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,8 +172,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                 return;
             }
             var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
+            panel2.Controls.Clear();
             foreach (var ent in DxfDrawHelper.dxfDoc.Entities.All)
             {
                 DxfDrawHelper.DrawEntity(g, ent);
@@ -179,7 +181,15 @@ namespace YektamakDesktop.Formlar.Projemodul
                 if (ent.Type == EntityType.Arc) continue;
                 if (ent.Type == EntityType.Spline) continue;
                 if (ent.Type == EntityType.Insert) continue;
+                Label label = new Label();
+                label.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
+                label.ForeColor = Color.Red;
+                label.Location = new System.Drawing.Point(15, 15);
+                label.Name = "label";
+                label.Size = new Size(500, 23);
+                label.TabIndex = 0;
                 label.Text = $"{ent.Type.ToString()} çizilemedi";
+                panel2.Controls.Add(label);
             }
 
             DxfDrawHelper.RebuildScreenCache();
@@ -239,7 +249,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
             }
-            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
+            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, false);
         }
 
         private PdfGoruntuleme pdfPopup

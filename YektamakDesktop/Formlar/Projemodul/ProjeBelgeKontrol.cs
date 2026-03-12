@@ -42,47 +42,56 @@ namespace YektamakDesktop.Formlar.Projemodul
             pdfPopup.TopLevel = false;
             panel1.Controls.Add(pdfPopup);
             pdfPopup.Show();
+            panel2.MouseWheel += panel2_MouseWheel;
+            panel2.MouseClick += panel2_MouseClick;
+            panel2.MouseDown += panel2_MouseDown;
+            panel2.MouseMove += panel2_MouseMove;
+            panel2.MouseUp += panel2_MouseUp;
         }
+
         private void Initialize()
         {
             UniversalGridHelper.Replace(ref universalGrid1, this);
             universalGrid1.Grid.SelectionChanged += UniversalGrid1_SelectionChanged;
             universalGrid1.Grid.RowPrePaint += dataGridView1_RowPrePaint;
-            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, true);
+            universalGrid1.SetData(new List<StokKartDosyaDTO>(), this.Name, false);
             fcbProjeKod.SetDataSource(_cache.projeList);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(m => m.stokGrup.Id == 1).ToList());
         }
 
         private async void UniversalGrid1_SelectionChanged(object sender, EventArgs e)
         {
+            if (universalGrid1.Grid.CurrentRow == null) return;
             skd = (StokKartDosyaDTO)universalGrid1.Grid.CurrentRow.DataBoundItem;
-            if (skd.dosyaTipId == 1)
+            var projeStokKart = (await _projeService.GetProjeStokKart(new ProjeStokKart { proje = {Id=int.Parse(fcbProjeKod.SelectedValue.ToString())},stokKart = { Id = skd.stokKartId } }))[0];
+            var pdfFullPath = projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.isActive==true && d.dosyaTip.Id == 1)?.dosyaFullPath;
+            var dxffFullPath = projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.isActive == true && d.dosyaTip.Id == 2)?.dosyaFullPath;
+            pdfPopup.GetInstance(
+                    await _fileService.GetFileDecompress(pdfFullPath)
+                );
+            var dxfDosya = await _fileService.GetFileDecompress(dxffFullPath);
+            if (dxfDosya != null)
             {
-
-                pdfPopup.GetInstance(
-                        await _fileService.GetFileDecompress(skd.dosyaFullPath)
-                    );
+                panel2.Controls.Clear();
+                DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
+                DxfDrawHelper.BuildSplineCache();
+                DxfDrawHelper.FitToScreen(panel1);
             }
-            else if (skd.dosyaTipId == 2)
+            else
             {
-                var dxfDosya = await _fileService.GetFileDecompress(skd.dosyaFullPath);
-                if (dxfDosya != null)
-                {
-                    label.Text = "";
-                    DxfDrawHelper.dxfDoc = DxfDocument.Load(new MemoryStream(dxfDosya));
-                    DxfDrawHelper.BuildSplineCache();
-                    DxfDrawHelper.FitToScreen(panel1);
-                }
-                else
-                {
-                    label.Text = "DXF dosyası bulunamadı";
-                    DxfDrawHelper.dxfDoc = null;
-                }
-                panel1.Invalidate();
+                panel2.Controls.Clear();
+                Label label = new Label();
+                label.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
+                label.ForeColor = Color.Red;
+                label.Location = new System.Drawing.Point(15, 15);
+                label.Name = "label";
+                label.Size = new Size(500, 23);
+                label.TabIndex = 0;
+                label.Text = "DXF dosyası bulunamadı";
+                panel2.Controls.Add(label);
+                DxfDrawHelper.dxfDoc = null;
             }
-            else { pdfPopup.GetInstance(null); }
-
-
+            panel2.Invalidate();
         }
 
         private StokKartDosyaDTO _stokKartDosya;
@@ -111,7 +120,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
             }
-            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
+            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, false);
         }
 
         private void ProjeBelgeKontrol_FormClosing(object sender, FormClosingEventArgs e)
@@ -159,6 +168,19 @@ namespace YektamakDesktop.Formlar.Projemodul
             row.DefaultCellStyle.BackColor =
                 isActive ? Color.LightGreen : Color.LightGray;
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape && DxfDrawHelper.isMeasuring)
+            {
+                DxfDrawHelper.CancelMeasure(panel1);
+                return true;
+            }
+            if (keyData==Keys.F5)
+            {
+                DxfDrawHelper.StartMeasure();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         Circle selected;
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -166,11 +188,11 @@ namespace YektamakDesktop.Formlar.Projemodul
             if (DxfDrawHelper.isMeasuring)
             {
                 DxfDrawHelper.DrawSnap(e.Graphics);
-                return;
+                //return;
             }
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
+            panel2.Controls.Clear();
             foreach (var ent in DxfDrawHelper.dxfDoc.Entities.All)
             {
                 DxfDrawHelper.DrawEntity(g, ent);
@@ -179,7 +201,15 @@ namespace YektamakDesktop.Formlar.Projemodul
                 if (ent.Type == EntityType.Arc) continue;
                 if (ent.Type == EntityType.Spline) continue;
                 if (ent.Type == EntityType.Insert) continue;
+                Label label = new Label();
+                label.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
+                label.ForeColor = Color.Red;
+                label.Location = new System.Drawing.Point(15, 15);
+                label.Name = "label";
+                label.Size = new Size(500, 23);
+                label.TabIndex = 0;
                 label.Text = $"{ent.Type.ToString()} çizilemedi";
+                panel2.Controls.Add(label);
             }
 
             DxfDrawHelper.RebuildScreenCache();
@@ -199,7 +229,112 @@ namespace YektamakDesktop.Formlar.Projemodul
                 DxfDrawHelper.DrawPlusMarkup(g, selected);
             }
         }
+        private void panel2_MouseWheel(object sender, MouseEventArgs e)
+        {
+            float oldScale = DxfDrawHelper.scale;
+            DxfDrawHelper.scale *= e.Delta > 0 ? 1.1f : 0.9f;
 
+            DxfDrawHelper.pan.X = e.X - (e.X - DxfDrawHelper.pan.X) * (DxfDrawHelper.scale / oldScale);
+            DxfDrawHelper.pan.Y = e.Y - (e.Y - DxfDrawHelper.pan.Y) * (DxfDrawHelper.scale / oldScale);
+
+            panel2.Invalidate();
+        }
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle || e.Button == MouseButtons.Left)
+            {
+                DxfDrawHelper.isPanning = true;
+                DxfDrawHelper.lastMouse = e.Location;
+            }
+            PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
+            if (DxfDrawHelper.isMeasuring)
+            {
+                PointF p = DxfDrawHelper.GetSnapPoint(world) ?? world;
+
+                if (DxfDrawHelper.measureStart == null)
+                {
+                    DxfDrawHelper.measureStart = p;
+                }
+                else
+                {
+                    DxfDrawHelper.measureEnd = p;
+                    DxfDrawHelper.measurements.Add((DxfDrawHelper.measureStart.Value, DxfDrawHelper.measureEnd.Value));
+
+                    // yeni ölçüye hazır
+                    DxfDrawHelper.measureStart = null;
+                    DxfDrawHelper.measureEnd = null;
+                }
+            }
+            else
+            {
+                selected = DxfDrawHelper.FindCircleAt(world);
+
+
+            }
+
+
+            // Snap varsa burası snap’ten dönen nokta olur
+
+
+            panel2.Invalidate();
+        }
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (DxfDrawHelper.isPanning)
+            {
+                DxfDrawHelper.pan.X += e.X - DxfDrawHelper.lastMouse.X;
+                DxfDrawHelper.pan.Y += e.Y - DxfDrawHelper.lastMouse.Y;
+                DxfDrawHelper.lastMouse = e.Location;
+                panel2.Invalidate();
+            }
+            if (!DxfDrawHelper.isMeasuring) return;
+
+            PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
+            DxfDrawHelper.measureEnd = DxfDrawHelper.GetSnapPoint(world) ?? world;
+
+
+            DxfDrawHelper.UpdateSnap(world);
+
+            DxfDrawHelper.measureEnd = DxfDrawHelper.activeSnapPoint ?? world;
+            panel2.Invalidate();
+        }
+        private void panel2_MouseUp(object sender, MouseEventArgs e)
+        {
+            DxfDrawHelper.isPanning = false;
+        }
+        float minDist = float.MaxValue;
+        private void panel2_MouseClick(object sender, MouseEventArgs e)
+        {
+            PointF mouseWorld = DxfDrawHelper.ScreenToWorld(e.Location);
+            foreach (var line in DxfDrawHelper.dxfDoc.Entities.Lines)
+            {
+                PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
+                PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
+
+                float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, a, b);
+
+                if (d < DxfDrawHelper.pickTolerance && d < minDist)
+                {
+                    minDist = d;
+                    //selectedLine = line;
+                }
+            }
+            for (int s = 0; s < DxfDrawHelper.splineSegments.Count; s++)
+            {
+                var spl = DxfDrawHelper.splineSegments[s];
+
+                for (int i = 0; i < spl.points.Count - 1; i++)
+                {
+                    float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, spl.points[i], spl.points[i + 1]);
+                    if (d < DxfDrawHelper.pickTolerance && d < minDist)
+                    {
+                        minDist = d;
+                        //selectedSpline = DxfDrawHelper.dxfDoc.Entities.Splines.ToList()[s];
+                    }
+                }
+            }
+            panel2.Invalidate();
+        }
         private async void roundedButton2_Click(object sender, EventArgs e)
         {
             using (var frm = new RedSebep())
@@ -239,7 +374,7 @@ namespace YektamakDesktop.Formlar.Projemodul
                     stokKartDosyaDTOs.Add(_convertHelper.ToDTO<StokKartDosyaDTO>(stokKartDosya));
                 }
             }
-            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, true);
+            universalGrid1.SetData(stokKartDosyaDTOs, this.Name, false);
         }
 
         private PdfGoruntuleme pdfPopup
