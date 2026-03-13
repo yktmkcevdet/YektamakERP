@@ -300,7 +300,7 @@ namespace YektamakDesktop.Common
                 MessageBox.Show("PDF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
-            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.First(d=>d.dosyaTip.Id==1).kontrolSonucu != true))
+            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.FirstOrDefault(d=>d.dosyaTip.Id==1 && d.isActive==true)?.onaySonucu == false))
             {
                 MessageBox.Show("Kontrol onayı verilmemiş PDF dosyaları var.");
                 return false;
@@ -310,7 +310,7 @@ namespace YektamakDesktop.Common
                 MessageBox.Show("DXF dosyası olmayan kayıtlar seçilemez.");
                 return false;
             }
-            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.First(d => d.dosyaTip.Id == 2).kontrolSonucu != true))
+            if (stokKarts.Any(x => x.projeStokKart.stokKart.dosyaList.FirstOrDefault(d => d.dosyaTip.Id == 2 && d.isActive == true)?.onaySonucu == false))
             {
                 MessageBox.Show("Kontrol onayı verilmemiş DXF dosyaları var.");
                 return false;

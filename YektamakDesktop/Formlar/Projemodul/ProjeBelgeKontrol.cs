@@ -292,7 +292,6 @@ namespace YektamakDesktop.Formlar.Projemodul
             PointF world = DxfDrawHelper.ScreenToWorld(e.Location);
             DxfDrawHelper.measureEnd = DxfDrawHelper.GetSnapPoint(world) ?? world;
 
-
             DxfDrawHelper.UpdateSnap(world);
 
             DxfDrawHelper.measureEnd = DxfDrawHelper.activeSnapPoint ?? world;
@@ -305,35 +304,35 @@ namespace YektamakDesktop.Formlar.Projemodul
         float minDist = float.MaxValue;
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            PointF mouseWorld = DxfDrawHelper.ScreenToWorld(e.Location);
-            foreach (var line in DxfDrawHelper.dxfDoc.Entities.Lines)
-            {
-                PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
-                PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
+            //PointF mouseWorld = DxfDrawHelper.ScreenToWorld(e.Location);
+            //foreach (var line in DxfDrawHelper.dxfDoc.Entities.Lines)
+            //{
+            //    PointF a = new((float)line.StartPoint.X, (float)line.StartPoint.Y);
+            //    PointF b = new((float)line.EndPoint.X, (float)line.EndPoint.Y);
 
-                float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, a, b);
+            //    float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, a, b);
 
-                if (d < DxfDrawHelper.pickTolerance && d < minDist)
-                {
-                    minDist = d;
-                    //selectedLine = line;
-                }
-            }
-            for (int s = 0; s < DxfDrawHelper.splineSegments.Count; s++)
-            {
-                var spl = DxfDrawHelper.splineSegments[s];
+            //    if (d < DxfDrawHelper.pickTolerance && d < minDist)
+            //    {
+            //        minDist = d;
+            //        //selectedLine = line;
+            //    }
+            //}
+            //for (int s = 0; s < DxfDrawHelper.splineSegments.Count; s++)
+            //{
+            //    var spl = DxfDrawHelper.splineSegments[s];
 
-                for (int i = 0; i < spl.points.Count - 1; i++)
-                {
-                    float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, spl.points[i], spl.points[i + 1]);
-                    if (d < DxfDrawHelper.pickTolerance && d < minDist)
-                    {
-                        minDist = d;
-                        //selectedSpline = DxfDrawHelper.dxfDoc.Entities.Splines.ToList()[s];
-                    }
-                }
-            }
-            panel2.Invalidate();
+            //    for (int i = 0; i < spl.points.Count - 1; i++)
+            //    {
+            //        float d = DxfDrawHelper.DistancePointToSegment(mouseWorld, spl.points[i], spl.points[i + 1]);
+            //        if (d < DxfDrawHelper.pickTolerance && d < minDist)
+            //        {
+            //            minDist = d;
+            //            //selectedSpline = DxfDrawHelper.dxfDoc.Entities.Splines.ToList()[s];
+            //        }
+            //    }
+            //}
+            //panel2.Invalidate();
         }
         private async void roundedButton2_Click(object sender, EventArgs e)
         {

@@ -37,7 +37,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             headerPanel1 = new HeaderPanel();
             label2 = new Label();
-            label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             panel1 = new Panel();
@@ -49,7 +48,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             label7 = new Label();
             fcbProjeKod = new FilterableComboBox();
             fcbMalzemeGrup = new FilterableComboBox();
-            fcbStokTip = new FilterableComboBox();
             fcbStokGrup = new FilterableComboBox();
             fcbTalepNeden = new FilterableComboBox();
             label8 = new Label();
@@ -79,21 +77,11 @@ namespace YektamakDesktop.Formlar.Satinalma
             label2.TabIndex = 4;
             label2.Text = "Proej Kodu";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label3.Location = new System.Drawing.Point(45, 153);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(56, 15);
-            label3.TabIndex = 6;
-            label3.Text = "Stok Tipi";
-            // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label4.Location = new System.Drawing.Point(45, 180);
+            label4.Location = new System.Drawing.Point(45, 153);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(71, 15);
             label4.TabIndex = 9;
@@ -103,7 +91,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             // 
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            label5.Location = new System.Drawing.Point(45, 207);
+            label5.Location = new System.Drawing.Point(45, 180);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(96, 15);
             label5.TabIndex = 10;
@@ -112,9 +100,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Location = new System.Drawing.Point(45, 230);
+            panel1.Location = new System.Drawing.Point(45, 204);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(991, 325);
+            panel1.Size = new System.Drawing.Size(991, 351);
             panel1.TabIndex = 15;
             // 
             // ctbAciklama
@@ -230,7 +218,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbMalzemeGrup.BorderSize = 1;
             fcbMalzemeGrup.DisplayMember = "ad";
             fcbMalzemeGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbMalzemeGrup.Location = new System.Drawing.Point(160, 201);
+            fcbMalzemeGrup.Location = new System.Drawing.Point(160, 174);
             fcbMalzemeGrup.Margin = new Padding(1);
             fcbMalzemeGrup.Name = "fcbMalzemeGrup";
             fcbMalzemeGrup.Padding = new Padding(7, 5, 7, 5);
@@ -241,24 +229,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbMalzemeGrup.ValueMember = "Id";
             fcbMalzemeGrup.SelectedIndexChanged += clbMalzemeGrup_SelectedIndexChanged;
             // 
-            // fcbStokTip
-            // 
-            fcbStokTip.BorderColor = System.Drawing.Color.Silver;
-            fcbStokTip.BorderRadius = 8;
-            fcbStokTip.BorderSize = 1;
-            fcbStokTip.DisplayMember = "ad";
-            fcbStokTip.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbStokTip.Location = new System.Drawing.Point(160, 147);
-            fcbStokTip.Margin = new Padding(1);
-            fcbStokTip.Name = "fcbStokTip";
-            fcbStokTip.Padding = new Padding(7, 5, 7, 5);
-            fcbStokTip.PlaceholderText = "Seçiniz...";
-            fcbStokTip.ReadOnly = false;
-            fcbStokTip.Size = new System.Drawing.Size(203, 25);
-            fcbStokTip.TabIndex = 25;
-            fcbStokTip.ValueMember = "Id";
-            fcbStokTip.SelectedIndexChanged += clbStokTip_SelectedIndexChanged;
-            // 
             // fcbStokGrup
             // 
             fcbStokGrup.BorderColor = System.Drawing.Color.Silver;
@@ -266,7 +236,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             fcbStokGrup.BorderSize = 1;
             fcbStokGrup.DisplayMember = "ad";
             fcbStokGrup.Font = new System.Drawing.Font("Segoe UI", 8F);
-            fcbStokGrup.Location = new System.Drawing.Point(160, 174);
+            fcbStokGrup.Location = new System.Drawing.Point(160, 147);
             fcbStokGrup.Margin = new Padding(1);
             fcbStokGrup.Name = "fcbStokGrup";
             fcbStokGrup.Padding = new Padding(7, 5, 7, 5);
@@ -340,7 +310,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(label8);
             Controls.Add(fcbTalepNeden);
             Controls.Add(fcbStokGrup);
-            Controls.Add(fcbStokTip);
             Controls.Add(fcbMalzemeGrup);
             Controls.Add(fcbProjeKod);
             Controls.Add(label7);
@@ -350,7 +319,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(panel1);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(headerPanel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -364,7 +332,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         public CustomControls.HeaderPanel headerPanel1;
         private CustomControls.CustomComboListBox clbProjeKod;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private Panel panel1;
@@ -376,7 +343,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private Label label7;
         private FilterableComboBox fcbProjeKod;
         private FilterableComboBox fcbMalzemeGrup;
-        private FilterableComboBox fcbStokTip;
         private FilterableComboBox fcbStokGrup;
         private FilterableComboBox fcbTalepNeden;
         private Label label8;

@@ -35,7 +35,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             panel1.Controls.Add(customDataGrid.detailPanel);
             fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             fcbStokGrup.SetDataSource(_cache.stokGrups);
-            fcbStokTip.SetDataSource(_cache.stokTips);
             fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups);
             fcbTalepNeden.SetDataSource(_cache.talepNedenList);
             satinalmaTalep.talepEdenKullanici.Id = _cache.kullanici.Id;
@@ -64,7 +63,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         private void BindData()
         {
             BindHelper.BindData(fcbMalzemeGrup, satinalmaTalep.malzemeGrup, nameof(satinalmaTalep.malzemeGrup.Id));
-            BindHelper.BindData(fcbStokTip, satinalmaTalep.stokTip, nameof(satinalmaTalep.stokTip.Id));
             BindHelper.BindData(ctbAciklama, satinalmaTalep, nameof(satinalmaTalep.aciklama));
             BindHelper.BindData(ctbTalepNo,satinalmaTalep, nameof(satinalmaTalep.satinalmaTalepNo));
             BindHelper.BindData(ctbTeslimTarihi, satinalmaTalep, nameof(satinalmaTalep.teslimTarihi));
@@ -91,18 +89,10 @@ namespace YektamakDesktop.Formlar.Satinalma
         {
             VeriDegisti?.Invoke(this, satinalmaTalep);
         }
-
-        private void clbStokTip_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            fcbMalzemeGrup.SetDataSource(_cache.malzemeGrups.Where(x => x.stokGrup.Id == int.Parse(fcbStokTip.SelectedValue.ToString())).ToList());
-            fcbStokGrup.SetDataSource(_cache.stokGrups);
-            VeriDegisti?.Invoke(this, satinalmaTalep);
-        }
         private bool Validate()
         {
             bool isValid = true;
             isValid &= CheckFieldHelper.CheckField("Proje seçilmelidir", fcbProjeKod);
-            isValid &= CheckFieldHelper.CheckField("Stok tipi seçilmelidir", fcbStokTip);
             isValid &= CheckFieldHelper.CheckField("Malzeme grubu seçilmelidir", fcbMalzemeGrup);
             isValid &= CheckFieldHelper.CheckField("Talep nedeni seçilmelidir", fcbTalepNeden);
             isValid &= CheckFieldHelper.CheckField("Teslim tarihi girilmelidir", ctbTeslimTarihi);
@@ -112,29 +102,21 @@ namespace YektamakDesktop.Formlar.Satinalma
         private async void customButtonSave1_SaveButtonClick(object sender, EventArgs e)
         {
             if (!Validate()) return;
+            if (!ValidateTalepList(satinalmaTalep.satinalmaTalepDetays)) return;
             satinalmaTalep.satinalmaTalepDetays.Clear();
-            List<SatinalmaTalepDetay> talepList = new List<SatinalmaTalepDetay>();
+            List<ProjeStokKartDTO> talepList = new List<ProjeStokKartDTO>();
             foreach (var dataControlSatinalmaTalepDetay in customDataGrid.dataSource.Where(x => x.newRec == false))
             {
                 if (!dataControlSatinalmaTalepDetay.ValidateFields()) return;
-                SatinalmaTalepDetay projeStokKartDTO = dataControlSatinalmaTalepDetay.satinalmaTalepDetay;
+                ProjeStokKartDTO projeStokKartDTO = _convertHelper.ToDTO<ProjeStokKartDTO>(dataControlSatinalmaTalepDetay.satinalmaTalepDetay.projeStokKart);
                 projeStokKartDTO.miktar = double.Parse(dataControlSatinalmaTalepDetay.miktar.TextCustom.ToString());
                 talepList.Add(projeStokKartDTO);
-                //SatinalmaTalepDetay satinalmaTalepDetay = new();
-                //satinalmaTalepDetay = dataControlSatinalmaTalepDetay.satinalmaTalepDetay;
-                //satinalmaTalep.satinalmaTalepDetays.Add(satinalmaTalepDetay);
             }
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
             satinalmaTalep.talepTarihi = DateTime.Today;
             satinalmaTalep.teslimTarihi = DateTime.Parse(ctbTeslimTarihi.TextCustom.ToString());
             _satinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
-
-            
-            
-            if (!ValidateTalepList(satinalmaTalep.satinalmaTalepDetays)) return;
-            // CreateSatinalmaTalep();
-            // string jsonResult = await _satinalmaTalepService.SaveSatinalmaTalep(satinalmaTalep);
             if (satinalmaTalep.onayKullanici.Id == _cache.kullanici.Id)
             {
                 satinalmaTalep.onayDurum = true;
@@ -159,11 +141,6 @@ namespace YektamakDesktop.Formlar.Satinalma
         public bool ValidateTalepList(List<SatinalmaTalepDetay> stokKarts)
         {
             // Formdaki gerekli alanların dolu olup olmadığını kontrol et
-            if (!stokKarts.Any())
-            {
-                MessageBox.Show("Satınalma talebi oluşturulacak satırlar seçilmelidir.");
-                return false;
-            }
             if (stokKarts.Any(x => {
                 if (x.projeStokKart.stokKart.isPdf == false)
                 {

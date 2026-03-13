@@ -931,100 +931,295 @@ namespace YektamakDesktop.Common
         public PointF Point;
         public double Distance;
     }
-    //class SnapEngine
-    //{
-    //    public float ToleranceWorld = 5f;
+    class SnapEngine
+    {
+        public float ToleranceWorld = 5f;
+        public DxfDocument dxfDoc;
 
-    //    public SnapResult FindSnap(PointF mouseWorld)
-    //    {
-    //        var snaps = new List<SnapResult>();
+        public SnapResult FindSnap(PointF mouseWorld)
+        {
+            var snaps = new List<SnapResult>();
 
-    //        snaps.AddRange(CheckEndpoint(mouseWorld));
-    //        snaps.AddRange(CheckMidpoint(mouseWorld));
-    //        snaps.AddRange(CheckIntersection(mouseWorld));
-    //        snaps.AddRange(CheckCenter(mouseWorld));
+            snaps.AddRange(CheckEndpoint(mouseWorld));
+            snaps.AddRange(CheckMidpoint(mouseWorld));
+            snaps.AddRange(CheckIntersection(mouseWorld));
+            snaps.AddRange(CheckCenter(mouseWorld));
 
-    //        return snaps
-    //            .OrderBy(s => s.Distance)
-    //            .FirstOrDefault();
-    //    }
-    //    List<SnapResult> CheckEndpoint(PointF mouse)
-    //    {
-    //        var result = new List<SnapResult>();
+            return snaps
+                .OrderBy(s => s.Distance)
+                .FirstOrDefault();
+        }
+        List<SnapResult> CheckEndpoint(PointF mouse)
+        {
+            var result = new List<SnapResult>();
 
-    //        foreach (var line in dxfDoc.Entities.Lines)
-    //        {
-    //            var p1 = new PointF((float)line.StartPoint.X, (float)line.StartPoint.Y);
-    //            var p2 = new PointF((float)line.EndPoint.X, (float)line.EndPoint.Y);
+            foreach (var line in dxfDoc.Entities.Lines)
+            {
+                var p1 = new PointF((float)line.StartPoint.X, (float)line.StartPoint.Y);
+                var p2 = new PointF((float)line.EndPoint.X, (float)line.EndPoint.Y);
 
-    //            AddIfClose(result, p1, mouse, SnapType.Endpoint);
-    //            AddIfClose(result, p2, mouse, SnapType.Endpoint);
-    //        }
+                AddIfClose(result, p1, mouse, SnapType.Endpoint);
+                AddIfClose(result, p2, mouse, SnapType.Endpoint);
+            }
 
-    //        return result;
-    //    }
-    //    List<SnapResult> CheckMidpoint(PointF mouse)
-    //    {
-    //        var result = new List<SnapResult>();
+            return result;
+        }
+        List<SnapResult> CheckMidpoint(PointF mouse)
+        {
+            var result = new List<SnapResult>();
 
-    //        foreach (var line in dxfDoc.Entities.Lines)
-    //        {
-    //            var mid = new PointF(
-    //                (float)((line.StartPoint.X + line.EndPoint.X) / 2),
-    //                (float)((line.StartPoint.Y + line.EndPoint.Y) / 2));
+            foreach (var line in dxfDoc.Entities.Lines)
+            {
+                var mid = new PointF(
+                    (float)((line.StartPoint.X + line.EndPoint.X) / 2),
+                    (float)((line.StartPoint.Y + line.EndPoint.Y) / 2));
 
-    //            AddIfClose(result, mid, mouse, SnapType.Midpoint);
-    //        }
+                AddIfClose(result, mid, mouse, SnapType.Midpoint);
+            }
 
-    //        return result;
-    //    }
-    //    List<SnapResult> CheckCenter(PointF mouse)
-    //    {
-    //        var result = new List<SnapResult>();
+            return result;
+        }
+        List<SnapResult> CheckCenter(PointF mouse)
+        {
+            var result = new List<SnapResult>();
 
-    //        foreach (var circle in dxfDoc.Entities.Circles)
-    //        {
-    //            var center = new PointF(
-    //                (float)circle.Center.X,
-    //                (float)circle.Center.Y);
+            foreach (var circle in dxfDoc.Entities.Circles)
+            {
+                var center = new PointF(
+                    (float)circle.Center.X,
+                    (float)circle.Center.Y);
 
-    //            AddIfClose(result, center, mouse, SnapType.Center);
-    //        }
+                AddIfClose(result, center, mouse, SnapType.Center);
+            }
 
-    //        foreach (var arc in dxfDoc.Entities.Arcs)
-    //        {
-    //            var center = new PointF(
-    //                (float)arc.Center.X,
-    //                (float)arc.Center.Y);
+            foreach (var arc in dxfDoc.Entities.Arcs)
+            {
+                var center = new PointF(
+                    (float)arc.Center.X,
+                    (float)arc.Center.Y);
 
-    //            AddIfClose(result, center, mouse, SnapType.Center);
-    //        }
+                AddIfClose(result, center, mouse, SnapType.Center);
+            }
 
-    //        return result;
-    //    }
-    //    List<SnapResult> CheckIntersection(PointF mouse)
-    //    {
-    //        var result = new List<SnapResult>();
+            return result;
+        }
+        List<SnapResult> CheckIntersection(PointF mouse)
+        {
+            var result = new List<SnapResult>();
 
-    //        foreach (var ip in FindAllIntersections())
-    //            AddIfClose(result, ip, mouse, SnapType.Intersection);
+            foreach (var ip in FindAllIntersections())
+                AddIfClose(result, ip, mouse, SnapType.Intersection);
 
-    //        return result;
-    //    }
+            return result;
+        }
+        List<PointF> FindAllIntersections()
+        {
+            var result = new List<PointF>();
 
-    //    void AddIfClose(List<SnapResult> list, PointF p, PointF mouse, SnapType type)
-    //    {
-    //        double d = Distance(p, mouse);
+            var lines = dxfDoc.Entities.Lines.ToList();
+            var arcs = dxfDoc.Entities.Arcs.ToList();
 
-    //        if (d < ToleranceWorld)
-    //        {
-    //            list.Add(new SnapResult
-    //            {
-    //                Type = type,
-    //                Point = p,
-    //                Distance = d
-    //            });
-    //        }
-    //    }
-    //}
+            result.AddRange(LineLineIntersections(lines));
+            result.AddRange(LineArcIntersections(lines, arcs));
+            result.AddRange(ArcArcIntersections(arcs));
+
+            return result;
+        }
+        IEnumerable<PointF> LineLineIntersections(List<Line> lines)
+        {
+            var result = new List<PointF>();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                for (int j = i + 1; j < lines.Count; j++)
+                {
+                    PointF a1 = new((float)lines[i].StartPoint.X, (float)lines[i].StartPoint.Y);
+                    PointF a2 = new((float)lines[i].EndPoint.X, (float)lines[i].EndPoint.Y);
+
+                    PointF b1 = new((float)lines[j].StartPoint.X, (float)lines[j].StartPoint.Y);
+                    PointF b2 = new((float)lines[j].EndPoint.X, (float)lines[j].EndPoint.Y);
+
+                    if (TryLineIntersection(a1, a2, b1, b2, out var ip))
+                        result.Add(ip);
+                }
+            }
+
+            return result;
+        }
+        IEnumerable<PointF> LineArcIntersections(List<Line> lines, List<Arc> arcs)
+        {
+            var result = new List<PointF>();
+
+            foreach (var line in lines)
+            {
+                var p1 = new PointF((float)line.StartPoint.X, (float)line.StartPoint.Y);
+                var p2 = new PointF((float)line.EndPoint.X, (float)line.EndPoint.Y);
+
+                foreach (var arc in arcs)
+                {
+                    if (TryLineArcIntersection(p1, p2, arc, out var points))
+                        result.AddRange(points);
+                }
+            }
+
+            return result;
+        }
+        IEnumerable<PointF> ArcArcIntersections(List<Arc> arcs)
+        {
+            var result = new List<PointF>();
+
+            for (int i = 0; i < arcs.Count; i++)
+            {
+                for (int j = i + 1; j < arcs.Count; j++)
+                {
+                    if (TryArcArcIntersection(arcs[i], arcs[j], out var points))
+                        result.AddRange(points);
+                }
+            }
+
+            return result;
+        }
+        bool TryLineIntersection(PointF a1, PointF a2, PointF b1, PointF b2, out PointF p)
+        {
+            p = default;
+
+            float d = (a1.X - a2.X) * (b1.Y - b2.Y) -
+                      (a1.Y - a2.Y) * (b1.X - b2.X);
+
+            if (Math.Abs(d) < 0.0001f) return false;
+
+            float xi = ((b1.X - b2.X) * (a1.X * a2.Y - a1.Y * a2.X) -
+                        (a1.X - a2.X) * (b1.X * b2.Y - b1.Y * b2.X)) / d;
+
+            float yi = ((b1.Y - b2.Y) * (a1.X * a2.Y - a1.Y * a2.X) -
+                        (a1.Y - a2.Y) * (b1.X * b2.Y - b1.Y * b2.X)) / d;
+
+            p = new PointF(xi, yi);
+            return true;
+        }
+        bool TryLineArcIntersection(PointF p1, PointF p2, netDxf.Entities.Arc arc, out List<PointF> result)
+        {
+            result = new List<PointF>();
+
+            float cx = (float)arc.Center.X;
+            float cy = (float)arc.Center.Y;
+            float r = (float)arc.Radius;
+
+            float dx = p2.X - p1.X;
+            float dy = p2.Y - p1.Y;
+
+            float fx = p1.X - cx;
+            float fy = p1.Y - cy;
+
+            float a = dx * dx + dy * dy;
+            float b = 2 * (fx * dx + fy * dy);
+            float c = fx * fx + fy * fy - r * r;
+
+            float discriminant = b * b - 4 * a * c;
+
+            if (discriminant < 0)
+                return false;
+
+            discriminant = (float)Math.Sqrt(discriminant);
+
+            float t1 = (-b - discriminant) / (2 * a);
+            float t2 = (-b + discriminant) / (2 * a);
+
+            if (t1 >= 0 && t1 <= 1)
+            {
+                var p = new PointF(p1.X + t1 * dx, p1.Y + t1 * dy);
+                if (PointOnArc(p, arc))
+                    result.Add(p);
+            }
+
+            if (t2 >= 0 && t2 <= 1)
+            {
+                var p = new PointF(p1.X + t2 * dx, p1.Y + t2 * dy);
+                if (PointOnArc(p, arc))
+                    result.Add(p);
+            }
+
+            return result.Count > 0;
+        }
+        bool TryArcArcIntersection(Arc a1, Arc a2, out List<PointF> result)
+        {
+            result = new List<PointF>();
+
+            float x0 = (float)a1.Center.X;
+            float y0 = (float)a1.Center.Y;
+            float r0 = (float)a1.Radius;
+
+            float x1 = (float)a2.Center.X;
+            float y1 = (float)a2.Center.Y;
+            float r1 = (float)a2.Radius;
+
+            float dx = x1 - x0;
+            float dy = y1 - y0;
+            float d = (float)Math.Sqrt(dx * dx + dy * dy);
+
+            if (d > r0 + r1) return false;          // ayrı
+            if (d < Math.Abs(r0 - r1)) return false; // biri diğerinin içinde
+            if (d == 0 && r0 == r1) return false;    // sonsuz kesişim
+
+            float a = (r0 * r0 - r1 * r1 + d * d) / (2 * d);
+            float h = (float)Math.Sqrt(r0 * r0 - a * a);
+
+            float xm = x0 + a * dx / d;
+            float ym = y0 + a * dy / d;
+
+            float xs1 = xm + h * dy / d;
+            float ys1 = ym - h * dx / d;
+
+            float xs2 = xm - h * dy / d;
+            float ys2 = ym + h * dx / d;
+
+            var p1 = new PointF(xs1, ys1);
+            var p2 = new PointF(xs2, ys2);
+
+            if (PointOnArc(p1, a1) && PointOnArc(p1, a2))
+                result.Add(p1);
+
+            if (PointOnArc(p2, a1) && PointOnArc(p2, a2))
+                result.Add(p2);
+
+            return result.Count > 0;
+        }
+        bool PointOnArc(PointF p, netDxf.Entities.Arc arc)
+        {
+            double angle = Math.Atan2(
+                p.Y - arc.Center.Y,
+                p.X - arc.Center.X) * 180 / Math.PI;
+
+            if (angle < 0)
+                angle += 360;
+
+            double start = arc.StartAngle;
+            double end = arc.EndAngle;
+
+            if (start < end)
+                return angle >= start && angle <= end;
+
+            return angle >= start || angle <= end;
+        }
+        void AddIfClose(List<SnapResult> list, PointF p, PointF mouse, SnapType type)
+        {
+            double d = Distance(p, mouse);
+
+            if (d < ToleranceWorld)
+            {
+                list.Add(new SnapResult
+                {
+                    Type = type,
+                    Point = p,
+                    Distance = d
+                });
+            }
+        }
+        float Distance(PointF p1, PointF p2)
+        {
+            float dx = p1.X - p2.X;
+            float dy = p1.Y - p2.Y;
+            return (float)Math.Sqrt(dx * dx + dy * dy);
+        }
+    }
 }
