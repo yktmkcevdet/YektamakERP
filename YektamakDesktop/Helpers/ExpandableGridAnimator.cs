@@ -212,7 +212,7 @@ public class ExpandableGridAnimator
         };
 
         // Yuvarlak köşe
-        panel.Region = System.Drawing.Region.FromHrgn(
+        panel.Region = Region.FromHrgn(
             CreateRoundRectRgn(0, 0, panel.Width, panel.Height, 12, 12));
 
         // SubGrid
@@ -222,10 +222,10 @@ public class ExpandableGridAnimator
             ReadOnly = true,
             RowHeadersVisible = false,
             AllowUserToAddRows = false,
-            BackgroundColor = Color.White,
+            BackgroundColor = Color.AliceBlue,
             BorderStyle = BorderStyle.None,
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-            ScrollBars = ScrollBars.None
+            ScrollBars = ScrollBars.Vertical
         };
 
         sub.Columns.Add("Grup", "Grup");
@@ -243,7 +243,7 @@ public class ExpandableGridAnimator
         }
 
         // Panel yüksekliği
-        panel.Height = sub.Rows.Count * 35 + 25;
+        panel.Height = sub.Rows.Count * 25 + 25;
         exp.ExpandedHeight = panel.Height;
 
         panel.Controls.Add(sub);

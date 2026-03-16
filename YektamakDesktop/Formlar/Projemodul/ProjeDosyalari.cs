@@ -178,9 +178,10 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (projeStokKartFilter.proje.Id == null || projeStokKartFilter.proje.Id == -1) return;
             this.Enabled = false;
 
-            List<ProjeStokKart> projeStokKarts = (await _projeService.GetProjeStokKart(projeStokKartFilter)).Where(p=>p.stokKart.isFromExcel==true).ToList();
+            List<ProjeStokKart> projeStokKarts = (await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } })).Where(p=>p.stokKart.isFromExcel==true).ToList();
             projeStokKartDTOs = projeStokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).ToList();
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
+            await GridYenile();
             this.Enabled = true;
         }
         private async Task GridYenile()
@@ -263,13 +264,14 @@ namespace YektamakDesktop.Formlar.ProjeModul
             chkStep.DataBindings["CheckState"].WriteValue();
             await GridYenile();
         }
-        private void roundedButton4_Click(object sender, EventArgs e)
+        private async void roundedButton4_Click(object sender, EventArgs e)
         {
             bool result = true;
             var talepList = universalGrid1.GetCheckedRows<ProjeStokKartDTO>();
             Proje proje = new Proje { Id = int.TryParse(fcbProjeKod.SelectedValue.ToString(), out int projeId) ? projeId : null };
             MalzemeGrup malzemeGrup = new MalzemeGrup { Id = int.TryParse(fcbMalzemeGrup.SelectedValue?.ToString(), out int malzemeGrupId) ? malzemeGrupId : null };
             if (result) _satinalmaTalepHelper.CreateSatinalmaTalep(talepList, proje, malzemeGrup);
+            await GridDoldur();
         }
         private void stokKartınıGörüntüleToolStripMenuItem_Click(object sender, EventArgs e)
         {

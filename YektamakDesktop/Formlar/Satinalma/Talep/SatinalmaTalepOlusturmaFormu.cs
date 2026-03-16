@@ -131,7 +131,6 @@ namespace YektamakDesktop.Formlar.Satinalma
                     TalepOnaylandi?.Invoke(this, _convertHelper.ToDTO<SatinalmaTalepDTO>(satinalmaTalep));
                 }
             }
-            //await HandleSaveResult(jsonResult);
         }
         private void fcbProjeKod_SelectedIndexChanged(object sender, EventArgs e)
         {
