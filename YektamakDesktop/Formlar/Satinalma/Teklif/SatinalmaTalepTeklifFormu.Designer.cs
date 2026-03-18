@@ -35,13 +35,9 @@ namespace YektamakDesktop.Formlar.Satinalma
             headerPanel1 = new HeaderPanel();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             btnTeklif = new RoundedIconButton();
-            ctxBeginTeslimTarihi = new CustomTextBoxTarih();
-            ctxEndTeslimTarihi = new CustomTextBoxTarih();
             contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(components);
             parçaListesiniGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             stokKartınıGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ctbBeginTalepTarihi = new CustomTextBoxTarih();
-            ctbEndTalepTarihi = new CustomTextBoxTarih();
             panel1 = new System.Windows.Forms.Panel();
             universalGrid1 = new UniversalGrid();
             label1 = new System.Windows.Forms.Label();
@@ -105,30 +101,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             btnTeklif.UseVisualStyleBackColor = false;
             btnTeklif.Click += btnTeklif_Click;
             // 
-            // ctxBeginTeslimTarihi
-            // 
-            ctxBeginTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxBeginTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctxBeginTeslimTarihi.Location = new System.Drawing.Point(776, 315);
-            ctxBeginTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
-            ctxBeginTeslimTarihi.Name = "ctxBeginTeslimTarihi";
-            ctxBeginTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctxBeginTeslimTarihi.Size = new System.Drawing.Size(145, 32);
-            ctxBeginTeslimTarihi.TabIndex = 9;
-            ctxBeginTeslimTarihi.Visible = false;
-            // 
-            // ctxEndTeslimTarihi
-            // 
-            ctxEndTeslimTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctxEndTeslimTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctxEndTeslimTarihi.Location = new System.Drawing.Point(923, 315);
-            ctxEndTeslimTarihi.Margin = new System.Windows.Forms.Padding(1);
-            ctxEndTeslimTarihi.Name = "ctxEndTeslimTarihi";
-            ctxEndTeslimTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctxEndTeslimTarihi.Size = new System.Drawing.Size(145, 32);
-            ctxEndTeslimTarihi.TabIndex = 10;
-            ctxEndTeslimTarihi.Visible = false;
-            // 
             // contextMenuStrip2
             // 
             contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { parçaListesiniGösterToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem });
@@ -148,30 +120,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             stokKartınıGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             stokKartınıGörüntüleToolStripMenuItem.Text = "Stok Kartını Görüntüle";
             stokKartınıGörüntüleToolStripMenuItem.Click += stokKartınıGörüntüleToolStripMenuItem_Click;
-            // 
-            // ctbBeginTalepTarihi
-            // 
-            ctbBeginTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbBeginTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbBeginTalepTarihi.Location = new System.Drawing.Point(776, 283);
-            ctbBeginTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
-            ctbBeginTalepTarihi.Name = "ctbBeginTalepTarihi";
-            ctbBeginTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctbBeginTalepTarihi.Size = new System.Drawing.Size(145, 32);
-            ctbBeginTalepTarihi.TabIndex = 12;
-            ctbBeginTalepTarihi.Visible = false;
-            // 
-            // ctbEndTalepTarihi
-            // 
-            ctbEndTalepTarihi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ctbEndTalepTarihi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            ctbEndTalepTarihi.Location = new System.Drawing.Point(923, 283);
-            ctbEndTalepTarihi.Margin = new System.Windows.Forms.Padding(1);
-            ctbEndTalepTarihi.Name = "ctbEndTalepTarihi";
-            ctbEndTalepTarihi.Padding = new System.Windows.Forms.Padding(1);
-            ctbEndTalepTarihi.Size = new System.Drawing.Size(145, 32);
-            ctbEndTalepTarihi.TabIndex = 13;
-            ctbEndTalepTarihi.Visible = false;
             // 
             // panel1
             // 
@@ -277,7 +225,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             isTeklif.TabIndex = 24;
             isTeklif.Text = "Teklif İstenenleri Göster";
             isTeklif.UseVisualStyleBackColor = true;
-            
             // 
             // fccMalzemeAltGrupId
             // 
@@ -307,7 +254,7 @@ namespace YektamakDesktop.Formlar.Satinalma
             dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.Location = new System.Drawing.Point(719, 55);
             dgv.Name = "dgv";
-            dgv.Size = new System.Drawing.Size(371, 224);
+            dgv.Size = new System.Drawing.Size(371, 300);
             dgv.TabIndex = 27;
             // 
             // chkBukum
@@ -364,10 +311,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Controls.Add(label1);
             Controls.Add(universalGrid1);
             Controls.Add(panel1);
-            Controls.Add(ctbEndTalepTarihi);
-            Controls.Add(ctbBeginTalepTarihi);
-            Controls.Add(ctxEndTeslimTarihi);
-            Controls.Add(ctxBeginTeslimTarihi);
             Controls.Add(btnTeklif);
             Controls.Add(headerPanel1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -385,12 +328,8 @@ namespace YektamakDesktop.Formlar.Satinalma
         public CustomControls.HeaderPanel headerPanel1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private CustomControls.RoundedIconButton btnTeklif;
-        private CustomControls.CustomTextBoxTarih ctxBeginTeslimTarihi;
-        private CustomControls.CustomTextBoxTarih ctxEndTeslimTarihi;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem parçaListesiniGösterToolStripMenuItem;
-        private CustomControls.CustomTextBoxTarih ctbBeginTalepTarihi;
-        private CustomControls.CustomTextBoxTarih ctbEndTalepTarihi;
         private System.Windows.Forms.Panel panel1;
         private CustomControls.UniversalGrid universalGrid1;
         private System.Windows.Forms.Label label1;

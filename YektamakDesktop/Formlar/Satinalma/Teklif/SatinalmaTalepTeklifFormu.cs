@@ -35,7 +35,7 @@ namespace YektamakDesktop.Formlar.Satinalma
         private readonly IProjeService _projeService;
         private readonly IFileService _fileService;
         private readonly IDosyalamaService _dosyalamaService;
-        private ExpandableGridAnimator mgr;
+        private ExpandableGridAnimator<SatinalmaTalepForProje, SatinalmaTalepForGrup> mgr;
         public SatinalmaTalepTeklifFormu(IConvertHelper convertHelper, ISatinalmaTalepService satinalmaService, IConfigurationService configurationService,
             ICache cache, IAnaVeriService anaVeriService, IStokService stokService, IProjeService projeService, IFileService fileService, IDosyalamaService dosyalamaService)
         {
@@ -52,10 +52,6 @@ namespace YektamakDesktop.Formlar.Satinalma
             Initialize();
             isTeklif.CheckStateChanged += async (s, e) => await isTeklif_CheckedChanged(s, e);
             Load += async (s, e) => await SatinalmaTalepTeklifFormu_Load(s, e);
-            ctbBeginTalepTarihi.textBox.PlaceholderText = "Başlangıç Talep Tarihi";
-            ctbEndTalepTarihi.textBox.PlaceholderText = "Bitiş Talep Tarihi";
-            ctxBeginTeslimTarihi.textBox.PlaceholderText = "Başlangıç Teslim Tarihi";
-            ctxEndTeslimTarihi.textBox.PlaceholderText = "Bitiş Teslim Tarihi";
             fcbBoyut.PlaceholderText = "Boyut Seçimleri...";
             clbStokGrupId.SetDataSource(_cache.stokGrups);
             clbMalzemeGrupId.SetDataSource(_cache.malzemeGrups);
@@ -143,7 +139,7 @@ namespace YektamakDesktop.Formlar.Satinalma
 
         private void GrupGridDoldur()
         {
-            mgr = new ExpandableGridAnimator(dgv);
+            mgr = new ExpandableGridAnimator<SatinalmaTalepForProje,SatinalmaTalepForGrup>(dgv);
             var grupList = GetData();
 
             foreach (var grup in grupList)
@@ -159,7 +155,7 @@ namespace YektamakDesktop.Formlar.Satinalma
                     Filtrele = (e) => FiltreGrid(detayList[(int)e].projeId, detayList[(int)e].malzemeGrupId)
                 };
 
-                int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde());
+                int rowIndex = dgv.Rows.Add(grup.projeKod, grup.satirSayisi, grup.teklifSayisi, grup.yuzde);
 
                 mgr.BindRow(dgv.Rows[rowIndex], gorunumModel);
             }
@@ -675,21 +671,18 @@ namespace YektamakDesktop.Formlar.Satinalma
         public int satirSayisi { get; set; }
         public int teklifSayisi { get; set; }
         
-        public decimal yuzde ()=> teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2);
+        public decimal yuzde { get { return teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2); } }
     }
 
     public class SatinalmaTalepForGrup
     {
         public int? projeId { get; set; }
-        public string projeKod { get; set; }
         public List<SatinalmaTalepForGrup> Details { get; set; }
-        public DataGridView DetailGrid { get; set; }
-        public bool IsExpanded { get; set; }
         public string Grup { get; set; }
         public int? malzemeGrupId { get; set; }
         public int satirSayisi { get; set; }
         public int teklifSayisi { get; set; }
-        public decimal yuzde ()=> teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2);
+        public decimal yuzde { get { return teklifSayisi == 0 ? 0 : Math.Round(((decimal)teklifSayisi / satirSayisi) * 100, 2); } }
         public Action<int> Filtrele { get; set; }
     }
     public class Filter : SatinalmaTalepDetayDTO

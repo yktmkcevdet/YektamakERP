@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using YektamakDesktop.Formlar.Satinalma;
 
-public class ExpandableGridAnimator
+public class ExpandableGridAnimator<T, U> where T : class where U : class
 {
     private readonly DataGridView dgv;
     private readonly List<ExpandInfo> expandList = new();
@@ -18,13 +19,18 @@ public class ExpandableGridAnimator
     public ExpandableGridAnimator(DataGridView grid)
     {
         dgv = grid;
+        dgv.ScrollBars = ScrollBars.Vertical;
         dgv.Columns.Clear();
-        dgv.Columns.Add(nameof(SatinalmaTalepForProje.projeKod), "Proje");
-        dgv.Columns.Add(nameof(SatinalmaTalepForProje.satirSayisi), "Talep");
-        dgv.Columns.Add(nameof(SatinalmaTalepForProje.teklifSayisi), "Teklif");
-        dgv.Columns.Add(nameof(SatinalmaTalepForProje.yuzde), "%");
-        dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-        dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Format = "N2";
+        foreach (var item in typeof(T).GetProperties())
+        {
+            dgv.Columns.Add(item.Name, item.Name);
+        }
+        //dgv.Columns.Add(nameof(SatinalmaTalepForProje.projeKod), "Proje");
+        //dgv.Columns.Add(nameof(SatinalmaTalepForProje.satirSayisi), "Talep");
+        //dgv.Columns.Add(nameof(SatinalmaTalepForProje.teklifSayisi), "Teklif");
+        //dgv.Columns.Add(nameof(SatinalmaTalepForProje.yuzde), "%");
+        //dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        //dgv.Columns[nameof(SatinalmaTalepForProje.yuzde)].DefaultCellStyle.Format = "N2";
 
         dgv.Scroll += (s, e) => RepositionAll();
         dgv.SizeChanged += (s, e) => RepositionAll();
@@ -191,7 +197,7 @@ public class ExpandableGridAnimator
     // ---------------- PANEL OLUŞTURMA -----------------
     private void BuildPanel(ExpandInfo exp)
     {
-        var info = (SatinalmaTalepForGrup)exp.Tag;
+        var info = (U)exp.Tag;
         exp.Row.DefaultCellStyle.Alignment=DataGridViewContentAlignment.TopLeft;
         // Modern tema: yuvarlak kenarlı mavi gölgeli panel
         var panel = new Panel
@@ -206,14 +212,14 @@ public class ExpandableGridAnimator
         // Mavi gölge efekti
         panel.Paint += (s, e) =>
         {
-            using var shadow = new SolidBrush(Color.FromArgb(40, 0, 120, 215));
+            using var shadow = new SolidBrush(Color.FromArgb(40, 0, 255, 215));
             var rect = new Rectangle(0, 0, panel.Width - 1, panel.Height - 1);
             e.Graphics.FillRectangle(shadow, rect);
         };
 
         // Yuvarlak köşe
         panel.Region = Region.FromHrgn(
-            CreateRoundRectRgn(0, 0, panel.Width, panel.Height, 12, 12));
+            NativeMethods.CreateRoundRectRgn(0, 0, panel.Width, panel.Height+40, 12, 12));
 
         // SubGrid
         var sub = new DataGridView
@@ -226,20 +232,34 @@ public class ExpandableGridAnimator
             BorderStyle = BorderStyle.None,
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
             ScrollBars = ScrollBars.Vertical
+            
         };
-
-        sub.Columns.Add("Grup", "Grup");
-        sub.Columns.Add("Talep", "Talep");
-        sub.Columns.Add("Teklif", "Teklif");
-        sub.Columns.Add("Yuzde", "%");
+        foreach (var item in typeof(U).GetProperties())
+        {
+            sub.Columns.Add(item.Name, item.Name);
+        }
+        //sub.Columns.Add("Grup", "Grup");
+        //sub.Columns.Add("Talep", "Talep");
+        //sub.Columns.Add("Teklif", "Teklif");
+        //sub.Columns.Add("Yuzde", "%");
         sub.CellDoubleClick += (s, e) =>
         {
-            info.Filtrele(e.RowIndex);
+            MethodInfo methodInfo = typeof(U).GetMethod("Filtrele");
+            if (methodInfo == null)
+            {
+                return;
+            }
+            object[] prm = { e.RowIndex };
+            methodInfo.Invoke(info, prm);
+            //info.Filtrele(e.RowIndex);
         };
+        var prop = info.GetType().GetProperty("Details");
+        var value = prop.GetValue(info);
 
-        foreach (var d in info.Details)
+        List<U> list = (List<U>)value;
+        foreach (var d in list)
         {
-            sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
+            //sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
         }
 
         // Panel yüksekliği
@@ -367,9 +387,12 @@ public class ExpandableGridAnimator
     {
         return expandList.FirstOrDefault(x => x.Row == row);
     }
+}
+public static class NativeMethods
+{
     // WinAPI - yuvarlak panel
     [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-    private static extern IntPtr CreateRoundRectRgn
+    public static extern IntPtr CreateRoundRectRgn
     (
         int nLeftRect, int nTopRect, int nRightRect,
         int nBottomRect, int nWidthEllipse, int nHeightEllipse

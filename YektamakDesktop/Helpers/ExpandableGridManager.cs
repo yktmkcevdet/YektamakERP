@@ -87,7 +87,7 @@ public class ExpandableGridManager
         sub.Columns.Add("Yuzde", "%");
 
         foreach (var d in info.Details)
-            sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
+            sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde);
 
         // Yükseklik hesapla
         panel.Height = sub.Rows.Count * 24 + 25;
