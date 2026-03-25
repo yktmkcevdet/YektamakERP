@@ -197,7 +197,7 @@ public class ExpandableGridAnimator<T, U> where T : class where U : class
     // ---------------- PANEL OLUŞTURMA -----------------
     private void BuildPanel(ExpandInfo exp)
     {
-        var info = (U)exp.Tag;
+        var info = (SatinalmaTalepForGrup)exp.Tag;
         exp.Row.DefaultCellStyle.Alignment=DataGridViewContentAlignment.TopLeft;
         // Modern tema: yuvarlak kenarlı mavi gölgeli panel
         var panel = new Panel
@@ -234,32 +234,32 @@ public class ExpandableGridAnimator<T, U> where T : class where U : class
             ScrollBars = ScrollBars.Vertical
             
         };
-        foreach (var item in typeof(U).GetProperties())
-        {
-            sub.Columns.Add(item.Name, item.Name);
-        }
-        //sub.Columns.Add("Grup", "Grup");
-        //sub.Columns.Add("Talep", "Talep");
-        //sub.Columns.Add("Teklif", "Teklif");
-        //sub.Columns.Add("Yuzde", "%");
+        //foreach (var item in typeof(U).GetProperties())
+        //{
+        //    sub.Columns.Add(item.Name, item.Name);
+        //}
+        sub.Columns.Add("Grup", "Grup");
+        sub.Columns.Add("Talep", "Talep");
+        sub.Columns.Add("Teklif", "Teklif");
+        sub.Columns.Add("Yuzde", "%");
         sub.CellDoubleClick += (s, e) =>
         {
-            MethodInfo methodInfo = typeof(U).GetMethod("Filtrele");
-            if (methodInfo == null)
-            {
-                return;
-            }
-            object[] prm = { e.RowIndex };
-            methodInfo.Invoke(info, prm);
-            //info.Filtrele(e.RowIndex);
+            //MethodInfo methodInfo = typeof(U).GetMethod("Filtrele");
+            //if (methodInfo == null)
+            //{
+            //    return;
+            //}
+            //object[] prm = { e.RowIndex };
+            //methodInfo.Invoke(info, prm);
+            info.Filtrele(e.RowIndex);
         };
         var prop = info.GetType().GetProperty("Details");
         var value = prop.GetValue(info);
 
         List<U> list = (List<U>)value;
-        foreach (var d in list)
+        foreach (var d in info.Details)
         {
-            //sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde());
+            sub.Rows.Add(d.Grup, d.satirSayisi, d.teklifSayisi, d.yuzde);
         }
 
         // Panel yüksekliği
