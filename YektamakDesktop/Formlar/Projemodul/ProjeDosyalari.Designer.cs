@@ -63,6 +63,8 @@ namespace YektamakDesktop.Formlar.ProjeModul
             universalGrid1 = new UniversalGrid();
             ctbParcaKod = new CustomTextBox();
             ctbParcaAd = new CustomTextBox();
+            chkIsTalasli = new CheckBox();
+            eToolStripMenuItem = new ToolStripMenuItem();
             panelFooter.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -250,9 +252,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { seçiliKalemlerİçinSaToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem, seçilenKayıtlarıSilToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { seçiliKalemlerİçinSaToolStripMenuItem, stokKartınıGörüntüleToolStripMenuItem, seçilenKayıtlarıSilToolStripMenuItem, eToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(303, 70);
+            contextMenuStrip1.Size = new Size(303, 114);
             // 
             // seçiliKalemlerİçinSaToolStripMenuItem
             // 
@@ -444,12 +446,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             // ctbParcaKod
             // 
-            ctbParcaKod.BackColor = SystemColors.Window;
+            ctbParcaKod.BackColor = Color.White;
             ctbParcaKod.BorderColor = Color.Silver;
             ctbParcaKod.BorderFocusColor = Color.HotPink;
             ctbParcaKod.BorderSize = 1;
             ctbParcaKod.Font = new Font("Segoe UI", 8F);
-            ctbParcaKod.ForeColor = Color.DimGray;
+            ctbParcaKod.ForeColor = Color.Black;
             ctbParcaKod.Location = new Point(376, 116);
             ctbParcaKod.Margin = new Padding(1);
             ctbParcaKod.Multiline = false;
@@ -468,12 +470,12 @@ namespace YektamakDesktop.Formlar.ProjeModul
             // 
             // ctbParcaAd
             // 
-            ctbParcaAd.BackColor = SystemColors.Window;
+            ctbParcaAd.BackColor = Color.White;
             ctbParcaAd.BorderColor = Color.Silver;
             ctbParcaAd.BorderFocusColor = Color.HotPink;
             ctbParcaAd.BorderSize = 1;
             ctbParcaAd.Font = new Font("Segoe UI", 8F);
-            ctbParcaAd.ForeColor = Color.DimGray;
+            ctbParcaAd.ForeColor = Color.Black;
             ctbParcaAd.Location = new Point(376, 143);
             ctbParcaAd.Margin = new Padding(1);
             ctbParcaAd.Multiline = false;
@@ -490,11 +492,33 @@ namespace YektamakDesktop.Formlar.ProjeModul
             ctbParcaAd.TextCustom = "";
             ctbParcaAd.UnderlinedStyle = false;
             // 
+            // chkIsTalasli
+            // 
+            chkIsTalasli.AutoSize = true;
+            chkIsTalasli.Checked = true;
+            chkIsTalasli.CheckState = CheckState.Indeterminate;
+            chkIsTalasli.Location = new Point(652, 118);
+            chkIsTalasli.Name = "chkIsTalasli";
+            chkIsTalasli.Size = new Size(57, 17);
+            chkIsTalasli.TabIndex = 139;
+            chkIsTalasli.Text = "Talaşlı";
+            chkIsTalasli.ThreeState = true;
+            chkIsTalasli.UseVisualStyleBackColor = true;
+            // 
+            // eToolStripMenuItem
+            // 
+            eToolStripMenuItem.Image = Properties.Resources.fromExcelButton;
+            eToolStripMenuItem.Name = "eToolStripMenuItem";
+            eToolStripMenuItem.Size = new Size(302, 22);
+            eToolStripMenuItem.Text = "Excel'e Aktar";
+            eToolStripMenuItem.Click += eToolStripMenuItem_Click;
+            // 
             // ProjeDosyalari
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1103, 699);
+            Controls.Add(chkIsTalasli);
             Controls.Add(ctbParcaAd);
             Controls.Add(ctbParcaKod);
             Controls.Add(universalGrid1);
@@ -568,5 +592,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private RoundedButton roundedButton2;
         private CustomTextBox ctbParcaKod;
         private CustomTextBox ctbParcaAd;
+        private CheckBox chkIsTalasli;
+        private ToolStripMenuItem eToolStripMenuItem;
     }
 }

@@ -30,6 +30,7 @@ namespace Utilities
             services.AddSingleton<IConvertHelper, ConvertHelper>();
             services.AddSingleton<IFileHelper, FileHelper>();
             services.AddSingleton<IMailService, MailService>();
+            services.AddSingleton<IGridExporter, GridExporter>();
             return services;
         }
     }

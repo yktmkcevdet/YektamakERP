@@ -13,8 +13,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Utilities.Implementations;
 using Utilities.Interfaces;
@@ -33,8 +35,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly IConvertHelper _convertHelper;
         private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
         private readonly IDosyalamaService _dosyalamaService;
+        private readonly IGridExporter _gridExporter;
         public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper,
-            ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService)
+            ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService, IGridExporter gridExporter)
         {
             _cache = cache;
             _projeService = projeService;
@@ -42,6 +45,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _convertHelper = convertHelper;
             _satinalmaTalepHelper = satinalmaTalepHelper;
             _dosyalamaService = dosyalamaService;
+            _gridExporter = gridExporter;
             InitializeComponent();
             Initialize();
         }
@@ -72,6 +76,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             chkDxf.CheckStateChanged += async (s, e) => await chkDxf_CheckedChanged(s, e);
             chkStep.CheckStateChanged += async (s, e) => await chkStep_CheckedChanged(s, e);
             chkSatinalma.CheckStateChanged += async (s, e) => await chkSatinalma_CheckedChanged(s, e);
+            chkIsTalasli.CheckStateChanged += async (s, e) => await chkIsTalasli_CheckedChanged(s, e);
             FormClosing += async (s, e) => await ProjeDosyalari_FormClosing(s, e);
             seçilenKayıtlarıSilToolStripMenuItem.Click += async (s, e) => await seçilenKayıtlarıSilToolStripMenuItem_Click(s, e);
             universalGrid1.Grid.CellMouseEnter += Grid_CellMouseEnter;
@@ -168,6 +173,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             BindHelper.BindData(chkDxf, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isDxf));
             BindHelper.BindData(chkStep, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isStep));
             BindHelper.BindData(chkSatinalma, projeStokKartFilter, nameof(projeStokKartFilter.isSatinalma));
+            BindHelper.BindData(chkIsTalasli, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.isTalasli));
             BindHelper.BindData(ctbParcaKod, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.kod));
             BindHelper.BindData(ctbParcaAd, projeStokKartFilter.stokKart, nameof(projeStokKartFilter.stokKart.ad));
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
@@ -178,7 +184,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             if (projeStokKartFilter.proje.Id == null || projeStokKartFilter.proje.Id == -1) return;
             this.Enabled = false;
 
-            List<ProjeStokKart> projeStokKarts = (await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } })).Where(p=>p.stokKart.isFromExcel==true).ToList();
+            List<ProjeStokKart> projeStokKarts = (await _projeService.GetProjeStokKart(new ProjeStokKart { proje = new Proje { Id = int.Parse(fcbProjeKod.SelectedValue.ToString()) } })).Where(p => p.stokKart.isFromExcel == true).ToList();
             projeStokKartDTOs = projeStokKarts.CastToDTO<ProjeStokKartDTO>(_convertHelper).ToList();
             await universalGrid1.SetData(projeStokKartDTOs, this.Name, true);
             await GridYenile();
@@ -240,6 +246,11 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private async Task chkSatinalma_CheckedChanged(object sender, EventArgs e)
         {
             chkSatinalma.DataBindings["CheckState"].WriteValue();
+            await GridYenile();
+        }
+        private async Task chkIsTalasli_CheckedChanged(object sender, EventArgs e)
+        {
+            chkIsTalasli.DataBindings["CheckState"].WriteValue();
             await GridYenile();
         }
         private async Task chkPdf_CheckStateChanged(object sender, EventArgs e)
@@ -723,6 +734,20 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private void ProjeDosyalari_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void eToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedColumns = universalGrid1.Grid.Columns;
+            var columns = new Dictionary<string, string>();
+            foreach (DataGridViewColumn column in selectedColumns)
+            {
+                if (column.Visible)
+                {
+                    columns.Add(column.DataPropertyName,column.Name);
+                }
+            }
+            _gridExporter.ExportToExcel(((SortableBindingList<ProjeStokKartDTO>)universalGrid1.Grid.DataSource).ToList(), columns);
         }
     }
 }
