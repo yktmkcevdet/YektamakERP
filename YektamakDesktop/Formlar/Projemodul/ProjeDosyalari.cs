@@ -36,8 +36,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
         private readonly ISatinalmaTalepHelper _satinalmaTalepHelper;
         private readonly IDosyalamaService _dosyalamaService;
         private readonly IGridExporter _gridExporter;
+        private readonly object _args;
         public ProjeDosyalari(ICache cache, IProjeService projeService, IFileService fileService, IConvertHelper convertHelper,
-            ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService, IGridExporter gridExporter)
+            ISatinalmaTalepHelper satinalmaTalepHelper, IDosyalamaService dosyalamaService, IGridExporter gridExporter, object args=null)
         {
             _cache = cache;
             _projeService = projeService;
@@ -46,6 +47,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
             _satinalmaTalepHelper = satinalmaTalepHelper;
             _dosyalamaService = dosyalamaService;
             _gridExporter = gridExporter;
+            _args = args;
             InitializeComponent();
             Initialize();
         }
@@ -159,6 +161,7 @@ namespace YektamakDesktop.Formlar.ProjeModul
         {
             fcbProjeKod.SetDataSource(_cache.projeList.Where(x => x.sorumluList.Where(s => s.personel.Id == _cache.kullanici.personel.Id).Count() > 0).ToList());
             fcbStokGrup.SetDataSource(_cache.stokGrups);
+            projeStokKartFilter.proje.Id = _args != null && int.TryParse(_args.ToString(), out int projeId) ? projeId : null;
             await Binding();
             chkSatinalma.Checked = false;
         }
@@ -738,9 +741,9 @@ namespace YektamakDesktop.Formlar.ProjeModul
 
         private void eToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var selectedColumns = universalGrid1.Grid.Columns;
+            var selectedColumns = universalGrid1.Columns;
             var columns = new Dictionary<string, string>();
-            foreach (DataGridViewColumn column in selectedColumns)
+            foreach (DataGridViewColumn column in selectedColumns.OrderBy(c=>c.DisplayIndex))
             {
                 if (column.Visible)
                 {
@@ -751,4 +754,3 @@ namespace YektamakDesktop.Formlar.ProjeModul
         }
     }
 }
-   

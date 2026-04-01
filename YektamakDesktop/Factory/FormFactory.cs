@@ -9,14 +9,28 @@ namespace YektamakDesktop
 {
     public static class FormFactory
     {
-        public static Form CreateFormByType(Type formType)
+        public static Form CreateFormByType(Type formType, object args=null)
         {
-            Form form = (Form)DIContainer.serviceProvider.GetService(formType);
+            Form form;
+
+            if (args == null)
+            {
+                form = (Form)DIContainer.serviceProvider.GetService(formType);
+            }
+            else
+            {
+                form = (Form)ActivatorUtilities.CreateInstance(
+                    DIContainer.serviceProvider,
+                    formType,
+                    args
+                );
+            }
+
             SetupFormDefaults(form);
             return form;
         }
 
-        public static Form CreateFormByName(string formTypeName)
+        public static Form CreateFormByName(string formTypeName, object args=null)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var asm in assemblies)
@@ -26,7 +40,7 @@ namespace YektamakDesktop
                     typeof(Form).IsAssignableFrom(t));
 
                 if (type != null)
-                    return CreateFormByType(type);
+                    return CreateFormByType(type,args);
             }
 
              throw new InvalidOperationException($"Form tipi bulunamadı: {formTypeName}");

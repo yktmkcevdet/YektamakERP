@@ -29,6 +29,7 @@ namespace YektamakDesktop.CustomControls
         private readonly ConcurrentDictionary<Type, IEnumerable<PropertyAttributePair>> _propertyCache = new();
         private HashSet<string> allowedFields;
         private bool _isCheck = false;
+        public List<DataGridViewColumn> Columns { get; private set; }
         public sealed record PropertyAttributePair(
             PropertyInfo Property,
             GridDisplayAttribute Attribute
@@ -241,8 +242,8 @@ namespace YektamakDesktop.CustomControls
         }
         private async Task LoadSettings<T>(string key, bool isCheck)
         {
-            var columns = await ConfigureColumns<T>(key, isCheck);
-            await DIContainer.GetService<GridSettingsManager>().Load(_cache.kullanici.Id, key, columns, dataGridView1);
+            Columns = await ConfigureColumns<T>(key, isCheck);
+            await DIContainer.GetService<GridSettingsManager>().Load(_cache.kullanici.Id, key, Columns, dataGridView1);
         }
         public async Task SaveGridSettings() => await DIContainer.GetService<GridSettingsManager>().Save(_cache.kullanici.Id, _formName, dataGridView1);
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

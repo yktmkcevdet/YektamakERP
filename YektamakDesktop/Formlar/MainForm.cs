@@ -332,7 +332,7 @@ namespace YektamakDesktop.Formlar
                 }
             }
             
-            var form = FormFactory.CreateFormByName(item.formAd);
+            var form = FormFactory.CreateFormByName(item.formAd, item.args);
             var field = form.GetType()
                 .GetField("headerPanel1",
                           BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
@@ -349,6 +349,7 @@ namespace YektamakDesktop.Formlar
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
+            
             
             tabPage.Controls.Add(form);
             tabMain.TabPages.Add(tabPage);

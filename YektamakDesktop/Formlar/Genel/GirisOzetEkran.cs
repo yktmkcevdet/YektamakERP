@@ -81,7 +81,7 @@ namespace YektamakDesktop.Formlar.Genel
                 };
                 this.Controls.Add(lblSatinalmaOnayliTalep);
             }
-            if (projeStokKarts.Any(p=> _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id==p.proje.Id) && p.isSatinalma==false))
+            if (projeStokKarts.Any(p=> p.isSatinalma==false && _cache.projeList.Any(l=>l.Id==p.proje.Id && l.sorumluList.Any(s=>s.personel.Id==_cache.kullanici.Id))))
             {
                 Label lblProjeDosyalari = new Label();
                 lblProjeDosyalari.Text = $"Satınalma talebi açılacak projeler ({projeStokKarts.Where(p => _cache.projeList.Any(l =>l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p=>p.proje.Id).ToList().Count.ToString()})";
@@ -92,7 +92,7 @@ namespace YektamakDesktop.Formlar.Genel
                 lblProjeDosyalari.Location = new Point(x, y);
                 y = y + 30;
                 this.Controls.Add(lblProjeDosyalari);
-                foreach (var proje in projeStokKarts.Where(p => _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false).GroupBy(p => p.proje.Id))
+                foreach (var proje in projeStokKarts.Where(p => _cache.projeList.Any(l => l.sorumluList.Any(s => s.personel.Id == _cache.kullanici.personel.Id) && l.Id == p.proje.Id) && p.isSatinalma == false && p.stokKart.dosyaList.Any(d=>d.onaySonucu==true)).GroupBy(p => p.proje.Id))
                 {
                     Label lblProje = new Label();
                     lblProje.Text = $" - {proje.FirstOrDefault().proje.kod}";
@@ -108,7 +108,8 @@ namespace YektamakDesktop.Formlar.Genel
                         Menu menuItem = new Menu
                         {
                             formAd = nameof(ProjeDosyalari),
-                            ad = "ProjeDosyalari"
+                            ad = "ProjeDosyalari",
+                            args = proje.FirstOrDefault().proje.Id
                         };
                         mainForm.OpenFormInTab(menuItem);
                     };

@@ -30,6 +30,7 @@
         public string icon { get; set; }
         public string model { get; set; }
         public string blazorIcon { get; set; }
+        public object args { get; set; }
     }
     public class Yetki:IEntity
     {
